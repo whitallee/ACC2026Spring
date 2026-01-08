@@ -1,0 +1,536 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1612</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1612: Runtime Polymorphism through Class Inheritance</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them. </p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Definition of the class named A.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Definition of the class named B. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Beginning of the driver class named Poly03. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Polymorphic behavior. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Source of a compiler error.</li>
+		<li><a href="#Listing_6">Listing 6</a>. A new object of type A.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p><strong>What is polymorphism?
+
+</strong> </p>
+<p>The meaning of the word <em>polymorphism</em> is something like <em>one name, many forms</em>.
+
+</p>
+<p><strong>How does Java implement polymorphism?
+
+</strong> </p>
+<p>Polymorphism manifests itself in Java in the form of multiple methods having the same name.
+
+</p>
+<p>In some cases, multiple methods have the same name, but different formal argument lists 
+<em>(overloaded methods, which were discussed in a previous chapter)</em>. </p>
+<p>In other cases, multiple methods have the same name, same return type, and same formal argument list 
+<em>(overridden methods)</em>. </p>
+<p><strong>Three distinct forms of polymorphism</strong> </p>
+<p>From a practical programming viewpoint, polymorphism manifests itself in three distinct forms in Java:
+
+    </p>
+<ul>
+	<li>Method overloading
+    </li>
+	<li>Method overriding through class inheritance
+    </li>
+	<li>Method overriding through the Java interface </li>
+</ul>
+<p>I covered method overloading as one form of polymorphism <em>(compile-time polymorphism)</em> in a previous chapter.  I also explained automatic type conversion and the use of the cast operator for type conversion in a previous chapter. 
+I also provided a brief discussion of method overriding in a previous chapter.</p>
+<p><strong>In this chapter ...
+
+</strong> </p>
+<p>I will begin the discussion of runtime polymorphism through method overriding and 
+class inheritance in this chapter.  I will cover interfaces in a 
+future chapter. </p>
+<p><strong>The essence of runtime polymorphic behavior
+
+</strong> </p>
+<p>With runtime polymorphism based on method overriding,</p>
+<ul>
+	<li>the decision as to which version of a method will be executed is based on </li>
+	<li>the actual type of the object whose reference is stored in the reference variable, and </li>
+	<li><strong>not</strong> on the type of the reference variable on which the method is called.
+	</li>
+</ul>
+<p><strong>Late binding
+
+</strong> </p>
+<p>The decision as to which version of the method to call cannot be made at compile time.  That decision must be deferred and made at runtime.  This is sometimes referred to as 
+<em>late binding</em>. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>Operational description of runtime polymorphism</strong></p>
+<p>Here is an operational description of runtime polymorphism as implemented in Java through 
+class inheritance and method overriding:
+
+    </p>
+<ul>
+	<li>Assume that a class named <strong>SuperClass</strong> defines a method named 
+	<strong>myMethod</strong>.
+    </li>
+	<li>Assume that a class named <strong>SubClass</strong> extends <strong>SuperClass</strong> and overrides the method named 
+	<strong>myMethod</strong>.
+    </li>
+	<li>Assume that a reference to an object of the class named <strong>SubClass</strong> is assigned to a reference variable named 
+	<strong>ref</strong> of type <strong>SuperClass</strong>.
+    </li>
+	<li>Assume that the method named <strong>myMethod</strong> is then called on the reference variable using the following syntax:
+	<ul>
+		<li><strong>ref.myMethod()
+    </strong>
+    </li>
+	</ul>
+	</li>
+	<li><strong><em>Result:</em></strong>  The version of the method named 
+	<strong>myMethod</strong> that will actually be executed is the <em>overridden</em> version in the class named
+	<strong>SubClass</strong>, and is not the version that is defined in the class named 
+	<strong>SuperClass, </strong>even though the reference to the object of type
+	<strong>SubClass</strong> is stored in a variable of type <strong>SuperClass</strong>.</li>
+</ul>
+<p>This is <em>runtime polymorphism</em> in a nutshell, which is sometimes also referred to as 
+<em>late-binding</em>.</p>
+<p><strong>Runtime polymorphism is very powerful </strong> </p>
+	<p>As you gain more experience with Java, you will learn that much of the power of OOP using Java is centered on runtime polymorphism using class inheritance, interfaces, and method overriding.  
+	<em>(The use of interfaces for polymorphism will be discussed in a future chapter.)</em> </p>
+<p><strong>An important attribute of runtime polymorphism
+
+</strong> </p>
+<p>The decision as to which version of the method to execute </p>
+<ul>
+	<li>is based on the actual type of object whose reference is stored in the reference variable, 
+	and</li>
+	<li>is not based on the type of the reference variable on which the method is called.
+	</li>
+</ul>
+<p><strong>Why is it called runtime polymorphism?</strong> </p>
+<p>The reason that this type of polymorphism is often referred to as <em>runtime polymorphism</em> is because the decision as to which version of the method to execute cannot be made until runtime.  The decision cannot be made at compile time.
+
+</p>
+<p><strong>Why defer the decision?
+
+</strong> </p>
+<p>The decision cannot be made at compile time because the compiler has no way of knowing 
+<em>(when the program is compiled) </em>the actual type of the object whose reference will be stored in the reference variable. </p>
+<p><strong>Sample Program
+
+</strong></p>
+<p>Let's take a look at a sample program that illustrates runtime polymorphism using class inheritance and overridden methods.  The name of the program is 
+<strong>Poly03</strong>.  A complete listing of the program is shown in 
+<a href="#Listing_7">Listing 7</a> near the end of the chapter. </p>
+<p><a href="#Listing_1">Listing 1</a> shows the definition of a class named 
+<strong>A</strong>, which extends the class named <strong>Object</strong>. </p>
+<p><em>(Remember that any class that doesn't extend some other class automatically extends 
+<strong>Object</strong> by default, and it is not necessary to show that explicitly as I did in this example.)</em></p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Definition of the class 
+				named A.
+
+				<pre>class A extends Object{
+  public void m(){
+    System.out.println("m in class A");
+  }//end method m()
+}//end class A</pre>
+</div>
+	<p>The class named <strong>A</strong> defines a method named <strong>m()</strong>.
+
+</p>
+<p><strong>Behavior of the method
+
+</strong> </p>
+<p>The behavior of the method, as defined in the class named <strong>A</strong>, is to display a message indicating that it has been called, and that it is defined in the class named 
+<strong>A</strong>. </p>
+<p>This message will allow us to determine which version of the method is executed in each case discussed later.
+
+</p>
+<p><strong>The class named B</strong> </p>
+<p><a href="#Listing_2">Listing 2</a> shows the definition of a class named 
+<strong>B</strong> that extends the class named <strong>A</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Definition of the class 
+				named B.
+
+				<pre>class B extends A{
+  public void m(){
+    System.out.println("m in class B");
+  }//end method m()
+}//end class B</pre>
+</div>
+	<p>The class named <strong>B</strong> overrides <em>(redefines)</em> the method named 
+	<strong>m()</strong>, which it inherits from the class named <strong>A</strong>.
+
+</p>
+<p><strong>Behavior of the overridden version of the method </strong> </p>
+<p>Like the inherited version, the overridden version displays a message indicating that it has been called.  However, the message is different from the message displayed by the inherited version discussed above.  The overridden version tells us that it is defined in the class named 
+<strong>B</strong>. <em>(The behavior of the overridden version of the method is appropriate for an object instantiated from the class named 
+<strong>B</strong>.) </em> </p>
+<p>Again, this message will allow us to determine which version of the method is executed in each case discussed later.
+
+</p>
+<p><strong>The driver class
+
+</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> shows the beginning of the driver class named 
+<strong>Poly03</strong>, which extends the <strong>Object</strong> class by default.</p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Beginning of the driver 
+				class named Poly03.
+
+				<pre>public class Poly03{
+  public static void main(String[] args){
+    Object var = new B();
+    ((B)var).m();</pre>
+</div>
+	<p><strong>A new object of the class B
+
+</strong> </p>
+<p>The code in the <strong>main</strong> method begins by instantiating a new object of the class named 
+<strong>B</strong>, and assigning the object's reference to a reference variable of type 
+<strong>Object</strong>. </p>
+<p><em>(Recall that this is legal because an object's reference can be assigned to any reference variable whose type is a superclass of the class from which the object was instantiated.  The class named 
+<strong>Object</strong> is the superclass of all classes.)</em></p>
+<p><strong>Downcast and call the method</strong> </p>
+<p>If you read the earlier chapter on casting, it will come as no surprise to you that the second statement in the 
+<strong>main</strong> method, which casts the reference down to type <strong>B</strong> and calls the method named 
+<strong>m()</strong> on it, will compile and execute successfully. </p>
+<p><strong>Which version is executed?</strong> </p>
+<p>The execution of the method produces the following output on the computer screen:
+
+</p>
+<div class="a">
+<pre>m in class B </pre>
+</div>
+<p>By examining the output, you can confirm that the version of the method that was overridden in the class named 
+<strong>B</strong> is the version that was executed. </p>
+<p><strong>Why was this version executed? </strong> </p>
+	<p>This should also come as no surprise to you.  The cast converts the type of the reference from type 
+	<strong>Object</strong> to type <strong>B</strong>. </p>
+<p>You can always call a public method belonging to an object using a reference to the object whose type is the same as the class from which the object was instantiated.
+
+</p>
+<p><strong>Not runtime polymorphic behavior
+
+</strong> </p>
+<p>Just for the record, the above call to the method does not constitute runtime polymorphism 
+<em>(in my opinion)</em>.  I included that call to the method to serve as a backdrop for what follows. </p>
+<p><strong>Runtime polymorphic behavior
+
+</strong> </p>
+<p>However, the following call to the method does constitute runtime polymorphism. </p>
+<p>The statement in <a href="#Listing_4">Listing 4</a> casts the reference down to type 
+<strong>A</strong> and calls the method named <strong>m()</strong> on that reference.  </p>
+<p>It may not come as a surprise to you that the 
+call to the method shown in <a href="#Listing_4">Listing 4</a> also compiles and runs successfully. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Polymorphic behavior.
+
+				<pre>((A)var).m();</pre>
+</div>
+	<p><strong>The method output
+
+</strong> </p>
+<p>Here is the punch line.  Not only does the statement in <a href="#Listing_4">Listing 4</a> compile and run successfully, it produces the following output, 
+<em>(which is exactly the same output as before)</em>:
+
+</p>
+<div class="a">
+<pre>m in class B </pre>
+</div>
+<p><strong>Same method executed in both cases</strong> </p>
+<p>It is important to note that this output, <em>(produced by casting the reference variable to type 
+<strong>A</strong> instead of type <strong>B</strong>)</em>, is exactly the same as that produced by the earlier call to the method when the reference was cast to type 
+<strong>B</strong>.  This means that the same version of the method was executed in both cases.
+
+</p>
+<p>This confirms that, even though the type of the reference was converted to type 
+<strong>A</strong>, <em>(rather than type <strong>Object</strong> or type 
+<strong>B</strong>)</em>, the overridden version of the method defined in class 
+<strong>B</strong> was actually executed.
+
+    </p>
+<p>This is an example of runtime polymorphic behavior.
+
+</p>
+<p>The version of the method that was executed was based on 
+
+</p>
+<ul>
+	<li>the actual type of the object, <strong>B</strong>, and </li>
+	<li>not on the type of the reference, <strong>A</strong>. </li>
+</ul>
+<p>This is an extremely powerful and useful concept.
+
+</p>
+<p><strong>Another call to the method </strong> </p>
+	<p>Now take a look at the statement in <a href="#Listing_5">Listing 5</a>.  Will this statement compile and execute successfully?  If so, which version of the method will be executed? </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. Source of a compiler 
+				error.
+				<pre>var.m();</pre>
+</div>
+	<p><strong>Compiler error
+
+</strong>
+
+</p>
+<p>The code in <a href="#Listing_5">Listing 5</a> attempts, unsuccessfully, to call the method named 
+<strong>m()</strong> using the reference variable named <strong>var</strong>, which is of type 
+<strong>Object</strong>. The result is a compiler error, which, depending on your 
+version of the JDK, will be similar to the following:</p>
+<div class="a">
+<pre>Poly03.java:40: cannot resolve symbol
+symbol  : method m  ()
+location: class java.lang.Object
+    var.m();
+       ^ </pre>
+</div>
+<p><strong>Some important rules
+
+</strong> </p>
+<p>The <strong>Object</strong> class does not define a method named <strong>m()</strong>.  Therefore, the overridden method named 
+<strong>m()</strong> in the class named <strong>B</strong> is not an overridden version of a method that is defined in the class named 
+<strong>Object</strong>. </p>
+<p><strong>Necessary, but not sufficient
+
+</strong> </p>
+<p>Runtime polymorphism based on class inheritance requires that the type of the reference variable be a superclass of the class from which the object 
+<em>(on which the method will be called)</em> is instantiated. </p>
+<p>However, while necessary, that is not sufficient.
+
+</p>
+<p>The type of the reference variable must also be a class that either <strong>
+<em>defines or inherits</em></strong> the method that will ultimately be called on the object. </p>
+<p><strong>This method is not defined in the Object class </strong> </p>
+	
+	<p>Since the class named <strong>Object</strong> neither defines nor 
+	inherits the method named <strong>m()</strong>, a reference of type <strong>Object</strong> does not qualify as a participant in runtime polymorphic behavior in this case.  The attempt to use it as a participant resulted in the compiler error given above.
+
+</p>
+<p><strong>One additional scenario
+
+</strong>
+
+</p>
+<p>Before leaving this topic, let's look at one additional scenario to help you distinguish what is, and what is not, runtime polymorphism.  Consider the code shown in 
+<a href="#Listing_6">Listing 6</a>. </p>
+<div class="a"><a name="Listing_6">Listing 6</a>. A new object of type A.
+				<pre>    var = new A();
+    ((A)var).m();</pre>
+</div>
+	<p><strong>A new object of type A
+
+</strong> </p>
+<p>The code in  
+<a href="#Listing_6">Listing 6</a> instantiates a new object of the class named 
+<strong>A</strong>, and stores the object's reference in the original reference variable named
+<strong>var</strong> of type <strong>Object</strong>. </p>
+<p><em>(As a side note, this overwrites the previous contents of the reference variable with a new reference and causes the object whose reference was previously stored there to become eligible for garbage collection.)
+
+</em> </p>
+<p><strong>Downcast and call the method
+
+</strong> </p>
+<p>Then the code in  
+<a href="#Listing_6">Listing 6</a> casts the reference down to type <strong>A</strong>, 
+<em>(the type of the object to which the reference refers)</em>, and calls the method named 
+<strong>m()</strong> on the downcast reference. </p>
+<p><strong>The output
+
+</strong> </p>
+<p>As you would probably predict, this produces the following output on the computer screen:
+
+</p>
+<div class="a">
+<pre>m in class A </pre>
+</div>
+<p>In this case, the version of the method defined in the class named <strong>A</strong>, 
+<em>(not the version defined in </em><strong><em>B</em></strong>) was executed. </p>
+<p><strong>Not polymorphic behavior </strong> </p>
+	<p>In my view, this is not polymorphic behavior <em>(at least it isn't a very useful form of polymorphic behavior)</em>.  This code simply converts the type of the reference from type 
+	<strong>Object</strong> to the type of the class from which the object was instantiated, and calls one of its methods.  Nothing special takes place regarding a selection among different versions of the method.
+
+    </p>
+<p><strong>Some authors may disagree
+
+    </strong></p>
+<p>While some authors might argue that this is technically runtime polymorphic behavior, in my view at least, it does not illustrate the real benefits of runtime polymorphic behavior.  The benefits of runtime polymorphic behavior generally accrue when the actual type of the object is a subclass of the type of the reference variable containing the reference to the object.
+
+</p>
+<p><strong>Once again, what is runtime polymorphism?</strong> </p>
+<p>As I have discussed in this chapter, runtime polymorphic behavior based on 
+class inheritance occurs when
+
+    </p>
+<ul>
+	<li>The type of the reference is a superclass of the class from which the object was instantiated.
+    </li>
+	<li>The version of the method that is executed is the version that is either defined in, or inherited into, the class from which the object was instantiated.
+	</li>
+</ul>
+<p><strong>More than you ever wanted to hear</strong></p>
+	<p>And that is probably more than you ever wanted to hear about runtime polymorphism based on 
+	class inheritance.
+
+</p>
+<p>A future chapter will discuss runtime polymorphism based on the Java interface.  From a practical viewpoint, you will find the rules to be similar but somewhat different in the case of the Java interface. </p>
+<p><strong>A very important concept</strong></p>
+<p>As an example of the importance of runtime polymorphism in Java, the entire event-driven graphical user interface 
+structure of Java is based on runtime polymorphism involving the Java interface.</p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+	<p>Polymorphism manifests itself in Java in the form of multiple methods having the same name.
+
+</p>
+<p>From a practical programming viewpoint, polymorphism manifests itself in three distinct forms in Java:
+
+    </p>
+<ul>
+	<li>Method overloading
+    </li>
+	<li>Method overriding through class inheritance </li>
+	<li>Method overriding through the Java interface </li>
+</ul>
+<p>This chapter discusses method overriding through class inheritance.</p>
+<p>With runtime polymorphism based on method overriding, the decision as to which version of a method will be executed is based on the actual type of object whose reference is stored in the reference variable, and not on the type of the reference variable on which the method is called.
+
+</p>
+<p>The decision as to which version of the method to call cannot be made at compile time.  That decision must be deferred and made at runtime.  This is sometimes referred to as late binding.
+
+</p>
+<p>This is illustrated in the sample program discussed in this chapter. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter (following the review chapter) I will continue my discussion of the implementation of polymorphism using method overriding through 
+class inheritance, and I will concentrate on a special case in that category. </p>
+<p>Specifically, I will discuss the use of the <strong>Object</strong> class as a completely generic type for storing references to objects of subclass types, and explain how that results in a very useful form of runtime polymorphism. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1612: Runtime Polymorphism through Class 
+					Inheritance</li>
+					<li>File: Java1612.htm
+</li>
+					<li>Published: 02/27/02 </li>
+					<li>Revised: 03/08/20</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_7">Listing 7</a> below. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing 7: Complete program listing.
+				<pre>/*File Poly03.java
+Copyright, R.G.Baldwin
+
+This program illustrates downcasting
+and polymorphic behavior
+
+Program output is:
+  
+m in class B
+m in class B
+m in class A
+**************************************/
+
+class A extends Object{
+  public void m(){
+    System.out.println("m in class A");
+  }//end method m()
+}//end class A
+//===================================//
+
+class B extends A{
+  public void m(){
+    System.out.println("m in class B");
+  }//end method m()
+}//end class B
+//===================================//
+
+public class Poly03{
+  public static void main(String[] args){
+    Object var = new B();
+    //Following will compile and run
+    ((B)var).m();
+    //Following will also compile 
+    // and run due to polymorphic
+    // behavior.
+    ((A)var).m();
+    //Following will not compile
+    //var.m();
+    //Instantiate obj of class A
+    var = new A();
+    //Call the method on it
+    ((A)var).m();    
+  }//end main
+}//end class Poly03</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

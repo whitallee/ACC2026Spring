@@ -1,0 +1,291 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4100r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4100r Review: The Comparator Interface, Part 2</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4100: The Comparator Interface, Part 2</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>? </p>
+<ul>
+	<li>Compiler Error</li>
+	<li>Runtime Error</li>
+	<li>Joe Bill Tom JOE BILL TOM</li>
+	<li>Tom TOM Joe JOE Bill BILL</li>
+	<li>Joe Bill Tom</li>
+	<li>None of the above.</li>
+</ul>
+
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? By using a <b>Comparator</b> object, you can achieve 
+comparisons and sort orders that are different from the <i>natural ordering</i> 
+for a given element type.</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? The first time the <strong>fillIt</strong> method is called in <a href="#Listing_1">Listing 
+1</a>, the <strong>TreeSet</strong> collection referred to by the incoming 
+parameter named <strong>ref</strong> is populated with the following names in 
+the following order:</p>
+<p><strong>Joe Bill Tom JOE BILL TOM</strong></p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>True or False? The second time the <strong>fillIt</strong> method is called 
+in <a href="#Listing_1">Listing 
+1</a>, the <strong>TreeSet</strong> collection referred to by the incoming 
+parameter named <strong>ref</strong> is populated with the following names in 
+the following order:</p>
+<p><strong>Bill Bill Joe Joe Tom Tom</strong></p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>Explain why the second time the <strong>fillIt</strong> method is 
+called in <a href="#Listing_1">Listing 
+1</a>, the <strong>TreeSet</strong> collection referred to by the incoming 
+parameter named <strong>ref</strong> is populated with the following names in 
+the following order:</p>
+<p><b>Bill Joe Tom</b></p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Comparator03.java. </li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>A <strong>Comparator</strong> object's reference is passed to the <strong>
+TreeSet</strong> constructor when the second <strong>TreeSet</strong> object is 
+instantiated. The <strong>Comparator</strong> is designed to eliminate the 
+distinction between upper-case and lower-case characters when each new element 
+is compared with the existing elements. This causes the last three names to be 
+treated as duplicates of the first three names so they are not added to the 
+collection. As a result, the collection ends up containing only the first three 
+names that are added.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>False. The second time the <strong>fillIt</strong> method is called in <a href="#Listing_1">Listing 
+1</a>, the <strong>TreeSet</strong> collection referred to by the incoming 
+parameter named <strong>ref</strong> is populated with the following names in 
+the following order with duplicate elements eliminated:</p>
+<p><b>Bill Joe Tom</b></p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False. The first time the <strong>fillIt</strong> method is called in <a href="#Listing_1">Listing 
+1</a>, the <strong>TreeSet</strong> collection referred to by the incoming 
+parameter named <strong>ref</strong> is populated with the following names in 
+the following <em>natural order</em> for <strong>String</strong> objects. 
+The <strong>String</strong> class implements the <strong>Comparable</strong> 
+interface, and that is what determines the sorted order in this case.</p>
+<p><b>BILL Bill JOE Joe TOM Tom</b></p>
+
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>True.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>None of the above. </p>
+<p>The output produced by the program shown in <a href="#Listing_1">Listing 1</a> 
+is four lines long as shown below. <em>(Note that the bullets shown below do not 
+appear in the actual program output.)</em> </p>
+<ul>
+	<li><b>Natural ordering</b></li>
+	<li><b>BILL Bill JOE Joe TOM Tom</b></li>
+	<li><b>Comparator in use</b></li>
+	<li><b>Bill Joe Tom</b> </li>
+</ul>
+<p><a href="#question01">Back to Question 1</a> </p>
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. Comparator03.java.</p>
+<pre>//File Comparator03.java
+//Copyright R.G.Baldwin
+import java.util.*;
+import java.io.Serializable;
+
+public class Comparator03{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator03
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+    System.out.println("Natural ordering");
+    ref = new TreeSet();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+    System.out.println("Comparator in use");
+    ref = new TreeSet(new TheComparator());
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add("Joe");
+    ref.add("Bill");
+    ref.add("Tom");
+    ref.add("JOE");
+    ref.add("BILL");
+    ref.add("TOM");
+  }//end fillIt()
+}//end class Populator
+
+class TheComparator
+        implements Comparator,Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    //Do an ignore-case comparison
+    int result = 
+      ((String)o1).compareToIgnoreCase((String)o2);
+    return result;
+  }//end compare()
+
+  public boolean equals(Object o){
+    if(!(o instanceof TheComparator))
+        return false;
+    else return true;
+  }//end overridden equals()
+}//end class TheComparator
+</pre>
+
+</div>
+
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4100r Review: The Comparator Interface, Part 2</li>
+				<li>File: Java4100r.htm </li>
+				<li>Published: 12/01/13</li>
+				<li>Revised: 04/18/20</li>
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,687 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4090</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4090: The Comparator Interface, Part 1</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+<li><a href="#Generics">Generics</a></li>
+<li><a href="#The_Comparable_interface_">The Comparable interface </a> </li>
+<li><a href="#The_Comparator_interface_">The Comparator interface</a> </li>
+<li><a href="#Beginning_with_a_quiz_">Beginning with a quiz</a> </li>
+<li><a href="#Eligibility_for_inclusion_in_a_TreeSet_">Eligibility for inclusion in a TreeSet 
+</a>
+<ul>
+	<li><a href="#Using_a_Comparator_object_">Using a Comparator object</a></li>
+	<li><a href="#Passing_Comparator_to_TreeSet_constructor_">Passing Comparator to TreeSet constructor 
+	</a></li>
+	<li><a href="#Passing_the_TreeSet_to_a_populator_method_">Passing the TreeSet to a 
+	Populator method</a>
+	</li>
+	<li><a href="#Similar_to_previous_program_">Similar to previous program </a>
+	</li>
+	<li><a href="#MyClass_does_not_implement_Comparable_">MyClass does not implement Comparable 
+	</a></li>
+	<li><a href="#Comparator_eliminates_requirement_for_Comparable_">Comparator eliminates requirement for Comparable 
+	</a></li>
+</ul>
+</li>
+<li><a href="#The_class_named_TheComparator_">The class named TheComparator </a>
+<ul>
+	<li><a href="#Implementing_the_Comparator_interface_">Implementing the Comparator interface 
+	</a></li>
+	<li><a href="#Implementing_the_Serializable_interface_">Implementing the Serializable interface</a>
+	</li>
+	<li><a href="#Methods_of_the_Comparator_interface_">Methods of the Comparator interface 
+	</a></li>
+	<li><a href="#The_compare_method_">The compare method </a></li>
+</ul>
+</li>
+<li><a href="#Specialization_is_required_">Specialization is required</a>
+<ul>
+	<li><a href="#Must_gain_access_to_instance_variables_">Must gain access to instance variables 
+	</a></li>
+	<li><a href="#Specialized_for_type_MyClass_">Specialized for type MyClass 
+	</a></li>
+	<li><a href="#General_behavior_of_compare_method_">General behavior of compare method 
+	</a></li>
+	<li><a href="#Implementation_of_required_behavior_">Implementation of required behavior 
+	</a></li>
+	<li><a href="#Other_stipulations_">Other stipulations</a> </li>
+</ul>
+</li>
+<li><a href="#The_equals_method_">The equals method </a>
+<ul>
+	<li><a href="#Overridden_equals_method_">Overridden equals method</a> </li>
+</ul>
+</li>
+<li><a href="#The_program_output_">The program output </a> </li>
+
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>This chapter discusses and illustrates the use of the <strong>Comparator</strong> interface.  The sorting order established by a 
+<strong>Comparator</strong> may be different or may be the same as the natural order.  A 
+<strong>Comparator</strong> can be used to establish a sorting order for objects that don't have a natural ordering.  The use of a 
+<strong>Comparator</strong> is an alternative to the implementation of the 
+<strong>Comparable</strong> interface.</p>
+<p>This chapter is also the first of several chapters on the <b>Comparator</b> 
+interface. The purpose of the chapters in this group is to teach you about the 
+interactions between the <b>Comparator</b> interface and the Collections 
+Framework<i>,</i> particularly with respect to the <b>Set</b>, <b>SortedSet</b>, 
+and <b>SortedMap</b> interfaces of the Collections Framework. This chapter 
+discusses <b>Set</b> and <b>SortedSet</b>. A discussion of <b>SortedMap</b> will be 
+deferred to a future chapter. </p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Comparator02. </li>
+	<li><a href="#Listing_2">Listing 2</a>. Passing Comparator to TreeSet constructor. </li>
+	<li><a href="#Listing_3">Listing 3</a>. The fillIt method. </li>
+	<li><a href="#Listing_4">Listing 4</a>. The class named MyClass. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Beginning of the class named TheComparator. </li>
+	<li><a href="#Listing_6">Listing 6</a>. Beginning of the compare method. </li>
+	<li><a href="#Listing_7">Listing 7</a>. Implementation of required behavior.</li>
+	<li><a href="#Listing_8">Listing 8</a>. The overridden equals method. </li>
+	<li><a href="#Listing_9">Listing 9</a>. Display the contents of the TreeSet object. </li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>Previous chapters have discussed the use of the <b>Comparable</b> interface. 
+This chapter discusses and illustrates the use of the <b>Comparator</b> 
+interface. <em>(Note the difference in spelling between the two interfaces.)</em></p>
+<p>The <b>Comparable</b> interface establishes <i>natural ordering.</i> 
+The sorting order established by a <b>Comparator</b> may be different or may be 
+the same as the <i>natural order.</i> </p>
+<p>A <b>Comparator</b> can be used to establish a sorting order for objects that 
+don&#39;t have a <i>natural ordering</i>. </p>
+<p>The use of a <b>Comparator</b> is an alternative to the implementation of the
+<b>Comparable</b> interface. For example, a <b>TreeSet</b> object instantiated with the 
+benefit of a <b>Comparator</b> object doesn&#39;t require the objects in its 
+collection to implement <b>Comparable</b>. </p>
+
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+
+<h2><a name="Generics">Generics</a></h2>
+<p>The code in this chapter is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile this code, you will probably 
+get a warning about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+
+<h2><a name="The_Comparable_interface_">The Comparable interface </a></h2>
+<p>Previous chapters have discussed the use of the <b>Comparable</b> 
+interface to establish the <i>natural ordering</i> of elements in a sorted set. 
+Although the name of the <b>Comparable</b> interface is similar to the name of 
+the <b>Comparator</b> interface, they are different interfaces. Don&#39;t be 
+confused by the similarity of the names. </p>
+<h2><a name="The_Comparator_interface_">The Comparator interface </a></h2>
+<p>This chapter will begin the discussion of an alternative approach to sorting, 
+using the <b>Comparator</b> interface to establish sorting order. The discussion 
+will be continued in future chapters.</p>
+<p>The sorting order established by a <b>Comparator</b> may be different from 
+the <i>natural ordering</i>. The <b>Comparator</b> interface can also be 
+used to establish sorting order for objects that do not implement the <b>
+Comparable</b> interface and therefore do not have a <i>natural ordering</i>.
+</p>
+<h2><a name="Beginning_with_a_quiz_">Beginning with a quiz </a></h2>
+<p>Let&#39;s begin with a little quiz to test your prior knowledge of the 
+Collections Framework and the Comparator interface. </p>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321</li>
+	<li>D. 4321</li>
+	<li>E. 1234</li>
+	<li>F. 12344</li>
+	<li>G. None of the above.</li>
+</ul>
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named Comparator02.</p>
+<pre>//File Comparator02.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+import java.io.Serializable;
+
+public class Comparator02{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator02
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new TreeSet(new TheComparator());
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+
+}//end MyClass
+
+class TheComparator
+    implements Comparator, Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof MyClass))
+        throw new ClassCastException();
+    if(!(o2 instanceof MyClass))
+        throw new ClassCastException();
+    if(((MyClass)o1).data
+                  &lt; ((MyClass)o2).data)
+      return -1;
+    if(((MyClass)o1).data
+                  &gt; ((MyClass)o2).data)
+      return 1;
+    else return 0;
+  }//end compare()
+
+  public boolean equals(Object o){
+    if(!(o instanceof TheComparator))
+        return false;
+    else return true;
+  }//end overridden equals()
+}//end class TheComparator
+</pre>
+
+</div>
+
+<p>If your answer was <b>E. 1234</b>, then you are correct. </p>
+<h2><a name="Eligibility_for_inclusion_in_a_TreeSet_">Eligibility for inclusion in a TreeSet
+</a> </h2>
+<p>The <b>TreeSet</b> class implements the <b>SortedSet</b> interface. </p>
+<p>In an earlier chapter, I told you that in order to be eligible for inclusion 
+in a <b>TreeSet</b> collection, an object must be instantiated from a class that 
+implements the <b>Comparable</b> interface. </p>
+<p>At that time, I also told you that it is possible to instantiate a new <b>
+TreeSet</b> object using a constructor that receives an incoming reference to a
+<b>Comparator</b> object, in which case it is not necessary for the objects in 
+the collection to implement the <b>Comparable</b> interface. </p>
+<h3><a name="Using_a_Comparator_object_">Using a Comparator object </a> </h3>
+<p>The program in <a href="#Listing_1">Listing 1</a> takes this latter approach. The main purpose 
+of this program is to illustrate the use of a <b>Comparator</b> object as an 
+alternative to implementation of the <b>Comparable</b> interface. </p>
+<h3><a name="Passing_Comparator_to_TreeSet_constructor_">Passing Comparator to TreeSet constructor
+</a> </h3>
+<p>The code fragment in <a href="#Listing_2">Listing 2</a> shows the instantiation of a new <b>TreeSet</b> 
+object, passing an anonymous object of type <b>TheComparator</b> as a parameter 
+to the constructor for <b>TreeSet</b>. Shortly, we will see that the class 
+named <b>TheComparator</b> implements the <b>Comparator</b> interface. 
+Therefore, an object instantiated from that class is a <b>Comparator</b> object. </p>
+
+<!--``1List02-->
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. Passing Comparator to TreeSet constructor.</p>
+<pre>    Collection ref;
+    ref = new TreeSet(new TheComparator());
+    Populator.fillIt(ref);
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Passing_the_TreeSet_to_a_populator_method_">Passing the TreeSet to a 
+Populator method
+</a> </h3>
+<p>The code fragment in <a href="#Listing_2">Listing 2</a> also shows the reference to the <b>TreeSet</b> 
+object being stored in a reference variable of the interface type <b>Collection</b>. 
+The reference to the <b>TreeSet</b> object is passed as type <b>Collection</b> 
+to a method named <b>fillIt</b>. </p>
+<p>The purpose of the <b>fillIt</b> method is to instantiate some objects of 
+type <b>MyClass</b>, and to store those object references in the <b>TreeSet</b> 
+collection. </p>
+<h3><a name="The_fillIt_method_">The fillIt method </a> </h3>
+<p>The code fragment in <a href="#Listing_3">Listing 3</a> shows the entire method named <b>fillIt</b>. 
+This method instantiates five objects from the class named <b>MyClass</b> and 
+adds those object&#39;s references to the <b>TreeSet</b> collection. 
+</p>
+
+<!--``1List03-->
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. The fillIt 
+				method.</p>
+<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Similar_to_previous_program_">Similar to previous program </a> 
+</h3>
+<p>This is essentially the same code that we saw in a sample program in a 
+previous chapter. In that chapter, we saw that it was necessary for the 
+class named <b>MyClass</b> to implement the <b>Comparable</b> interface. 
+Otherwise, the <b>add</b> method would throw a runtime exception. </p>
+<h3><a name="MyClass_does_not_implement_Comparable_">MyClass does not implement Comparable
+</a> </h3>
+<p>In that program, however, the <b>TreeSet</b> object was instantiated without 
+benefit of a <b>Comparator</b> object. </p>
+<p>As you can see in the code fragment in <a href="#Listing_4">Listing 4</a>, the class named <b>MyClass</b> 
+in this program 
+does not implement the <b>Comparable</b> interface. </p>
+<h3><a name="Comparator_eliminates_requirement_for_Comparable_">Comparator eliminates requirement for Comparable
+</a> </h3>
+<p>Furthermore, the <b>add</b> method in <a href="#Listing_3">Listing 3</a> does not throw a runtime 
+exception. That is because the <b>TreeSet</b> object was instantiated with 
+the benefit of a <b>Comparator</b> object. </p>
+<p>The use of a <b>Comparator</b> object in the instantiation of the <b>TreeSet</b> 
+object eliminates the requirement for objects stored in the <b>TreeSet</b> 
+collection to implement the <b>Comparable</b> interface. </p>
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. The class 
+				named MyClass.</p>
+<pre>class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+}//end MyClass
+</pre>
+</div>
+<!--``2-->
+<h2><a name="The_class_named_TheComparator_">The class named TheComparator </a> 
+</h2>
+<p>That brings us to the class named <b>TheComparator</b> from which the <b>
+Comparator</b> object was instantiated and passed to the constructor for the <b>
+TreeSet</b> object in <a href="#Listing_2">Listing 2</a>. The declaration for the class named <strong>
+TheComparator</strong> is shown in <a href="#Listing_5">Listing 5</a>. </p>
+
+<!--``1List05-->
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. Beginning of 
+				the class named TheComparator.</p>
+<pre>class TheComparator
+    implements Comparator, Serializable{
+</pre>
+</div>
+<!--``2-->
+<p>As you can see, the class named <b>TheComparator</b> implements both the <b>
+Comparator</b> interface and the <b>Serializable</b> interface. </p>
+<h3><a name="Implementing_the_Comparator_interface_">Implementing the Comparator interface
+</a> </h3>
+<p>By implementing the <b>Comparator</b> interface, an object instantiated from 
+the class is eligible to be passed to the constructor for a <b>TreeSet</b> 
+object, which requires an incoming parameter of type <b>Comparator</b>. </p>
+<h3><a name="Implementing_the_Serializable_interface_">Implementing the Serializable interface
+</a> </h3>
+<p>Here is what Oracle has to say about implementing the <b>Serializable</b> 
+interface: </p>
+<blockquote>
+	<i>&quot;Note: It is generally a good idea for comparators to implement 
+	java.io.Serializable, as they may be used as ordering methods in 
+	serializable data structures (like TreeSet, TreeMap). In order for the data 
+	structure to serialize successfully, the comparator (if provided) must 
+	implement Serializable.&quot;</i></blockquote>
+<p>Since the <b>Serializable</b> interface doesn&#39;t declare any methods, 
+implementing the interface simply requires a declaration that the interface is 
+being implemented. </p>
+<h3><a name="Methods_of_the_Comparator_interface_">Methods of the Comparator interface
+</a> </h3>
+<p>The <b>Comparator</b> interface declares the two methods listed below: </p>
+<ul>
+	<li>public int <b>compare</b>(Object o1, Object o2) </li>
+	<li>public boolean <b>equals</b>(Object 
+obj) </li>
+</ul>
+<p>As is always the case when implementing interfaces, a class that implements 
+the <b>Comparator</b> interface must provide concrete definitions for both of 
+these methods. </p>
+<h3><a name="The_compare_method_">The compare method </a> </h3>
+<p>The beginning of the <strong>compare</strong> method is shown in <a href="#Listing_6">Listing 6</a>. </p>
+
+<!--``1List06-->
+	<div class="a">
+		<p>
+<a name="Listing_6">Listing 6</a>. Beginning of 
+				the compare method.</p>
+<pre>  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof MyClass))
+        throw new ClassCastException();
+    if(!(o2 instanceof MyClass))
+        throw new ClassCastException();
+</pre>
+</div>
+<!--``2-->
+<p>The purpose of a <b>Comparator</b> is to compare the values stored in the 
+instance variables of two objects and to return a value indicating which object 
+is <i>greater</i>. </p>
+<h2><a name="Specialization_is_required_">Specialization is required </a> </h2>
+<p>Generally speaking, therefore, a <b>Comparator</b> object must be specialized 
+to deal with a particular type of object. That type could be </p>
+<ul>
+	<li>A specific class from which the object is instantiated,</li>
+	<li>A specific interface implemented by the class from which the object is 
+	instantiated, or perhaps</li>
+	<li>A specific superclass of the class from which the object is 
+	instantiated.</li>
+</ul>
+<p>The code in <a href="#Listing_6">Listing 6</a> confirms that both of the objects to be compared are of 
+the correct type, which in this case is type <strong>MyClass</strong>.</p>
+<h3><a name="Must_gain_access_to_instance_variables_">Must gain access to instance variables
+</a> </h3>
+<p>Regardless of how the type is established, the code in the <b>compare</b> 
+method of the <b>Comparator</b> object must gain access to the instance 
+variables of the two objects passed to the <b>compare</b> method as type <b>
+Object</b>. This normally requires that a downcast be performed on the 
+incoming object references. </p>
+<h3><a name="Specialized_for_type_MyClass_">Specialized for type MyClass </a> 
+</h3>
+<p>This <b>Comparator</b> is specialized to compare two objects of the class 
+named <b>MyClass</b>. The first two statements in <a href="#Listing_6">Listing 6</a> above confirm 
+that both of the incoming objects are of type <b>MyClass</b>. If either 
+object is not of that type, an exception is thrown. </p>
+<h3><a name="General_behavior_of_compare_method_">General behavior of compare method
+</a> </h3>
+<p>The general description of the behavior of the <b>compare</b> method as 
+provided by Oracle is shown below: </p>
+<blockquote>
+	<i>&quot;Compares its two arguments for order. Returns a negative integer, zero, 
+	or a positive integer as the first argument is less than, equal to, or 
+	greater than the second.&quot;</i></blockquote>
+<h3><a name="Implementation_of_required_behavior_">Implementation of required behavior
+</a> </h3>
+<p>This behavior is accomplished by the code shown in <a href="#Listing_7">Listing 7</a>. In this 
+case, the comparison is based solely on the values of the instance variable 
+named <b>data</b> in each of the two objects. </p>
+<p>Depending on which object contains the larger value in its instance variable, 
+a value of 1 or -1 is returned. If the two values are equal, a value of 0 
+is returned. </p>
+<blockquote><i>(Note that it is up to the author of the <b>compare</b> 
+method to decide what constitutes larger. This gives the author of the 
+method a great deal of control over the results of a sorting operation.)</i> 
+</blockquote>
+
+<!--``1List07-->
+	<div class="a">
+		<p>
+<a name="Listing_7">Listing 7</a>. Implementation of required behavior.</p>
+<pre>    if(((MyClass)o1).data &lt; ((MyClass)o2).data)
+      return -1;
+    if(((MyClass)o1).data &gt; ((MyClass)o2).data)
+      return 1;
+    else return 0;
+  }//end compare()
+</pre>
+</div>
+<!--``2-->
+<h3>
+<a name="Other_stipulations_">
+Other stipulations </a>
+</h3>
+<p>The documentation for the <b>compare</b> method contains several other 
+stipulations regarding the behavior of the method. While I believe that 
+this version of the <b>compare</b> method meets all of those stipulations, I 
+haven&#39;t taken the time to test it fully. Therefore, it is possible that it 
+may not meet all of the stipulations in terms of its behavior. </p>
+<h2><a name="The_equals_method_">The equals method </a> </h2>
+<p>Every new class inherits a default version of the <b>equals</b> method from 
+the class named <b>Object. </b>Therefore, a new class that implements the
+<b>Comparator</b> interface already has such a method. The new class is 
+free to override the inherited version, or to simply make use of the inherited 
+version. Here is what Oracle has to say on the subject: </p>
+<blockquote>
+	<i>&quot;Note that it is always safe not to override Object.equals(Object). 
+	However, overriding this method may, in some cases, improve performance by 
+	allowing programs to determine that two distinct Comparators impose the same 
+	order.&quot;</i></blockquote>
+<h3><a name="Overridden_equals_method_">Overridden equals method </a> </h3>
+<blockquote>AUTHOR'S NOTE:
+</blockquote>
+<blockquote>I recently received a message from a student regarding Java4090.htm and 
+a question about equals()
+that read as follows:</blockquote>
+<blockquote>"My question is about overriding the equals method.   My online searches about equals are telling me that if we override it, we are required to override 
+hashCode() as well, but that isn't mentioned here, but does seem to be in the Java 
+<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object">documentation</a>:</blockquote>
+<blockquote>Are we just simplifying here by not doing this?   Does it not matter for the purposes of the course?  "</blockquote>
+<blockquote>My response was that I was not previously aware of the requirement. Since I 
+hadn't been 
+meeting the requirement for 25+ years of teaching Java at ACC, it probably 
+didn't 
+matter for the purpose of this course. Therefore, students could ignore the requirement 
+unless they encounter what seems to be a related problem, in which case let 
+should me know.</blockquote>
+<blockquote>Here 
+is a webpage regarding the requirement that you may find interesting:
+<a href="https://crunchify.com/how-to-override-equals-and-hashcode-method-in-java/">How to Override equals() and 
+hashCode() Method in Java?</a></blockquote>
+<blockquote>Prof. Baldwin</blockquote>
+    <p>I decided, for purposes of illustration, to go ahead and override the <b>
+equals</b> method. However, my overridden version, as shown in <a href="#Listing_8">Listing 8</a> 
+isn&#39;t very significant. It simply confirms that an object being compared 
+for equality to a <b>Comparator</b> object is instantiated from the same class.
+</p>
+<p>Since the <b>Comparator</b> object doesn&#39;t contain any instance variables, 
+there isn&#39;t much more to be tested for equality. </p>
+<!--``1List08-->
+	<div class="a">
+		<p>
+<a name="Listing_8">Listing 8</a>. The overridden 
+				equals method.</p>
+<pre>  public boolean equals(Object o){
+    if(!(o instanceof TheComparator))
+        return false;
+    else return true;
+  }//end overridden equals()
+}//end class TheComparator
+</pre>
+</div>
+<!--``2-->
+<h2><a name="The_program_output_">The program output </a> </h2>
+<p>Finally, the code shown in <a href="#Listing_9">Listing 9</a> uses an <b>Iterator</b> to 
+display the contents of the populated <b>TreeSet</b> object. </p>
+<!--``1List09-->
+	<div class="a">
+		<p>
+<a name="Listing_9">Listing 9</a>. Display the 
+				contents of the TreeSet object.</p>
+<pre>    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+<p>The output produced by this code fragment is shown below. </p>
+<p><b>1234</b> </p>
+<p>As you can see, the duplicate elements having the value 4 were eliminated as 
+would be expected for a <b>Set</b> object. In addition, the <b>Comparator</b> 
+was used to accomplish the following contract of a <b>SortedSet</b> object: </p>
+<blockquote>
+	<i>&quot;A set that further guarantees that its iterator will traverse the set in 
+	ascending element order, sorted according to the natural ordering of its 
+	elements (see <strong>Comparable</strong>), or by a <strong>Comparator</strong> provided at sorted set 
+	creation time.&quot;</i></blockquote>
+<p>In this case, the sorted order was controlled by the <b>Comparator</b> 
+object, and not by the <i>natural ordering</i> of the elements. The <i>
+natural ordering</i> is controlled by implementation of the <b>Comparable</b> 
+interface, and the elements in this collection did not implement the <b>
+Comparable</b> interface. Therefore, objects of the class named <strong>MyClass</strong> 
+do not have a natural order in this program.</p>
+<p>However, the code in this version of the <strong>Comparator</strong> produced 
+an output order that matches the ascending natural order that one might expect 
+for objects of type <strong>MyClass</strong>. Future chapters will show you how 
+to design the <strong>Comparator</strong> object to produce different output 
+orders, such as descending order for example.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code <a href="#Listing_1">Listing 1</a> and paste it into your Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>This chapter has discussed and illustrated the use of the <b>Comparator</b> 
+interface. </p>
+<p>The sorting order established by a <b>Comparator</b> may be different or may 
+be the same as the <i>natural ordering</i> for a collection of objects<i>.</i>
+</p>
+<p>A <b>Comparator</b> can be used to establish a sorting order for objects that 
+don&#39;t have a <i>natural ordering</i>. </p>
+<p>The use of a <b>Comparator</b> is an alternative to the implementation of the
+<b>Comparable</b> interface. </p>
+<p>A <b>TreeSet</b> object instantiated with the benefit of a <b>Comparator</b> 
+object doesn&#39;t require the objects in its collection to implement <b>Comparable</b>.
+</p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter, I will illustrate the use of a <b>Comparator</b> to 
+eliminate the effect of case when sorting <b>String</b> objects.</p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+	
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4090: The Comparator Interface, Part 1</li>
+					<li>File: Java4090.htm</li>
+					<li>Revised: 06/12/22</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

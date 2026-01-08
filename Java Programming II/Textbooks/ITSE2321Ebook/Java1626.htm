@@ -1,0 +1,804 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java1626</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1626: Array Objects, Part 3</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	
+	<h1><a name="Preface">Preface</a></h1>
+	
+
+		<p><em><strong>Note: The material in 
+		this chapter is beyond the scope this introductory OOP course. The material is presented 
+		here solely for the benefit of students who would like to dig deeper 
+		into the technology. Other students should feel free to skip this 
+		chapter. ITSE 2321 students in Prof. Baldwin's classes will not be expected to know and will not be 
+		tested on the material in this chapter unless it is 
+		also presented in another chapter.</strong></em></p>
+
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Using the newInstance method.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Populate the array object. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Display the data. </li>
+		<li><a href="#Listing_4">Listing 4</a>. An array object of type int. </li>
+		<li><a href="#Listing_5">Listing 5</a>. The two-dimensional array object tree.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Populate the leaf elements.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Display the data.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Create, populate, and display an array object.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Sort and display the data.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Search for an existing string.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Search for a non-existing string.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Complete program listing.</li>
+	</ul>
+	<h1><a name="Preview">Preview</a></h1>
+	<p>This chapter discusses various details regarding the use of array objects 
+	in Java, including:</p>
+<ul>
+	<li>The members of an array object</li>
+	<li>The interfaces implemented by array objects</li>
+	<li><b>Class</b> objects and array objects</li>
+	<li>The classes named <b>Array</b> and <b>Arrays</b></li>
+</ul>
+	
+	<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	
+	<p><b>Members of an array object</b> </p>
+<p>An array object has the following members <i>(in addition to the data stored 
+in the object):</i></p>
+<ul>
+	<li>A public <strong>final</strong> variable named <b>length</b>, which contains the number 
+	of components of the array <i>(length may be positive or zero)</i></li>
+	<li>A public method named <b>clone</b>. This method overrides the method of 
+	the same name in the <b>Object</b> class.</li>
+	<li>Default versions of all the methods inherited from the class named <b>
+	Object</b>, <i>(other than <b>clone</b>, which is overridden as described 
+	above).</i></li>
+</ul>
+<p><b>Implements Cloneable and Serializable</b> </p>
+<p>Also, every array object implements the <b>Cloneable</b> and <b>Serializable</b> 
+interfaces. <i>(Note that neither of these interfaces declares any methods.)</i>
+</p>
+<p><b>What is the Cloneable interface?</b> </p>
+<p>Here is what Sun has to say about the <b>Cloneable</b> interface: </p>
+<p><i>&quot;A class implements the <b>Cloneable</b> interface to indicate to the <b>
+Object.clone()</b> method that it is legal for that method to make a 
+field-for-field copy of instances of that class. Attempts to clone instances 
+that do not implement the <b>Cloneable</b> interface result in the exception <b>
+CloneNotSupportedException</b> being thrown.&quot;</i> </p>
+<p>Thus, the fact than an array object implements the <b>Cloneable</b> interface 
+makes it possible to clone array objects. </p>
+<p><b>A cloned array is shallow</b> </p>
+<p>While it is possible to clone arrays, care must be exercised when cloning 
+multidimensional arrays. That is because a clone of a multidimensional array is 
+shallow. </p>
+<p><b>What does shallow mean?</b> </p>
+<p>Shallow means that the cloning process creates only a single new array. </p>
+<p>Subarrays are shared between the original array and the clone. </p>
+<p><i>(Although I&#39;m not certain, I suspect that this may also be the case for 
+cloning array objects containing references to ordinary objects. I will leave 
+that determination as an exercise for the student. In any event, be careful if 
+you clone array objects.)</i> </p>
+<p><b>Serialization</b> </p>
+<p>Serialization of an object is the process of decomposing the object into a 
+stream of bytes, which can later be recomposed into a copy of the object. Here 
+is what Sun has to say about the <b>Serializable</b> interface: </p>
+<p><i>&quot;Serializability of a class is enabled by the class implementing the <b>
+java.io.Serializable</b> interface. Classes that do not implement this interface 
+will not have any of their state serialized or deserialized.</i> </p>
+<p><i>All subtypes of a serializable class are themselves serializable.</i> </p>
+<p><i>The serialization interface has no methods or fields and serves only to 
+identify the semantics of being serializable.&quot;</i> </p>
+<p>Even though this quotation from Sun doesn&#39;t address array objects, because 
+array objects implement the <b>Serializable</b> interface, they can be 
+serialized and later reconstructed. </p>
+<p><b>Class objects representing array objects</b> </p>
+<p>An object of the class named <b>Class</b> can be obtained <i>(by calling the
+<b>getClass</b> method of the <b>Object</b> class)</i> to represent the class 
+from which an ordinary object was instantiated. </p>
+<p>The <b>Class</b> object is able to answer certain questions about the class 
+that it represents <i>(such as the name of the superclass),</i> and has other 
+uses as well. </p>
+<p><i>(One of the other uses is to specify the type as a parameter to the 
+methods of the <b>Array</b> class, which I will illustrate later in this 
+chapter.)</i> </p>
+<p>Every array also has an associated <b>Class</b> object. </p>
+<p>That <b>Class </b>object is shared with all other arrays with the same 
+component type. </p>
+<p>The superclass of an array type is <b>Object</b>. <i>(Think about this!)</i>
+</p>
+<p><b>An array of characters is not a string</b> </p>
+<p>For the benefit of the C/C++ programmers in the audience, an array of <b>char</b> 
+is not a <b>String</b>. </p>
+<p><i>(In Java, a string is an object of the <b>String</b> class or the <b>
+StringBuffer </b>class).</i> </p>
+<p><b>Not terminated by null</b> </p>
+<p>Also, neither a <b>String</b> object nor an array of type <b>char</b> is 
+terminated by &#39;\u0000&#39; <em>(the NUL character)</em>. </p>
+<p><i>(This information is provided for the benefit of C programmers who are 
+accustomed to working with so-called null-terminated strings. If you&#39;re not a C 
+programmer, don&#39;t worry about this.)</i> </p>
+<p><b>A String object in Java is immutable</b> </p>
+<p>Once initialized, the contents of a Java <b>String</b> object never change.
+</p>
+<p>On the other hand, an array of type <b>char</b> has mutable elements. The <b>
+String</b> class provides a method named <b>toCharArray</b>, which returns an 
+array of characters containing the same character sequence as a <b>String</b>.
+</p>
+<p><b>StringBuffer objects</b> </p>
+<p>The class named <b>StringBuffer</b> also provides a variety of methods that 
+work with arrays of characters. The contents of a <b>StringBuffer</b> object are 
+mutable. </p>
+<p><b>The Array and Arrays classes</b> </p>
+<p>The classes named <b>Array</b> and <b>Arrays</b> provide methods that you can 
+use to work with array objects. </p>
+<p>The <b>Array</b> class provides static methods to dynamically create and 
+access Java arrays. </p>
+<p>The <b>Arrays</b> class contains various methods for manipulating arrays <i>
+(such as sorting and searching).</i> It also contains a static factory method 
+that allows arrays to be viewed as lists. </p>
+<p><b>A sample program named Array08</b> </p>
+<p>The sample program named <b>Array08</b> <i>(shown in <a href="#Listing_12">
+Listing 12</a> near the end of the chapter)</i> illustrates the use of some of 
+these methods. </p>
+<p><b>Will discuss in fragments</b> </p>
+<p>As usual, I will discuss this program in fragments. Essentially all of the 
+interesting code is in the method named <b>main</b>, so I will begin my 
+discussion there. The first few fragments will illustrate the creation, 
+population, and display of a one-dimensional array object whose elements contain 
+references to objects of type <b>String</b>. </p>
+<p><b>The newInstance method of the Array class</b> </p>
+<p>The code in <a href="#Listing_1">Listing 1</a> calls the <b>static</b> method 
+of the <b>Array</b> class named <b>newInstance</b> to create the array object 
+and to store the object&#39;s reference in a reference variable of type <b>Object</b> 
+named <b>v1</b>. </p>
+<p><i>(Note that there are two overloaded versions of the <b>newInstance</b> 
+method in the <b>Array</b> class. I will discuss the other one later.)</i> </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Using the newInstance 
+				method.
+
+<pre>
+ Object v1 = Array.newInstance(
+                            Class.forName(&quot;java.lang.String&quot;),3);
+</pre>
+</div>
+	<p><b>Two parameters required</b> </p>
+<p>This version of the <b>newInstance</b> method requires two parameters. The 
+first parameter specifies the component type. This must be a reference to a <b>
+Class</b> object representing the component type of the new array object. </p>
+<p>The second parameter, of type <b>int</b>, specifies the length of the new 
+array object. </p>
+<p><b>The Class object</b> </p>
+<p>The second parameter that specifies the array length is fairly obvious. 
+However, you may need some help with the first parameter. Here is part of what 
+Sun has to say about a <b>Class</b> object. </p>
+<p><i>&quot;Instances of the class <b>Class</b> 
+represent classes and interfaces in a running Java application. Every array also 
+belongs to a class that is reflected as a <b>Class</b> object that is shared by 
+all arrays with the same element type and number of dimensions. The primitive 
+Java types (boolean, byte, char, short, int, long, float, and double), and the 
+keyword void are also represented as <b>Class</b> objects.&quot;</i> </p>
+<p><b>Getting a 
+reference to a Class object</b> </p>
+<p>I know of three ways to get <i>(or refer to)</i> a <b>Class</b> object.</p>
+<ul>
+	<li><b>Class</b> objects for primitive types</li>
+	<li>The <b>getClass</b> method</li>
+	<li>The <b>forName</b> method</li>
+</ul>
+<p><b>Class objects for primitive types</b> </p>
+<p>There are nine predefined <b>Class</b> objects that represent the eight 
+primitive types and void. These are created by the Java Virtual Machine, and 
+have the same names as the primitive types that they represent: <b>boolean</b>,
+<b>byte</b>, <b>char</b>, <b>short</b>, <b>int</b>, <b>long</b>, <b>float</b>, 
+and <b>double</b>. You can refer to these class objects using the following 
+syntax: </p>
+<ul>
+	<li>boolean.class, </li>
+	<li>int.class, </li>
+	<li>float.class, etc. </li>
+</ul>
+<p>I will 
+illustrate this later in this chapter. </p>
+<p><b>The getClass method</b> </p>
+<p>If you have a reference to a target object <i>(ordinary object or array 
+object),<b> </b></i>you can gain access to a <b>Class</b> object representing 
+the class from which that object was instantiated by calling the <b>getClass</b> 
+method of the <b>Object</b> class, on that object. </p>
+<p>The <b>getClass</b> method 
+returns a reference of type <b>Class</b> that refers to a <b>Class</b> object 
+representing the class from which the target object was instantiated. </p>
+<p><b>The forName method</b> </p>
+<p>The static <b>forName</b> method of the <b>Class</b> class accepts the name 
+of a class or interface as an incoming <b>String</b> parameter, and returns the
+<b>Class</b> object associated with the class or interface having the given 
+string name. </p>
+<p><i>(The <b>forName</b> method cannot be used with primitive types 
+as a parameter.)</i> </p>
+<p><b>Class object for the String class</b> </p>
+<p>Referring back to <a href="#Listing_1">Listing 1</a>, you will see that the first parameter passed to 
+the <b>newInstance</b> method was a reference to a <b>Class</b> object 
+representing the <b>String</b> class. </p>
+<p>Thus, the statement in <a href="#Listing_1">Listing 1</a> creates a 
+one-dimensional array object, of component type <b>String</b>, three elements in 
+length. </p>
+<p>The reference to the array object is saved in the generic reference 
+variable of type <b>Object</b>. </p>
+<p><i>(In case you haven&#39;t recognized it already, 
+this is an alternative to syntax such as </i> </p>
+<p><i><b>new String[3]</b>. </i> </p>
+<p><i>Note that there 
+are no square brackets in this alternative approach. Thus, it might be said that 
+this approach is more mainstream OOP than the approach that requires the use of 
+square brackets.)</i> </p>
+<p><b>Populate the array object</b> </p>
+<p>The code in <a href="#Listing_2">Listing 2</a> uses two <b>static</b> methods of the <b>Array</b> 
+class to populate the three elements of the array object with references to 
+objects of type <b>String</b>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Populate the array object.
+
+				<pre> for(int i = 0; i &lt; Array.getLength(v1);i++){
+   Array.set(v1, i, &quot;a&quot;+i);
+ }//end for loop</pre>
+</div>
+	<p><b>The getLength method</b> </p>
+<p>The <b>getLength</b> method of the <strong>Array</strong> class is used in <a href="#Listing_2">Listing 2</a> to 
+get the <b>length</b> of the array for use in the conditional expression of a <b>
+for</b> loop. </p>
+<p>Note that unlike the sample programs in the previous chapter <i>(that stored 
+the array object&#39;s reference as type <b>Object</b>), </i>it was not necessary to 
+cast the reference to type <b>String[]</b> in order to get the <b>length</b>.
+</p>
+<p><b>The set method</b> </p>
+<p>The <b>set</b> method of the <strong>Array</strong> class is used in <a href="#Listing_2">Listing 2</a> 
+to store references to <b>String</b> objects in the elements of the array 
+object. </p>
+<p>Again, unlike the programs in the previous chapter, it was not necessary to 
+cast the array reference to type <b>String[]</b> to access the elements. In 
+fact, there are no square brackets anywhere in <a href="#Listing_2">Listing 2</a>.
+</p>
+<p><b>Display the data</b> </p>
+<p><a href="#Listing_3">Listing 3</a> uses a similar <b>for</b> loop to display the contents of the <b>
+String</b> objects whose references are stored in the elements of the array 
+object. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Display the data.
+
+				<pre> for(int i = 0; i &lt; Array.getLength(v1); i++){
+   System.out.print(Array.get(v1, i)  + &quot; &quot;);
+ }//end for loop</pre>
+</div>
+	<p><b>No square brackets</b> </p>
+<p>Once again, note that no casts, and no square brackets were required in
+<a href="#Listing_3">Listing 3</a>. In fact, this approach makes it possible to 
+deal with one-dimensional array objects using a syntax that is completely devoid 
+of square brackets. </p>
+<p>Rather than using square brackets to access array elements, this is a <i>
+method-oriented</i> approach to the use of array objects. This makes it possible 
+to treat array objects much the same as we treat ordinary objects in Java. </p>
+<p><b>A two-dimensional rectangular array object tree</b> </p>
+<p>Next, I will use the methods of the <b>Array</b> class to create, populate, 
+and display a rectangular two-dimensional array object tree, whose elements 
+contain references to objects of the class <b>String</b>. </p>
+<p><b>Another overloaded version of newInstance</b> </p>
+<p>To accomplish this, I will use the other overloaded version of the <b>
+newInstance</b> method. This version requires a reference to an array object of 
+type <b>int</b> as the second parameter. </p>
+<p><i>(Note that the Sun documentation describes two different behaviors for 
+this method, depending on whether the first parameter represents a non-array 
+class or interface, or represents an array type. This sample program illustrates 
+the first possibility.)</i> </p>
+<p><b>The second parameter</b> </p>
+<p>As mentioned above, the version of the <b>newInstance</b> method that I am 
+going to use requires a reference to an array object of type <b>int</b> as the 
+second parameter. </p>
+<p><i>(The length of the array object of type <b>int</b> specifies the number of 
+dimensions of the multi-dimensional array object. The contents of the elements 
+of the array object of type <b>int</b> specify the sizes of those dimensions.)</i>
+</p>
+<p>Thus, my first task is to create and populate an array object of type <b>int</b>.
+</p>
+<p><b>An array object of type int</b> </p>
+<p><a href="#Listing_4">Listing 4</a> shows the code required to create and populate the array object of 
+type <b>int</b>. This is a one-dimensional array object having two elements <i>
+(length equals 2).</i> The first element is populated with the <b>int</b> value 
+2 and the second element is populated with the <b>int</b> value 3. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. An array object of type int.
+
+				<pre> Object v2 = Array.newInstance(int.class,2);
+ Array.setInt(v2, 0, 2);
+ Array.setInt(v2, 1, 3);</pre>
+</div>
+	<p><b>Why do we need this array object?</b> </p>
+<p>When this array object is used later, in conjunction with the version of the
+<b>newInstance</b> method that requires a reference to an array object of type
+<b>int</b> as the second parameter, this array object will specify an array 
+object having two dimensions <i>(a rectangular array). </i>The rectangular array 
+will have two rows and three columns. </p>
+<p><b>Same newInstance method as before</b> </p>
+<p>Note that <a href="#Listing_4">Listing 4</a> uses the same version of the <b>
+newInstance</b> method that was used to create the one-dimensional array object 
+in <a href="#Listing_1">Listing l</a>.</p>
+<p><b>Class object representing int</b> </p>
+<p>Note the syntax of the first parameter passed to the <b>newInstance</b> 
+method in <a href="#Listing_4">Listing 4</a>. As mentioned earlier, this is a 
+reference to the predefined <b>Class</b> object that represents the primitive type <b>int</b>. This causes 
+the component type of the array object to be type <b>int</b>. </p>
+<p><b>The setInt method</b> </p>
+<p>You should also note the use of the <b>setInt</b> method of the <b>Array</b> 
+class to populate each of the two elements in the array in <a href="#Listing_4">Listing 4</a>
+<i>(with <b>
+int</b> values of 2 and 3 respectively).</i> </p>
+<p><b>The two-dimensional array object tree</b> </p>
+<p><a href="#Listing_5">Listing 5</a> uses the other overloaded version of the <b>newInstance</b> method 
+to create a two-dimensional array object tree, having two rows and three 
+columns. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. The two-dimensional array object tree.
+				<pre> Object v3 = Array.newInstance(Class.forName(&quot;java.lang.String&quot;),
+                               (int[])v2);</pre>
+</div>
+	<p>A reference to the array object at the root of the tree is stored in the 
+	reference variable of type <b>Object</b> named <b>v3</b>. Note that the tree 
+	is designed to store references to objects of type <b>String</b>. </p>
+<p><i>(The number of dimensions and the size of each dimension are specified by 
+the reference to the array object of type <b>int</b> passed as the second 
+parameter.)</i> </p>
+<p><b>Square-bracket cast is required here</b> </p>
+<p>The required type of the second parameter for this version of the <b>
+newInstance</b> method is <b>int[]</b>. Therefore, there was no way for me to 
+avoid the use of square brackets. I could either store the reference to the 
+array object as type <b>Object</b> and cast it before passing it to the method,
+<i>(which I did),</i> or save it originally as type <b>int[]</b>, <i>(which I 
+didn&#39;t). </i>Either way, I would have to know about the type <b>int[]</b>. </p>
+<p><b>Populate the leaf elements</b> </p>
+<p>The nested <b>for</b> loop in <a href="#Listing_6">Listing 6</a> uses the various methods of the <b>
+Array</b> class to populate the elements in the leaf array objects with 
+references to objects of the class <b>String</b>. </p>
+<div class="a"><a name="Listing_6">Listing 6</a>. Populate the leaf elements.
+				<pre> for(int i=0;i &lt; Array.getLength(v3);i++){
+   for(int j=0;j &lt; Array.getLength(Array.get(v3,i));j++){
+     Array.set(Array.get(v3,i),j,&quot;b&quot; + (i+1)*(j+1));
+   }//end inner loop
+ }//end outer loop</pre>
+</div>
+	<p>Admittedly, the code in <a href="#Listing_6">Listing 6</a> is a little 
+	complex. However, there is really nothing new there, so I won&#39;t discuss it 
+	further. </p>
+<p><b>Display the data</b> </p>
+<p>Similarly, the code in <a href="#Listing_7">Listing 7</a> uses the methods of 
+the <b>Array</b> class 
+in a nested <b>for</b> loop to get and display the contents of the <b>String</b> 
+objects whose references are stored in the elements of the leaf array objects. 
+Again, there is nothing new here, so I won&#39;t discuss this code further. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Display the data.
+				<pre> for(int i=0;i &lt; Array.getLength(v3);i++){
+   for(int j=0;j &lt; Array.getLength(Array.get(v3,i));j++){
+     System.out.print(Array.get(Array.get(v3,i),j) + &quot; &quot;);
+   }//end inner loop
+   System.out.println();
+ }//end outer loop
+ System.out.println();</pre>
+</div>
+	<p><b>Very few square brackets</b> </p>
+<p>I will point out that with the exception of the requirement to create and 
+pass an array object as type <b>int[]</b>, it was possible to write this entire 
+example without the use of square brackets. This further illustrates the fact 
+that the <b>Array</b> class makes it possible to create and work with array 
+objects in a <i>method-oriented</i> manner, almost devoid of the use of 
+square-bracket notation. </p>
+<p><b>Sorting and Searching</b> </p>
+<p>Many college professors require their students to spend large amounts of time 
+reinventing algorithms for sorting and searching <i>(and for various collections 
+and data structures as well).</i> There was probably a time in history when that 
+was an appropriate use of a student&#39;s time. However, in my opinion, that time 
+has passed. </p>
+<p><b>Reuse, don&#39;t reinvent</b> </p>
+<p>Through a combination of the <b>Arrays</b> class, and the <b>Java Collections 
+Framework</b>, most of the sorting, searching, data structures, and collection 
+needs that you might have are readily available without a requirement for you to 
+reinvent them. </p>
+<p><i>(One of the most important concepts in OOP is <b>reuse, don&#39;t reinvent</b>.)</i>
+</p>
+<p>I will now illustrate sorting and searching using <b>static</b> methods of 
+the <b>Arrays</b> class. </p>
+<p><i>(Note that the <b>Arrays</b> class is different from the <b>Array</b> 
+class discussed earlier.)</i> </p>
+<p><b>Create, populate, and display an array object</b> </p>
+<p>To give us something to work with, <a href="#Listing_8">Listing 8</a> 
+creates, populates, and displays the contents of an array object. Note that the 
+array object is populated with references to <b>String</b> objects. There is 
+nothing new here, so I won&#39;t discuss the code in <a href="#Listing_8">Listing 8</a> 
+in detail. </p>
+<div class="a"><a name="Listing_8">Listing 8</a>. Create, populate, and display an array object.
+				<pre> Object v4 = Array.newInstance(Class.forName(&quot;java.lang.String&quot;),
+                               8);
+ //Populate the array object.
+ // Create a gap in the data.
+ for(int i = 0; i &lt; Array.getLength(v4); i++){
+   if(i &lt; 4){
+     Array.set(v4,i,&quot;c&quot;+(8-i));}
+   else{
+     Array.set(v4,i,&quot;c&quot;+(18-i));}
+ }//end for loop
+
+ //Display the raw data
+ for(int i = 0; i &lt; Array.getLength(v4); i++){
+   System.out.print(Array.get(v4,i)+ &quot; &quot;);
+ }//end for loop</pre>
+</div>
+	<p><b>The output</b> </p>
+<p>The code in <a href="#Listing_8">Listing 8</a> 
+produces the following output on the screen: </p>
+<div class="a">
+<pre>c8 c7 c6 c5 c14 c13 c12 c11</pre>
+</div>
+<p>Note that the order of this data is generally descending, and there is no 
+string encapsulating the characters <b>c4</b>. </p>
+<p><b>Sort and display the data</b> </p>
+<p>The code in <a href="#Listing_9">Listing 9</a> uses the <b>sort</b> method of the <b>Arrays</b> class 
+to sort the array data into ascending order. </p>
+<div class="a"><a name="Listing_9">Listing 9</a>. Sort and display the data.
+				<pre> Arrays.sort((Object[])v4);
+
+ //Display the sorted data
+ for(int i = 0; i &lt; Array.getLength(v4); i++){
+   System.out.print(Array.get(v4, i) + &quot; &quot;);
+ }//end for loop</pre>
+</div>
+	<p><b>The output</b> </p>
+<p>The code in <a href="#Listing_9">Listing 9</a> displays the sorted contents 
+of the array object, producing the following 
+<a name="output_on_the_computer_screen">output on the computer screen</a>: </p>
+<div class="a">
+<pre>c11 c12 c13 c14 c5 c6 c7 c8</pre>
+</div>
+<p>Note that the order of the data in the array object has been modified, and 
+the array data is now in ascending order. </p>
+<p><i>(This order is based on the natural ordering of the <b>String</b> data. I 
+discuss other ways to order sorted data in conjunction with the <b>Comparable</b> 
+and <b>Comparator</b> interfaces in my chapters on the 
+Java Collections 
+Framework.)</i> </p>
+<p><b>Binary search</b> </p>
+<p>A binary search is a search algorithm that can very quickly find an item 
+stored in a sorted collection of items. In this case, the collection of items is 
+stored in an array object, and the data is sorted in ascending order. </p>
+<p><b>Search for an existing string</b> </p>
+<p><a href="#Listing_10">Listing 10</a> uses the <b>binarySearch</b> method of the <b>Arrays</b> class to 
+perform a search for an existing <b>String</b> object whose reference is stored 
+in the sorted array. The code searches for the reference to the <b>String</b> 
+object encapsulating the characters <b>c5</b>. </p>
+<div class="a"><a name="Listing_10">Listing 10</a>. Search for an existing string.
+				<pre> System.out.println(Arrays.binarySearch((Object[])v4,&quot;c5&quot;));</pre>
+</div>
+	<p><b>The result of the search</b> </p>
+<p>The code in <a href="#Listing_10">Listing 10</a> displays the numeral 4 on 
+the screen. </p>
+<p>When the <b>binarySearch</b> method finds a match, it returns the index value 
+of the matching element. If you go back and look at the
+<a href="#output_on_the_computer_screen">sorted contents</a> of the array shown 
+earlier, you will see that this is the index of the element containing a 
+reference to a <b>String</b> object that encapsulates the 
+characters <b>c5</b>. </p>
+<p><b>Search for a non-existing string</b> </p>
+<p>The code in <a href="#Listing_11">Listing 11</a> uses the <b>binarySearch</b> method to search for a 
+reference to a <b>String</b> object that encapsulates the characters <b>c4</b>. 
+As I indicated earlier, a <b>String</b> object that encapsulates these 
+characters is not represented in the sorted array object. </p>
+
+	
+	
+
+	
+<div class="a"><a name="Listing_11">Listing 11</a>. Search for a non-existing string.
+				<pre> System.out.println(Arrays.binarySearch((Object[])v4,&quot;c4&quot;));</pre>
+</div>
+	<p><b>The result of the search</b> </p>
+<p>The code in <a href="#Listing_11">Listing 11</a> produces the following 
+negative numeral on the screen: <b>-5</b>. </p>
+<p>Here is Sun&#39;s explanation for the value returned by the <b>binarySearch</b> 
+method: </p>
+<p><i>&quot;Returns: index of the search key, if it is contained in the list; 
+otherwise, (-(insertion point) - 1). The insertion point is defined as the point 
+at which the key would be inserted into the list: the index of the first element 
+greater than the key, or list.size(), if all elements in the list are less than 
+the specified key. Note that this guarantees that the return value will be &gt;= 0 
+if and only if the key is found.&quot;</i> </p>
+<p>Thus, the negative return value indicates that the method didn&#39;t find a 
+match. The absolute value of the return value can be used to determine the index 
+of the reference to the target object if it did exist in the sorted list. I will 
+leave it as an exercise for the student to interpret Sun&#39;s explanation beyond 
+this simple explanation. </p>
+<p><b>Other capabilities</b> </p>
+<p>In addition to sorting and searching, the <b>Arrays</b> class provides 
+several other methods that can be used to manipulate the contents of array 
+objects in Java. </p>
+
+	
+	
+	<h1><a name="Summary">Summary</a></h1>
+<p>An array object has the following members <i>(in addition to the data stored 
+in the object):</i></p>
+<ul>
+	<li>A public final variable named <b>length</b></li>
+	<li>An overridden version of the public method named <b>clone</b></li>
+	<li>Default versions of all the other methods inherited from the class named
+	<b>Object</b></li>
+</ul>
+<p>Every array object implements the <b>Cloneable</b> and <b>Serializable</b> 
+interfaces.</p>
+<p>A clone of a multidimensional array is shallow. Therefore, you should 
+exercise caution when cloning array objects. </p>
+<p>Because array objects implement the <b>Serializable</b> interface, they can 
+be serialized and later reconstructed. </p>
+<p>Every array also has an associated <b>Class</b> object. </p>
+<p>The classes named <b>Array</b> and <b>Arrays</b> provide methods that you can 
+use to work with array objects. </p>
+<p>The <b>Array</b> class provides static methods to dynamically create and 
+access Java array objects. </p>
+<p>The <b>Arrays</b> class contains various methods for manipulating arrays <i>
+(such as sorting and searching).</i> It also contains a static factory method 
+that allows arrays to be viewed as lists. </p>
+<p>Class objects are required when using the methods of the <b>Array</b> class 
+to dynamically create Java array objects. </p>
+<p>There are nine predefined <b>Class</b> objects that represent the eight 
+primitive types and void. They are accessed using the following syntax: 
+boolean.class, int.class, etc. </p>
+<p>Three ways to get a <b>Class</b> object are:</p>
+<ul>
+	<li>Class objects for primitive types: <b>int.class</b>, etc.</li>
+	<li>The <b>getClass</b> method</li>
+	<li>The <b>forName</b> method</li>
+</ul>
+<p>The methods of the <b>Array</b> class make it possible to deal with 
+one-dimensional array objects using a syntax that is completely devoid of square 
+brackets. This is a <i>method-oriented</i> approach to the use of array objects. 
+This makes it possible to treat array objects much the same as we treat ordinary 
+objects in Java. The required syntax for multi-dimensional array objects is 
+mostly devoid of square brackets.</p>
+<p>The <b>Arrays</b> class provides methods for sorting and searching array 
+objects as well as performing other operations on array objects as well. </p>
+<p>Through a combination of the <b>Arrays</b> class and the Java Collections 
+Framework, most of the sorting, searching, data structures, and collection needs 
+that you might have are readily available without a requirement for you to 
+reinvent them. </p>
+<p>One of the most important concepts in OOP is <i>reuse, don&#39;t reinvent.</i>
+</p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter will explain static members.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1626: Array Objects, Part 3</li>
+					<li>File: Java1626.htm
+</li>
+					<li>Published: 08/08/12</li>
+					<li>Revised: 03/17/20</li>
+
+				</ul>
+</div>
+
+
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_12">Listing 
+12</a> below.</p>
+
+
+<div class="a">
+<a name="Listing_12">Listing 12</a>. <strong>Complete program listing</strong>.
+
+<pre>/*File Array08.java
+Copyright, R.G.Baldwin
+Rev 2/10/02
+
+This program illustrates the use of
+static methods of the Array class to
+dynamically create and access Java
+arrays.
+
+It also illustrates the use of static
+methods of the Arrays class to sort
+and search array objects.
+
+Tested using JDK 1.3 under Win 2000.
+**************************************/
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
+public class Array08{
+  public static void main(
+                        String[] args){
+
+  try{
+    //Create, populate, and display a
+    // one-dimensional array object
+    // whose elements contain
+    // references to objects of type
+    // String.
+
+    //Create the array object
+    Object v1 = Array.newInstance(
+              Class.forName(
+               &quot;java.lang.String&quot;), 3);
+    //Populate the array object
+    for(int i = 0; i &lt;
+             Array.getLength(v1); i++){
+      Array.set(v1, i, &quot;a&quot;+i);
+    }//end for loop
+    //Display the data
+    for(int i = 0; i &lt;
+             Array.getLength(v1); i++){
+      System.out.print(
+               Array.get(v1, i) + &quot; &quot;);
+    }//end for loop
+    System.out.println();
+    System.out.println();
+
+    //Create, populate, and display a
+    // rectangular two-dimensional
+    // array object tree whose
+    // elements contain references
+    // to objects of type String.
+
+    //First create an array object of
+    // type int required as a
+    // parameter to the newInstance
+    // method.  Populate it to later
+    // specify a rectangular array
+    // object tree with two rows and
+    // three columns.
+    Object v2 = Array.newInstance(
+                         int.class, 2);
+    Array.setInt(v2, 0, 2);
+    Array.setInt(v2, 1, 3);
+    //Now create the actual two-
+    // dimensional array object tree.
+    Object v3 = Array.newInstance(
+       Class.forName(
+       &quot;java.lang.String&quot;), (int[])v2);
+
+    //Populate the leaf elements with
+    // references to objects of type
+    // String.
+    for(int i=0;i&lt;
+
+              Array.getLength(v3);i++){
+      for(int j=0;j&lt;
+               Array.getLength(
+                 Array.get(v3,i));j++){
+        Array.set(Array.get(v3,i), j,
+                    &quot;b&quot; + (i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop
+
+    //Display the data encapsulated
+    // in the String objects.
+    for(int i=0;i&lt;Array.getLength(v3);
+                                  i++){
+      for(int j=0;j&lt;Array.getLength(
+                 Array.get(v3,i));j++){
+        System.out.print(Array.get(
+            Array.get(v3,i), j) + &quot; &quot;);
+      }//end inner loop
+      System.out.println();
+    }//end outer loop
+    System.out.println();
+
+    //Now illustrate sorting and
+    // searching using methods of
+    // the arrays class.
+
+    //Create the array object
+    Object v4 = Array.newInstance(
+              Class.forName(
+               &quot;java.lang.String&quot;), 8);
+    //Populate the array object.
+    // Create a gap in the data.
+    for(int i = 0; i &lt;
+             Array.getLength(v4); i++){
+      if(i&lt;4){Array.set(v4, i,
+                           &quot;c&quot;+(8-i));}
+      else{Array.set(v4, i,
+                          &quot;c&quot;+(18-i));}
+    }//end for loop
+
+    //Display the raw data
+    for(int i = 0; i &lt;
+             Array.getLength(v4); i++){
+      System.out.print(Array.get(v4, i)
+                                + &quot; &quot;);
+    }//end for loop
+    System.out.println();
+
+    //Sort array data into
+    // ascending order.
+    Arrays.sort((Object[])v4);
+
+    //Display the sorted data
+    for(int i = 0; i &lt;
+             Array.getLength(v4); i++){
+      System.out.print(
+               Array.get(v4, i) + &quot; &quot;);
+    }//end for loop
+    System.out.println();
+
+    //Search for an existing String
+    System.out.println(
+      Arrays.binarySearch((Object[])v4,
+                                &quot;c5&quot;));
+    //Search for a non-existing String
+    System.out.println(
+      Arrays.binarySearch((Object[])v4,
+                                &quot;c4&quot;));
+
+  }catch(ClassNotFoundException e){
+                System.out.println(e);}
+  }//end main
+}//end class Array08</pre>
+
+</div>
+<p>-end- </p>
+
+
+</body>
+</html>

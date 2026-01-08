@@ -1,0 +1,1091 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java077</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style6 {
+	text-align: left;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java077 Callbacks - I</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+		<li><a href="#Unicast_Sample_Program">Unicast sample program</a></li>
+		<li><a href="#Multicast_sample_program">Multicast sample program</a></li>
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+
+</ul>
+	<h1 class="auto-style6"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one in a series of three chapters designed to teach you 
+	about callbacks in Object-Oriented Programming (OOP) using Java. The other 
+	two chapters are titled <em>Callbacks - II</em> and <em>Callbacks - III</em>. </p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the figures 
+	and listings while you are reading about them.</p>
+<h3><a name="Figures">Figures</a></h3>
+<ul>
+	<li><a href="#Figure_1">Figure 1</a>. Documentation for the removeElement method. </li>
+	<li><a href="#Figure_2">Figure 2</a>. Output from Callback02. </li>
+</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Define the CallBack interface. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Define the Teacher class. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Define the Student class. </li>
+		<li><a href="#Listing_4">Listing 4</a>. A controlling class named Callback01. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Complete listing of program named Callback01.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Define the CallBack interface.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Define the Teacher class.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Define the method named register.</li>
+		<li><a href="#Listing_9">Listing 9</a>. The unRegister method.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Define the callTheRoll method.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Define the class named Dog.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Define the class named Callback02.</li>
+		<li><a href="#Listing_13">Listing 13</a>. Complete listing of program named Callback02.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>Many processes in the standard Java API make use of a mechanism that 
+	might be referred to as a <i>callback</i> mechanism. Basically, this is a 
+	mechanism where a method in one object asks a method in another object to <i>
+	&quot;call me back&quot;</i> or <i>&quot;notify me&quot;</i> when an interesting event happens.
+</p>
+<p><strong>An interesting event</strong></p>
+<p>For example, an interesting event might be that the price of a specified 
+stock goes above its previous high value, or the toaster finishes toasting the 
+bread. </p>
+<p><strong>Multicasting</strong></p>
+<p>In fact, many different objects may ask one object to notify 
+them when the interesting event happens. This is sometimes referred to as <i>
+multicasting</i>. <i>(The one-to-one case is often referred to as unicasting.)
+</i>
+</p>
+<p>Going further, many different objects may ask one object to 
+notify them when any interesting event in a family of interesting 
+events happens, and to identify the specific event that actually 
+happened along with the notification. </p>
+<p><strong>Many examples</strong></p>
+<p>For example, we see different forms of callback activity in conjunction with</p>
+<ul>
+	<li>the <i>Delegation Event Model</i> used with GUIs in JDK 1.1, </li>
+	<li>the <i>Observer/Observable</i> concept used in the <i>Model-View-Controller</i> 
+paradigm, </li>
+	<li>the concept of <i>Bound Properties</i> and <i>Constrained Properties</i> 
+in <i>Java Beans</i>, etc. </li>
+</ul>
+<p><strong>Callback implementation</strong></p>
+<p>Callback capabilities are often implemented in other languages by passing a
+function pointer to another function. The receiving function uses the 
+passed function pointer to call another function when an interesting event 
+happens. However, Java doesn&#39;t support function pointers. In this chapter, we will learn how to 
+implement the callback mechanism using <b>interfaces</b> instead. </p>
+<p><strong>From the simple to the more complex</strong></p>
+<p>As usual, our approach will be to learn the material by reviewing programs 
+that progress from very simple to more complex. As mentioned earlier, this topic 
+consumes all of this chapter and two additional chapters.</p>
+<p><strong>Meaningful scenarios</strong></p>
+<p>It is usually easier to understand abstract concepts if they are explained in 
+terms of meaningful scenarios. In this case, our scenario will consist of a <i>
+teacher </i>and some <i>students</i>. In the beginning there will only be one 
+student. Ultimately there will be many students and there will also be some 
+animals in the classroom as well. </p>
+<p><strong>Registration</strong></p>
+<p>The students <em>(and the animals)</em> register themselves on the teacher's roll book 
+to be notified of interesting events. Initially the interesting event will 
+simply be the teacher taking the roll. Ultimately the interesting event will be 
+notification that it is <i>either </i>time for recess, <i>or </i>it is time for 
+lunch. </p>
+<p><strong>Unicast and multicast scenarios</strong></p>
+<p>Initially, only one student receives notification of the one type of event. 
+Ultimately, all of the students and all of the animals receive notification of 
+both types of event <em>(recess or lunch) </em>but some of those who are notified choose 
+to ignore the notification. </p>
+<p>We will refer to the case where only one student is on the list as the <i>
+unicast</i> program. We will refer to the case where many students <em>(and possibly 
+animals as well)</em> are on the list as the <i>multicast</i> program. This 
+terminology was selected because it matches the terminology used in the JDK 1.1 
+documentation for the Delegation Event Model. </p>
+<p>Without further discussion, let&#39;s look at some code.</p>
+	<h1 class="auto-style6"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<h2><a name="Unicast_Sample_Program">Unicast sample program</a></h2>
+<p>The purpose of this program is to develop a <i>callback </i>capability using
+<i>Interfaces</i>. This version of the program is designed to emphasize the 
+structure of the process. Therefore an effort was made to avoid the 
+requirement for any extra code so it doesn&#39;t do anything fancy. </p>
+<p><strong>A CallBack interface</strong></p>
+<p>This program defines a <b>CallBack </b>interface <em>(interface named </em> <b>
+<em>CallBack</em></b>) 
+that can be used to establish a new type of object reference, and also to
+declare the interface to a method named <b>callBack</b> that will be 
+contained in all objects of classes that implement the interface. This method 
+will then be used to notify those objects whenever something interesting 
+happens. </p>
+<p><strong>A Teacher class</strong></p>
+<p>The program defines a <b>Teacher </b>class that has the ability to</p>
+<ul>
+	<li>create and maintain a list of <em>(only)</em> one object of the <strong>
+	CallBack</strong> interface 
+	type <em>(multiple objects come later)</em>, and</li>
+	<li>to notify that object that something interesting has happened by calling 
+	its <b>callBack</b> method.</li>
+</ul>
+<p><em>(As mentioned earlier, the size of the list was constrained to only one object 
+in order to emphasize callback structure and avoid getting bogged down in 
+list processing. A subsequent version will implement list processing.)</em></p>
+<p><strong>A Student class</strong></p>
+<p>The program defines a class named <b>Student </b>that <em>implements</em><b> </b>the
+<b>CallBack </b>interface. Objects of the <b>Student</b> class can be <i>
+registered </i>on the list maintained by an object of the <b>Teacher </b>class, 
+and can be <i>notified </i>by the object of the <b>Teacher </b>class whenever 
+something interesting happens. Notification takes the form of calling the
+<b>callBack</b> method on the object. </p>
+<p><strong>The method named callBack</strong></p>
+<p>The body of the <b>callBack</b> method can be designed to do anything, but 
+in this case, to keep things simple, it just announces that it has been called.
+</p>
+<p><strong>The controlling class</strong></p>
+<p>Finally, the program defines a controlling class named <strong>Callback01</strong> that ties all the 
+pieces together and exercises them. </p>
+<p>The program was originally tested using JDK 1.1.3 under Win95 and more 
+recently tested using JDK 12.0.1 under Windows 7.</p>
+<p>The output from the program is shown in the complete program listing in a later 
+section.</p>
+	<p><strong>Interesting unicast code fragments</strong></p>
+<p><a href="#Listing_1">Listing 1</a> defines an interface named <b>CallBack </b>that creates a new type 
+and declares a generic method named <b>callBack</b> that can be used to execute 
+a callback on any object that is instantiated from a class that implements the 
+interface. </p>
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. Define the CallBack 
+				interface.
+
+				</p>
+
+				<pre>interface CallBack{
+  public void callBack();
+}//end interface CallBack</pre>
+</div>
+	<p><strong>A class that can register and notify objects of type CallBack</strong></p>
+<p>Next we need a class whose objects can maintain a list of references to 
+objects of type <b>CallBack </b><em>(objects whose class implements the </em><b>
+<em>CallBack </em></b><em>interface)</em>. </p>
+<p>We refer to the process of putting an object on the list as <i>registering</i> 
+the object. </p>
+<p>This class also needs to have the ability to notify all the objects on that 
+list when something interesting happens. We will name this class <b>Teacher</b> 
+in keeping with the scenario described earlier. </p>
+<p>As mentioned earlier, to keep things simple, and emphasize the callback 
+structure without getting bogged down in list processing, we will begin with a 
+limitation of one object for the length of the list. </p>
+<p><strong>The unicast class named Teacher</strong></p>
+<p>The unicast <strong>Teacher</strong> class consists of one instance variable 
+of type <b>CallBack</b> <em>(the interface type)</em> and two instance methods.
+</p>
+<p>One of the methods named <b>register</b> places an object on the list. 
+The other method named <b>callTheRoll</b> calls the <b>callBack</b> method on 
+the object that is on the list. </p>
+<p>Note that the object on the list is guaranteed to have a method named <b>
+callBack </b>because it implements the<strong> CallBack</strong> interface.<strong>
+</strong>Otherwise, it couldn&#39;t get on the list in the first place. This is 
+because the <b>register</b> method requires the incoming object&#39;s reference to 
+be of type <b>CallBack</b>. </p>
+	<p>The Teacher class is defined in <a href="#Listing_2">Listing 2</a>.</p>
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a>. Define the Teacher class.
+
+				</p>
+
+				<pre>class Teacher{
+  CallBack obj; //list of objects of type CallBack
+  //-----------------------------------------------------//
+
+  //Method to add objects to the list.
+  void register(CallBack obj){
+    this.obj = obj;
+  }//end register()
+  //-----------------------------------------------------//
+
+  //Method to notify all objects on the list
+  void callTheRoll(){
+    obj.callBack();
+  }//end callTheRoll()
+  //-----------------------------------------------------//
+}//end class Teacher</pre>
+</div>
+	<p><strong>A class that implements the CallBack interface</strong></p>
+<p>Next, we need a class that <em>implements</em><b> </b>the <b>CallBack </b>
+interface. Objects of this class can be registered on the list maintained by an 
+object of the <b>Teacher </b>class, and will be <i>notified </i>whenever that 
+object calls the <b>callBack</b> method on the registered objects on the list. 
+In keeping with the scenario described earlier, we will name this class <b>
+Student</b>. </p>
+<p>By claiming to implement the <b>CallBack</b> interface, this class is 
+required to provide a concrete definition for the method named <b>callBack</b> that is 
+declared in the interface. Otherwise, the program won&#39;t compile. In this case, 
+that definition is rather simple. The <b>callBack</b> method simply announces 
+that it has been called. </p>
+<p><strong>The callback mechanism</strong></p>
+<p>As we saw above, an object of the <b>Teacher</b> class will call the <b>
+callBack</b> method on all objects on its list when the interesting event 
+occurs. It is important to note that the callback mechanism is to call this 
+method. </p>
+	<p>The <strong>Student</strong> class is defined in <a href="#Listing_3">
+	Listing 3</a>.</p>
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a>. Define the Student class.</p>
+<pre>class Student implements CallBack{
+  String name;
+  //-----------------------------------------------------//
+
+  Student(String name){//constructor
+    this.name = name;  //save the name to identify the obj
+  }//end constructor
+  //-----------------------------------------------------//
+
+  public void callBack(){
+    System.out.println(name + " here");
+  }//end callBack()
+}//end class Student</pre>
+</div>
+	<p><strong>A controlling class named Callback01</strong></p>
+<p>Finally, we need a controlling class to tie all the pieces together and to 
+exercise them. The <b>main</b> method in this class</p>
+<ul>
+	<li>instantiates an object of the <b>Teacher</b> class named <b>missJones</b>,</li>
+	<li>instantiates an anonymous <b>Student</b> object named &quot;<b>Joe</b>&quot;,</li>
+	<li>registers the <strong>Student</strong> object on the list maintained by <b>missJones</b>, and</li>
+	<li>calls the <b>callTheRoll</b> method on <b>missJones</b> to cause the 
+	objects on the list to be notified (to cause their <b>callBack</b> methods 
+	to be called).</li>
+</ul>
+<p>This is not too complicated once you break the process into its 
+component parts. </p>
+<p>The class named Callback01 is defined in <a href="#Listing_4">Listing 4</a>.</p>
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a>. A controlling class named Callback01.</p>
+<pre>class Callback01{
+  public static void main(String[] args){
+    //Instantiate Teacher object
+    Teacher missJones = new Teacher();
+    //Instantiate and register a Student object with the
+    // Teacher object
+    missJones.register(new Student("Joe"));
+    //Cause the Teacher object to do a callBack on the
+    // Student object.
+    missJones.callTheRoll();
+  }//end main()
+}//end class Callback01</pre>
+</div>
+	<p>There you have it. This simple program contains the sum and substance of 
+	one approach to callbacks in Java. </p>
+<p>It is critical to note that the objects registered on the list are of the 
+interface type <b>CallBack</b>. This guarantees that there cannot be an object 
+on the list that does not have an instance method named <b>callBack</b>. </p>
+<p><strong>Unicast Program Listing</strong></p>
+<p>A complete listing of the program is provided in <a href="#Listing_5">Listing 
+5</a> so that you can view the code fragments in context. </p>
+<div class="a">
+<p><a name="Listing_5">Listing 5</a>. Complete listing of 
+				program named Callback01.</p>
+
+				<pre>/*File Callback01.java Copyright, R.G.Baldwin
+The purpose of this program is to develop a callback
+capability using Interfaces.  This version of the
+program is designed to emphasize the structure of
+the process, and therefore an effort was made to
+avoid the requirement for any extra code to do
+anything fancy.
+
+Tested using JDK 1.1.3 under Win95.
+
+The output from the program is:
+
+Joe here.
+**********************************************************/
+//First we define an interface that will create a new type
+// and declare a generic method that can be used to
+// callback any object that is of a class that implements
+// the interface.
+interface CallBack{
+  public void callBack();
+}//end interface CallBack
+//=======================================================//
+
+//Next we need a class whose objects can maintain a
+// registered list of objects of type CallBack (whose
+// class implements the CallBack interface) and can
+// notify all the objects on that list when something
+// interesting happens.
+
+//To keep things simple, and emphasize the structure of
+// what we are doing, we will begin with a limitation
+// of one object on the length of the list.
+
+class Teacher{
+  CallBack obj; //list of objects of type CallBack
+  //-----------------------------------------------------//
+
+  //Method to add objects to the list.
+  void register(CallBack obj){
+    this.obj = obj;
+  }//end register()
+  //-----------------------------------------------------//
+
+  //Method to notify all objects on the list that
+  // something interesting has happened.
+  void callTheRoll(){
+    //Call the callBack() method on the object.  The
+    // object is guaranteed to have such a method because
+    // it is of a class that implements the CallBack
+    // interface.
+    obj.callBack();
+  }//end callTheRoll()
+  //-----------------------------------------------------//
+}//end class Teacher
+//=======================================================//
+
+//Class that implements the CallBack interface.  Objects
+// of this class can be registered on the list maintained
+// by an object of the Teacher class, and will be notified
+// whenever that object calls the callBack method on the
+// registered objects on the list.
+class Student implements CallBack{
+  String name;
+  //-----------------------------------------------------//
+
+  Student(String name){//constructor
+    this.name = name;  //save the name to identify the obj
+  }//end constructor
+  //-----------------------------------------------------//
+
+  //An object of the Teacher class will call this method
+  // as the callback mechanism to notify an object of this
+  // class that something interesting has happened.
+  public void callBack(){
+    System.out.println(name + " here");
+  }//end overridden callBack()
+}//end class Student
+//=======================================================//
+
+//Controlling class that ties all the pieces together and
+// exercises them.
+class Callback01{
+  public static void main(String[] args){
+    //Instantiate Teacher object
+    Teacher missJones = new Teacher();
+    //Instantiate and register a Student object with the
+    // Teacher object
+    missJones.register(new Student("Joe"));
+    //Cause the Teacher object to do a callBack on the
+    // Student object.
+    missJones.callTheRoll();
+  }//end main()
+}//end class Callback01
+//=======================================================/</pre>
+</div>
+	<h2><a name="Multicast_sample_program">Multicast sample program</a></h2>
+	
+	<p>The multicast version of this program does not modify the basic callback 
+	mechanism developed in the previous program. It simply enhances that 
+	mechanism to make it possible to maintain <em>a list of objects</em> 
+	registered for callback and to notify all the objects on that list when an 
+	interesting event happens. </p>
+<p>In case you started reading at this point, this is an enhanced version of the 
+program named <strong>Callback01</strong>. You should familiarize yourself with 
+that program before trying to understand this program. </p>
+<p><strong>A list of registered objects</strong></p>
+<p>This program has the capability to create and maintain a list of objects that 
+register for callback whereas the program named <strong>Callback01</strong> 
+could only remember a single object for callback. </p>
+<p><strong>Multiple classes implement CallBack interface</strong></p>
+<p>In addition, this program defines two different classes that implement the <b>
+CallBack </b>interface. Mixed objects of those two types are maintained on the 
+list and notified at callback time. This is a subtle but very important point. 
+It is not necessary that all the objects that are registered on a callback list 
+be of the same class type, only that they all be of a class that implements the
+<b>CallBack</b> interface. </p>
+<p><strong>The CallBack interface</strong></p>
+<p>As before, this program defines a <b>CallBack </b>interface that establishes 
+a new type of object, and also declares the interface to a method named <b>
+callBack </b>that is contained in all objects of classes that implement 
+the interface. Because the <b>callBack </b>method is guaranteed to be 
+contained in all of the objects on the list, it can be used to notify those 
+objects whenever something interesting happens. </p>
+<p><strong>The Teacher class</strong></p>
+<p>The program defines a <b>Teacher </b>class that creates and maintains a list 
+of objects of the <strong>CallBack</strong> interface type, and 
+notifies those objects that something interesting has happened by calling the <b>
+callBack</b> method on each of the objects on the list. </p>
+<p>The size of the list is limited only to the largest <b>Vector </b>object that 
+can be accommodated by the system. <em>(See the Java documentation for information about the <strong>Vector</strong> class. 
+If I were writing this program in 2020 instead of 1998, I would probably use an
+<strong>ArrayList</strong> object in place of the <strong>Vector</strong> 
+object.) </em></p>
+<p><strong>The Student and Dog classes</strong></p>
+<p>The program defines a class named <b>Student </b>that implements the <b>
+CallBack </b>interface. The program also defines a class named <b>Dog </b>that 
+implements the <b>CallBack </b>interface. <em>(Back in the description 
+of the scenario, I promised you that </em><b><em>missJones</em></b><em> was 
+going to have to deal with animals in the classroom.) </em></p>
+<p><strong>Registration and notification of Student and Dog objects</strong></p>
+<p>Objects of the <b>Student </b>and <b>Dog </b>classes can be <i>registered </i>
+on the list <em>(of <strong>CallBack</strong> objects)</em> maintained by an 
+object of the <b>Teacher </b>class <em>(because they both implement the <strong>
+CallBack</strong> interface)</em>, and can be <i>notified </i>by the object of 
+the <b>Teacher </b>class whenever something interesting happens. </p>
+<p><strong>Addition and removal from the list</strong></p>
+<p>Note that objects can be added to the list and then removed from the list. 
+One object is first added and later removed for demonstration purposes. </p>
+<p><strong>The callback mechanism</strong></p>
+<p>As before, notification takes the form of calling the <b>callBack</b> method 
+on each of the objects on the list. </p>
+<p><strong>Behavior of the callBack methods</strong></p>
+<p>The behavior of the <b>callBack</b> methods in the classes that implement the 
+interface can be designed to do anything. In this case, to keep things simple, 
+they just announce that they have been called. However, they make the 
+announcement in slightly different ways. </p>
+<p><strong>Text display statements</strong></p>
+<p>This program contains display statements in the registration and notification 
+methods for demonstration purposes only, and to allow us to track what is 
+happening as the program runs. </p>
+<p><strong>The controlling class</strong></p>
+<p>Finally, the program defines a controlling class named <strong>Callback02</strong> 
+that ties all the pieces together and exercises them. </p>
+<p>The program was originally tested using JDK 1.1.3 under Win95 and more 
+recently tested using JDK 12.0.1 under Windows 7.</p>
+<p>The output from the program is shown following a discussion of the 
+controlling class at the end of the next section.</p>
+<p><strong>Interesting multicast code fragments</strong></p>
+<p><a href="#Listing_6">Listing 6</a> defines an interface that creates a new type and 
+declares a generic method that can be used to call back any object that is of a 
+class that implements the interface. There is nothing new here. </p>
+	
+<div class="a">
+	<p><a name="Listing_6">Listing 6</a>. Define the CallBack 
+				interface.
+				</p>
+				<pre>interface CallBack{
+  public void callBack();
+}//end interface CallBack</pre>
+</div>
+<p><strong>A class that can register and notify objects of type CallBack</strong></p>
+<p>Next we need a class whose objects can maintain a registered list of objects 
+of type <b>CallBack</b> <em>(objects whose class implements the </em> <b><em>CallBack 
+</em> </b>
+<em>interface)</em> and can <i>notify </i>all the objects on that list when something 
+interesting happens. As before, we name this class <b>Teacher</b>.</p>
+<p><strong>The Teacher class</strong></p>
+
+<p>The <strong>Teacher</strong> class has grown to the point that we will break it into parts and 
+discuss them separately. </p>
+<p>There is quite a bit here that is new, due simply to the requirement for list 
+processing. However, there is nothing new about the basic callback mechanism. </p>
+<p><strong>An object of type Vector</strong></p>
+<p>We start out by replacing the single instance variable of type <b>CallBack</b> 
+by a reference to an object of type <b>Vector</b>. We will maintain our list in 
+the object of type <strong>Vector</strong>. </p>
+<p>Recall that a <b>Vector</b> object can only work with references to 
+objects of type <b>Object</b>, so this will entail some down casting later. </p>
+<p><em>(Author's note: Sometime around JDK 1.5, a concept known as generics was 
+released into Java, which eliminated the restriction to objects of type <strong>
+Object</strong> mentioned in the previous paragraph. However, this code has not 
+been updated to take advantage of that capability.)</em></p>
+<p>The constructor for our new <b>Teacher</b> class, which is shown in
+<a href="#Listing_7">Listing 7</a>, instantiates the <b>Vector</b> 
+object. </p>
+<div class="a">
+	<p><a name="Listing_7">Listing 7</a>. Define the Teacher class.</p>
+<pre>class Teacher{
+  Vector objList; //list of objects of type CallBack
+  //----------------------------------------------//
+
+  Teacher(){//constructor
+    objList = new Vector();
+  }//end constructor</pre>
+</div>
+	<p><strong>The method named register</strong></p>
+<p>Next we need a method to add objects to the list. We will synchronize it to 
+protect against the possibility of two or more objects on different threads 
+trying to register at the same time. <em>(Synchronization and multi-threaded 
+programming is a complex topic that is not explained in this eBook.)</em></p>
+<p>Note that the references to the objects are received as type <b>CallBack</b>, 
+which is the interface type, and stored as type <b>Object</b>, because the <b>
+Vector </b>class only accommodates references to objects of type <b>Object</b>.
+<em>(See the earlier author's note.)</em> This will lead to some down 
+casting requirements later. </p>
+<div class="a">
+	<p><a name="Listing_8">Listing 8</a>. Define the method named 
+				register.</p>
+<pre>  synchronized void register(CallBack obj){
+    this.objList.addElement(obj);
+    System.out.println(obj + " added");
+  }//end register()</pre>
+</div>
+	<p><strong>The unRegister method</strong></p>
+<p>To be general, we also need a method to remove objects from the list. Removal 
+of an object from the list is a little more complicated than adding an object to 
+the list due to the possibility of having two or more identical objects on the 
+list. <em>(We could, and possibly should, guard against that possibility when 
+constructing the list.)</em> </p>
+<p><a href="#Figure_1">Figure 1</a> contains a partial excerpt from the JDK 
+1.1.3 documentation, which describes the <b>removeElement</b> method of the <b>Vector</b> 
+class that we are using to accomplish this <em>(three different methods are 
+available to remove objects from a </em> <b><em>Vector</em></b>). </p>
+<div class="a">
+	<p><a name="Figure_1">Figure 1</a>. Documentation for the 
+				removeElement method. </p>
+
+							<pre>public final synchronized boolean removeElement(Object obj)
+
+This method removes the first occurrence of the argument from this 
+vector. Indices beyond that point are adjusted appropriately
+
+Parameters: obj - the component to be removed.
+
+Returns: true if the argument was a component of this vector; 
+         false otherwise.</pre>
+</div>
+	<p><strong>Registered object removal code</strong></p>
+<p>Given that explanation, the code for removal of an object from the list is 
+straightforward. The <strong>unRegister</strong> method is shown in
+<a href="#Listing_9">Listing 9</a>.</p>
+<div class="a">
+	<p><a name="Listing_9">Listing 9</a>. The unRegister method.</p>
+<pre>  synchronized void unRegister(CallBack obj){
+    if(this.objList.removeElement(obj))
+      System.out.println(obj + " removed");
+    else System.out.println(obj + " not in the list");
+  }//end register()</pre>
+</div>
+	<p><strong>The callTheRoll method</strong></p>
+<p>Now we need a method to notify all of the objects on the list that something 
+interesting has happened. We will name this method <b>callTheRoll</b> to adhere 
+to our classroom scenario. </p>
+<p><strong>Maintain the integrity of the callback list</strong></p>
+<p>One of the potential problems with this type of callback mechanism is that 
+when the callback method is called on an object, that method might take a while 
+to finish.</p>
+<p><em>(As an aside, when writing callback methods, if they do anything 
+significant in terms of time, the code in the method should probably spawn 
+another thread to do the actual work and return as quickly as possible.)</em>
+</p>
+<p>This leads to the possibility that additional objects might attempt to 
+register during that time interval. To protect against this, we make a copy of 
+the state of the list object as it existed at the point in time that the 
+decision was made to do the callbacks, and then perform the callbacks using that 
+copy. That way, the original list is free to be updated as needed during this 
+interval. </p>
+<p>So, we start out by creating a clone of the list. We also <i>synchronize </i>
+this process to prevent the list from being modified while we are creating the 
+clone. </p>
+<p>Following this, we use a <b>for</b> loop to access all the objects on the 
+list, and call the <b>callBack</b> method on those objects. <em>(Actually, the 
+list contains references to objects, and not the actual objects, so we are 
+calling the method on the references.) </em></p>
+<p><em>(Once again, if I were writing this program in 2020 instead of 1998, I 
+would probably use features of Generics and the Collections Framework to 
+accomplish some of this.)</em></p>
+<p>As promised earlier, we have to downcast from <b>Object</b> to <b>CallBack</b> 
+to gain access to the <b>callBack</b> method in the objects. </p>
+<div class="a">
+	<p><a name="Listing_10">Listing 10</a>. Define the callTheRoll 
+				method.
+				</p>
+				<pre>
+  void callTheRoll(){
+    Vector tempList;//save a temporary copy of list here
+
+    synchronized(this){
+      tempList = (Vector)objList.clone();
+    }//end synchronized block
+
+    for(int cnt = 0; cnt &lt; tempList.size(); cnt++){
+      ((CallBack)tempList.elementAt(cnt)).callBack();
+    }//end for loop
+  }//end callTheRoll()</pre>
+</div>
+	<p><strong>End of the class named Teacher</strong></p>
+<p>That ends the discussion of the class named <b>Teacher</b> and brings us to 
+the class named <b>Student</b> that implements the <b>CallBack</b> interface. 
+This class hasn&#39;t changed. As indicated earlier, this version of the program 
+also has a class named <b>Dog</b> that implements the interface. These two 
+classes are essentially the same. </p>
+<p><strong>Define the class named Dog</strong></p>
+<p>Because of their similarity, and because they are essentially the same as in 
+the previous program, I will simply show the class named <b>Dog</b> with no 
+further discussion. </p>
+
+	
+<div class="a">
+	<p><a name="Listing_11">Listing 11</a>. Define the class named 
+				Dog.</p>
+<pre>class Dog implements CallBack{
+  String name; //store name here for later ID
+  //-----------------------------------------------------//
+
+  Dog(String name){//constructor
+    this.name = name; //save the name to identify the obj
+  }//end constructor
+  //-----------------------------------------------------//
+
+  //An object of the Teacher class will call this method
+  // as the callback mechanism to notify an object of this
+  // class that something interesting has happened.
+
+  public void callBack(){//announce callBack
+
+    System.out.println("Woof, Woof " + name);
+  }//end overridden callBack()
+}//end class Dog</pre>
+</div>
+	<p><strong>The controlling class</strong></p>
+<p>That brings us to the controlling class named <strong>Callback02</strong> 
+that ties all the pieces together and exercises them. This class is shown in
+<a href="#Listing_12">Listing 12</a>.</p>
+
+<div class="a">	
+<p><a name="Listing_12">Listing 12</a>. Define the class named 
+				Callback02.</p>
+
+				<pre>
+class Callback02{
+  public static void main(String[] args){
+    //Instantiate Teacher object
+    Teacher missJones = new Teacher();
+
+ //Instantiate some Student objects
+    Student tom = new Student("Tom");
+    Student sue = new Student("Sue");
+    Student peg = new Student("Peg");
+    Student bob = new Student("Bob");
+    Student joe = new Student("Joe");
+
+    //Instantiate some Dog objects.
+    Dog spot = new Dog("Spot");
+    Dog fido = new Dog("Fido");
+    Dog brownie = new Dog("Brownie");
+
+    //Register some Student and Dog objects with the
+    // Teacher object.
+    System.out.println("Register Tom");
+    missJones.register(tom);
+    System.out.println("Register Spot");
+    missJones.register(spot);
+    System.out.println("Register Sue");
+    missJones.register(sue);
+    System.out.println("Register Fido");
+    missJones.register(fido);
+    System.out.println("Register Peg");
+    missJones.register(peg);
+    System.out.println("Register Bob");
+    missJones.register(bob);
+    System.out.println("Register Brownie");
+    missJones.register(brownie);
+
+    //Remove a Student object from the list.
+    System.out.println("Remove Peg");
+    missJones.unRegister(peg);
+
+    //Try to remove an object that is not on the list.
+    System.out.println("Try to remove Joe");
+    missJones.unRegister(joe);
+
+    System.out.println();//blank line
+
+    //Cause the Teacher object to do a callBack on all
+    // the objects on the list.
+    missJones.callTheRoll();
+  }//end main()
+}//end class Callback02</pre>
+</div>
+
+	<p><strong>Differences relative to Callback01</strong></p>
+<p>This program differs from the previous program primarily in terms of the 
+volume of <b>Student</b> and <b>Dog</b> objects to be 
+instantiated and registered on the <b>Teacher</b> object. There are also a lot 
+of display statements to help us keep track of what is going on. </p>
+<p>The ability to remove objects from the list is also illustrated. </p>
+<p><strong>Call the roll</strong></p>
+<p>Finally, the callback to the objects on the list is executed in
+<a href="#Listing_12">Listing 12</a> by calling the
+<b>callTheRoll</b> method on the <b>Teacher</b> object named <b>missJones</b>. 
+The output from running this program is shown later.</p>
+<p><strong>Mixed object types</strong></p>
+<p>A subtle, but extremely important point is illustrated here. <b>Student</b> 
+and <b>Dog</b> are different classes. Objects of both of those classes are registered on the single object of the <b>Teacher</b> class. The <b>Teacher</b> 
+object doesn&#39;t care that they are different, so long as they are all 
+instantiated from classes that implement the <b>CallBack</b> interface. The <b>
+register</b> method will only accept object references of type <b>CallBack</b>.
+</p>
+<p><strong>Program output</strong></p>
+<p>The output from running this program is shown in <a href="#Figure_2">Figure 2</a>. You can see the 
+identification of each individual object as it is added to, or removed from the 
+list. </p>
+<div class="a">
+	<p><a name="Figure_2">Figure 2</a>. Output from Callback02.</p>
+<pre>Register Tom
+Student@1cc73e added
+Register Spot
+Dog@1cc74e added
+Register Sue
+Student@1cc741 added
+Register Fido
+Dog@1cc751 added
+Register Peg
+Student@1cc744 added
+Register Bob
+Student@1cc747 added
+Register Brownie
+Dog@1cc754 added
+Remove Peg
+Student@1cc744 removed
+Try to remove Joe
+Student@1cc74a not in the list
+
+Tom here
+Woof, Woof Spot
+Sue here
+Woof, Woof Fido
+Bob here
+Woof, Woof Brownie</pre>
+</div>
+<p>Note that the attempt to remove Joe from the list was not successful because 
+he was never registered in the first place. </p>
+<p>Finally, you see the output produced by calling <b>callTheRoll</b> which in 
+turn calls the <b>callBack</b> method on each of the objects on the list. </p>
+<p>Note that Peg didn&#39;t appear in the roll call because she was first added and 
+then removed from the list before the roll call was taken.</p>
+<p><strong>The sum and substance</strong></p>
+<p>So there you have it, the sum and substance of multicast callbacks in Java. 
+Obviously improvements could be made. You can see a couple of them in the 
+next two callback chapters in this eBook.</p>
+<p><strong>Multicast Program Listing</strong></p>
+<p>A complete listing of the multicast program named <strong>Callback02</strong> 
+is provided in <a href="#Listing_13">Listing 13</a>.</p>
+
+<div class="a">
+<p><a name="Listing_13">Listing 13</a>. Complete listing of program named Callback02.</p>
+	
+				<pre>/*File Callback02.java Copyright, R.G.Baldwin
+The purpose of this program is to develop a callback
+capability using Interfaces.
+
+This is an enhanced version of the program named
+Callback01. You should familiarize yourself with
+the earlier program before getting into this program.
+
+This version has the added capability to create and
+maintain a list of objects that register for callback
+whereas the program named Callback01 could only remember
+a single object for callback.
+
+Tested using JDK 1.1.3 under Win95.
+
+The output from the program was:
+
+Register Tom
+Student@1cc73e added
+Register Spot
+Dog@1cc74e added
+Register Sue
+Student@1cc741 added
+Register Fido
+Dog@1cc751 added
+Register Peg
+Student@1cc744 added
+Register Bob
+Student@1cc747 added
+Register Brownie
+Dog@1cc754 added
+Remove Peg
+Student@1cc744 removed
+Try to remove Joe
+Student@1cc74a not in the list
+
+Tom here
+Woof, Woof Spot
+Sue here
+Woof, Woof Fido
+Bob here
+Woof, Woof Brownie
+
+Note that Peg didn't appear in the callBack list because
+she was first added to, and later removed from the list.
+**********************************************************/
+import java.util.*;
+
+//First we define an interface that will create a new type
+// and declare a generic method that can be used to
+// callback any object that is of a class that implements
+// the interface.
+interface CallBack{
+  public void callBack();
+}//end interface CallBack
+//=======================================================//
+
+//Next we need a class whose objects can maintain a
+// registered list of objects of type CallBack (whose
+// class implements the CallBack interface) and can
+// notify all the objects on that list when something
+// interesting happens.
+
+class Teacher{
+  Vector objList; //list of objects of type CallBack
+  //-----------------------------------------------------//
+
+  Teacher(){//constructor
+    //Instantiate a Vector object to contain the list
+    // of registered objects.
+    objList = new Vector();
+  }//end constructor
+  //-----------------------------------------------------//
+
+  //Method to add objects to the list.  Synchronize to
+  // protect against two or more objects on different
+  // threads trying to register at the same time.  Note
+  // that the objects are received as type CallBack which
+  // is the interface type, and stored as type Object,
+  // because the Vector class only accommodates objects of
+  // type Object.
+  synchronized void register(CallBack obj){
+    this.objList.addElement(obj);
+    System.out.println(obj + " added");
+  }//end register()
+  //-----------------------------------------------------//
+
+  //Method to remove objects from the list.
+  synchronized void unRegister(CallBack obj){
+    if(this.objList.removeElement(obj))
+      //true when successfully found and removed
+      System.out.println(obj + " removed");
+    else//false on failure to find and remove
+      System.out.println(obj + " not in the list");
+  }//end unRegister()
+  //-----------------------------------------------------//
+
+  //Method to notify all objects on the list that
+  // something interesting has happened.
+  void callTheRoll(){
+    Vector tempList;//save a temporary copy of list here
+
+    //Make a copy of the list to avoid the possibility of
+    // the list changing while objects are being notified.
+    // Synchronize to protect against list changing while
+    // making the copy.
+    synchronized(this){
+      tempList = (Vector)objList.clone();
+    }//end synchronized block
+
+    //Call the callBack() method on each object on
+    // the list.  The object are guaranteed to have such
+    // a method, even if they are of different types,
+    // because they are all of a class that implements
+    // the CallBack interface. If not, they could not
+    // have been registered on the list in the first
+    // place.  Note the requirement to downcast to
+    // type CallBack.
+    for(int cnt = 0; cnt &lt; tempList.size(); cnt++){
+      ((CallBack)tempList.elementAt(cnt)).callBack();
+    }//end for loop
+  }//end callTheRoll()
+  //-----------------------------------------------------//
+}//end class Teacher
+//=======================================================//
+
+//Class that implements the CallBack interface.  Objects
+// of this class can be registered on the list maintained
+// by an object of the Teacher class, and will be notified
+// whenever that object calls the callBack method on the
+// registered objects on the list.  This program will not
+// compile if this class fails to implement the CallBack
+// interface
+
+class Student implements CallBack{
+  String name; //store the object name here for later ID
+  //-----------------------------------------------------//
+
+  Student(String name){//constructor
+    this.name = name;  //save the name to identify the obj
+  }//end constructor
+  //-----------------------------------------------------//
+
+  //An object of the Teacher class will call this method
+  // as the callback mechanism to notify an object of this
+  // class that something interesting has happened.
+
+  public void callBack(){//announce callBack
+    System.out.println(name + " here");
+  }//end overridden callBack()
+}//end class Student
+//=======================================================//
+
+//Another Class that implements the CallBack interface.
+// Objects of this class can also be registered on the list
+// maintained by an object of the Teacher class, and will
+// also be notified whenever that object calls the
+// callBack() method on the registered objects on the
+// list. This program will not compile if this class
+// fails to implement the CallBack interface.
+
+class Dog implements CallBack{
+  String name; //store name here for later ID
+  //-----------------------------------------------------//
+
+  Dog(String name){//constructor
+    this.name = name; //save the name to identify the obj
+  }//end constructor
+  //-----------------------------------------------------//
+
+  //An object of the Teacher class will call this method
+  // as the callback mechanism to notify an object of this
+  // class that something interesting has happened.
+
+  public void callBack(){//announce callBack
+    System.out.println("Woof, Woof " + name);
+  }//end overridden callBack()
+}//end class Dog
+//=======================================================//
+
+//Controlling class that ties all the pieces together and
+// exercises them.
+class Callback02{
+  public static void main(String[] args){
+    //Instantiate Teacher object
+    Teacher missJones = new Teacher();
+
+    //Instantiate some Student objects
+    Student tom = new Student(&quot;Tom&quot;);
+    Student sue = new Student(&quot;Sue&quot;);
+    Student peg = new Student(&quot;Peg&quot;);
+    Student bob = new Student(&quot;Bob&quot;);
+    Student joe = new Student(&quot;Joe&quot;);
+
+    //Instantiate some Dog objects.
+    Dog spot = new Dog(&quot;Spot&quot;);
+    Dog fido = new Dog(&quot;Fido&quot;);
+    Dog brownie = new Dog(&quot;Brownie&quot;);
+
+    //Register some Student and Dog objects with the
+    // Teacher object.
+    System.out.println(&quot;Register Tom&quot;);
+    missJones.register(tom);
+    System.out.println(&quot;Register Spot&quot;);
+    missJones.register(spot);
+    System.out.println(&quot;Register Sue&quot;);
+    missJones.register(sue);
+    System.out.println(&quot;Register Fido&quot;);
+    missJones.register(fido);
+    System.out.println(&quot;Register Peg&quot;);
+    missJones.register(peg);
+    System.out.println(&quot;Register Bob&quot;);
+    missJones.register(bob);
+    System.out.println(&quot;Register Brownie&quot;);
+    missJones.register(brownie);
+
+    //Remove a Student object from the list.
+    System.out.println(&quot;Remove Peg&quot;);
+    missJones.unRegister(peg);
+
+    //Try to remove an object that is not on the list.
+    System.out.println(&quot;Try to remove Joe&quot;);
+    missJones.unRegister(joe);
+
+    System.out.println();//blank line
+
+    //Cause the Teacher object to do a callBack on all
+    // the objects on the list.
+    missJones.callTheRoll();
+  }//end main()
+}//end class Callback02
+//=======================================================//</pre>
+</div>
+<h1 class="auto-style6"><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from
+<a href="#Listing_5">Listing 5</a> and
+<a href="#Listing_13">Listing 13</a>. Compile the code and execute it. 
+Experiment with the code, making changes, and observing the results of your 
+changes. Make certain that you can explain why your changes behave as they do.</p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>In this chapter, you learned the fundamentals of callbacks using interfaces in 
+Java.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java077 Callbacks - I</li>
+					<li>File: Java077.htm
+</li>
+					<li>Published: 1998</li>
+					<li>Revised: 04/19/22</li>
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+	<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,1025 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0040</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0040: Logical Operations, Numeric Casting, String Concatenation, and the toString Method</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. B</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap039{
+  public static void main(
+                        String args[]){
+    new Worker().doLogical();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLogical(){
+    int x = 5, y = 6;
+    if((x &gt; y) || (y &lt; x/0)){
+      System.out.println(&quot;A&quot;);
+    }else{
+      System.out.println(&quot;B&quot;);
+    }//end else
+  }//end doLogical()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. B</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap040{
+  public static void main(
+                        String args[]){
+    new Worker().doLogical();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLogical(){
+    int x = 5, y = 6;
+    if((x &lt; y) || (y &lt; x/0)){
+      System.out.println(&quot;A&quot;);
+    }else{
+      System.out.println(&quot;B&quot;);
+    }//end else
+  }//end doLogical()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. B</li>
+	<li>E. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap041{
+  public static void main(
+                        String args[]){
+    new Worker().doLogical();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLogical(){
+    int x = 5, y = 6;
+    if(!(x &lt; y) &amp;&amp; !(y &lt; x/0)){
+      System.out.println(&quot;A&quot;);
+    }else{
+      System.out.println(&quot;B&quot;);
+    }//end else
+  }//end doLogical()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#question04">Listing 
+4</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. 1</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap042{
+  public static void main(
+                        String args[]){
+    new Worker().doCast();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doCast(){
+    boolean x = true;
+    int y = (int)x;
+    System.out.println(y);
+  }//end doCast()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 4 -4</li>
+	<li>D. 3 -3</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap043{
+  public static void main(
+                        String args[]){
+    new Worker().doCast();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doCast(){
+    double w = 3.7;
+    double x = -3.7;
+    int y = (int)w;
+    int z = (int)x;
+    System.out.println(y + &quot; &quot; + z);
+  }//end doCast()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 4 -3</li>
+	<li>D. 3 -4</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap044{
+  public static void main(
+                        String args[]){
+    new Worker().doCast();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doCast(){
+    double w = 3.5;
+    double x = -3.499999999999;
+
+    System.out.println(doIt(w) + 
+                       &quot; &quot; +
+                       doIt(x));
+  }//end doCast()
+    
+  private int doIt(double arg){
+    if(arg &gt; 0){
+      return (int)(arg + 0.5);
+    }else{
+      return (int)(arg - 0.5);
+    }//end else
+  }//end doIt()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 3.5/9/true</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap045{
+  public static void main(
+                        String args[]){
+    new Worker().doConcat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doConcat(){
+    double w = 3.5;
+    int x = 9;
+    boolean y = true;
+    String z = w + &quot;/&quot; + x + &quot;/&quot; + y;
+    System.out.println(z);
+  }//end doConcat()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>Which of the following best approximates the output from the program shown in
+<a href="#Listing_8">Listing 8</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Dummy@273d3c</li>
+	<li>D. Joe 35 162.5</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap046{
+  public static void main(
+                        String args[]){
+    new Worker().doConcat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doConcat(){
+    Dummy y = new Dummy();
+    System.out.println(y);
+  }//end doConcat()
+}// end class
+
+class Dummy{
+  private String name = &quot;Joe&quot;;
+  private int age = 35;
+  private double weight = 162.5; 
+}//end class dummy
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>Which of the following best approximates the output from the program shown in
+<a href="#Listing_9">Listing 9</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. C. Dummy@273d3c</li>
+	<li>D. Joe Age = 35 Weight = 162.5</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap047{
+  public static void main(
+                        String args[]){
+    new Worker().doConcat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doConcat(){
+    Dummy y = new Dummy();
+    System.out.println(y);
+  }//end doConcat()
+}// end class
+
+class Dummy{
+  private String name = &quot;Joe&quot;;
+  private int age = 35;
+  private double weight = 162.5;
+  
+  public String toString(){
+    String x = name + &quot; &quot; +
+               &quot; Age = &quot; + age + &quot; &quot; +
+               &quot; Weight = &quot; + weight;
+    return x;
+  } 
+}//end class dummy
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>Which of the following best approximates the output from the program shown in
+<a href="#Listing_10">Listing 10</a>? <em>(Note the use of the constructor for the </em><strong><em>Date</em></strong><em> class that 
+takes no parameters.) </em></p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Sun Dec 02 17:35:00 CST 2012 1354491300781</li>
+	<li>D. Thur Jan 01 00:00:00 GMT 1970</li>
+	<li>0</li>
+	<li>None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>import java.util.*;
+public class Ap048{
+  public static void main(
+                        String args[]){
+    new Worker().doConcat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doConcat(){
+    Date w = new Date();
+    String y = w.toString();
+    System.out.print(y);
+    System.out.println(" " + w.getTime());
+  }//end doConcat()
+}// end class
+</pre>
+
+</div>
+
+
+	
+
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+	<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+	<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+	<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+	<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+	<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+	<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+	<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+	<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+	<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10.</li>
+
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0040: Logical Operations, 
+				Numeric Casting, String Concatenation, and the toString Method</li>
+				<li>File: Ap0040.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/02/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>C. Sun Dec 02 17:35:00 CST 2012 1354491300781</p>
+<h3><strong>Explanation 10</strong></h3><p>
+<strong>The noarg constructor for the Date class</strong></p><p>
+The <strong>Date</strong> class has a constructor that takes no parameters 
+and is described in the documentation as follows: </p>
+
+	<p><em>&quot;Allocates a </em> <strong><em>Date</em></strong><em> object and initializes it so that it 
+	represents the time at which it was allocated, measured to the nearest 
+	millisecond.&quot;</em></p>
+<p>In other words, this constructor can be used to instantiate a <strong>Date</strong> 
+object that represents the current date and time according to the system clock.</p>
+
+<p><strong>A property named time of type long</strong> </p>
+<p>The actual date and time information encapsulated in a <strong>Date</strong> 
+object is apparently stored in a property named <strong>time</strong> as a 
+<strong>long</strong> integer. </p><p>
+<strong>Milliseconds since the epoch</strong>
+</p>
+<p>The <strong>long</strong> integer encapsulated in a <strong>Date</strong> object represents 
+the total number of milliseconds for the encapsulated date and time, relative to 
+the epoch, which was Jan 01 00:00:00 GMT 1970. </p>
+<p>Earlier dates are represented as negative values. Later dates are represented 
+as positive values. </p>
+<p><strong>An overridden toString method</strong> </p>
+<p>An object of the <strong>Date</strong> class has an overridden <strong>
+toString</strong> method that converts the value in milliseconds to a form that 
+is more useful for a human observer, such as: </p>
+
+<p><strong>Sun Dec 02 17:35:00 CST 2012</strong></p>
+
+<p><strong>Instantiate a Date object with the noarg constructor </strong> </p>
+<p>This program instantiates an object of the <strong>Date</strong> class using 
+the constructor that takes no parameters. </p>
+<p><strong>Call the overridden toString method </strong> </p>
+<p>Then it calls the overridden <strong>toString</strong> method to populate a
+<strong>String</strong> object that represents the <strong>Date</strong> object.
+</p>
+<p>Following this, it displays that <strong>String</strong> object by calling 
+the <strong>print</strong> method, producing 
+the first part of the output shown above. <em>(The actual date and time will vary depending on when 
+the program is executed.) </em> </p>
+<p><strong>Get the time property value </strong> </p>
+<p>Then it calls the <strong>getTime</strong> method to get and display the 
+value of the <strong>time</strong> property. </p>
+<p>This is a representation of the same date and time shown <a href="#answer10">above</a>, but in 
+milliseconds: </p>
+
+<p><strong>1354491300781</strong></p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>D. Joe Age = 35 Weight = 162.5 </p>
+<h3><strong>Explanation 9</strong></h3><p>
+<strong>Upgraded program from Question 8
+</strong>
+</p>
+<p>The program used for this question is an upgrade to the program that was used 
+for <a href="#question08">Question 8</a>. </p>
+<p><strong>Dummy class overrides the toString method</strong> 
+</p>
+<p>In particular, in this program, the class named <strong>Dummy</strong> 
+overrides the <strong>toString</strong> method in such a way as to return a
+<strong>String</strong> representing the object that would be useful to a human 
+observer. </p>
+<p>The <strong>String</strong> that is returned contains the values of the 
+instance variables of the object: name, age, and weight. </p>
+<p><strong>Overridden toString method code </strong> </p>
+<p>The overridden <strong>toString</strong> method for the <strong>Dummy</strong> 
+class is shown below for easy reference. </p>
+
+
+
+
+<div class="a"><strong>Overridden <em>toString</em> method</strong>
+				<pre>  public String toString(){
+    String x = name + &quot; &quot; +
+               &quot; Age = &quot; + age + &quot; &quot; +
+               &quot; Weight = &quot; + weight;
+    return x;
+  }//end toString()</pre>
+</div>
+	
+<p>The code in the overridden <strong>toString</strong> method is almost 
+trivial. </p>
+<p>The important thing is not the specific code in a specific overridden version 
+of the <strong>toString</strong> method.</p>
+<p><strong>Why override the toString method? </strong> </p>
+<p>Rather, the important thing is to understand why you should probably override 
+the <strong>toString</strong> method in most of the new classes that you define. </p>
+<p>In fact, you should override the <strong>toString</strong> method in 
+all new classes that you define if a <strong>String</strong> representation of 
+an instance of that class will ever be needed for any purpose. </p>
+<p><strong>The code will vary </strong> </p>
+<p>The code required to override the <strong>toString</strong> method will vary 
+from one class to another. The important point is that the code must return a 
+reference to a <strong>String</strong> object. The <strong>String</strong> 
+object should encapsulate information that represents the original object in a 
+format that is meaningful to a human observer. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>C. Dummy@273d3c </p>
+<h3><strong>Explanation 8</strong></h3><p>
+<strong>Display an object of the Dummy class</strong>
+</p>
+<p>This program instantiates a new object of the <strong><strong>Dummy</strong></strong> class, and passes that 
+object&#39;s reference to the method named <strong>println</strong>. </p>
+<p>The purpose of the <strong>println</strong> method is to display a 
+representation of the new object that is meaningful to a human observer. In 
+order to do so, it requires a <strong>String</strong> representation of the 
+object. </p>
+<p><strong>The toString method </strong> </p>
+<p>The class named <strong>Object</strong> defines a default version of a method named <strong>
+toString</strong>. </p>
+<p>All classes inherit the <strong>toString</strong> method. </p>
+<p><strong>A child of the Object class </strong> </p>
+<p>Those classes that extend directly from the class named <strong>Object</strong> inherit the 
+default version of the <strong>toString</strong> method. </p>
+<p><strong>Grandchildren of the Object class</strong> </p>
+<p>Those classes that don&#39;t directly extend the class named <strong>Object</strong> also inherit 
+a version of the <strong>toString</strong> method. </p>
+<p><strong>May be default or overridden version </strong> </p>
+<p>The inherited <strong>toString</strong> method may be the default version, or 
+it may be an overridden version, depending on whether the method has been 
+overridden in a superclass of the new class. </p>
+<p><strong>The purpose of the toString method </strong> </p>
+<p>The purpose of the <strong>toString</strong> method defined in the <strong>Object</strong> class is to be overridden in new classes. </p>
+<p>The body of the overridden version should return a reference to a 
+<strong>String</strong> object that represents an object of the new class. </p>
+<p><strong>Whenever a String representation of an object is required
+</strong>
+</p>
+<p>Whenever a <strong>String</strong> representation of an object is required 
+for any purpose in Java, the <strong>toString</strong> method is called on a 
+reference to the object. </p>
+<p>The <strong>String</strong> that is returned by the <strong>toString</strong> 
+method is taken to be a <strong>String</strong> that represents the object. </p>
+<p><strong>When toString has not been overridden </strong> </p>
+<p>When the <strong>toString</strong> method is called on a reference to an 
+object for which the method has not been overridden, the default version of the 
+method is called. </p>
+<p>The default <strong>String</strong> representation of an object </p>
+<p>The <strong>String</strong> returned by the default version consists of the 
+following: </p>
+<ul>
+	<li>The name of the class from which the object was instantiated</li>
+	<li>The @ character</li>
+	<li>A hexadecimal value that is the <strong>hashcode</strong> value for the object</li>
+</ul><p>
+As you can see, this does not include any information about the values of the 
+data stored in the object. </p>
+<p>Other than the name of the class from which the object was instantiated, this 
+is not particularly useful to a human observer. </p>
+<p><strong>Dummy class does not override toString method</strong> </p>
+<p>In this program, the class named <strong>Dummy</strong> extends the <strong>Object</strong> class directly, and 
+doesn&#39;t override the <strong>toString</strong> method. </p>
+<p>Therefore, when the <strong>toString</strong>  method is called on a reference 
+to an object of the <strong>Dummy</strong> class, the <strong>String</strong> that is returned 
+looks something like the following: </p>
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+<p><strong>Dummy@273d3c</strong></p>
+<p>Note that the six hexadecimal digits at the end will probably be different 
+from one program to the next.</p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>C. 3.5/9/true </p>
+<h3><strong>Explanation 7</strong></h3><p>
+<strong>More on String concatenation</strong>
+</p>
+<p>This program illustrates <strong>String</strong> concatenation. </p>
+<p>The plus (+)
+operator is what is commonly called an <em>overloaded operator</em>.</p>
+
+<p><strong>What is an overloaded operator?</strong></p>
+<p>An overloaded operator is an operator whose behavior depends on the types of 
+its operands. </p>
+<p><strong>Plus (+) as a unary operator </strong> </p>
+<p>The plus operator can be used as either a <strong>unary</strong> operator or a 
+<strong>binary</strong> 
+operator. However, as a unary operator, with only one operand to its right, it 
+doesn&#39;t do anything useful. This is illustrated by the following two statements, 
+which are functionally equivalent. </p>
+
+<p><strong>x = y;</strong></p>
+<p><strong>x = +y;</strong></p>
+
+<p><strong>Plus (+) as a binary operator </strong> </p>
+<p>As a binary operator, the plus operator requires two operands, one on either 
+side. <em>(This is called infix notation.)</em> When used as a binary operator, its 
+behavior depends on the types of its operands. </p>
+<p><strong>Two numeric operands </strong> </p>
+<p>If both operands are numeric operands, the plus operator performs arithmetic 
+addition. </p>
+<p>If the two numeric operands are of different types, the narrower operand is 
+converted to the type of the wider operand, and the addition is performed as the 
+wider type. </p>
+<p><strong>Two String operands</strong> </p>
+<p>If both operands are references to objects of type <strong>String</strong>, the plus operator 
+creates and returns a new <strong>String</strong> object that contains the concatenated values of 
+the two operands. </p>
+<p><strong>One String operand and one of another type</strong> </p>
+<p>If one operand is a reference to an object of type <strong>String</strong> and the other 
+operand is of some type other than <strong>String</strong>, the plus operator causes a new <strong>String</strong> 
+object to come into existence. </p>
+<p>This new <strong>String</strong> object is a <strong>String</strong> representation of the 
+<em>non-String</em> operand <em>(such as a value of type <strong>int</strong>)</em>, </p>
+<p>Then it concatenates the two <strong>String</strong> objects, producing another new <strong>String</strong>  
+object, which is the concatenation of the two. </p>
+<p><strong>How is the new String operand representing the non-string operand created?
+</strong> </p>
+<p>The manner in which it creates the new <strong>String</strong> object that represents the 
+non-String operand varies with the actual type of the operand. </p>
+<p><strong>A primitive operand </strong> </p>
+<p>The simplest case is when the non-String operand is one of the primitive 
+types. In these cases, the capability already exists in the core programming 
+language to produce a <strong>String</strong>  object 
+that represents the value of the primitive type. </p>
+<p><strong>A boolean operand </strong> </p>
+<p>For example, if the operand is of type <strong>boolean</strong>, the new 
+<strong>String</strong>  object that represents the operand will either contain the word true or 
+the word false. </p>
+<p><strong>A numeric operand</strong> </p>
+<p>If the operand is one of the numeric types, the new <strong>String</strong> object will be 
+composed of some of the following: </p>
+<ul>
+	<li>numeric characters</li>
+	<li>a decimal point character</li>
+	<li>minus characters</li>
+	<li>plus character</li>
+	<li>other characters such as E or e</li>
+</ul><p>
+These characters will be arranged in such a way as to represent the numeric 
+value of the operand to a human observer.
+</p>
+<p><strong>In this program ...</strong> </p>
+<p>In this program, a numeric <strong>double</strong> value, a numeric <strong>
+int</strong> value, and a <strong>boolean</strong> value were concatenated with 
+a pair of slash characters to produce a <strong>String</strong> object containing the following:
+</p>
+
+<p><strong>3.5/9/true</strong></p>
+
+<p>When a reference to this <strong>String</strong> object was passed as a 
+parameter to the <strong>println</strong> method, the code in that method extracted the character 
+string from the <strong>String</strong> object, and displayed that character string on the 
+screen. </p>
+<p><strong>The toString method </strong> </p>
+<p>If one of the operands to the plus operator is a reference to an object, the
+<strong>toString</strong> method is called on the reference to produce a string 
+that represents the object. The <strong>toString</strong> method may be 
+overridden by the author of the class from which the object was instantiated to 
+produce a<strong> String</strong> that faithfully represents the object.<strong>
+</strong>
+</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. 4 -3 </p>
+<h3><strong>Explanation 6</strong></h3><p>
+<strong>A rounding algorithm </strong>
+</p>
+<p>The method named <strong>doIt</strong> in this program illustrates an algorithm that can be 
+used with a numeric cast operator <strong>(int)</strong> 
+to cause <strong>double</strong> values to be rounded to the nearest integer.</p>
+
+<p><strong>Different than truncation toward zero </strong> </p>
+<p>Note that this is different from simply truncating to the next integer closer 
+to zero <em>(as was illustrated in <a href="#question05">Question 5</a>)</em>. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>D. 3 -3 </p>
+<h3><strong>Explanation 5</strong></h3><p>
+<strong>Truncates toward zero</strong>
+</p>
+<p>When a <strong>double</strong> value is cast to an <strong>int</strong>, the fractional part of the <strong>double</strong> 
+value is discarded. </p>
+<p>This produces a result that is the next integer value closer to zero. </p>
+<p>This is true regardless of whether the <strong>double</strong> is positive or negative. This 
+is sometimes referred to as its <em>&quot;truncation toward zero&quot;</em> behavior. </p>
+<p><strong>Not the same as rounding </strong> </p>
+<p>If each of the values assigned to the variables named <strong>w</strong> and 
+<strong>x</strong> in this program 
+were rounded to the nearest integer, the result would be 4 and -4, not 3 and -3 
+as produced by the program. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 4</strong></h3><p>
+<strong>Cannot cast a boolean type</strong>
+</p>
+<p>A <strong>boolean</strong> type cannot be cast to any other type. This 
+program produces the following compiler error: </p>
+
+
+
+
+<div class="a"><pre>
+Ap042.java:13: inconvertible types
+found   : boolean
+required: int
+    int y = (int)x;
+</pre>
+</div>
+
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>D. B </p>
+<h3><strong>Explanation 3</strong></h3><p>
+<strong>The logical and operator
+</strong>
+</p>
+<p>The logical and operator shown below</p>
+
+
+
+
+<div class="a"><strong>The </strong> <em><strong>logical and </strong> </em>
+				<strong>operator
+				</strong>
+				<pre>&amp;&amp;</pre>
+</div><p>
+performs an <strong><em>and</em></strong> operation between its two operands, 
+both of which must be of type <strong>boolean</strong>. If both operands are true, the operator returns true. Otherwise, it 
+returns false.
+</p>
+<p><strong>The boolean negation operator </strong> </p>
+<p>The boolean negation operator shown below</p>
+
+
+
+
+<div class="a"><strong>The </strong><em><strong>boolean negation</strong></em><strong> 
+				operator </strong>
+				<p>!</p>
+</div>
+<p>is a <em>unary</em> operator, meaning that it always has only one operand. That 
+operand must be of type <strong>boolean</strong>, and the operand always appears immediately to 
+the right of the operator.
+</p>
+<p>The behavior of this operator is to change its right operand from true to 
+false, or from false to true. </p>
+<p><strong>Evaluation from left to right</strong> </p>
+<p>Now, consider the following code fragment from this program.</p>
+
+
+
+
+<div class="a">
+				<pre>    int x = 5, y = 6;
+    if(!(x &lt; y) &amp;&amp; !(y &lt; x/0)){
+      System.out.println(&quot;A&quot;);
+    }else{
+      System.out.println(&quot;B&quot;);
+    }//end else</pre>
+</div>
+
+<p>The individual operands of the <em>logical and</em> operator are evaluated 
+from left to right.</p>
+
+<p>Consider the left operand of the <em>logical and</em> operator that reads:</p>
+
+
+
+
+<div class="a">
+				<pre>!(x&lt;y)</pre>
+</div>
+
+<p><strong>The following expression is true </strong> </p>
+
+
+
+
+<div class="a"><pre>(x &lt; y)</pre>
+</div>
+	<p>In this case, <strong>x</strong> is less than <strong>y</strong>, so the expression inside the parentheses 
+evaluates to true. </p>
+<p><strong>The following expression is false </strong> </p>
+
+
+
+
+<div class="a"><pre>!(x &lt; y)</pre>
+</div>
+	<p>The true result becomes the right operand for the <em>boolean negation</em> 
+operator at this point.</p>
+<p>You might think of the state of the evaluation process at this point as being 
+something like </p>
+<p><strong>not true</strong>.</p>
+
+<p>When the <strong>! </strong> 
+operator is applied to the <strong>true </strong>result, the combination of the two become a 
+<strong>false</strong> 
+result.</p>
+
+<p><strong>Short-circuit evaluation applies</strong> </p>
+<p>This, in turn, causes the left operand of the <em>logical and</em> operator 
+to be <strong>false</strong>.</p>
+
+<p>At that point, the final outcome of the logical expression has been 
+determined. It doesn&#39;t matter whether the right operand is true or false. The 
+final result will be false regardless. </p>
+<p><strong>No attempt is made to evaluate the right operand </strong> </p>
+<p>Therefore, no attempt is made to evaluate the right operand of the <em>logical 
+and</em> operator in this case.</p>
+
+<p>No attempt is made to divide the integer variable <strong>x</strong> by zero, no exception is 
+thrown, and the program doesn&#39;t terminate abnormally. It runs to completion and 
+displays a B on the screen. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>C. A </p>
+<h3><strong>Explanation 2</strong></h3><p>
+<strong>Short-circuit evaluation
+</strong>
+</p>
+<p><a href="#question01">Question 1</a> was intended to set the stage for this question. </p>
+<p>This Question, in combination with <a href="#question01">Question 1</a>, is intended to help you 
+understand and remember the concept of short-circuit evaluation. </p>
+<p><strong>What is short-circuit evaluation? </strong> </p>
+<p>Logical expressions are evaluated from left to right. That is, the left 
+operand of a logical operator is evaluated before the right operand of the same 
+operator is evaluated. </p>
+<p>When evaluating a logical expression, the final outcome can often be 
+determined without the requirement to evaluate all of the operands. </p>
+<p>Once the final outcome is determined, no attempt is made to evaluate the 
+remainder of the expression. This is short-circuit evaluation. </p>
+<p><strong>Code from Question 1 </strong> </p>
+<p>Consider the following code fragment from <a href="#question01">Question 1</a>: </p>
+
+
+
+
+<div class="a">
+				<pre>    int x = 5, y = 6;
+    if((x &gt; y) || (y &lt; x/0)){
+      ...</pre>
+</div>
+
+<p>The (||)
+operator is the <em>logical or</em> operator.</p>
+
+<p><strong>Boolean operands required</strong> </p>
+<p>This operator requires that its left and right operands both be of type 
+<strong>boolean</strong>. This operator performs an <em>inclusive or</em> on its left and right operands. 
+The rules for an inclusive or are: </p>
+
+	<p><em>If either of its operands is true, the operator returns true. Otherwise, it 
+	returns false.</em></p><p>
+<strong>Left operand is false</strong>
+</p>
+<p>In this particular expression, the value of <strong>x</strong> is not greater than the value 
+of <strong>y</strong>. Therefore, the left operand of the <em>logical or</em> operator is not true. </p>
+<p><strong>Right operand must be evaluated </strong> </p>
+<p>This means that the right operand must be evaluated in order to determine the 
+final outcome. </p>
+<p><strong>Right operand attempts to divide by zero</strong> </p>
+<p>However, when an attempt is made to evaluate the right operand, an attempt is 
+made to divide <strong>x</strong> by zero. This throws an exception, which is not caught and 
+handled by the program, so the program terminates as described in 
+<a href="#question01">Question 1</a>.
+</p>
+<p><strong>Similar code from Question 2 </strong> </p>
+<p>Now consider the following code fragment from <a href="#question02">Question 2</a>. </p>
+
+
+
+
+<div class="a">
+				<pre>    int x = 5, y = 6;
+    if((x &lt; y) || (y &lt; x/0)){
+      System.out.println(&quot;A&quot;);
+    ...</pre>
+</div>
+<p>Note that the right operand of the <em>logical or</em> operator still contains an 
+expression that attempts to divide the integer x by zero. </p>
+
+<p><strong>No runtime error in this case </strong> </p>
+<p>This program does not terminate with a runtime error. Why not? </p>
+<p><strong>And the answer is ...</strong> </p>
+<p>In this case, <strong>x</strong> is less than <strong>y</strong>. Therefore, the left operand of the <em>logical or</em> 
+operator is true. </p>
+<p><strong>Remember the rule for inclusive or </strong> </p>
+<p>It doesn&#39;t matter whether the right operand is true or false. The final 
+outcome is determined as soon as it is determined that the left operand is true.
+</p>
+<p><strong>The bottom line</strong> </p>
+<p>Because the final outcome has been determined as soon as it is determined 
+that the left operand is true, no attempt is made to evaluate the right operand.
+</p>
+<p>Therefore, no attempt is made to divide <strong>x</strong> by zero, and no runtime error 
+occurs. </p>
+<p><strong>Short-circuit evaluation </strong> </p>
+<p>This behavior is often referred to as <em>short-circuit evaluation</em>. </p>
+<p>Only as much of a logical expression is evaluated as is required to determine 
+the final outcome. </p>
+<p>Once the final outcome is determined, no attempt is made to evaluate the 
+remainder of the logical expression. </p>
+<p>This is not only true for the <em>logical or</em> operator, it is also true 
+for the <em>logical and </em>
+operator, which consists of two ampersand characters with no space between them.</p>
+
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 1</strong></h3><p>
+<strong>Divide by zero</strong>
+</p>
+<p>Whenever a Java program attempts to evaluate an expression requiring that a 
+value of one of the integer types be divided by zero, it will throw an 
+<strong>ArithmeticException</strong>. If this exception is not caught and handled by the program, 
+it will cause the program to terminate. </p>
+<p><strong>Attempts to divide x by 0</strong> </p>
+<p>This program attempts to evaluate the following expression:</p>
+
+
+
+
+<div class="a"><pre>(y &lt; x/0)</pre>
+</div>
+<p>This expression attempts to divide the variable named <strong>x</strong> by zero. This causes the program 
+to terminate with the following error message when running under JDK 1.3:</p> 
+
+
+
+
+<div class="a">
+				<pre>java.lang.ArithmeticException: / by zero
+   at Worker.doLogical(Ap039.java:13)
+   at Ap039.main(Ap039.java:6)</pre>
+</div>
+
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

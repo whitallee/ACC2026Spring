@@ -1,0 +1,261 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0140.htm</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0140: Java Comments</h1>
+
+ 
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Discussion">Discussion and sample code</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Complete_program_listings">Complete program listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1 class="auto-style3"> <a name="Preface"></a>Preface</h1>
+<h2> <a name="General">General</a></h2>
+
+
+
+
+
+<p>This chapter is part of an Ebook designed to help you learn 
+to program computers. </p>
+<p>It explains Java comments.</p>
+<blockquote><em>Hopefully you have already been introduced to comments in the 
+Kjell </em><a href="http://programmedlessons.org/Java9/chap06/ch06_15.html"><em>
+book</em></a><em>. If not, I recommend that you review that material before 
+continuing with this chapter.</em></blockquote>
+<h2><a name="Prerequisites">Prerequisites</a></h2>
+<p>The minimum prerequisites for understanding the material in these chapters 
+include:</p>
+<ul>
+	<li>An understanding of algebra.</li>
+	<li>An understanding of all of the material covered in the earlier chapters 
+	in this Ebook.</li>
+</ul>
+<h2> <a name="Viewing_tip">Viewing tip</a></h2>
+<p> I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+<h3> <a name="Figures">Figures</a></h3>
+<ul>
+	<li><a href="#Figure_1">Figure 1</a>. Three styles of comments. </li>
+</ul>
+<h3> <a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. A multi-line comment.</li>
+	<li><a href="#Listing_2">Listing 2</a>. Three single-line comments. </li>
+	<li><a href="#Listing_3">Listing 3</a>. The program named Comments01.</li>
+	<li><a href="#Listing_4">Listing 4</a>. Batch file to compile and run the program named Comments01.</li>
+</ul>
+<h1 class="auto-style3"> <a name="Discussion">Discussion and sample code</a></h1>
+<h2><a name="Comments">Comments</a></h2>
+<p>The process of writing and using a Java program consists of the following steps:
+
+    </p>
+<ol>
+	<li>Write the source code. </li>
+	<li>Compile the source code.
+    </li>
+	<li>Execute the program.
+
+</li>
+</ol>
+<p>The source code consists of a set of instructions that will later be presented to a special program called a compiler for the purpose of producing a program that can be executed.  In other words, when you write the source code, you are writing instructions that the compiler will use to produce the executable program. </p>
+<h3>Some things should be ignored
+
+</h3>
+<p>Sometimes, when you are writing source code, you would like to include information that may be useful to you, but should be ignored by the compiler.  Information of that sort is called 
+a 
+<strong>comment</strong>. </p>
+<h3>Three styles of comments</h3>
+<p>Java supports the three styles of comments shown in <a href="#Figure_1">Figure 1</a>.</p>
+
+
+<div class="a">
+	<p><a name="Figure_1">Figure 1</a>. Three styles of comments.
+</p>
+<pre>
+/** special documentation comment 
+used by the javadoc tool */
+
+/* This is a 
+multi-line comment */
+
+//Single-line comment
+program code // Another single-line comment</pre></div>
+
+
+
+	
+<h3>The javadoc tool</h3>
+<p>The javadoc tool mentioned in <a href="#Figure_1">Figure 1</a> is a special program that is used to produce documentation for Java programs.  Comments of this style begin with /** and end with */ as shown in <a href="#Figure_1">Figure 1</a>.</p>
+<p>The compiler ignores everything in the source code that begins and ends with this pattern of characters.
+
+Documentation produced using the javadoc program is very useful for on-line or 
+on-screen documentation.</p>
+<h3>Multi-line comments</h3>
+<p>Multi-line comments begin with /* and end with */ as shown in <a href="#Figure_1">Figure 1</a>.  As you have probably already guessed, the compiler also ignores everything in the source code that matches this format.
+<em>(A javadoc comment is simply a multi-line comment insofar as the compiler 
+knows. Only the special program named javadoc.exe cares about javadoc comments.)</em></p>
+<p>The multi-line comment style is particularly useful for creating large blocks of information that should be ignored by the compiler.  
+This style can be used to produce a comment consisting of a single line of text as well.  However, the single-line comment style discussed in the next section requires less typing. </p>
+<h3>Single-line comments</h3>
+<p>Single-line comments begin with // and end at the end of the line.  The compiler  ignores the // and everything following 
+the slash characters to the end of the line.</p>
+<p>This style is particularly useful for inserting short comments throughout the source code.  In this case, the // can appear at the beginning of the line 
+as shown in <a href="#Figure_1">Figure 1</a>, or can appear anywhere in the line, including at the end of some valid source code
+<em>(also shown in </em> <a href="#Figure_1"><em>Figure 1</em></a><em>)</em>. </p>
+	
+
+<h2><a name="Sample_program">Sample program</a></h2>
+<p>The purpose of the program named <strong>Comments01</strong>, which is shown in
+<a href="#Listing_3">Listing 
+3</a> near the end of the chapter, is to illustrate the use of single and multi-line comments.  The program does not 
+contain any javadoc comments.</p>
+<p>The commands for a batch file that you can use to compile and run this 
+program are provided in <a href="#Listing_4">Listing 4</a>.</p>
+<p>When you compile and run the program, the following text should appear on your 
+command-line screen:</p>
+<pre>Hello World </pre>
+<h3><a name="Interesting_code_fragments">Interesting code fragments</a></h3>
+<p>I will explain this program in fragments, and will explain only those portions of the program that are germane to this 
+chapter.  Don't worry about the other details of the program 
+at this time.  You will learn about those details in future chapters.</p>
+<h4>A multi-line comment</h4>
+<p><a href="#Listing_1">Listing 1</a>, 
+shows a multi-line comment, which consists of three lines of text.</p>
+<p>As required, this multi-line comment begins with /* and ends with */.  The 
+extra stars on the third line are simply part of the comment.</p>
+<p>You will often see formats similar to this being used to provide a visual separation between multi-line comments and the other parts of a program. </p>
+
+<div class="a">
+<a name="Listing_1">Listing 1</a>. A multi-line comment.
+
+<pre>
+/*File Comments01.java
+This is a multi-line comment.
+*****************************************/
+</pre>
+</div>
+
+<h4>Single-line comments</h4>
+<p><a href="#Listing_2">Listing 2</a> shows three 
+single-line comments. Can you spot them? Remember, single-line comments begin 
+with //.</p>
+<div class="a">
+<a name="Listing_2">Listing 2</a>. Three single-line comments.
+
+<pre>
+class Comments01 {
+  //This is a single-line comment 
+  public static void main(String[] args){ 
+    System.out.println("Hello World"); 
+  }//end main 
+}//End class</pre>
+</div>
+
+<p>One of the comments in <a href="#Listing_2">Listing 2</a> starts at the 
+beginning of the line. The other two comments follow some program code.</p>
+<p>A demonstration of javadoc comments is beyond the scope of this chapter.</p>
+<h1 class="auto-style3"><a name="Run_the_program">Run the program</a></h1>
+	<p>I encourage you to run the program that I presented in this chapter 
+	to confirm that you get the same results. Experiment with 
+the code, making changes, and observing the results of your changes. Make 
+certain that you can explain why your changes behave as they do. </p>
+<h1 class="style1"><a name="Complete_program_listings">Complete program listings</a></h1>
+<p><a href="#Listing_3">Listing 3</a> contains a complete listing of the 
+program named <strong>Comments01</strong>.</p>
+<div class="a">
+<a name="Listing_3">Listing 3</a>. The program named Comments01.
+
+<pre>
+/*File Comments01.java
+This is a multi-line comment.
+*****************************************/
+class Comments01 {
+  //This is a single-line comment 
+  public static void main(String[] args){ 
+    System.out.println("Hello World"); 
+  }//end main 
+}//End class</pre>
+</div>
+
+<p><a href="#Listing_4">Listing 4</a> contains the commands for a batch file that can be used to compile 
+and run the program named <strong>Comments01</strong>.</p>
+
+
+<div class="a">
+<a name="Listing_4">Listing 4</a>. Batch file to compile and run the program 
+named Comments01.
+
+<pre>
+echo off
+cls
+
+del *.class
+
+javac -cp .; Comments01.java
+java -cp .; Comments01
+
+pause</pre>
+</div>
+
+
+<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">	<p>Housekeeping material 
+</p>
+
+<ul>
+<li>Author: Prof. Richard G. Baldwin</li>
+	<li>Chapter name: Jb0140: Java comments</li>
+<li>File: Jb0140.htm </li>
+	<li>Revised: 06/07/22</li>
+</ul>
+</div>
+
+<p>-end-</p>
+
+</body>
+</html>

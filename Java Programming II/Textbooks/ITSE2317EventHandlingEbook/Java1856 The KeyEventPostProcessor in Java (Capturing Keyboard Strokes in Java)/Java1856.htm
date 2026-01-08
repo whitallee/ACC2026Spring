@@ -1,0 +1,904 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+                
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+                
+  <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+  <title>... JAVA and DSP by Richard G Baldwin</title>
+</head>
+<body link="#0000ff" vlink="#666666" alink="#ff0000" lang="EN-US">
+ 
+<h2>The KeyEventPostProcessor in Java (Capturing Keyboard Strokes in Java)</h2>
+    <i>The processing of a key event by the focus owner is not necessarily the 
+end of the road for that event. Learn how to cause a chain of post 
+processors to spring into action and to perform additional processing on the 
+event before it finally dies.</i><p><b>Published:</b> January 25, 2005 <br/>
+   <b>By <a href="#About_the_author">Richard G. Baldwin</a></b> </p>
+     
+<p>Java Programming, Notes # 1856</p>
+     
+<ul>
+  <li><a href="#Preface">Preface</a></li>
+  <li><a href="#Preview">Preview</a></li>
+  <li><a href="#Discussion_and_Sample_Code">Discussion and Sample Code</a><li><a href="#Run_the_Programs">Run the Program</a></li>
+  <li><a href="#Summary">Summary</a></li>
+	<li><a href="#Whats Next">What's Next</a></li>
+  <li><a href="#Complete_Program_Listings">Complete Program Listing</a> </li>
+</ul>
+        
+<hr size="3" width="100%" align="center">    
+<center>    
+<h2> <a name="Preface">Preface</a></h2>
+   </center>
+<p><font color="#FF0000"><b>The focus subsystem</b></font></p>
+<p>When Java 2 SDK, Standard Edition Version 1.4 
+was released, it contained a large number of new features. This included many changes and additions to 
+the focus subsystem, some of which were incompatible with earlier versions.</p>
+<p>This chapter is part of a series of chapters designed to 
+teach you how to use some of those features of the focus subsystem.</p>
+<p>The first chapter in the series was entitled 
+<a href="http://www.developer.com/java/other/article.php/2198221">Focus 
+Traversal Policies in Java Version 1.4</a>. The previous chapter was 
+entitled <a href="http://www.developer.com/java/other/article.php/3452231">The 
+KeyEventDispatcher in Java</a>.</p>
+<p><font color="#ff0000"><b>Previous topics</b></font></p>
+<p>Previous chapters in this series have taught you how to use several features of the new focus subsystem, 
+including:</p>
+<ul>
+	<li>Defining new focus traversal keys</li>
+	<li>How to control focusability at runtime.</li>
+	<li>The ability to query for the currently focused Component.</li>
+	<li>The default Focus Traversal Policy.</li>
+	<li>How to establish a focus traversal policy and modify it at runtime.</li>
+	<li>How to control the focus programmatically.</li>
+	<li>Opposite components.</li>
+	<li>The KeyEventDispatcher.</li>
+</ul>
+<p>This chapter will show you how to use the <b>KeyEventPostProcessor</b> interface.</p>
+<p><font color="#FF0000"><b>Builds on previous chapter</b></font></p>
+<p>The sample program that I will explain in this chapter is an upgrade of the 
+program presented in the previous chapter entitled 
+<a href="http://www.developer.com/java/other/article.php/3452231">The 
+KeyEventDispatcher in Java</a>. Thus, the 
+material in this chapter builds upon the material that I presented in that 
+chapter. As a result, much of the material discussed early in this chapter 
+will be very brief, simply reminding you of what you learned in the previous 
+chapter.</p>
+<p>It is strongly recommended that you study and understand the material in the 
+previous chapter entitled
+<a href="http://www.developer.com/java/other/article.php/3452231">The 
+KeyEventDispatcher in Java</a> before embarking on the material in this chapter.</p>
+<p><font color="#FF0000"><b>What do we mean by focus?</b></font></p>
+<p>Among all of the applications showing on the desktop at any point in time, 
+only one will respond to the keyboard.</p>
+<p>If that application is a Java application, only one component 
+within that application's graphical user interface <i>(GUI)</i> will respond to 
+the keyboard. That is the component that has the <i>focus</i> at that 
+point in time.</p>
+<p>A Java component that has the focus also has the ability to fire <b>KeyEvents</b> when it responds to the keyboard.</p>
+  <p><font color="#FF0000"><b>KeyEventDispatcher and KeyEventPostProcessor</b></font></p>
+<p>The program that I will explain in this chapter makes heavy use of both the <b>
+KeyEventDispatcher</b> interface and the <b>KeyEventPostProcessor</b> interface.</p>
+<p>The previous chapter provided detailed information about the <b>
+KeyEventDispatcher</b> interface, so I won't repeat that information here. 
+Rather, I will concentrate on the <b>KeyEventPostProcessor</b> interface in this 
+chapter.</p>
+<p><font color="#FF0000"><b>What does Sun have to say?</b></font></p>
+<p>Before getting into the technical details, I will provide some 
+quotations from Sun that describe both the<b> KeyEventDispatcher</b> interface 
+and<b> KeyEventPostProcessor</b> interface.</p>
+<p><i>&quot;A <b>KeyEventDispatcher</b> is a lightweight interface that allows client 
+code to pre-listen to all <b>KeyEvents</b> ...</i></p>
+<p><i>... allowing the <b>KeyEventDispatcher</b> to retarget the event, consume 
+it, dispatch it itself, or make other changes.</i></p>
+<p><i>... if a <b>KeyEventDispatcher</b> reports that it dispatched the 
+KeyEvent, ... the <b>KeyboardFocusManager</b> will take no further action with 
+regard to the KeyEvent.</i></p>
+<p><i>Client-code may also post-listen to <b>KeyEvents</b> ...using the <b>
+KeyEventPostProcessor</b> interface. </i></p>
+<p><i><b>KeyEventPostProcessors</b> registered with the current <b>
+KeyboardFocusManager</b> will receive <b>KeyEvents</b> after the <b>KeyEvents</b> 
+have been dispatched to and handled by the focus owner.&quot;</i></p>
+<p><font color="#FF0000"><b>In layman's terms ...</b></font></p>
+<p>A <b>KeyEventDispatcher</b> object has an opportunity to process all <b>
+KeyEvents</b> before they are dispatched to the components that fired them, and 
+can prevent those events from being dispatched to the components that fired them.</p>
+<p>A <b>KeyEventPostProcessor</b> object has an opportunity to process all <b>
+KeyEvents</b> after they have been processed by <b>KeyEventDispatchers</b> 
+or by the components that fired the events.</p>
+<p><b><font color="#ff0000">Viewing tip</font></b> </p>
+ 
+<p>You may find it useful to open another copy of this chapter in a separate
+ browser window. That will make it easier for you to scroll back and
+ forth among the different figures and listings while you are reading about
+ them. </p>
+ 
+<p><b><font color="#ff0000">Supplementary material</font></b> </p>
+ 
+<p>I recommend that you also study the other chapters in my extensive collection
+ of vwxyzabcde Java tutorials. You will find those chapters published at
+<a href="http://softwaredev.earthweb.com/java">Gamelan.com</a>. However, 
+as of the date of this writing, Gamelan doesn't maintain a consolidated index 
+of my Java tutorial chapters, and sometimes they are difficult to locate there. 
+You will find a consolidated index at <a
+ href="http://www.dickbaldwin.com">www.DickBaldwin.com</a><font
+ color="#000000">.</font></p>
+<h2 align="center"><a name="Preview">Preview</a></h2>
+<p>In this chapter, I will show you how to use a <b>KeyEventPostProcessor</b> to process <b>KeyEvents</b> 
+after they have been processed by <b>
+KeyEventDispatchers</b> or by the components that fired the events.</p>
+<p>Using a sample program, characters typed into one text field in a GUI will 
+appear in another text field belonging to the same GUI. Those characters 
+will not appear in the text field into which they were typed.</p>
+<p>In addition, a <b>KeyEventPostProcessor</b> will display information about 
+the events on the screen.</p>
+<h2 align="center"><a name="Discussion_and_Sample_Code">Discussion and Sample 
+Code</a></h2>
+<p><font color="#ff0000"><b>Description of the program</b></font></p>
+<p>This chapter presents and explains a sample program named <b>
+KeyEventPostProc01</b>.</p>
+<p>This program illustrates the use of a <b>KeyEventPostProcessor</b> object in 
+addition to a pair of <b>KeyEventDispatcher</b> objects.</p>
+<p>This program is an upgrade of the program named <b>KeyEventDispatch01</b>, 
+which was discussed in the previous chapter. This version adds a <b>
+KeyEventPostProcessor</b> to process <b>KeyEvents</b> after they have been 
+handled either by the focus owner or by a <b>KeyEventDispatcher</b> object.</p>
+<p><font color="#FF0000"><b>The program GUI</b></font></p>
+<p>The program causes a single <b>JFrame</b> object to appear on the screen as 
+shown in Figure 1.</p>
+<div align="center">
+<div class="a">                    
+<pre><img border="0" src="java1856a.gif" width="391" height="101">
+
+<b>Figure 1 Program GUI.</b>
+</pre>
+</div>
+</div>
+<p>The <b>JFrame</b> object contains three <b>JTextField</b> objects. The initial text in 
+the three <b>JTextField</b> objects is respectively: 
+ 
+</p>
+<ul>
+	<li>Field A 
+	</li>
+	<li>Field B 
+	</li>
+	<li>Field C </li>
+</ul>
+<p><font color="#FF0000"><b>Two KeyEventDispatcher objects</b></font></p>
+<p>Two different <b>KeyEventDispatcher</b> objects are 
+registered on the current <b>KeyboardFocusManager</b> 
+in the following order:</p>
+<ul>
+	<li>AlternateDispatcherA </li>
+	<li>AlternateDispatcherB </li>
+</ul>
+<p><font color="#FF0000"><b>When a KeyEvent occurs ...</b></font></p>
+<p>When a <b>KeyEvent</b> occurs, the current <b>KeyboardFocusManager</b> delivers that event to 
+the <b>AlternateDispatcherA</b> object for dispatching. </p>
+<blockquote>
+	<p><i>(Events are delivered to multiple registered <b>KeyEventDispatcher</b> objects in the 
+order in which they are registered.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>If the focus owner is <i>Field A ...</i></b></font></p>
+<p>If the 
+owner of the focus at that point in time <i>(the source of the event)</i> is 
+<i>Field A,</i> the <b>AlternateDispatcherA</b> object 
+<i>re-dispatches</i> that event to <i>Field C</i> and returns 
+<b>false</b>.</p>
+<blockquote>
+	<p><i>(Note that the program in the previous chapter returned <b>true</b> at 
+	this point.)</i></p>
+</blockquote>
+<p>Re-dispatching the event to<i> Field C </i>causes keystrokes entered into <i>Field A</i> to appear in <i>Field C</i> instead 
+of appearing in <i>Field A.</i> </p>
+<p><font color="#FF0000"><b>If the source of the event is not <i>Field A ...</i></b></font></p>
+<p>If the source of the event is not <i>Field A,</i> the <b>AlternateDispatcherA</b> 
+object still returns <b>false</b>. The object returns <b>false</b> 
+regardless of whether the source of the event is <i>Field A.</i></p>
+<p><font color="#FF0000"><b>Returning false ...</b></font></p>
+<p>Returning <b>false</b> causes the event to be delivered to <b>
+AlternateDispatcherB</b> as described below, and also causes the event to be 
+delivered to the <b>KeyEventPostProcessor</b> later.</p>
+<p><font color="#FF0000"><b>If the source of the event is <i>Field B ...</i></b></font></p>
+<p>If the 
+owner of the focus at that point in time is 
+<i>Field B, </i>the <b>AlternateDispatcherB</b> object 
+<i>re-dispatches </i>that event to <i>Field C</i> and returns 
+<b>false</b>. </p>
+<blockquote>
+	<p><i>(Once again, the program in the previous chapter returned <b>true</b> 
+	at this point.)</i></p>
+</blockquote>
+<p>Re-dispatching the event to<i> Field C </i>causes keystrokes entered into 
+<i>Field B</i> to appear in <i>Field C</i> instead of appearing in <i>Field B.</i> </p>
+<p><font color="#FF0000"><b>If the source of the event is not <i>Field B ...</i></b></font></p>
+<p>If the owner of the focus at that point in time 
+is not <i>Field B,</i> the <b>AlternateDispatcherB</b> object 
+still returns <b>false</b>.</p>
+<p>Returning<b> false </b>causes the current <b>KeyboardFocusManager</b> to dispatch the event to 
+the component that owns the focus. This is what normally happens in the absence 
+of registered <b>KeyEventDispatcher</b> objects.</p>
+<p>Returning <b>false</b> also causes the event to be delivered to the <b>
+KeyEventPostProcessor</b> later.</p>
+<p><font color="#FF0000"><b>Must be <i>Field C</i> </b></font> </p>
+<p>In this 
+program, the component that owns the focus at this point would have to be <i>Field C</i> 
+because it has already been determined that 
+neither <i>Field A</i> nor <i>Field B</i> owns the focus. 
+ 
+This causes keystrokes entered into <i>Field C</i> to 
+appear in <i>Field C</i> as normal.</p>
+<p><font color="#FF0000"><b>All keystrokes appear in <i>Field C</i></b></font></p>
+<p>Thus, all keystrokes typed into any of the 
+three fields in the GUI in Figure 1 will appear in <i>Field C.</i> 
+ 
+</p>
+<p><font color="#FF0000"><b>The state of the GUI</b></font></p>
+<p>Figure 1 shows the state of the GUI after the characters a, b, and c, were entered respectively into fields A, B, and C, in that order. Note 
+that all three characters, abc, appear in <i>Field C.</i></p>
+<p><font color="#FF0000"><b>The KeyEventPostProcessor</b></font></p>
+<p>After the event has been dispatched to the focus owner or delivered to the <b>
+KeyEventDispatcher</b> objects, the <b>KeyboardFocusManager</b> will deliver the 
+event to the registered <b>KeyEventPostProcessor</b> objects for final 
+processing.</p>
+<blockquote>
+	<p><i>(There is only one registered <b>KeyEventPostProcessor</b> in this 
+	program.)</i> </p>
+</blockquote>
+<p><font color="#FF0000"><b>Display the character and the event type</b></font></p>
+<p>The <b>KeyEventPostProcessor</b> determines and displays the character that 
+was entered into the text field and the type of the event. Three types of
+<b>KeyEvent</b> are possible:</p>
+<ul>
+	<li>The &quot;key pressed&quot; event.</li>
+	<li>The &quot;key released&quot; event.</li>
+	<li>The &quot;key typed&quot; event.</li>
+</ul>
+<p>The character and the type of the event are displayed on the screen as each 
+event is processed by the <b>KeyEventPostProcessor</b>.</p>
+<blockquote>
+	<p><i>(Note that typing a single character into a text field causes all three 
+	of the event types listed above to be fired.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>The screen output</b></font></p>
+<p>The screen output produced by entering the characters a, b, and c into fields 
+A, B, and C respectively is shown in Figure 2.</p>
+<div align="center">
+<div class="a">                     
+<pre>a keyPressed
+a keyTyped
+a keyReleased
+b keyPressed
+b keyTyped
+b keyReleased
+c keyPressed
+c keyTyped
+c keyReleased
+
+<b>Figure 2</b></pre>
+</div>
+</div>
+<p><font color="#FF0000"><b>A chain of KeyEventPostProcessors</b></font></p>
+<p>A <b>KeyboardFocusManager </b>can register more than one <b>
+KeyEventPostProcessors</b>, creating a chain of <b>KeyEventPostProcessors</b>, 
+ending with the current <b>KeyboardFocusManager</b>.</p>
+<p>Each <b>KeyEventPostProcessor</b> can return either <b>true</b> or <b>
+false</b>. If a <b>KeyEventPostProcessor</b> returns false, then the <b>KeyEvent</b> is 
+passed to the next <b>KeyEventPostProcessor</b> in the chain.</p>
+<p>If the <b>KeyEventPostProcessor</b> returns <b>true, </b>the <b>KeyEvent</b> 
+is assumed to have been fully handled and the <b>KeyboardFocusManager </b>will 
+take no further action with regard to the <b>KeyEvent</b>.</p>
+<p>Note that the <b>KeyEventPostProcessor</b> in this program returns <b>true</b>. 
+However, it doesn't matter whether the return value is <b>true</b> or <b>false</b> 
+because only one <b>KeyEventPostProcessor</b> is registered on the <b>
+KeyboardFocusManager</b> in this program. </p>
+<p><font color="#FF0000"><b>Will discuss the program in fragments</b></font></p>
+<p>I will discuss this program in fragments. A complete listing of the 
+program is provided in Listing 7 near the end of the chapter.</p>
+<p>Listing 1 shows the class named <b>KeyEventPostProc01</b>, including 
+the <b>main</b> method.</p>
+<div class="a">                     
+<pre>
+class <b>KeyEventPostProc01</b>{
+  public static void <b>main</b>(String[] args){
+    new GUI();
+  }//end main
+}//end class KeyEventPostProc01
+
+<b>Listing 1</b>
+</pre>
+</div></p>
+<p>In this case, the <b>main</b> method simply instantiates an object of the <b>
+GUI</b> class. The object of the <b>GUI</b> class appears in Figure 1.</p>
+<p><font color="#FF0000"><b>The GUI class</b></font></p>
+<p>Listing 2 shows the beginning of the <b>GUI</b> class, which extends the <b>
+JFrame</b> class. Thus, a <b>GUI</b> object is also a <b>JFrame</b> 
+object.</p>
+<div class="a">                     
+<pre>
+class GUI extends JFrame{
+  JTextField fieldA =
+                    new JTextField("Field A",12);
+  JTextField fieldB =
+                    new JTextField("Field B",12);
+  JTextField fieldC =
+                    new JTextField("Field C",12);
+
+  KeyboardFocusManager manager;
+
+  GUI(){//constructor
+    getContentPane().setLayout(new FlowLayout());
+    getContentPane().add(fieldA);
+    getContentPane().add(fieldB);
+    getContentPane().add(fieldC);
+
+    setSize(390,100);
+    setTitle("Copyright, R.G. Baldwin");
+    setDefaultCloseOperation(
+                           JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+    manager = KeyboardFocusManager.
+                getCurrentKeyboardFocusManager();
+
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherA(
+                         fieldA,fieldC,manager));
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherB(
+                         fieldB,fieldC,manager));
+
+<b>Listing 2</b>
+</pre>
+</div></p>
+<p>The code in Listing 2 is very similar to the code that I explained in the 
+previous chapter, so I won't repeat that explanation here.</p>
+<blockquote>
+	<p><i>(Note that the code in Listing 2 ends in the middle of the 
+	constructor.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>Register a KeyEventPostProcessor</b></font></p>
+<p>Continuing with the constructor, the statement in Listing 3 is new to this 
+chapter.</p>
+<div class="a">                     
+<pre>
+    manager.addKeyEventPostProcessor(
+                            new PostProcessor());
+
+  }//end constructor
+}//end class GUI
+
+<b>Listing 3</b>
+</pre>
+</div></p>
+<p>The statement in Listing 3 instantiates a new object of the <b>PostProcessor</b> 
+class and registers it on the <b>KeyboardFocusManager</b>.</p>
+<p>The <b>PostProcessor</b> class implements the <b>KeyEventPostProcessor</b> 
+interface. Therefore, an object of the <b>PostProcessor</b> class is a <b>
+KeyEventPostProcessor</b>.</p>
+<blockquote>
+	<p><i>(I will explain the <b>PostProcessor</b> class later in this chapter.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>End of the GUI class</b></font></p>
+<p>Listing 3 also signals the end of the constructor and the end of the <b>GUI</b> 
+class.</p>
+<p><font color="#FF0000"><b>The AlternateDispatcherA class</b></font></p>
+<p>Listing 4 shows the complete <b>AlternateDispatcherA</b> class.</p>
+<div class="a">                     
+<pre>
+class AlternateDispatcherA
+                   implements KeyEventDispatcher{
+  JTextField fieldA;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+  //Constructor
+  AlternateDispatcherA(
+                   JTextField fieldA,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldA = fieldA;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+  public boolean <b>dispatchKeyEvent</b>(KeyEvent e){
+    if(e.getSource() == fieldA){
+      manager.redispatchEvent(fieldC,e);
+    }//end if
+    <b>return false</b>;
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherA
+
+<b>Listing 4</b>
+</pre>
+</div></p>
+<p>The <b>AlternateDispatcherA</b> class implements the <b>KeyEventDispatcher</b> 
+interface. Therefore, an object of the <b>AlternateDispatcherA</b> class 
+is an <b>KeyEventDispatcher</b>.</p>
+<blockquote>
+	<p><i>(An object of the <b>AlternateDispatcherA</b> class was registered on 
+	the <b>KeyboardFocusManager</b> in Listing 2.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>Similar to previous code</b></font></p>
+<p>The code in Listing 4 is almost identical to code in a class having the same 
+name that I explained in the previous chapter. The only difference involves 
+some minor logic changes having to do with the return value from the method 
+named <b>dispatchKeyEvent</b>.</p>
+<blockquote>
+	<p><i>(This version of the <b>dispatchKeyEvent</b> method always returns <b>
+	false</b>, whereas the previous version returned <b>true</b> if the source 
+	of the event was Field A and returned <b>false</b> otherwise.)</i></p>
+</blockquote>
+<p>Therefore, I won't repeat that explanation in this chapter.</p>
+<p><font color="#FF0000"><b>The AlternateDispatcherB class</b></font></p>
+<p>Listing 7 near the end of the chapter also defines a class named <b>
+AlternateDispatcherB</b>.</p>
+<p>Once again, the code in the <b>AlternateDispatcherB </b>class <b>is</b> 
+almost identical to code in a class having the same name that I explained in the 
+previous chapter. The only difference involves minor logic changes 
+having to do with the return value from the method named <b>dispatchKeyEvent</b>.</p>
+<p>As a result, I won't show the <b>AlternateDispatcherB </b>class as a code 
+fragment in this chapter, and I won't repeat the previous explanation in this chapter.</p>
+<p><font color="#FF0000"><b>The PostProcessor class</b></font></p>
+<p>The beginning of the <b>PostProcessor</b> class and the entire method named
+<b>postProcessKeyEvent</b> are shown in Listing 5. </p>
+<div class="a">                     
+<pre>
+class PostProcessor
+                implements KeyEventPostProcessor{
+
+  public boolean <b>postProcessKeyEvent(KeyEvent e)</b>{
+    System.out.println(
+               e.getKeyChar() + " " +
+                        getEventType(e.getID()));
+    return true;
+  }//end postProcessKeyEvent
+
+<b>Listing 5</b>
+</pre>
+</div></p>
+<p>The <b>PostProcessor</b> class implements the <b>KeyEventPostProcessor</b> 
+interface. Therefore, an object of the <b>PostProcessor</b> class is a <b>
+KeyEventPostProcessor.</b></p>
+<p>An object of the <b>PostProcessor</b> class was registered on the <b>
+KeyboardFocusManager</b> in Listing 3 by invoking the <b>
+addKeyEventPostProcessor</b> method on the <b>KeyboardFocusManager</b> and 
+passing the <b>PostProcessor</b> object as a parameter.</p>
+<p><font color="#FF0000"><b>The addKeyEventPostProcessor method</b></font></p>
+<p>Here is some of what Sun has to say about the behavior of the <b>
+addKeyEventPostProcessor</b> method and the subsequent behavior of the <b>
+KeyboardFocusManager</b> with respect to registered <b>KeyEventPostProcessors</b>.</p>
+<blockquote>
+	<p><i>&quot;This method adds a <b>KeyEventPostProcessor</b> to this <b>
+	KeyboardFocusManager's</b> post- processor chain. </i></p>
+	<p><i>After a <b>KeyEvent</b> has been dispatched to and handled by its 
+	target, <b>KeyboardFocusManager</b> will request that each <b>
+	KeyEventPostProcessor</b> perform any necessary post-processing as part of 
+	the <b>KeyEvent's</b> final resolution. </i></p>
+	<p><i><b>KeyEventPostProcessors</b> will be notified in the order in which 
+	they were added; the current <b>KeyboardFocusManager</b> will be notified 
+	last. </i></p>
+	<p><i>Notifications will halt as soon as one KeyEventPostProcessor returns
+	<b>true</b> from its <b>postProcessKeyEvent</b> method. </i></p>
+	<p><i>There is no limit to the <span lang="en-us"></span>total number of <b>KeyEventPostProcessors</b> 
+	that can be added, nor to the number of times that a particular <b>
+	KeyEventPostProcessor</b> instance can be added. </i></p>
+	<p><i>If a null post-processor is specified, no action is taken and no 
+	exception is thrown.&quot;</i> </p>
+</blockquote>
+<p><font color="#FF0000"><b>The KeyEventPostProcessor interface</b></font></p>
+<p>The <b>PostProcessor</b> class implements the <b>KeyEventPostProcessor</b> 
+interface. Here is some of what Sun has to say about that interface.</p>
+<blockquote>
+	<p><i>&quot;A <b>KeyEventPostProcessor</b> cooperates with the current <b>
+	KeyboardFocusManager</b> in the final resolution of all unconsumed <b>
+	KeyEvents</b>. </i></p>
+	<p><i><b>KeyEventPostProcessors</b> registered with the current <b>
+	KeyboardFocusManager</b> will receive <b>KeyEvents</b> after the <b>
+	KeyEvents</b> have been dispatched to and handled by their targets.&quot;</i> </p>
+</blockquote>
+<p>The <b>KeyEventPostProcessor</b> interface declares a single method named <b>
+postProcessKeyEvent</b>, which must be defined by classes that implement the 
+interface.</p>
+<p><font color="#FF0000"><b>The postProcessKeyEvent method</b></font></p>
+<p>Here is some of what Sun has to say about the <b>postProcessKeyEvent</b> 
+method.</p>
+<blockquote>
+	<p><i>&quot;This method is called by the current <b>KeyboardFocusManager</b>, 
+	requesting that this <b>KeyEventPostProcessor</b> perform any necessary 
+	post-processing which should be part of the <b>KeyEvent's</b> final 
+	resolution. </i></p>
+	<p><i>At the time this method is invoked, typically the <b>KeyEvent</b> has 
+	already been dispatched to and handled by its target. ...</i></p>
+	<p><i>Note that if a <b>KeyEventPostProcessor</b> wishes to dispatch the <b>
+	KeyEvent</b>, it must use <b>redispatchEvent</b> to prevent the AWT from 
+	recursively requesting that this <b>KeyEventPostProcessor</b> perform 
+	post-processing of the event again. </i></p>
+	<p><i>If an implementation of this method returns <b>false</b>, then the <b>
+	KeyEvent</b> is passed to the next <b>KeyEventPostProcessor</b> in the 
+	chain, ending with the current <b>KeyboardFocusManager</b>. </i></p>
+	<p><i>If an implementation returns <b>true</b>, the <b>KeyEvent</b> is 
+	assumed to have been fully handled (although this need not be the case), and 
+	the AWT will take no further action with regard to the <b>KeyEvent</b>.&quot; </i>
+	</p>
+</blockquote>
+<p><font color="#FF0000"><b>The code for the postProcessKeyEvent method</b></font></p>
+<p>Now refer back to the definition of the <b>postProcessKeyEvent</b> method in 
+Listing 5.</p>
+<blockquote>
+	<p><i>(Note that the method receives a reference to the <b>KeyEvent</b> 
+	object as an incoming parameter.)</i></p>
+</blockquote>
+<p>The code invokes the following two methods on the <b>KeyEvent</b> object:</p>
+<ul>
+	<li>getKeyChar</li>
+	<li>getID</li>
+</ul>
+<p><font color="#FF0000"><b>Behavior of these methods</b></font></p>
+<p>The <b>getKeyChar</b> method returns the character associated with the key in 
+the <b>KeyEvent</b> object.</p>
+<p>The <b>getID</b> method is inherited from the <b>AWTEvent</b> class. It 
+returns the event type as a numeric value. For a <b>KeyEvent</b>,<b> t</b>he 
+event type is returned as a value of type <b>int</b>, which corresponds to one 
+of the following three constants defined in the <b>KeyEvent</b> class:</p>
+<ul>
+	<li>KEY_PRESSED</li>
+	<li>KEY_RELEASED</li>
+	<li>KEY_TYPED</li>
+</ul>
+<p><font color="#FF0000"><b>Event type as a descriptive String</b></font></p>
+<p>The purpose of the code in Listing 5 is to display the character and the 
+event type for all <b>KeyEvents</b>.</p>
+<p>Because the <b>getID</b> method returns the type as a numeric value of type
+<b>int</b>, it is useful to convert that type to a descriptive string before 
+displaying it. This is accomplished by the method named <b>getEventType.</b></p>
+<p><font color="#FF0000"><b>The getEventType method</b></font></p>
+<p>The <b>getEventType</b> method is shown in Listing 6.</p>
+<div class="a">                     
+<pre>
+String getEventType(int ID){
+  if(ID == KeyEvent.KEY_PRESSED){
+    return "keyPressed";
+  }else if(ID == KeyEvent.KEY_RELEASED){
+    return "keyReleased";
+  }else if(ID == KeyEvent.KEY_TYPED){
+    return "keyTyped";
+  }else{
+    return "Unknown event type";
+  }//end else
+}//end getEventType
+
+<b>Listing 6</b>
+</pre>
+</div></p>
+<p>This method simply</p>
+<ul>
+	<li>Receives the numeric type identifier as an incoming parameter.</li>
+	<li>Compares the value of the parameter with the values of the three 
+	constants listed earlier.</li>
+	<li>Returns a <b>String</b> that describes the event type.</li>
+</ul>
+<blockquote>
+	<p><i>(As an aside, the strings returned by this method are actually the 
+	names of the corresponding methods declared in the <b>KeyListener</b> 
+	interface. This is the interface that is implemented by code designed 
+	to handle <b>KeyEvents</b> in the JavaBeans event model. I have 
+	published numerous tutorials on this topic on my web site.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>The screen output</b></font></p>
+<p>Now refer back to Figure 2, which shows the screen output produced by 
+entering the characters a, b, and c into fields A, B, and C respectively in the 
+GUI shown in Figure 1. </p>
+<blockquote>
+	<p><i>(Note that all three event types are fired each time a single 
+	character is typed into one of the text fields.)</i> </p>
+</blockquote>
+<h2 align="center"><a name="Run_the_Programs">Run the Program</a></h2>
+<p>I encourage you to copy, compile, and run the program provided in this chapter. 
+Experiment with it, making changes and observing the results of your changes.</p><h2 align="center"><a name="Summary">Summary</a></h2>
+<p>I showed you how to use a <b>KeyEventPostProcessor</b> object to process <b>
+KeyEvents</b> after they have been processed by <b>KeyEventDispatchers</b> 
+or by the components that fired the events.</p>
+<h2 align="center"><a name="Whats Next">What's Next?</a></h2>
+<p>Future chapters will discuss other features of the focus subsystem including the 
+following:</p>
+<ul>
+	<li>FocusEvent and WindowEvent</li>
+	<li>Event delivery</li>
+	<li>Temporary focus events</li>
+	<li>Focus and PropertyChangeListener</li>
+	<li>Focus and VetoableChangeListener</li>
+</ul>
+<h2 align="center"><a name="Complete_Program_Listings">Complete Program Listing</a></h2><p>
+A complete listing of the program discussed in this chapter is provided below.</p><p>
+<div class="a">                     
+<pre>
+/*File KeyEventPostProc01.java
+Copyright,R.G.Baldwin
+Revised 07/27/04
+
+This program illustrates the use of a
+KeyEventPostProcessor in addition to an
+alternate KeyEventDispatcher.
+
+This is an upgrade to the program named
+KeyEventDispatch01. This version adds a
+KeyEventPostProcessor to process key events after
+they have been handled either by the focus owner
+or by an alternate KeyEventDispatcher object.
+
+A JFrame object appears on the screen containing
+three JTextField objects. The initial text in
+the three JTextField objects is respectively:
+
+Field A
+Field B
+Field C
+
+Two alternative KeyEventDispatcher objects are
+registered on the current KeyboardFocusManager
+in the following order:
+
+AlternateDispatcherA
+AlternateDispatcherB
+
+In addition a KeyEventPostProcessor object is
+registered on the current KeyboardFocusManager.
+
+When a key event occurs, the current
+KeyboardFocusManager delivers that event to
+AlternateDispatcherA for dispatching. If the
+owner of the focus at that point in time is
+Field A, the AlternateDispatcherA object
+re-dispatches that event to Field C and returns
+false. That causes keystrokes entered into
+Field A to appear in Field C instead. Returning
+false causes the event to be delivered to
+AlternateDispatcherB as described below, and also
+causes the event to be delivered to the
+KeyEventPostProcessor later.
+
+If the owner of the focus at that point in time
+is not Field A, the AlternateDispatcherA object
+returns false. This causes the current
+KeyboardFocusManager to deliver the event to
+AlternateDispatcherB for dispatching. If the
+owner of the focus at that point in time is
+Field B, the AlternateDispatcherB object
+re-dispatches that event to Field C and returns
+false. That causes keystrokes entered into
+Field B to appear in Field C instead. Returning
+false causes the event to be delivered to the
+KeyEventPostProcessor later.
+
+If the owner of the focus at that point in time
+is not Field B, the AlternateDispatcherB object
+returns false. This causes the current
+KeyboardFocusManager to dispatch the event to
+the component that owns the focus. In this
+simple program, that would have to be Field C
+because it has already been determined that
+neither Field A nor Field B own the focus.
+
+That causes keystrokes entered into Field C to
+appear in Field C as is normally the case.
+
+Thus, all keystrokes entered into any of the
+three fields in the GUI will appear in field C.
+
+In addition, after the event has been dispatched
+to the focus owner or delivered to the alternate
+KeyEventDispatcher object, the
+KeyboardFocusManager will deliver the event to
+the KeyEventPostProcessor object for final
+processing. The KeyEventPostProcessor determines
+and displays the character that was entered into
+the text field and the type of the event. Three
+types of event are possible:
+
+The &quot;key pressed&quot; event.
+The &quot;key released&quot; event.
+The &quot;key typed&quot; event.
+
+The character and the type of the event are
+displayed on the screen as each event is
+processed by the KeyEventPostProcessor. Note
+that entering a single character into a text
+field causes all three of the event types listed
+above to be fired. The screen output produced
+by entering the characters a, b, and c into
+fields A, B, and C respectively is shown below.
+
+a keyPressed
+a keyTyped
+a keyReleased
+b keyPressed
+b keyTyped
+b keyReleased
+c keyPressed
+c keyTyped
+c keyReleased
+
+Note that the KeyEventPostProcessor returns true,
+but in this program, it doesn't matter whether
+the return value is true or false. This is
+because this program only has one
+KeyEventPostProcessor object registered on the
+KeyboardFocusManager. If a KeyEventPostProcessor
+object returns false, then the KeyEvent is passed
+to the next KeyEventPostProcessor in the chain,
+ending with the current KeyboardFocusManager. If
+true, the KeyEvent is assumed to have been fully
+handled (although this need not be the case), and
+the AWT will take no further action with regard
+to the KeyEvent.
+
+Tested using J2SE 1.4.2 under WinXP
+************************************************/
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class KeyEventPostProc01{
+  public static void main(String[] args){
+    new GUI();
+  }//end main
+}//end class KeyEventPostProc01
+//=============================================//
+
+class GUI extends JFrame{
+  JTextField fieldA =
+                    new JTextField("Field A",12);
+  JTextField fieldB =
+                    new JTextField("Field B",12);
+  JTextField fieldC =
+                    new JTextField("Field C",12);
+
+  KeyboardFocusManager manager;
+
+  GUI(){//constructor
+    getContentPane().setLayout(new FlowLayout());
+    getContentPane().add(fieldA);
+    getContentPane().add(fieldB);
+    getContentPane().add(fieldC);
+
+    setSize(390,100);
+    setTitle("Copyright, R.G. Baldwin");
+    setDefaultCloseOperation(
+                           JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+    manager = KeyboardFocusManager.
+                getCurrentKeyboardFocusManager();
+
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherA(
+                         fieldA,fieldC,manager));
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherB(
+                         fieldB,fieldC,manager));
+    manager.addKeyEventPostProcessor(
+                            new PostProcessor());
+
+  }//end constructor
+}//end class GUI
+//=============================================//
+
+class AlternateDispatcherA
+                   implements KeyEventDispatcher{
+  JTextField fieldA;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+  //Constructor
+  AlternateDispatcherA(
+                   JTextField fieldA,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldA = fieldA;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+  public boolean dispatchKeyEvent(KeyEvent e){
+    if(e.getSource() == fieldA){
+      manager.redispatchEvent(fieldC,e);
+    }//end if
+    return false;
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherA
+//=============================================//
+
+class AlternateDispatcherB
+                   implements KeyEventDispatcher{
+  JTextField fieldB;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+  //Constructor
+  AlternateDispatcherB(
+                   JTextField fieldB,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldB = fieldB;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+  public boolean dispatchKeyEvent(KeyEvent e){
+    if(e.getSource() == fieldB){
+      manager.redispatchEvent(fieldC,e);
+    }//end if
+    return false;
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherB
+//=============================================//
+
+class PostProcessor
+                implements KeyEventPostProcessor{
+
+  public boolean postProcessKeyEvent(KeyEvent e){
+    System.out.println(
+               e.getKeyChar() + " " +
+                        getEventType(e.getID()));
+    return true;
+  }//end postProcessKeyEvent
+//---------------------------------------------//
+
+String getEventType(int ID){
+  if(ID == KeyEvent.KEY_PRESSED){
+    return "keyPressed";
+  }else if(ID == KeyEvent.KEY_RELEASED){
+    return "keyReleased";
+  }else if(ID == KeyEvent.KEY_TYPED){
+    return "keyTyped";
+  }else{
+    return "Unknown event type";
+  }//end else
+}//end getEventType
+
+}//end class PostProcessor
+
+<b>Listing 7</b>
+</pre></div></p>
+<br/>
+     
+<hr size="3" width="100%" align="center">    
+<p>Copyright, Richard G. Baldwin. Reproduction in whole or in
+part in any form or medium without express written permission from Richard
+Baldwin is prohibited. </p>
+     
+<h4> <a name="About_the_author">About the author</a></h4><b>
+<a href="mailto:baldwin@dickbaldwin.com">Richard Baldwin</a></b><i>
+  is a college professor (at Austin Community College in Austin, TX) and
+private  consultant whose primary focus is a combination of Java, C#, and
+XML. In addition to the many platform and/or language independent benefits
+of Java and C# applications, he believes that a combination of Java, C#,
+and XML will become the primary driving force in the delivery of structured
+information on the Web.</i>    
+<p><i>Richard has participated in numerous consulting projects, and he frequently 
+ provides onsite training at the high-tech companies located in and around 
+ Austin, Texas. He is the author of Baldwin's Programming <a
+ href="http://www.dickbaldwin.com">Tutorials</a>,
+  which has gained a worldwide following among experienced and aspiring programmers.
+  He has also published articles in JavaPro magazine.</i> </p>
+     
+<p><i>In addition to his programming expertise, Richard has many years of 
+ practical experience in Digital Signal Processing (DSP). His first
+ job after he earned his Bachelor's degree was doing DSP in the Seismic Research 
+ Department of Texas Instruments. (TI is still a world leader in DSP.) 
+ In the following years, he applied his programming and DSP expertise to other
+ interesting areas including sonar and underwater acoustics.</i> </p>
+     
+<p><i>Richard holds an MSEE degree from Southern Methodist University and
+  has many years of experience in the application of computer technology
+to  real-world problems.</i> </p>
+     
+<p><i><a href="mailto:baldwin@dickbaldwin.com">Baldwin@DickBaldwin.com</a></i>
+  </p>
+     
+<p>-end- </p>
+   </body>
+</html>

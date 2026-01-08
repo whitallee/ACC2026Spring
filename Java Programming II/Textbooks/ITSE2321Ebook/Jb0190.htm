@@ -1,0 +1,257 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0190</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0190: Using the System and PrintStream Classes</h1>
+
+ 
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	</li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#Discussion">Discussion</a></li>
+	<li><a href="#A_word_about_class_variables">A word about class variables</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>This chapter takes a preliminary look at the complexity of OOP by examining some 
+	aspects of the  
+<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a> 
+	and 
+<a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html">
+PrintStream</a> classes. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The program named Hello1. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Display the string "Hello World". </li>
+	</ul>
+	<h1><a name="Introduction">Introduction</a></h1>
+<p>This chapter introduces you to the use of the <b>System </b>and <b>PrintStream
+</b>classes in Java. This is our first introduction to the complexity that can 
+accompany the <b>OOP </b>paradigm. It gets a little complicated, so you might 
+need to pay special attention to the discussion. </p>
+	<h1><a name="Discussion">Discussion</a></h1>
+<h2>What does the main method do?</h2>
+<p>The <strong>main</strong> method in the controlling <em>(driver)</em> class of a Java 
+application controls the flow of the program. </p>
+<p>The <strong>main</strong> method can also access other classes along with the 
+variables and methods of those classes and of objects instantiated from those 
+classes. </p>
+<h2>The Hello1 Application</h2>
+<p><a href="#Listing_1">Listing 1</a> shows a simple Java application named
+<strong>Hello1</strong>.</p>
+<p><em>(By convention, the names of class definitions in Java should begin with an upper-case 
+character. However, many sample programs in this Ebook do not adhere to that 
+convention because they were originally written before the convention came into 
+common use.)</em></p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. The program named Hello1.
+
+<pre>
+/*File Hello1.java Copyright, R.G.Baldwin
+**********************************************************/
+class Hello1 { //define the controlling class
+  //define main method
+  public static void main(String[] args){
+    //display text string
+    System.out.println(&quot;Hello World&quot;);
+  }//end main
+}//End Hello1 class.  No semicolon at end of Java class.
+</pre>
+
+</div>
+<!--``2-->
+	<h2>Does this program Instantiate objects?</h2>
+<p>This is a simple example that does not instantiate objects of any other 
+class. </p>
+<h2>Does this program access another class?</h2>
+<p>However, it does access another class. It accesses the 
+<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html">System</a> 
+class that is provided with the Java development kit. <em>(The <strong>System</strong> class will 
+be discussed in more detail in a future chapter.) </em></p>
+<h2>The variable named <em>out</em></h2>
+<p>The variable named 
+<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/System.html#out">out</a>, referred to in <a href="#Listing_1">Listing 1</a> as <strong>System.out</strong>, 
+is a <em>public static final variable</em> of the <strong>System</strong> class. </p>
+<p>Recall that a static variable can be accessed without a requirement to 
+instantiate an object of the class. As is the case with all variables, the 
+static variable must be of some specific type and in this case the type of the 
+variable is <strong>PrintStream</strong>.</p>
+<h2>Primitive variables vs. reference variables</h2>
+<p>A class variable may be a <em>primitive variable</em>, which contains a 
+primitive value, or it may be a <em>reference 
+variable</em>, which contains a reference to an object. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap11/ch11_06.html#reference,_object">Objects are Created at Run Time</a>.)</em></p>
+<p><em>(I&#39;ll have more to say about the difference between primitive 
+variables and 
+reference variables in a future chapter.)</em></p>
+<p>The variable named <strong>out</strong> in this case is a
+<em>reference variable</em> that refers to an object of another type:
+<a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html">
+PrintStream</a>. </p>
+<h2>Accessing class variables</h2>
+<p>You access static or class variables or methods in Java by joining the name of 
+the class to the name of the variable or method with a period as shown 
+<a name="below">below</a>. </p>
+
+
+
+<div class="a">				<p>System.out
+
+</p>
+				<p>accesses the class variable named <strong>out</strong> in the Java class named 
+				<strong>System</strong>.</p>
+</div>	<h2>The PrintStream class</h2>
+<p>Another class that is provided with the Java development kit is the 
+<a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html">PrintStream</a> 
+class. A <strong>PrintStream</strong> adds functionality to another output stream, namely the ability to print representations of various data values conveniently.</p>
+<h2>What does the out variable refer to?</h2>
+<p>The <strong>out</strong> variable in the <strong>System</strong> class refers 
+to <em>(points to)</em> an instance of the <strong>PrintStream</strong> class
+<em>(a <strong>PrintStream</strong> object),</em> which is automatically 
+instantiated when the <strong>System</strong> class is loaded into the 
+application. </p>
+<p>We will be discussing the <strong>PrintStream</strong> class along with a 
+number of other classes in detail in a future chapter on input/output streams, so 
+this is not intended to be an exhaustive discussion. </p>
+<h2>The println method</h2>
+<p>The <strong>PrintStream</strong> class has several overloaded versions of <em>instance methods</em> named 
+<a href="https://docs.oracle.com/javase/7/docs/api/java/io/PrintStream.html#println()">println</a>
+<em>(see Kjell <a href="http://programmedlessons.org/Java9/chap06/ch06_05.html">println()</a>)</em> that causes its argument to be displayed on the standard 
+output device when it is called. <em>(Overloaded methods will be discussed in a 
+later chapter. Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap51/ch51_16.html#overloading,_of_methods">Method Overloading</a>.)</em></p>
+	<p><em>(Typically, the standard output device is the command-line window. 
+	However, it is possible to redirect it to some other device when you start 
+	the program. See Kjell 
+	<a href="http://programmedlessons.org/Java9/chap70/ch70_08.html#redirection,_program_output">Redirecting Output.</a>)</em></p>
+	
+	<h2>Accessing an instance method</h2>
+<p>The 
+method named <strong>println</strong> can be accessed by joining a <strong>
+PrintStream</strong> object&#39;s 
+reference to the name of the method using a period. </p>
+<p>Thus, <em>(assuming that the standard output device has not been redirected)</em>, the 
+statement shown in <a href="#Listing_2">Listing 2</a> causes the string &quot;Hello 
+World&quot; <em>(without the quotation marks)</em> to be displayed in the 
+command-line window.</p>
+<!--``1List02-->
+<div class="a"><a name="Listing_2">Listing 2</a>. Display the string &quot;Hello 
+				World&quot;.
+
+<pre>
+System.out.println(&quot;Hello World&quot;);
+</pre>
+
+</div>
+<!--``2-->
+	<p>SUMMARY: This statement calls the <strong>println</strong> method of an object 
+	instantiated from 
+	the <strong>PrintStream</strong> class, which is referred to <em>(pointed to)</em> 
+	by the variable named <strong>out</strong>, which is a <em>class variable</em> 
+	of the <strong>System</strong> class. </p>
+<p>Read the previous paragraph very carefully. As I indicated when I started this chapter, this is our first introduction to 
+the complexity that can result from use of the OOP paradigm. <em>(It can get 
+even more complicated.)</em> If this is not clear to you, go back 
+over it and think about it until it becomes clear. </p>
+	<h1><a name="A_word_about_class_variables">A word about class variables</a></h1>
+<h2>How many instances of a class variable exist?</h2>
+<p>The runtime system allocates memory for a class (static) variable only once no matter how many 
+instances <em>(objects)</em> of the class containing the variable are instantiated. </p>
+<p>All objects of the class share the same physical memory space for the class 
+variable. </p>
+<p>If a method in one object changes the value stored in the class variable, it 
+is changed insofar as all of the objects are concerned. <em>(For the benefit of 
+experienced C, C++, or Pascal programmers, this is about as 
+close to a global variable as you can get in Java. If you don't know what a 
+global variable is, don't worry about it.)</em></p>
+<h2>Accessing a class variable</h2>
+<p>You can use the name of the class to access class variables by joining the 
+name of the class to the name of the variable using a period as shown
+<a href="#below">earlier</a>.</p>
+<p>You can also access a class variable by joining the name of a reference 
+variable containing an object&#39;s reference to the name of the variable using a 
+period as the joining operator.</p>
+<h2>Referencing object methods via class variables</h2>
+<p>Class variables are either primitive variables or reference variables. <em>
+(Primitive variables contain primitive values and reference variables contain references 
+to objects.)</em> </p>
+<p>A referenced object may provide methods to control the behavior of the 
+object. In <a href="#Listing_2">Listing 2</a>, we accessed the <strong>println</strong> method of 
+an object of the <strong>PrintStream</strong> class 
+referred to by the class variable named <strong>out</strong>. </p>
+<h2>Instance variables and methods</h2>
+<p>As a side note, in addition to class variables, Java provides <em>instance 
+variables</em> <em>(see Kjell 
+<a href="http://programmedlessons.org/Java9/chap47/ch47_06.html#instance_variable">Filling in the Definition</a>)</em> and <em>instance methods</em>. Every instance of a class has its 
+own set of instance variables. You can only access instance variables and 
+instance methods through a reference to an object of the class.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a>. Compile the code and execute 
+it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	<p>Housekeeping material</p>
+ 
+
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0190: Using the System and 
+					PrintStream Classes</li>
+					<li>File: Jb0190.htm
+</li>
+					<li>Revised: 06/10/22</li>
+				</ul>
+</div>
+
+<p>-end- </p>
+
+
+</body>
+</html>

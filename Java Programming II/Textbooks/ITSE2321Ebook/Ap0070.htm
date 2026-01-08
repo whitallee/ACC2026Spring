@@ -1,0 +1,922 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0070</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0070: Method Overloading</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 9 17.64</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap079{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    int x = 3;
+    double y = 4.2;
+    System.out.println(square(x) + &quot; &quot;
+                          + square(y));
+  }//end doOverLoad()
+    
+  public int square(int y){
+    return y*y;
+  }//end square()
+    
+  public double square(double y){
+    return y*y;
+  }//end square()
+}// end class</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. float 9.0 double 17.64</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap080{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    int x = 3;
+    double y = 4.2;
+
+    System.out.print(square(x) + &quot; &quot;);
+    System.out.print(square(y));
+    System.out.println();
+  }//end doOverLoad()
+    
+  public float square(float y){
+    System.out.print(&quot;float &quot;);
+    return y*y;
+  }//end square()
+    
+  public double square(double y){
+    System.out.print(&quot;double &quot;);
+    return y*y;
+  }//end square()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 10 17.64</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+				<pre>public class Ap081{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    double w = 3.2;
+    double x = 4.2;
+    
+    int y = square(w);
+    double z = square(x);
+    
+    System.out.println(y + &quot; &quot; + z);
+  }//end doOverLoad()
+    
+  public int square(double y){
+    return (int)(y*y);
+  }//end square()
+  
+  public double square(double y){
+    return y*y;
+  }//end square()
+
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 9 17.64</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+				<pre>public class Ap083{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    int w = 3;
+    double x = 4.2;
+
+    System.out.println(
+      new Subclass().square(w) + &quot; &quot;
+      + new Subclass().square(x));
+  }//end doOverLoad()
+}// end class
+
+class Superclass{
+  public double square(double y){
+    return y*y;
+  }//end square()
+}//end class Superclass
+
+class Subclass extends Superclass{
+  public int square(int y){
+    return y*y;
+  }//end square()
+}//end class Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>Which of the following is produced by the program shown in
+<a href="#Listing_5">Listing 5</a>? </p>
+<div class="a">
+				<pre>A.  Compiler Error
+				
+B.  Runtime Error
+
+C.  float 2.14748365E9
+    float 9.223372E18
+    double 4.2
+    
+D.  None of the above
+</pre>
+</div>
+`
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+				<pre>public class Ap084{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    int x = 2147483647;
+    square(x);
+    long y = 9223372036854775807L;
+    square(y);
+    double z = 4.2;
+    square(z);
+    
+    System.out.println();
+  }//end doOverLoad()
+    
+  public void square(float y){
+    System.out.println(&quot;float&quot; + &quot; &quot; +
+                              y + &quot; &quot;);
+  }//end square()
+    
+  public void square(double y){
+    System.out.println(&quot;double&quot; + &quot; &quot; +
+                              y + &quot; &quot;);
+  }//end square()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Test DumIntfc</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+				<pre>public class Ap085{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    Test a = new Test();
+    DumIntfc b = new Test();
+    overLoadMthd(a);
+    overLoadMthd(b);
+    System.out.println();
+  }//end doOverLoad()
+    
+  public void overLoadMthd(Test x){
+    System.out.print(&quot;Test &quot;);
+  }//end overLoadMthd
+  
+  public void overLoadMthd(DumIntfc x){
+    System.out.print(&quot;DumIntfc &quot;);
+  }//end overLoadMthd
+}// end class
+
+interface DumIntfc{
+}//end DumIntfc
+
+class Test implements DumIntfc{
+}//end class Test
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Test Object</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+				<pre>public class Ap086{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    Test a = new Test();
+    Object b = new Test();
+    overLoadMthd(a);
+    overLoadMthd(b);
+    System.out.println();
+  }//end doOverLoad()
+    
+  public void overLoadMthd(Test x){
+    System.out.print(&quot;Test &quot;);
+  }//end overLoadMthd
+  
+  public void overLoadMthd(Object x){
+    System.out.print(&quot;Object &quot;);
+  }//end overLoadMthd
+
+}// end class
+
+class Test{
+}//end class Test
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. SubC SuperC</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+				<pre>public class Ap087{
+  public static void main(
+                        String args[]){
+    new Worker().doOverLoad();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doOverLoad(){
+    SubC a = new SubC();
+    SuperC b = new SubC();
+
+    SubC obj = new SubC();
+    obj.overLoadMthd(a);
+    obj.overLoadMthd(b);
+
+    System.out.println();
+  }//end doOverLoad()
+
+}// end class
+
+class SuperC{
+  public void overLoadMthd(SuperC x){
+    System.out.print(&quot;SuperC &quot;);
+  }//end overLoadMthd
+}//end SuperC
+
+class SubC extends SuperC{
+  public void overLoadMthd(SubC x){
+    System.out.print(&quot;SubC &quot;);
+  }//end overLoadMthd
+}//end class SubC
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0070: Method Overloading</li>
+				<li>File: Ap0070.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/04/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>C. SubC SuperC </p>
+<h3><strong>Explanation 8</strong></h3>
+<p>While admittedly a little convoluted, this is another relatively 
+straightforward application of method overloading using types from the class 
+hierarchy. </p>
+<p>Type <strong>SubC</strong>, <strong>SuperC</strong>, or <strong>Object?</strong></p>
+<p>This method defines a class named <strong>SuperC</strong>, which extends 
+<strong>Object</strong>, and a class named <strong>SubC</strong>, which extends <strong>SuperC</strong>. Therefore, an object 
+instantiated from the class named <strong>SubC</strong> can be treated as any of the following 
+types: <strong>SubC</strong>, <strong>SuperC</strong>, or 
+<strong>Object</strong>. </p>
+<p><strong>Two overloaded methods in different classes </strong> </p>
+<p>Two overloaded methods named <strong>overLoadMthd</strong> are defined in two 
+classes in the inheritance hierarchy. The class named <strong>SuperC</strong> defines a version 
+that requires an incoming parameter of type <strong>SuperC</strong>. The class named <strong>SubC</strong> defines 
+a version that requires an incoming parameter of type <strong>SubC</strong>. When called, each of 
+these overloaded methods prints the type of its formal argument. </p>
+<p><strong>Two objects of type SubC</strong> </p>
+<p>The program instantiates two objects of the <strong>SubC</strong> class, storing the reference 
+to one of them in a reference variable of type <strong>SubC</strong>, and storing the reference 
+to the other in a reference variable of type <strong>SuperC</strong>. </p>
+<p><strong>Call the overloaded method twice</strong> </p>
+<p>The next step is to call the overloaded method named <strong>overLoadMthd</strong> 
+twice in succession, passing each of the reference variables of type <strong>SubC</strong> and 
+<strong>SuperC</strong> to the method. </p>
+<p><strong>Instance methods require an object </strong> </p>
+<p>Because the two versions of the overloaded method are instance methods, it is 
+necessary to have an object on which to call the methods. This is accomplished 
+by instantiating a new object of the <strong>SubC</strong> class, storing the reference to that 
+object in a reference variable named <strong>obj</strong>, and calling the overloaded method on 
+that reference. </p>
+<p><strong>Overloaded methods not in same class </strong> </p>
+<p>The important point here is that the two versions of the overloaded method 
+were not defined in the same class. Rather, they were defined in two different 
+classes in the inheritance hierarchy. However, they were defined in such a way 
+that both overloaded versions were contained as instance methods in an object 
+instantiated from the class named <strong>SubC</strong>. </p>
+<p><strong>No surprises </strong> </p>
+<p>There were no surprises. When the overloaded method was called twice in 
+succession, passing the two different reference variables as parameters, the 
+output shows that the version that was called in each case had a formal argument 
+type that matched the type of the parameter that was passed to the method. </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>C. Test Object</p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>Another straightforward application </strong></p>
+<p>This is another straightforward application of method overloading, which 
+produces no surprises. </p>
+<p>This program defines a new class named <strong>Test</strong>, which extends 
+the <strong>Object</strong> class by default. This means that an object 
+instantiated from the class named <strong>Test</strong> can be treated either as 
+type <strong>Test</strong>, or as type <strong>Object</strong>. </p>
+<p>The program defines two overloaded methods named <strong>overLoadMthd</strong>. 
+One requires an incoming parameter of type <strong>Test</strong>. The other requires an incoming 
+parameter of type <strong>Object</strong>. When called, each of these methods prints the type of 
+its incoming parameter. </p>
+<p>The program instantiates two different objects of the class <strong>Test</strong>, storing a 
+reference to one of them in a reference variable of type <strong>Test</strong>, and storing a 
+reference to the other in a reference variable of type <strong>Object</strong>. </p>
+<p><strong>No surprises here </strong> </p>
+<p>Then it calls the overloaded <strong>overLoadMthd</strong> method twice in 
+succession, passing the reference of type <strong>Test</strong> during the first 
+call, and 
+passing the reference of type <strong>Object</strong> during the second call. </p>
+<p>As mentioned above, the output produces no surprises. The output indicates 
+that the method selected for execution during each call is the method with 
+the formal argument type that matches the type of parameter passed to the 
+method. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. Test DumIntfc</p>
+<h3><strong>Explanation 6</strong></h3>
+<p><strong>Overloaded methods with reference parameters </strong></p>
+<p>This is a fairly straightforward application of method overloading. However, 
+rather than requiring method parameters of primitive types as in the previous 
+questions in this chapter, the overloaded methods in this program require 
+incoming parameters of class and interface types respectively. </p>
+<p><strong>Type Test or type DumIntfc? </strong></p>
+<p>The program defines an interface named <strong>DumIntfc</strong> and defines 
+a class named <strong>Test</strong> that implements that interface. The result 
+is that an object instantiated from the <strong>Test</strong> class can be 
+treated either as type <strong>Test</strong> or as type <strong>DumIntfc</strong>
+<em>(it could also be treated as type Object as well)</em>. </p>
+<p><strong>Two overloaded methods</strong> </p>
+<p>The program defines two overloaded methods named <strong>overLoadMthd</strong>. 
+One requires an incoming parameter of type <strong>Test</strong>, and the other 
+requires an incoming parameter of type <strong>DumIntfc</strong>. When called, 
+each of the overloaded methods prints a message indicating the type of its 
+argument. </p>
+<p><strong>Two objects of the class Test</strong> </p>
+<p>The program instantiates two objects of the class <strong>Test</strong>. It 
+assigns one of the object&#39;s references to a reference variable named <strong>a</strong>, 
+which is declared to be of type <strong>Test</strong>. </p>
+<p>The program assigns the other object&#39;s reference to a reference variable 
+named <strong>b</strong>, which is declared to be of type <strong>DumIntfc</strong>.
+<em>(Remember, both objects were instantiated from the class <strong>Test</strong>.)</em></p>
+<p><strong>No surprises here </strong></p>
+<p>Then it calls the overloaded method named <strong>overLoadMthd</strong> twice 
+in succession, passing first the reference variable of type <strong>Test</strong> 
+and then the reference variable of type <strong>DumIntfc</strong>. </p>
+<p>The program output doesn&#39;t produce any surprises. When the reference variable 
+of type <strong>Test</strong> is passed as a parameter, the overloaded method 
+requiring that type of parameter is selected for execution. When the reference 
+variable of type <strong>DumIntfc</strong> is passed as a parameter, the 
+overloaded method requiring that type of parameter is selected for execution.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<div class="a">
+				<pre>C.  float 2.14748365E9
+    float 9.223372E18
+    double 4.2
+</pre>
+</div>
+<h3><strong>Explanation 5</strong></h3>
+<p><strong>Another subtle method selection issue </strong></p>
+<p>This program illustrates a subtle issue in the automatic selection of an 
+overloaded method based on assignment compatibility. </p>
+<p>This program defines two overloaded methods named <strong>square</strong>. 
+One requires an incoming parameter of type <strong>float</strong>, and the other 
+requires an incoming parameter of type <strong>double</strong>. </p>
+<p>When called, each of these methods prints the type of its formal argument 
+along with the value of the incoming parameter as represented by its formal 
+argument type. In other words, the value of the incoming parameter is printed 
+after it has been automatically converted to the formal argument type. </p>
+<p><strong>Printout identifies the selected method </strong></p>
+<p>This printout makes it possible to determine which version is called for 
+different types of parameters. It also makes it possible to determine the effect 
+of the automatic conversion on the incoming parameter. What we are going to see 
+is that the conversion process can introduce serious accuracy problems. </p>
+<p><strong>Call the method three times</strong> </p>
+<p>The <strong>square</strong> method is called three times in succession, 
+passing values of type <strong>int</strong>, <strong>long</strong>, and <strong>
+double</strong> during successive calls. </p>
+<p><em>(Type </em><strong><em>long</em></strong><em> is a 64-bit integer type 
+capable of storing integer values that are much larger than can be stored in 
+type </em><strong><em>int</em></strong><em>. The use of this type here is 
+important for illustration of data corruption that occurs through automatic type 
+conversion.) </em></p>
+<p>The third invocation of the <strong>square</strong> method, passing a <strong>
+double</strong> as a parameter, is not particularly interesting. There is a 
+version of <strong>square</strong> with a matching argument type, and everything 
+behaves as would be expected for this invocation. The interesting behavior 
+occurs when the <strong>int</strong> and <strong>long</strong> values are passed 
+as parameters. </p>
+<p><strong>Passing an int parameter </strong></p>
+<p>The first thing to note is the behavior of the program produced by the 
+following code fragment. </p>
+
+
+
+
+<div class="a">
+				<pre>int x = 2147483647;
+square(x);</pre>
+</div>
+<p>The above fragment assigns a large integer value
+(2147483647)to the <strong>int</strong> variable and passes that variable to the <strong>
+square</strong> method. This fragment produces the following output on the 
+screen:</p>
+
+<div class="a">
+				<pre>float 2.14748365E9</pre>
+</div>
+<p>As you can see, the system selected the overloaded method that requires an 
+incoming parameter of type <strong>float</strong> for execution in this case 
+<em>(rather than the version that requires type </em> <strong><em>double</em></strong>). </p>
+<p><strong>Conversion from int to float loses accuracy
+</strong>
+</p>
+<p>Correspondingly, it converted the incoming <strong>int</strong> value to type
+<strong>float</strong>, losing one decimal digit of accuracy in the process. 
+<em>(The original </em> <strong><em>int</em></strong><em> value contained ten digits of accuracy. This 
+was approximated by a nine-digit </em> <strong><em>float</em></strong><em> value with an exponent 
+value of 9.) </em> </p>
+<p>This seems like an unfortunate choice of overloaded method. Selecting the 
+other version that requires a <strong>double</strong> parameter as input would 
+not have resulted in any loss of accuracy. </p>
+<p><strong>A more dramatic case </strong> </p>
+<p>Now, consider an even more dramatic case, as illustrated in the following 
+fragment where a very large <strong>long</strong> integer value(9223372036854775807) is passed to the <strong>square</strong> method.</p>
+	
+
+
+
+<div class="a">
+				<pre>long y = 9223372036854775807L;
+square(y);</pre>
+</div>
+<p>The above code fragment produced the following output: </p>
+
+
+
+
+<div class="a">
+				<pre>float 9.223372E18</pre>
+</div>
+<p><strong>A very serious loss of accuracy </strong> </p>
+<p>Again, unfortunately, the system selected the version of the <strong>square</strong> 
+method that requires a <strong>float</strong> parameter for execution. This 
+caused the <strong>long</strong> integer to be converted to a <strong>float</strong>. As a 
+result, the <strong>long</strong> value containing 19 digits of accuracy was converted to an 
+estimate consisting of only seven digits plus an exponent. <em>(Even if the 
+overloaded </em> <strong><em>square</em></strong><em> method requiring a </em> <strong>
+<em>double</em></strong><em> 
+parameter had been selected, the conversion process would have lost about three 
+digits of accuracy, but that would have been much better than losing twelve 
+digits of accuracy.)</em> </p>
+<p><strong>The moral to the story is ... </strong> </p>
+<p>Don&#39;t assume that just because the system knows how to automatically convert 
+your integer data to floating data, it will protect the integrity of your data. 
+Oftentimes it won&#39;t. </p>
+<p><strong>To be really safe ... </strong> </p>
+<p>To be really safe, whenever you need to convert either <strong>int</strong> 
+or <strong>long</strong> types to floating format, you should write your code in such a way as to 
+ensure that it will be converted to type <strong>double</strong> instead of type
+<strong>float</strong>. </p>
+<p>For example, the following modification would solve the problem for the
+<strong>int</strong> data and would greatly reduce the magnitude of the problem 
+for the <strong>long</strong> data. Note the use of the <strong>(double) </strong>cast to force 
+the <strong>double</strong> version of the <strong>square</strong> method to be selected for execution.
+</p>
+
+
+
+
+<div class="a">
+				<pre>int x = 2147483647;
+square((double)x);
+long y = 9223372036854775807L;
+square((double)y);</pre>
+</div>
+<p>The above modification would cause the program to produce the following 
+output: </p>
+
+
+
+
+<div class="a">
+				<pre>double 2.147483647E9 
+double 9.223372036854776E18 
+double 4.2</pre>
+</div>
+<p>This output shows no loss of accuracy for the <strong>int</strong> value, and 
+the loss of three digits of accuracy for the long value. </p>
+<p><em>(Because a </em><strong><em>long</em></strong><em> and a </em> <strong>
+<em>double</em></strong><em> both store their data in 64 
+bits, it is not possible to convert a very large </em><strong><em>long</em></strong><em> value to a
+</em> <strong><em>double</em></strong><em> 
+value without some loss in accuracy, but even that is much better than 
+converting a 64-bit </em><strong><em>long</em></strong><em> value to a 32-bit 
+</em><strong><em>float</em></strong><em> value.) </em> </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>C. 9 17.64 </p>
+<h3><strong>Explanation 4</strong></h3>
+<p>When the <strong>square</strong> method is called on an object of the <strong>
+Subclass</strong> type passing an <strong>int</strong> as a parameter, there is an exact 
+match to the required parameter type of the <strong>square</strong> method 
+defined in that class. Thus, the method is properly selected and executed.</p>
+<p>When the <strong>square</strong> method is called on an object of the <strong>
+Subclass</strong> type passing a <strong>double</strong> as a parameter, the version of 
+the <strong>square</strong> method defined in the <strong>Subclass</strong> type 
+is not selected. The <strong>double</strong> value is not assignment compatible with the required 
+type of the parameter <em>(an </em><strong><em>int</em></strong><em> is narrower 
+than a </em><strong><em>double</em></strong>). </p>
+<p>Having made that determination, the system continues searching for an 
+overloaded method with a required parameter that is either type <strong>double</strong> 
+or assignment compatible with <strong>double</strong>. It finds the version 
+inherited from <strong>Superclass</strong> that requires a <strong>double</strong> 
+parameter and calls it. </p>
+<p>The bottom line is, overloaded methods can occur up and down the inheritance 
+hierarchy.</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 3</strong></h3>
+<p><strong>Return type is not a differentiating feature </strong> </p>
+<p>This is not a subtle issue. This program illustrates the important fact that 
+the return type does not differentiate between overloaded methods having the 
+same name and formal argument list. </p>
+<p>For a method to be overloaded, two or more versions of the method must have 
+the same name and different formal arguments lists. </p>
+<p>The return type can be the same, or it can be different <em>(it can even be 
+void)</em>. It doesn&#39;t matter. </p>
+<p><strong>These two methods are not a valid overload </strong> </p>
+<p>This program attempts to define two methods named <strong>square</strong>, 
+each of which requires a single incoming parameter of type <strong>double</strong>. 
+One of the methods casts its return value to type <strong>int</strong> and 
+returns type <strong>int</strong>. The other method returns type <strong>double</strong>.
+</p>
+<p>The JDK 1.3 compiler produced the following error: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap081.java:28: square(double) is already defined 
+in Worker
+
+  public double square(double y){
+</pre>
+</div>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>C. float 9.0 double 17.64 </p>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>This program is a little more subtle</strong> </p>
+<p>Once again, the program defines two overloaded methods named <strong>square</strong>. 
+However, in this case, one of the methods requires a single incoming parameter 
+of type <strong>float</strong> and the other requires a single incoming 
+parameter of type <strong>double</strong>. <em>(Suffice it to say that the </em>
+<strong><em>float</em></strong><em> type is similar to the </em><strong><em>
+double</em></strong><em> type, but with less precision. It is a floating type, 
+not an integer type. The </em><strong><em>double</em></strong><em> type is a 
+64-bit floating type and the </em><strong><em>float</em></strong><em> type is a 
+32-bit floating type.)</em> </p>
+<p><strong>Passing a type int as a parameter </strong></p>
+<p>This program does not define a method named <strong>square</strong> that 
+requires an incoming parameter of type <strong>int</strong>. However, the 
+program calls the <strong>square</strong> method passing a value of type <strong>
+int</strong> as a parameter. </p>
+<p><strong>What happens to the int parameter?</strong> </p>
+<p>The first question to ask is, will this cause one of the two overloaded 
+methods to be called, or will it cause a compiler error? The answer is that it 
+will cause one of the overloaded methods to be called because a value of type <strong>
+int</strong> is assignment compatible with both type <strong>float</strong> 
+and type <strong>double</strong>. </p>
+<p><strong>Which overloaded method will be called?</strong> </p>
+<p>Since the type <strong>int</strong> is assignment compatible with type
+<strong>float</strong> and also with type <strong>double</strong>, the next 
+question is, which of the two overloaded methods will be called when a value of 
+type <strong>int</strong>  is passed as a parameter? </p>
+<p><strong>Learn through experimentation</strong> </p>
+<p>I placed a print statement in each of the overloaded methods to display the 
+type of that method&#39;s argument on the screen when the method is called. By 
+examining the output, we can see that the method with the <strong>float</strong> 
+parameter was called first <em>(corresponding to the parameter of type </em>
+<strong><em>int</em></strong>). Then the method with the <strong>double</strong> 
+parameter was called <em>(corresponding to the parameter of type </em><strong>
+<em>double</em></strong>). </p>
+<p><strong>Converted int to float</strong> </p>
+<p>Thus, the system selected the overloaded method requiring an incoming 
+parameter of type <strong>float</strong> when the method was called passing an
+<strong>int</strong> as a parameter. The value of type <strong>int</strong> was 
+automatically converted to type <strong>float</strong>. </p>
+<p>In this case, it wasn&#39;t too important which method was called to process the 
+parameter of type <strong>int</strong>, because the two methods do essentially 
+the same thing -- compute and return the <strong>square</strong>  of the incoming 
+value. </p>
+<p>However, if the behavior of the two methods were different from one another, 
+it could make a lot of difference, which one gets called on an assignment 
+compatible basis. <em>(Even in this case, it makes some difference. As we will 
+see later, when a very large </em><strong><em>int</em></strong><em> value is 
+converted to a </em><strong><em>float</em></strong><em>, there is some loss in 
+accuracy. However, when the same very large </em><strong><em>int</em></strong><em> 
+value is converted to a </em><strong><em>double</em></strong><em>, there is no 
+loss in accuracy.)</em> </p>
+<p><strong>Avoiding the problem </strong></p>
+<p>One way to avoid this kind of subtle issue is to avoid passing 
+assignment-compatible values to overloaded methods. </p>
+<p>Passing assignment-compatible values to overloaded methods allows the system 
+to resolve the issue through automatic type conversion. Automatic type 
+conversion doesn&#39;t always provide the best choice. </p>
+<p><strong>Using a cast to force your choice of method </strong></p>
+<p>Usually, you can cast the parameter values to a specific type before calling 
+the method and force the system to select your overloaded method of choice. </p>
+<p>For example, in this problem, you could force the method with the <strong>
+double</strong> parameter to handle the parameter of type <strong>int</strong> 
+by using the following cast when the method named <strong>square</strong>  is 
+called: </p>
+
+<p><strong>square((double)x)</strong></p>
+
+<p>However, as we will see later, casting may not be the solution in every case. </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>C. 9 17.64</p>
+<h3><strong>Explanation 1</strong></h3>
+<p><strong>What is method overloading?</strong> </p>
+<p>A rigorous definition of method overloading is very involved and won&#39;t be 
+presented here. However, from a practical viewpoint, a method is overloaded when 
+two or more methods having the same name and different formal argument lists are 
+defined in the class from which an object is instantiated, or are inherited into 
+an object by way of superclasses of that class. </p>
+<p><strong>How does the compiler select among overloaded methods?</strong> </p>
+<p>The exact manner in which the system determines which method to call in 
+each particular case is also very involved. Basically, the system determines 
+which of the overloaded methods to execute by matching the types of parameters 
+passed to the method to the types of arguments defined in the formal argument 
+list. </p>
+<p><strong>Assignment compatible matching </strong> </p>
+<p>However, there are a number of subtle issues that arise, particularly when 
+there isn&#39;t an exact match. In selecting the version of the method to call, 
+Java supports the concept of an &quot;assignment compatible&quot; match <em>(or possibly more 
+than one assignment compatible match)</em>. </p>
+<p>Briefly, assignment compatibility means that it would be allowable to assign 
+a value of the type that is passed as a parameter to a variable whose type 
+matches the specified argument in the formal argument list. </p>
+<p><strong>Selecting the best match</strong> </p>
+<p>According to <em>Java Language Reference</em> by Mark Grand, </p>
+<p><em>&quot;If more than one method 
+is compatible with the given arguments, the method that most closely matches the 
+given parameters is selected. If the compiler cannot select one of the methods 
+as a better match than the others, the method selection process fails and the 
+compiler issues an error message.&quot; </em> </p>
+<p><strong>Understanding subtleties </strong> </p>
+<p>If you plan to be a Java programmer, you must have some 
+understanding of the subtle issues involving overloaded methods, and the 
+relationship between <em>overloaded</em> methods and <em>overridden</em> methods. Therefore, the 
+programs in this chapter will provide some of that information and discuss some 
+of the subtle issues that arise. </p>
+<p>Even if you don&#39;t care about the subtle issues regarding method overloading, 
+many of those issues really involve automatic type 
+conversion. You should study these questions to learn about the problems 
+associated with automatic type conversion. </p>
+<p><strong>This program is straightforward</strong> </p>
+<p>However, there isn&#39;t anything subtle about the program for 
+<a href="#question01">Question 1</a>. This 
+program defines two overloaded methods named <strong>square</strong>. One requires a single 
+incoming parameter of type <strong>int</strong>. The other requires a single incoming parameter 
+of type <strong>double</strong>. Each method calculates and returns the square of the incoming 
+parameter. </p>
+<p>The program calls a method named <strong>square</strong> twice in succession, and displays 
+the values returned by those two invocations. In the first case, an <strong>int</strong> value is 
+passed as a parameter. This causes the method with the formal argument list of 
+type <strong>int</strong> to be called. </p>
+<p>In the second case, a <strong>double</strong> value is passed as a parameter. This causes the 
+method with the formal argument list of type <strong>double</strong> to be 
+called. </p>
+<p><strong>Overloaded methods may have different return types</strong> </p>
+<p>Note in particular that the overloaded methods have different return types. 
+One method returns its value as type <strong>int</strong> and the other returns its value as type 
+<strong>double</strong>. This is reflected in the output format for the two return vales as shown 
+below: </p>
+
+<p><strong>9 17.64</strong></p>
+
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0260</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0260: Command-Line Arguments</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Discussion_and_sample_code">Discussion</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>Although the use of command-line arguments is rare in this time of 
+	Graphical User Interfaces <em>(GUI)</em>, they are still useful for testing 
+	and debugging code. This chapter explains the use of command-line arguments 
+	in Java. </p>
+<p>Before continuing with this chapter, I recommend that you read Kjell 
+<a href="http://programmedlessons.org/Java9/chap65/ch65_10.html">Command Line Arguments</a> 
+through <a href="http://programmedlessons.org/Java9/chap65/ch65_14.html">End of the Chapter</a>.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following link to easily find and view the listing while you are reading about 
+	it.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Illustration of command-line arguments. </li>
+	</ul>
+	<h1><a name="Discussion_and_sample_code">Discussion</a></h1>
+	<p><strong>Familiar example from DOS</strong></p>
+<p>Java programs can be written to accept command-line-arguments. </p>
+<p>DOS users will be familiar with commands such as the following: </p>
+
+
+
+<div class="a"><strong>Familiar DOS command</strong>
+				<pre>
+copy fileA fileB</pre>
+</div>
+<p>In this case, <strong>copy</strong> is the name of the program to be 
+executed, while <strong>fileA</strong> and 
+<strong>fileB</strong> are command-line arguments. </p>
+<p><strong>Java syntax for command-line arguments</strong></p>
+<p>The Java syntax for supporting command-line arguments is shown below <em>(note 
+the formal argument list for the <strong>main</strong> method)</em>.</p>
+
+
+
+<div class="a"><strong>Java syntax for command-line arguments</strong>
+				<pre>
+public static void main(String[] args){
+. . . 
+}//end main method</pre>
+</div>
+	<p>In Java, 
+the formal argument list for the <strong>main</strong> method must appear in the method signature whether or not the 
+program is written to support the use of command-line arguments. If the argument 
+	isn&#39;t used, it is simply ignored.</p>
+<p><strong>Where the arguments are stored</strong></p>
+<p>The parameter <strong>args</strong> contains a reference to a one-dimensional 
+array object of type <strong>String</strong>.</p>
+<p>Each of the elements in the array <em>(including the 
+element at index zero)</em> contains a reference to an object of type <strong>
+String</strong>. Each object of type String encapsulates one command-line 
+argument.</p>
+<p><strong>The number of arguments entered by the user</strong></p>
+<p>Recall from an earlier chapter on arrays that the number of elements in a Java 
+array can be obtained from the <strong>length</strong> property of the array. 
+Therefore, the number of arguments entered by the user is equal to the value of 
+the <strong>length</strong> property. If the user didn&#39;t enter any arguments, 
+the value will be zero.</p>
+<p>Command-line arguments are separated by the space character. If you need to 
+enter an argument that contains a space, surround the entire argument with 
+quotation mark characters as in <em>&quot;My command line argument&quot;</em>.</p>
+<p>The first command-line argument is encapsulated in the <strong>String</strong> 
+object referred to by the contents of the array element at index 0, the second 
+argument is referred to by the element at index 1, etc.</p>
+<p><strong>Sample Java program</strong></p>
+<p>The sample program in <a href="#Listing_1">Listing 1</a> illustrates the use 
+of command-line arguments.</p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. Illustration of 
+				command-line arguments.
+
+<pre>
+/*File cmdlin01.java Copyright, R.G.Baldwin
+This Java application illustrates the use of Java 
+command-line arguments.
+
+When this program is run from the command line as follows:
+
+java cmdlin01 My command line arguments
+
+the program produces the following output:
+
+My
+command
+line
+arguments
+********************************************************/
+class cmdlin01 { //define the controlling class
+  public static void main(String[] args){ //main method
+    for(int i=0; i &lt; args.length; i++)
+    System.out.println( args[i] );
+  }//end main
+}//End cmdlin01 class.
+</pre>
+
+</div>
+<!--``2-->
+	<p>The output from running this program for a specific input is shown 
+in the comments at the beginning of the program.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code <a href="#Listing_1">Listing 1</a>. Compile the code and execute 
+it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	Housekeeping material 
+
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0260: Command-Line Arguments</li>
+					<li>File: Jb0260.htm</li>
+					<li>Revised: 08/05/22</li>
+				</ul>
+</div>
+
+<p>-end- </p>
+
+
+</body>
+</html>

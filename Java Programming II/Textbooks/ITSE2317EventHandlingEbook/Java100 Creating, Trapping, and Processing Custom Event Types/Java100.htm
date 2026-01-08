@@ -1,0 +1,477 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>... in Java by Richard G Baldwin</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MSOFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff">
+
+<P><!--start--></P>
+<I><H3 ALIGN="CENTER">Richard G Baldwin (512) 223-4758, </I><A HREF="mailto:baldwin@austin.cc.tx.us"><I>baldwin@austin.cc.tx.us</I></A><I>, </I><A HREF="http://www2.austin.cc.tx.us/baldwin/"><I>http://www2.austin.cc.tx.us/baldwin/</I></A></H3>
+<H2 ALIGN="CENTER"><!--title-->Event Handling in JDK 1.1, Creating, Trapping, and Processing Custom Event Types<!--endtitle--></H2>
+<P>Java Programming, Lecture Notes # 100, Revised 04/20/22 </P>
+
+<UL>
+<LI><A HREF="#preface">Preface</A> </LI>
+<LI><A HREF="#introduction">Introduction</A> </LI>
+<LI><A HREF="#essential_ingredients_for_creating_custo">Essential Ingredients for Creating Custom Event</A> </LI>
+<LI><A HREF="#discussion_of_multiple_listener_objects">Discussion of Multiple Listener Objects</A> </LI>
+<LI><A HREF="#sample_program">Sample Program</A> </LI>
+
+<UL>
+<LI><A HREF="#interesting_code_fragments">Interesting Code Fragments</A> </LI>
+<LI><A HREF="#program_listing">Program Listing</A></LI></UL>
+
+<LI><A HREF="#review">Review</A></LI></UL>
+
+<P><HR></P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="preface"></A>Preface</H2>
+</FONT><P>Students in Prof. Baldwin's <B><U>Intermediate Java Programming</B></U> classes at ACC are responsible for knowing and understanding all of the material in this chapter. </P>
+<P>JDK 1.1 was formally released on February 18, 1997. This chapter was originally written on March 27, 1997 using the software and documentation in the JDK 1.1 download package. </P>
+<P>On 2/24/99, it was confirmed that the sample program in this chapter works properly with JDK 1.2 under Win95.</P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="introduction"></A>Introduction</H2>
+</FONT><P>The purpose of this chapter is to illustrate one way that you can create your own custom event types. In other words, if you need a type of event that is not one of the standard types, it is possible for you to create a new type. Then you can cause events of that new type to be generated, trapped, and processed. </P>
+<P>This is an important aspect of Java Beans technology, so it is worth learning how to do it while we are studying the various ways of working with events. We will be referring back to this material in a future chapter on Java Beans. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="essential_ingredients_for_creating_custo"></A>Essential Ingredients for Creating Custom Event Types</H2>
+</FONT><P>Using the techniques illustrated in this program, the essential ingredients for creating, trapping, and processing a new custom event type are: </P>
+
+<UL>
+<LI>Define a class from which objects of the new custom event type can be instantiated. It should extend <B>EventObject</B>. </LI>
+<LI>Define an <B>EventListener </B>interface for the new custom event type. This interface should be <I>implemented </I>by <B>Listener </B>classes for the new type. The interface should extend <B>EventListener</B>. </LI>
+<LI>Define a <B>Listener </B>class that <I>implements </I>the interface for the new custom event type. </LI>
+<LI>Define a class for instantiating objects capable of generating the new custom event type. In this program, that class extends <B>Component</B> and is in the category of "program-generated events." </LI>
+<LI>Define a method, preferably named <B>add&lt;CustomEventNameListener</B>, that can maintain a list of <B>Listener </B>objects registered to listen for events of the new custom type (In this bare-bones program, to avoid complexity, the length of the list is limited to only one <B>Listener </B>object. See discussion in the next section.) </LI>
+<LI>Define a method that dispatches an event object of the new custom event type to all <B>Listener </B>objects registered in the above list by invoking the central event-trapping method of those <B>Listener </B>objects. This event-trapping method is the method declared in the <B>EventListener </B>interface for the new custom event type. In this program, it is named <B>customEventTrapped()</B>.</LI></UL>
+
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="discussion_of_multiple_listener_objects"></A>Discussion of Multiple Listener Objects</H2>
+</FONT><P>The <I>delegation event model</I> can support the registration of multiple <B>Listener</B> objects on a single event-generating source object. The model can also support the registration of objects from a single <B>Listener</B> class on multiple event-generating source objects. Finally, the model can support various combinations of the two. </P>
+<P>In an earlier chapter on "program-generated events", we learned how to use the <B>add()</B> method of the <B>AWTEventMulticaster</B> class to create and maintain a list of registered <B>Listener</B> objects. This method supports the capability to register multiple <B>Listener</B> objects on a single event-generating source object. When you then invoke an event dispatching method (such as <B>actionPerformed()</B>) on the reference to the list, the event is automatically dispatched to every <B>Listener</B> object in the list. </P>
+<P>Unfortunately, the <B>add()</B> method of the <B>AWTEventMulticaster</B> class cannot be used directly to maintain a list of registered <B>Listener</B> objects for new custom event types because there is no overloaded version of the <B>add()</B> method whose signature matches the new event type. </P>
+<P>One way to create and maintain such a list of registered <B>Listener</B> objects is to embark on a <I>data structures</I> programming exercise in <I>list processing</I>. Since <I>data structures</I> is not the thrust of this chapter, I decided not to take that approach. If you would like to see some example code showing how to create and maintain your own list of registered objects in a situation similar to this, see Chapter 15 of <U>Inside Java</U> by Siyan and Weaver, ISBN 1-56205-664-6, $55.00 USA/$77.95 CAN. </P>
+<P>Another approach that would probably work would be to subclass the <B>AWTEventMulticaster</B> class and overload the <B>add()</B> method. The method would have a signature that matches the new type of event Of course, the body of the overloaded method would still have to provide the list-processing code so this could become a little complicated.. If I can find the time, I may try to do that and update this chapter later. </P>
+<P>In the meantime, the primary thrust of this chapter on custom event types can be adequately illustrated by limiting the number of <B>Listener</B> objects to one object per object-registration list. Also, that limitation will probably satisfy a reasonable percentage of real-world situations. Therefore, I decided to avoid the complexity of <I>list-processing</I> code in the sample program in this chapter by limiting the number of <B>Listener</B> objects to one <B>Listener</B> object per object-registration list.. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="sample_program"></A>Sample Program</H2>
+</FONT><P>This program is designed to be compiled and run under JDK 1.1. </P>
+<P>This is a bare-bones program that illustrates the ability to <U>create, trap, and process</U> events of new custom types. </P>
+<P>The program also illustrates program-generated events, a capability that was also illustrated in an earlier sample program in a previous chapter. You should make certain that you understand that material before embarking on this chapter. </P>
+<P>A non-visual object class (named <B>NonVisual</B>) is defined. Objects of this class are capable of generating events of the new custom event type. </P>
+<P>The essential ingredients for creating, trapping, and processing events of new custom types were listed in an earlier section of this chapter. </P>
+<P>In this program, two objects of the <B>NonVisual </B>class are instantiated and one <B>CustomEventListenerClass </B>class is defined. The <B>CustomEventListenerClass</B> class <I>implements</I> the <B>CustomEventListener</B> interface and defines a method for processing <B>CustomEvent</B> objects named <B>customEventTrapped()</B>. </P>
+<P>Objects of the <B>CustomEventListenerClass</B> class are instantiated and registered to listen for custom events on both of the <B>NonVisual </B>objects mentioned above. Therefore, this program also illustrates the capability to instantiate and register <B>Listener</B> objects from a single <B>Listener</B> class on multiple event-generating source objects. </P>
+<P>The <B>NonVisual</B> object contains an instance method named <B>generateCustomEvent()</B> This method is designed to dispatch an event of the new custom event type to the <B>Listener</B> object registered on the source object by invoking the <B>customEventTrapped()</B> method of the <B>Listener</B> object. </P>
+<P>In the program, the <B>generateCustomEvent()</B> method is invoked on both of the <B>NonVisual </B>objects causing custom events to occur and to be trapped and processed by the registered <B>CustomEventListenerClass </B>objects. </P>
+<P>The processing of the event in this case is fairly simple. Identification and source information is extracted from the <B>CustomEvent</B> object that is passed as a parameter to the <B>customEventTrapped()</B> method. That information is displayed on the standard output device. </P>
+<P>The output from the program for one particular run was: </P>
+<B><PRE>Copyright, R.G.Baldwin
+customEventTrapped() method invoked on First NonVisualObject
+Source of event was NonVisual[,0,0,0x0,invalid]
+customEventTrapped() method invoked on Second NonVisualObject
+Source of event was NonVisual[,0,0,0x0,invalid]</PRE>
+</B><P>The program was tested using JDK 1.1 running under Win95. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="interesting_code_fragments"></A>Interesting Code Fragments</H3>
+</FONT><P>The first interesting code fragment is the definition of the class from which event objects of a new custom event type can be instantiated. The entire class definition is shown below. <br/>
+ </P>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>class CustomEvent extends EventObject{
+ String id;//instance variable for an object of this type
+ //--------------------------------------------------------
+ CustomEvent(Object obj, String id){//constructor
+ super(obj);//pass the Object parameter to the superclass
+ this.id = id;//save the String parameter
+ }//end constructor
+ //--------------------------------------------------------
+ //method to return the saved String parameter
+ String getCustomID(){
+ return id;
+ }//end getCustomID
+}//end class CustomEvent</PRE></TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<P ALIGN="CENTER">As you can see, this class extends <B>java.util.EventObject</B>. The constructor for an object of this class receives two parameters. The first parameter is a reference to the object that generated the event. This parameter is passed to the constructor of the superclass, <B>EventObject</B>, where it is stored for later access using the <B>getSource()</B> method of class <B>EventObject.</B> </P>
+<P>The second parameter is <B>String </B>identification information provided to the constructor when the <B>CustomEvent</B> object is instantiated. In this program, the <B>String </B>information is simply a <B>String </B>object stored as an instance variable in the source object when it was instantiated. You could pass virtually any identifying or command information in this manner. The <B>String </B>information is stored as an instance variable in the <B>CustomEvent</B> object. </P>
+<P>The class also provides an accessor method that returns the <B>String</B> stored as an instance variable in the object. </P>
+<P>The next interesting code fragment is the definition of a new <B>Listener</B> interface named <B>CustomEventListener</B> that extends <B>EventListener</B>. This interface declares a method named <B>customEventTrapped()</B> which is the primary event processing method of <B>Listener</B> objects of this class. It is through this method that events are dispatched to the listener objects. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>interface CustomEventListener extends EventListener{
+ void customEventTrapped(CustomEvent e);
+}</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next interesting code fragment implements the above interface and defines a <B>Listener</B> class for events of this new custom type. It is a <I>plain-vanilla </I><B>Listener </B>class that overrides the <B>customEventTrapped()</B> method declared in the interface. The overridden method uses the accessor methods to access and display the <B>String</B> data and the identification of the source object from the <B>CustomEvent</B> object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>class CustomEventListenerClass
+ implements CustomEventListener{
+ public void customEventTrapped(CustomEvent e){
+ System.out.println(
+ "customEventTrapped() method invoked on " +
+ e.getCustomID());
+ System.out.println("Source of event was " +
+ e.getSource());
+ }//end customEventTrapped
+}//end class CustomEventListenerClass</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The remaining interesting code fragments come from the definition of a class designed to generate events of this new custom event type. This class is very similar to the class developed in a previous chapter on "program-generated events." As mentioned earlier, this bare-bones version can only support one <B>Listener</B> object registered on each event-generating source object. </P>
+<P>We start with the beginning of the class definition that shows that this class extends <B>Component</B> and maintains two instance variables. One of the instance variables is the <B>String</B> <B>ID</B> information initialized by the constructor. The other instance variable is a reference to the <B>Listener</B> object registered on the source object. The constructor code is too simple to merit display in this section. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>class NonVisual extends Component {
+ String ID; // The ID of this object
+ //Reference to single Listener object
+ CustomEventListenerClass customListener;</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next interesting code fragment is the code that actually registers a <B>Listener</B> object. This is very similar to the code in the previous chapter except that this code doesn't use the <B>AWTEventMulticaster.add()</B> method to create and maintain a list of registered <B>Listener</B> objects. This code supports only one registered <B>Listener</B> object and contains logic to terminate the program if an attempt is made to register more than one <B>Listener</B> object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>public void addCustomEventListener(
+ CustomEventListenerClass listener){
+ //Do not attempt to add more than one Listener object.
+ if(customListener == null)
+ customListener = listener;//one listener only
+ else{
+ System.out.println(
+ "No support for multiple Listener objects");
+ //terminate on attempt to register multiple listeners
+ System.exit(0);
+ }
+ }//end addCustomEventListener()</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next interesting code fragment is the method that actually dispatches an event of the new custom type. In this case, the dispatching is accomplished by invoking the <B>customEventTrapped()</B> method of the registered <B>Listener</B> object and passing an object of the <B>CustomEvent</B> type as a parameter. This is also nearly identical to code in the previous chapter on "program-generated events" and is a typical way of dispatching events in JDK 1.1. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> public void generateCustomEvent() {
+ customListener.customEventTrapped(
+ new CustomEvent(this, ID));
+ }//end generateCustomEvent</PRE></TD>
+</TR>
+</TABLE>
+
+<P>These code fragments have illustrated the <U>essential ingredients</U> of creating, trapping, and processing new custom event types. A complete listing of the program is contained in the next section. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="program_listing"></A>Program Listing</H3>
+</FONT><P>This section contains a complete listing of the program. Refer to previous sections for an operational description of the program. <br/>
+ </P>
+<P ALIGN="CENTER"><CENTER><TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Event26.java Copyright, R.G.Baldwin
+This program is designed to be compiled and run under JDK 1.1
+
+This is a bare-bones program that illustrates the ability to create, trap,
+and process events of new custom types.  
+
+The program also illustrates program-generated events, but this capability 
+was also illustrated in an earlier sample program.  It would be good to 
+understand that material before tackling this lesson.
+
+A non-visual object class (named NonVisual) is defined.  Objects of 
+this class are capable of generating Custom events.  
+
+The essential ingredients for creating, trapping, and processing events of
+new custom types, as used in this example program are:
+1.  Define a class from which objects of the new custom event type can 
+be instantiated.  It should extend EventObject.
+2.  Define an EventListener interface for the new custom event type to be 
+implemented by Listener classes. It should extend EventListener.
+3.  Define a Listener class that implements the interface for the new 
+custom event type.
+4.  Define a class for instantiating objects capable of generating the 
+new custom event type. In this program, that class extends Component.
+5.  Define a method, preferably named add<CustomEvent>Listener, that can 
+maintain a list of Listener objects registered to listen for events of the 
+new custom type on another object (In this bare-bones program, to avoid
+complexity, the length of the list is limited to only one Listener object.)
+6.  Define a method that dispatches an event object of the new custom 
+event type to all Listener objects registered in the above list by 
+invoking the central event-trapping method of those Listener objects.  
+This event-trapping method is the method declared in the EventListener
+interface for the new custom event type.  In this program, it is named
+customEventTrapped().
+
+In this program, two objects of the NonVisual class are instantiated.
+
+One CustomEventListener class is defined.  An object of this class is 
+instantiated and registered to listen for Custom events on both of the 
+NonVisual objects mentioned above.
+
+The generateCustomEvent() method is invoked on each the NonVisual objects 
+causing Custom events to occur and to be trapped and processed by the 
+CustomEventListener objects.  
+
+The output from the program for one particular run was:
+
+Copyright, R.G.Baldwin
+customEventTrapped() method invoked on First NonVisualObject
+Source of event was NonVisual[,0,0,0x0,invalid]
+customEventTrapped() method invoked on Second NonVisualObject
+Source of event was NonVisual[,0,0,0x0,invalid]
+
+The program was tested using JDK 1.1 running under Win95.
+*/
+//=======================================================================
+import java.awt.*;
+import java.awt.event.*;
+import java.util.EventListener;
+import java.util.EventObject;
+//=======================================================================
+
+public class Event26 {
+  public static void main(String[] args){
+    new Event26();//instantiate an object of this type
+  }//end main
+//-------------------------------------------------------------------------
+  public Event26(){//constructor
+    System.out.println("Copyright, R.G.Baldwin");
+    NonVisual firstNonVisualObject = new NonVisual("First NonVisualObject");
+    firstNonVisualObject.addCustomEventListener(new CustomEventListenerClass());
+    firstNonVisualObject.generateCustomEvent();//create an event
+
+    NonVisual secondNonVisualObject = new NonVisual("Second NonVisualObject");
+    secondNonVisualObject.addCustomEventListener(new CustomEventListenerClass());
+    //The following statement causes the program to terminate with the message
+    // "No support for multiple Listener objects" because it violates the 
+    // restriction that this bare-bones program only allows one Listener object
+    // to be registered on each NonVisual object.  Therefore, the statement
+    // has been disabled by making it a comment. It is included here for 
+    // illustration purposes only.
+    //secondNonVisualObject.addCustomEventListener(new CustomEventListenerClass());
+    secondNonVisualObject.generateCustomEvent();//create an event
+    
+  }//end constructor
+}//end class Event26
+//========================================================================
+
+//Class to define a new type of event
+class CustomEvent extends EventObject{
+  String id;//instance variable for an object of this type
+  //---------------------------------------------------------------------
+  CustomEvent(Object obj, String id){//constructor
+    super(obj);//pass the Object parameter to the superclass
+    this.id = id;//save the String parameter
+  }//end constructor
+  //---------------------------------------------------------------------
+  String getCustomID(){//method to return the saved String parameter
+    return id;
+  }//end getCustomID
+}//end class CustomEvent
+//========================================================================
+
+//Define interface for the new type of event listener
+interface CustomEventListener extends EventListener{
+  void customEventTrapped(CustomEvent e);
+}//
+//========================================================================
+
+//Listener class to respond to custom events
+class CustomEventListenerClass implements CustomEventListener{
+  public void customEventTrapped(CustomEvent e){
+    System.out.println(
+      "customEventTrapped() method invoked on " + e.getCustomID());
+    System.out.println("Source of event was " + e.getSource());      
+  }//end customEventTrapped
+}//end class CustomEventListenerClass
+//========================================================================
+
+//Class to create object capable of generating Custom events.
+// Note:  This is a bare-bones version which can only support a single
+// Listener object for the Custom event type.
+class NonVisual extends Component {
+  String ID; // The ID of this object
+  CustomEventListenerClass customListener;//Reference to single Listener object
+  //-----------------------------------------------------------------------
+  public NonVisual(String ID) {//Constructs a NonVisual object
+      this.ID = ID;
+  }//end constructor
+  //-----------------------------------------------------------------------
+  public void addCustomEventListener(CustomEventListenerClass listener) {
+    //Do not attempt to add more than one Listener object.
+    if(customListener == null) customListener = listener;//one listener only
+    else{
+      System.out.println("No support for multiple Listener objects");
+      System.exit(0);//terminate on attempt to register multiple Listener objects
+    }
+  }//end addCustomEventListener()
+  //-----------------------------------------------------------------------
+  public void generateCustomEvent() {
+    customListener.customEventTrapped(
+        new CustomEvent(this, ID));
+  }//end generateCustomEvent
+}//end class NonVisual
+//===========================================================
+
+
+
+//=========================================================</PRE>
+
+</TD>
+</TR>
+</TABLE>
+</CENTER></P>
+
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="review"></A>Review</H2>
+</FONT><P>Q - Write a Java application that meets the specifications given below. </P>
+<FONT SIZE=2 COLOR="#0000ff"><P>A - See solution below.</FONT><br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE><FONT COLOR="#0000ff">/*File SampProg130.java from chapter 100
+Copyright, R.G.Baldwin
+
+Without viewing the solution that follows, write a Java
+application that uses the definition given for the class
+named SampProg130 and produces the output shown below.
+
+<B>Copyright, R.G.Baldwin
+CustomEvent[source=ClassA[,0,0,0x0,invalid]]
+on ClassA Object
+CustomEvent[source=ClassB[,0,0,0x0,invalid]]
+on ClassB Object</B>
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=========================================================
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
+//=========================================================
+
+public class SampProg130 {
+ public static void main(String[] args){
+ new SampProg130();//instantiate an object of this type
+ }//end main
+//---------------------------------------------------------
+ public SampProg130(){//constructor
+ System.out.println("Copyright, R.G.Baldwin");
+
+ ClassA classAObject = new ClassA("ClassA Object");
+ classAObject.addCustomEventListener(
+ new CustomEventListenerClass());
+ classAObject.generateCustomEvent();//create an event
+
+ ClassB classBObject = new ClassB("ClassB Object");
+ classBObject.addCustomEventListener(
+ new CustomEventListenerClass());
+ classBObject.generateCustomEvent();//create an event
+
+ }//end constructor
+}//end class SampProg130
+//=========================================================
+
+//One class to create object capable of generating Custom
+// events. Note: This is a bare-bones version which can
+// only support a single Listener object for the Custom
+// event type.
+class ClassA extends Component {
+ String ID; // The ID of this object
+ //Reference to single Listener object
+ CustomEventListenerClass customListener;
+ //-------------------------------------------------------
+ public ClassA(String ID) {//Constructs a ClassA object
+ this.ID = ID;
+ }//end constructor
+ //-------------------------------------------------------
+ public void addCustomEventListener(
+ CustomEventListenerClass listener) {
+ //Do not attempt to add more than one Listener object.
+ if(customListener == null) customListener = listener;
+ else{
+ System.out.println(
+ "No support for multiple Listener objects");
+ //terminate on attempt to register multiple Listeners
+ System.exit(0);
+ }//end else
+ }//end addCustomEventListener()
+ //-------------------------------------------------------
+ public void generateCustomEvent() {
+ customListener.customEventTrapped(
+ new CustomEvent(this, ID));
+ }//end generateCustomEvent
+}//end class ClassA
+//=========================================================
+
+
+//Another Class to create object capable of generating
+// Custom events. Note: This is a bare-bones version which
+// can only support a single Listener object for the Custom
+// event type.
+class ClassB extends Component {
+ String ID; // The ID of this object
+ //Reference to single Listener object
+ CustomEventListenerClass customListener;
+ //-------------------------------------------------------
+ public ClassB(String ID) {//Constructs a ClassB object
+ this.ID = ID;
+ }//end constructor
+ //-------------------------------------------------------
+ public void addCustomEventListener(
+ CustomEventListenerClass listener) {
+ //Do not attempt to add more than one Listener object.
+ if(customListener == null) customListener = listener;
+ else{
+ System.out.println(
+ "No support for multiple Listener objects");
+ //terminate on attempt to register multiple Listeners
+ System.exit(0);
+ }//end else
+ }//end addCustomEventListener()
+ //-------------------------------------------------------
+ public void generateCustomEvent() {
+ customListener.customEventTrapped(
+ new CustomEvent(this, ID));
+ }//end generateCustomEvent
+}//end class ClassB
+//=========================================================
+
+//Class to define a new type of event
+class CustomEvent extends EventObject{
+ String id;//instance variable for an object of this type
+ //-------------------------------------------------------
+ CustomEvent(Object obj, String id){//constructor
+ //pass the Object parameter to the superclass
+ super(obj);
+ this.id = id;//save the String parameter
+ }//end constructor
+ //-------------------------------------------------------
+ //method to return the saved String parameter
+ String getCustomID(){
+ return id;
+ }//end getCustomID
+}//end class CustomEvent
+//=========================================================
+
+//Define interface for the new type of event listener
+interface CustomEventListener extends EventListener{
+ void customEventTrapped(CustomEvent e);
+}//
+//=========================================================
+
+//Listener class to respond to custom events
+class CustomEventListenerClass
+ implements CustomEventListener{
+ public void customEventTrapped(CustomEvent e){
+ System.out.println("" + e.toString());
+ System.out.println("on " + e.getCustomID());
+ }//end customEventTrapped
+}//end class CustomEventListenerClass
+//=========================================================</PRE></FONT></TD>
+</TR>
+</TABLE>
+
+<P>-end-<!--end--></P></BODY>
+</HTML>

@@ -1,0 +1,938 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0090</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0090: The super keyword, final keyword, and static methods</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1, 2</li>
+	<li>D. 5, 10</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap100{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    Subclass obj = new Subclass();
+    System.out.println(obj.getX() + 
+                    &quot;, &quot; + obj.getY());
+  }//end makeObj()
+}// end class 
+
+class Superclass{
+  private int x = 1;
+    
+  public Superclass(){
+    x = 5;
+  }//end constructor
+  
+  public int getX(){
+    return x;
+  }//end getX()
+}//end Superclass
+
+class Subclass extends Superclass{
+  private int y = 2;
+  
+  public Subclass(){
+    super();
+    y = 10;
+  }//end constructor
+  
+  public int getY(){
+    return y;
+  }//end getY()
+}//end Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>?</p><ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1, 2</li>
+	<li>D. 5, 2</li>
+	<li>E. 5, 10</li>
+	<li>F. 20, 10</li>
+	<li>G. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap101{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    Subclass obj = new Subclass();
+    System.out.println(obj.getX() + 
+                    &quot;, &quot; + obj.getY());
+  }//end makeObj()
+}// end class 
+
+class Superclass{
+  private int x = 1;
+    
+  public Superclass(){
+    x = 5;
+  }//end constructor
+  
+  public Superclass(int x){
+    this.x = x;
+  }//end constructor
+  
+  public int getX(){
+    return x;
+  }//end getX()
+}//end Superclass
+
+class Subclass extends Superclass{
+  private int y = 2;
+  
+  public Subclass(){
+    super(20);
+    y = 10;
+  }//end constructor
+  
+  public int getY(){
+    return y;
+  }//end getY()
+}//end Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>?</p><ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap102{
+  public static void main(
+                        String args[]){
+    new Worker().finalStuff();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void finalStuff(){
+    final int x = 5;
+    x = 10;
+    System.out.println(x);
+  }//end finalStuff()
+}// end class 
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>?</p><ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap103{
+  public static void main(
+                        String args[]){
+    new Worker().finalStuff();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void finalStuff(){
+    public final int x = 5;
+    System.out.println(x);
+  }//end finalStuff()
+}// end class 
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap104{
+  public static void main(
+                        String args[]){
+    new Worker().finalStuff();
+  }//end main()
+}//end class definition
+
+class Worker{
+  void finalStuff(){
+    final int x = 5;
+    System.out.println(x);
+  }//end finalStuff()
+}// end class 
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 3.141592653589793</li>
+	<li>D. 3.1415927</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap105{
+  public static void main(
+                        String args[]){
+    System.out.println(Worker.fPi);
+  }//end main()
+}//end class definition
+
+class Worker{
+  public static final float fPi = 
+                        (float)Math.PI;
+}// end class 
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A static method</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap106{
+  public static void main(
+                        String args[]){
+    Worker.staticMethod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public static void staticMethod(){
+    System.out.println(
+                    &quot;A static method&quot;);
+  }//end staticMethod()
+    
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap107{
+  public static void main(
+                        String args[]){
+    Worker.staticMethod();
+  }//end main()
+}//end class Ap107
+
+class Worker{
+  private int x = 5;
+  public static void staticMethod(){
+    System.out.println(x);
+  }//end staticMethod()
+    
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap108{
+  public static void main(
+                        String args[]){
+    Worker.staticMethod();
+  }//end main()
+}//end class Ap108
+
+class Worker{
+  private int x = 5;
+  public static void staticMethod(){
+    System.out.println(
+                  new Worker().getX());
+  }//end staticMethod()
+    
+  public int getX(){
+    return x;
+  }//end getX()
+    
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>Which output shown below is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>?</p>
+<div class="a">
+				<pre>A.  Compiler Error
+B.  Runtime Error
+C.  38.48451000647496
+    12.566370614359172
+D.  None of the above</pre>
+</div>
+`
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap109{
+  public static void main(String args[]){
+    System.out.println(Worker.area(3.5));
+    System.out.println(Worker.area(2.0));
+    System.out.println();
+  }//end main()
+}//end class Ap109
+
+class Worker{
+  public static double area(double r){
+    return r*r*Math.PI;
+  }//end area()
+   
+}// end class
+</pre>
+
+</div>
+
+
+	
+
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0090: The super keyword, 
+				final keyword, and static methods</li>
+				<li>File: Ap0090.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/05/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+
+<div class="a">
+				<pre>C.  38.48451000647496
+    12.566370614359172</pre>
+</div>
+
+<h3><strong>Explanation 10</strong></h3>
+<p><strong>Use static methods sparingly </strong></p>
+<p>Good object-oriented design dictates that <strong>static</strong> methods be 
+used sparingly, and only in those situations where they are appropriate. As you 
+might guess, not all authors will agree on the issue of appropriateness in all 
+cases. </p>
+<p><strong>Is this an appropriate use of a static method? </strong></p>
+<p>However, I believe that most authors will agree that this program illustrates 
+an appropriate use of a <strong>static</strong> method. </p>
+<p><strong>No persistence requirement </strong></p>
+<p>This <strong>static</strong> method computes and returns a result on a 
+non-persistent basis. That is to say, there is no attempt by the <strong>static</strong> 
+method to save any historical information from one call of the method to the 
+next. <em>(Of course, the method that calls the </em><strong><em>static</em></strong><em> 
+method can save whatever it chooses to save.) </em></p>
+<p><strong>Avoiding wasted computer resources </strong></p>
+<p>In situations such as this, it would often be a waste of computer resources 
+to require a program to instantiate an object and call an instance method on 
+that object just to be able to delegate a non-persistent computation to that 
+method. <em>(This is just about as close to a global method as you can get in 
+Java.) </em></p>
+<p><strong>Computing the area of a circle </strong></p>
+<p>In this program, the <strong>Worker</strong> class provides a <strong>static</strong> method 
+named <strong>area</strong> that receives a <b>double</b> parameter representing the radius of 
+a circle. It computes and returns the area of the circle as a <b>double</b> 
+value. The <strong>static</strong> method named area is shown in the following 
+code fragment. </p>
+<div class="a">
+				<pre>class Worker{
+  public static double area(double r){
+    return r*r*Math.PI;
+  }//end area()
+   
+}// end class</pre>
+</div>
+	<p>As a driver, the <strong>main</strong> method of the controlling class 
+	calls the <strong>area</strong> method twice in succession, passing 
+	different values for the radius of a circle. In each case, the <strong>main</strong> 
+	method receives and displays the value that is returned by the <strong>area</strong> 
+	method representing the area of a circle. </p>
+<p><strong>Static methods in the class libraries </strong></p>
+<p>If you examine the Java API documentation carefully, you will find numerous 
+examples of <strong>static</strong> methods that produce and return something on 
+a non-persistent basis. <em>(Again, non-persistent in this context means that no 
+attempt is made by the </em><strong><em>static</em></strong><em> method to store 
+any historical information. It does a job, forgets it, and goes on to the next 
+job when it is called again.) </em></p>
+<p><strong>Factory methods</strong> </p>
+<p>For example, the alphabetical index of the JDK 1.3 API lists several dozen <strong>static</strong>  methods named <strong>getInstance</strong>, which are 
+defined in different classes. These methods, which usually produce and return a 
+reference to an object, are often called <em>factory methods</em>. </p>
+<p>Here is the text from the API documentation describing one of them:</p>
+<div class="a">
+				<p>getInstance(int)</p>
+				<p>Static method in class java.awt.AlphaComposite</p>
+				<p>Creates an AlphaComposite object with the specified rule.</p>
+</div>
+
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>C. 5 </p>
+<h3><strong>Explanation 9</strong></h3>
+<p><strong>Going through a reference to ...</strong> </p>
+<p>This program illustrates a rather convoluted methodology by which a <strong>
+static</strong> method can gain access to an instance member of an object. </p>
+<div class="a">
+				<pre>class Worker{
+  private int x = 5;
+  public static void staticMethod(){
+    System.out.println(
+                  new Worker().getX());
+  }//end staticMethod()
+    
+  public int getX(){
+    return x;
+  }//end getX()
+    
+}// end class</pre>
+</div>
+	<p>In this example, the <strong>static</strong> method calls a getter method 
+	on a reference to an object to gain access to an instance variable belonging 
+	to that object. This is what I meant in the discussion in the previous 
+	question when I said <em>&quot;going through a reference to an object of the 
+	class.&quot; </em></p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 8</strong></h3>
+<p><strong>A static method cannot access ... </strong></p>
+<p>A <strong>static</strong> method cannot access non-static or instance members 
+of its class without going through a reference to an object of the class. </p>
+<p>In this program, the <strong>static</strong> method attempts to directly 
+access the instance variable named <strong>x</strong>. As a result, JDK 1.3 
+produces the following compiler error: </p>
+<div class="a">
+				<pre>Ap107.java:17: non-static variable x
+cannot be referenced from a static context
+    System.out.println(x);
+</pre>
+</div>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>C. A static method </p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>Using a static method</strong> </p>
+<p>This is a very straightforward example of the use of a <strong>static</strong> 
+method. </p>
+<p>When a method is declared <strong>static</strong>, it is not necessary to 
+instantiate an object of the class containing the method in order to access the 
+method <em>(although it is possible to do so unless the class is declared 
+abstract)</em>. All that is necessary to access a <strong>public</strong> <strong>static</strong> method is to refer to the name 
+of the class in which it is defined and the name of the method joined by a 
+period. </p>
+<p><em>(A method that is declared </em><strong><em>static</em></strong><em> is 
+commonly referred to as a class method. If the method is not declared </em>
+<strong><em>public</em></strong><em>, it may not be accessible from your code.)</em></p>
+<p><strong>Accessing the static method </strong></p>
+<p>This is illustrated by the following fragment from the program, with much of 
+the code deleted for brevity. </p>
+<div class="a">
+				<pre>//...
+        Worker.staticMethod();
+  //...
+
+class Worker{
+  public static void staticMethod(){
+    //...
+  }//end staticMethod()
+    
+}// end class</pre>
+</div>
+	<p>The class named <strong>Worker</strong> defines a <strong>public</strong> <strong>static</strong> 
+method named <strong>staticMethod</strong>. A statement in the <strong>main</strong> 
+method of the controlling class calls the method by referring to the name of the 
+class and the name of the method joined by a period. </p>
+<p><strong>When should you use static methods?</strong> </p>
+<p>Static methods are very useful as utility methods <em>(getting the absolute 
+value of a number, for example)</em>. </p>
+<p>In my opinion, you should almost never use a <strong>static</strong> method 
+in any circumstance that requires the storage and use of data from one call of 
+the method to the next. In other words, a <strong>static</strong> method may be 
+appropriate for use when it performs a specific task that is completed each time 
+it is called without the requirement for data to persist between calls. </p>
+<p>The <strong>Math</strong> class contains many good examples of the use of
+<strong>static</strong> 
+methods, such as <strong>abs</strong>, <strong>acos</strong>, <strong>asin</strong>, 
+etc.</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>D. 3.1415927 </p>
+<h3><strong>Explanation 6</strong></h3>
+<p><strong>Using a public</strong> <strong>static</strong> <strong>final member 
+variable</strong> </p>
+<p>The class named <strong>Worker</strong> declares and initializes a member 
+variable named <strong>fPi</strong>. </p>
+<p><strong>final</strong> </p>
+<p>Because it is declared <strong>final</strong>, it is not possible to write 
+code that will change its value after it has been initialized. </p>
+<p><strong>static</strong> </p>
+<p>Because it is declared <strong>static</strong>, it can be accessed without a 
+requirement to instantiate an object of the <strong>Worker</strong> class. All 
+that is necessary to access the variable is to refer to the name of the class 
+and the name of the variable joined by a period. </p>
+<p>Because it is <strong>static</strong>, it can also be accessed by <strong>
+static</strong> methods. </p>
+<p><strong>public</strong> </p>
+<p>Because it is declared <strong>public</strong>, it can be accessed by any 
+code in any method in any object that can locate the class. </p>
+<p><b>Type float is less precise than type double</b> </p>
+<p>Because the initialized value is cast from the type <b>double</b> that is 
+returned by <strong>Math.PI</strong> to type <b>float</b>, an 8-digit 
+approximation is stored in the variable named <strong>fPi</strong>. </p>
+<p>The <b>double</b> value returned by <strong>Math.PI</strong> is 
+3.141592653589793</p>
+<p>The cast to type <b>float</b> reduces the precision down to 3.1415927 </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>C. 5 </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><strong>Using a final local variable </strong></p>
+<p>Well, I finally got rid of all the bugs. This program uses a <strong>final</strong> 
+local variable properly. The program compiles and executes without any problems.
+</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 4</strong></h3>
+<p>The purpose of this question is to see if you are still awake. </p>
+<p><strong>What caused the compiler error?</strong> </p>
+<p>The statement that caused the compiler error in this program is shown below. 
+Now that you know that there was a compiler error, and you know which statement 
+caused it, do you know what caused it? </p>
+<div class="a">
+				<pre>    public final int x = 5;</pre>
+</div>
+<p><strong>Using public</strong> <strong>static</strong> <strong>final 
+member variables </strong> 
+</p>
+<p>As I mentioned in an earlier question, the <strong>final</strong> keyword can be applied 
+either to local variables or to member variables. When applying the <strong>
+final</strong> keyword to member variables, it is common practice to declare 
+them to be both <strong>public</strong> and <strong>static</strong> in order to 
+make them as accessible as possible. For example, the math class has a <strong>
+final</strong> variable that is described as follows: </p>
+<div class="a">
+				<p>public static final double PI</p>
+				<p>The double value that is closer than any other to pi, the ratio of the circumference of a circle to its diameter.
+</p>
+</div>
+<p><strong>The constant named PI</strong> </p>
+<p>You may recognize the constant named <strong>PI</strong> from your high school geometry class.
+</p>
+<p>Whenever you need the value for the constant <strong>PI</strong>, you shouldn&#39;t have to 
+instantiate an object just to get access to it. Furthermore, your class should 
+not be required to have any special package relationship with the <strong>Math</strong> class 
+just to get access to <strong>PI</strong>. </p>
+<p><strong>The good news ...</strong> </p>
+<p>Because <strong>PI</strong> is declared to be both <strong>public</strong> and <strong>static</strong> 
+in the <strong>Math</strong> class, it is readily available to any code in any method in any Java 
+program that has access to the standard Java class library. </p>
+<p><strong>How is PI accessed? </strong> </p>
+<p><strong>PI</strong> can be accessed by using an expression as simple as that 
+shown below, which consists simply of the name of the class and the name of 
+the variable joined by a period <em>(Math.PI)</em>. </p>
+<div class="a">
+				<pre>double piRSquare = Math.PI * R * R;</pre>
+</div>
+<p><strong>No notion of public local variables </strong> </p>
+<p>As a result of the above, many of you may have become accustomed to 
+associating the keyword <strong>public</strong> with the keyword <strong>final</strong>. 
+However, if you missed this question and you have read the explanation to this 
+point, you must also remember that there is no notion of <strong>public</strong> 
+or <strong>private</strong> for local variables. Therefore, when this program was compiled under 
+JDK 1.3, a compiler error was produced. That compiler error is partially 
+reproduced below: </p>
+<div class="a">
+				<pre>Ap103.java:16: illegal start of
+expression
+    public final int x = 5;
+</pre>
+</div>
+	<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 3</strong></h3>
+<p>The <strong>final</strong> keyword </p>
+<p>The <strong>final</strong> keyword can be applied in a variety of ways in 
+Java. This includes: </p>
+<ul>
+	<li>final parameters</li>
+	<li>final methods</li>
+	<li>final classes</li>
+	<li>final variables <em>(constants)</em></li>
+</ul>
+<p><strong>Behaves like a constant </strong> </p>
+<p>When the <strong>final</strong> keyword is applied to a variable in Java, that causes the 
+variable to behave like a constant. In other words, the value of the variable 
+must be initialized when it is declared, and it cannot be changed thereafter 
+<em>(see the exception discussed below)</em>. </p>
+<p><strong>Apply to local or member variables </strong> </p>
+<p>The <strong>final</strong> keyword can be applied to either local variables or member 
+variables. <em>(In case you have forgotten, local variables are declared inside a 
+method or constructor, while member variables are declared inside a class, but outside a 
+method.) </em> </p>
+<p><strong>So, what is the problem? </strong> </p>
+<p>The problem with this program is straightforward. As shown in the following 
+code fragment, after declaring a <strong>final</strong> local variable and initializing its value 
+to 5, the program attempts to change the value stored in that variable to 10. 
+This is not allowed. </p>
+<div class="a">
+				<pre>    final int x = 5;
+    x = 10;</pre>
+</div>
+<p><strong>A compiler error</strong> </p>
+<p>JDK 1.3 produces the following error message: </p>
+<div class="a">
+	
+<pre>Ap102.java:17: cannot assign a value to final variable x
+    x = 10;</pre>
+</div>
+<p><strong>An interesting twist - blank finals</strong></p>
+<p>An interesting twist of the use of the <strong>final</strong> keyword with local variables is 
+discussed below. </p>
+<p><strong>Background information</strong> </p>
+<p>Regardless of whether or not the local variable is declared <strong>final</strong>, the 
+compiler will not allow you to access the value in a local variable if that 
+variable doesn&#39;t contain a value. This means that you must always either 
+initialize a local variable or assign a value to it before you can access it.
+</p>
+<p><strong>So, what is the twist?</strong> </p>
+<p>Unlike <strong>final</strong> member variables of a class, the Java compiler and runtime 
+system do not require you to initialize a <strong>final</strong> local variable when you declare 
+it. Rather, you can wait and assign a value to it later. <em>(Some authors refer 
+to this as a blank final.)</em> However, once you have 
+assigned a value to a <strong>final</strong> local variable, you cannot change that value later.
+</p>
+<p><strong>The bottom line</strong> </p>
+<p>Whether you initialize the <strong>final</strong> local variable when you declare it, or 
+assign a value to it later, the result is the same. It behaves as a constant. 
+The difference is that if you don&#39;t initialize it when you declare it, you 
+cannot access it until after you assign a value to it. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>F. 20, 10 </p>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>Calling a parameterized constructor </strong></p>
+<p>This is a relatively straightforward implementation of the use of the <strong>
+super</strong> keyword in a subclass constructor to call a parameterized 
+constructor in the superclass. </p>
+<p>The interesting code in the program is highlighted in the following fragment. 
+Note that quite a lot of code was deleted from the fragment for brevity. </p>
+<div class="a">
+				<pre>class Superclass{
+  //...
+  
+  public Superclass(int x){
+    //...
+  }//end constructor
+  
+  //...
+}//end Superclass
+
+class Subclass extends Superclass{
+  //...
+  
+  public Subclass(){
+    super(20);
+    //...
+  }//end constructor
+  
+  //...
+}//end Subclass</pre>
+</div>
+	<p><strong>Using the super keyword</strong> </p>
+<p>The code that is of interest is the use of <strong>super(20)</strong> as the 
+first executable statement in the <strong>Subclass</strong> constructor to call 
+the parameterized constructor in the superclass, passing a value of 20 as a 
+parameter to the parameterized constructor. </p>
+<p>Note that when the <strong>super</strong> keyword is used in this fashion in 
+a constructor, it must be the <strong><em>first</em></strong> executable 
+statement in the constructor.</p>
+<p>As before, the program plays around a little with initial values for instance 
+variables to see if you are alert, but the code that is really of interest is 
+highlighted in the above fragment. </p>
+
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>D. 5, 10 </p>
+<h3><strong>Explanation 1</strong></h3>
+<p><strong>The execution of constructors </strong></p>
+<p>The purpose of this question and the associated answer is to illustrate 
+explicitly what happens automatically by default regarding the execution of 
+constructors. </p>
+<p><strong>The Subclass constructor </strong></p>
+<p>This program defines a class named <strong>Subclass</strong>, which extends a 
+class named <strong>Superclass</strong>. A portion of the <strong>Subclass</strong> 
+definition, including its <em>noarg</em> constructor is shown in the following 
+code fragment. <em>(The class also defines a getter method, which was omitted 
+here for brevity.) </em></p>
+<div class="a">
+				<pre>class Subclass extends Superclass{
+  private int y = 2;
+  
+  public Subclass(){
+    super();
+    y = 10;
+  }//end constructor
+  
+  //...
+}//end Subclass</pre>
+</div>
+	<p><strong>The super keyword </strong></p>
+<p>The important thing to note in the above fragment is the statement containing 
+the keyword <strong>super</strong>. </p>
+<p>The <strong>super</strong> keyword has several uses in Java. As you might 
+guess from the word, all of those uses have something to do with the superclass 
+of the class in which the keyword is used. </p>
+<p><strong>Invoke the superclass constructor </strong> </p>
+<p>When the <strong>super</strong> keyword <em>(followed by a pair of matching parentheses)</em> appears 
+as the first executable statement in a constructor, this is an instruction to 
+the runtime system to first call the constructor for the superclass, and then 
+come back and finish executing the code in the constructor for the class to 
+which the constructor belongs. </p>
+<p><strong>Call the </strong> <em><strong>noarg</strong></em><strong> superclass constructor 
+</strong> </p>
+<p>If the parentheses following the <strong>super</strong> keyword are empty, this is an 
+instruction to call the <em>noarg</em> constructor for the superclass. </p>
+<p><strong>Invoke a parameterized superclass constructor</strong> </p>
+<p>If the parentheses are not empty, this is an instruction to find and call a 
+parameterized constructor in the superclass whose formal arguments match the 
+parameters in the parentheses. </p>
+<p><strong>Invoke the </strong> <em><strong>noarg</strong></em><strong> superclass constructor by default 
+</strong> </p>
+<p>Here is an important point that is not illustrated above. If the first executable statement in your constructor is not an instruction 
+to call the constructor for the superclass, an instruction to call the <em>noarg</em> 
+constructor for the superclass will effectively be inserted into your 
+constructor code before it is compiled.</p>
+<p>Therefore, a constructor for the superclass is <strong><em>always called</em></strong> before the code 
+in the constructor for your new class is executed. </p>
+<p><strong>You can choose the superclass constructor </strong> </p>
+<p>The superclass constructor that is called may be the <em>noarg</em> 
+constructor for the superclass, or you can force it to be a parameterized 
+constructor by inserting something like </p>
+<p><strong>super(3,x,4.5);</strong> </p>
+<p>as the 
+first instruction in your constructor definition. </p>
+<p><strong>Always have a </strong> <em><strong>noarg</strong></em><strong> constructor ... 
+</strong> </p>
+<p>Now you should understand why I told you in an earlier chapter that the 
+classes you define should almost always have a <em>noarg</em> constructor, 
+either the default <em>noarg</em> version, or a <em>noarg</em> version of your 
+own design. </p>
+<p>If your classes don&#39;t have a <em>noarg</em> constructor, then anyone who 
+extends your classes will be required to put code in the constructor for their 
+new class to call a parameterized constructor in your class. </p>
+<p>In this program, the <strong>super();</strong> statement in the <strong>Subclass</strong> 
+constructor causes the <em>noarg</em> constructor for the <strong>Superclass</strong> to be 
+called. That <em>noarg</em> constructor is shown in the following code fragment.
+</p>
+<div class="a">
+				<pre>class Superclass{
+  private int x = 1;
+    
+  public Superclass(){
+    x = 5;
+  }//end constructor
+  
+  //...
+}//end Superclass</pre>
+</div>
+<p><strong>Additional code </strong> </p>
+<p>Beyond an exposure and explanation of the use of the <strong>super</strong> keyword to call 
+the superclass constructor, this program plays a few games with initial values 
+of instance variables just to see if you are alert to that sort of thing. 
+However, none of that should be new to you, so I won&#39;t discuss it further here.
+</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

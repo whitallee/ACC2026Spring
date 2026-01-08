@@ -1,0 +1,664 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1616</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1616: Polymorphism and Interfaces, Part 1 </h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listings</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Definition of interfaces named I1 and I2.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Definition of the class named A. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Definition of the class named B. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Definition of the class named C. </li>
+		<li><a href="#Listing_5">Listing 5</a>. The driver class named Poly05.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p><strong>Method overloading</strong> </p>
+<p>I covered method overloading as one form of polymorphism <em>(compile-time polymorphism)</em> in a previous chapter.  I also explained automatic type conversion and the use of the cast operator for type conversion in a previous chapter. </p>
+<p><strong>Method overriding and class inheritance</strong> </p>
+<p>I also discussed runtime polymorphism implemented through method overriding and class inheritance in previous chapters.
+
+</p>
+<p><strong>Using the Java interface</strong> </p>
+<p>In this chapter and the next, I will explain runtime polymorphism as implemented using method overriding and the Java interface.
+
+</p>
+<p><strong>A very important concept</strong> </p>
+<p>In my opinion, this is one of the most important concepts in Java OOP, and the one that seems to give students the greatest amount of difficulty.  Therefore, I will try to take it slow and easy.  As usual, I will illustrate the concept using sample programs.
+
+</p>
+<p>I will also tie this concept back to the concept of polymorphism using method overriding through inheritance.
+
+</p>
+<p><strong>A skeleton program
+
+</strong> </p>
+<p>In this chapter, I will present a simple skeleton program that illustrates many of the important aspects of polymorphic behavior based on the Java interface.
+
+</p>
+<p><strong>Multiple inheritance and the cardinal rule</strong> </p>
+<p>I will explain how the implementation of interfaces in Java is similar to multiple inheritance 
+in other languages such as C++.
+
+I will explain the cardinal rule of interface implementation.
+
+</p>
+<p><strong>A new relationship</strong> </p>
+<p>I will explain that objects instantiated from classes that implement the same interface have a new relationship that goes beyond the relationship imposed by the standard class hierarchy.
+
+</p>
+<p><strong>One object, many types</strong> </p>
+<p>I will explain that due to the combination of the class hierarchy and the fact that a class can implement many different interfaces, a single object in Java can be treated as many different types.  However, for any given type, there are restrictions on the methods that can be called on the object.
+
+</p>
+<p><strong>Many classes, one type</strong> </p>
+<p>I will explain that because different classes can implement the same interface, objects instantiated from different classes can be treated as a common interface type.
+
+</p>
+<p><strong>Interfaces are critical to Java programming</strong> </p>
+<p>I will suggest that there is little if anything very useful that can be done in Java without understanding and using interfaces. </p>
+<p>In support of this suggestion, I will discuss several real-world examples of the use of the Java interface, including the Delegation Event Model, 
+the Model View Control paradigm, and iterators in Java data structures.</p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><a href="#Listing_6">Listing 6</a> near the end of the chapter contains a very simple program named 
+	<strong>Poly05</strong>.
+
+</p>
+<p>The purpose of this program is to illustrate polymorphic behavior using interfaces in addition to class inheritance.
+
+</p>
+<p><strong>Designed to illustrate structure</strong> </p>
+<p>This is a skeleton program designed solely to illustrate the inheritance and interface implementation structure in as simple a program as possible.
+<em>(I will put some meat on this skeleton using another program in the next chapter.)</em></p>
+<p><strong>Empty methods</strong> </p>
+<p>Except for the two methods that return type <strong>String</strong>, all of the methods in the program are empty.  
+<em>(Methods that return type <strong>String</strong> cannot be empty.  They must contain a 
+<strong>return</strong> statement in order to compile successfully.)
+</em> </p>
+<p><strong>Interface definitions</strong> </p>
+<p><a href="#Listing_1">Listing 1</a> shows the definition of two simple interfaces named 
+<strong>I1</strong> and <strong>I2</strong>. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Definition of interfaces 
+				named I1 and I2.
+
+				<pre>interface I1{
+  public void p();
+}//end interface I1
+
+//===================================//
+
+interface I2 extends I1{
+  public void q();
+}//end interface I2</pre>
+</div>
+	<p><strong>Similar but different
+
+</strong> </p>
+<p>An interface definition is similar to a class definition.  However, there are some very important differences.
+
+</p>
+<p><strong>No single hierarchy
+
+</strong> </p>
+<p>To begin with, unlike the case with classes, there is no single interface hierarchy.  Also, multiple inheritance is allowed when extending interfaces.
+
+</p>
+<p>A new interface can extend none, one, or more existing interfaces.  In <a href="#Listing_1">Listing 1</a>,
+<strong>I2</strong> extends <strong>I1</strong>, but <strong>I1</strong> doesn't extend any other interface 
+<em>(and unlike classes, an interface doesn't automatically extend another interface by default)</em>. </p>
+<p><strong>Two kinds of members allowed
+
+</strong> </p>
+<p>Only two kinds of members are allowed in an interface definition:
+
+    </p>
+<ul>
+	<li>Methods, which are implicitly abstract
+    </li>
+	<li>Variables, which are implicitly constant <em>(final) </em></li>
+</ul>
+<blockquote>Author's note: This restriction was changed significantly in Java SE 
+8 and Java SE 9. Following the release of those versions,
+<a href="https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html">
+Default methods</a> and
+<a href="https://docs.oracle.com/en/java/javase/17/language/java-language-changes.html#GUID-905DDDF7-E63A-40BD-84E6-8A08C926E1C7">
+private interface methods</a> are allowed in an interface definition.</blockquote>
+<p>Each of the interfaces in <a href="#Listing_1">Listing 1</a> declares an implicitly abstract method 
+<em>(an abstract method does not have a body)</em>. </p>
+<p>Neither of the interfaces in <a href="#Listing_1">Listing 1</a> declares any variables 
+<em>(they aren't needed for the purpose of this chapter)</em>. </p>
+<p><strong>A new data type
+
+</strong> </p>
+<p>I told you earlier that when you define a new class, you cause a new data type to become available to your program.  The same is true of an interface definition.  Each interface definition constitutes a new type.
+
+</p>
+<p><strong>The class named A</strong> </p>
+<p><a href="#Listing_2">Listing 2</a> defines a very simple class named <strong>A</strong>, which in turn defines two methods named 
+<strong>toString</strong> and <strong>x</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Definition of the class 
+				named A.
+
+				<pre>class A extends Object{
+  public String toString(){
+    return "toString in A";
+  }//end toString()
+  //---------------------------------//
+  
+  public String x(){
+    return "x in A";
+  }//end x()
+  //---------------------------------//
+}//end class A</pre>
+</div>
+	<p><strong>Overridden toString</strong> </p>
+<p>The method named <strong>toString</strong> in <a href="#Listing_2">Listing 2</a> is actually an overridden version of the method having the same name that is defined in the class named 
+<strong>Object</strong>.  <em>(Recall that a previous chapter made heavy use of overridden versions of the 
+<strong>toString</strong> method.) </em> </p>
+<p><strong>New method
+
+</strong> </p>
+<p>The method named <strong>x</strong> is newly defined in the class named 
+<strong>A</strong>. <em>(The method named </em><strong><em>x</em></strong><em> is not inherited into the class named 
+</em><strong><em>A</em></strong><em>, because the class named <strong>Object</strong> does not define a method named 
+<strong>x</strong>.) </em> </p>
+<p><strong>The class named B</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> contains material that is new to this chapter. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Definition of the class 
+				named B.
+
+				<pre>class B extends A implements I2{
+  public void p(){
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+  }//end q();
+  //---------------------------------//
+}//end class B</pre>
+</div>
+	<p><strong>Implementing an interface</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> defines a class named <strong>B</strong> 
+that 
+<em>extends</em> the class named <strong>A</strong>, and also <em>implements</em> the interface named 
+<strong>I2</strong>.
+
+</p>
+<p>As you already know, a class in Java can extend only one other class.  However, a Java class can implement any number of interfaces. 
+<em>(Multiple inheritance is allowed with interfaces.) </em>
+
+</p>
+<p><strong>Similar to an abstract class</strong>
+
+</p>
+<p>An interface is similar, but not identical, to an <strong>abstract</strong> class.
+
+    <em>(An abstract class may contain abstract methods or concrete methods, or a combination of the two 
+while all of the methods in an interface are implicitly abstract.)</em></p>
+<p><strong>Restrictions</strong></p>
+<p>An abstract class cannot be instantiated. Thus, an abstract class is only 
+useful when it is extended by another class.</p>
+<p>An interface also cannot be instantiated.</p>
+<p><strong>Implicitly abstract methods</strong></p>
+<p>As mentioned above, all methods declared in an interface are implicitly abstract, but that is not true for an abstract class.  An abstract class can also contain fully-defined 
+<em>(concrete)</em> methods. Regardless, an abstract class cannot be 
+instantiated.</p>
+<p><strong>A totally abstract class
+
+</strong>
+
+</p>
+<p>At the risk of offending the purists, I will coin a new term here and say that an interface is similar to a totally abstract class 
+<em>(one that contains only abstract method declarations and final variables)</em>.
+
+</p>
+<p>To a first degree of approximation then, we might say that the class named 
+<strong>B</strong> is not only a subclass of the class named <strong>A</strong>, it is also a subclass of the 
+<em>totally abstract</em> class named <strong>I2</strong>. <em>(This is pretty far out 
+with respect to terminology, so to avoid being embarrassed, you probably shouldn't repeat it to anyone else.)</em>
+
+</p>
+<p>Since <strong>I2</strong> extends <strong>I1</strong>, we might also say that the class named 
+<strong>B</strong> is a subclass of the <em>totally abstract</em> class named 
+<strong>I1</strong>.
+
+</p>
+<p><strong>A different kind of thinking</strong>
+
+</p>
+<p>With this kind of thinking, we have suddenly make it possible for Java classes to support 
+<em>multiple inheritance</em>, with the stipulation that all but one of the inherited classes must be 
+<em>totally abstract classes</em>.
+
+</p>
+<p><strong>Be very careful with this way of thinking
+
+</strong>
+
+</p>
+<p>However, we need to be very careful with this kind of thinking.  While it may help some students to understand the role of interfaces in Java, there are probably some hidden dangers lurking here.
+
+</p>
+<p><strong>Back to the safety zone
+
+</strong>
+
+</p>
+<p>The safest course of action is to simply say that the class named <strong>B</strong>:
+
+    </p>
+<ul>
+	<li>Extends the class named <strong>A</strong> </li>
+	<li>Implements the interface named <strong>I2</strong> directly
+    </li>
+	<li>Implements the interface named <strong>I1</strong> through inheritance
+	</li>
+</ul>
+<p>Java does not support true multiple inheritance <em>(as in C++, for example)</em>, but it does allow you to extend one class and implement any number of interfaces. 
+</p>
+<p><strong>The cardinal rule
+
+regarding interface implementation</strong>
+
+</p>
+<p>The cardinal rule in implementing interfaces is:
+
+    </p>
+<p><em>If a class implements an interface, it must provide a concrete definition for all the methods declared by that interface, and all the methods inherited by that interface.  Otherwise, the class must be declared abstract and the definitions must be provided by a class that extends the abstract class.</em>
+
+</p>
+<p><strong>The cardinal rule
+
+regarding class inheritance</strong>
+
+</p>
+<p>A similar rule exists for defining classes that inherit abstract methods from 
+other classes:</p>
+<p><em>If a class inherits one or more abstract methods from its superclasses, it must provide concrete definitions 
+for all the inherited abstract methods.  Otherwise, the class must be declared abstract and the 
+concrete definitions must be provided by a class that extends the abstract class.</em>
+
+</p>
+<p><strong>What does that mean in this case?</strong>
+
+</p>
+<p>In this case, this means that the class named <strong>B</strong> must provide concrete definitions for the methods named 
+<strong>p</strong> and <strong>q</strong>, because:
+
+    </p>
+<ul>
+	<li>The class named <strong>B</strong> implements the interface named 
+	<strong>I2</strong>.</li>
+	<li>The method named <strong>q</strong> is declared in the interface named 
+	<strong>I2</strong>.</li>
+	<li>The interface named <strong>I2</strong> extends the interface named 
+	<strong>I1</strong>.</li>
+	<li>The method named <strong>p</strong> is declared in the interface named 
+	<strong>I1</strong>. </li>
+</ul>
+<p>As in method overriding, the signature of the concrete method in the defining class must match the signature of the method as it is declared in the interface.
+
+</p>
+<p><strong>Class B satisfies the cardinal rule</strong>
+
+</p>
+<p>As you can see from <a href="#Listing_3">Listing 3</a>, the class named 
+<strong>B</strong> does provide concrete <em>(but empty)</em> definitions of the methods named 
+<strong>p</strong> and <strong>q</strong>..
+
+    </p>
+<p><em>(As mentioned earlier, I made the methods empty in this program for simplicity.  However, it is not uncommon to define empty methods in classes that implement interfaces 
+that declare a large number of methods, such as the 
+<a href="https://docs.oracle.com/javase/tutorial/uiswing/events/mouselistener.html">MouseListener</a> 
+interface.) </em>
+
+</p>
+<p><strong>The class named C</strong>
+
+</p>
+<p><a href="#Listing_4">Listing 4</a>  defines a class named <strong>C</strong> 
+that extends 
+<strong>Object</strong>, and also implements <strong>I2</strong>.  As in the case of the class named 
+<strong>B</strong>, this class must, and does, provide concrete <em>(but empty)
+</em>definitions for the methods named <strong>p</strong> and <strong>q</strong>. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Definition of the class 
+				named C.
+
+				<pre>class C extends Object implements I2{
+  public void p(){
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+  }//end q();
+  //---------------------------------//
+}//end class C</pre>
+</div>
+	<p><strong>A driver class</strong> </p>
+<p>Finally, the driver class named <strong>Poly05</strong> shown in
+<a href="#Listing_5">Listing 5</a> defines an empty <strong>main</strong> method. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. The driver class named 
+				Poly05.
+				<pre>public class Poly05{
+  public static void main(String[] args){
+  }//end main
+}//end class Poly05</pre>
+</div>
+	<p><strong>Doesn't do anything
+
+</strong> </p>
+<p>As mentioned earlier, the purpose of this program is solely to illustrate an inheritance and interface structure.  This program can be compiled and executed, but it doesn't do anything useful.
+
+</p>
+<p><strong>A new relationship
+
+</strong> </p>
+<p>At this point, it might be useful for you to sketch out the structure in a simple hierarchy diagram.
+
+</p>
+<p>If you do, you will see that implementation of the interface named <strong>I2</strong> by the classes named 
+<strong>B</strong> and <strong>C</strong>, has created a relationship between those two classes that is totally independent of the normal class hierarchical relationship. </p>
+<p><strong>What is the new relationship?
+
+</strong> </p>
+<p>By declaring that both of these classes implement the same interface named 
+<strong>I2</strong>, we are guaranteeing that an object of either class will contain concrete definitions of the two methods declared in the interfaces named 
+<strong>I2</strong> and <strong>I1</strong>. </p>
+<p>Furthermore, we are guaranteeing that objects instantiated from the two classes can be treated as the common type 
+<strong>I2</strong>. </p>
+<p><em>(</em><strong><em>Important</em></strong><em>: references to any objects instantiated from classes that implement 
+<strong>I2</strong>, can be stored in reference variables of the type <strong>I2</strong>, and any of the interface methods can be called on those references.)
+</em> </p>
+<p><strong>The signatures must match</strong></p>
+<p>The signatures of the interface methods in the two classes must match the signatures declared in the interfaces.
+
+</p>
+<p>This means that if we have access to the documentation for the interfaces, we also know the signatures of the interface methods for objects instantiated from any class that implements the interfaces.
+
+</p>
+<p><strong>Different behavior
+
+</strong> </p>
+<p>However, and this is extremely important, the behavior of the interface methods as defined in the class named 
+<strong>B</strong> may be <em>(and often will be)</em> entirely different from the behavior of the interface methods having the same signatures as defined in the class named 
+<strong>C</strong>. </p>
+<p><strong>Possibly the most powerful concept in Java
+
+</strong> </p>
+<p>This is possibly the most powerful <em>(and most difficult) </em>concept embodied in the Java programming language. </p>
+<p><strong>If you don't understand interfaces ...</strong> </p>
+<p>I usually tell my students several times each semester that if they don't understand interfaces, they don't really understand Java.
+
+</p>
+<p>It is unlikely that you will ever be successful as a Java programmer without an understanding of interfaces.
+
+</p>
+<p>There are very few worthwhile programs that can be written in Java without an understanding of interfaces.
+
+</p>
+<p><strong>The core aspect
+
+</strong> </p>
+<p>So, what is the core aspect of this concept that is so powerful?
+
+</p>
+<p>I told you earlier that each interface definition constitutes a new type.  As a result, a reference to any object instantiated from any class that implements a given interface can be treated as the type of the interface.
+
+</p>
+<p><strong>So what!</strong> </p>
+<p>When a reference to an object is treated as an interface type, any method declared in, or inherited into that interface can be called on the reference to the object.
+
+</p>
+<p>However, the behavior of the method when called on references to different objects of the same interface type may be very different.  In the current jargon, the behavior is 
+<em>appropriate for the object on which it is called</em>. </p>
+<p><strong>One object, many types</strong> </p>
+<p>Furthermore, because a single class can implement any number of different interfaces, a single object instantiated from a given class can be treated as any of the interface types implemented by the class from which it is instantiated.  Therefore, a single object in Java can be treated as many different types.
+
+    </p>
+<p><em>(However, when an object is treated as an interface type, only those methods declared in that interface can be called on the object.  To call other methods on the object, it necessary to cast the object's reference to a different type.)
+
+</em> </p>
+<p><strong>Treating different types of objects as a common type
+
+</strong> </p>
+<p>All of this also makes it possible to treat objects instantiated from widely differing classes as the same type, provided that all of those classes implement the same interface.
+
+    </p>
+<p><strong>Important</strong>:  When an interface method is called on one of the objects using the reference of the interface type, the behavior of the method will be as defined by the author of the specific class that implemented the interface.  The behavior of the method will often be different for different objects instantiated from different classes that implement the same interface. </p>
+<p><strong>Receiving parameters as interface types</strong> </p>
+<p>Methods can receive parameters that are references of interface types.  In this case, the author of the code that calls interface methods on the incoming reference doesn't need to know, and often doesn't care about the name of the class from which the object was instantiated.  
+<em>(For a discussion of this capability, see </em>a<em> discussion of
+<a href="https://docs.oracle.com/javase/tutorial/collections/">the Java 
+Collections Framework</a>.)</em></p>
+<p><strong>A common example
+
+</strong> </p>
+<p>A very common example is to store references to objects instantiated from different classes, 
+<em>(which implement the same interface)</em> in some sort of data structure (<em>such as list or a set)</em> and then call the same methods on each of the references in the collection. </p>
+<p><strong>Heart of the Delegation Event Model
+
+</strong> </p>
+<p>For example, this methodology is at the heart of the <em>Delegation Event Model</em>, which forms the basis of Graphical User Interfaces and event-driven programming in Java. </p>
+<p>This often entails defining classes that implement standard interfaces such as 
+<strong>MouseListener</strong>, <strong>WindowListener</strong>, <strong>TextListener</strong>, etc.  In this case, the programmer defines the interface methods to be appropriate for a listener object instantiated from a specific class.  Then a reference to the listener object is registered on an event source 
+<em>as the interface type</em>. </p>
+<p>Later when an event of that type occurs, the source object calls one or more interface methods on the listener object using the reference of the interface type.  The event source object doesn't know or care about the class from which the object was instantiated.  In fact, it doesn't even care how the interface method behaves when it is called.  The responsibility of the source object ends when it calls the appropriate interface method on the listener object.
+
+</p>
+<p><strong>Model View Control
+
+</strong> </p>
+<p>This same methodology is also critical to the use of the <em>Model View Control</em> paradigm in Java using the
+<strong>Observer</strong> interface and the <strong>Observable</strong> class.  In this case, view objects instantiated from different classes that implement the 
+<strong>Observer</strong> interface can register themselves on a model object that extends the 
+<strong>Observable</strong> class.  Then each time the data being maintained in the model changes, each of the views will be notified so that they can update themselves. </p>
+<p><strong>JavaBeans Components</strong> </p>
+<p>This concept is also critical to the use of <em>bound</em> and <em>constrained</em> properties in JavaBeans Components.  One bean can register itself on other beans to be notified each time the value of a bound or constrained property changes.  In the case of constrained properties, the bean that is notified has the option of vetoing the change. </p>
+<p><strong>Java Collections Framework</strong> </p>
+<p>  
+<em><a href="https://docs.oracle.com/javase/tutorial/collections/">The Java 
+Collections Framework</a></em> is also totally dependent on the use of 
+interfaces.</p>
+<p><strong>Iterators and Enumerators</strong> </p>
+<p>If you appreciate data structures, you will also appreciate iterators.  In Java, 
+<strong>Iterator</strong> is an interface, and an object that knows how to iterate across a data structure is an object of a class that implements the 
+<strong>Iterator</strong> interface. </p>
+<p>As a result, the users of the concrete implementations in the Java Collections Framework don't need to know any of the implementation details of the collection to create and use an iterator.  All of the work necessary to properly create an iterator is done by the author of the class that implements the appropriate Collection interfaces.  All the user needs to understand is the behavior of the three methods declared in the 
+<strong>Iterator</strong> interface. </p>
+	
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>Polymorphic behavior, based on the Java interface, is one of the most important concepts in Java OOP
+
+</p>
+<p>In this chapter, I began my discussion of runtime polymorphism as implemented using method overriding and the Java interface.
+
+</p>
+<p>I presented a simple skeleton program that illustrated many of the important aspects of polymorphic behavior based on the Java interface.
+
+</p>
+<p>By using a nonstandard notation of my own design, <em>(a totally abstract class)</em>, I explained how the implementation of interfaces in Java is similar to multiple inheritance 
+in languages such as C++.
+
+</p>
+<p>I explained the cardinal rule, which is:
+
+    </p>
+<p><em>If a class implements an interface, it must provide a concrete definition for all the methods declared by that interface, and all the methods inherited by that interface.  Otherwise, the class must be declared abstract and the definitions must be provided by a class that extends the abstract class.
+
+</em>
+</p>
+<p>I explained that objects instantiated from classes that implement the same interface have a new relationship that goes beyond the relationship imposed by the standard class hierarchy.
+
+</p>
+<p>I explained that due to the combination of the class hierarchy and the fact that a class can implement many different interfaces, a single object in Java can be treated as many different types.  However, for any given type, there are restrictions on the methods that can be called on the object.
+
+</p>
+<p>I also explained that because different classes can implement the same interface, objects instantiated from different classes can be treated as a common interface type.
+
+</p>
+<p>I suggested that there is little if anything useful that can be done in Java without understanding and using interfaces.
+
+</p>
+<p>Finally I discussed some real-world examples of the use of the Java interface:
+
+    </p>
+<ul>
+	<li>Delegation event model
+    </li>
+	<li>Model View Control paradigm
+    </li>
+	<li>Bound and constrained properties in JavaBeans Components
+    </li>
+	<li>Java Collections Framework
+    Iterators and Enumerators </li>
+</ul>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter (following the review chapter) I will explain a more substantive program as I continue my discussion of polymorphic behavior using the Java interface.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1616: Polymorphism and Interfaces, Part 1
+</li>
+					<li>File: Java1616.htm
+</li>
+					<li>Published: 03/27/02 </li>
+					<li>Revised: 04/19/22</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listings</a></h1>
+<p>A complete listing of the sample program is shown in <a href="#Listing_6">Listing 6</a> below. </p>
+
+
+
+<div class="a">
+<a name="Listing_6">Listing 6</a>. <strong>Complete program listing.</strong>
+
+<pre>/*File Poly05.java
+Copyright, R.G.Baldwin
+**************************************/
+
+interface I1{
+  public void p();
+}//end interface I1
+//===================================//
+
+interface I2 extends I1{
+  public void q();
+}//end interface I2
+//===================================//
+
+class A extends Object{
+  public String toString(){
+    return "toString in A";
+  }//end toString()
+  //---------------------------------//
+  
+  public String x(){
+    return "x in A";
+  }//end x()
+  //---------------------------------//
+}//end class A
+//===================================//
+
+class B extends A implements I2{
+  public void p(){
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+  }//end q();
+  //---------------------------------//
+}//end class B
+//===================================//
+
+class C extends Object implements I2{
+  public void p(){
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+  }//end q();
+  //---------------------------------//
+}//end class B
+//===================================//
+
+public class Poly05{
+  public static void main(String[] args){
+  }//end main
+}//end class Poly05</pre>
+
+</div>
+<p>-end- </p>
+
+
+</body>
+</html>

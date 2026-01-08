@@ -1,0 +1,1833 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+   <title>... in Java by Richard G Baldwin</title>
+</head>
+<body link="#DD0000" vlink="#0000FF" alink="#FF0000" lang="EN-US">
+
+<h2>
+Understanding Action Objects in Java</h2>
+<i>Baldwin explains the theory behind, and illustrates the use of the Action
+interface.</i>
+<p><b>Published:</b> May 25, 2002
+<br/><b>By <a href="#About the author">Richard G. Baldwin</a></b>
+<p>Java Programming Notes # 107
+<ul >
+<li>
+<a href="#Preface">Preface</a></li>
+
+<li>
+<a href="#Discussion and Sample Programs">Discussion and Sample Code</a></li>
+
+<li>
+<a href="#Run the program">Run the Program</a></li>
+
+<li>
+<a href="#Complete Program Listings">Complete Program Listing</a></li>
+</ul>
+
+<hr size=3 width="100%" align=center>
+<center>
+<h2>
+<a NAME="Preface"></a>Preface</h2></center>
+The main purpose of this chapter is to help you to understand the use of
+Java <b>Action</b> objects, with particular emphasis on the changes introduced
+in Java version 1.3. Along the way, you will also learn something
+about <i>bound properties</i> in Java.
+<p><b><font color="#FF0000">Viewing tip</font></b>
+<p>You may find it useful to open another copy of this chapter in a separate
+browser window. That will make it easier for you to scroll back and
+forth among the different figures and listings while you are reading about
+them.
+<p><b><font color="#FF0000">Supplementary material</font></b>
+<p>I recommend that you also study the other chapters in my extensive collection
+of vwxyzabcde Java tutorials. You will find those chapters published at
+<a href="http://softwaredev.earthweb.com/java">Gamelan.com</a>.
+However, as of the date of this writing, Gamelan doesn't maintain a consolidated
+index of my Java tutorial chapters, and sometimes they are difficult to
+locate there. You will find a consolidated index at
+<a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Baldwin's
+Java Programming Tutorials</a><font color="#000000">.</font>
+<center>
+<h2>
+<a NAME="Discussion and Sample Programs"></a><font color="#000000">Discussion
+and Sample Code</font></h2></center>
+<b><font color="#FF0000">What is an Action object?</font></b>
+<p>An <b>Action</b> object is an object that is instantiated from any class
+that implements the <b>Action</b> interface.
+<blockquote><i>(To avoid confusion at the outset, let me point out that
+the <b>Action</b> interface is not the same as the <b>ActionListener</b>
+interface.)</i></blockquote>
+This leads to the obvious question, <i>"What is the <b>Action</b> interface?"</i>
+<p>Sun summarizes the purpose of the <b>Action</b> interface in the following
+way:
+<blockquote><i>"The <b>Action</b> interface provides a useful extension
+to the <b>ActionListener</b> interface in cases where the same functionality
+may be accessed by several controls."</i></blockquote>
+<b><font color="#FF0000">A real-world example</font></b>
+<p>Most text editors and word processors provide a <i>copy</i> action.
+Typically, the <i>copy</i> action makes it possible to highlight some text,
+and to copy it to the system clipboard.
+<p>The <i>copy</i> action can often be initiated in several ways.
+There will usually be a <i>copy</i> item on the <i>Edit</i> menu.
+Usually, there will also be a <i>copy</i> button on a toolbar.
+<blockquote><i>(Typically also, the copy item on the menu will have an
+accelerator keystroke such as Ctrl+C, but that is the topic of a different
+article.)</i></blockquote>
+<b><font color="#FF0000">Need the same behavior</font></b>
+<p>Regardless of whether the user initiates the <i>copy</i> action by selecting
+the menu item or by clicking the toolbar button, the behavior should be
+the same. <i>(That behavior is usually to copy highlighted text onto
+the system clipboard.)</i>
+<p><b><font color="#FF0000">Copy action can be disabled</font></b>
+<p>With the editor that I am using, whenever no text has been selected,
+the <i>copy</i> action is disabled. Whenever text is selected, the
+<i>copy</i>
+action becomes enabled. It is important that the <i>copy</i> item
+on the menu and the <i>copy</i> button on the toolbar become enabled and
+disabled in unison. <i>(It would be very confusing if the copy menu
+item were to become disabled while the copy button on the toolbar remains
+enabled.)</i>
+<p><b><font color="#FF0000">ActionListener objects</font></b>
+<p>In Java, the behavior of menu items and toolbar buttons is normally
+controlled by registering <b>ActionListener</b> objects on those sources,
+and defining the behavior in the <b>actionPerformed</b> method of the <b>ActionListener</b>
+object.
+<blockquote><i>(If you are unfamiliar with the use of Action listeners,
+you will find numerous tutorial chapters that discuss the Delegation or
+JavaBeans event model at <a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Baldwin's
+Java Programming Tutorials</a>.)</i></blockquote>
+It is a straightforward matter to instantiate an <b>ActionListener</b>
+object and to register it on more than one source <i>(a menu item and a
+toolbar button, for example).</i> This will guarantee that action
+events will be handled in an identical way regardless of which source fires
+the event.
+<p><b><font color="#FF0000">Enable and disable</font></b>
+<p>It is somewhat less straightforward to guarantee that all of the sources
+are enabled and disabled in unison, particularly from a software maintenance
+viewpoint. Whenever the enabled state changes, it is necessary to
+individually enable or disable all of the sources on which the <b>ActionListener</b>
+object is registered.
+<p>Short of examining the source code, there is no easy way to determine
+how many and which sources a given <b>ActionListener</b> object has been
+registered on. You could, of course, create and maintain a list of
+such sources, but that would entail extra programming effort.
+<p><b><font color="#FF0000">Action object to the rescue</font></b>
+<p>This is where an <b>Action</b> object shines. The <b>Action</b>
+interface extends the <b>ActionListener</b> interface. Therefore,
+an <b>Action</b> object is an <i>action listener,</i> which provides a
+definition for the <b>actionPerformed</b> method.
+<p>In addition, and this is very important, the <b>Action</b> object is
+also a source of <b>PropertyChange</b> events. <i>(An ordinary <b>ActionListener</b>
+object is not normally a source of <b>PropertyChange</b> events.)</i>
+<p>Here is part of what Sun has to say about <b>PropertyChange</b> events:
+<blockquote><i>"A "PropertyChange" event gets delivered whenever a bean
+changes a "bound" or "constrained" property. A PropertyChangeEvent object
+is sent as an argument to the PropertyChangeListener and VetoableChangeListener
+methods."</i></blockquote>
+<b><font color="#FF0000">What are bound and constrained properties?</font></b>
+<p>If you are unfamiliar with the concept of <i>bound properties</i> in
+JavaBeans components, you will find several tutorial chapters on JavaBeans
+components at <a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Baldwin's
+Java Programming Tutorials</a>.
+<p>In a nutshell, a bound property is a property that will:
+<ul>
+<li>
+Register other objects that want to be notified when the value of the property
+changes</li>
+
+<li>
+Notify them when the value changes</li>
+</ul>
+<i><font color="#000000">(Constrained properties don't come into play here,
+so there is no need to discuss them further in this chapter.)</font></i>
+<p><b><font color="#FF0000">Two-way communication</font></b>
+<p>An <b>Action</b> object has a bound property, of type <b>boolean</b>,
+named <b>enabled</b>. Whenever an <b>Action</b> object is <i>set</i>
+or <i>registered</i> on an <i>action-aware</i> component, at least two
+important things happen.
+<p><b><font color="#FF0000">Registered as an ActionListener object</font></b>
+<p>First, the <b>Action</b> object is registered as an <b>ActionListener</b>
+object on the <i>action-aware</i> component. The behavior of the
+<b>actionPerformed</b>
+method, as defined in the <b>Action</b> object, handles <b>Action</b> events
+fired by the component.
+<p><b><font color="#FF0000">What does action-aware mean?</font></b>
+<p>An <i>action-aware</i> class is a class that either defines or inherits
+the <b>setAction</b> method shown in Figure 1. An <i>action-aware</i>
+component is an object instantiated from such a class.
+<br/>
+<div class="a">public void <b>setAction</b>(Action a)
+<p>Sets the Action for the ActionEvent source.
+<p>Parameters:
+<br/>a - the Action for the AbstractButton, or null
+<p><b><font face="Courier New,Courier">Figure 1</font></b></div>
+
+<p>This is the method that sets up the two-way communication described
+earlier <i>(and sometimes does some other things as well, which I will
+discuss later).</i>
+<p><b><font color="#FF0000">What are the action-aware components?</font></b>
+<p>A review of the Java API documentation indicates that as of Java version
+1.4.0, the following classes are <i>action-aware</i> according to the definition
+given above. <i>(Note, however, not all of these classes are suitable
+for instantiating typical <b>Action</b> objects. For example, I can't
+think of a good reason to use a <b>MetalScrollButton</b> as an
+<b>Action</b>
+object, but there may be such a reason that I haven't thought of.)</i>
+<ul>
+<li>
+AbstractButton</li>
+
+<ul>
+<li>
+JButton</li>
+
+<ul>
+<li>
+BasicArrowButton</li>
+
+<ul>
+<li>
+MetalScrollButton</li>
+</ul>
+
+<li>
+MetalComboBoxButton</li>
+</ul>
+
+<li>
+JMenuItem</li>
+
+<ul>
+<li>
+JCheckBoxMenuItem</li>
+
+<li>
+JMenu</li>
+
+<li>
+JRadioButtonMenuItem</li>
+</ul>
+
+<li>
+JToggleButton</li>
+
+<ul>
+<li>
+JCheckBox</li>
+
+<li>
+JRadioButton</li>
+</ul>
+</ul>
+
+<li>
+JTextField</li>
+
+<ul>
+<li>
+DefaultTreeCellEditor.DefaultTextField</li>
+
+<li>
+JPasswordField</li>
+
+<li>
+JFormattedTextField</li>
+</ul>
+
+<li>
+JComboBox</li>
+</ul>
+<b><font color="#FF0000">Establishes behavior of ActionEvent handler</font></b>
+<p>The invocation of the <b>setAction</b> method on an <i>action-aware</i>
+component sets the
+<b>Action</b> property for the <b>ActionEvent</b> source.
+In other words, it establishes the behavior that will be exhibited when
+the <i>action-aware</i> component fires an
+<b>Action</b> event.
+<p>The new <b>Action</b> replaces any previously set <b>Action</b> objects.
+However, it does not affect any <b>ActionListener</b> objects that were
+independently added using the <b>addActionListener</b> method <i>(I will
+demonstrate this later).</i> Also, if the <b>Action</b> object is already
+a registered <b>ActionListener</b>, it is not re-registered.
+<p><b><font color="#FF0000">Sets certain component properties</font></b>
+<p>Another important result of setting the <b>Action</b> property on the
+<i>action-aware</i>
+component is that certain other properties belonging to the component are
+also set from the values encapsulated in the <b>Action</b> object.
+The properties that get set may differ for different component classes.
+For example, if the component is a <b>JButton</b>, the properties that
+get set include:
+<ul>
+<li>
+The <b>enabled</b> property</li>
+
+<li>
+The property that controls the text on the face of the button</li>
+
+<li>
+The property that controls the <b>Icon</b> that appears on the button</li>
+
+<li>
+The text for the tool tip</li>
+
+<li>
+The Mnemonic for the button</li>
+</ul>
+You can learn more about this process by taking a look at the documentation
+for the <b>configurePropertiesFromAction</b> method for the class of interest.
+This is the method that handles the configuration process for each different
+component.
+<blockquote><i>(Note that this documentation for version 1.4.0 is considerably
+different from the documentation for version 1.3.1 with respect to the
+<b>AbstractButton</b>,
+<b>JButton</b>,
+and <b>JMenuItem</b> classes. In particular, the list of properties
+that get set has been expanded in all three cases. I don't know if
+this is the result of changes, or earlier typographical errors.)</i></blockquote>
+For example, here is what Sun has to say about the <b>configurePropertiesFromAction</b>
+method for the <b>AbstractButton</b> class <i>(v 1.4.0):</i>
+<blockquote><i>"The properties which are set may differ for subclasses.
+By default, the properties which get set are Text, Icon, Enabled, ToolTipText,
+ActionCommand, and Mnemonic."</i></blockquote>
+The Sun documentation for the <b>configurePropertiesFromAction</b> method
+for the J<b>Button</b> class says essentially the same thing as the documentation
+for the <b>AbstractButton</b> class.
+<p>In comparison, here is what Sun has to say about the <b>configurePropertiesFromAction</b>
+method for the <b>JMenuItem</b> class:
+<blockquote><i>"By default, this method sets the same properties as AbstractButton.configurePropertiesFromAction(),
+plus Accelerator."</i></blockquote>
+In other words, a <b>JMenuItem</b> object can set and track one property,
+<b>Accelerator</b>,
+which is not tracked by a <b>JButton</b> object.
+<p><b><font color="#FF0000">PropertyChange notification</font></b>
+<p>Earlier I stated that whenever an <b>Action</b> object is <i>set</i>
+or <i>registered</i> on an <i>action-aware</i> component, at least two
+important things happen. I have been discussing the first of the
+two things that happen. It is now time to discuss the second important
+thing that happens.
+<p>Setting the <b>Action</b> object on an <i>action-aware</i> component
+causes the component to be registered as a <b>PropertyChange</b> listener
+on the
+<b>Action</b> object. Thereafter, whenever the value of the
+<b>enabled</b>
+property of the <b>Action</b> object changes, the component is notified
+of the change.
+<blockquote><i>(It is the responsibility of the component to respond to
+that notification and to cause its <b>enabled</b> property to track the
+value of the <b>enabled</b> property of the <b>Action</b> object.)</i></blockquote>
+<b><font color="#FF0000">Keyed properties</font></b>
+<p>Certain other properties belonging to the <b>Action</b> object are also
+tracked and updated on the component as the <b>Action</b> object's <i>keyed
+properties</i> change.
+<blockquote><i>(Disclaimer: Even though I refer to these values as
+keyed properties, it is probably not technically correct to call them properties
+or bound properties, because the methods for setting and getting their
+values do not conform to the JavaBeans design patterns for properties.
+However, they behave like bound properties, meaning that the component
+is notified when the values of the keyed properties change.)</i></blockquote>
+<b><font color="#FF0000">A PropertyChangeListener</font></b>
+<p>This update process is handled by causing the component to <i>act like</i>
+a <b>PropertyChangeListener</b> registered on the <b>Action</b> object.
+<blockquote><i>(The components can't actually be PropertyChangeListeners
+in their own right, because they neither define nor inherit the method
+named <b>PropertyChange</b>.)</i></blockquote>
+Some smoke and mirrors is being used here. This process is handled
+by the method named <b>createActionPropertyChangeListener</b>.
+<blockquote><i>(I'm not certain exactly how this is handled, but my guess
+is that the invocation of the <b>setAction</b> method on a particular component
+causes the invocation of the <b>createActionPropertyChangeListener</b>
+method on that component. I suspect that this method instantiates
+an object from a class that implements the <b>PropertyChangeListener</b>
+interface. This <b>PropertyChangeListener </b>object is registered
+on the <b>Action</b> object so that it is notified when a property change
+occurs. My guess is that it also holds a reference to the component
+for which it was instantiated. When it is notified of a <b>PropertyChange</b>
+event on the <b>Action</b> object, it updates the component's properties
+using current values from the <b>Action</b> object. This causes the
+component to behave like a
+<b>PropertyChangeListener</b>.)</i></blockquote>
+
+<p><br/><b><font color="#FF0000">Overridden createActionPropertyChangeListener</font></b>
+<p>Different overridden versions of the <b>createActionPropertyChangeListener</b>
+method exist for different component classes, so the properties that are
+tracked and updated may differ from one component class to the next.
+<p>For example, if the component is a <b>JButton</b>, the properties that
+are tracked and automatically updated include those in the following list:
+<ul>
+<li>
+The <b>enabled</b> property</li>
+
+<li>
+The property that controls the text on the face of the button</li>
+
+<li>
+The property that controls the <b>Icon</b> that appears on the button</li>
+
+<li>
+The text for the tool tip</li>
+
+<li>
+The Mnemonic for the button</li>
+</ul>
+<b><font color="#FF0000">Notification mechanism</font></b>
+<p>In typical fashion, the <b>propertyChange </b>method shown in Figure
+2 is invoked on every registered listener when the <b>Action</b> object
+fires a <b>PropertyChange</b> event.
+<br/>
+<div class="a">public void <b>propertyChange</b>(PropertyChangeEvent evt)
+<p>This method gets called when a bound property is changed.
+<p>Parameters:
+<br/>evt - A PropertyChangeEvent object describing the
+<br/>event source and the property that has changed.
+<p><b><font face="Courier New,Courier">Figure 2</font></b></div>
+
+<p>It is the responsibility of the <b>propertyChange</b> method in each
+registered listener object to use this notification to cause the enabled
+state of the component to track the value of the <b>enabled</b> property
+of the
+<b>Action</b> object. This method also causes other properties
+discussed above to track the values of the corresponding <i>keyed properties</i>
+of the <b>Action</b> object.
+<p><b><font color="#FF0000">Two different programming styles</font></b>
+<p>Two different programming styles can be used to accomplish the above
+behavior. The first of those programming styles existed prior to
+the release of JDK 1.3. The second approach was released with JDK
+1.3 and updated in JDK 1.4.0.
+<p>The earlier approach, <i>(which is still supported in version 1.4.0
+but is not the preferred approach),</i> makes use of a specialized version
+of the <b>add</b> method for three specific container types: <b>JMenu</b>,
+<b>JPopupMenu</b>,
+and <b>JToolBar</b>. <i>(This method is limited to use with those
+three container types).</i> The signature of the specialized version
+of the <b>add</b> method for each of the three container types respectively
+is:
+<ul>
+<li>
+<tt>public JMenuItem add(Action a)</tt></li>
+
+<li>
+<tt>public JMenuItem add(Action a)</tt></li>
+
+<li>
+<tt>public JButton add(Action a)</tt></li>
+</ul>
+<b><font color="#FF0000">The specialized add method</font></b>
+<p>This specialized version of the <b>add</b> method is defined for the
+container classes <b>JMenu</b>, <b>JPopupMenu</b>, and <b>JToolBar</b>.
+Here are descriptions for this method as defined for those three classes
+respectively:
+<ul>
+<li>
+<b>JMenu</b> - Creates a new menu item attached to the specified <b>Action</b>
+object and appends it to the end of this menu. Returns <b>JMenuItem</b>.</li>
+
+<li>
+<b>JPopupMenu</b> - Appends a new menu item to the end of the menu, which
+dispatches the specified <b>Action</b> object. Returns <b>JMenuItem</b>.</li>
+
+<li>
+<b>JToolBar</b> - Adds a new <b>JButton</b>, which dispatches the action.
+Returns <b>JButton</b>.</li>
+</ul>
+<b><font color="#FF0000">Not the preferred method</font></b>
+<p>Although this method is still supported as of JDK 1.4.0, in all three
+cases, Sun has something like the following to say:
+<blockquote><i>As of JDK 1.3, this is no longer the preferred method for
+adding Actions to a container. Instead it is recommended to configure a
+control with an action using <b>setAction</b>, and then add that control
+directly to the Container.</i></blockquote>
+<b><font color="#FF0000">However ...</font></b>
+<p>Even though this is not the preferred approach, you are very likely
+to encounter code that uses this approach. Therefore, I am providing
+a brief description of this approach, and will compare it with the preferred
+approach.
+<blockquote><i>(All of the discussion, from the beginning of the article
+down to the beginning of the above discussion on the specialized
+<b>add</b>
+method, was based on the preferred approach.)</i></blockquote>
+<b><font color="#FF0000">Use is restricted to three container types</font></b>
+<p>It is important to emphasize that this approach can only be used with
+the following container classes <i>(because other container classes neither
+define nor inherit the specialized version of the <b>add</b> method):</i>
+<ul>
+<li>
+<b>JMenu</b></li>
+
+<li>
+<b>JPopupMenu</b></li>
+
+<li>
+<b>JToolBar</b></li>
+</ul>
+The preferred method, on the other hand, can be used with just about any
+of the standard container classes.
+<blockquote><i>(For example, you could place an action-aware component
+in a <b>JButton</b> if you had a reason to do so. However, you may
+want to avoid using AWT container classes in order to avoid the problems
+inherent in mixing heavyweight and lightweight components.)</i></blockquote>
+<b><font color="#FF0000">The specialized add method</font></b>
+<p>When the specialized <b>add</b> method is invoked on one of the three
+containers listed above, passing an <b>Action</b> object as a parameter,
+the following things happen:
+<ul>
+<li>
+The container creates a component that is appropriate for that container:</li>
+
+<ul>
+<li>
+<b>JMenu</b> creates a <b>JMenuItem</b></li>
+
+<li>
+<b>JPopupMenu</b> creates a <b>JMenuItem</b></li>
+
+<li>
+<b>JToolBar</b> creates a <b>JButton</b></li>
+</ul>
+
+<li>
+The container gets the appropriate properties <i>(such as enabled and the
+icon)</i> from the <b>Action</b> object to customize the component.</li>
+
+<li>
+The container checks the initial state of the <b>Action</b> object to determine
+if it is enabled or disabled, and renders the component in the same state.</li>
+
+<li>
+The container registers a <b>PropertyChangeListener</b> with the <b>Action</b>
+object so that it is notified of state changes. When the <b>Action</b>
+object changes from enabled to disabled, or back, the container makes the
+appropriate revisions and renders the component accordingly.</li>
+</ul>
+<b><font color="#FF0000">The major differences</font></b>
+<p>The major differences between this approach and the preferred approach
+seem to be:
+<ul>
+<li>
+This approach is limited to only three types of containers, whereas the
+preferred approach can be used with just about any container.</li>
+
+<li>
+This approach can only be used with one specific component type for each
+of the three containers. The preferred approach can pair any of a
+large number of component types with just about any container.</li>
+</ul>
+<b><font color="#FF0000">Much more general</font></b>
+<p>The bottom line is that the preferred approach is the more general of
+the two. For example, if you had a reason to do so, you could put
+an <i>action-aware</i> <b>JTextField</b> object in a <b>JMenu</b> object,
+or an <i>action-aware</i> <b>JRadioButton</b> object in a <b>JButton</b>
+object.
+<p><b><font color="#FF0000">A sample program</font></b>
+<p>Now it is time to take a look at some code. A complete listing
+of the sample program named <b>ActionObj02</b> is shown in Listing 22 near
+the end of this article.
+<p>This program uses the preferred approach to place two <i>action-aware</i>
+components in each of the following three container types: <b>JMenu</b>,
+<b>JToolBar</b>,
+and <b>JPanel</b>.
+<blockquote><i>(Note that the earlier approach did not support the <b>JPanel</b>
+container type.)</i></blockquote>
+Two different <b>Action</b> objects are used to populate the three containers.
+Within each container, one of the components is registered with one of
+the <b>Action</b> objects, and the other component is registered with the
+other <b>Action</b> object.
+<p>The <b>JMenu</b> container is populated with two <b>JMenuItem</b> objects.
+The <b>JToolBar</b> container is populated with two <b>JButton</b> objects.
+The <b>JPanel</b> container is populated with one <b>JButton</b> object
+and one <b>JMenuItem</b> object.
+<p><b><font color="#FF0000">View at startup</font></b>
+<p>Figure 3 shows a view of the program as it appears at startup <i>(the
+<b>JMenu</b>
+object is hidden from view).</i>
+<center>
+<p><img SRC="java107fig03.gif" NOSAVE height=201 width=351>
+<p><b>Figure 3 View of Program at Startup</b></center>
+
+<p>The title for the hidden menu is shown at the top in Figure 3.
+A tool bar object is shown immediately below the menu bar. A <b>JPanel</b>
+object is shown at the bottom.
+<p>The four checkboxes in the center are used to manipulate the <i>enabled</i>
+and <i>icon</i> properties of the two <b>Action</b> objects. This,
+in turn, causes the <i>enabled</i> property of each of the components to
+change, and also causes the icon displayed on each of the components to
+change, when the checkboxes are checked and cleared.
+<p><b><font color="#FF0000">The expanded menu</font></b>
+<p>Figure 4 shows the screen display of the program with the menu expanded,
+but with no other changes.
+<center>
+<p><img SRC="java107fig04.gif" NOSAVE height=201 width=351>
+<p><b>Figure 4 View with Menu Expanded</b></center>
+
+<p>As you can see, the two menu items represent the same <b>Action</b>
+objects as the components on the tool bar and the components in the <b>JPanel</b>.
+<p><b><font color="#FF0000">Manipulating the Action objects</font></b>
+<p>The checkboxes in the center can be used to manipulate the <b>Action</b>
+objects. For example, Figure 5 shows the output with one of the <b>Action</b>
+objects disabled by checking the upper-left checkbox. <i>(Note that
+the text on the checkbox also changes when it is checked.)</i>
+<center>
+<p><img SRC="java107fig05.gif" NOSAVE height=201 width=351>
+<p><b>Figure 5 View with One Action Item Disabled</b></center>
+
+<p>As you can see in Figure 5, disabling one of the <b>Action</b> objects
+causes both of the visible <i>action-aware</i> components registered <i>(as
+PropertyChange listeners)</i> on that object to be disabled.
+<blockquote><i>(The menu also contains a component registered as a PropertyChange
+listener on that <b>Action</b> object. If you could see that component,
+you would see that it is disabled also.)</i></blockquote>
+In a similar fashion, checking the upper-right checkbox would disable the
+other <b>Action</b> object and the three components registered as <i>PropertyChange
+listeners </i>on it.
+<p><b><font color="#FF0000">Toggle between two icons</font></b>
+<p>The <b>enabled</b> property is clearly a property in the sense that
+its <i>setter</i> and <i>getter</i> methods match the JavaBeans design
+pattern for properties.
+<p>As we will see later, the property that specifies the icon to be displayed
+on the components doesn't use the standard <i>setter</i> and <i>getter</i>
+methods for properties. Regardless, changing the property that specifies
+the icon in the <b>Action</b> object causes the components registered on
+that object to display a different icon.
+<p>Figure 6 shows the result of checking the lower-left checkbox.
+Checking and clearing this checkbox toggles the specified icon in the
+<b>Action</b>
+object between two different gif files.
+<center>
+<p><img SRC="java107fig06.gif" NOSAVE height=201 width=351>
+<p><b>Figure 6 View with a Different Icon</b></center>
+
+<p>As you can see in Figure 6, changing the property that specifies the
+icon in one of the <b>Action</b> objects causes the icon displayed on registered
+components to change from a red ball to a blue ball. Again, if you
+could see the corresponding item on the menu, you would see that it has
+changed also.
+<p><b><font color="#FF0000">The Action interface</font></b>
+<p>According to Sun,
+<blockquote><i>"The Action interface provides a useful extension to the
+ActionListener interface in cases where the same functionality may be accessed
+by several controls."</i></blockquote>
+Previous sections in this article have discussed how such a capability
+may be used.
+<p>Here is a quotation from <a href="http://developer.java.sun.com/developer/Books/swing/">John
+Zukowski</a>, which may help to illuminate the purpose of the <b>Action</b>
+interface.
+<blockquote><i>"The Action interface is an extension to the ActionListener
+interface that's very flexible for defining shared event handlers independent
+of the components that act as the triggering agents. ..., the interface
+implements ActionListener and defines a lookup table data structure whose
+keys act as bound properties. Then, when an Action is associated with a
+component, these display properties are automatically carried over to it."</i></blockquote>
+<b><font color="#FF0000">The actionPerformed method and other things</font></b>
+<p>Because the <b>Action</b> interface extends the <b>ActionListener</b>
+interface, it declares the <b>actionPerformed</b> method. In addition,
+this interface makes it possible to define the following items in a single
+location:
+<ul>
+<li>
+Text strings that describe the properties of <i>action-aware</i> components
+associated with an <b>Action</b> object.</li>
+
+<li>
+Icons that may be displayed on <i>action-aware</i> components associated
+with an <b>Action</b> object.</li>
+
+<li>
+The <i>enabled/disabled</i> state that should be tracked by <i>action-aware</i>
+components registered as <b>PropertyChange</b> listeners on an <b>Action</b>
+object</li>
+</ul>
+<b><font color="#FF0000">The enabled/disabled state</font></b>
+<p>In addition to the <b>actionPerformed</b> method inherited from the
+<b>ActionListener</b>
+interface, the <b>Action</b> interface declares six methods in support
+of the functionality described above.
+<p>The two methods shown in Figure 7 are the standard JavaBeans <i>setter</i>
+and <i>getter</i> methods for the <b>enabled</b> property.
+<br/>
+<div class="a"><b>isEnabled</b>() - Returns the enabled state of the Action.
+<p><b>setEnabled</b>(boolean b) - Sets the enabled state of the Action.
+<p><b><font face="Courier New,Courier">Figure 7</font></b></div>
+
+<p>Although it isn't obvious in the method declarations, the <b>enabled</b>
+property is a <i>bound</i> property as described earlier in this article.
+<i>(In
+fact, the word bound doesn't appear anywhere in the JavaDocs description
+of javax.swing Interface Action for Java 2 Platform SE v1.4.0.)</i>
+<p><b><font color="#FF0000">PropertyChangeListener registration</font></b>
+<p>The two methods shown in Figure 8 are the standard JavaBeans methods
+for registering and unregistering a <b>PropertyChangeListener</b> object.
+<br/>
+<div class="a"><b>addPropertyChangeListener</b>(PropertyChangeListener listener) -
+Adds a PropertyChange listener.
+<p><b>removePropertyChangeListener</b>(PropertyChangeListener listener)-
+Removes a PropertyChange listener.
+<p><b><font face="Courier New,Courier">Figure 8</font></b></div>
+
+<p>All objects that are registered as a <b>PropertyChangeListener</b> on
+the <b>Action</b> object are notified when the value of any <i>bound</i>
+property changes.
+<p><b><font color="#FF0000">Keyed properties</font></b>
+<p>The two methods shown in Figure 9 are used to <i>put</i> and <i>get</i>
+the values of properties that I will refer to as <i>keyed properties</i>.
+These methods behave like typical <i>put</i> and <i>get</i> methods for
+a hashtable object.
+<br/>
+<div class="a">void <b>putValue</b>(String key, Object value) - Sets one of this object's
+properties using the associated key.
+<p>Object <b>getValue</b>(String key) - Gets one of this object's properties
+using the associated key.
+<p><b><font face="Courier New,Courier">Figure 9</font></b></div>
+
+<p>The values of these properties consist of:
+<ul>
+<li>
+Text strings that describe the properties of <i>action-aware</i> components
+associated with an <b>Action</b> object</li>
+
+<li>
+References to <b>ImageIcon</b> objects that may be displayed on <i>action-aware</i>
+components associated with an <b>Action</b> object.</li>
+</ul>
+<b><font color="#FF0000">The keys</font></b>
+<p>The keys associated with these values are declared by the <b>Action</b>
+interface as <b>public static final</b> fields of type <b>String</b>, having
+the following names and purposes.
+<ul>
+<li>
+<b>NAME</b> - Used for storing the name for the action. Appears at
+text on the face of a tool bar button or a menu item.</li>
+
+<li>
+<b>SHORT_DESCRIPTION</b> - Used for storing a short description for the
+action. This description is used for tooltip text.</li>
+
+<li>
+<b>SMALL_ICON</b> - Used for storing a small icon for the action.
+This icon appears on toolbar buttons and menu items.</li>
+
+<li>
+<b>ACCELERATOR_KEY</b> - Used for storing a <b>KeyStroke</b> to be used
+as the accelerator for the action.</li>
+
+<li>
+<b>MNEMONIC_KEY</b> - Used for storing a key code used as the mnemonic
+for the action.</li>
+
+<li>
+<b>ACTION_COMMAND_KEY</b> - Used to determine the command string for an
+<b>ActionEvent</b>
+object.</li>
+
+<li>
+<b>DEFAULT</b> - Can be used as the storage-retrieval key when setting
+or getting one of this object's properties.</li>
+
+<li>
+<b>LONG_DESCRIPTION</b> - Used for storing a longer description for the
+action.</li>
+</ul>
+<b><font color="#FF0000">The key values</font></b>
+<p>Because these fields are declared in an interface, they are inherently
+<b>final</b>.
+They are all references to <b>String</b> objects. Although the documentation
+doesn't specify the values encapsulated in the <b>String</b> objects, it
+can be determined experimentally that as of version 1.4.0, the string values
+encapsulated in the <b>String</b> objects are:
+<ul>
+<li>
+Name</li>
+
+<li>
+ShortDescription</li>
+
+<li>
+SmallIcon</li>
+
+<li>
+AcceleratorKey</li>
+
+<li>
+MnemonicKey</li>
+
+<li>
+ActionCommandKey</li>
+
+<li>
+Default</li>
+
+<li>
+LongDescription</li>
+</ul>
+Whenever possible you should refer to the constants symbolically <i>(as
+in Action.NAME)</i> and avoid using the encapsulated values explicitly.
+That way, if the encapsulated values change in some later version of Java,
+it will be less likely that your code will become broken.
+<p><b><font color="#FF0000">Key-value pairs</font></b>
+<p>The values associated with these keys <i>(in a key-value pair sense)</i>
+in any particular program are dependent on the program. You will
+see how some of these keys are used in the sample program to be discussed
+later, so I won't discuss them further at this time.
+<p><b><font color="#FF0000">Keyed properties are bound properties</font></b>
+<p>Apparently each of these keyed properties behaves like a <i>bound</i>
+property; meaning that all registered <b>PropertyChangeListener</b> objects
+are notified whenever the value of one of these properties changes.
+Whether or not that listener object takes any specific action as a result
+of the change is determined by the author of the class from which the <b>PropertyChangeListener</b>
+object is instantiated.
+<p><b><font color="#FF0000">Implementing the Action interface</font></b>
+<p>As is usually the case, you can start from scratch and define a new
+class that implements the <b>Action</b> interface. Among other things,
+this will require you to provide <b>PropertyChange</b> support.
+<p>If you elect to take this route, I recommend that you consider using
+an object instantiated from the <b>PropertyChangeSupport</b> class or the
+<b>SwingPropertyChangeSupport</b>
+class to handle the registration and notification of <b>PropertyChangeListener</b>
+objects.
+<p>However, in most cases, you won't need to start from scratch.
+Rather, you can define a new class that extends the <b>AbstractAction</b>
+class, and override any methods whose behavior needs to be different from
+that defined in that class.
+<p><b><font color="#FF0000">The AbstractAction class</font></b>
+<p>According to Sun,
+<blockquote><i>"This class provides default implementations for the JFC
+<b>Action</b>
+interface. Standard behaviors like the get and set methods for <b>Action</b>
+object properties (icon, text, and enabled) are defined here. The developer
+need only subclass this abstract class and define the
+<b>actionPerformed</b>
+method."</i></blockquote>
+Often, by extending this class, instead of defining a new class that implements
+the <b>Action</b> interface, you can save yourself a lot of programming
+effort.
+<blockquote><i>(As a side note regarding the importance of the <b>Action</b>
+interface, more than two-dozen classes in v1.4.0 extend the <b>AbstractAction</b>
+class.)</i></blockquote>
+<b><font color="#FF0000">Fields of AbstractAction class</font></b>
+<p>In addition to the <b>final</b> fields inherited from the <b>Action</b>
+interface, this class defines the following two fields:
+<ul>
+<li>
+SwingPropertyChangeSupport <b>changeSupport</b></li>
+
+<li>
+boolean <b>enabled</b></li>
+</ul>
+The first field contains a reference to an object instantiated from the
+<b>SwingPropertyChangeSupport</b>
+class. As I mentioned earlier, this is a helper class designed to
+register and notify <b>PropertyChange</b> listeners
+<p>The second field is of type <b>boolean</b>, and specifies whether the
+action is enabled at a particular point in time. The default value
+is true.
+<p><b><font color="#FF0000">Methods of AbstractAction class</font></b>
+<p>The <b>AbstractAction</b> class provides default implementations for
+each of the six methods declared in the <b>Action</b> interface <i>(See
+Figures 7, 8, and 9.)</i>
+<p>In addition, the <b>AbstractAction</b> class defines the four methods
+shown in Figure 10.
+<br/>
+<div class="a"><b>clone</b>() - Clones the abstract action.
+<p><b>firePropertyChange</b>(String propertyName, Object oldValue, Object
+newValue) - Supports reporting bound property changes.
+<p><b>getKeys</b>() - Returns an array of Objects which are keys for which
+values have been set for this AbstractAction, or null if no keys have values
+set.
+<p><b>getPropertyChangeListeners()</b> - Returns an array of all the PropertyChangeListeners
+added to this AbstractAction with addPropertyChangeListener().
+<p><b><font face="Courier New,Courier">Figure 10</font></b></div>
+
+<p>The behavior of the <b>clone</b> method should be self-explanatory.
+<p><b><font color="#FF0000">firePropertyChange method</font></b>
+<p>This method can be used in a subclass to fire a <b>PropertyChange</b>
+event. When a <b>PropertyChange</b> event is fired, the <b>SwingPropertyChangeSupport</b>
+object will send the appropriate <b>PropertyChangeEvent</b> to all registered
+<b>PropertyChangeListener</b>
+objects.
+<p><b><font color="#FF0000">getKeys method</font></b>
+<p>Returns an array of <b>Object</b> references which are the keys for
+which values have been set. Returns null if no keys have their values
+set. Can be used in an <i>action-aware</i> component to identify
+and get the values for keyed properties.
+<p><b><font color="#FF0000">getPropertyChangeListeners()</font></b>
+<p>Returns an array of all the PropertyChangeListeners added to this <b>AbstractAction</b>
+object with <b>addPropertyChangeListener()</b>. The array is empty
+if no listeners have been added. Can be used in a subclass to get
+a list of listeners.
+<p><b><font color="#FF0000">Now for some code</font></b>
+<p>As is my practice, I will discuss the program named <b>ActionObj02 </b>in
+fragments. A complete listing of the program is shown in Listing
+22 near the end of the chapter. The first fragment, shown in Listing
+1, simply uses the <b>main</b> method to instantiate an object of the <b>GUI</b>
+class. I will discuss the definition of the <b>GUI</b> class later.
+<br/>
+<div class="a">
+<pre>public class ActionObj02{
+ public static void <b>main</b>(
+ String[] args){
+ new GUI();
+ }//end main
+}//end ActionObj02
+
+<b><font face="Courier New,Courier">Listing 1</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">The MyAction class</font></b>
+<p>Listing 2 shows the entire class definition for the <b>MyAction</b>
+class from which <b>Action</b> objects will be instantiated.
+<br/>
+<div class="a">
+<pre>class <b>MyAction extends AbstractAction</b>{
+ public void <b>actionPerformed</b>(
+ ActionEvent e){
+ System.out.println("Action: " +
+ ((AbstractButton)e.getSource()).
+ getActionCommand());
+ }//end actionPerformed
+}//end class MyAction
+
+<b><font face="Courier New,Courier">Listing 2</font></b></pre>
+</div>
+
+<p>Note that the <b>MyAction</b> class doesn't implement the <b>Action</b>
+interface directly. Rather, it extends the <b>AbstractAction</b>
+class and implements the <b>Action</b> interface through inheritance.
+This causes it to inherit the default behavior of the methods defined in
+the <b>AbstractAction</b> class and discussed earlier in this chapter.
+<p><b><font color="#FF0000">Overrides actionPerformed</font></b>
+<p>The <b>MyAction</b> class overrides the <b>actionPerformed</b> method.
+The overridden behavior of the method is to get and display the <i>action
+command</i> for any source object
+<i>(on which it is registered)</i> that
+fires an <b>ActionEvent</b>. By default, the <i>action command</i>
+is simply the text that is visible on the face of the source object. Thus,
+clicking any of the six components located on the <b>JMenu</b>, the <b>JToolBar</b>,
+or the <b>JPanel</b> <i>(see Figure 4)</i> will cause the text on the face
+of that component to be displayed.
+<p><b><font color="#FF0000">The GUI class</font></b>
+<p>Listing 3 shows the beginning of the <b>GUI</b> class.
+<br/>
+<div class="a">
+<pre>class <b>GUI</b> extends JFrame{
+ JMenuBar menuBar = new JMenuBar();
+ JMenu menu = new JMenu("Menu");
+ JToolBar toolBar = new JToolBar();
+ JPanel panel = new JPanel();
+
+<b><font face="Courier New,Courier">Listing 3</font></b></pre>
+</div>
+
+<p>The code in Listing 3 creates the following container objects, which
+are visible in Figure 4:
+<ul>
+<li>
+JMenu</li>
+
+<li>
+JToolBar</li>
+
+<li>
+JPanel</li>
+</ul>
+<b><font color="#FF0000">Two Action objects</font></b>
+<p>Listing 4 creates two <b>Action</b> objects <i>(instances of the <b>MyAction</b>
+class discussed above).</i> These two <b>Action</b> objects will
+be registered on various <i>action-aware</i> components later.
+<br/>
+<div class="a">
+<pre> Action actionObj01 = new MyAction();
+ Action actionObj02 = new MyAction();
+
+<b><font face="Courier New,Courier">Listing 4</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Control</font></b>
+<p>Listing 5 creates the four check boxes and a control panel shown in
+the center of Figure 3.
+<br/>
+<div class="a">
+<pre> JCheckBox ckBox01 = new JCheckBox(
+ "Disable01");
+ JCheckBox ckBox02 = new JCheckBox(
+ "Disable02");
+ JCheckBox ckBox03 = new JCheckBox(
+ "Toggle Icon01");
+ JCheckBox ckBox04 = new JCheckBox(
+ "Toggle Icon02");
+ JPanel controlPanel = new JPanel();
+
+<b><font face="Courier New,Courier">Listing 5</font></b></pre>
+</div>
+
+<p>The four check boxes will be used to manipulate the behavior of the
+two <b>Action</b> objects, and hence the behavior of the six associated
+<i>action-aware</i>
+components. Note that the text shown on the face of the checkboxes
+will be modified when those checkboxes are checked and cleared.
+<p><b><font color="#FF0000">The GUI constructor</font></b>
+<p>Listing 6 shows the beginning of the constructor for the <b>GUI</b>
+class.
+<br/>
+<div class="a">
+<pre> GUI(){//constructor
+ menuBar.<b>add</b>(menu);
+
+ menuBar.<b>setBorder</b>(
+ new BevelBorder(
+ BevelBorder.RAISED));
+
+ <b>setJMenuBar</b>(menuBar);
+
+<b><font face="Courier New,Courier">Listing 6</font></b></pre>
+</div>
+
+<p>The code in Listing 6 adds the <b>JMenu</b> object to the <b>JMenuBar</b>
+object, which is the standard way to construct a menu in Java.
+<p>Then it invokes the <b>setBorder</b> method on the menu bar to cause
+its edges to become visible. I did this to make it easy to visually
+separate the menu bar from the tool bar that appears immediately below
+it in Figure 3. <i>(You can learn more about Swing borders at <a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Baldwin's
+Java Programming Tutorials</a>.)</i>
+<p><b><font color="#FF0000">Set the JMenuBar</font></b>
+<p>Finally, the code in Listing 6 adds the menu bar to the <b>JFrame</b>.
+Note, however, that this is accomplished by invoking the <b>setJMenuBar</b>
+method on the <b>JFrame</b> object instead of invoking an <i>add</i> method,
+<i>(which
+is the way that other components are normally added to a <b>JFrame</b>
+container.)</i>
+<p><b><font color="#FF0000">A decorated JToolBarcontainer</font></b>
+<p>Listing 7 decorates the <b>JToolBar</b> object with raised bevel borders,
+and places it in the NORTH position of the <b>JFrame</b> object.
+This causes the toolbar to appear immediately below the menu bar in Figure
+3.
+<br/>
+<div class="a">
+<pre> toolBar.setBorder(new BevelBorder(
+ BevelBorder.RAISED));
+ getContentPane().add(
+ toolBar,BorderLayout.NORTH);
+
+<b><font face="Courier New,Courier">Listing 7</font></b></pre>
+</div>
+
+<p><i>(If need be, you can also learn more about the <b>BorderLayout</b>
+manager and the <b>getContentPane</b> method at <a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Baldwin's
+Java Programming Tutorials</a>.)</i>
+<p><b><font color="#FF0000">A decorated JPanel container</font></b>
+<p>Listing 8 decorates the <b>JPanel</b> object with raised bevel borders,
+and places it in the SOUTH position of the <b>JFrame</b> object.
+This causes it to appear at the bottom of the <b>JFrame</b> in Figure 3.
+<br/>
+<div class="a">
+<pre> panel.setBorder(new BevelBorder(
+ BevelBorder.RAISED));
+ getContentPane().add(
+ panel,BorderLayout.SOUTH);
+
+<b><font face="Courier New,Courier">Listing 8</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Setting keyed values</font></b>
+<p>Except for the definition of the <b>MyAction</b> class discussed earlier,
+very little of the code discussed so far has been specific to the <b>Action</b>
+interface. However, the code in Listing 9 is very specific to the
+<b>Action</b>
+interface.
+<br/>
+<div class="a">
+<pre> actionObj01.<b>putValue</b>(
+ Action.NAME,"actionObj01");
+
+<b><font face="Courier New,Courier">Listing 9</font></b></pre>
+</div>
+
+<p>Listing 9 invokes the <b>putValue</b> method on one of the <b>Action</b>
+objects to set the <i>value</i> for one of the <i>keyed properties.</i>
+As mentioned earlier, each <b>Action</b> object has a container for <i>keyed
+properties</i> that behaves much as a hashtable behaves. <i>Values</i>
+are stored against <i>keys,</i> and can be accessed later by specifying
+the <i>key.</i>
+<p>Values are stored in that container by invoking the <b>putValue</b>
+method and passing a <i>key</i> and a <i>value</i> as parameters.
+In this case, one of the constants <i>(final variables)</i> defined in
+the <b>Action</b> interface is used as the <i>key</i>. The literal
+<b>String</b>
+object <i>"actionObj01"</i> is passed as the value.
+<blockquote><i>(Note that as discussed earlier, the constant is referred
+to symbolically as <b>Action.NAME</b>, and no explicit use is made of the
+actual <b>String</b> value encapsulated in that constant.)</i></blockquote>
+<b><font color="#FF0000">The remaining keyed properties</font></b>
+<p>Listing 10 sets the values for each of the remaining <i>keyed properties.</i>
+<br/>
+<div class="a">
+<pre> actionObj01.putValue(
+ Action.<b>SMALL_ICON</b>,new ImageIcon(
+ "<b>redball.gif</b>"));
+ actionObj01.putValue(
+ Action.SHORT_DESCRIPTION,
+ "ToolTip for actionObj01");
+
+ actionObj02.putValue(
+ Action.NAME,"actionObj02");
+ actionObj02.putValue(
+ Action.<b>SMALL_ICON</b>,new ImageIcon(
+ "<b>bulb2.gif</b>"));
+ actionObj02.putValue(
+ Action.SHORT_DESCRIPTION,
+ "ToolTip for actionObj02");
+
+<b><font face="Courier New,Courier">Listing 10</font></b></pre>
+</div>
+
+<p>As mentioned earlier, these <i>keyed properties</i> behave as <i>bound
+properties,</i> meaning that registered objects are notified when their
+values change. Checking and clearing two of the checkboxes in this
+program causes the values of the <b>SMALL_ICON</b> properties to change,
+thus causing the icons displayed on the components registered on the respective
+<b>Action</b>
+objects to change accordingly.
+<p><b><font color="#FF0000">Build the menu</font></b>
+<p>Code that I discussed earlier created a menu bar and placed a menu on
+that bar. Now the time has come to place some menu items on that
+menu. This process begins in Listing 11.
+<br/>
+<div class="a">
+<pre> JMenuItem mnuA1 = new JMenuItem();
+<b> </b>mnuA1.<b>setAction</b>(actionObj01);
+ menu.add(mnuA1);
+
+<b><font face="Courier New,Courier">Listing 11</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Invoke the setAction method</font></b>
+<p>The code in Listing 11 is very significant relative to the use of <b>Action</b>
+objects. Listing 11 instantiates a new <b>JMenuItem</b> object and
+then invokes the <b>setAction</b> method on that object, passing a reference
+to one of the <b>Action</b> objects as a parameter.
+<p>As discussed earlier, this causes the <b>Action</b> object to be registered
+as an action listener on the <b>JMenuItem</b> object.
+<p><b><font color="#FF0000">PropertyChange listener registration</font></b>
+<p>More importantly, however, for the purpose of this discussion, invocation
+of the <b>setAction</b> method causes the <b>JMenuItem</b> object to be
+registered as a <b>PropertyChange</b> listener on the <b>Action</b> object.
+Following this, when the <i>enabled</i> property, or any of the <i>keyed
+properties</i> of the <b>Action</b> object change, the <b>JMenuItem</b>
+object will be notified of the change.
+<p>The <b>JMenuItem</b> class is designed such that this will cause some
+of the corresponding properties on the
+<b>JMenuItem</b> object to change
+in order to track the change on the <b>Action</b> object. <i>(A <b>JMenuItem</b>
+object doesn't set or track all of the indexed properties.)</i>
+<p>After the <b>JMenuItem</b> object has been properly prepared, it is
+added to the menu in Listing 11.
+<p><b><font color="#FF0000">An alternative to invoking setAction</font></b>
+<p>Listing 12 shown an alternative approach to invoking the <b>setAction</b>
+method on the new <b>JMenuItem</b> object. (<i>This approach appears
+to achieve the same result as the invocation of the <b>setAction</b> method.).</i>
+<br/>
+<div class="a">
+<pre> //Put a JMenuItem on the menu. Set
+ // its Action object in the
+ // constructor. This is a
+ // different approach.
+ JMenuItem mnuA2 =
+ <b>new JMenuItem(actionObj02);
+</b> menu.add(mnuA2);
+
+<b><font face="Courier New,Courier">Listing 12</font></b></pre>
+</div>
+
+<p>The <b>JMenuItem</b> class has a constructor that accepts a reference
+to an <b>Action</b> object as a parameter, and according to the Sun documentation,
+<i>"Creates
+a menu item whose properties are taken from the specified Action."</i>
+<p><b><font color="#FF0000">An understatement</font></b>
+<p>It appears that the statement in the Sun documentation is something
+of an understatement. In particular, it appears that constructing
+the <b>JMenuItem</b> object in this manner causes the <b>action</b> property
+of that object to be set to the <b>Action</b> object, just as though the
+<b>setAction</b>
+method were invoked on that object as in Listing 11.
+<p>As explained in the discussion of Listing 11, this involves much more
+than the Sun documentation statement would imply. In particular,
+the <b>Action</b> object becomes an <i>action listener</i> on the <b>JMenuItem</b>
+object, and the <b>JMenuItem</b> also becomes a <i>change listener</i>
+on the
+<b>Action</b> object.
+<p><b><font color="#FF0000">Registration of two action listeners</font></b>
+<p>Registering an <b>Action</b> object on an <i>action-aware</i> component
+does not prohibit the registration of ordinary <b>ActionListener</b> objects
+on the same component. This is illustrated in Listing 13.
+<br/>
+<div class="a">
+<pre> JButton butB1 = new JButton();
+
+ butB1.<b>addActionListener</b>(
+ new ActionListener(){
+ public void <b>actionPerformed</b>(
+ ActionEvent e){
+ System.out.println(
+ "<b>Ordinary Action Listener</b>");
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+ butB1.<b>setAction</b>(actionObj01);
+
+ toolBar.add(butB1);
+
+<b><font face="Courier New,Courier">Listing 13</font></b></pre>
+</div>
+
+<p>Listing 13 instantiates a new <b>JButton</b> object, and then uses an
+anonymous inner class to register an ordinary <b>ActionListener</b> object
+on that component.
+<blockquote><i>(If you are unfamiliar with anonymous inner classes, see
+<a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Baldwin's
+Java Programming Tutorials</a>.)</i></blockquote>
+Then it invokes the <b>setAction</b> method on the same <b>JButton</b>
+object, which causes the specified <b>Action</b> object to also be registered
+as an action listener on the <b>JButton</b> object.
+<p><b><font color="#FF0000">Two actionPerformed methods are invoked</font></b>
+<p>Thereafter, when the <b>JButton</b> object is clicked with the mouse,
+causing an action event to be fired by the <b>JButton</b> object, the following
+two lines of text appear on the screen:
+<p><b><tt>Action: actionObj01</tt></b>
+<br/><b><tt>Ordinary Action Listener</tt></b>
+<p>The first line of output text is produced by the <b>actionPerformed</b>
+method defined in the <b>Action</b> object <i>(see Listing 2).</i>
+<p>The second line of output text is produced by the <b>actionPerformed</b>
+method defined for the ordinary <b>ActionListener</b> object <i>(see Listing
+13).</i>
+<p><b><font color="#FF0000">Finish populating the toolbar</font></b>
+<p>Listing 14 finishes populating the toolbar by placing another <b>JButton</b>
+object on the toolbar.
+<br/>
+<div class="a">
+<pre> JButton butB2 = new JButton();
+ butB2.<b>setAction</b>(actionObj02);
+ toolBar.add(butB2);
+
+<b><font face="Courier New,Courier">Listing 14</font></b></pre>
+</div>
+
+<p>Listing 14 invokes the <b>setAction</b> method on the <b>JButton</b>
+object to register the other <b>Action</b> object on that <b>JButton</b>.
+Thus, two different <b>Action</b> objects are registered on the two <b>JButton</b>
+objects on the toolbar.
+<p><b><font color="#FF0000">Synchronized with menu items</font></b>
+<p>Furthermore, the same two <b>Action</b> objects that are registered
+on the <b>JButton</b> objects on the tool bar are also registered on the
+two <b>JMenuItem</b> objects on the menu. Thus, the menu items and
+the toolbar buttons are tied together <i>(in pairs)</i> so as to behave
+in a synchronous fashion.
+<p>When one of the <b>Action</b> objects becomes disabled, the corresponding
+menu item and the corresponding toolbar button also become disabled.
+When the other <b>Action</b> object becomes disabled, the other menu item
+and the other toolbar button become disabled.
+<p>When an <b>Action</b> object becomes enabled, the corresponding menu
+item and the corresponding toolbar button become enabled.
+<p>When the value of the <i>keyed property</i> of an <b>Action</b> object
+identified with the key <i>Action.SMALL_ICON</i> changes, the corresponding
+menu item and the corresponding toolbar button track the change.
+This causes the image displayed on both of those components to change.
+<p><b><font color="#FF0000">Various containers can be used</font></b>
+<p>Probably the most common use of the <b>Action</b> interface is to synchronize
+the behavior of items on a menu with buttons on a toolbar. However,
+the use of the <b>Action</b> interface is not confined to those two types
+of containers. Rather, the <b>Action</b> interface can be used to
+synchronize the behavior of <i>action-aware</i> components in just about
+any kind of container. This is illustrated in Listing 15.
+<blockquote><i>(You may want to avoid AWT containers to avoid the problems
+involved in mixing heavyweight and lightweight components. For example,
+it appears that you cannot control icons on a <b>JButton</b> that is placed
+in an AWT <b>Panel</b>.)</i></blockquote>
+
+<div class="a">
+<pre> JButton butC = new JButton();
+ butC.<b>setAction</b>(actionObj01);
+ panel.add(butC);
+
+ JMenuItem mnuC = new JMenuItem();
+ mnuC.<b>setAction</b>(actionObj02);
+ panel.add(mnuC);
+
+<b><font face="Courier New,Courier">Listing 15</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Populate the JPanel</font></b>
+<p>Listing 15 creates a new <b>JButton</b> object and a new <b>JMenuItem</b>
+object and places them in a common <b>JPanel</b> container object.
+The <b>setAction</b> method is used, along with the same two <b>Action</b>
+objects discussed earlier, to synchronize the behavior of these two components
+with the two components on the menu, and the two components on the toolbar.
+<blockquote><i>(Hopefully by now you will have compiled and run this program.
+Due to the limitations of my verbal descriptions of behavior, running the
+program may ultimately be necessary for you to fully understand how this
+program behaves.)</i></blockquote>
+<b><font color="#FF0000">Construct control panel, set size, etc.</font></b>
+<p>Listing 16 constructs the control panel containing check boxes that
+will be used to manipulate the properties of the two <b>Action</b> objects.
+Listing 16 also sets the size of the GUI and makes it visible.
+<br/>
+<div class="a">
+<pre> //Construct the control panel and
+ // put it in the Center
+ controlPanel.setLayout(
+ new GridLayout(2,2,3,3));
+ controlPanel.add(ckBox01);
+ controlPanel.add(ckBox02);
+ controlPanel.add(ckBox03);
+ controlPanel.add(ckBox04);
+ getContentPane().add(controlPanel,
+ BorderLayout.CENTER);
+
+ //Set the size and make the GUI
+ // visible
+ setSize(350,200);
+ setVisible(true);
+ setTitle("Copyright, " +
+ "R.G.Baldwin");
+
+<b><font face="Courier New,Courier">Listing 16</font></b></pre>
+</div>
+
+<p>The code in Listing 16 is completely straightforward and doesn't deserve
+further discussion in this article.
+<p><b><font color="#FF0000">Register checkbox event handlers to manipulate
+Action properties</font></b>
+<p>The anonymous inner listener class in Listing 17 makes it possible for
+the user to manipulate the <b>enabled</b> property of one of the <b>Action</b>
+objects and its associated visual components.
+<p>The code in Listing 17, <i>(and the code that follows in other listings),</i>
+registers <b>ActionListener</b> objects on each of the checkboxes.
+<blockquote><i>(Note that these ActionListener objects registered on the
+checkboxes are completely independent of the <b>Action</b> objects registered
+on the action-aware components.)</i></blockquote>
+This control structure makes it possible for the user to disable and enable
+the two <b>Action</b> objects independently of one another simply by checking
+or clearing the checkboxes.
+<p>This control structure also makes it possible to toggle the icons between
+two different images on each <b>Action</b> object when the <b>Action</b>
+object is enabled.
+<br/>
+<div class="a">
+<pre> ckBox01.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ if(e.getActionCommand().
+ equals("Disable01")){
+ ckBox01.setText(
+ "Enable01");
+ <b>actionObj01.setEnabled(
+ false)</b>;
+ //Disable ability to toggle
+ // the IconImage.
+ ckBox03.setEnabled(false);
+ }else{
+ ckBox01.setText(
+ "Disable01");
+ <b>actionObj01.setEnabled(
+ true)</b>;
+ //Enable ability to toggle
+ // the IconImage.
+ ckBox03.setEnabled(true);
+ }//end else
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+<b><font face="Courier New,Courier">Listing 17</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Two important statements</font></b>
+<p>Although the code in Listing 17 appears to be long and complex, it is
+relatively straightforward.
+<p>The <b>actionPerformed</b> method shown in Listing 17 is invoked when
+the checkbox fires an action event <i>(when the user checks or clears the
+checkbox). </i>Let me draw your attention to the two boldface statements
+in Listing 17. These two statements use the current state of the
+checkbox object to make a decision between two alternatives, and then to
+change the value of the <b>enabled</b> property of the <b>Action</b> object
+referred to by <b>actionObj01</b>. <i>(The state of the checkbox
+object
+is also changed accordingly.)</i>
+<p>When the value of the <b>enabled</b> property of the <b>Action</b> object
+is changed, the three components registered earlier as <i>change listeners</i>
+on the <b>Action</b> object are notified of the change. The code
+in the classes from which those components were instantiated causes them
+to become enabled or disabled accordingly. In other words, the <i>enabled</i>
+state of all three components tracks the <b>enabled</b> property of the
+<b>Action</b>
+object.
+<p><b><font color="#FF0000">The other Action object</font></b>
+<p>The code in Listing 18 uses a different checkbox object to provide essentially
+the same <i>enabled/disabled </i>control for the other <b>Action</b> object
+and its associated components. Since this code replicates the code
+in Listing 17, I deleted most of it for brevity. You can view all
+of the code in Listing 22 near the end of this chapter.
+<br/>
+<div class="a">
+<pre> ckBox02.addActionListener(
+ //...code deleted for brevity
+ );//end addActionListener
+
+<b><font face="Courier New,Courier">Listing 18</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Manipulate the icons</font></b>
+<p>Listing 19 is an anonymous inner listener class that makes it possible
+for the user to manipulate a <i>keyed property</i> value of an <b>Action</b>
+object, the value of which specifies the icon to be displayed on registered
+components.
+<p>Basically, this code causes the value of the property that specifies
+the icon displayed on the components to toggle between two different <b>ImageIcon</b>
+objects based on two different <i>gif</i> files.
+<br/>
+<div class="a">
+<pre> ckBox03.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ //Get file name for the
+ // ImageIcon object.
+ String gif = (actionObj01.
+ <b>getValue</b>(
+ Action.SMALL_ICON)).
+ toString();
+
+ if((gif).equals(
+ "redball.gif")){
+<b> </b>actionObj01.<b>putValue</b>(
+ Action.SMALL_ICON,
+ new ImageIcon(
+ "blueball.gif"));
+ }else{
+ actionObj01.<b>putValue</b>(
+ Action.SMALL_ICON,
+ new ImageIcon(
+ "redball.gif"));
+ }//end else
+
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+<b><font face="Courier New,Courier">Listing 19</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Change the displayed icon</font></b>
+<p>The logic in Listing 19 is straightforward. When the checkbox
+fires an action event, the code in the <b>actionPerformed</b> method uses
+the <b>getValue</b> method of the <b>Action</b> interface to get the name
+of the <i>gif</i> file that specifies the icon. Then it changes the
+value of that <i>keyed property</i> in the <b>Action</b> object to an <b>ImageIcon</b>
+object based on the other <i>gif</i> file, thereby toggling the value between
+two <b>ImageIcon</b> objects based on the two different <i>gif</i> files.
+<p>When the value of this <i>keyed property</i> changes, the three components
+that were earlier registered as <i>change listeners</i> on the <b>Action</b>
+object are notified of the change. The code in the classes from which
+the three components were instantiated causes the icon that is displayed
+on the component to track the corresponding property value of the <b>Action</b>
+object.
+<p><b><font color="#FF0000">Do it again for the other Action object</font></b>
+<p>Listing 20 provides the same icon toggling capability for the other
+<b>Action</b>
+object. Once again, since this code replicates the code in Listing
+19, I deleted most of it for brevity. You can view all of the code
+in Listing 22 near the end of this chapter.
+<br/>
+<div class="a">
+<pre> ckBox04.addActionListener(
+ //... code deleted for brevity
+ );//end addActionListener
+
+<b><font face="Courier New,Courier">Listing 20</font></b></pre>
+</div>
+
+<p><b><font color="#FF0000">Finally, the end of the program</font></b>
+<p>Listing 21 is a simple WindowListener that terminates the program when
+the user clicks the <i>close</i> button on the <b>JFrame</b> object.
+This is relatively standard material, which should not require a discussion
+in this context.
+<br/>
+<div class="a">
+<pre> this.addWindowListener(
+ new WindowAdapter(){
+ public void windowClosing(
+ WindowEvent e){
+ System.exit(0);
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ }//end constructor
+}//end GUI class
+
+<b><font face="Courier New,Courier">Listing 21</font></b></pre>
+</div>
+
+<p>Listing 21 is also the end of the <b>GUI</b> class definition.
+<br/>
+<center>
+<h2>
+<a NAME="Run the program"></a>Run the Program</h2></center>
+If you haven't done so already, I encourage you to copy the code from Listing
+22 into your text editor. Then compile and run it. Make changes
+and experiment with it in order to get a feel for the use of the <b>Action</b>
+interface.
+<blockquote><i>(Note that you will need a couple of gif files containing
+small images to use as <b>ImageIcon</b> objects. Any small image
+will do. Just be sure to handle the file names properly.)</i></blockquote>
+
+<center>
+<h2>
+<a NAME="Complete Program Listings"></a>Complete Program Listing</h2></center>
+A complete listing of the program is shown in Listing 22 below.
+<br/>
+<div class="a">
+<pre>/*ActionObj02.java
+Rev 03/30/02
+Copyright, R.G.Baldwin
+
+Illustrates use of action objects.
+Uses the setAction method that was
+released with V1.3
+
+Tested using JDK 1.4.0 under
+Win2000.
+**************************************/
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ActionObj02{
+ public static void main(
+ String[] args){
+ new GUI();
+ }//end main
+}//end ActionObj02
+//===================================//
+
+class GUI extends JFrame{
+ //Create three containers
+ JMenuBar menuBar = new JMenuBar();
+ JMenu menu = new JMenu("Menu");
+ JToolBar toolBar = new JToolBar();
+ JPanel panel = new JPanel();
+
+ //Create two Action objects
+ Action actionObj01 = new MyAction();
+ Action actionObj02 = new MyAction();
+
+ //Create four check boxes and a
+ // control panel, which will be used
+ // to manipulate the Action objects
+ // and their visual components.
+ JCheckBox ckBox01 = new JCheckBox(
+ "Disable01");
+ JCheckBox ckBox02 = new JCheckBox(
+ "Disable02");
+ JCheckBox ckBox03 = new JCheckBox(
+ "Toggle Icon01");
+ JCheckBox ckBox04 = new JCheckBox(
+ "Toggle Icon02");
+ JPanel controlPanel = new JPanel();
+
+ GUI(){//constructor
+ //Construct and decorate the menu
+ // and put it in place.
+ menuBar.add(menu);
+ menuBar.setBorder(
+ new BevelBorder(
+ BevelBorder.RAISED));
+ setJMenuBar(menuBar);
+
+ //Decorate the JToolBar and place
+ // it in the North position.
+ toolBar.setBorder(new BevelBorder(
+ BevelBorder.RAISED));
+ getContentPane().add(
+ toolBar,BorderLayout.NORTH);
+
+ //Decorate the JPanel and place it
+ // in the South position.
+ panel.setBorder(new BevelBorder(
+ BevelBorder.RAISED));
+ getContentPane().add(
+ panel,BorderLayout.SOUTH);
+
+ //Set some keyed properties for
+ // each of the two Action objects.
+ actionObj01.putValue(
+ Action.NAME,"actionObj01");
+ actionObj01.putValue(
+ Action.SMALL_ICON,new ImageIcon(
+ "redball.gif"));
+ actionObj01.putValue(
+ Action.SHORT_DESCRIPTION,
+ "ToolTip for actionObj01");
+
+ actionObj02.putValue(
+ Action.NAME,"actionObj02");
+ actionObj02.putValue(
+ Action.SMALL_ICON,new ImageIcon(
+ "bulb2.gif"));
+ actionObj02.putValue(
+ Action.SHORT_DESCRIPTION,
+ "ToolTip for actionObj02");
+
+ //Put a JMenuItem on the menu. Set
+ // its Action object using the
+ // setAction method. This is
+ // one approach.
+ JMenuItem mnuA1 = new JMenuItem();
+ mnuA1.setAction(actionObj01);
+ menu.add(mnuA1);
+
+ //Put a JMenuItem on the menu. Set
+ // its Action object in the
+ // constructor. This is a
+ // different approach.
+ JMenuItem mnuA2 =
+ new JMenuItem(actionObj02);
+ menu.add(mnuA2);
+
+
+ //Put a JButton on the toolbar.
+ // Set its Action object using the
+ // setAction method. Also register
+ // an ordinary Action listener
+ // on it.
+ JButton butB1 = new JButton();
+ butB1.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ System.out.println(
+ "Ordinary Action Listener");
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+ butB1.setAction(actionObj01);
+ toolBar.add(butB1);
+
+ //Put a JButton on the toolbar.
+ // Set its Action object.
+ JButton butB2 = new JButton();
+ butB2.setAction(actionObj02);
+ toolBar.add(butB2);
+
+ //Put a JButton on the JPanel.
+ // Set its Action object.
+ JButton butC = new JButton();
+ butC.setAction(actionObj01);
+ panel.add(butC);
+
+ //Put a JMenuItem on the JPanel.
+ // Set its Action object.
+ JMenuItem mnuC = new JMenuItem();
+ mnuC.setAction(actionObj02);
+ panel.add(mnuC);
+
+
+ //Construct the control panel and
+ // put it in the Center
+ controlPanel.setLayout(
+ new GridLayout(2,2,3,3));
+ controlPanel.add(ckBox01);
+ controlPanel.add(ckBox02);
+ controlPanel.add(ckBox03);
+ controlPanel.add(ckBox04);
+ getContentPane().add(controlPanel,
+ BorderLayout.CENTER);
+
+ //Set the size and make the GUI
+ // visible
+ setSize(350,200);
+ setVisible(true);
+ setTitle("Copyright, " +
+ "R.G.Baldwin");
+
+ //The following anonymous inner
+ // allow the user to manipulate the
+ // Action objects and their
+ // associated visual components.
+
+ //Register ActionListener objects
+ // on each of the check boxes.
+ // This makes it possible to
+ // disable and enable the two
+ // Actions objects independently of
+ // one another. It also makes it
+ // possible to toggle the icons
+ // between two different images
+ // on each Action object when the
+ // Action object is enabled.
+ ckBox01.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ if(e.getActionCommand().
+ equals("Disable01")){
+ ckBox01.setText(
+ "Enable01");
+ actionObj01.setEnabled(
+ false);
+ //Disable ability to toggle
+ // the IconImage.
+ ckBox03.setEnabled(false);
+ }else{
+ ckBox01.setText(
+ "Disable01");
+ actionObj01.setEnabled(
+ true);
+ //Enable ability to toggle
+ // the IconImage.
+ ckBox03.setEnabled(true);
+ }//end else
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+ ckBox02.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ if(e.getActionCommand().
+ equals("Disable02")){
+ ckBox02.setText(
+ "Enable02");
+ actionObj02.setEnabled(
+ false);
+ //Disable ability to toggle
+ // the IconImage.
+ ckBox04.setEnabled(false);
+ }else{
+ ckBox02.setText(
+ "Disable02");
+ actionObj02.setEnabled(
+ true);
+ //Enable ability to toggle
+ // the IconImage.
+ ckBox04.setEnabled(true);
+ }//end else
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+ ckBox03.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ //Get file name for the
+ // ImageIcon object.
+ String gif = (actionObj01.
+ getValue(
+ Action.SMALL_ICON)).
+ toString();
+
+ if((gif).equals(
+ "redball.gif")){
+ actionObj01.putValue(
+ Action.SMALL_ICON,
+ new ImageIcon(
+ "blueball.gif"));
+ }else{
+ actionObj01.putValue(
+ Action.SMALL_ICON,
+ new ImageIcon(
+ "redball.gif"));
+ }//end else
+
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+ ckBox04.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(
+ ActionEvent e){
+ //Get file name for the
+ // ImageIcon object.
+ String gif = (actionObj02.
+ getValue(
+ Action.SMALL_ICON)).
+ toString();
+
+ if((gif).equals(
+ "bulb2.gif")){
+ actionObj02.putValue(
+ Action.SMALL_ICON,
+ new ImageIcon(
+ "bulb1.gif"));
+ }else{
+ actionObj02.putValue(
+ Action.SMALL_ICON,
+ new ImageIcon(
+ "bulb2.gif"));
+ }//end else
+
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener
+
+ //Create a WindowListener used
+ // to terminate the program
+ this.addWindowListener(
+ new WindowAdapter(){
+ public void windowClosing(
+ WindowEvent e){
+ System.exit(0);
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ }//end constructor
+}//end GUI class
+
+//===================================//
+
+//This is the class from which the
+// Action objects are instantiated.
+class MyAction extends AbstractAction{
+ public void actionPerformed(
+ ActionEvent e){
+ System.out.println("Action: " +
+ ((AbstractButton)e.getSource()).
+ getActionCommand());
+ }//end actionPerformed
+}//end class MyAction
+
+<b><font face="Courier New,Courier">Listing 22</font></b></pre>
+</div>
+
+<p>
+<hr size=3 width="100%" align=center>
+<p>Copyright, Richard G. Baldwin. Reproduction in whole or in
+part in any form or medium without express written permission from Richard
+Baldwin is prohibited.
+<h4>
+<a NAME="About the author"></a>About the author</h4>
+<b><a href="mailto:baldwin.richard@iname.com">Richard Baldwin</a></b><i>
+is a college professor (at Austin Community College in Austin, TX) and
+private consultant whose primary focus is a combination of Java, C#, and
+XML. In addition to the many platform and/or language independent benefits
+of Java and C# applications, he believes that a combination of Java, C#,
+and XML will become the primary driving force in the delivery of structured
+information on the Web.</i>
+<p><i>Richard has participated in numerous consulting projects, and he
+frequently provides onsite training at the high-tech companies located
+in and around Austin, Texas. He is the author of Baldwin's Programming
+<a href="http://www.geocities.com/Athens/7077/scoop/onjava.html">Tutorials</a>,
+which has gained a worldwide following among experienced and aspiring programmers.
+He has also published articles in JavaPro magazine.</i>
+<p><i>Richard holds an MSEE degree from Southern Methodist University and
+has many years of experience in the application of computer technology
+to real-world problems.</i>
+<p><i><a href="mailto:baldwin.richard@iname.com">baldwin.richard@iname.com</a></i>
+<p>-end-
+<br/>
+</body>
+</html>

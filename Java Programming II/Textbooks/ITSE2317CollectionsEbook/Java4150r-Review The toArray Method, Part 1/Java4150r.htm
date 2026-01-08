@@ -1,0 +1,329 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4150r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4150r Review: The toArray Method, Part 1</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a></li>
+	</ul>
+	</li>
+	<li><a href="#Figures">Figures</a></li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4150: The toArray Method, Part 1</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? The <strong>Collection</strong> interface declares the following two versions 
+of the <strong>toArray</strong> method <em>(with generics syntax omitted because generics is 
+beyond the scope of this course)</em>.</p>
+<p><strong>public Object[] toArray()
+ 
+</strong></p>
+<p><strong>public Object[] toArray(Object[] a)</strong></p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>Write down the output produced by the program in <a href="#Listing_1">Listing 
+1</a>. </p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? When the <strong>toArray</strong> method is used to produce an 
+array containing the contents of a collection, modifying the contents of the 
+array will also modify the contents of the underlying collection.</p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>True or False? When the <strong>toArray</strong> method is used to produce an 
+array containing the contents of a collection, the array ends up containing 
+references to copies of the objects referred to by the elements of the 
+collection.</p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? In Java, it is not possible to have two or more references to 
+the same object. </p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? When the <strong>toArray</strong> method is used to produce an 
+array containing the contents of a collection, if you use a reference stored in 
+the array to modify the state of the object to which it refers, that 
+modification is made to an object that is also referred to by an element in the 
+collection. The array and the collection contain references to the same objects.</p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+
+<h1><a name="Figures">Figures</a></h1>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Answer 2.</li>
+
+	</ul>
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. ToArray01.java. </li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>True.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>False. In Java, it is entirely possible to have two or more references to the 
+same object. This can lead to problems if you are not careful as to how you use 
+those references.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>False. When the <strong>toArray</strong> method is used to produce an array 
+containing the contents of a collection, the collection and the array end up 
+containing copies of references to the same underlying objects.</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False. According to Oracle,</p>
+<p>"<i>The returned array will be "safe" in that no references to it are 
+maintained by this collection. ... The caller is thus free to modify the 
+returned array."</i></p>
+<p>Note, however, that there is still some danger that you need to be aware of, 
+and you must use caution when using the contents of the array.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>The program shown in <a href="#Listing_1">Listing 1</a> produces the output 
+shown in <a href="#Figure_1">Figure 1</a>.</p>
+
+	<div class="a">
+<a name="Figure_1">Figure 1</a>. Answer 2.
+<pre>
+Collection contents
+B0 B1 L2 B3 B4 L5 
+New array contents
+B0 B1 L2 B3 B4 L5 
+Modified array contents
+XX B1 L2 B3 B4 L5 
+Collection contents
+XX B1 L2 B3 B4 L5 
+</pre>
+</div>
+
+
+
+	
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>True. </p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+
+
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. ToArray01.java.</p>
+<pre>//File ToArray01.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+import javax.swing.*;
+
+class ToArray01{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class ToArray01
+//===================================//
+
+class Worker{
+  public void doIt(){
+    Collection ref;
+
+    //Create, populate, and display the
+    // contents of a collection
+    ref = new LinkedList();
+    Populator.fillIt(ref);
+    System.out.println("Collection contents");
+    showCollection(ref);
+
+    //Get collection contents into the
+    // array and display the new
+    // contents of the array.
+    Object[] array = ref.toArray();
+    System.out.println("New array contents");
+    showArray(array);
+
+    //Modify a property of an object
+    // referred to by one of the
+    // elements in the array. Display
+    // array contents after
+    // modification
+    System.out.println("Modified array contents");
+    ((JComponent)array[0]).setToolTipText("XX");
+    showArray(array);
+
+    //Display the contents of the
+    // collection
+    System.out.println("Collection contents");
+    showCollection(ref);
+  }//end doIt()
+//-----------------------------------//
+
+  //Utility method for displaying
+  // array contents
+  void showArray(Object[] array){
+    for(int i = 0; i &lt; array.length;i++){
+      if(array[i] == null){
+        System.out.print("null ");
+      }else{
+        System.out.print(((JComponent)array[i]).
+                                 getToolTipText() + " ");
+      }//end else
+    }//end for loop
+    System.out.println();
+  }//end showArray()
+//-----------------------------------//
+
+  //Utility method for displaying
+  // collection contents
+  void showCollection(Collection ref){
+    Iterator iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(((JComponent)iter.next()).
+                                 getToolTipText() + " ");
+    }//end while loop
+    System.out.println();
+  }//end showCollection
+}// end class Worker
+//===================================//
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new JButton());
+    ref.add(new JButton());
+    ref.add(new JLabel());
+    ref.add(new JButton());
+    ref.add(new JButton());
+    ref.add(new JLabel());
+
+    Iterator iter = ref.iterator();
+    int cnt = 0;
+    JComponent refVar;
+    while(iter.hasNext()){
+      refVar = (JComponent)iter.next();
+      if(refVar instanceof JButton){
+        refVar.setToolTipText("B"+cnt++);
+      }else{
+        refVar.setToolTipText("L" + cnt++);
+      }//end else
+    }//end while loop
+
+  }//end fillIt()
+}//end class Populator
+</pre>
+
+</div>
+
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+			</p>
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4150r Review: The toArray Method, Part 1</li>
+				<li>File: Java4150r.htm </li>
+				<li>Published: 12/04/13</li>
+				<li>Revised: 04/21/20</li>
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+
+
+</body>
+</html>

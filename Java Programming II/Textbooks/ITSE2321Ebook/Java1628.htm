@@ -1,0 +1,865 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>ava1628</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1628: The <em>this</em> and <em>super</em> Keywords</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. The extends keyword. </li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The program named This01.</li>
+		<li><a href="#Listing_2">Listing 2</a>. The program named This02. </li>
+		<li><a href="#Listing_3">Listing 3</a>. The program named This03. </li>
+		<li><a href="#Listing_4">Listing 4</a>. The program named Super3. </li>
+		<li><a href="#Listing_5">Listing 5</a>. The program named Super4.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter explains the use of the keywords <b><i>this</i></b> and <b>
+	<i>super</i></b>. Short sample programs illustrate how you can use these 
+	keywords for several purposes.</p>
+<p>I will discuss and illustrate the use of the <b>this</b> keyword in the 
+following situations: </p>
+<ul>
+	<li>To bypass local variables or parameters that hide member variables 
+	having the same name, in order to access the member variable.</li>
+	<li>To make it possible for one overloaded constructor to call another 
+	overloaded constructor in the same class.</li>
+	<li>To pass a reference to the current object to a method belonging to a 
+	different object <i>(as in implementing callbacks, for example).</i></li>
+</ul>
+<p>I will also discuss and illustrate the use of the <b>super</b> keyword in the 
+following situations:</p>
+<ul>
+	<li>To bypass the overridden version of a method in a subclass and execute 
+	the version in the superclass.</li>
+	<li>To bypass a member variable in a subclass in order to access a member 
+	variable having the same name in a superclass.</li>
+	<li>To cause a constructor in a subclass to call a parameterized constructor 
+	in the immediate superclass.</li>
+</ul>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><b>You already know quite a lot about OOP</b></p>
+<p>By now you know that an <i>object </i>is an <i>instance of a class</i>. You 
+know that all variables and methods in Java must be contained in a class or an 
+object. You know that the three primary characteristics of an object-oriented 
+programming language are:</p>
+<ul>
+	<li><i>encapsulation</i></li>
+	<li><i>inheritance</i></li>
+	<li><i>polymorphism</i>.</li>
+</ul>
+<p>If you have been studying this series of chapters on the Essence of OOP in 
+Java, you already know quite a lot about OOP in general, and the implementation 
+of OOP in Java in particular.</p>
+<p><b>A few more important OOP/Java concepts</b></p>
+<p>However, there are a few more important concepts that I haven&#39;t previously 
+discussed in this series of chapters. In this chapter, I will explain the use of 
+the keywords <b><i>this</i></b> and <b><i>super</i></b>. </p>
+<p><b>Data and methods</b> </p>
+<p>The class provides the plan from which objects are built. This plan defines 
+the <i>data</i> that is to be stored in an object and the <i>methods</i> for 
+manipulating that data. The data is variously referred to as <i>data members,</i>
+<i>fields</i>, and <i>variables</i>, depending on which book you are reading.
+</p>
+<p><b>Non-static and static</b> </p>
+<p>The data can be further sub-divided into <i>non-static</i> and <i>static</i>, 
+often referred to as i<i>nstance variables </i>and <i>class variables</i> 
+respectively. </p>
+<p>The methods are also often referred to as <i>member methods</i> and they can 
+also be <i>static </i>or <i>non-static</i>. Static methods are often referred to 
+as <i>class methods</i> while non-static methods are often referred to as <i>
+instance methods</i>. </p>
+<p><b>Instance variables and instance methods</b> </p>
+<p>The class body contains the <i>declarations </i>for, and possibly the <i>
+initialization </i>of all data members <i>(both class variables and instance 
+variables)</i> as well as the full definition of all <i>methods</i>. <em>(If the 
+class body doesn't contain the full definition of all methods, the class must be 
+declared to be <strong>abstract</strong>, which in effect means incomplete.)</em></p>
+<p>In this chapter, we will be particularly interested in instance variables and 
+instance methods. </p>
+<p><b>Every class is a subclass of Object</b> </p>
+<p>By default, every class in Java extends <i>(either directly or indirectly)</i> 
+the class named <b>Object</b>. A new class may either extend <b>Object</b>, or 
+extend another class that extends <b>Object</b>, or extend another class further 
+down the inheritance hierarchy. </p>
+<p>The immediate parent class of a new class is known as its <i>superclass</i>, 
+and the new class is known as the <i>subclass</i>. </p>
+<p><i>(Sometimes we use the word superclass to indicate the collection of 
+classes in the inheritance hierarchy from which a specific class is derived.)</i>
+</p>
+<p>If you do not specify the <i>superclass </i>for a new class, it will extend
+<b>Object</b> by default. </p>
+<p><b>The <i>extends</i> keyword</b> </p>
+<p>The keyword <b>extends</b> is used in the class declaration to specify the 
+immediate <i>superclass </i>of the new class using the syntax shown in 
+<a href="#Figure_1">Figure 1</a>.
+</p>
+<div class="a"><a name="Figure_1">Figure 1</a>. The extends keyword.
+
+
+							<pre>class NewClass extends SuperClassName{
+  //body of class
+}//end class definition</pre>
+
+</div>
+	<p><b>Inheritance</b></p>
+<p>A class inherits the variables and methods of its superclass, and of the 
+superclass of that class, etc., all the way back up the family tree to the 
+single class <b>Object</b>, which is the root of all inheritance. </p>
+<p>Thus, an object that is instantiated from a class contains all the instance 
+variables and all the instance methods defined by that that class and defined by 
+all its ancestors. </p>
+<p>However, the methods may have been <i>overridden</i> one or more times along 
+the way. Also, access to those variables and methods may have been restricted 
+through the use of the <b>public</b>, <b>private</b>, and <b>protected</b> 
+keywords. </p>
+<p><i>(There is another access level, often referred to as <b>package private</b>, 
+which is what you get when you don&#39;t use an access keyword.)</i> </p>
+<p><b>The this keyword</b> </p>
+<p>Every instance method in every object in Java receives a reference named <b>
+this</b> when the method is called. The reference named <b>this</b> is a 
+reference to the object on which the method was called. It can be used for any 
+purpose for which such a reference is needed. </p>
+<p><b><a name="Three_common_situations">Three common situations</a></b> </p>
+<p>There are at least three common situations where such a reference is needed:
+</p>
+<ul>
+	<li>To bypass local variables or parameters that hide member variables 
+	having the same name, in order to access the member variable.</li>
+	<li>To make it possible for one overloaded constructor to call another 
+	overloaded constructor in the same class.</li>
+	<li>To pass a reference to the current object to a method belonging to a 
+	different object <i>(as in implementing callbacks, for example).</i></li>
+</ul>
+<p>Normally, instance methods belonging to an object have direct access to the 
+instance variables belonging to that object, and to the class variables 
+belonging to the class from which that object was instantiated. </p>
+<p><i>(Class methods never have access to instance variables or instance 
+methods.)</i> </p>
+<p><b>Name can be duplicated</b> </p>
+<p>However, the name of a method parameter or constructor parameter can be the 
+same as the name of an instance variable belonging to the object or a class 
+variable belonging to the class. It is also allowable for the name of a local 
+variable to be the same as the name of an instance variable or a class variable. 
+In this case, the local variable or the parameter is said to <i>hide </i>the 
+member variable having the same name. </p>
+<p><b>Reference named <i>this</i> is passed to instance methods</b> </p>
+<p>As mentioned above, whenever an instance method is called on an object, a 
+hidden reference named <b>this </b>is always passed to the method. The <b>this
+</b>reference always refers to the object on which the method was called. This 
+makes it possible for the code in the method to refer back to the object on 
+which the method was called. </p>
+<p>The reference named <b>this </b>can be used to access the member variables 
+hidden by the local variables or parameters having of the same name. </p>
+<p><b>The sample program named This01</b> </p>
+<p>The sample program shown in <a href="#Listing_1">Listing 1</a> illustrates 
+the use of the <b>this </b>
+reference to access a hidden instance variable named <b>myVar</b> and a hidden 
+class variable named <b>yourVar</b>. </p>
+
+<div class="a">
+<a name="Listing_1">Listing 1</a>. <strong>The program named This01</strong>.
+
+<pre>/*File This01.java
+Copyright, R.G.Baldwin
+Illustrates use of this keyword to
+access hidden member variables.
+
+Tested using JDK 1.4.0 under Win2000
+
+The output from this program is:
+
+myVar parameter = 20
+local yourVar variable = 1
+Instance variable myVar = 5
+Class variable yourVar = 10
+**************************************/
+
+class This01 {
+  int myVar = 0;
+  static int yourVar = 0;
+
+  //Constructor with parameters named
+  // myVar and yourVar
+  public This01(int myVar,int yourVar){
+    this.myVar = myVar;
+    this.yourVar = yourVar;
+  }//end constructor
+  //---------------------------------//
+
+  //Method with parameter named myVar
+  // and local variable named yourVar
+  void myMethod(int myVar){
+    int yourVar = 1;
+    System.out.println(
+         &quot;myVar parameter = &quot; + myVar);
+    System.out.println(
+            &quot;local yourVar variable = &quot;
+                            + yourVar);
+    System.out.println(
+           &quot;Instance variable myVar = &quot;
+                         + this.myVar);
+    System.out.println(
+            &quot;Class variable yourVar = &quot;
+                       + this.yourVar);
+  }//end myMethod
+  //---------------------------------//
+
+  public static void main(
+                        String[] args){
+    This01 obj = new This01(5,10);
+    obj.myMethod(20);
+  }//end main method
+}//End This01 class definition.</pre>
+
+</div>
+	<p><b>The key points</b></p>
+<p>The key points to observe in the program is <a href="#Listing_1">Listing 1</a> 
+are:</p>
+<ul>
+	<li>When the code refers to <b>myVar</b> or <b>yourVar</b>, the reference 
+	resolves to either an incoming parameter or to a local variable having that 
+	name.</li>
+	<li>When the code refers to <b>this.myVar</b> or <b>this.yourVar</b>, the 
+	reference resolves to the corresponding instance variable and class variable 
+	having that name.</li>
+</ul>
+<p>To summarize this situation, every time an instance method is called, it 
+receives a hidden reference named <b>this</b>. That is a reference to the object 
+on which the method was called. </p>
+<p>The code in the method can use that reference to access any instance member 
+of the object on which it was called, or any class member of the class from 
+which the object was instantiated. </p>
+<p>However, when class methods are called, they do not receive such a hidden 
+reference, and therefore, they cannot refer to any instance members of any 
+object instantiated from the class. They can only access class members of the 
+same class. </p>
+<p><b>Calling other constructors of the same class</b> </p>
+<p>Now I am going to discuss and illustrate the second common situation listed 
+earlier. </p>
+<p>A class can define two or more overloaded constructors having the same name 
+and different argument lists. Sometimes it is useful for one overloaded 
+constructor to call another overloaded constructor in the same class. When this 
+is done, the constructor being called is referred to as though it were a method 
+whose name is <b>this</b>, and whose argument list matches the argument list of 
+the constructor being called. </p>
+<p><b>The sample program named This02</b> </p>
+<p>This situation is illustrated in the program named <b>This02</b> shown in 
+<a href="#Listing_2">Listing 2</a>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. The program named This02.
+
+				<pre>/*File This02.java
+Copyright, R.G.Baldwin
+Illustrates use of this keyword for one
+overloaded constructor to access
+another overloaded constructor of the
+same class.
+
+Tested using JDK 1.4.0 under Win2000
+
+The output from this program is:
+
+Instance variable myVar = 15
+**************************************/
+
+class This02 {
+  int myVar = 0;
+
+  public static void main(
+                        String[] args){
+    This02 obj = new This02();
+    obj.myMethod();
+  }//end main method
+  //---------------------------------//
+
+  //Constructor with no parameters
+  public This02(){
+    //Call parameterized constructor
+    this(15);
+  }//end constructor
+  //---------------------------------//
+
+  //Constructor with one parameter
+  public This02(int var){
+    myVar = var;
+  }//end constructor
+  //---------------------------------//
+
+  //Method to display member variable
+  // named myVar
+  void myMethod(){
+    System.out.println(
+           &quot;Instance variable myVar = &quot;
+                              + myVar);
+  }//end myMethod
+
+}//End This02 class definition.</pre>
+</div>
+	<p><b>Calling a <i>noarg</i> constructor</b> </p>
+<p>The <b>main</b> method in <a href="#Listing_2">Listing 2</a> instantiates a 
+new object by applying the <b>new</b> operator to the <i>noarg</i> constructor 
+for the class named <b>This02</b>. </p>
+<p><i>(The common jargon for a constructor that doesn&#39;t take any parameters is a 
+noarg constructor.)</i> </p>
+<p><b>The <i>noarg</i> constructor calls a parameterized constructor</b> </p>
+<p>The code in the <i>noarg</i> constructor uses the <b>this</b> keyword to call 
+the other overloaded constructor, passing an <strong>int</strong> value of 15 as 
+a parameter. </p>
+<p>That constructor stores the value of the incoming parameter (15) in the 
+instance variable named <b>myVar</b>. Then control returns to the <i>noarg</i> 
+constructor, which in turn returns control to the <b>main</b> method. When 
+control returns to the <b>main</b> method, the new object has been constructed, 
+and the instance variable named <b>myVar</b> belonging to that object contains 
+the value 15. </p>
+<p><b>Display the value of the instance variable</b> </p>
+<p>The next statement in the <b>main</b> method calls the method named <b>
+myMethod</b> on the object, which causes the value stored in the instance 
+variable (15) to be displayed on the screen. </p>
+<p><b>The most important statement</b> </p>
+<p>For purposes of this discussion, the most important statement in the program 
+is the statement that reads: </p>
+<div class="a">
+<pre>this(15);</pre>
+</div>
+<p>This is the statement used by one overloaded constructor to call another 
+overloaded constructor. </p>
+<p><b>Callbacks</b> </p>
+<p>An extremely important concept in programming is the third situation 
+mentioned in the <a href="#Three_common_situations">earlier list</a>. This is a situation where a method in one object 
+calls a method in another object and passes a reference to itself as a 
+parameter. </p>
+<p><i>(This is sometimes referred to as registration. That is to say, 
+one object registers itself on another object.)</i> </p>
+<p>The method in the second object saves the reference that it receives as an 
+incoming parameter. This makes it possible for a method in the second object to 
+make a callback to the first object sometime later. This is illustrated in the 
+program named <b>This03</b>, shown in <a href="#Listing_3">Listing 3</a>. </p>
+
+
+
+<div class="a">
+<a name="Listing_3">Listing 3</a>. <strong>The program named This03</strong>.
+
+<pre>/*File This03.java
+Copyright, R.G.Baldwin
+Illustrates using the this keyword in
+a callback scenario.
+
+Tested using JDK 1.4.0 under Win2000
+
+The output from this program is:
+
+Instance variable myVar = 15
+**************************************/
+
+class This03 {
+  public static void main(
+                        String[] args){
+    ClassA objA = new ClassA();
+    ClassB objB = new ClassB();
+    objA.goRegister(objB);
+    objB.callHimBack();
+    objA.showData();
+  }//end main method
+}//End This03 class definition.
+//===================================//
+
+class ClassA{
+  int myVar;
+
+  void goRegister(ClassB refToObj){
+    refToObj.registerMe(this);
+
+  }//end goRegister
+  //---------------------------------//
+
+  void callMeBack(int var){
+    myVar = var;
+  }//end callMeBack
+  //---------------------------------//
+
+  void showData(){
+    System.out.println(
+           &quot;Instance variable myVar = &quot;
+                              + myVar);
+  }//end showData
+}//end ClassA
+//===================================//
+
+class ClassB{
+  ClassA ref;
+
+  void registerMe(ClassA var){
+    ref = var;
+  }//end registerMe
+  //---------------------------------//
+
+  void callHimBack(){
+    ref.callMeBack(15);
+  }//end callHimBack
+
+}//End ClassB class definition</pre>
+
+</div>
+
+	<p><b>Not intended to be useful</b> </p>
+<p>Note that the program in <a href="#Listing_3">Listing 3</a> is intended 
+solely to illustrate the concept of a callback, and is not intended to do 
+anything useful. This is a rather long and convoluted explanation, so please 
+bear with me. </p>
+<p>The <b>main</b> method begins by instantiating two objects, one each from the 
+classes named <b>ClassA</b> and <b>ClassB</b>. </p>
+<p><b>Go register yourself</b> </p>
+<p>Then the <b>main</b> method sends a message to <b>objA</b> telling it to go 
+register itself on <b>objB</b>. A reference to <b>objB</b> is passed as a 
+parameter to the method named <b>goRegister</b> belonging to <b>objA</b>. </p>
+<p>The code in <b>objA</b> uses this reference to call the method named <b>
+registerMe</b> on <b>objB</b>, passing <b>this</b> as a parameter. In other 
+words, the code in <b>objA</b> calls a method belonging to <b>objB</b> passing a 
+reference to itself as a parameter. The code in <b>objB</b> saves that reference 
+in an instance variable for later use. </p>
+<p><b>Make a callback</b> </p>
+<p>Then the <b>main</b> method sends a message to <b>objB</b> asking it to use 
+the saved reference to make a callback to <b>objA</b>. The code in the method 
+named <b>callHimBack</b> uses the reference to <b>objA</b> saved earlier to call 
+the method named <b>callMeBack</b> on <b>objA</b>, passing 15 as a parameter. 
+The method named <b>callMeBack</b> belonging to <b>objA</b> saves that value in 
+an instance variable. </p>
+<p><b>Show the data</b> </p>
+<p>Finally, the <b>main</b> method calls the <b>showData</b> method on <b>objA</b> 
+to cause the value stored in the instance variable belonging to <b>objA</b> to 
+be displayed on the computer screen. </p>
+<p><b>Callbacks are important</b> </p>
+<p>Again, this program is provided solely to illustrate the concept of a 
+callback using the <b>this</b> keyword. In practice, callbacks are used 
+throughout Java, but they are implemented in a somewhat more elegant way, making 
+use of interfaces. </p>
+<p>For example, interfaces with names like <b>Observer</b> and <b>MouseListener</b> 
+are commonly used to register <i>observer</i> objects on <i>observable</i> 
+objects <i>(sometimes referred to as listeners and sources).</i> Then later in 
+the program, when something of interest happens on the <i>observable</i> object
+<i>(the source),</i> all registered <i>observer</i> objects <i>(the listeners),</i> 
+are notified of the event. </p>
+<p><b>The main point regarding the <i>this</i> reference</b> </p>
+<p>The main point of this discussion is that the <b>this</b> reference is 
+available to all instance methods belonging to an object, and can be used 
+whenever there is a need for a reference to the object on which the method is 
+called. </p>
+<p><b>To disambiguate something</b> </p>
+<p>At least one prominent author uses the word <i>disambiguate</i> to describe 
+the process described by the first item in the
+<a href="#Three_common_situations">earlier list</a>, where the <b>this</b> keyword is used to bypass one 
+variable in favor of a different variable having the same name. I will also use 
+that terminology in the following discussion. </p>
+<p><b><a name="Three_uses_of_the_super_keyword">Three uses of the <i>super</i> 
+keyword</a></b> </p>
+<p>Here are three common uses of the <strong>super</strong> keyword:</p>
+<ul>
+	<li>If your class <i>overrides </i>a method in a superclass, you can use the
+	<b>super </b>keyword to bypass the overridden version in the class and 
+	execute the version in the superclass. </li>
+	<li>If a local variable in your method or a member variable in your class 
+	hides a member variable in the superclass <i>(having the same name),</i> you 
+	can use the <b>super</b> keyword<b> </b>to access the member variable in the 
+	superclass. </li>
+	<li>You can also use <b>super</b> in a constructor of your class to call a 
+	parameterized constructor in the superclass. </li>
+</ul>
+<p><b>The program named Super3</b> </p>
+<p>The program in <a href="#Listing_4">Listing 4</a> uses <b>super</b> to call a parameterized 
+constructor in the superclass from the subclass constructor. This is an 
+important use of <b>super</b>. </p>
+<p>The program also uses <b>this</b> and <b>super</b> to disambiguate a local 
+variable, an instance variable of the subclass, and an instance variable of the 
+superclass. All three variables have the same name. </p>
+
+
+
+<div class="a">
+<a name="Listing_4">Listing 4</a>. <strong>The program named Super3</strong>.
+
+<pre>/*File Super3.java
+Copyright, R.G.Baldwin
+Illustrates use of super reference to
+access constructor in superclass.  Also
+illustrates use of super to
+disambiguate instance variable in
+subclass from instance variable in
+superclass.  Illustrates use of this
+to disambiguate local variable from
+instance variable in subclass.
+
+Tested using JDK 1.4.0 under Win2000
+
+The output from this program is:
+
+In SuperClass constructor.
+Setting superclass instance var to 500
+
+In subclass constructor.
+Setting subclass instance var to 400
+
+In main
+Subclass instance var = 400
+
+In method myMeth
+Local var = 300
+Subclass instance var = 400
+SuperClass instance var = 500
+**************************************/
+class SuperClass{
+  int data;
+
+  //Parameterized superclass
+  // constructor
+  public SuperClass(int val){
+    System.out.println(
+        &quot;In SuperClass constructor. &quot;);
+    System.out.println(
+         &quot;Setting superclass instance &quot;
+                   + &quot;var to &quot; + val);
+    data = val;
+    System.out.println();//blank line
+  }//end SuperClass constructor
+}//end SuperClass class definition
+//===================================//
+
+class Super3 extends SuperClass{
+  //Instance var in subclass has same
+  // name as instance var in superclass
+  int data;
+
+  //Subclass constructor
+  public Super3(){
+    //Call parameterized SuperClass
+    // constructor
+    super(500);
+    System.out.println(
+           &quot;In subclass constructor.&quot;);
+    System.out.println(
+       &quot;Setting subclass instance var &quot;
+                           + &quot;to 400&quot;);
+    data = 400;
+    System.out.println();//blank line
+  }//end subclass constructor
+  //---------------------------------//
+
+  //Method illustrates use of this and
+  // super to disambiguate local
+  // variable, instance variable of
+  // subclass, and instance variable
+  // of superclass.  All three
+  // variables have the same name.
+  void myMeth(){
+    int data = 300;//local variable
+    System.out.println(
+                   &quot;In method myMeth&quot;);
+    System.out.println(&quot;Local var = &quot;
+                               + data);
+    System.out.println(
+             &quot;Subclass instance var = &quot;
+                          + this.data);
+    System.out.println(
+           &quot;SuperClass instance var = &quot;
+                         + super.data);
+  }//end method myMeth
+  //---------------------------------//
+
+  public static void main(
+                       String[] args){
+    Super3 obj = new Super3();
+    System.out.println(&quot;In main&quot;);
+    System.out.println(
+             &quot;Subclass instance var = &quot;
+                           + obj.data);
+    System.out.println();//blank line
+    obj.myMeth();
+  }//end main method
+}//End Super3 class definition.</pre>
+
+</div>
+<p>The keyword <b>super</b> is used twice in the program in
+	<a href="#Listing_4">Listing 4</a><i>.</i> </p>
+<p><b>Call a parameterized constructor</b> </p>
+<p>The first usage of the keyword <b>super</b> appears as the first executable 
+statement in the <i>noarg</i> constructor for the class named <b>Super3</b>. 
+This statement reads as follows: </p>
+<div class="a">
+<pre>super(500);</pre>
+</div>
+<p>This statement causes the parameterized constructor for the immediate 
+superclass <i>(the class named <b>SuperClass</b>)</i> of the class named <b>
+Super3</b>, to be executed before the remaining code in the constructor for <b>
+Super3</b> is executed. </p>
+<p>This is the mechanism by which you can cause a parameterized constructor in 
+the immediate superclass to be executed. </p>
+<p><b>What if you don&#39;t do this?</b> </p>
+<p>If you don&#39;t do this, an attempt will always be made to call a <i>noarg</i> 
+constructor on the superclass before executing the remaining code in the 
+constructor for your class. </p>
+<p><i>(That is why you should almost always make 
+certain that the classes that you define have a noarg constructor in addition to 
+any parameterized constructors that you may define.)</i> </p>
+<p><b>First executable statement in constructor</b> </p>
+<p>When <b>super(parameters)</b> is used to call the superclass constructor, it 
+must always be the first executable statement in the constructor. </p>
+<p>Whenever you call the constructor of a class to instantiate an object, if 
+your constructor doesn&#39;t have a call to <b>super</b> as the first executable 
+statement in the constructor, the call to the <i>noarg</i> constructor in the 
+superclass is made automatically. </p>
+<p>In other words, in order to construct an object of a class, it is necessary 
+to first construct that part of the object attributable to the superclass. That 
+normally happens automatically, making use of the superclass constructor that 
+doesn&#39;t take any parameters. </p>
+<p><b>Calling a parameterized constructor</b> </p>
+<p>If you want to use a version of the superclass constructor that takes 
+parameters, you can make your own call to <b>super(parameters)</b> as the first 
+executable statement in your constructor <i>(as was done in this program).</i>
+</p>
+<p><b>Accessing a superclass member variable</b> </p>
+<p>The second use of the <b>super</b> keyword in the program shown in 
+<a href="#Listing_4">Listing 4</a> 
+uses the keyword to bypass an instance variable named <b>data</b> in the class 
+named <b>Super3</b>, to access and display the value of an instance variable 
+named <b>data</b> in the superclass named <b>SuperClass</b>. </p>
+<p>Note that in that same section of code, the <b>this</b> keyword is used to 
+bypass a local variable named <b>data</b> in order to display the value of an 
+instance variable named <b>data</b> in the class named <b>Super3</b>. </p>
+<p>Similarly, a statement without the use of either <b>this</b> or <b>super</b> 
+is used to display the value of a local variable named <b>data</b>. </p>
+<p><b>To disambiguate</b> </p>
+<p>Therefore, as stated earlier, the program uses <b>this</b> and <b>super</b> 
+to disambiguate a local variable, an instance variable of the subclass, and an 
+instance variable of the superclass, where all three variables have the same 
+name. </p>
+<p><b>Accessing overridden superclass method</b> </p>
+<p>As mentioned <a href="#Three_uses_of_the_super_keyword">earlier</a>, if your method <i>overrides </i>a method in its 
+superclass, you can use the keyword <b>super </b>to call the overridden version 
+in the superclass, possibly completely bypassing the overridden version in the 
+subclass. </p>
+<p><b>The program named Super4</b></p>
+<p>This is illustrated by the program in <a href="#Listing_5">Listing 5</a>. This program contains an 
+overridden version of a superclass method named <b>meth</b>. The subclass 
+version uses the value of an incoming parameter to decide whether to call the 
+superclass version and then to call some of its own code, or to execute its own 
+code exclusively. </p>
+
+
+
+<div class="a">
+<a name="Listing_5">Listing 5</a>. <strong>The program named Super4</strong>.
+
+<pre>/*File Super4.java
+Copyright, R.G.Baldwin
+Illustrates calling the superclass
+version of an overridden method from
+code in the subclass version.
+
+Tested using JDK 1.4.0 under Win 2000.
+
+The output from this program is:
+
+In main
+Entering overridden method in subclass
+Incoming parameter is false
+Subclass version only is called
+Back in or still in subclass version
+Goodbye from subclass version
+
+Entering overridden method in subclass
+Incoming parameter is true
+SuperClass method called
+Back in or still in subclass version
+Goodbye from subclass version
+
+Back in main
+**************************************/
+class SuperClass{
+  //Following method is overridden in
+  // the subclass.
+  void meth(boolean par){
+    System.out.println(
+       &quot;Incoming parameter is &quot; + par);
+    System.out.println(
+          &quot;SuperClass method called&quot;);
+  }//end meth
+}//end SuperClass class definition
+//===================================//
+
+class Super4 extends SuperClass{
+  //Following method overrides method
+  // in the superclass
+  void meth(boolean par){
+    System.out.println(
+          &quot;Entering overridden method &quot;
+                      + &quot;in subclass&quot;);
+    //Decide whether to call
+    // superclass version
+    if(par)
+      //Call superclass version
+      super.meth(par);
+    else{
+      //Don&#39;t call superclass version
+      System.out.println(
+       &quot;Incoming parameter is &quot; + par);
+      System.out.println(
+            &quot;Subclass version only is &quot;
+                          + &quot;called&quot;);
+    }//end else
+    //Execute some additional code
+    System.out.println(
+        &quot;Back in or still in subclass &quot;
+                          + &quot;version&quot;);
+    System.out.println(
+      &quot;Goodbye from subclass version&quot;);
+    System.out.println();//blank line
+
+  }//end overridden meth()
+  //---------------------------------//
+
+  public static void main(
+                        String[] args){
+    //instantiate an object of
+    // this type
+    Super4 obj = new Super4();
+    System.out.println(&quot;In main&quot;);
+    //Call overridden version of
+    // method
+    obj.meth(false);
+    //Call superclass version of
+    // method
+    obj.meth(true);
+    System.out.println(&quot;Back in main&quot;);
+  }//end main method
+}//End Super4 class definition.</pre>
+
+</div>
+	<p><b>Only one statement contains super</b> </p>
+<p>The <b>super</b> keyword is used in only one statement in the program in 
+<a href="#Listing_5">Listing 5</a>. That statement appears in the subclass version of an overridden 
+method, and is as follows: </p>
+<div class="a">
+<pre>super.meth(par);</pre>
+</div>
+<p>This statement is inside the body of an <b>if</b> statement. If the value of
+<b>par</b> is true, then this statement is executed, causing the superclass 
+version of the method named <b>meth</b> to be executed <i>(passing the value of
+<b>par</b> as a parameter to the superclass method).</i> When the method 
+returns, the remaining code in the subclass version of the method is executed.
+</p>
+<p>If the value of <b>par</b> is false, the above statement is bypassed, and the 
+superclass version of the method doesn&#39;t get executed. In this case, only the 
+code in the subclass version is executed. </p>
+	
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>I have discussed and illustrated the use of the <b>this</b> keyword in the 
+following common situations:</p>
+<ul>
+	<li>To bypass local variables or parameters that hide member variables 
+	having the same name, in order to access the member variable.</li>
+	<li>To make it possible for one overloaded constructor to call another 
+	overloaded constructor in the same class.</li>
+	<li>To pass a reference to the current object to a method belonging to a 
+	different object <i>(as in implementing callbacks, for example).</i></li>
+</ul>
+<p>I have also discussed and illustrated the use of the <b>super</b> keyword in 
+the following situations: </p>
+<ul>
+	<li>To bypass the overridden version of a method in a subclass and execute 
+	the version in the superclass.</li>
+	<li>To bypass a member variable in a subclass in order to access a member 
+	variable having the same name in a superclass.</li>
+	<li>To cause a constructor in a subclass to call a parameterized constructor 
+	in the immediate superclass.</li>
+</ul>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter (following the review chapter) in this collection will teach you how to use exception 
+handling in Java.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1628: The <em>this</em> and <em>super</em> Keywords</li>
+					<li>File: Java1628.htm
+</li>
+					<li>Published: 08/08/13</li>
+					<li>Revised: 03/18/20</li>
+
+				</ul>
+</div>
+
+
+	<p>-end- </p>
+
+
+</body>
+</html>

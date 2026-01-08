@@ -1,0 +1,778 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1618</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1618: Polymorphism and Interfaces, Part 2</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<center>
+	<h1><a name="Preface">Preface</a></h1>
+	</center>
+	<p>This chapter is one of a series of chapters designed to teach you about Object-Oriented Programming (OOP) using Java.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.. </p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Definition of the interfaces named I1 and I2.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Definition of the class named A. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Definition of the class named B. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Definition of the class named C. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Beginning of the class named Poly06.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Try unsuccessfully to call the method named q.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Successfully call the method named q.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Instantiate a new object of the class B.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Try unsuccessfully to call the method named x.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Successfully call the method named x.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Call the toString method.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Try unsuccessfully to call the method named p.</li>
+		<li><a href="#Listing_13">Listing 13</a>. Successfully call the method named p.</li>
+		<li><a href="#Listing_14">Listing 14</a>. A walk in the park.</li>
+		<li><a href="#Listing_15">Listing 15</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p><strong>Method overloading
+
+</strong> </p>
+<p>I covered method overloading as one form of polymorphism <em>(compile-time polymorphism)</em> in a previous chapter.
+
+</p>
+<p><strong>Method overriding and class inheritance
+
+</strong> </p>
+<p>I discussed <em>runtime polymorphism</em> implemented through method overriding and class inheritance in previous chapters.
+
+</p>
+<p><strong>Using the Java interface
+
+</strong> </p>
+<p>&nbsp;I am explaining runtime polymorphism as implemented using method overriding and the Java interface 
+in this and the previous chapter.
+
+</p>
+<p><strong>A very important concept
+
+</strong> </p>
+<p>In my opinion, this is one of the most important concepts in Java OOP, and the one that seems to give students the greatest amount of difficulty.  Therefore, I am trying to take it slow and easy.  As usual, I am illustrating the concept using sample programs.
+
+</p>
+<p><strong>A skeleton program
+
+</strong> </p>
+<p>In the previous chapter, I presented a simple skeleton program that illustrated many of the important aspects of polymorphic behavior based on the Java interface.
+
+</p>
+<p><strong>Multiple inheritance and the cardinal rule
+
+</strong> </p>
+<p>I explained how the implementation of interfaces in Java is similar to multiple inheritance.
+
+I explained the cardinal rule of interface implementation.
+
+</p>
+<p><strong>A new relationship
+
+</strong> </p>
+<p>I explained that objects instantiated from classes that implement the same interface have a new relationship that goes beyond the relationship imposed by the standard class hierarchy.
+
+</p>
+<p><strong>One object, many types
+
+</strong> </p>
+<p>I explained that due to the combination of the class hierarchy and the fact that a class can implement many different interfaces, a single object in Java can be treated as many different types.  However, for any given type, there are restrictions on the methods that can be called on the object.
+
+</p>
+<p><strong>Many classes, one type
+
+</strong> </p>
+<p>I explained that because different classes can implement the same interface, objects instantiated from different classes can be treated as a common interface type.
+
+</p>
+<p><strong>Interfaces are critical to Java programming</strong> </p>
+<p>I suggested that there is little if anything useful that can be done in Java without understanding and using interfaces.
+
+In support of this suggestion, I discussed several real-world examples of the use of the Java interface, including the Delegation Event Model and 
+the Model View Control paradigm.
+
+</p>
+<p><strong>Another sample program
+
+</strong> </p>
+<p>In this chapter, I will present another sample program that will take you deeper into the world of polymorphism as implemented using the Java interface.
+
+</p>
+<p>The sample program that I will discuss in this chapter will illustrate <em>(in a very basic form)</em> some of the things that you can do with interfaces, along with some of the things that you cannot do with interfaces.  In order to write programs that do something worthwhile, you will need to extend the concepts illustrated by this sample program into real-world requirements. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p>Now, let's take a look at a sample program named <strong>Poly06</strong>. 
+	You may find it useful to sketch a hierarchy diagram that describes the 
+	program as I present the parts.</p>
+<p>This program is designed to be very simple, while still illustrating runtime polymorphism using interfaces, class inheritance, and overridden methods.
+
+</p>
+<p>You can view a complete listing of the program in <a href="#Listing_15">Listing 15</a> near the end of the chapter.
+
+</p>
+<p><strong>Same structure as before
+
+</strong> </p>
+<p>Note that this program has the same structure as <strong>Poly05</strong> discussed in the 
+previous chapter.  
+<em>(I strongly recommend that you study the previous chapter before continuing with this chapter.)</em>  However, unlike the program in the previous chapter, the methods in this version of the program are not empty.  When a method is called in this version, something happens.  
+<em>(Admittedly not much happens.  Text is displayed on the computer screen, but that is something.)</em> </p>
+<p><strong>The interface definitions
+
+</strong>
+
+</p>
+<p><a href="#Listing_1">Listing 1</a> shows the definition of the two interfaces named 
+<strong>I1</strong> and <strong>I2</strong>. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Definition of the interfaces named I1 and I2.
+
+				<pre>interface I1{
+  public void p();
+}//end interface I1
+
+//===================================//
+
+interface I2 extends I1{
+  public void q();
+}//end interface I2</pre>
+</div>
+	<p>Since the methods declared in an interface are not allowed to have a body, these interface definitions are identical to those shown in the program from the previous chapter.
+
+</p>
+<p><strong>The class named A</strong> </p>
+<p>Similarly, <a href="#Listing_2">Listing 2</a> shows the definition of the class named 
+<strong>A</strong> along with the definition of the method named <strong>x</strong>, and the overridden method named 
+<strong>toString</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Definition of the class named A.
+
+				<pre>class A extends Object{
+  
+  public String toString(){
+    return "toString in A";
+  }//end toString()
+  //---------------------------------//
+  
+  public String x(){
+    return "x in A";
+  }//end x()
+  //---------------------------------//
+}//end class A</pre>
+</div>
+	<p>These two methods were also fully defined in the program from the previous chapter, so there is no change here either.
+
+</p>
+<p><strong>The method named B</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> defines the class named <strong>B</strong>, which extends 
+<strong>A</strong>, and implements <strong>I2</strong>. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Definition of the class 
+				named B.
+
+				<pre>class B extends A implements I2{
+  public void p(){
+    System.out.println("p in B");
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+    System.out.println("q in B");
+  }//end q();
+  //---------------------------------//
+}//end class B</pre>
+</div>
+	<p><strong>Actually implements two interfaces
+
+</strong> </p>
+<p>Although it isn't obvious from an examination of <a href="#Listing_3">Listing 3</a> alone, the class named 
+<strong>B</strong> actually implements both <strong>I2</strong> and <strong>I1</strong>.  This is because the interface named 
+<strong>I2</strong> extends <strong>I1</strong>.  Thus, the class named <strong>B</strong> implements 
+<strong>I2</strong> directly, and implements <strong>I1</strong> through interface inheritance. </p>
+<p><strong>The cardinal rule
+
+</strong>
+
+</p>
+<p>In case you have forgotten it, the cardinal rule for implementing interfaces is:
+
+    </p>
+<p><em>If a class implements an interface, it must provide a concrete definition for all the methods declared by that interface, and all the methods inherited by that interface.  Otherwise, the class must be declared abstract and the definitions must be provided by a class that extends the abstract class.
+
+</em> </p>
+<p><strong>Must define two methods
+
+</strong> </p>
+<p>As a result, the class named <strong>B</strong> must provide concrete definitions for the methods 
+named 
+<strong>p</strong> and <strong>q</strong>.  <em>(The method named <strong>p</strong> is declared in interface 
+<strong>I1</strong> and the method named <strong>q</strong> is declared in interface 
+<strong>I2</strong>.)</em> </p>
+<p>As you can see from <a href="#Listing_3">Listing 3</a>, the behavior of each of these methods is to display a message indicating that it has been 
+called.  This will be useful later to tell us exactly which method is executed when we exercise the objects in the 
+<strong>main</strong> method of the driver class. </p>
+<p><strong>The class named C
+
+</strong> </p>
+<p><a href="#Listing_4">Listing 4</a> shows the upgraded version of the class named 
+<strong>C</strong>. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Definition of the class 
+				named C.
+
+				<pre>class C extends Object implements I2{
+  public void p(){
+    System.out.println("p in C");
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+    System.out.println("q in C");
+  }//end q();
+  //---------------------------------//
+}//end class C</pre>
+</div>
+	<p>In this upgraded version, the methods named <strong>p</strong> and 
+	<strong>q</strong> each display a message indicating that they have been 
+	called.  Again, this will be useful later to let us know exactly which version of the methods named 
+	<strong>p</strong> and <strong>q</strong> get executed when we exercise the objects. </p>
+<p><strong>The driver class</strong> </p>
+<p><a href="#Listing_5">Listing 5</a> shows the beginning of the class named 
+<strong>Poly06</strong>.  The <strong>main</strong> method in this class instantiates objects of the classes named 
+<strong>B</strong> and <strong>C</strong>, and exercises them to illustrate what can, and what cannot be done with them. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. Beginning of the class 
+				named Poly06.
+				<pre>public class Poly06{
+  public static void main(String[] args){
+    I1 var1 = new B();
+    var1.p();//OK </pre>
+</div>
+	<p><strong>A new data type</strong> </p>
+<p>As explained in the previous chapter, when you define a new interface, you create a new data type.
+
+</p>
+<p>You can store the reference to any object instantiated from any class that implements the interface in a reference variable of that type.
+
+</p>
+<p><strong>A new object of the class B</strong> </p>
+<p>The code shown in <a href="#Listing_5">Listing 5</a> instantiates a new object of the class 
+<strong>B</strong>. </p>
+<p>It is important to note that the code in <a href="#Listing_5">Listing 5</a> stores the object's reference in a reference variable of the interface type 
+<strong>I1</strong> <em>(not as the class type <strong>B</strong>)</em>. </p>
+<p><strong>Call an interface method
+
+</strong> </p>
+<p>Following this, the code in <a href="#Listing_5">Listing 5</a> successfully calls the method named 
+<strong>p</strong> on the reference, producing the following output on the computer screen: </p>
+<div class="a">
+<pre>p in B </pre>
+</div>
+<p><strong>Why is this allowed?</strong> </p>
+<p>This is allowable because the method named <strong>p</strong> is declared in the interface named 
+<strong>I1</strong>. </p>
+<p><strong>Which version of the method was executed?
+
+</strong> </p>
+<p>It is also important to note, <em>(by observing the output)</em>, that the version of the method defined in the class named 
+<strong>B</strong> <em>(and not the version defined in the class named <strong>C</strong>)</em> was actually executed. </p>
+<p><strong>Attempt unsuccessfully to call q
+
+</strong> </p>
+<p>Next, the code in <a href="#Listing_6">Listing 6</a> attempts, unsuccessfully, to call the method named 
+<strong>q</strong> on the same reference variable of type <strong>I1</strong>. </p>
+	
+<div class="a"><a name="Listing_6">Listing 6</a>. Try unsuccessfully to call the method 
+				named q.
+				<pre>     var1.q();//won't compile</pre>
+</div>
+	<p><strong>Why did it fail?</strong> </p>
+<p>Even though the class named <strong>B</strong>, from which the object was instantiated, defines the method named 
+<strong>q</strong>, that method is neither declared nor inherited into the interface named 
+<strong>I1</strong>. </p>
+<p>Therefore, a reference of type <strong>I1</strong> cannot be used to call the method named 
+<strong>q</strong>.
+
+</p>
+<p><strong>The solution is a type conversion
+
+</strong> </p>
+<p><a href="#Listing_7">Listing 7</a> shows the solution to the problem presented by 
+<a href="#Listing_6">Listing 6</a>. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Successfully call the 
+				method named q.
+				<pre>    ((I2)var1).q();//OK</pre>
+</div>
+	<p>As in the case of polymorphism involving class inheritance, the solution is to change the type of the reference to a type that either declares or inherits the method named 
+	<strong>q</strong>. </p>
+<p>In this case, this takes the form of using a cast operator to temporarily convert the type of the reference from type 
+<strong>I1</strong>, to type <strong>I2</strong>, and then calling the method named 
+<strong>q</strong> on that reference of a new type. </p>
+<p>This produces the following output:
+
+</p>
+<div class="a">
+<pre>q in B </pre>
+</div>
+<p><strong>Using type I2 directly</strong> </p>
+<p><a href="#Listing_8">Listing 8 </a>instantiates a new object of the class 
+<strong>B</strong> and stores the object's reference in a reference variable of the interface type 
+<strong>I2</strong>. </p>
+<div class="a"><a name="Listing_8">Listing 8</a>. Instantiate a new object 
+				of the class B.
+				<pre>
+    I2 var2 = new B();
+    var2.p();//OK
+    var2.q();//OK</pre>
+</div>
+	<p><strong>Call both methods successfully
+
+</strong>
+
+</p>
+<p>Then the code successfully calls both the methods <strong>p</strong> and 
+<strong>q</strong> on that reference, producing the following output:
+
+</p>
+<div class="a">
+<pre>p in B 
+q in B </pre>
+</div>
+<p><strong>Why does this work?</strong>
+</p>
+<p>This works because:
+
+    </p>
+<ul>
+	<li>The interface named <strong>I2</strong> declares the method named 
+	<strong>q</strong> </li>
+	<li>The interface named <strong>I2</strong> inherits the declaration of the method named 
+	<strong>p</strong> </li>
+	<li>The class named <strong>B</strong> implements the interface named 
+	<strong>I2</strong> and provides concrete definitions of both the methods 
+	<strong>p</strong> and <strong>q</strong>. </li>
+</ul>
+<p><strong>Attempt, unsuccessfully, to call x on var2
+
+</strong>
+</p>
+<p>Following this, the code in <a href="#Listing_9">Listing 9</a> attempts, unsuccessfully, to call the method named 
+<strong>x</strong> on the reference variable named <strong>var2</strong> of type 
+<strong>I2</strong>.  This code produces a compiler error.
+</p>
+<div class="a"><a name="Listing_9">Listing 9</a>. Try unsuccessfully to 
+				call the method named x.
+				<pre>    String var3 = var2.x();</pre>
+</div>
+	<p><strong>The object of class B has a method named x
+
+</strong> </p>
+<p>At this point, the reference variable named <strong>var2</strong> contains a reference to an object instantiated from the class named 
+<strong>B</strong>. </p>
+<p>Furthermore, the class named <strong>B</strong> inherits the method named 
+<strong>x</strong> from the class named <strong>A</strong>. </p>
+<p><strong>Necessary, but not sufficient
+
+</strong> </p>
+<p>However, the fact that the object contains the method is not sufficient to make it executable in this case.
+
+</p>
+<p><strong>Same song, different verse
+
+</strong> </p>
+<p>The interface named <strong>I2</strong> neither declares nor inherits the method named 
+<strong>x</strong>. </p>
+<p>Therefore, the method named <strong>x</strong> cannot be called using the reference stored in the variable named 
+<strong>var2</strong> unless the reference is converted either to type <strong>A</strong>
+<em>(where the method named </em><strong><em>x</em></strong><em> is defined)</em> or type 
+<strong>B</strong> <em>(where the method named x is inherited)</em>. </p>
+<p><strong>Do the type conversion</strong>
+
+</p>
+<p>The required type conversion is accomplished in <a href="#Listing_10">Listing 10</a> where the reference is temporarily converted to type 
+<strong>A</strong> using a cast operator. <em>(It would also work to cast it to type 
+<strong>B</strong>.) </em> </p>
+<div class="a"><a name="Listing_10">Listing 10</a>. Successfully call the 
+				method named x.
+				<pre>    String var3 = ((A)var2).x();//OK
+    System.out.println(var3);</pre>
+</div>
+	<p>The String produced by the first statement in <a href="#Listing_10">Listing 10</a> is passed to the 
+	<strong>println</strong> method causing the following text to be displayed on the computer screen:
+
+</p>
+<div class="a">
+<pre>x in A </pre>
+</div>
+<p><strong>Get ready for a surprise
+
+</strong></p>
+<p>If you have now caught onto the general scheme of things, the next thing that I am going to show you may result in a little surprise.
+
+</p>
+<p><strong>Successfully call the toString method on var2</strong> </p>
+<p>The first statement in <a href="#Listing_11">Listing 11</a> successfully calls the 
+<strong>toString</strong> method on the object of the class <strong>B</strong> whose reference is stored as type 
+<strong>I2</strong>. </p>
+
+	
+<div class="a"><a name="Listing_11">Listing 11</a>. Call the toString 
+				method.
+				<pre>
+    var3 = var2.toString();//OK
+    System.out.println(var3);</pre>
+</div>
+	<p><strong>How can this work?
+
+</strong> </p>
+<p>How can this work when the interface named <strong>I2</strong> neither declares nor inherits a method named 
+<strong>toString</strong>. </p>
+<p><strong>A subtle difference in behavior</strong> </p>
+<p>I am unable to point you to any Oracle documentation to verify the following.
+<em>(I also admit that I haven't spent a large amount of time searching for such documentation).
+</em> </p>
+<p>With respect to the eleven methods declared in the <strong>Object</strong>
+<em>class (listed in an earlier chapter)</em>, a reference of an interface type acts like it is also of type 
+<strong>Object</strong>. </p>
+<p><strong>And the end result is ...</strong> </p>
+<p>This allows the methods declared in the <strong>Object</strong> class to be called on references held as interface types without a requirement to cast the references to type 
+<strong>Object</strong>. <em>(Later, I will show you that the reverse is not true.)
+</em> </p>
+<p><strong>The output
+
+</strong> </p>
+<p>Therefore, the two statements shown in <a href="#Listing_11">Listing 11</a> cause the following to be displayed on the computer screen: </p>
+<div class="a">
+<pre>toString in A </pre>
+</div>
+<p><strong>Polymorphism applies</strong> </p>
+<p>Note that the object whose reference is held in <strong>var2</strong> was instantiated from the class named 
+<strong>B</strong>, which extends the class named <strong>A</strong>. </p>
+<p>Due to polymorphism, the <strong>toString</strong> method that was actually executed in 
+<a href="#Listing_11">Listing 11</a> was the overridden version defined in class 
+<strong>A</strong>, and not the default version defined in the <strong>Object</strong> class.  The overridden version in class 
+<strong>A</strong> was inherited into class <strong>B</strong>. </p>
+<p><strong>The reverse is not true
+
+</strong></p>
+<p>While a reference of an interface type also acts like type <strong>Object</strong>, a reference of type 
+<strong>Object</strong> does not act like an interface type. </p>
+<p><strong>Store a reference as type Object
+
+</strong></p>
+<p>The code in <a href="#Listing_12">Listing 12</a> instantiates a new object of type 
+<strong>B</strong> and stores it in a reference of type <strong>Object</strong>.
+</p>
+<p><strong>Attempt unsuccessfully to call p</strong> </p>
+<p>Then it attempts, unsuccessfully, to call the method named <strong>p</strong> on the reference.
+</p>
+
+	
+<div class="a"><a name="Listing_12">Listing 12</a>. Try unsuccessfully to 
+				call the method named p.
+				<pre>
+    Object var4 = new B();
+    var4.p();//won't compile</pre>
+</div>
+	<p><strong>Same song, an even different verse
+
+</strong> </p>
+<p>The code in <a href="#Listing_12">Listing 12</a> won't compile, because the 
+<strong>Object</strong> class neither defines nor inherits the method named 
+<strong>p</strong>. </p>
+<p>In order to call the method named <strong>p</strong> on the reference of type 
+<strong>Object</strong>, the type of the reference must be changed to either: </p>
+<ul>
+	<li>The class in which the method is defined
+    </li>
+	<li>An interface that declares the method, which is implemented by the class in which the method is defined
+    </li>
+	<li>A couple of other possibilities involving subclasses or sub-interfaces
+	</li>
+</ul>
+<p><strong>Convert reference to type I1</strong> </p>
+<p>The code in <a href="#Listing_13">Listing 13</a> uses a cast operator to 
+temporarily convert the reference from type 
+<strong>Object</strong> to type <strong>I1</strong>, and calls the method named 
+<strong>p</strong> on the converted reference. </p>
+
+	
+<div class="a"><a name="Listing_13">Listing 13</a>. Successfully call the 
+				method named p.
+				<pre>       ((I1)var4).p();//OK</pre>
+</div>
+	<p><strong>The output
+
+</strong>
+
+</p>
+<p>The code in <a href="#Listing_13">Listing 13</a> compiles and executes successfully, producing the following text on the computer screen:
+
+</p>
+<div class="a">
+<pre>p in B </pre>
+</div>
+<p><strong>A walk in the park
+
+</strong></p>
+<p>If you understand all of the above, understanding the code in 
+<a href="#Listing_14">Listing 14</a> should be like a walk in the park on a sunny day.
+</p>
+
+	
+<div class="a"><a name="Listing_14">Listing 14. </a>A walk in the park.
+				<pre>
+    var2 = new C();
+    var2.p();//OK
+    var2.q();//OK</pre>
+</div>
+	<p><strong>Class C implements I2</strong>
+
+</p>
+<p>Recall that the class named <strong>C</strong> also implements the interface named 
+<strong>I2</strong>.
+
+</p>
+<p>The code in <a href="#Listing_14">Listing 14</a> instantiates a new object of the class named 
+<strong>C</strong>, and stores the object's reference in the existing reference variable named 
+<strong>var2</strong> of type <strong>I2</strong>.
+
+</p>
+<p>Then it calls the methods named <strong>p</strong> and <strong>q</strong> on that reference, causing the following text to be displayed on the computer screen:
+
+</p>
+<div class="a">
+<pre>p in C 
+q in C </pre>
+</div>
+<p><strong>Which methods were executed?</strong> </p>
+<p>This confirms that the methods that were actually executed were the versions defined in the class named 
+<strong>C</strong> (<em>and not the versions defined in the class named <strong>B</strong>)</em>. </p>
+<p><strong>Same method name, different behavior
+
+</strong> </p>
+<p>It is important to note that the behavior of the methods named <strong>p</strong> and 
+<strong>q</strong>, as defined in the class named <strong>C</strong>, is different from the behavior of the methods having the same signatures defined in the class named 
+<strong>B</strong>.  Therein lies much of the power of the Java interface. </p>
+<p><strong>The power of the Java interface
+
+</strong> </p>
+<p>Using interface types, it is possible to collect many objects instantiated from many different classes 
+<em>(provided all the classes implement a common interface)</em>, and store each of the references in some kind of collection as the interface type. </p>
+<p><strong>Appropriate behavior</strong> </p>
+<p>Then it is possible to call any of the interface methods on any of the objects whose references are stored in the collection.
+
+</p>
+<p>To use the current jargon, when a given interface method is called on a given reference, the behavior that results will be 
+<em>appropriate</em> to the class from which that particular object was instantiated. </p>
+<p>This is runtime polymorphism based on interfaces and overridden methods. </p>
+
+	
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p><strong>If you don't understand interfaces ...
+
+</strong> </p>
+<p>If you don't understand interfaces, you don't understand Java, and it is highly unlikely that you will be successful as a Java programmer.
+
+</p>
+<p><strong>Interfaces are indispensable in Java </strong> </p>
+<p>Beyond writing "Hello World" programs, there is little if anything that can be accomplished using Java without understanding and using interfaces.
+
+</p>
+<p><strong>What can you do with interfaces?</strong> </p>
+<p>The sample program that I discussed in this chapter has illustrated <em>(in a very basic form)</em> some of the things that you can do with interfaces, along with some of the things that you cannot do with interfaces.  </p>
+<p>In order to write programs that do something worthwhile, you will need to extend the concepts illustrated by this sample program into real-world requirements. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>Java supports the use of <strong>static</strong> member variables and <strong>static</strong> methods in class definitions. </p>
+<p>While <strong>static</strong> members can be useful in some situations, the existence of 
+<strong>static</strong> members tends to complicate the overall object-oriented structure of Java. </p>
+<p>Furthermore, the overuse of <strong>static</strong> members can lead to problems similar to those experienced in languages like C and C++ that support global variables and global functions. </p>
+<p>The use of static members will be discussed in the next chapter. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1618: Polymorphism and Interfaces, Part 2</li>
+					<li>File: Java1618.htm
+</li>
+					<li>Published: 04/10/02</li>
+					<li>Revised: 07/27/21</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the sample program is shown in <a href="#Listing_15">Listing 15</a> below. </p>
+
+
+
+<div class="a">
+<a name="Listing_15">Listing 15</a>. <strong><a name="Listing_15x0">Complete 
+program listing.</a></strong>
+
+<pre>/*File Poly06.java
+Copyright, R.G.Baldwin
+
+This program illustrates polymorphic 
+behavior using interfaces in addition
+to class inheritance.
+
+The program output is:
+p in B
+q in B
+
+p in B
+q in B
+x in A
+toString in A
+
+p in B
+
+p in C
+q in C
+**************************************/
+
+interface I1{
+  public void p();
+}//end interface I1
+//===================================//
+
+interface I2 extends I1{
+  public void q();
+}//end interface I2
+//===================================//
+
+class A extends Object{
+  
+  public String toString(){
+    return "toString in A";
+  }//end toString()
+  //---------------------------------//
+  
+  public String x(){
+    return "x in A";
+  }//end x()
+  //---------------------------------//
+}//end class A
+//===================================//
+
+class B extends A implements I2{
+  public void p(){
+    System.out.println("p in B");
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+    System.out.println("q in B");
+  }//end q();
+  //---------------------------------//
+}//end class B
+//===================================//
+
+class C extends Object implements I2{
+  public void p(){
+    System.out.println("p in C");
+  }//end p()
+  //---------------------------------//
+  
+  public void q(){
+    System.out.println("q in C");
+  }//end q();
+  //---------------------------------//
+}//end class C
+//===================================//
+
+public class Poly06{
+  public static void main(
+                        String[] args){
+    I1 var1 = new B();
+    var1.p();//OK
+    //var1.q();//won't compile
+    ((I2)var1).q();//OK
+    System.out.println("");//blank line
+    
+    I2 var2 = new B();
+    var2.p();//OK
+    var2.q();//OK
+    //Following won't compile
+    //String var3 = var2.x();
+    String var3 = ((A)var2).x();//OK
+    System.out.println(var3);
+    var3 = var2.toString();//OK
+    System.out.println(var3);
+    System.out.println("");//blank line
+    
+    Object var4 = new B();
+    //var4.p();//won't compile
+    ((I1)var4).p();//OK
+    System.out.println("");//blank line
+    
+    var2 = new C();
+    var2.p();//OK
+    var2.q();//OK
+    System.out.println("");//blank line
+  }//end main
+}//end class Poly06</pre>
+
+</div>
+<p>-end- </p>
+
+
+</body>
+</html>

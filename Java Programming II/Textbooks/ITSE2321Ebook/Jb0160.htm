@@ -1,0 +1,412 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0160</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+.auto-style2 {
+	text-align: left;
+}
+div.a {
+  border: 2px solid black;
+
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0160: Hello World</h1> 
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Viewing_tip">Viewing tip</a></li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#The_Java_version_of_Hello_World">The Java version of Hello World</a></li>
+	<li><a href="#Interesting_code_fragments">Interesting code fragments</a></li>
+	<li><a href="#General_information">General information</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+<p>It is traditional in introductory programming courses to write and explain a 
+simple program that prints the text <strong><em>&quot;Hello World&quot;</em></strong> on the computer screen. This chapter continues that tradition.
+<em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap06/ch06_02.html">Example Source Program</a>.)</em></p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures and Listings while you are reading about them.</p>
+<h3><a name="Figures">Figures</a></h3>
+<ul>
+	<li><a href="#Figure_1">Figure 1</a>. How to compile and run a Java 
+	application. </li>
+</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Beginning of the class named hello1. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Beginning of the main method. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Display the string Hello World. </li>
+		<li><a href="#Listing_4">Listing 4</a>. End of the class named hello1. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Complete program listing.</li>
+	</ul>
+	
+	<h1><a name="Introduction">Introduction</a></h1>
+<p>This chapter introduces you to Java programming by presenting and discussing a 
+traditional <em>Hello World</em> program.</p>
+<h2>Two approaches </h2>
+<p>Java programs can be written and executed in at least two different ways, 
+including the following:</p>
+<ul>
+	<li>Stand-alone application from the command line. </li>
+	<li>Applet that runs under control of a Java-capable browser.</li>
+</ul>
+<h2>Applets vs. applications</h2>
+<p>Programming an <em>&quot;application&quot;</em> in Java is significantly different from 
+programming an <em>&quot;applet.&quot;</em> Applets are designed to be downloaded and executed 
+on-line under control of a browser. </p>
+<p>The functionality of an applet is usually restricted in an attempt to prevent downloaded 
+applets from damaging your computer or your data. No such restrictions apply to 
+the functionality of a Java application.</p>
+<p>As of February 2020, the use of applets may have been swept into the dustbin 
+of technological history. In any event, this course does not deal with applets 
+other than to provide the brief discussion given above.</p>
+<h2>Class definitions</h2>
+<p>All Java programs consist of one or more <strong>class</strong> definitions. 
+In this course, I will often refer to the <em>primary</em> class definition for a 
+Java <em>application</em> as the <em>controlling class</em>. Kjell refers to it as the 
+<a href="http://programmedlessons.org/Java9/chap46/ch46_10.html#driver_class">Driver Class</a>. <em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap46/ch46_06.html#class_definition,_syntax">Syntax of a Class Definition</a>.)</em></p>
+<h2>The main method</h2>
+<p>A stand-alone Java application requires a method named <strong>main</strong> 
+in its <em>controlling class</em>. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap40/ch40_06.html">Picture of an Object</a>.)</em></p>
+<h2>Getting started</h2>
+<p><a href="#Figure_1">Figure 1</a> shows the steps for compiling and running a 
+Java application.</p>
+
+<div class="a">
+	<p><a name="Figure_1">Figure 1.</a> How to compile and run a Java 
+application. </p>
+<p>Here are the steps for compiling and running a Java application, based on the 
+assumption that you are running under Windows. If you are running under some 
+other operating system, you will need to translate these instructions for that 
+OS. </p>
+<p>1. Download and install the JDK from Oracle. Also consider downloading and 
+installing the documentation, which is a separate download.</p>
+<p>2. Using any editor that can produce a plain text file <em>(such as Notepad 
+or <a href="https://notepad-plus-plus.org/downloads/">Notepad++</a>),</em> 
+create a source code file with the extension on the file name being .java This 
+file contains your actual Java instructions. <em>(You can copy some sample 
+programs from the early chapters in this Ebook to get started.)</em></p>
+<p>3. Open a command-line window and change directory to the directory 
+containing the source file. It doesn&#39;t really matter which directory the source 
+file is in, but I normally put my Java files in a directory all their own. </p>
+<p>4. Assume that the name of the file is <em><strong>joe.java</strong></em>, 
+just to have something definitive to refer to. </p>
+<p>5. To compile the file, enter the following command at the prompt: </p>
+<pre>javac -cp .; joe.java</pre>
+<p>This assumes that you chose to set the path in a semi-permanent way when you 
+installed the JDK. An earlier chapter explained how to set the path temporarily. 
+That chapter also explained how to use a batch file to execute the required 
+commands as an alternative to entering them manually at the command prompt.</p>
+	<p>In case you are curious about the terms "-cp .;" above, open a command 
+	line window and enter the javac command. Among other things, the will see 
+	something similar to the following:</p>
+	<pre> --class-path &lt;path&gt;, -classpath &lt;path&gt;, -cp &lt;path&gt;
+       Specify where to find user class files and annotation processors</pre>
+	<p>The term "-cp .;" tells the compiler to search the current folder for 
+	class files before searching elsewhere on the computer. Although this isn't 
+	required, it can prove to be very useful in some circumstances.</p>
+<p>6. Correct any compiler errors that show up. Once you have corrected all 
+compiler errors, the <strong>javac</strong> program will execute and return 
+immediately to the prompt with no output. At that point, the directory should 
+also contain a file named <em><strong>joe.class</strong></em> and possibly some 
+other files with a .class extension as well. These are the compiled Java files.</p>
+<p>7. To run the program, enter the following command: </p>
+<pre>java -cp .; joe</pre>
+<p>Once again, see the discussion above regarding setting the path and using a 
+batch file.</p>
+<p>8. If your program produces the correct output, congratulations. You have 
+written, compiled, and executed a Java application. If not, you will need to 
+determine why not.</p></div>
+
+
+
+<h1><a name="The_Java_version_of_Hello_World">The Java version of Hello World</a></h1>
+<h2>The class file</h2>
+<p>Compiled Java programs are stored in <em>&quot;bytecode&quot;</em> form <em>
+(see Kjell <a href="http://programmedlessons.org/Java9/chap05/ch05_03.html">
+Bytecodes</a>)</em> in a file with an 
+extension of <strong>.class</strong> where the name of the file is the same as 
+the name of the <em>controlling class</em> <em>(or other class)</em> in the 
+program. </p>
+<h2>The main method is static</h2>
+<p><em>(Also see Kjell
+<a href="http://programmedlessons.org/Java9/chap40/ch40_12.html#static">Static</a> and Kjell 
+<a href="http://programmedlessons.org/Java9/chap40/ch40_13.html#static_method">Static Methods.</a>)</em></p>
+<p>The <strong>main</strong> method in the controlling class of an application 
+must be <em>static</em>, which results in <strong>main </strong>being a <em>
+class</em> method. </p>
+<p><em>Class</em> methods can be called without a requirement to instantiate 
+<em>(create an instance of)</em> an object of the class. <em>(See Kjell 
+instantiation <a href="http://programmedlessons.org/Java9/chap40/ch40_07.html">
+here</a>.)</em></p>
+<p>When a Java application is started, the <em>Java Virtual Machine</em> <em>(see Kjell <a href="http://programmedlessons.org/Java9/chap05/ch05_04.html">Java 
+Virtual Machine</a>) or 
+JVM (an executable file named java.exe)</em> finds and calls the
+<strong>main</strong> method in the class whose name matches the name of the 
+class file specified on the command line. </p>
+<h2>Running an application</h2>
+<p>For example, to start the JVM and run a Java application named
+<strong>hello1</strong>, a command such as the following would be executed at the operating system prompt: </p>
+<pre>java -cp .; hello1</pre>
+<p>This command instructs the operating system to start the<em>
+</em>JVM, and then instructs the 
+JVM to find and execute the java application stored in the file named<strong> 
+hello1.class</strong>. <em>(Note that the .class extension is not included in 
+the command.)</em></p>
+<p>This sample program is a Java application named <strong>hello1.java</strong>. When compiled, it produces a class file named <strong>hello1.class</strong>. When the program is run, the JVM calls the <strong>main</strong> method defined in the
+<em>controlling class</em>. The <strong>main</strong> method is a <em>class</em> 
+or static method.
+<em>Class</em> (static) methods can be called without a requirement to instantiate 
+an object of the class.</p>
+<p>The program displays the following words on the screen:</p>
+<pre>Hello World</pre>
+<h1><a name="Interesting_code_fragments">Interesting code fragments</a></h1>
+<p>I will explain this program code in fragments. A complete listing of the 
+program is provided in <a href="#Listing_5">Listing 5</a>.</p>
+	<p>The code fragment in <a href="#Listing_1">Listing 1</a> shows the first line 
+	of the class definition for the controlling class named <strong>hello1</strong>. 
+	<em>(I will discuss class 
+	definitions in detail in a future chapter.)</em></p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. Beginning of the class 
+				named hello1.
+
+<pre>
+class hello1 { //define the controlling class
+</pre>
+
+</div>
+<!--``2-->
+	<p>Note that the optional <strong><em>public</em></strong>
+	<a href="http://programmedlessons.org/Java9/chap46/ch46_06.html#class_definition,_syntax">
+	modifier</a> isn't used in Listing 1. You will learn more about modifiers in 
+	a future chapter.</p>
+<p>The code fragment in <a href="#Listing_2">Listing 2</a> begins the definition 
+	of the <strong>main</strong> method. I will also discuss method definitions in 
+	detail in a future chapter.</p>
+<!--``1List02-->
+<div class="a"><a name="Listing_2">Listing 2</a>. Beginning of the main 
+				method.
+
+<pre>
+public static void main(String[] args){
+</pre>
+
+</div>
+<!--``2-->
+	<p>The fragment in <a href="#Listing_3">Listing 3</a> causes the following 
+	text to be 
+	displayed on the command-line screen. </p>
+<pre>
+Hello
+Java World
+</pre>
+<p>The statement in <a href="#Listing_3">
+	Listing 3</a> is an extremely powerful statement from an object-oriented 
+programming viewpoint and you aren't expected to understand it at this point. When you 
+fully understand how it 
+	works, you will be well on your way to understanding the Java version of 
+	Object-Oriented Programming (OOP).</p>
+<p>I will discuss this statement in more detail later in a future chapter.</p>
+<p>However, there are a few things that you need to know now:</p>
+<ul>
+	<li>Every Java statement ends with a semicolon. Per 
+	<a href="http://programmedlessons.org/Java9/chap06/ch06_05.html">Kjell</a>,
+	<em>"A <strong>statement</strong> in a programming language is a command for the computer to do something. It is like a sentence of the language. A statement in Java is followed by a semicolon".</em></li>
+	<li>Java statements can be broken onto multiple lines, but the breaks must occur 
+at natural breaks in the syntax of the code. <em>(See Kjell 
+	<a href="http://programmedlessons.org/Java9/chap09/ch09_09.html#statements,_split_over_several_lines">Several Lines per Statement</a>.)</em></li>
+	<li>A string is a group of characters surrounded by double quotes. <em>(See 
+	Kjell 
+	<a href="https://programmedlessons.org/Java9/chap44/ch44_02.html#String,_construction">Easy way to Construct Strings</a>.)</em></li>
+	<li>A + character can be used to concatenate two strings into a single string.</li>
+	<li>The \n sequence in <a href="#Listing_3">Listing 3</a> is called an 
+	<strong><em>escape character</em></strong>. There are several different escape characters that you 
+	will learn about in a future chapter. This particular escape character 
+	causes the output text to advance to the next line. Hence, it is often 
+	called a <strong><em>newline sequence</em></strong>. In this case, it caused the word Java to be 
+	displayed on a new line in the output text. Note that physical line breaks 
+	in the output are independent of physical line breaks in the code.</li>
+</ul>
+<!--``1List03-->
+<div class="a"><a name="Listing_3">Listing 3</a>. Display the string Hello 
+				World.
+
+<pre>
+     System.out.println("Hello\n" + "Java " +
+                       "World");
+</pre>
+
+</div>
+<!--``2-->
+	<p><a href="#Listing_4">Listing 4</a> ends the <strong>main</strong> method 
+	and also ends the class definition for the class named <strong>hello1</strong>.</p>
+<!--``1List04-->
+<div class="a"><a name="Listing_4">Listing 4</a>. End of the class named 
+				hello1.
+
+<pre>
+  }//end main
+}//End hello1 class
+</pre>
+
+</div>
+<!--``2-->
+<p>As mentioned earlier, a complete listing of the program is provided in 
+<a href="#Listing_5">Listing 5</a> near the end of the chapter.</p>
+<h1><a name="General_information">General information</a></h1>
+<p>This program illustrates several general aspects of Java programming.</p>
+<h2>Overall skeleton of java program</h2>
+<p>The overall skeleton of any Java program consists of one or more class 
+definitions.</p>
+<p>All methods and variables must be defined inside a <strong>class</strong> 
+definition. There can be no freestanding methods or global variables. </p>
+<h2>File names and extensions</h2>
+<p>The name of the <em>controlling class</em> should be the same as the name of 
+the source file that contains it. </p>
+<p>Files containing source code in Java have an extension of <em>java</em>. </p>
+<h2>The main method</h2>
+<p>The controlling class definition for an application must 
+contain the <strong>main</strong> method. </p>
+<h2>The primary class file</h2>
+<p>The file produced by compiling the file containing the controlling class has the 
+same name as the controlling class, and has an extension of <strong>class</strong>.</p>
+<h2>Many class files may be produced</h2>
+<p>The java compiler produces a separate file for every class
+definition contained in an application, even if two or more 
+class<strong>
+</strong>definitions are contained in the same source file. </p>
+<p>Thus, the compilation of a large application can produce many different <em>
+class</em> files. </p>
+<h2>What are jar files?</h2>
+<p>A feature known as a <em>jar</em> file can be used to consolidate those 
+class files into a single file for more compact storage, distribution, and 
+transmission. Such a file has an extension of <strong>.jar</strong>. <em>(A jar 
+file is similar to a zip file except that it is specialized for use with Java 
+programs.)</em> This course does not deal directly with jar files beyond this 
+brief description.</p>
+<h2>The main method is static</h2>
+<p>The controlling class for a Java application must contain a 
+<a href="http://programmedlessons.org/Java9/chap40/ch40_12.html#static">static</a> 
+method named <strong>main</strong>. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap06/ch06_04.html">Between the Braces</a>.)</em></p>
+<p>When you run the application using the JVM, you specify the name 
+of the <em>class </em>file that you want to run. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap06/ch06_06.html">Running a Java Program (Review)</a>.)</em></p>
+<p>The JVM then calls the <strong>main</strong> method defined in the
+<em>class </em>file having that name. This is possible because a <em>class 
+(static) method</em> can be called without a requirement to instantiate an object of the 
+class. </p>
+<p>The <strong>main</strong> method defined in that class
+definition controls the flow of the program.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_5">Listing 5</a>. Compile the code and execute 
+it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">	<p>Housekeeping material 
+</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0160: Hello World</li>
+					<li>File: Jb0160.htm
+</li>
+					<li>Revised: 06/09/22</li>
+				</ul>
+</div>
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program discussed in this chapter is provided in 
+<a href="#Listing_5">Listing 5</a>.</p>
+
+<!--``1List05-->
+<div class="a"><a name="Listing_5">Listing 5</a>. Complete program 
+				listing.
+<pre>
+/*File hello1.java Copyright, R.G.Baldwin
+This is a Java application program .
+
+When compiled, this program produces the class named:
+
+hello1.class
+
+When the Java interpreter is called on the application's
+controlling class using the following statement at the
+command line:
+
+java hello1
+
+the interpreter starts the program by calling the main
+method defined in the controlling class. The main method is
+a class method which can be called without the requirement
+to instantiate an object of the class.
+
+The program displays the following words on the screen:
+
+Hello 
+Java World
+
+*********************************************************/
+class hello1 { //define the controlling class
+  //define main method
+  public static void main(String[] args){
+    //display text string
+    System.out.println("Hello\n" + "Java " +
+                       "World");
+  }//end main
+}//End hello1 class.
+</pre>
+
+</div>
+<!--``2-->
+
+<p>-end- </p>
+
+</body>
+</html>

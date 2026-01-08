@@ -1,0 +1,547 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4050</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+<h1 class="auto-style1">Java4050: Core Collection Interfaces</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a> </li>
+	<li><a href="#Viewing_tip">Viewing tip</a></li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+		<li><a href="#Illustration_of_core_collection_interfaces_">Illustration of core collection interfaces</a><ul>
+			<li><a href="#Multiple_list_implementations_">Multiple list implementations</a>
+			</li>
+			<li><a href="#TreeSet_and_ArrayList_">TreeSet and ArrayList </a> </li>
+			<li><a href="#Behavior_is_different_but_appropriate_">Behavior is different but appropriate</a> </li>
+		</ul>
+		</li>
+		<li><a href="#The_fillIt_method_">The fillIt method </a> </li>
+		<li><a href="#Create_and_populate_a_TreeSet_object_">Create and populate a TreeSet object</a>
+		<ul>
+			<li><a href="#Display_the_collections_contents_">Display the collection's contents 
+			</a> </li>
+			<li><a href="#TreeSet_object_is_type_SortedSet_">TreeSet object is type SortedSet</a> </li>
+		</ul>
+		</li>
+		<li><a href="#Create_and_populate_an_ArrayList_object">Create and populate an ArrayList object 
+		</a> 
+		<ul>
+			<li><a href="#Display_the_collections_contents">Display the collection's contents</a></li>
+		</ul>
+		</li>
+		<li><a href="#The_important_point_">The important point </a>
+		<ul>
+			<li><a href="#No_duplicate_elements_in_ascending_order_">No duplicate elements in ascending order</a>
+			</li>
+			<li><a href="#Duplicates_allowed_with_no_sorting_">Duplicates allowed with no sorting 
+			</a></li>
+		</ul>
+		</li>
+		<li><a href="#Structure_of_core_the_interfaces">Structure of the core interfaces</a></li>
+		<li><a href="#A_Map_is_not_a_true_Collection_">A Map is not a true Collection</a></li>
+		<li><a href="#Some_operations_are_optional_">Some operations are optional</a>
+		<ul>
+			<li><a href="#Support_for_optional_operations_">Support for optional operations 
+			</a></li>
+			<li><a href="#Optional_Collection_operations">Optional Collection operations</a></li>
+			<li><a href="#Optional_Map_operations">Optional Map operations </a>
+			</li>
+			<li><a href="#Many_methods_are_not_optional_">Many methods are not optional 
+			</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a> </li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>The Java <em>Collections Framework</em> defines eight core interfaces, in two distinct trees.  
+You will learn about the inheritance structure and the purpose of those interfaces.  
+You will also learn how the interfaces declare polymorphic methods that apply to implementations of the interfaces, and 
+you will learn about the optional methods of the <strong>Collection</strong> and
+<strong>Map</strong> interfaces.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Ap401. </li>
+	<li><a href="#Listing_2">Listing 2</a>. The Populator class. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Create and populate a TreeSet object.</li>
+	<li><a href="#Listing_4">Listing 4</a>. Create and populate an ArrayList object.</li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>In earlier chapters, you learned that at least three things are included in 
+a collections framework: </p>
+<ul>
+	<li>interfaces</li>
+	<li>implementations</li>
+	<li>algorithms</li>
+</ul>
+<p>Earlier chapters provided a general discussion of the purpose of the 
+interfaces, implementations, and algorithms in the <em>Collections Framework</em>. 
+This chapter takes that discussion further and illustrates the use of the <i>core 
+collection interfaces.</i> </p>
+<p>As mentioned earlier, the Java Collections Framework defines eight core 
+interfaces, in two distinct trees. You will learn the names and the inheritance 
+structure of those interfaces. You will also learn about the purpose of some of 
+those interfaces. You will see how the interfaces declare polymorphic methods 
+that apply to implementations of the interfaces, and you will learn about the 
+optional methods of the <strong>Collection</strong> and <strong>Map</strong> 
+interfaces.</p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations.</em></p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Illustration_of_core_collection_interfaces_">Illustration of core 
+collection interfaces </a></h2>
+<p>We will begin this chapter with a little quiz. Take a look at the program 
+shown in <a href="#Listing_1">Listing 1</a> and see if you can answer the following question. 
+</p>
+<p>What output does the program in <a href="#Listing_1">Listing 1</a> produce? 
+</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321 44321</li>
+	<li>D. 12344 12344</li>
+	<li>E. 1234 44321</li>
+	<li>F. 1234 4321</li>
+	<li>D. None of the above.</li>
+</ul>
+
+
+
+
+
+
+	<div class="a">
+		<p>
+<a name="Listing_1">Listing 1</a>. The program 
+				named Ap401.</p>
+<pre>
+import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class Ap401{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap401
+
+class Worker{
+  public void doIt(){
+    Collection ref = new TreeSet();
+    Populator.fillIt(ref);
+    Iterator iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.print(" ");
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(4);
+    ref.add(4);
+    ref.add(3);
+    ref.add(2);
+    ref.add(1);
+  }//end fillIt()
+}//end class populator
+</pre>
+</div>
+
+
+<p>If you selected the following answer, then you are correct. </p>
+<p>E. 1234 44321 </p>
+<p>The program in <a href="#Listing_1">Listing 1</a> illustrates the basic purpose of the core 
+collection interfaces in the Java Collections Framework. That purpose 
+is to allow collections to be manipulated without regard for how the collections 
+are implemented. </p>
+<h3><a name="Multiple_list_implementations_">Multiple list implementations </a>
+</h3>
+<p>For example, there is more than one way to implement a list. Two common 
+ways involve arrays and linked structures. If two lists are implemented in 
+different ways, but both satisfy the requirements of the core collection 
+interfaces, they can each be manipulated the same way regardless of the details 
+of their implementation. </p>
+<h3><a name="TreeSet_and_ArrayList_">TreeSet and ArrayList </a></h3>
+<p>A collection of type <b>TreeSet</b> and a collection of type <b>ArrayList</b> 
+are instantiated in the program in <a href="#Listing_1">Listing 1</a>. Each of the collections is 
+viewed as being of the interface type <b>Collection</b>. A method named <b>add</b> is used to populate each collection with the same values 
+in the same order. 
+</p>
+<h3><a name="Behavior_is_different_but_appropriate_">Behavior is different but 
+appropriate </a></h3>
+<p>The behavior of the <b>add</b> method is appropriate, and different in each 
+of the two cases, with the final contents of each collection being determined by 
+the respective behavior of the <b>add</b> method for that type of collection.
+</p>
+<h2><a name="The_fillIt_method_">The fillIt method </a></h2>
+<p>The code in the fragment shown in <a href="#Listing_2">Listing 2</a> defines 
+a <em>static</em> method named 
+<b>fillIt</b> of the class named <b>Populator</b>. This is a class of my own 
+design intended solely to illustrate the primary point of this program. </p>
+<p>The method named <b>fillIt</b> receives an incoming reference to a collection 
+object as type <b>Collection</b>. The method calls the <b>add</b> 
+method on the incoming reference five times in succession to add five elements 
+to the collection. These elements are added without regard for the actual 
+type or underlying implementation of the collection. <i>(As written, the <strong>
+fillIt</strong> method has no way of knowing the underlying implementation.)</i></p>
+
+	
+
+
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. The Populator 
+				class.
+
+				</p>
+
+				<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(4);
+    ref.add(4);
+    ref.add(3);
+    ref.add(2);
+    ref.add(1);
+  }//end fillIt()
+}//end class populator
+</pre>
+</div>
+<!--``2-->
+
+<p>The <b>fillIt</b> method will be used to populate two collections of 
+different types with the same data values in the same order. </p>
+<h2><a name="Create_and_populate_a_TreeSet_object_">Create and populate a 
+TreeSet object </a></h2>
+<p>Consider the code fragment shown in <a href="#Listing_3">Listing 3</a>. </p>
+	
+
+<!--``1List03-->
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. Create and populate a TreeSet object.</p>
+<pre>    Collection ref = new TreeSet();
+    Populator.fillIt(ref);
+    Iterator iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+
+<p>The code in <a href="#Listing_3">Listing 3</a> instantiates an object of type 
+<b>TreeSet</b>, and 
+passes that object&#39;s reference to the <b>fillIt</b> method as type <b>Collection</b>. As described above, the 
+<b>fillIt</b> method adds five 
+elements to the collection, in random order with two of the elements being 
+duplicates.</p>
+<blockquote><em>&quot;Note that this program does not use the syntax for Generics. 
+Therefore, if you copy and compile this program, you will probably see a warning 
+regarding unchecked or unsafe operations&quot;</em></blockquote>
+<h3><a name="Display_the_collections_contents_">Display the collection&#39;s 
+contents </a></h3>
+<p>Then the code in <a href="#Listing_3">Listing 3</a> gets an <b>Iterator</b> object on the collection 
+and uses the iterator to display the contents of the collection. </p>
+<h3><a name="TreeSet_object_is_type_SortedSet_">TreeSet object is type SortedSet
+</a></h3>
+<p>The <b>TreeSet</b> class implements one of the core collection interfaces 
+named <b>SortedSet</b>.<b> SortedSet</b> extends <em>(is a
+<a href="#parent_child_relationships">child</a> of)</em> <b>Set</b><i>.</i> 
+One of the characteristics of a <b>Set</b> object is that it doesn&#39;t allow 
+duplicate elements. One of the characteristics of a <b>SortedSet</b> 
+object is that, by default, it maintains its elements in ascending natural order. Since the <b>TreeSet</b> class implements both of these interfaces, it is both a 
+<b>Set</b> 
+and a <b>SortedSet</b>, and exhibits the characteristics of both interfaces. </p>
+<p>Because the underlying structure of the <b>TreeSet</b> class doesn&#39;t allow 
+duplicates, and the underlying structure maintains its elements in ascending 
+order, the code in <a href="#Listing_3">Listing 3</a> produces the following text on the screen: 
+</p>
+<p><strong>1234</strong> </p>
+<h2><a name="Create_and_populate_an_ArrayList_object">Create and populate an 
+ArrayList object</a> </h2>
+<p>Now consider the code fragment shown in <a href="#Listing_4">Listing 4</a>. 
+</p>
+
+	
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. Create and populate an ArrayList object.
+				</p>
+				<pre>    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+
+<p>The code in <a href="#Listing_4">Listing 4</a> instantiates a new collection of type 
+<b>ArrayList</b>, 
+and passes that object&#39;s reference to the same <b>fillIt</b> method, once again as 
+type <strong>Collection</strong>. </p>
+<p>The code in the <b>fillIt</b> method adds five elements having the same 
+values as before to the collection and adds them in the same order as before. The added elements are references to
+<b>Integer</b> objects encapsulating the same values as were earlier added to 
+the <b>TreeSet</b> collection. <em>(See the discussion of Autoboxing and Unboxing in 
+an earlier chapter.)</em> Although they are physically different 
+objects, the result is that essentially the same data is added to both 
+collections. </p>
+<h3><a name="Display_the_collections_contents">Display the collection&#39;s contents</a>
+</h3>
+<p>Then, as before, the code in <a href="#Listing_4">Listing 4</a> gets an iterator and uses it to access 
+and display the contents of the <b>ArrayList</b> collection. </p>
+<p>The <b>ArrayList</b> class implements the <b>List</b> interface, which does 
+not prohibit duplicate elements, and does not maintain its elements in sorted 
+order. Therefore, in this case, the following text was displayed: </p>
+<p><strong>44321</strong> </p>
+<p>All five element values are displayed, including the duplicate, in the order 
+in which they were added to the list. </p>
+<h2><a name="The_important_point_">The important point </a></h2>
+<p>The important point is that although the <b>fillIt</b> method calls the same 
+method name (<b>add</b>) on each of the collection objects, the behavior of 
+that method is different in each case. In both cases, the behavior is 
+appropriate for the underlying data structure. Furthermore, the underlying 
+data structure isn&#39;t even known to the <b>fillIt</b> method. </p>
+<h3><a name="No_duplicate_elements_in_ascending_order_">No duplicate elements in 
+ascending order </a></h3>
+<p>In the first case, where the underlying data structure was a <b>TreeSet</b> 
+object <i>(type <strong>SortedSet</strong>),</i> the duplicate element was eliminated, and the 
+elements were stored so as to be accessible in ascending order. </p>
+<h3><a name="Duplicates_allowed_with_no_sorting_">Duplicates allowed with no 
+sorting </a></h3>
+<p>In the second case, where the underlying data structure was an <b>ArrayList</b> 
+object <i>(type <strong>List</strong>),</i> all five elements, including the duplicate element 
+were stored in the collection. Furthermore, they were stored and later 
+retrieved in the same order in which they were added. </p>
+<h2><a name="Structure_of_core_the_interfaces">Structure of the core interfaces</a>
+</h2>
+<p>The <i>core collection interfaces</i> in the Java Collections 
+Framework do not all extend from a common root interface. </p>
+<p>Rather, the inheritance structure of the core interfaces is shown below. 
+Indentation is used to indicate the <a name="parent_child_relationships">parent-child relationships</a> 
+among the interfaces. </p>
+<ul>
+	<li>Collection 	
+	<ul>
+		<li>Set
+		<ul>
+			<li>SortedSet</li>
+		</ul>
+		</li>
+		<li>List</li>
+		<li>Queue</li>
+		<li>Deque</li>
+	</ul>
+	</li>
+	<li>Map
+	<ul>
+		<li>SortedMap</li>
+	</ul>
+	</li>
+</ul>
+<h2><a name="A_Map_is_not_a_true_Collection_">A Map is not a true Collection </a>
+</h2>
+<p>As you can see, that there is no common root interface. Rather, there 
+are two distinct trees, one rooted by <b>Collection</b> and the other rooted by
+<b>Map</b>. According to The Java Tutorial from Oracle, <i>&quot;a Map is not a 
+true Collection.&quot;</i>  I will have more to say about this in a future chapter.
+</p>
+<h2><a name="Some_operations_are_optional_">Some operations are optional </a>
+</h2>
+<p>Every class that implements an interface in the tree rooted in <b>Collection</b> 
+is not required to support all of the methods <i>(operations)</i> 
+declared in the <b>Collection</b> interface. </p>
+<p>Rather, some of the methods in the <b>Collection</b> 
+interface are designated as &quot;optional operation&quot; in the documentation. <i>(See the list of optional 
+methods for the Collection interface below.)</i> </p>
+<p>According to the contract for the Collections Framework, if a given 
+implementation doesn&#39;t support a specific method, it must throw an
+<b>UnsupportedOperationException</b>. The author of the implementation is 
+responsible for providing documentation that identifies the optional operations 
+that the implementation does and does not support. </p>
+<h3><a name="Support_for_optional_operations_">Support for optional operations
+</a></h3>
+<p>This should not be an issue unless you are either defining your own 
+implementation, or using an implementation defined by someone other than the 
+programmers at Oracle. All of the general-purpose 
+implementations from Oracle appear to support all of the optional operations. </p>
+<h3><a name="Optional_Collection_operations">Optional Collection operations</a>
+</h3>
+<p>The following list shows the optional operations in the <b>Collection</b> 
+interface. Each of these methods has the ability to modify 
+the contents of the collection. </p>
+<ul>
+	<li>add()</li>
+	<li>addAll()</li>
+	<li>clear()</li>
+	<li>remove()</li>
+	<li>removeAll()</li>
+	<li>retainAll()</li>
+</ul>
+<h3><a name="Optional_Map_operations">Optional Map operations</a> </h3>
+<p>The following list shows the optional operations in the <b>Map</b> 
+interface. Each of these methods also has the ability to modify the contents of 
+the map. </p>
+<ul>
+	<li>clear()</li>
+	<li>put()</li>
+	<li>putAll()</li>
+	<li>remove()</li>
+</ul>
+<h3><a name="Many_methods_are_not_optional_">Many methods are not optional </a>
+</h3>
+<p>In both cases, the interface declares numerous other methods that are not 
+optional. Generally, the non-optional methods don&#39;t have the ability to 
+modify the collection. For example, the <b>get</b> method of the <b>Map</b> 
+interface is not optional. Although the <b>get</b> method receives an 
+incoming <i>key</i> and returns the <i>value</i> to which the key maps, the 
+method doesn&#39;t have the ability to modify the contents of the collection. 
+</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a> and paste it into your 
+Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>A collections framework contains at least the following items: </p>
+<ul>
+	<li>interfaces</li>
+	<li>implementations</li>
+	<li>algorithms</li>
+</ul>
+<p>The <em>Java Collections Framework</em> defines eight core interfaces, in two distinct 
+trees. One tree is rooted in <b>Collection</b> and the other is rooted in
+<b>Map</b>. </p>
+<p>The basic purpose of the core interfaces is to make it possible for 
+collections to be manipulated without regard for how they are implemented, so 
+long as the implementation satisfies the contracts of the interfaces. </p>
+<p>When the same method name <em>(and signature)</em> is called on references to collections of different 
+types, the behavior of the method is likely to be different for each collection. 
+However, in each case, that behavior will be appropriate for the type of 
+collection object on which the method is called. This is polymorphic 
+behavior. </p>
+<p>Six of the methods declared in the <b>Collection </b>interface are optional 
+insofar as being supported by implementing classes is concerned. The optional methods 
+all have the ability to modify the contents of the collection. Those 
+implementing classes that don&#39;t support an optional method must throw an <b>UnsupportedOperationException</b> if that method is called on an object of the 
+class. Similarly four of the methods declared in the <strong>Map</strong> 
+interface are optional.</p>
+<p>Many methods declared in the <b>Collection</b> interface are not optional. 
+Generally, the non-optional methods don&#39;t have the ability to modify the 
+collection. </p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter, I will discuss and illustrate some of the details of the 
+core interfaces and the general-purpose implementations in the Java Collections 
+Framework. For example, I will discuss the difference between a <em>set</em> and a 
+<em>list</em>. 
+I will also discuss the difference between <i>ordered</i> and <i>sorted</i>. I 
+will discuss the fact that additional stipulations are applied as you progress 
+down the framework interface hierarchy. In order to help you learn and retain 
+the material, I will provide a couple of short quizzes.</p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong> </p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4050: Core Collection Interfaces</li>
+					<li>File: Java4050.htm
+</li>
+					<li>Published: 04/18/13</li>
+					<li>Revised: 04/15/20</li>
+					
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

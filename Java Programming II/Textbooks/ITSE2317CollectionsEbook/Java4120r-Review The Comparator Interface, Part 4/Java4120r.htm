@@ -1,0 +1,428 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4120r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4120r Review: The Comparator Interface, Part 4</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>, 
+		<a href="#question11">11</a>, <a href="#question12">12</a>, 
+		<a href="#question13">13</a>, 
+		<a href="#question14">14</a>, 
+		<a href="#question15">15</a>,
+		<a href="#question16">16</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4120: The Comparator Interface, Part 4</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+
+
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? The <b>Collection</b> interface declares a method named <b>
+convertToArray</b>, which can be called on a <b>Collection</b> object to <i>
+"return an array containing all of the elements in this collection whose runtime 
+type is that of the specified array"</i>. </p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? A <b>Comparator</b> object can be used to sort the contents of 
+an array containing references to objects.</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? An array is a container that can be used to store a collection 
+of primitive values or a collection of references to objects. </p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>Write down the output produced by the program shown in <a href="#Listing_1">
+Listing 1</a>. Hint: There are ten lines of output.</p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? A <strong>Vector</strong> object is a <strong>Set</strong> 
+object.</p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? Because a <strong>Vector</strong> object is a <strong>List</strong> 
+object, it is not allowed to contain duplicate elements.</p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h2><a name="question07">Question 7</a></h2>
+<p>True or False? Because a <strong>Vector</strong> is a <b>List</b>, it 
+is an <i>ordered</i> collection. </p>
+<p><a href="#answer07">Answer 7</a></p>
+
+<h2><a name="question08">Question 8</a> </h2>
+<p>True or False? The position of each element in an <em>ordered</em> collection 
+is determined by <span class="auto-style1"><a href="#answer08">i</a>ts value 
+relative to the values of its neighbors.</span></p>
+<p><a href="#answer08">Answer 8</a> </p>
+
+<h2><a name="question09">Question 9</a></h2>
+<p>True or False? The <strong>add</strong> method for the <strong>Vector</strong> 
+class simply adds each new element to the end of the list.</p>
+<p><a href="#answer09">Answer 9</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>True or False? When an iterator is used to traverse the elements in a <b>
+Vector</b> collection, the elements are delivered by the iterator in ascending 
+index order, beginning with the element stored at index 0. </p>
+<p><a href="#answer10">Answer 10</a></p>
+	
+<h2><a name="question11">Question 11</a></h2>
+<p>True or False? The first time the iterator is applied to the <strong>
+Vector</strong> object in <a href="#Listing_1">Listing 1</a>, the output is in 
+ascending natural order as shown below:</p>
+<p><strong>BILL Bill JOE Joe TOM Tom</strong></p>
+<p><a href="#answer11">Answer 11</a></p>
+	
+<h2><a name="question12">Question 12</a></h2>
+<p>True or False? The <strong>toArray</strong> method can be called on a <strong>
+Vector</strong> object to return a reference to an array object containing all 
+of the elements in the <strong>Vector</strong> in ascending index order.</p>
+<p><a href="#answer12">Answer 12</a></p>
+	
+<h2><a name="question13">Question 13</a></h2>
+<p>True or False? The documentation for the <b>toArray</b> method of the <b>
+Collection</b> interface reads partially as follows: </p>
+<blockquote>
+	<i>"Returns an array containing all of the elements in this collection. If 
+	the collection makes any guarantees as to what order its elements are 
+	returned by its iterator, this method must return the elements in the same 
+	order.</i></blockquote>
+<p><a href="#answer13">Answer 13</a></p>
+	
+<h2><a name="question14">Question 14</a></h2>
+<p>True or False? There is a class named <b>Arrays</b> that contains various methods for manipulating arrays 
+<em>(such as 
+	sorting and searching)</em>. The <b>Arrays</b> class contains many overloaded 
+versions of the <b>sort</b> method. As usual, each overloaded version of the <strong>sort</strong> 
+method requires a different argument list.</p>
+
+<p><a href="#answer14">Answer 14</a></p>
+	
+<h2><a name="question15">Question 15</a></h2>
+<p>Given: <a href="#Listing_1">
+Listing 1</a> makes two calls to overloaded <strong>sort</strong> methods of the
+<strong>Arrays</strong> 
+class using the following overloaded methods. <em>(Note that I omitted generics 
+syntax from the signatures because generics is beyond the scope of this
+<a name="course">course</a>.)</em></p>
+<ul>
+	<li>sort(Object[] a)</li>
+	<li>sort(Object[] a, Comparator c)</li>
+</ul>
+<p>True or False? In <a href="#Listing_1">
+Listing 1</a>, the call to the first sort method in the <a href="#course">
+above list</a> produces the following output:</p>
+<p><strong>Tom TOM Joe JOE Bill BILL</strong></p>
+<p><a href="#answer15">Answer 15</a></p>
+	
+<h2><a name="question16">Question 16</a></h2>
+<p>True or False? In <a href="#Listing_1">
+Listing 1</a>, the call to the second sort method in the <a href="#course">above 
+list</a> produces the following output:</p>
+<p><strong>Tom TOM Joe JOE Bill BILL</strong></p>
+<p><a href="#answer16">Answer 16</a></p>
+
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Comparator05.java.</li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+<h2><a name="answer16">Answer 16</a></h2>
+<p>True.</p>
+<p><a href="#question16">Back to Question 16</a> </p>
+
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>False. Here is what the documentation has to say about this overloaded 
+version of the <strong>Arrays.sort</strong> method:</p>
+<p><i>Sorts the specified array of objects into ascending order, according to 
+the natural ordering of its elements. All elements in the array must implement 
+the Comparable interface.</i></p>
+<p>According to that specification, the output would be:</p>
+<p><strong>BILL Bill JOE Joe TOM Tom</strong></p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>True.</p>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>True.</p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>True.</p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>False. By default, a <strong>Vector</strong> object does not sort the 
+elements. Therefore, the output order is the same as the input order shown in 
+the <strong>fillIt</strong> method.</p>
+<p><strong>Joe Bill Tom JOE BILL TOM</strong></p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>True.</p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>True.</p>
+<p><a href="#question09">Back to Question 9</a> </p>
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>False. The position of each element in an <em>ordered</em> collection is 
+determined by a numeric index associated with the element and is independent of 
+the value of the element. </p>
+
+
+
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>True.</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>False. Because a <strong>Vector</strong> object is a <strong>List</strong> 
+object, <em>(and not a <strong>Set</strong> object)</em> it is allowed to 
+contain duplicate elements.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>False. A <strong>Vector</strong> object is a <strong>List</strong> object. 
+The <strong>Vector</strong> class implements the <strong>Collection</strong> 
+interface and the <strong>List</strong> interface but not the <strong>Set</strong> 
+interface.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>Collection data<br/>Joe Bill Tom JOE BILL TOM <br/>Raw array data<br/>Joe Bill 
+Tom JOE BILL TOM <br/>Natural order sorted array data<br/>BILL Bill JOE Joe TOM 
+Tom <br/>Custom order sorted array data<br/>Tom TOM Joe JOE Bill BILL <br/>
+Collection data<br/>Joe Bill Tom JOE BILL TOM</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>True.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>True.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>False. The <b>Collection</b> interface declares a method named <b>toArray</b>, 
+which can be called on a <b>Collection</b> object to <i>"return an array 
+containing all of the elements in this collection whose runtime type is that of 
+the specified array"</i>. </p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. Comparator05.java.</p>
+&nbsp;<pre>//File Comparator05.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+import java.io.Serializable;
+
+class Comparator05{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator05
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+    Object[] array;
+
+    ref = new Vector();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    System.out.println("Collection data");
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+    array = ref.toArray();
+    System.out.println("Raw array data");
+    display(array);
+
+    //Sort the array into natural order
+    // and display it.
+    Arrays.sort(array);
+    System.out.println("Natural order sorted " +
+                                  "array data");
+    display(array);
+
+    //Sort the array into custom order
+    // and display it.
+    Arrays.sort(array, new TheComparator());
+    System.out.println("Custom order sorted " +
+                                 "array data");
+    display(array);
+
+    iter = ref.iterator();
+    System.out.println("Collection data");
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+
+  static void display(Object[] array){
+    for(int i = 0; i &lt; array.length;i++){
+      System.out.print(array[i] + " ");
+    }//end for loop
+    System.out.println();
+  }//end display()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add("Joe");
+    ref.add("Bill");
+    ref.add("Tom");
+    ref.add("JOE");
+    ref.add("BILL");
+    ref.add("TOM");
+  }//end fillIt()
+}//end class Populator
+
+class TheComparator implements Comparator,Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    int result = ((String)o1).compareTo(((String)o2));
+    return result*(-1);
+  }//end compare()
+}//end class TheComparator
+</pre>
+
+</div>
+
+
+
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+			</p>
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4120r Review: The Comparator Interface, Part 4</li>
+				<li>File: Java4120r.htm </li>
+				<li>Published: 12/03/13</li>
+				<li>Revised: 04/21/20</li>
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+
+
+</body>
+</html>

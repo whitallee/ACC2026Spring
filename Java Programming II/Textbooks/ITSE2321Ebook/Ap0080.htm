@@ -1,0 +1,971 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0080</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0080: Classes, Constructors, and Accessor Methods</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. An Object</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap090{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = NewClass();
+    System.out.println(obj);
+
+  }//end makeObj()
+
+
+}// end class 
+
+class NewClass{
+  public String toString(){
+    return &quot;An Object&quot;;
+  }//end toString()
+}//end NewClass
+</pre></div>
+
+
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. An Object</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap091{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass();
+    System.out.println(obj);
+
+  }//end makeObj()
+
+}// end class 
+
+Class NewClass{
+  public String toString(){
+    return &quot;An Object&quot;;
+  }//end toString()
+}//end NewClass
+</pre></div>
+
+
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. An Object</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap092{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass();
+    System.out.println(obj);
+
+  }//end makeObj()
+
+}// end class 
+
+class NewClass{
+  public String toString(){
+    return &quot;An Object&quot;;
+  }//end toString()
+}//end NewClass
+</pre></div>
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Object containing 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap093{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass();
+    System.out.println(obj);
+  }//end makeObj()
+}// end class 
+
+class NewClass{
+  private int x = 2;
+  
+  public NewClass(int x){
+    this.x = x;
+  }//end constructor
+  
+  public String toString(){
+    return &quot;Object containing &quot; + x;
+  }//end toString()
+}//end NewClass
+</pre></div>
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Object containing 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap094{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    Subclass obj = new Subclass();
+    System.out.println(obj);
+  }//end makeObj()
+}// end class 
+
+class Superclass{
+  private int x;
+  
+  public Superclass(int x){
+    this.x = x;
+  }//end constructor
+  
+  public String toString(){
+    return &quot;Object containing &quot; + x;
+  }//end toString()
+    
+  public void setX(int x){
+    this.x = x;
+  }//end setX()
+}//end Superclass
+
+class Subclass extends Superclass{
+  public Subclass(){
+    setX(2);
+  }//end noarg constructor
+}//end Subclass
+</pre></div>
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Object containing 5</li>
+	<li>D. Object containing 2</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap095{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass(5);
+    System.out.println(obj);
+  }//end makeObj()
+}// end class 
+
+class NewClass{
+  private int x = 2;
+  
+  public NewClass(){
+  }//end constructor
+  
+  public NewClass(int x){
+    this.x = x;
+  }//end constructor
+  
+  public String toString(){
+    return &quot;Object containing &quot; + x;
+  }//end toString()
+}//end NewClass
+</pre></div>
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in<a href="#Listing_7"> Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Object containing 0, 0.0, false</li>
+	<li>D. Object containing 0.0, 0, true</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap096{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass();
+    System.out.println(obj);
+  }//end makeObj()
+}// end class 
+
+class NewClass{
+  private int x;
+  private double y;
+  private boolean z;
+  
+  public String toString(){
+    return &quot;Object containing &quot; + 
+                          x + &quot;, &quot; + 
+                          y + &quot;, &quot; + z;
+  }//end toString()
+}//end NewClass
+</pre></div>
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2</li>
+	<li>D. 5</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap097{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass(5);
+    System.out.println(obj.getX());
+  }//end makeObj()
+}// end class 
+
+class NewClass{
+  private int x = 2;
+    
+  public NewClass(){
+  }//end constructor
+  
+  public NewClass(int x){
+    this.x = x;
+  }//end constructor
+
+  public int getX(){
+    return x;
+  }//end getX()
+}//end NewClass
+</pre></div>
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 10</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap098{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+
+    NewClass obj = new NewClass();
+    obj.setX(10);
+    System.out.println(obj.getX());
+    
+  }//end makeObj()
+}// end class 
+
+class NewClass{
+  private int y;
+ 
+  public void setX(int y){
+    this.y = y;
+  }//end setX()
+
+  public int getX(){
+    return y;
+  }//end getX()
+}//end NewClass
+</pre></div>
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2</li>
+	<li>D. 5</li>
+	<li>E. 10</li>
+	<li>F. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap099{
+  public static void main(
+                        String args[]){
+    new Worker().makeObj();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void makeObj(){
+    NewClass obj = new NewClass(5);
+    obj.x = 10;
+    System.out.println(obj.x);
+  }//end makeObj()
+}// end class 
+
+class NewClass{
+  private int x = 2;
+    
+  public NewClass(){
+  }//end constructor
+  
+  public NewClass(int x){
+    this.x = x;
+  }//end constructor
+  
+  public void setX(int x){
+    this.x = x;
+  }//end setX()
+
+  public int getX(){
+    return x;
+  }//end getX()
+}//end NewClass
+</pre></div>
+
+	
+	
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0080: Classes, Constructors, 
+				and Accessor Methods</li>
+				<li>File: Ap0080.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/05/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>A. Compiler Error</p>
+<h3><strong>Explanation 10</strong></h3>
+<p><strong>Variables declared private really are private </strong> </p>
+<p>The code in the following fragment attempts to ignore the setter and getter 
+methods and directly access the <strong>private</strong> instance variable named 
+<strong>x</strong> in the object 
+referred to by the reference variable named <strong>obj</strong>. </p>
+<div class="a">
+				<pre>    obj.x = 10;
+    System.out.println(obj.x);</pre>
+</div>
+<p>This produces a compiler error. The compiler error produced by JDK 1.3 is 
+reproduced below. </p>
+<div class="a">
+				<pre>Ap099.java:19: x has private access in
+NewClass
+    obj.x = 10;
+       ^
+Ap099.java:20: x has private access in
+NewClass
+    System.out.println(obj.x);
+                          ^
+</pre>
+</div>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>C. 10</p>
+<h3><strong>Explanation 9</strong></h3>
+<p><strong>A setter and a getter </strong></p>
+<p>This is a very simple program that uses a setter <em>(modifier or mutator)</em> 
+method named <strong>setX</strong> to set the value 10 in a property named
+<strong>x</strong> that is stored in an instance variable named <strong>y</strong> in an object instantiated from the class named <strong>
+NewClass</strong>.. </p>
+<p>The program also uses a getter <em>(accessor) </em>method named <strong>getX</strong> 
+to get and display the value of the property named <strong>x</strong>. <em>(Note 
+that according to JavaBeans design patterns, the name of the property is 
+unrelated to the name of variable in which the property value is stored.)</em></p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>D. 5</p>
+<h3><strong>Explanation 8</strong></h3>
+<p><strong>Hide your data and expose your methods</strong></p>
+<p>For reasons that I won&#39;t go into here, good object-oriented design principles 
+state that in almost all cases where an instance variable is not declared to be 
+<strong>final</strong>, it should be declared <strong>private</strong>. <em>(A final variable behaves like a 
+constant.) </em> </p>
+<p><strong>What is private access?</strong> </p>
+<p>When an instance variable is declared <strong>private</strong>, it is accessible only by 
+methods of the class in which it is defined. Therefore, the only way that the 
+&quot;outside world&quot; can gain access to a <strong>private</strong> instance variable is by going 
+through an <em>(usually <strong>public</strong>)</em> instance method of the object. </p>
+<p><strong>Accessor, modifier, mutator, setter, and getter methods </strong> </p>
+<p>Historically, methods that have been defined for the purpose of exposing 
+<strong>private</strong> instance variables to the outside world have been referred to as 
+<em>accessor</em> and <em>modifier</em> methods. <em>(Modifier methods are also sometimes called mutator methods.)</em></p>
+<p><em>(Note that since the advent of Sun&#39;s JavaBeans Component design patterns, 
+these methods have also come to be known as getter methods and setter methods in 
+deference to the design-pattern naming conventions for the methods.)</em></p>
+<p><strong>A private instance variable with an initializer </strong> </p>
+<p>The class named <strong>NewClass</strong> declares a <strong>private</strong> instance variable named 
+<strong>x</strong> and 
+initializes its value to 2, as shown in the following code fragment: </p>
+<div class="a">
+				<pre>  private int x = 2;</pre>
+</div>
+<p><strong>Two constructors </strong> </p>
+<p>The class contains both a <em>noarg</em> constructor and a <em>parameterized</em> constructor 
+as shown in the following fragment: </p>
+<div class="a">
+				<pre>  public NewClass(){
+  }//end constructor
+  
+  public NewClass(int x){
+    this.x = x;
+  }//end constructor</pre>
+</div>
+<p><strong>Calling the noarg constructor </strong> </p>
+<p>If an object of the class is instantiated by calling the <em>noarg</em> constructor, 
+the initial value of 2 remains intact, and that object contains an instance 
+variable with an initial value of 2. </p>
+<p><strong>Calling the parameterized constructor</strong> </p>
+<p>If an object of the class is instantiated by calling the parameterized 
+constructor, the initial value of 2 is overwritten by the value of the incoming 
+parameter to the parameterized constructor. In this case, that value is 5, 
+because the object is instantiated by the following code fragment that passes 
+the literal value 5 to the parameterized constructor. Thus, the initial value of 
+the instance variable in that object is 5. </p>
+<div class="a">
+				<pre>    NewClass obj = new NewClass(5);</pre>
+</div>
+<p><strong>A getter method</strong> </p>
+<p>Because the instance variable named <strong>x</strong> is <strong>private</strong>, it cannot be accessed 
+directly for display by the code in the <strong>makeObj</strong> method of the 
+<strong>Worker</strong> class. 
+However, the <strong>NewClass</strong> class provides the following public <em>getter</em> or 
+<em>accessor</em> method 
+that can be used to get the value stored in the instance variable.</p>
+<p><em>(The name of this method complies with JavaBeans design patterns. If you 
+examine the name carefully, you will see why Java programmers often refer to 
+methods like this as getter methods.)</em></p>
+<div class="a">
+				<pre>  public int getX(){
+    return x;
+  }//end getX()</pre>
+</div>
+<p><strong>Calling the getter method </strong> </p>
+<p>Finally, the second statement in the following code fragment calls the getter 
+method on the <strong>NewClass</strong> object to get and display the value of the instance 
+variable named <strong>x</strong>. </p>
+<div class="a">
+				<pre>    NewClass obj = new NewClass(5);
+    System.out.println(obj.getX());</pre>
+</div>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>C. Object containing 0, 0.0, false</p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>Default initialization values</strong></p>
+<p>The purpose of this question is to confirm that you understand the default 
+initialization of instance variables in an object when you don&#39;t write code to 
+cause the initialization of the instance variable to differ from the default.</p>
+<p>By default, all instance variables in a new object are initialized with 
+default values if you don&#39;t provide a constructor <em>(or other mechanism)</em> 
+that causes them to be initialized differently from the default. </p>
+<ul>
+	<li>All instance variables of the numeric types are initialized to the value 
+	of zero for the type. This program illustrates default initialization to 
+	zero for <b>int</b> and <b>double</b> types.</li>
+	<li>Instance variables of type <strong>boolean</strong> are initialized to 
+	false.</li>
+	<li>Instance variables of type <strong>char</strong> are initialized to a 
+	16-bit Unicode character for which all sixteen bits have been set to zero. I 
+	didn&#39;t include initialization of the <strong>char</strong> type in the 
+	output of this program because the <strong>default</strong> char value is 
+	not printable.</li>
+	<li>Instance variables of reference types are initialized to null.</li>
+</ul>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. Object containing 5</p>
+<h3><strong>Explanation 6</strong></h3>
+<p><strong>A parameterized constructor</strong> </p>
+<p>This program illustrates the straightforward use of a parameterized 
+constructor. </p>
+<p>The class named <strong>NewClass</strong> defines a parameterized constructor 
+that requires an incoming parameter of type <b>int</b>.</p>
+<p><em>(For good design practice, the class also defines a <em>noarg</em> constructor, 
+even though it isn&#39;t actually used in this program. This makes it available if 
+needed later when someone extends the class.)</em></p>
+<p>Both constructors are shown in the following code fragment. </p>
+<div class="a">
+				<pre>  public NewClass(){
+  }//end constructor
+
+  public NewClass(int x){
+    this.x = x;
+  }//end constructor</pre>
+</div>
+	<p>The parameterized constructor stores its incoming parameter named <strong>
+	x</strong> in an instance variable of the class, also named <strong>x</strong>.</p>
+<p><em>(The use of the keyword <strong>this</strong> is required in this case to 
+eliminate the ambiguity of having a local parameter with the same name as an 
+instance variable. This is very common Java programming style that you should 
+recognize and understand.)</em></p>
+<p><strong>Call the parameterized constructor</strong> </p>
+<p>The following code fragment calls the parameterized constructor, passing the 
+literal <b>int</b> value of 5 as a parameter. </p>
+<div class="a">
+				<pre>    NewClass obj = new NewClass(5);</pre>
+</div>
+	<p>Hopefully you will have no difficulty understanding the remaining code in 
+	the program that causes the value stored in the instance variable named
+	<strong>x</strong> to be displayed on the computer screen.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><strong>If you define any constructors, ...</strong> </p>
+<p>The discussion for <a href="#question04">Question 4</a> explained that if you define any 
+constructor in a new class, you must define all constructors that will ever be 
+needed for that class. When you define one or more constructors, the default 
+<em>noarg</em> constructor is no longer provided by the system on your behalf. </p>
+<p><a href="#question04">Question 4</a> illustrated a simple manifestation of a problem arising 
+from the failure to define a <em>noarg</em> constructor that would be needed later. The 
+reason that it was needed later was that the programmer attempted to explicitly 
+use the non-existent <em>noarg</em> constructor to create an instance of the class. </p>
+<p><strong>A more subtle problem </strong> </p>
+<p>The problem in this program is more subtle. Unless you <em>(or the programmer of 
+the superclasses)</em> specifically write code to cause the system to behave 
+otherwise, each time you instantiate an object of a class, the system 
+automatically calls the <em>noarg</em> constructor on superclasses of that class up to 
+and including 
+the class named <b>Object</b>. If one or more of those superclasses don&#39;t have a <em>noarg</em> 
+constructor, unless the author of the subclass constructor has taken this into 
+account, the program will fail to compile. </p>
+<p><strong>Calling a non-existing </strong> <em><strong>noarg</strong></em><strong> constructor</strong> </p>
+<p>This program attempts to instantiate an object of a class named <strong>Subclass</strong>, 
+which extends a class named <strong>Superclass</strong>. By default, when attempting to 
+instantiate the object, the system will attempt to call a <em>noarg</em> 
+constructor defined in <strong>Superclass</strong>.</p>
+<p><strong>Superclass has no </strong> <em><strong>noarg</strong></em><strong> constructor</strong> </p>
+<p>The <strong>Superclass</strong> class defines a parameterized constructor that requires a 
+single incoming parameter of type <b>int</b>. However, it does not also define a 
+<em>noarg</em> constructor. Because the parameterized constructor is defined, the default 
+<em>noarg</em> constructor does not exist. As a result, JDK 1.3 produces the following 
+compiler error: </p>
+<div class="a">
+				<pre>Ap094.java:40: cannot resolve symbol
+
+symbol  : constructor Superclass  ()
+location: class Superclass
+  public Subclass(){
+</pre>
+</div>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 4</strong></h3>
+<p><strong>Constructors</strong> </p>
+<p>Java uses the following kinds of constructors: </p>
+<ul>
+	<li>Those that take arguments, often referred to as <em>parameterized 
+	constructors</em>, which typically perform initialization on the new object 
+	using parameter values.</li>
+	<li>Those that don&#39;t take arguments, often referred to as <em>default</em> 
+	or <em>noarg</em> constructors, which perform default initialization on the 
+	new object.</li>
+	<li>Those that don&#39;t take arguments but perform initialization on the new 
+	object in ways that differ from the default initialization.</li>
+</ul>
+<p><strong>Constructor definition is optional </strong></p>
+<p>You are not required to define a constructor when you define a new class. If 
+you don&#39;t define a constructor for your new class, a default constructor will be 
+provided on your behalf. This constructor requires no argument, and it is 
+typically used in conjunction with the new operator to create an instance of the 
+class using statements such as the following: </p>
+<div class="a">
+				<pre>    NewClass obj = new NewClass();</pre>
+</div>
+	<p><strong>The default constructor </strong></p>
+<p>The default constructor typically does the following: </p>
+<ul>
+	<li>Calls the <em>noarg</em> constructor of the superclass</li>
+	<li>Assists in the process of allocating and organizing memory for the new 
+	object</li>
+	<li>Initializes all instance variables of the new object with the following 
+	four default values:<ul>
+		<li>numeric = 0, </li>
+		<li>boolean = false, </li>
+		<li>char = all zero bits </li>
+		<li>reference = null</li>
+	</ul>
+	</li>
+</ul>
+<p><strong>Are you satisfied with default values?</strong></p>
+<p>As long as you are satisfied with the default initialization of all instance 
+variables belonging to the object, there is no need for you to define a 
+constructor of your own. </p>
+<p>However, in the event that you have initialization needs that are not 
+satisfied by the default constructor, you can define your own constructor. Your 
+new constructor may or may not require arguments. <em>(In case you have 
+forgotten, the name of the constructor is always the same of the name of the 
+class in which it is defined.) </em></p>
+<p><strong>A non-default <em>noarg</em> constructor </strong></p>
+<p>If your new constructor doesn&#39;t require arguments, you may need to write code 
+that performs initialization in ways that differ from the default 
+initialization. For example, you might decide that a particular <b>double</b> 
+instance variable needs to be initialized with a random number each time a new 
+object is instantiated. You could do that with a constructor of your own design 
+that doesn&#39;t take arguments by defining the constructor to get initialization 
+values from an object of the <strong>Random</strong> class.</p>
+<p><strong>A parameterized constructor</strong> </p>
+<p>If your new constructor does take arguments, <em>(a parameterized 
+constructor)</em> you can define as many overloaded versions as you need. Each 
+overloaded version must have a formal argument list that differs from the formal 
+argument list of all of the other overloaded constructors for that class.</p>
+<p><em>(The rules governing the argument list for overloaded constructors are 
+similar to the rules governing the argument list for overloaded methods, which 
+were discussed in a previous chapter.)</em></p>
+<p><strong>Use parameter values for initialization</strong> </p>
+<p>In this case, you will typically define your parameterized constructors to 
+initialize some or all of the instance variables of the new object using values 
+passed to the constructor as parameters. </p>
+<p><strong>What else can a constructor do? </strong></p>
+<p>You can also cause your new constructor to do other things if you so choose. 
+For example, if you know how to do so, you could cause your constructor <em>
+(with or without parameters)</em> to play an audio clip each time a new object 
+is instantiated. You could use a parameter to determine which audio clip to play 
+in each particular instance. </p>
+<p><strong>The punch line</strong> </p>
+<p>So far, everything that I have said is background information for this 
+program. Here is the punch line insofar as this program is concerned.</p>
+<p>If you define any constructor in your new class, you must define all 
+constructors that your new class will ever need.</p>
+<p>If you define any constructor, the default constructor is no longer provided 
+on your behalf. If your new class needs a <em>noarg</em> constructor <em>(and it probably 
+does, but that may not become apparent until later when you or someone else 
+extends your class)</em> you must define the <em>noarg</em> version in addition to the 
+other overloaded versions that you define. </p>
+<p>A violation of the rule </p>
+<p>This program violated the rule given above. It defined the parameterized 
+constructor for the class named <strong>NewClass</strong> shown below </p>
+<div class="a">
+				<pre>  public NewClass(int x){
+    this.x = x;
+  }//end constructor</pre>
+</div>
+	<p>However, the program did not also define a <em>noarg</em> constructor for the
+	<strong>NewClass</strong> class. </p>
+<p><strong>Calling the <em>noarg</em> constructor </strong></p>
+<p>The code in the <strong>makeObj</strong> method of the <strong>Worker</strong> 
+class attempted to instantiate a new object using the following code: </p>
+<div class="a">
+				<pre>    NewClass obj = new NewClass();</pre>
+</div>
+	<p>Since the class definition didn&#39;t contain a definition for a <em>noarg</em> 
+	constructor, the following compiler error was produced by JDK 1.3. </p>
+<div class="a">
+				<pre>Ap093.java:18: cannot resolve symbol
+symbol  : constructor NewClass 
+()
+location: class NewClass
+    NewClass obj = new NewClass();
+</pre>
+</div>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>C. An Object </p>
+<h3><strong>Explanation 3</strong></h3>
+<p><strong>We finally got it right! </strong></p>
+<p>Did you identify the errors in the previous two programs before looking at 
+the answers? </p>
+<p>This program declares the class named <strong>NewClass</strong> correctly and 
+uses the <strong>new</strong> operator correctly in conjunction with the default 
+<em>noarg</em> constructor for the <strong>NewClass</strong> class to create a new 
+instance of the class <em>(an object)</em>. </p>
+<p><strong>Making the class public </strong></p>
+<p>One of the things that I could do differently would be to make the 
+declaration for the <strong>NewClass</strong> class public <em>(as shown in the 
+following code fragment)</em>. </p>
+<div class="a">
+				<pre>public class NewClass{
+  public String toString(){
+    return &quot;An Object&quot;;
+  }//end toString()
+}//end NewClass</pre>
+</div>
+	<p><strong>I am a little lazy </strong></p>
+<p>The reason that I didn&#39;t declare this class <strong>public</strong> <em>(and 
+haven&#39;t done so throughout this series of chapters)</em> is because the source code for all
+<strong>public</strong> classes and interfaces must be in separate files. While 
+that is probably a good requirement for large programming projects, it is 
+overkill for simple little programs like I am presenting in this group of 
+self-assessment chapters. </p>
+<p><strong>Dealing with multiple files </strong></p>
+<p>Therefore, in order to avoid the hassle of having to deal with multiple 
+source code files for every program, I have been using <em>package-private</em> 
+access for class definitions other than the controlling class <em>(the 
+controlling class is declared public)</em>. Although I won&#39;t get into the 
+details at this point, when a class is not declared public, it is common to say 
+that it has <em>package-private</em> access instead of <strong>public</strong> 
+access.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>Java is a case-sensitive language </strong> </p>
+<p>Java keywords must be written exactly as specified. The keyword <strong>class</strong> cannot 
+be written as <em>Class</em>, which is the problem with this program. </p>
+<p>The inappropriate use of the upper-case C in the word <em>Class</em> caused the 
+following compiler error. </p>
+<div class="a">
+<pre>Ap091.java:25: &#39;class&#39; or &#39;interface&#39; expected
+Class NewClass{
+</pre>
+</div>
+<p><strong>The solution to the problem</strong> </p>
+<p>This problem can be resolved by causing the first character in the keyword
+<strong>class</strong> to be a lower-case character as shown in the following 
+code fragment. </p>
+<div class="a">
+				<pre>class NewClass{
+  public String toString(){
+    return &quot;An Object&quot;;
+  }//end toString()
+}//end NewClass</pre>
+</div>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>A. Compiler Error</p>
+<h3><strong>Explanation 1</strong></h3>
+<p><strong>Instantiating an object </strong></p>
+<p>There are several ways to instantiate an object in Java: </p>
+<ul>
+	<li>Use the <strong>newInstance</strong> method of the class named <strong>
+	Class</strong>.</li>
+	<li>Reconstruct a serialized object using an I/O <strong>readObject</strong> 
+	method.</li>
+	<li>Create an initialized array object such as {1,2,3}.</li>
+	<li>Create a <strong>String</strong> object from a literal string such as &quot;A 
+	String&quot;.</li>
+	<li>Use the <strong>new</strong> operator.</li>
+</ul>
+<p>Of all of these, the last two are by far the most common. </p>
+<p><strong>What you cannot do! </strong></p>
+<p>You cannot instantiate a new object using code like the following code 
+fragment that was extracted from this program. </p>
+<div class="a">
+				<pre>NewClass obj = NewClass();</pre>
+</div>
+	<p>This program produces the following compiler error: </p>
+<div class="a">
+				<pre>Ap090.java:18: cannot resolve symbol
+symbol  : method NewClass  ()
+location: class Worker
+    NewClass obj = NewClass();
+</pre>
+</div>
+<p><strong>The solution to the problem</strong> </p>
+<p>This problem can be solved by inserting the <strong>new</strong> operator to the left of the 
+constructor as shown in the following code fragment. </p>
+<div class="a">
+				<pre>    NewClass obj = new NewClass();</pre>
+</div>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

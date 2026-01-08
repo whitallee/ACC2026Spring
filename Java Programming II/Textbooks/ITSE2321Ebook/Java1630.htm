@@ -1,0 +1,1384 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java1630: Exception Handling</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1630: Exception Handling</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p><em><strong>Note: The material in 
+		this chapter is beyond the scope this introductory OOP course. The material is presented 
+		here solely for the benefit of students who would like to dig deeper 
+		into the technology. Other students should feel free to skip this 
+		chapter. ITSE 2321 students in Prof. Baldwin's classes will not be expected to know and will not be 
+		tested on the material in this chapter unless it is 
+		also presented in another chapter.</strong></em></p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Throwable constructors. </li>
+		<li><a href="#Figure_2">Figure 2</a>. Methods of the Throwable class. </li>
+		<li><a href="#Figure_3">Figure 3</a>. Compiler error from an unhandled checked exception.</li>
+		<li><a href="#Figure_4">Figure 4</a>. Another compiler error. </li>
+		<li><a href="#Figure_5">Figure 5</a>. Output from program that throws ArithmeticException. </li>
+		<li><a href="#Figure_6">Figure 6</a>. Syntax of a try block. </li>
+		<li><a href="#Figure_7">Figure 7</a>. Syntax of a catch block. </li>
+		<li><a href="#Figure_8">Figure 8</a>. Output produced by the finally block. </li>
+		<li><a href="#Figure_9">Figure 9</a>. Syntax for declaring that a method throws exceptions.</li>
+		<li><a href="#Figure_10">Figure 10</a>. Example of a throw statement.</li>
+		<li><a href="#Figure_11">Figure 11</a>. Output from the for loop.</li>
+		<li><a href="#Figure_12">Figure 12</a>. Output from the exception handler.</li>
+		<li><a href="#Figure_13">Figure 13</a>. Output from code following the catch block.</li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Sample program with no exception handling code.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Sample program that fixes one compiler error. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Sample program that fixes the remaining compiler error. </li>
+		<li><a href="#Listing_4">Listing 4</a>. A sample program that throws an exception. </li>
+		<li><a href="#Listing_5">Listing 5</a>. The power of the finally block.</li>
+		<li><a href="#Listing_6">Listing 6</a>. The class named MyException.</li>
+		<li><a href="#Listing_7">Listing 7</a>. The try block.</li>
+		<li><a href="#Listing_8">Listing 8</a>. A matching catch block.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Code following the catch block.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Complete program listing for Excep16.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter explains Exception Handling in Java. The discussion includes 
+	the following topics: </p>
+<ul>
+	<li>What is an exception?</li>
+	<li>How do you throw and catch exceptions?</li>
+	<li>What do you do with an exception once you have caught it?</li>
+	<li>How do you make use of the exception class hierarchy provided by the 
+	Java development environment?</li>
+</ul>
+<p>This chapter will cover many of the details having to do with exception 
+handling in Java. By the end of the chapter, you should know that the use of 
+exception handling is not optional in Java, and you should have a pretty good 
+idea how to use exception handling in a beneficial way. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><b>Introduction</b> </p>
+<p>Stated simply, the exception-handling capability of Java makes it possible 
+for you to: </p>
+<ul>
+	<li>Monitor for exceptional conditions within your program</li>
+	<li>Transfer control to special exception-handling code <i>(which you 
+	design)</i> if an exceptional condition occurs</li>
+</ul>
+<p><b>The basic concept</b> </p>
+<p>This is accomplished using the keywords: <b>try</b>, <b>catch</b>, <b>throw</b>,
+<b>throws</b>, and <b>finally</b>. The basic concept is as follows: </p>
+<ul>
+	<li>You <b>try</b> to execute the statements contained within a block of 
+	code. <i>(A block of code is a group of one or more statements surrounded by 
+	curly brackets.)</i></li>
+	<li>If you detect an exceptional condition within that block, you <b>throw</b> 
+	an exception object of a specific type.</li>
+	<li>You <b>catch</b> and process the exception object using code that you 
+	have designed.</li>
+	<li>You optionally execute a block of code, designated by <b>finally</b><i>,</i> 
+	which needs to be executed whether or not an exception occurs. <i>(Code in 
+	the <b>finally</b> block is normally used to perform some type of cleanup.)</i></li>
+</ul>
+<p><b>Exceptions in code written by others</b> </p>
+<p>There are also situations where you don&#39;t write the code to <b>throw</b> the 
+exception object, but an exceptional condition that occurs in code written by 
+someone else transfers control to exception-handling code that you write. </p>
+<p>For example, the <b>read</b> method of the <b>InputStream</b> class throws an 
+exception of type <b>IOException</b> if an exception occurs while the<b> read</b> 
+method is executing. In this case, you are responsible only for the code in the
+<b>catch</b> block and optionally for the code in the <b>finally</b> block. </p>
+<p><i>(This is the reason that you must surround the call to <b>System.in.read()</b> 
+with a <b>try</b> block followed by a <b>catch</b> block, or optionally declare 
+that your method <b>throws</b> an exception of type <b>IOException</b>.)</i></p>
+<p><b>Exception hierarchy, an overview</b> </p>
+<p>When an exceptional condition causes an exception to be <i>thrown</i>, that 
+exception is represented by an object instantiated from the class named <b>
+Throwable</b> or one of its subclasses. </p>
+<p>Here is part of what Sun has to say about the <b>Throwable</b> class: </p>
+<p><i>&quot;The <b>Throwable</b> class is the superclass of all errors and exceptions 
+in the Java language. Only objects that are instances of this class (or one of 
+its subclasses) are thrown by the Java Virtual Machine or can be thrown by the 
+Java <b>throw</b> statement. Similarly, only this class or one of its subclasses 
+can be the argument type in a <b>catch</b> clause.&quot;</i></p>
+<p>Sun goes on to say: </p>
+<p><i>&quot;Instances of two subclasses, <b>Error</b> and <b>Exception</b>, are 
+conventionally used to indicate that exceptional situations have occurred. 
+Typically, these instances are freshly created in the context of the exceptional 
+situation so as to include relevant information (such as stack trace data).&quot;</i></p>
+<p><b>The Error and Exception classes</b> </p>
+<p>The virtual machine and many different methods in many different classes 
+throw <i>exceptions </i>and <i>errors</i>. I will have quite a lot more to say 
+about the classes named <b>Error</b> and <b>Exception</b> later in this chapter.
+</p>
+<p><b>Defining your own exception types</b> </p>
+<p>You may have concluded from the Sun quotation given above that you can define 
+and <b>throw</b> exception objects of your own design, and if you did, that is a 
+correct conclusion. <i>(Your new class must extend <b>Throwable</b> or one of 
+its subclasses.)</i> </p>
+<p><b>The difference between Error and Exception</b> </p>
+<p>As mentioned above, the <b>Throwable</b> class has two subclasses: </p>
+<ul>
+	<li><b>Error</b></li>
+	<li><b>Exception</b></li>
+</ul>
+<p><b>What is an error?</b> </p>
+<p>What is the difference between an <b>Error</b> and an <b>Exception</b>? 
+Paraphrasing David Flanagan and his excellent series of books entitled <em>Java 
+in a Nutshell</em>, an <b>Error</b> indicates that a non-recoverable error has 
+occurred that should not be caught. Errors usually cause the Java virtual 
+machine to display a message and exit. </p>
+<p>Sun says the same thing in a slightly different way: </p>
+<p><i>&quot;An <b>Error</b> is a subclass of <b>Throwable</b> that indicates serious 
+problems that a reasonable application should not try to catch. Most such errors 
+are abnormal conditions.&quot;</i></p>
+<p>For example, one of the subclasses of <b>Error</b> is named <b>
+VirtualMachineError</b>. This error is <i>&quot;Thrown to indicate that the Java 
+Virtual Machine is broken or has run out of resources necessary for it to 
+continue operating. &quot;</i> </p>
+<p><b>What is an exception?</b> </p>
+<p>Paraphrasing Flanagan again, an <b>Exception</b> indicates an abnormal 
+condition that must be properly handled to prevent program termination. </p>
+<p>Sun explains it this way: </p>
+<p><i>&quot;The class <b>Exception</b> and its subclasses are a form of <b>Throwable</b> 
+that indicates conditions that a reasonable application might want to catch.&quot;</i></p>
+<p>As of JDK 1.4.0, there are more than fifty known subclasses of the <b>
+Exception</b> class. Many of these subclasses themselves have numerous 
+subclasses, so there is quite a lot of material that you need to become familiar 
+with. </p>
+<p><b>The RuntimeException class</b> </p>
+<p>One subclass of <b>Exception</b> is the class named <b>RuntimeException</b> 
+As of JDK 1.4.0, this class has about 30 subclasses, many which are further 
+subclassed. The class named <b>RuntimeException</b> is a very important class.
+</p>
+<p><b>Unchecked exceptions</b> </p>
+<p>The <b>RuntimeException</b> class, and its subclasses, are important not so 
+much for what they do, but for what they don&#39;t do. I will refer to exceptions 
+instantiated from <b>RuntimeException</b> and its subclasses as <i>unchecked </i>
+exceptions. </p>
+<p>Basically, an unchecked exception is a type of exception that you can 
+optionally handle, or ignore. If you elect to ignore the possibility of an 
+unchecked exception, and one occurs, your program will terminate as a result. If 
+you elect to handle an unchecked exception and one occurs, the result will 
+depend on the code that you have written to handle the exception. </p>
+<p><b>Checked exceptions</b> </p>
+<p>All exceptions instantiated from the <b>Exception</b> class, or from 
+subclasses of <b>Exception</b> other than <b>RuntimeException</b> and its 
+subclasses must either be: </p>
+<ul>
+	<li>Handled with a <b>try</b> block followed by a <b>catch</b> block, or</li>
+	<li>Declared in a <b>throws</b> clause of any method that can throw them</li>
+</ul>
+<p>In other words, checked exceptions <i>cannot be ignored</i> when you write 
+the code in your methods. According to Flanagan, the exception classes in this 
+category represent routine abnormal conditions that should be anticipated and 
+caught to prevent program termination. </p>
+<p><b>Checked by the compiler</b> </p>
+<p>Your code must anticipate and either handle or declare checked exceptions. 
+Otherwise, your program won&#39;t compile. <i>(These are exception types that are 
+checked by the compiler.)</i> </p>
+<p><b>Throwable constructors and methods</b> </p>
+<p>As mentioned above, all errors and exceptions are subclasses of the <b>
+Throwable</b> class. As of JDK 1.4.0, the <b>Throwable</b> class provides four 
+constructors and about a dozen methods. The four constructors are shown in 
+<a href="#Figure_1">Figure 1</a>. </p>
+<div class="a">
+	<p><a name="Figure_1">Figure 1</a>. Throwable constructors.
+
+
+</p>
+
+
+<pre>
+Throwable()
+Throwable(String message)
+Throwable(String message,Throwable cause)
+Throwable(Throwable cause)</pre>
+</div>
+	<p>The first two constructors have been in Java for a very long time. 
+	Basically, these two constructors allow you to construct an exception object 
+	with, or without a <b>String</b> message encapsulated in the object. </p>
+<p><b>New to JDK 1.4</b> </p>
+<p>The last two constructors are new in JDK 1.4.0. These two constructors are 
+provided to support the <i>cause facility.</i> The <i>cause facility</i> is new 
+in release 1.4. It is also known as the <i>
+<a href="http://softwaredev.earthweb.com/java/article/0,,12082_1431531_1,00.html">
+chained exception</a></i> facility. <i>(I won&#39;t cover this facility in this 
+chapter. Rather, I plan to cover it in a series of future chapters.)</i> </p>
+<p><b>Methods of the Throwable class</b> </p>
+<p><a href="#Figure_2">Figure 2</a> shows some of the methods of the <b>Throwable</b> class. <i>(I 
+omitted some of the methods introduced in JDK 1.4 for the reasons given above.)</i>
+</p>
+<div class="a">
+	<p><a name="Figure_2">Figure 2</a>. Methods of the Throwable class.
+
+
+							</p>
+
+
+							<pre>
+fillInStackTrace()
+getStackTrace()
+printStackTrace().
+setStackTrace(StackTraceElement[] stackTrace)
+
+getLocalizedMessage()
+getMessage()
+toString()</pre>
+
+</div>
+	<p><b>The StackTrace</b> </p>
+<p>The first four methods in <a href="#Figure_2">Figure 2</a> deal with the <i>
+StackTrace</i>. In case you are unfamiliar with the term <i>StackTrace,</i> this 
+is a list of the methods executed in sequence that led to the exception. <i>
+(This is what you typically see on the screen when your program aborts with a 
+runtime error that hasn&#39;t been handled.)</i> </p>
+<p><b>Messages</b> </p>
+<p>The two methods dealing with messages provide access to a <b>String</b> 
+message that may be encapsulated in the exception object. The <b>getMessage</b> 
+class simply returns the message that was encapsulated when the object was 
+instantiated. <i>(If no message was encapsulated, this method returns null.)</i>
+</p>
+<p>The <b>getLocalizedMessage</b> method is a little more complicated to use. 
+According to Sun, <i>&quot;Subclasses may override this method in order to produce a 
+locale-specific message.&quot;</i> </p>
+<p><b>The toString method</b> </p>
+<p>The <b>toString</b> method is inherited from the <b>Object</b> class and 
+overridden in the exception subclass to <i>&quot;return a short description of the <b>
+Throwable</b>&quot;.</i> </p>
+<p><b>Inherited methods</b> </p>
+<p>All exception objects inherit the methods of the <b>Throwable</b> class, 
+which are listed in <a href="#Figure_2">Figure 2</a>. Thus, any of these methods may be called by the 
+code in the <b>catch</b> block in its attempt to successfully handle the 
+exception. </p>
+<p>For example, exceptions may have a message encapsulated in the exception 
+object, which can be accessed using the <b>getMessage</b> method. You can use 
+this to display a message describing the error or exception. </p>
+<p>You can also use other methods of the <b>Throwable</b> class to: </p>
+<ul>
+	<li>Display a stack trace showing where the exception or error occurred</li>
+	<li>Produce a <b>String</b> representation of the exception object</li>
+</ul>
+<p><b>So, what is an exception?</b> </p>
+<p>According to the online book entitled
+<a href="http://java.sun.com/docs/books/tutorial/">The Java Tutorial</a> by 
+Campione and Walrath: </p>
+<p><i>&quot;The term exception is shorthand for the phrase &quot;exceptional event&quot;. It 
+can be defined as follows: </i></p>
+<p><i>Definition: An exception is an event that occurs 
+during the execution of a program that disrupts the normal flow of 
+instructions.&quot;</i></p>
+<p>When an exceptional condition occurs within a method, the method may 
+instantiate an exception object and hand it off to the runtime system to deal 
+with it. This is accomplished using the <b>throw</b> keyword. <i>(This is called 
+throwing an exception.)</i> </p>
+<p>To be useful, the exception object should probably contain information about 
+the exception, including its type and the state of the program when the 
+exception occurred. </p>
+<p><b>Handling the exception</b> </p>
+<p>At that point, the runtime system becomes responsible for finding a block of 
+code designed to handle the exception. </p>
+<p>The runtime system begins its search with the method in which the exception 
+occurred and searches backwards through the call stack until it finds a method 
+that contains an <i>appropriate</i> exception handler <i>(catch block).</i> </p>
+<p>An exception handler is <i>appropriate</i> if the type of the exception 
+thrown is the same as the type of exception handled by the handler, or is a 
+subclass of the type of exception handled by the handler. </p>
+<p>Thus, the requirement to handle an exception that has been thrown progresses 
+up through the call stack until an appropriate handler is found to handle the 
+exception. If no appropriate handler is found, the runtime system and the 
+program terminate. </p>
+<p><i>(If you have ever had a program terminate with a <b>NullPointerException</b>, 
+then you know how program termination works).</i></p>
+<p>According to the jargon, the exception handler that is chosen is said to <i>
+catch the exception.</i> </p>
+<p><b>Advantages of using exception handling</b> </p>
+<p>According to Campione and Walrath, exception handling provides the following 
+advantages over &quot;traditional&quot; error management techniques: </p>
+<ul>
+	<li>Separating Error Handling Code from &quot;Regular&quot; Code</li>
+	<li>Propagating Errors Up the Call Stack</li>
+	<li>Grouping Error Types and Error Differentiation</li>
+</ul>
+<p><b>Separating error handling code from regular code</b> </p>
+<p>I don&#39;t plan to discuss these advantages in detail. Rather, I will simply 
+refer you to <a href="http://java.sun.com/docs/books/tutorial/">The Java 
+Tutorial</a> and other good books where you can read their discussions. However, 
+I will comment briefly. </p>
+<p>Campione and Walrath provide a good illustration where they show how a simple 
+program having about six lines of code get &quot;bloated&quot; into about 29 lines of very 
+confusing code through the use of traditional error management techniques. Not 
+only does the program suffer bloat, the logical flow of the original program 
+gets lost in the clutter of the modified program. </p>
+<p>They then show how to accomplish the same error management using exception 
+handling. Although the version with exception handling contains about seventeen 
+lines of code, it is orderly and easy to understand. The additional lines of 
+code do not cause the original logic of the program to get lost. </p>
+<p><b>You must still do the hard work</b> </p>
+<p>However, the use of exception handling does not spare you from the hard work 
+of detecting, reporting, and handling errors. What it does is provide a means to 
+separate the details of what to do when something out-of-the-ordinary happens 
+from the normal logical flow of the program code. </p>
+<p><b>Propagating exceptions up the call stack</b> </p>
+<p>Sometimes it is desirable to propagate exception handling up the call stack 
+and let the corrective action be taken at a higher level. </p>
+<p>For example, you might provide a class with methods that implement a <i>stack</i>. 
+One of the methods of your class might be to <i>pop</i> an element off the 
+stack. </p>
+<p>What should your program do if a using program attempts to pop an element off 
+an empty stack? That decision might best be left to the user of your stack 
+class, and you might simply propagate the notification up to the calling method 
+and let that method take the corrective action. </p>
+<p><b>Grouping exception types</b> </p>
+<p>When an exception is thrown, an object of one of the exception classes is 
+passed as a parameter. Objects are instances of classes, and classes fall into 
+an inheritance hierarchy in Java. Therefore, a natural hierarchy can be created, 
+which causes exceptions to be grouped in logical ways. </p>
+<p>For example, going back to the stack example, you might create an exception 
+class that applies to all exceptional conditions associated with an object of 
+your stack class. Then you might extend that class into other classes that 
+pertain to specific exceptional conditions, such as <i>push </i>exceptions, <i>
+pop </i>exceptions, and <i>initialization </i>exceptions. </p>
+<p>When your code throws an exception object of a specific type, that object can 
+be caught by an exception handler designed either to: </p>
+<ul>
+	<li>Catch on the basis of a group of exceptions, or</li>
+	<li>Catch on the basis of a subgroup of that group, or</li>
+	<li>Catch on the basis of one of the specialized exceptions.</li>
+</ul>
+<p>In other words, an exception handler can catch exceptions of the class 
+specified by the type of its parameter, or can catch exceptions of any subclass 
+of the class specified by the type of its parameter. </p>
+<p><b>More detailed information on exception handling</b> </p>
+<p>As explained earlier, except for <b>Throwable</b> objects of type <b>Error</b> 
+and for <b>Throwable.Exception</b> objects of type <b>RuntimeException</b>, Java 
+programs must either <i>handle</i> or <i>declare </i>all <b>Exception </b>
+objects that are thrown. Otherwise, the compiler will refuse to compile the 
+program. </p>
+<p>In other words, all exceptions other than those specified above are <i>
+checked</i> by the compiler, and the compiler will refuse to compile the program 
+if the exceptions aren&#39;t handled or declared. As a result, exceptions other than 
+those specified above are often referred to as <i>checked</i> exceptions. </p>
+<p><b>Catching an exception</b> </p>
+<p>Just to make certain that we are using the same terminology, a method <i>
+catches</i> an exception by providing an exception handler whose parameter type 
+is appropriate for that type of exception object. <i>(I will more or less use 
+the terms <b>catch</b> block and exception handler interchangeably.)</i> </p>
+<p>The type of the parameter in the <b>catch</b> block must be the class from 
+which the exception was instantiated, or a superclass of that class that resides 
+somewhere between that class and the <b>Throwable</b> class in the inheritance 
+hierarchy. </p>
+<p><b>Declaring an exception</b> </p>
+<p>If the code in a method can throw a checked exception, and the method does 
+not provide an exception handler for the type of exception object thrown, the 
+method must <i>declare</i> that it can throw that exception. The <b>throws</b> 
+keyword is used in the method declaration to declare that it <b>throws</b> an 
+exception of a particular type. </p>
+<p>Any checked exception that can be thrown by a method is part of the method&#39;s 
+programming interface <i>(see the <b>read</b> method of the InputStream class, 
+which throws <b>IOException</b>, for example).</i> Users of a method must know 
+about the exceptions that a method can throw in order to be able to handle them. 
+Thus, you must declare the exceptions that the method can throw in the method 
+signature. </p>
+<p><b>Checked exceptions</b> </p>
+<p>Checked exceptions are all exception objects instantiated from subclasses of 
+the <b>Exception</b> class other than those of the <b>RuntimeException</b> 
+class. </p>
+<p>Exceptions of all <b>Exception </b>subclasses other than <b>RuntimeException
+</b>are checked by the compiler and will result in compiler errors if they are 
+neither <i>caught </i>nor <i>declared</i>. </p>
+<p>You will learn how you can create your own exception classes later. Whether 
+your exception objects become checked or not depends on the class that you 
+extend when you define your exception class. </p>
+<p><i>(If you extend a checked exception class, your new exception type will be 
+a checked exception. Otherwise, it will not be a checked exception.)</i></p>
+<p><b>Exceptions that can be thrown within the scope of a method</b> </p>
+<p>The exceptions that can be thrown within the scope of a method include not 
+only exceptions which are thrown by code written into the method, but also 
+includes exceptions thrown by methods called by that method, or methods called 
+by those methods, etc. </p>
+<p>According to Campione and Walrath, </p>
+<p><i>&quot;This ... includes any exception that can be thrown while the flow of 
+control remains within the method. Thus, this ... includes both exceptions that 
+are thrown directly by the method with Java&#39;s throw statement, and exceptions 
+that are thrown indirectly by the method through calls to other methods.&quot;</i></p>
+<p><b>Sample programs</b> </p>
+<p>Now it&#39;s time to take a look at some sample code designed to deal with 
+exceptions of the types delivered with the JDK. Initially I won&#39;t include 
+exception classes that are designed for custom purposes. However, I will deal 
+with exceptions of those types later in the chapter. </p>
+<p>The first three sample programs will illustrate the successive stages of 
+dealing with checked exceptions by either catching or declaring those 
+exceptions. </p>
+<p><b>Sample program with no exception handling code</b> </p>
+<p>The first sample program shown in <a href="#Listing_1">Listing 1</a> neither catches nor declares the
+<b>InterruptedException </b>which can be thrown by the <b>sleep </b>method of 
+the <b>Thread </b>class. </p>
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. Sample program with no exception handling code.
+
+				</p>
+
+				<pre>/*File Excep11.java
+Copyright, R.G.Baldwin
+Tested using JDK 1.4.0 under Win2000
+**************************************/
+import java.lang.Thread;
+
+class Excep11{
+  public static void main(
+                        String[] args){
+    Excep11 obj = new Excep11();
+    obj.myMethod();
+  }//end main
+  //---------------------------------//
+
+  void myMethod(){
+    Thread.currentThread().sleep(1000);
+  }//end myMethod
+}//end class Excep11</pre>
+</div>
+	<p><b>A possible InterruptedException</b> </p>
+<p>The code in the <b>main</b> method of <a href="#Listing_1">Listing 1</a> 
+calls the method named <b>myMethod</b>. The method named <b>myMethod</b> calls 
+the method named <b>sleep</b> of the <b>Thread</b> class. The method named <b>
+sleep</b> declares that it throws <b>InterruptedException</b>. </p>
+<p><b>InterruptedException</b> is a checked exception. The program illustrates 
+the failure to either catch or declare <b>InterruptedException</b> in the method 
+named <b>myMethod</b>. </p>
+<p>As a result, this program won&#39;t compile. The compiler error is similar to 
+that shown in <a href="#Figure_3">Figure 3</a>. Note the caret in the last line that points to the point 
+where the compiler detected the problem. </p>
+<div class="a">
+	<p><a name="Figure_3">Figure 3</a>. Compiler error from an 
+				unhandled checked exception.
+
+
+							</p>
+
+
+							<pre>unreported exception
+java.lang.InterruptedException;
+must be caught or declared to be thrown
+    Thread.currentThread().sleep(1000);
+                        ^</pre>
+
+</div>
+	<p>As you can see, the compiler detected a problem where the <b>sleep</b> 
+	method was called, because the method named <b>myMethod</b> failed to deal 
+	properly with an exception that can be thrown by the <b>sleep</b> method.
+</p>
+<p><b>Sample program that fixes one compiler error</b> </p>
+<p>The next version of the program, shown in <a href="#Listing_2">Listing 2</a>, 
+fixes the problem identified with the call to the <b>sleep</b> method, by declaring the exception 
+in the signature for the method named <b>myMethod</b>.</p>
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a>. Sample program that fixes one compiler error.</p>
+&nbsp;<pre>/*File Excep12.java
+Copyright, R.G.Baldwin
+Tested using JDK 1.4.0 under Win2000
+**************************************/
+import java.lang.Thread;
+
+class Excep12{
+  public static void main(
+                        String[] args){
+    Excep12 obj = new Excep12();
+    obj.myMethod();
+  }//end main
+  //---------------------------------//
+
+  void myMethod()
+           throws InterruptedException{
+    Thread.currentThread().sleep(1000);
+  }//end myMethod
+}//end class Excep12</pre>
+</div>
+	<p><b>Another possible InterruptedException</b> </p>
+<p>As was the case in the previous program, this program also illustrates a 
+failure to catch or declare an <b>InterruptedException</b>. However, in this 
+case, the problem has moved up one level in the call stack relative to the 
+problem with the program in <a href="#Listing_1">Listing 1</a>. </p>
+<p>This program also fails to compile, producing a compiler error similar to 
+that shown in <a href="#Figure_4">Figure 4</a>. Note that the caret indicates that the problem is 
+associated with the call to <b>myMethod</b>. </p>
+<div class="a">
+	<p><a name="Figure_4">Figure 4</a>. Another compiler error.</p>
+&nbsp;<pre>unreported exception
+java.lang.InterruptedException;
+must be caught or declared to be thrown
+    obj.myMethod();
+       ^</pre>
+
+</div>
+	<p><b>Didn&#39;t solve the problem</b> </p>
+<p>Simply declaring a checked exception doesn&#39;t solve the problem. Ultimately, 
+the exception must be handled if the compiler problem is to be solved. </p>
+<p><i>(Note, however, that it is possible to declare that the <b>main</b> method 
+throws a checked exception, which will cause the compiler to ignore it and allow 
+your program to compile.)</i></p>
+<p>The program in <a href="#Listing_2">Listing 2</a> eliminated the compiler 
+error identified with the call to the method named <b>sleep</b>. This was accomplished by declaring that 
+the method named <b>myMethod </b><i>throws InterruptedException</i>. However, 
+this simply passed the exception up the call stack to the next higher-level 
+method in the stack. This didn&#39;t solve the problem, it simply handed it off to 
+another method to solve. </p>
+<p>The problem still exists, and is now identified with the call to <b>myMethod</b> 
+where it will have to be handled in order to make the compiler error go away.
+</p>
+<p><b>Sample program that fixes the remaining compiler error</b> </p>
+<p>The version of the program shown in <a href="#Listing_3">Listing 3</a> fixes 
+the remaining compiler error. This program illustrates both declaring and 
+handling a checked exception. This program compiles and runs successfully. </p>
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a>. Sample program that fixes the remaining compiler error.
+
+				</p>
+
+				<pre>/*File Excep13.java
+Copyright, R.G.Baldwin
+
+Tested using JDK 1.4.0 under Win2000
+**************************************/
+import java.lang.Thread;
+
+class Excep13{
+  public static void main(
+                        String[] args){
+    Excep13 obj = new Excep13();
+    try{//begin try block
+      obj.myMethod();
+    }catch(InterruptedException e){
+      System.out.println(
+              "Handle exception here");
+    }//end catch block
+  }//end main
+  //---------------------------------//
+
+  void myMethod()
+           throws InterruptedException{
+    Thread.currentThread().sleep(1000);
+  }//end myMethod
+}//end class Excep13</pre>
+</div>
+	<p><b>The solution to the problem</b> </p>
+<p>This solution to the problem is accomplished by surrounding the call to <b>
+myMethod</b> with a <b>try</b> block, which is followed immediately by an <i>
+appropriate </i><b>catch</b> block. In this case, an appropriate <b>catch</b> 
+block is one whose parameter type is either <b>InterruptedException</b>, or a 
+superclass of <b>InterruptedException</b>. </p>
+<p><i>(Note, however, that the superclass cannot be higher than the <b>Throwable</b> 
+class in the inheritance hierarchy.)</i></p>
+<p><b>The myMethod method declares the exception</b> </p>
+<p>As in the previous version, the method named <b>myMethod </b>(declares the 
+exception and passes it up the call stack to the method from which it was 
+called. </p>
+<p><b>The main method handles the exception</b> </p>
+<p>In the new version shown in <a href="#Listing_3">Listing 3</a>, the <b>main</b> method provides a <b>
+try</b> block with an <i>appropriate </i><b>catch</b> block<i> </i>for dealing 
+with the problem <i>(although it doesn&#39;t actually deal with it in any 
+significant way). </i>This can be interpreted as follows: </p>
+<ul>
+	<li>Try<b> </b>to execute the code within the <b>try</b> block.</li>
+	<li>If an exception occurs, search for a <b>catch</b> block that matches the 
+	type of object thrown by the exception.</li>
+	<li>If such a <b>catch</b> block can be found, immediately transfer control 
+	to the catch block without executing any of the remaining code in the <b>try</b> 
+	block. </li>
+</ul>
+<p> <i>(For simplicity, this program didn&#39;t have any remaining code. Some 
+	later sample programs will illustrate code being skipped due to the 
+	occurrence of an exception.)</i></p>
+<p><b>Not a method call</b> </p>
+<p>Note that this transfer of control is not a method call. It is an 
+unconditional transfer of control. There is no <i>return</i> from a catch block.
+</p>
+<p><b>Matching catch block was found</b> </p>
+<p>In this case, there was a matching <b>catch</b> block to receive control. In 
+the event that an <b>InterruptedException</b> is thrown, the program would 
+execute the statement within the body of the <b>catch</b> block, and then 
+transfer control to the code following the final <b>catch</b> block in the group 
+of <b>catch</b> blocks <i>(in this case, there was only one <b>catch</b> block).</i>
+</p>
+<p><b>No output is produced</b> </p>
+<p>It is unlikely that you will see any output when you run this program, 
+because it is unlikely that an <b>InterruptedException</b> will be thrown. <i>(I 
+didn&#39;t provide any code that will cause such an exception to occur.)</i> </p>
+<p><b>A sample program that throws an exception</b> </p>
+<p>Now let&#39;s look at the sample program in <a href="#Listing_4">Listing 4</a>, which throws an exception 
+and deals with it. This program illustrates the implementation of exception 
+handling using the try/catch block structure. </p>
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a>. A sample program that throws an exception.
+
+				</p>
+
+				<pre>/*File Excep14.java
+Copyright, R. G. Baldwin
+
+Tested with JDK 1.4.0 under Win2000
+**************************************/
+
+class Excep14{
+  public static void main(
+                        String[] args){
+    try{
+      for(int cnt = 2; cnt &gt;-1; cnt--){
+        System.out.println(
+               &quot;Running. Quotient is: &quot;
+                              + 6/cnt);
+      }//end for-loop
+    }//end try block
+    catch(ArithmeticException e){
+      System.out.println(
+              &quot;Exception message is:  &quot;
+              + e.getMessage()
+              + &quot;\nStacktrace shows:&quot;);
+      e.printStackTrace();
+      System.out.println(
+        &quot;String representation is\n &quot; +
+                         e.toString());
+      System.out.println(
+         &quot;Put corrective action here&quot;);
+    }//end catch block
+    System.out.println(
+                 &quot;Out of catch block&quot;);
+  }//end main
+
+}//end class Excep14</pre>
+</div>
+	<p><b>Keeping it simple</b> </p>
+<p>I try to keep my sample programs as simple as possible, introducing the 
+minimum amount of complexity necessary to illustrate the main point of the 
+program. It is easy to write a <i>really simple</i> program that throws an 
+unchecked <b>ArithmeticException</b>. Therefore, the program in
+<a href="#Listing_4">Listing 4</a> was written to throw an <b>
+ArithmeticException</b>. This was accomplished by trying 
+to perform an integer divide by zero. </p>
+<p><b>The try/catch structure is the same ...</b> </p>
+<p>It is important to note that the <i>try/catch</i> structure illustrated in
+<a href="#Listing_4">Listing 4</a> would be the same whether the exception is 
+checked or unchecked. The main difference is that you are not required by the 
+compiler to handle unchecked exceptions and you are required by the compiler to 
+either handle or declare checked exceptions. </p>
+<p><b>Throwing an ArithmeticException</b> </p>
+<p>The code in <a href="#Listing_4">Listing 4</a> executes a simple counting 
+loop inside a <b>try</b> 
+block. During each iteration, the counting loop divides the integer 6 by the 
+value of the counter. When the value of the counter goes to zero, the runtime 
+system tries to perform an integer divide by zero operation, which causes it to 
+throw an <b>ArithmeticException</b>. </p>
+<p><b>Transfer control immediately</b> </p>
+<p>At that point, control is transferred directly to the <b>catch</b> block that 
+follows the <b>try</b> block. This is an <i>appropriate </i><b>catch</b> block 
+because the type of parameter declared for the <b>catch</b> block is <b>
+ArithmeticException</b>. It matches the type of the object that is thrown. </p>
+<p><i>(It would also be appropriate if the declared type of the parameter were a 
+superclass of <b>ArithmeticException</b>, up to and including the class named <b>
+Throwable</b>. <b>Throwable</b> is a direct subclass of <b>Object</b>. If you 
+were to declare the parameter type for the <b>catch</b> block as <b>Object</b>, 
+the compiler would produce an incompatible type error.)</i></p>
+<p><b>Calling methods inside the catch block</b> </p>
+<p>Once control enters the <b>catch</b> block, three of the methods of the <b>
+Throwable</b> class are called to cause information about the situation to be 
+displayed on the screen. The output produced by the program is similar to that 
+shown in <a href="#Figure_5">Figure 5</a>. </p>
+<div class="a">
+	<p><a name="Figure_5">Figure 5</a>. Output from program that 
+				throws ArithmeticException. </p>
+
+
+							<pre>Running. Quotient is: 3
+Running. Quotient is: 6
+Exception message is:  / by zero
+Stacktrace shows:
+java.lang.ArithmeticException:
+  / by zero
+  at Excep14.main(Excep14.java:35)
+String representation is
+java.lang.ArithmeticException:
+/ by zero
+Put corrective action here
+Out of catch block</pre>
+
+</div>
+	<p><b>Key things to note</b> </p>
+<p>The key things to note about the code in <a href="#Listing_4">Listing 4</a> 
+and the output in <a href="#Figure_5">Figure 5</a>are: </p>
+<ul>
+	<li>The code to be protected is contained in a <b>try</b> block.</li>
+	<li>The <b>try</b> block is followed immediately by an appropriate <b>catch</b> 
+	block.</li>
+	<li>When an exception is thrown within the <b>try</b> block, control is 
+	transferred immediately to the <b>catch</b> block with the matching or 
+	appropriate parameter type.</li>
+	<li>Although the code in the <b>catch</b> block simply displays the current 
+	state of the program, it could contain code that attempts to rectify the 
+	problem.</li>
+	<li>Once the code in the <b>catch</b> block finishes executing, control is 
+	passed to the next executable statement following the <b>catch</b> block, 
+	which in this program is a print statement.</li>
+</ul>
+<p><b>Doesn&#39;t attempt to rectify the problem</b> </p>
+<p>This program doesn&#39;t attempt to show how an actual program might recover from 
+an exception of this sort. However, it is clear that <i>(rather than 
+experiencing automatic and unconditional termination)</i> the program remains in 
+control, and in some cases, recovery might be possible. </p>
+<p>This sample program illustrates <b>try</b> and <b>catch</b>. The use of <b>
+finally</b>, will be discussed and illustrated later. </p>
+<p><b>A nuisance problem explained</b> </p>
+<p>While we are at it, I would be remiss in failing to mention a nuisance 
+problem associated with exception handling. </p>
+<p>As you may recall, the scope of a variable in Java is limited to the block of 
+code in which it is declared. A block is determined by enclosing code within a 
+pair of matching curly brackets: {...}. </p>
+<p>Since a pair of curly brackets is required to define a <b>try</b> block, the 
+scope of any variables or objects declared inside the <b>try</b><i> </i>block is 
+limited to the <b>try</b><i> </i>block. </p>
+<p>While this is not an insurmountable problem, it may require you to modify 
+your programming style in ways that you find distasteful. In particular, if you 
+need to access a variable both within and outside the <b>try</b> block, you must 
+declare it before entering the <b>try</b> block. </p>
+<p><b>The process in more detail</b> </p>
+<p>Now that you have seen some sample programs to help you visualize the 
+process, lets discuss the process in more detail. </p>
+<p><b>The try block</b> </p>
+<p>According to Campione and Walrath, </p>
+<p><i>&quot;The first step in writing any exception handler is putting the Java 
+statements within which an exception can occur into a try block. The try block 
+is said to govern the statements enclosed within it and defines the scope of any 
+exception handlers (established by subsequent catch blocks) associated with it.&quot;</i></p>
+<p>Note that the terminology being used by Campione and Walrath treats the <b>
+catch block</b> as the <i>&quot;exception handler&quot;</i> and treats the <b>try</b> 
+block as something that precedes one or more exception handlers. I don&#39;t 
+disagree with their terminology. I mention it only for the purpose of avoiding 
+confusion over terminology. </p>
+<p><b>The syntax of a try block</b> </p>
+<p>The general syntax of a <b>try</b> block, as you saw in the previous program, 
+has the keyword <b>try</b><i> </i>followed by one or more statements enclosed in 
+a pair of matching curly brackets, as shown in <a href="#Figure_6">Figure 6</a>. </p>
+<div class="a">
+	<p><a name="Figure_6">Figure 6</a>. Syntax of a try block.
+
+
+							</p>
+
+
+							<pre>try{
+  //java statements
+}//end try block</pre>
+
+</div>
+	<p><b>Single statement and multiple exceptions</b> </p>
+<p>You may have more than one statement that can throw one or more exceptions 
+and you will need to deal with all of them. </p>
+<p>You could put each such statement that might throw exceptions within its own
+<b>try</b><i> </i>block and provide separate exception handlers for each <b>try</b> 
+block. </p>
+<p><i>(Note that some statements, particularly those that call other methods, 
+could potentially throw many different types of exceptions.)</i></p>
+<p>Thus a <b>try</b> block consisting of a single statement might require many 
+different exception handlers or <b>catch</b> blocks following it. </p>
+<p><b>Multiple statements and multiple exceptions</b> </p>
+<p>You could put all or several of the statements that might throw exceptions 
+within a single <b>try</b> block and associate multiple exception handlers with 
+it. There are a number of practical issues involved here, and only you can 
+decide in any particular instance which approach would be best. </p>
+<p><b>The catch blocks must follow the try block</b> </p>
+<p>However you decide to do it, the exception handlers associated with a <b>try</b> 
+block must be placed immediately following their associated <i>try</i> block. If 
+an exception occurs within the <b>try</b><i> </i>block, that exception is 
+handled by the appropriate exception handler associated with the <b>try</b> 
+block. If there is no appropriate exception handler associated with the <b>try</b> 
+block, the system attempts to find an appropriate exception handler in the next 
+method up the call stack. </p>
+<p>A <b>try</b> block must be accompanied by at least one <b>catch </b>block <i>
+(or one <b>finally</b> block).</i> Otherwise, a compiler error that reads 
+something like <i>&#39;try&#39; without &#39;catch&#39; or &#39;finally&#39;</i> will occur. </p>
+<p><b>The catch block(s)</b> </p>
+<p>Continuing with what Campione and Walrath have to say: </p>
+<p><i>&quot;Next, you associate exception handlers with a try block by providing one 
+or more catch blocks directly after the try block.&quot;</i></p>
+<p>There can be no intervening code between the end of the <b>try </b>block and 
+the beginning of the first <b>catch</b><i> </i>block, and no intervening code 
+between <b>catch</b> blocks. </p>
+<p><b>Syntax of a catch block</b> </p>
+<p>The general form of a <b>catch</b> block is shown in <a href="#Figure_7">Figure 7</a>. </p>
+<div class="a">
+	<p><a name="Figure_7">Figure 7</a>. Syntax of a catch block.</p>
+&nbsp;<pre>catch(ThrowableObjectType paramName){
+  //Java statements to handle the
+  // exception
+}//end catch block</pre>
+
+</div>
+	<p>The declaration for the <b>catch</b> block requires a single argument as 
+	shown. The syntax for the argument declaration is the same as an argument 
+	declaration for a method. </p>
+<p><b>Argument type specifies type of matching exception object</b> </p>
+<p>The argument type declares the type of exception object that a particular <b>
+catch</b> block can handle. The type must be <b>Throwable</b>, or a subclass of 
+the <b>Throwable</b> class discussed earlier. </p>
+<p><b>A parameter provides the local name</b> </p>
+<p>Also, as in a method declaration, there is a parameter, which is the name by 
+which the handler can refer to the exception object. For example, in an earlier 
+program, I used statements such as <b>e.getMessage() </b>to access an instance 
+method of an exception object caught by the exception handler. In that case, the 
+name of the parameter was <b>e</b>. </p>
+<p>You access the instance variables and methods of exception objects the same 
+way that you access the instance variables and methods of other objects. </p>
+<p><b>Proper order of catch blocks</b> </p>
+<p>According to Campione and Walrath: </p>
+<p><i>&quot;The catch block contains a series of legal Java statements. These 
+statements are executed if and when the exception handler is called. The runtime 
+system calls the exception handler when the handler is the first one in the call 
+stack whose type matches that of the exception thrown.&quot;</i></p>
+<p>Therefore, the order of your exception handlers is very important, 
+particularly if you have some handlers, which are further up the exception 
+hierarchy than others. </p>
+<p>Those handlers that are designed to handle exception types furthermost from 
+the root of the hierarchy tree <i>(<b>Throwable</b>)</i> should be placed first 
+in the list of exception handlers. </p>
+<p>Otherwise, an exception handler designed to handle a specific type of object 
+may be preempted by another handler whose exception type is a superclass of that 
+type, if the superclass exception handler appears earlier in the list of 
+exception handlers. </p>
+<p><b>Catching multiple exception types with one handler</b> </p>
+<p>Exception handlers that you write may be more or less specialized. In 
+addition to writing handlers for very specialized exception objects, the Java 
+language allows you to write general exception handlers that handle multiple 
+types of exceptions. </p>
+<p><strong>A hierarchy of Throwable classes</strong></p>
+<p>Java exceptions are <b>Throwable</b> objects <i>(instances of the <b>
+Throwable</b> class or a subclass of the <b>Throwable </b>class).</i> </p>
+<p>The Java standard library contains numerous classes that are subclasses of <b>
+Throwable</b> and thus build a hierarchy of <b>Throwable</b> classes. </p>
+<p>According to Campione and Walrath: </p>
+<p><i>&quot;Your exception handler can be written to handle any class that inherits 
+from <b>Throwable</b>. If you write a handler for a &quot;leaf&quot; class (a class with 
+no subclasses), you&#39;ve written a specialized handler: it will only handle 
+exceptions of that specific type. If you write a handler for a &quot;node&quot; class (a 
+class with subclasses), you&#39;ve written a general handler: it will handle any 
+exception whose type is the node class or any of its subclasses.&quot;</i></p>
+<p><b>You have a choice</b> </p>
+<p>Therefore, when writing exception handlers, you have a choice. You can write 
+a handler whose exception type corresponds to a node in the inheritance 
+hierarchy, and it will be appropriate to <b>catch</b> exceptions of that type, 
+or any subclass of that type. </p>
+<p>Alternately, you can write a handler whose exception type corresponds to a <i>
+leaf, </i>in which case, it will be appropriate to <b>catch</b> exceptions of 
+that type only. </p>
+<p>And finally, you can mix and match, writing some exception handlers whose 
+type corresponds to a node, and other exception handlers whose type corresponds 
+to a leaf. In all cases, however, be sure to position your exception handlers in 
+reverse subclass order, with the furthermost subclass from the root appearing 
+first, and the root class appearing last. </p>
+<p><b>The finally block</b> </p>
+<p>And finally <i>(no pun intended),</i> Campione and Walrath tell us: </p>
+<p><i>&quot;Java&#39;s finally block provides a mechanism that allows your method to 
+clean up after itself regardless of what happens within the try block. Use the 
+finally block to close files or release other system resources.&quot;</i></p>
+<p>To elaborate, the <b>finally</b> block can be used to provide a mechanism for 
+cleaning up open files, etc., before allowing control to be passed to a 
+different part of the program. You accomplish this by writing the cleanup code 
+within a <b>finally</b> block. </p>
+<p><b>Code in finally block is always executed</b> </p>
+<p>It is important to remember that the runtime system always executes the code 
+within the <b>finally</b> block regardless of what happens within the <b>try</b> 
+block. </p>
+<p>If no exceptions are thrown, none of the code in <b>catch</b> blocks is 
+executed, but the code in the <b>finally</b> block is executed. </p>
+<p>If an exception is thrown and the code in an exception handler is executed, 
+once the execution of that code is complete, control is passed to the <b>finally</b> 
+block and the code in the <b>finally</b> block is executed. </p>
+<p><i>(There is one important exception to the above. If the code in the <b>
+catch</b> block terminates the program by executing <b>System.exit(0)</b>, the 
+code in the <b>finally</b> block will not be executed.)</i></p>
+<p><b>The power of the finally block</b> </p>
+<p>The sample program shown in <a href="#Listing_5">Listing 5</a> illustrates the power of the <b>finally</b> 
+block. </p>
+<div class="a">
+	<p><a name="Listing_5">Listing 5</a>. The power of the finally block.
+				</p>
+				<pre>/*File Excep15.java
+Copyright, R. G. Baldwin
+
+Tested with JDK 1.4.0 under Win2000
+**************************************/
+
+class Excep15{
+  public static void main(
+                        String[] args){
+    new Excep15().aMethod();
+  }//end main
+  //---------------------------------//
+
+  void aMethod(){
+    try{
+      int x = 5/0;
+    }//end try block
+    catch(ArithmeticException e){
+      System.out.println(
+      &quot;In catch, terminating aMethod&quot;);
+      return;
+    }//end catch block
+
+    finally{
+      System.out.println(
+            &quot;Executing finally block&quot;);
+    }//end finally block
+
+    System.out.println(
+                &quot;Out of catch block&quot;);
+  }//end aMethod
+
+}//end class Excep15</pre>
+</div>
+	<p><b>Execute return statement in catch block</b> </p>
+<p>The code in <a href="#Listing_5">Listing 5</a> forces an <b>
+ArithmeticException</b> by attempting to 
+do an integer divide by zero. Control is immediately transferred to the matching
+<b>catch</b> block, which prints a message and then executes a <b>return</b> 
+statement. </p>
+<p>Normally, execution of a <b>return</b> statement terminates the method 
+immediately. In this case, however, before the method terminates and returns 
+control to the calling method, the code in the <b>finally</b> block is executed. 
+Then control is transferred to the <b>main</b> method, which called this method 
+in the first place. </p>
+<p><a href="#Figure_8">Figure 8</a> shows the output produced by this program.
+</p>
+<div class="a">
+	<p><a name="Figure_8">Figure 8</a>. Output produced by the 
+				finally block.
+
+
+							</p>
+
+
+							<pre>In catch, terminating aMethod
+Executing finally block</pre>
+
+</div>
+	<p>This program demonstrates that the <b>finally</b> block really does have 
+	the final word. </p>
+<p><b>Declaring exceptions thrown by a method</b> </p>
+<p>Sometimes it is better to handle exceptions in the method in which they are 
+detected, and sometimes it is better to pass them up the call stack and let 
+another method handle them. </p>
+<p>In order to pass exceptions up the call stack, you must <i>declare</i> them 
+in your method signature. </p>
+<p>To <i>declare</i> that a method throws one or more exceptions, you add a <b>
+throws</b> clause to the method signature for the method. The <b>throws </b>
+clause is composed of the <b>throws</b><i> </i>keyword followed by a 
+comma-separated list of all the exceptions thrown by that method. </p>
+<p>The <b>throws</b> clause goes after the method name and argument list and 
+before the curly bracket that defines the scope of the method. </p>
+<p><a href="#Figure_9">Figure 9</a> shows the syntax for declaring that a method
+<b>throws</b> four 
+different types of exceptions. </p>
+<div class="a">
+	<p><a name="Figure_9">Figure 9</a>. Syntax for declaring that a 
+				method throws exceptions.
+
+
+							</p>
+
+
+							<pre>void myMethod() throws
+          InterruptedException,
+          MyException,
+          HerException,
+          UrException
+{
+  //method code
+}//end myMethod()</pre>
+
+</div>
+	<p>Assuming that these are checked exceptions, any method calling this 
+	method would be required to either handle these exception types, or continue 
+	passing them up the call stack. Eventually, some method must handle them or 
+	the program won&#39;t compile. </p>
+<p><i>(Note however that while it might not represent good programming practice, 
+it is allowable to declare that the <b>main</b> method <b>throws</b> exceptions. 
+This is a way to avoid handling checked exceptions and still get your program to 
+compile.)</i></p>
+<p><b>The throw keyword</b> </p>
+<p>Before your code can <b>catch</b> an exception, some Java code must <b>throw</b> 
+one. The exception can be thrown by code that you write, or by code that you are 
+using that was written by someone else. </p>
+<p>Regardless of who wrote the code that throws the exception, it&#39;s always 
+thrown with the Java <b>throw</b><i> </i>keyword. At least that is true for 
+exceptions that are thrown by code written in the Java language. </p>
+<p><i>(Exceptions such as <b>ArithmeticException</b> are also thrown by the 
+runtime system, which is probably not written using Java source code.)</i></p>
+<p><b>A single argument is required</b> </p>
+<p>When formed into a statement, the <b>throw</b> keyword requires a single 
+argument, which must be a reference to an object instantiated from the <b>
+Throwable</b> class, or any subclass of the <b>Throwable</b> class. 
+<a href="#Figure_10">Figure 10</a> 
+shows an example of such a statement. </p>
+<div class="a">
+	<p><a name="Figure_10">Figure 10</a>.  Example of a throw 
+				statement.</p>
+&nbsp;<pre>throw new myThrowableClass("Message");</pre>
+
+</div>
+	<p>If you attempt to throw an object that is not instantiated from <b>
+	Throwable</b> or one of its subclasses, the compiler will refuse to compile 
+	your program. </p>
+<p><b>Defining your own exception classes</b> </p>
+<p>Now you know how to write exception handlers for those exception objects that 
+are thrown by the runtime system, and thrown by methods in the standard class 
+library. </p>
+<p>It is also possible for you to define your own exception classes, and to 
+cause objects of those classes to be thrown whenever an exception occurs. In 
+this case, you get to decide just what constitutes an exceptional condition. </p>
+<p>For example, you could write a data-processing application that processes 
+integer data obtained via a TCP/IP link from another computer. If the 
+specification for the program indicates that the integer value 10 should never 
+be received, you could use an occurrence of the integer value 10 to cause an 
+exception object of your own design to be thrown. </p>
+<p><b>Choosing the exception type to throw</b> </p>
+<p>Before throwing an exception, you must decide on its type. Basically, you 
+have two choices in this regard: </p>
+<ul>
+	<li>Use an exception class written by someone else, such as the myriad of 
+	exception classes defined in the Java standard library.</li>
+	<li>Define an exception class of your own.</li>
+</ul>
+<p><b>An important question</b> </p>
+<p>So, an important question is, when should you define your own exception 
+classes and when should you use classes that are already available. Because this 
+is only one of many design issues, I&#39;m not going to try to give you a ready 
+answer to the question. However, I will refer you to
+<a href="http://java.sun.com/docs/books/tutorial/">The Java Tutorial</a> by 
+Campione and Walrath where you will find a checklist to help you make this 
+decision. </p>
+<p><b>Choosing a superclass to extend</b> </p>
+<p>If you decide to define your own exception class, it must be a subclass of <b>
+Throwable</b>. You must decide which class you will extend. </p>
+<p>The two existing subclasses of <b>Throwable</b> are <b>Exception</b> and <b>
+Error</b>. Given the earlier description of <b>Error</b> and its subclasses, it 
+is not likely that your exceptions would fit the <b>Error</b> category. <i>(In 
+concept, errors are reserved for serious hard errors that occur deep within the 
+system.)</i> </p>
+<p><b>Checked or unchecked exception</b> </p>
+<p>Therefore, your new class should probably be a subclass of <b>Exception</b>. 
+If you make it a subclass of <b>RuntimeException</b>, it won&#39;t be a checked 
+exception. If you make it a subclass of <b>Exception</b>, but not a subclass of
+<b>RuntimeException</b>, it will be a checked exception. </p>
+<p>Only you can decide how far down the <b>Exception</b> hierarchy you want to 
+go before creating a new branch of exception classes that are unique to your 
+application. </p>
+<p><b>Naming conventions</b> </p>
+<p>Many Java programmers append the word <b>Exception</b> to the end of all 
+class names that are subclasses of <b>Exception</b>, and append the word <b>
+Error</b> to the end of all class names that are subclasses of <b>Error</b>. </p>
+<p><b>One more sample program</b> </p>
+<p>Let&#39;s wrap up this chapter with one more sample program named <b>Excep16</b>. 
+We will define our own exception class in this program. Then we will <b>throw</b>,
+<b>catch and</b> process an exception object instantiated from that class. </p>
+<p><b>Discuss in fragments</b> </p>
+<p>This program is a little longer than the previous programs, so I will break 
+it down and discuss it in fragments. A complete listing of the program is shown 
+in <a href="#Listing_10">Listing 10</a>. </p>
+<p>The class definition shown in <a href="#Listing_6">Listing 6</a> is used to 
+construct a custom exception object that encapsulates a message. Note that this 
+class extends <b>Exception</b>. <i>(Therefore, it is a checked exception.)</i>
+</p>
+	
+<div class="a">
+	<p><a name="Listing_6">Listing 6</a>. The class named MyException . </p>
+				<pre>class MyException extends Exception{
+  MyException(String message){//constr
+    super(message);
+  }//end constructor
+}//end MyException class</pre>
+</div>
+	<p>The constructor for this class receives an incoming <b>String</b> message 
+	parameter and passes it to the constructor for the superclass. This makes 
+	the message available for access by the <b>getMessage</b> method called in 
+	the catch block. </p>
+<p><b>The try block</b> </p>
+<p><a href="#Listing_7">Listing 7</a> shows the beginning of the <b>main</b> method, including the entire
+<b>try</b> block </p>
+<div class="a">
+	<p><a name="Listing_7">Listing 7</a>. The try block.</p>
+&nbsp;<pre>class Excep16{//controlling class
+  public static void main(
+                        String[] args){
+    try{
+      for(int cnt = 0; cnt &lt; 5; cnt++){
+        //Throw a custom exception, and
+        // pass  message when cnt == 3
+        if(cnt == 3) throw
+                  new MyException(&quot;3&quot;);
+        //Transfer control before
+        // processing for cnt == 3
+        System.out.println(
+           &quot;Processing data for cnt = &quot;
+                                + cnt);
+      }//end for-loop
+    }//end try block</pre>
+</div>
+	<p>The <b>main</b> method executes a <b>for</b> loop <i>(inside the <b>try</b> 
+	block)</i> that guarantees that the variable named <b>cnt</b> will reach a 
+	value of 3 after a couple of iterations. </p>
+<p>Once during each iteration, <i>(until the value of <b>cnt</b> reaches 3)</i> 
+a print statement inside the <b>for</b> loop displays the value of <b>cnt</b>. 
+This results in the output shown in <a href="#Figure_11">Figure 11</a>. </p>
+<div class="a">
+	<p><a name="Figure_11">Figure 11</a>. Output from the for loop.
+
+
+							</p>
+
+
+							<pre>Processing data for cnt = 0
+Processing data for cnt = 1
+Processing data for cnt = 2</pre>
+
+</div>
+	<p><b>What happens when cnt equals 3?</b> </p>
+<p>However, when the value of <b>cnt</b> equals 3, the <b>throw</b> statement in
+<a href="#Listing_7">Listing 7</a> is executed. This causes control to transfer 
+immediately to the matching <b>catch</b> block following the <b>try</b> 
+block <i>(see <a href="#Listing_8">Listing 8</a>).</i> During this iteration, 
+the print statement following the <b>throw</b> statement is not executed. 
+Therefore, the output never shows a value for <b>cnt</b> greater than 2, as 
+shown in <a href="#Figure_11">Figure 11</a>. </p>
+<p><b>The catch block</b> </p>
+<p><a href="#Listing_8">Listing 8</a> shows a <b>catch</b> block whose type 
+matches the type of exception thrown in <a href="#Listing_7">Listing 7</a>. </p>
+<div class="a">
+	<p><a name="Listing_8">Listing 8</a>. A matching catch block.</p>
+&nbsp;<pre>    catch(MyException e){
+      System.out.println(
+               "In exception handler, "
+                  + "get the message\n"
+                     + e.getMessage());
+    }//end catch block</pre>
+</div>
+	<p>When the <b>throw</b> statement is executed in <a href="#Listing_7">
+	Listing 7</a>, control is transferred immediately to the <b>catch</b> block in <a href="#Listing_8">
+	Listing 8</a>. No further code is executed within the <b>try</b> block. </p>
+<p>A reference to the object instantiated as the argument to the <b>throw</b> 
+keyword in <a href="#Listing_7">Listing 7</a> is passed as a parameter to the <b>
+catch</b> block. That 
+reference is known locally by the name <b>e</b> inside the <b>catch</b> block.
+</p>
+<p><b>Using the incoming parameter</b> </p>
+<p>The code in the <b>catch</b> block calls the method named <b>getMessage </b>
+<i>(inherited from the <b>Throwable</b> class) </i>on the incoming parameter and 
+displays that message on the screen. This produces the output shown in
+<a href="#Figure_12">Figure 12</a>. </p>
+<div class="a">
+	<p><a name="Figure_12">Figure 12</a>. Output from the exception 
+				handler.
+
+
+							</p>
+
+
+							<pre>In exception handler, get the message
+3</pre>
+
+</div>
+	<p><b>When the catch block finishes execution ...</b> </p>
+<p>When the code in the <b>catch</b> block has completed execution, control is 
+transferred to the first executable statement following the <b>catch</b> block 
+as shown in <a href="#Listing_9">Listing 9</a>. </p>
+<div class="a">
+	<p><a name="Listing_9">Listing 9</a>. Code following the catch 
+				block.
+				</p>
+				<pre>    System.out.println(
+      "Out of catch block");
+  }//end main
+}//end class Excep16</pre>
+</div>
+	<p>That executable statement is a print statement that produces the output 
+	shown in <a href="#Figure_13">Figure 13</a>.</p>
+<div class="a">
+	<p><a name="Figure_13">Figure 13</a>. Output from code 
+				following the catch block.
+
+
+							</p>
+
+
+							<pre>Out of catch block</pre>
+
+</div>
+	<p><strong>Complete program listing</strong></p>
+	<p>A complete listing of the program named <strong>Excep16</strong> is shown in <a href="#Listing_10">
+	Listing 10</a>. </p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_10">Listing 10</a>. <strong>Complete program listing for 
+Excep16</strong>.
+
+</p>
+
+<pre>/*File Excep16.java
+Copyright, R. G. Baldwin
+Illustrates defining, throwing,
+catching, and processing a custom
+exception object that contains a
+message.
+
+Tested using JDK 1.4.0 under Win 2000
+
+The output is:
+
+Processing data for cnt = 0
+
+Processing data for cnt = 1
+Processing data for cnt = 2
+In exception handler, get the message
+3
+Out of catch block
+**************************************/
+
+//The following class is used to
+// construct a customized exception
+// object containing a message
+class MyException extends Exception{
+  MyException(String message){//constr
+    super(message);
+  }//end constructor
+}//end MyException class
+//===================================//
+
+class Excep16{//controlling class
+  public static void main(
+                        String[] args){
+    try{
+      for(int cnt = 0; cnt &lt; 5; cnt++){
+        //Throw a custom exception, and
+        // pass  message when cnt == 3
+        if(cnt == 3) throw
+                  new MyException(&quot;3&quot;);
+        //Transfer control before
+        // processing for cnt == 3
+        System.out.println(
+           &quot;Processing data for cnt = &quot;
+                                + cnt);
+      }//end for-loop
+    }//end try block
+    catch(MyException e){
+      System.out.println(
+               &quot;In exception handler, &quot;
+                  + &quot;get the message\n&quot;
+                     + e.getMessage());
+    }//end catch block
+    //-------------------------------//
+
+    System.out.println(
+      &quot;Out of catch block&quot;);
+  }//end main
+}//end class Excep16
+</pre>
+
+</div>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>This chapter has covered many of the details having to do with exception 
+handling in Java. By now, you should know that the use of exception handling is 
+not optional in Java, and you should have a pretty good idea how to use 
+exception handling in a beneficial way. </p>
+<p>Along the way, the discussion has included the following topics: </p>
+<ul>
+	<li>What is an exception?</li>
+	<li>How do you throw and catch exceptions?</li>
+	<li>What do you do with an exception once you have caught it?</li>
+	<li>How do you make use of the exception class hierarchy provided by the 
+	Java development environment?</li>
+</ul>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1630: Exception Handling</li>
+					<li>File: Java1630.htm
+</li>
+					<li>Published: 09/03/02 </li>
+					<li>Revised: 03/18/20</li>
+
+				</ul>
+</div>
+
+
+	<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,1013 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0130</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0130: Comparing objects, packages, import directives, and some common exceptions</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Joe Joe false</li>
+	<li>D. Joe Joe true</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap141{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap141
+
+class Worker{
+  void doIt(){
+    char[] anArray = {&#39;J&#39;,&#39;o&#39;,&#39;e&#39;};
+    String Str1 = new String(anArray);
+    String Str2 = new String(anArray);
+
+    System.out.println( 
+              Str1 + &quot; &quot; + Str2 + &quot; &quot; +
+              (Str1 == Str2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Joe Joe false</li>
+	<li>D. Joe Joe true</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap142{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap142
+
+class Worker{
+  void doIt(){
+    char[] anArray = {&#39;J&#39;,&#39;o&#39;,&#39;e&#39;};
+    String Str1 = new String(anArray);
+    String Str2 = new String(anArray);
+
+    System.out.println( 
+              Str1 + &quot; &quot; + Str2 + &quot; &quot; +
+              Str1.equals(Str2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. ABC DEF GHI</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap143{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap143
+
+class Worker{
+  void doIt(){
+    java.util.ArrayList ref = 
+            new java.util.ArrayList(1);
+    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);
+    ref.add(&quot;GHI&quot;);
+    
+    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. ABC DEF GHI</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap144{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap144
+
+class Worker{
+  void doIt(){
+    ArrayList ref = 
+            new ArrayList(1);
+    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);
+    ref.add(&quot;GHI&quot;);
+    
+    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. ABC DEF GHI</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>import java.util.ArrayList;
+
+public class Ap145{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap145
+
+class Worker{
+  void doIt(){
+    ArrayList ref = null;
+    ref = new ArrayList(1);
+    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);
+    ref.add(&quot;GHI&quot;);
+    
+    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. ABC DEF GHI</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>import java.util.ArrayList;
+
+public class Ap146{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap146
+
+class Worker{
+  void doIt(){
+    ArrayList ref = null;
+    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);
+    ref.add(&quot;GHI&quot;);
+    
+    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. ABC DEF GHI</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>import java.util.ArrayList;
+
+public class Ap147{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap147
+
+class Worker{
+  void doIt(){
+    ArrayList ref = null;
+    ref = new ArrayList(1);
+    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);
+    
+    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Infinity</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap148{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap148
+
+class Worker{
+  void doIt(){
+    System.out.println(1.0/0);
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Infinity</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap149{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap149
+
+class Worker{
+  void doIt(){
+    System.out.println(1/0);
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. AB CD EF</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap150{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap150
+
+class Worker{
+  void doIt(){
+    String[] ref = {&quot;AB &quot;,&quot;CD &quot;,&quot;EF &quot;};
+    for(int i = 0; i &lt;= 3; i++){
+      System.out.print(ref[i]);
+    }//end forloop
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+
+	
+
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0130: Comparing objects, 
+				packages, import directives, and some common exceptions</li>
+				<li>File: Ap0130.htm </li>
+				<li>Originally published: 2004</li>
+				<li>Published at cnx.org: 12/18/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>Both of the following occur.</p>
+<p>C. AB CD EF </p>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 10</strong></h3><p>
+<strong>Another index out of bounds</strong></p>
+<p>This is another example of a program that throws an index out of bounds 
+exception. In this case, since the container is an array object, the name of the 
+exception is <strong>ArrayIndexOutOfBoundsException</strong>. </p>
+<p><strong>Populate a three-element array object </strong> </p>
+<p>The code in the following fragment creates and populates a three-element 
+array object containing reference to three <strong>String</strong> objects. </p>
+<div class="a">
+				<pre>  void doIt(){
+    String[] ref = {&quot;AB &quot;,&quot;CD &quot;,&quot;EF &quot;};</pre>
+</div>
+<p><strong>Access an out-of-bounds element </strong> </p>
+<p>The next fragment attempts to access elements at indices 0 through 3 
+inclusive.</p>
+<div class="a">
+				<pre>    for(int i = 0; i &lt;= 3; i++){
+      System.out.print(ref[i]);
+    }//end forloop</pre>
+</div>
+<p>Since index value 3 is outside the bounds of the array, the program throws 
+the following exception and aborts: </p>
+<div class="a">
+				<pre>AB CD EF 
+java.lang.ArrayIndexOutOfBoundsException
+ at Worker.doIt(Ap150.java:22)
+ at Ap150.main(Ap150.java:14)
+</pre>
+</div>
+<p>Note however that the program displays the contents of the three <strong>
+String</strong> objects referred to by the contents of the first three elements 
+in the array before the problem occurs. </p>
+<p>That&#39;s the way it often is with runtime 
+errors. Often, a program will partially complete its task before getting into 
+trouble and aborting with a runtime error. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 9</strong></h3><p>
+<strong>A setup
+</strong></p>
+<p>If you feel like you&#39;ve been had, chances are you have been had. The purpose for 
+<a href="#question08">Question 8</a> was to set you up for this question. </p>
+<p><strong>Division by zero for integer types</strong> </p>
+<p>This program deals with the process of dividing by zero for <strong>int</strong> types. The 
+code in the following fragment divides the <strong>int</strong> value 1 by the 
+<strong>int</strong> value 0. </p>
+<div class="a">
+				<pre>  void doIt(){
+    System.out.println(1/0);
+  }//end doIt()</pre>
+</div>
+<p><strong>Not the same as <em>double</em> divide by zero </strong> </p>
+<p>However, unlike with type <strong>double</strong>, this process doesn&#39;t return a very large 
+value and continue running. Rather, for type <strong>int</strong>, attempting to divide by zero 
+will result in a runtime error of type <strong>ArithmeticException</strong> that looks something 
+like the following under JDK 1.3: </p>
+<div class="a">
+				<pre>java.lang.ArithmeticException: / by zero
+ at Worker.doIt(Ap149.java:20)
+ at Ap149.main(Ap149.java:14)
+</pre>
+</div>
+<p><strong>An exercise for the student </strong> </p>
+<p>I won&#39;t attempt to explain the difference in behavior for essentially the 
+same problem between type <strong>int</strong> and type <strong>double</strong>. As the old saying goes, I&#39;ll 
+leave that as an exercise for the student. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>C. Infinity </p>
+<h3><strong>Explanation 8</strong></h3><p>
+<strong>A double <em>divide by zero</em> operation </strong></p>
+<p>This program deals with the process of dividing by zero for floating values 
+of type <strong>double</strong>. </p>
+<p>The following code fragment attempts to divide the double value 1.0 by the 
+double value 0. </p>
+<div class="a">
+				<pre>  void doIt(){
+    System.out.println(1.0/0);
+  }//end doIt()</pre>
+</div>
+	<p>The program runs successfully, producing the output <strong>Infinity</strong>.
+</p>
+<p><strong>What is Infinity? </strong> </p>
+<p>Suffice it to say that Infinity is a very large number. </p>
+<p>
+	<em>(Any value divided by zero is a very large number.)</em></p><p>
+At this point, I&#39;m not going to explain it further. If you are interested in 
+learning what you can do with <strong>Infinity</strong>, see the language specifications.</p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 7</strong></h3><p>
+This program illustrates an <strong>IndexOutOfBounds</strong> exception.</p>
+<p><strong>Instantiate and populate an ArrayList object </strong> </p>
+<p>By now, you will be familiar with the kind of container object that you get 
+when you instantiate the <strong>ArrayList</strong> class. </p>
+<p>The code in the following fragment instantiates such a container, having an 
+initial capacity of one element. </p>
+<p>Then it adds two elements to the container. Each element is a reference to an 
+object of the class <strong>String</strong>. </p>
+<div class="a">
+				<pre>  void doIt(){
+    ArrayList ref = null;
+    ref = new ArrayList(1);
+    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);</pre>
+</div>
+<p><strong>Increase capacity automatically </strong> </p>
+<p>Because two elements were successfully added to a container having an initial 
+capacity of only one element, the container was forced to increase its capacity 
+automatically. </p>
+<p>Following execution of the code in the above fragment, <strong>String</strong> 
+object references were stored at index locations 0 and 1 in the <strong>
+ArrayList</strong> object. </p>
+<p><strong>Get reference at index location 2</strong> </p>
+<p>The next fragment attempts to use the <strong>get</strong> method to fetch an element from 
+the container at index value 2. </p>
+<p>Index values in an <strong>ArrayList</strong> object begin with zero. 
+Therefore, since only two elements were added to the container in the earlier 
+fragment, there is no element at index value 2. </p>
+<div class="a">
+				<pre>    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));</pre>
+</div>
+<p><strong>An IndexOutOfBounds exception </strong> </p>
+<p>As a result, the program throws an <strong>IndexOutOfBounds</strong> exception. The error 
+produced under JDK 1.3 looks something like the following: </p>
+<div class="a">
+				<pre>Exception in thread "main" java.lang.IndexOutOfBoundsException:
+Index: 2, Size: 2
+at java.util.ArrayList.RangeCheck
+  (Unknown Source)
+at java.util.ArrayList.get
+  (Unknown Source)
+at Worker.doIt(Ap147.java:27)
+at Ap147.main(Ap147.java:16)
+</pre>
+</div>
+<p>Attempting to access an element with a negative index value would produce the 
+same result. </p>
+<p><strong>An ArrayIndexOutOfBounds exception </strong> </p>
+<p>A similar result occurs if you attempt to access an element in an ordinary 
+array object outside the bounds of the index values determined by the size of 
+the array. However, in that case, the name of the exception is <strong>
+ArrayIndexOutOfBounds</strong>. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 6</strong></h3><p>
+<strong>The infamous <em>NullPointerException</em></strong></p>
+<p>Interestingly, one of the first things that you read when you start reading 
+Java books, is that there are <em>no pointers in Java</em>. It is likely that 
+shortly thereafter when you begin writing, compiling, and executing simple Java 
+programs, one of your programs will abort with an error message looking 
+something like that <a name="shown_below">shown below</a>: </p>
+<div class="a">
+				<pre>Exception in thread "main" java.lang.NullPointerException
+        at 
+Worker.doIt(Ap146.java:23)
+        at 
+Ap146.main(Ap146.java:16)
+</pre>
+</div>
+<p><strong>What is a NullPointerException? </strong> </p>
+<p>Stated simply, a <strong>NullPointerException</strong> occurs when you 
+attempt to perform some operation on an object using a reference that doesn&#39;t 
+refer to an object. </p>
+<p><strong>That is the case in this program </strong> </p>
+<p>The following code fragment declares a local reference variable and 
+initializes its value to <strong><em>null</em></strong>.</p>
+<div class="a">
+				<pre>  void doIt(){
+    ArrayList ref = null;</pre>
+</div>
+<p>
+	<em>(A reference variable in Java must either refer to a valid object, or 
+	specifically refer to no object (null). Unlike a pointer in C and C++, a 
+	Java reference variable cannot refer to something arbitrary.)</em></p>
+<p>In this case, null means that the reference variable doesn&#39;t refer to a valid 
+object. </p>
+<p><strong>No ArrayList object </strong> </p>
+<p>Note that the code in the above fragment does not instantiate an object of 
+the class <strong>ArrayList</strong> and assign that object&#39;s reference to the 
+reference variable. </p>
+<p>
+	<em>(The reference variable doesn&#39;t contain a reference to an object 
+	instantiated from the class named </em> <strong><em>ArrayList</em></strong><em>, or an object 
+	instantiated from any class for that matter.)</em></p>
+<p><strong>Call a method on the reference
+</strong></p>
+<p>However, the code in the next fragment attempts to add a <strong>String</strong> 
+object&#39;s reference to a nonexistent <strong>ArrayList</strong> object by calling 
+the <strong>add</strong> method on the reference containing null. </p>
+<div class="a">
+				<pre>    ref.add(&quot;ABC &quot;);</pre>
+</div>
+<p>This results in the <strong>NullPointerException</strong> shown 
+<a href="#shown_below">earlier</a>. </p>
+<p><strong>What can you do with a null reference? </strong> </p>
+<p>The only operation that you can perform on a reference variable containing 
+null is to assign an object&#39;s reference to the variable. Any other attempted 
+operation will result in a <strong>NullPointerException</strong>. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>C. ABC DEF GHI </p>
+<h3><strong>Explanation 5</strong></h3><p>
+The purpose of this program is to</p>
+<ul>
+	<li>Continue to illustrate the use of java packages, and</li>
+	<li>Illustrate the use of the Java import directive.</li>
+</ul>
+<p><strong>Program contains an import directive</strong></p>
+<p>This program is the same as the program in <a href="#question04">Question 4</a> 
+with a major exception. Specifically, the program contains the <em>import 
+directive</em> shown in the following fragment. </p>
+<div class="a">
+				<pre>import java.util.ArrayList;</pre>
+</div>
+	<p><strong>A shortcut </strong></p>
+<p>The designers of Java recognized that having to type a fully-qualified name 
+for every reference to a class in a Java program can become burdensome. 
+Therefore, they provided us with a shortcut that can be used, so long as we 
+don&#39;t need to refer to two or more class files having the same name. </p>
+<p><strong>Import directives </strong></p>
+<p>The shortcut is called an import directive. </p>
+<p>As can be seen above, the import directive consists of the word <em>import</em> 
+followed by the fully-qualified name of a class file that will be used in the 
+program. </p>
+<p>A program may have more than one import directive, with each import directive 
+specifying the location of a different class file. </p>
+<p>The import directive(s) must appear before any class or interface definitions 
+in the source code. </p>
+<p><strong>The alternative wild-card syntax </strong></p>
+<p>An alternative form of the import directive replaces the name of the class 
+with an asterisk. </p>
+<p>The asterisk behaves as a wild-card character. It tells the compiler to use 
+any class file that it finds in that package that matches a class reference in 
+the source code. </p>
+<p>The wild-card form should be used with care, because it can sometimes cause 
+the compiler to use a class file that is different from the one that you 
+intended to use <em>(if it finds the wrong one first)</em>. </p>
+<p><strong>Class file name collisions</strong> </p>
+<p>If your source code refers to two different class files having the same name, 
+you must forego the use of the import directive and provide fully-qualified 
+names for those class files. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 4</strong></h3><p>
+The purpose of this program is to continue to illustrate the use of java 
+packages.</p>
+<p><strong>No fully-qualified class names</strong> </p>
+<p>This program is the same as the program in <a href="#question03">Question 3</a> with a major exception. 
+Neither of the references to the <strong>ArrayList</strong> class use fully-qualified names in 
+this program. Rather, the references are as shown in the following fragment. </p>
+<div class="a">
+				<pre>    ArrayList ref = 
+            new ArrayList(1);</pre>
+</div>
+<p><strong>Compiler errors </strong> </p>
+<p>As a result, the JDK 1.3 compiler produces two error messages similar to the 
+following: </p>
+<div class="a">
+				<pre>Ap144.java:20: cannot resolve symbol
+symbol  : class ArrayList
+location: class Worker
+    ArrayList ref =
+</pre>
+</div>
+<p><strong>Doesn&#39;t know how to find the class file </strong> </p>
+<p>This error message indicates that the compiler didn&#39;t know where to look on 
+the disk to find the file named <strong>ArrayList.class </strong> </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>C. ABC DEF GHI </p>
+<h3><strong>Explanation 3</strong></h3><p>
+<strong>Illustrate the use of java packages </strong></p>
+<p>Since it was necessary to make use of a class to illustrate packages, this 
+program also previews the use of the <strong>ArrayList</strong> class. We will be very interested 
+in this class later when we study Java data containers. </p>
+<p><strong>What is an ArrayList object? </strong> </p>
+<p>Some of this terminology may not make much sense to you at this point, but 
+I&#39;ll go ahead and tell you anyway, just as a preview. </p>
+<p>According to Sun, the <strong>ArrayList</strong> class provides a </p>
+<p>
+	<em>&quot;Resizable-array implementation of the <strong>List</strong> interface. Implements all 
+	optional list operations, and permits all elements, including null. In 
+	addition to implementing the <strong>List</strong> interface, this class provides methods to 
+	manipulate the size of the array that is used internally to store the list. 
+	(This class is roughly equivalent to <strong>Vector</strong>, except that it is 
+	unsynchronized.)&quot;</em></p>
+<p><strong>Stated more simply ...
+</strong></p>
+<p>Stated more simply, an object of the <strong>ArrayList</strong> class can be used as a 
+replacement for an array object. An <strong>ArrayList</strong> object knows how to increase its 
+capacity on demand, whereas the capacity of a simple array object cannot change 
+once it is instantiated. </p>
+<p><strong>An ArrayList object </strong> </p>
+<p>The following statement instantiates a new object of the <strong>ArrayList</strong> class, 
+with an initial capacity for one element. The initial capacity is determined by 
+the <strong>int</strong> value passed to the constructor when the object is instantiated. </p>
+<div class="a">
+				<pre>    java.util.ArrayList ref = 
+            new java.util.ArrayList(1);</pre>
+</div>
+<p><strong>Back to the primary purpose ... </strong> </p>
+<p>Getting back to the primary purpose of this program, what is the meaning of 
+the term <strong><em>java.util</em></strong> that appears ahead of the name of the class, <strong>ArrayList</strong>? </p>
+<p><strong>Avoiding name conflicts </strong> </p>
+<p>One of the age-old problems in computer programming has to do with the 
+potential for name conflicts. The advent of OOP and reusable code didn&#39;t cause 
+that problem to go away. If anything, it made the problem worse. </p>
+<p>For example, you and I may work as programmers for separate companies named X 
+and Y. A company named Z may purchase our two companies and attempt to merge the 
+software that we have written separately. Given that there are only a finite 
+number of meaningful class names, there is a good possibility that you and I may 
+have defined different classes with the same names. Furthermore, it may prove 
+useful to use both of the class definitions in a new program. </p>
+<p><strong>Put class files in different directories</strong> </p>
+<p>Sun&#39;s solution to the problem is to cause compiled class files to reside in 
+different directories. Simplifying things somewhat, if your compiled file for a 
+class named <strong>Joe</strong> is placed in a directory named <strong>X</strong>, and my compiled file for a 
+different class named <strong>Joe</strong> is placed in a directory named 
+<strong>Y</strong>, then source code in 
+the same Java program can refer to those two class files as <strong>X.Joe</strong> and 
+<strong>Y.Joe</strong>. 
+This scheme makes it possible for the Java compiler and the Java virtual machine 
+to distinguish between the two files having the name <strong>Joe.class</strong>. </p>
+<p><strong>The java and util directories</strong> </p>
+<p>Again, simplifying things slightly, the code in the above fragment refers to 
+a file named <strong>ArrayList.class</strong>, which is stored in a directory named 
+<strong>util</strong>, which 
+is a subdirectory of a directory named <strong>java</strong>. </p>
+<p>The directory named java is the root of a directory tree containing a very 
+large number of standard Java class files. </p>
+<p>
+	<em>(As an aside, there is another directory named javax, which forms the root 
+	of another directory tree containing class files considered to be extensions 
+	to the standard class library.)</em></p>
+<p><strong>Many directories <em>(packages) </em></strong></p>
+
+<p>Stated simply, a Java package is nothing more or less than a directory 
+containing class files. </p>
+<p>The standard and extended Java class libraries are scattered among a fairly 
+large number of directories or packages <em>(a quick count of the packages in the 
+JDK 1.3 documentation indicates that there are approximately 65 standard and 
+extended packages)</em>. </p>
+<p><strong>A fully-qualified class name</strong> </p>
+<p>With one exception, whenever you refer to a class in a Java program, you must 
+provide a fully-qualified name for the class, including the path through the 
+directory tree culminating in the name of the class. Thus, the following is the 
+fully-qualified name for the class whose name is <strong>ArrayList</strong>. </p>
+<p><strong>java.util.ArrayList</strong> </p>
+<p><em>(Later we will see another way to accomplish this that requires less typing 
+effort.)</em> </p>
+<p>The exception </p>
+<p>The one exception to the rule is the use of classes in the <em>java.lang</em> package, 
+<em>(such as <strong>Boolean</strong>, <strong>Class</strong>, and <strong>Double</strong>)</em>. Your source code can refer to classes in 
+the <strong>java.lang</strong> package without the requirement to provide a fully-qualified class 
+name. </p>
+<p><strong>An ArrayList object</strong> </p>
+<p>Now back to the use of the object previously instantiated from the class 
+named <strong>ArrayList</strong>. This is the kind of object that is often referred to as a 
+container. </p>
+<p>
+	<em>(A container in this sense is an object that is used to store references to 
+	other objects.)</em></p>
+<p><strong>Many methods available</strong></p>
+<p>An object of the <strong>ArrayList</strong> class provides a variety of methods that can be 
+used to store object references and to fetch the references that it contains.
+</p>
+<p><strong>The <em>add</em> method</strong> </p>
+<p>One of those methods is the method named <strong>add</strong>. </p>
+<p>The following code fragment instantiates three objects of the <strong>String</strong> 
+class, and stores them in the <strong>ArrayList</strong> object instantiated earlier. </p>
+<p>
+	<em>(Note that since the initial capacity of the </em> <strong><em>ArrayList</em></strong><em> object was adequate 
+	to store only a single reference, the following code causes the object to 
+	automatically increase its capacity to at least three.)</em></p>
+<div class="a">
+				<pre>    ref.add(&quot;ABC &quot;);
+    ref.add(&quot;DEF &quot;);
+    ref.add(&quot;GHI&quot;);</pre>
+</div>
+<p><strong>The get() method </strong> </p>
+<p>The references stored in an object of the <strong>ArrayList</strong> class can be fetched by 
+calling the <strong>get</strong> method on a reference to the object passing a 
+parameter of type <strong>int</strong>. </p>
+<p>The code in the following fragment calls the<strong> get </strong>method to fetch the references 
+stored in index locations 0, 1, and 2. These references are passed to the 
+<strong>println</strong> method, where the contents of the <strong>String</strong>  objects 
+referred to by those references are concatenated and displayed on the computer 
+screen. </p>
+<div class="a">
+				<pre>    System.out.println(
+                   (String)ref.get(0) + 
+                   (String)ref.get(1) + 
+                   (String)ref.get(2));</pre>
+</div>
+<p><strong>The output </strong> </p>
+<p>This results in the following being displayed: </p>
+<p><strong>ABC DEF GHI</strong></p>
+<p><strong>Summary</strong> </p>
+<p>The above discussion gave you a preview into the use of containers in 
+general, and the <strong>ArrayList</strong> container in particular. </p>
+<p>However, the primary purpose of this program was to help you to understand 
+the use of packages in Java. </p>
+<p>The <strong>ArrayList</strong> class was simply used as an example of a class file that is 
+stored in a standard Java package. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>D. Joe Joe true </p>
+<h3><strong>Explanation 2</strong></h3><p>
+<strong>Two String objects with identical contents</strong></p>
+<p>As in <a href="#question01">Question 1</a>, the program instantiates two
+<strong>String</strong> 
+objects containing identical character strings, as shown in the following code 
+fragment. </p>
+<div class="a">
+				<pre>    char[] anArray = {&#39;J&#39;,&#39;o&#39;,&#39;e&#39;};
+    String Str1 = new String(anArray);
+    String Str2 = new String(anArray);</pre>
+</div>
+	<p><strong>Compare objects for equality </strong></p>
+<p>Also, as in <a href="#question01">Question 1</a>, this program compares the 
+two objects for equality and displays the result as shown by the call to the
+<strong>equals</strong> method in the following fragment. </p>
+<div class="a">
+				<pre>    System.out.println( 
+              Str1 + &quot; &quot; + Str2 + &quot; &quot; +
+              Str1.equals(Str2));</pre>
+</div>
+	<p><strong>Compare using overridden equals method </strong></p>
+<p>The == operator is not used to compare the two objects in this program. 
+Instead, the objects are compared using an overridden version of the <strong>
+equals</strong> method. In this case, the <strong>equals</strong>  method 
+returns true, indicating that the objects are of the same type and contain the 
+same data values. </p>
+<p><strong>The equals method </strong></p>
+<p>The <strong>equals</strong>  method is defined in the <strong>Object</strong> 
+class, and can be overridden in subclasses of <strong>Object</strong>. It is the responsibility 
+of the author of the subclass to override the method so as to implement that 
+author&#39;s concept of &quot;equal&quot; insofar as objects of the class are concerned. </p>
+<p><strong>The overridden <em>equals</em> method </strong> </p>
+<p>The reason that the <strong>equals</strong> method returned true in this case 
+was that the author of the <strong>String</strong> class provided an overridden 
+version of the <strong>equals</strong> method. </p>
+<p><strong>The default <em>equals</em> method </strong> </p>
+<p>If the author of the class does not override the <strong>equals</strong> 
+method, and the default version of the <strong>equals</strong> method inherited 
+from <strong>Object</strong> is called on an object of the class, then according to Sun: </p>
+<p>
+	<em>&quot;for any reference values x and y, this method returns true if and only if x 
+	and y refer to the same object (x==y has the value true)&quot;</em></p>
+<p>In other words, the default version of the <strong>equals</strong> method 
+inherited from the class <strong>Object</strong> provides the same behavior as the == operator 
+when applied to object references.</p>
+
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>C. Joe Joe false </p>
+<h3><strong>Explanation 1</strong></h3><p>
+<strong>The identity operator </strong></p>
+<p>This program illustrates the behavior of the == operator <em>(sometimes 
+referred to as the identity operator)</em> when used to compare references to 
+objects. </p>
+<p><strong>Two String objects with identical contents </strong></p>
+<p>As shown in the following fragment, this program instantiates two objects of 
+the <strong>String</strong> class containing identical character strings. </p>
+<div class="a">
+				<pre>class Worker{
+  void doIt(){
+    char[] anArray = {&#39;J&#39;,&#39;o&#39;,&#39;e&#39;};
+    String Str1 = new String(anArray);
+    String Str2 = new String(anArray);</pre>
+</div>
+	<p>The fact that the two <strong>String</strong> objects contain identical 
+	character strings is confirmed by: </p>
+<ul>
+	<li>Both objects are instantiated using the same array object of type 
+	<strong>char</strong> 
+	as input.</li>
+	<li>When the <strong>toString</strong> representations of the two objects are displayed 
+	later, the display of each object produces Joe on the computer screen.</li>
+</ul>
+<p><strong>Compare object references using identity (==)
+</strong></p>
+<p>The references to the two <strong>String</strong> objects are compared using the == operator, 
+and the result of that comparison is displayed. This comparison will produce 
+either true or false. The code to accomplish this comparison is shown in the 
+following fragment. </p>
+<div class="a">
+				<pre>    System.out.println( 
+              Str1 + &quot; &quot; + Str2 + &quot; &quot; +
+              (Str1 == Str2));</pre>
+</div>
+<p>The statement in the above fragment produces the following display: </p>
+<p><strong>Joe Joe false</strong></p>
+<p><strong>How can this be false?</strong> </p>
+<p>We know that the two objects are of the same type (<strong>String</strong>) and that they 
+contain the same character strings. Why does the == operator return false? </p>
+<p><strong>Doesn&#39;t compare the objects </strong> </p>
+<p>The answer lies in the fact that the above statement doesn&#39;t really compare 
+the two objects at all. Rather, it compares the values stored in the reference 
+variables referring to the two objects. That is not the same as comparing the 
+objects. </p>
+<p><strong>References are not equal </strong> </p>
+<p>Even though the objects are of the same type and contain the same character 
+string, they are two different objects, located in different parts of memory. 
+Therefore, the contents of the two reference variables containing references to 
+the two objects are not equal. </p>
+<p><strong>The correct answer is <em>false</em></strong> </p>
+<p>The == operator returns <strong><em>false</em></strong> as it should. The only way that the == operator 
+could return <strong><em>true</em></strong> is if both reference variables refer to the same object, 
+<em>(which is not the case)</em>. </p>
+<p><strong>The bottom line is ...</strong> </p>
+<p>The == operator cannot be used to compare two objects for equality. However, 
+it can be used to determine if two reference variables refer to the same object.
+</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<p>-end- </p>
+
+
+</body>
+</html>

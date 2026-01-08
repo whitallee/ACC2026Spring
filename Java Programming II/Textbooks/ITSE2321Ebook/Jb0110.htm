@@ -1,0 +1,422 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0110</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+.auto-style2 {
+	text-align: left;
+}
+div.a {
+  border: 2px solid black;
+
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0110: Programming Fundamentals, Getting Started</h1>
+<p>Author's note: When reading this Ebook, please don't skip the page titled "<a href="Jb0101.htm">Jb0101</a>: Preface to Prof. Baldwin's ITSE 2321 Ebook". 
+If you do, you will miss out on a lot of very important information.</p>
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a><ul>
+		<li><a href="#General">General</a></li>
+		<li><a href="#Prerequisites">Prerequisites</a></li>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Creating_compiling_and_running_Java_programs">Writing, compiling, and running Java programs</a><ul>
+		<li><a href="#Meet_Bucky">Meet Bucky</a></li>
+		<li><a href="#Meet_Professor_Bradley_Kjell">Meet Professor Bradley Kjell</a></li>
+		<li><a href="#Writing_the_code">Writing Java code</a></li>
+		<li><a href="#Preparing_to_compile_and_run_Java_code">Preparing to compile and run Java code</a><ul>
+			<li><a href="#The_java_development_kit">Downloading the java development kit (JDK)</a></li>
+			<li><a href="#Installation_of_the_JDK">Installing the JDK</a></li>
+			<li><a href="#The_JDK_documentation">The JDK documentation</a></li>
+		</ul>
+		</li>
+		<li><a href="#Compiling_and_running_Java_code">Compiling and running Java code</a><ul>
+			<li><a href="#Write_your_Java_program">Write your Java program</a></li>
+			<li><a href="#Create_a_batch_file">Create a batch file</a></li>
+			<li><a href="#A_test_program">A test program with a single source code file</a></li>
+			<li><a href="#A_test_program2">A test program with two source code files</a></li>
+		</ul>
+		</li>
+		<li><a href="#Congratulations">Congratulations</a></li>
+		<li><a href="#Oops">Oops</a></li>
+	</ul>
+	</li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1 class="auto-style2"> <a name="Preface"></a>Preface</h1>
+<h2> <a name="General">General</a></h2>
+
+
+
+
+
+<p>This chapter explains how to get started programming using the Java 
+programming language.</p>
+<h2><a name="Prerequisites">Prerequisites</a></h2>
+	
+	<p>The minimum prerequisites for understanding the material in these chapters 
+	include:</p>
+<ul>
+	<li>An understanding of algebra.</li>
+	<li>An understanding of all of the material covered in the earlier chapters 
+	in this Ebook.</li>
+</ul>
+<h2> <a name="Viewing_tip">Viewing tip</a></h2>
+<p> I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3> <a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Windows batch file.</li>
+	<li><a href="#Listing_2">Listing 2</a>. A test program with a single source code file. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Driver class for a test program with two source code files.</li>
+	<li><a href="#Listing_4">Listing 4</a>. Runner class for a test program with two source code files. </li>
+</ul>
+<h1 class="style1"><a name="Creating_compiling_and_running_Java_programs">
+Writing, compiling, and running Java programs</a></h1>
+<h2><a name="Meet_Bucky">Meet Bucky</a></h2>
+<p>If you are a student who likes to learn from videos, I will take this 
+opportunity to introduce you to a series of Java educational videos at
+<a href="https://www.youtube.com/watch?v=5u8rFbpdvds&amp;list=PL484D73FA74A11AC9&amp;index=3">
+Java Programming Tutorial - 2 - Running a Java Program</a>. I will refer to some 
+of those video tutorials later in this Ebook. Note however that this video is 
+not a substitute for studying the Kjell material in the next section. Also note 
+that Bucky's tutorial titled
+<a href="https://www.youtube.com/watch?v=Hl-zzrqQoSE&amp;list=PL484D73FA74A11AC9&amp;index=1">Java Programming Tutorial - 1 - Installing the JDK</a> 
+is somewhat dated so you should skip it and depend instead on the instructions 
+given <a href="#Installation_of_the_JDK">below</a> for the installation of the required software..</p>
+<h2><a name="Meet_Professor_Bradley_Kjell">Meet Professor Bradley Kjell</a></h2>
+<p>Before we go any further, I strongly recommend that you study the first seven 
+chapters of <a href="http://programmedlessons.org/Java9/index.html#part02">Introduction to Computer Science using Java</a> by Professor Bradley Kjell of Central Connecticut State University. 
+Make sure that you understand the material in chapters 1 through 4 and then pay particular attention to 
+the Java material in chapters 5 
+through 7. Be sure to take advantage of the interactive Quizzes, Flash Cards, 
+and Reviews.</p>
+<h2><a name="Writing_the_code">Writing Java code</a></h2>
+<p>You will find that some of the material in this and the following sections duplicates material in the Kjell chapters. You will also find material here that is 
+not in the Kjell chapters, such as the use of batch files to compile and run 
+Java programs.</p>
+<p>As you learned in from Kjell, writing Java code is straightforward. You can write Java code 
+using any plain text editor. You simply need to cause the output file to have 
+an extension of .java.</p>
+<p>There are a number of high-level <em>Integrated Development Environments (IDEs)</em> 
+available, such as Eclipse and NetBeans, but they tend to be overkill for the relatively simple Java programs 
+described in these chapters.</p>
+<p>There are also some low-level IDEs available, such as JCreator, DrJava, 
+IntelliJ, and BlueJ that are very useful. I normally use a free version of 
+JCreator, mainly because it contains a color-coded editor <em>(but it no longer 
+seems to be available)</em>.</p>
+<p>So, just find an editor that you are happy with and use it to write your Java 
+code.</p>
+<h2><a name="Preparing_to_compile_and_run_Java_code">Preparing to compile and 
+run Java code</a></h2>
+<p>Perhaps the most complicated thing is to get your computer set up for 
+compiling and running Java code in the first place.</p>
+<h3><a name="The_java_development_kit">Downloading the java development kit <em>(JDK)</em></a></h3>
+<p>You will need to download and install the free Java JDK from
+the Oracle website. As of 05/30/22, you will find that website at
+<a href="https://www.oracle.com/java/technologies/javase-downloads.html">
+https://www.oracle.com/java/technologies/javase-downloads.html</a> </p>
+<p>There is a 64-bit version of the JDK, which works well on my home computer 
+and on my office computer running Windows 7.</p>
+<h3><a name="Installation_of_the_JDK">Installing the JDK</a></h3>
+<p>As of 05/30/22, you will find a link to installation instructions on that 
+same web page. If you know how to do so and choose to do so, you can set the 
+path in <a name="a_semi-permanent_way">a semi-permanent way</a> by modifying the path environment variable. 
+However, that is not necessary nor is it particularly desirable. You can also set the path temporarily each time you compile and run your program. See 
+the comments following <a href="#Listing_1">Listing 1</a> to learn how to set the path temporarily.</p>
+<h3><a name="The_JDK_documentation">The JDK documentation</a></h3>
+<p>It is very difficult to program in Java without access to the documentation. A link to 
+the full documentation set is also available on that same page. A page 
+containing links to all classes and interfaces for Java SE 18 is available
+<a href="https://docs.oracle.com/en/java/javase/18/docs/api/allclasses-index.html">
+here</a>. An alphabetical index is available
+<a href="https://docs.oracle.com/en/java/javase/18/docs/api/index-files/index-1.html">
+here</a>. Documentation for Java SE 8 in an earlier format is available
+<a href="https://docs.oracle.com/javase/8/docs/api/index.html">here</a>.</p>
+<h2><a name="Compiling_and_running_Java_code">Compiling and running Java code</a></h2>
+<p>There are a variety of ways to compile and run Java code. The way that I will 
+describe here is the most basic and, in my opinion, the most reliable. These instructions 
+apply to a Windows operating system. If you are using a different operating 
+system, you will need to translate the instructions to your operating system.</p>
+<h3><a name="Write_your_Java_program">Write your Java program</a></h3>
+<p>Begin by using your text editor to write your Java program into one or more 
+text files, each with an extension of 
+.java. <em>(Files of this type are often referred to as source code files.)</em> Save the 
+source code files in an empty folder somewhere on your disk. Make sure that the 
+name of the <strong>class</strong> containing the <strong>main</strong> 
+method <em>(which you will learn about in a future chapter)</em> matches the name of the 
+file in which that class is contained <em>(except for the extension of .java on the file name, 
+which does not appear in the class name)</em>.</p>
+<h3><a name="Create_a_batch_file">Create a batch file</a></h3>
+<p class="style2">Use your text editor to create a batch file <em>(or whatever the equivalent is for your operating system)</em> 
+containing the commands shown in <a href="#Listing_1">Listing 1</a> <em>(with the 
+modifications discussed below)</em> and store it in the same folder as your Java 
+source code files.</p>
+<p>Then execute the batch file, which in turn will compile and execute the program if there 
+are no compilation errors.</p>
+
+<div class="a">
+<a name="Listing_1">Listing 1</a>. Windows batch file.
+
+<pre>
+echo off
+cls
+rem path="C:\Program Files\Java\jdk-13\bin";%path%
+del *.class
+
+javac -cp .; hello.java
+java -cp .; hello 5
+
+pause</pre>
+</div>
+
+<h4>Comments regarding the batch file</h4>
+
+<p>The commands in the batch file of <a href="#Listing_1">Listing 1</a> will </p>
+<ul>
+	<li>Open a command-line screen for the folder containing the batch 
+	file.</li>
+	<li>Delete all of the compiled class files from the folder. <em>(If the folder 
+	doesn&#39;t contain any class files, this will be indicated on the command-line 
+	screen.)</em></li>
+	<li>Temporarily set the path (optional) If you chose to set the path in a
+	<a href="#a_semi-permanent_way">semi-permanent way</a>, you can delete the 
+	line that begins with rem (or just leave it alone because it is a comment). 
+	To set the path temporarily, delete the word rem and the space that follows 
+	that word. Then replace "jdk-13" with the name of the folder containing your 
+	installation of the JDK. If you installed it in the default location, that 
+	folder would normally be found in a location such as the following: 
+	"C:\Program Files\Java"</li>
+	<li>Attempt to compile the program in the file named <strong>hello.java</strong> </li>
+	<li>Attempt to run the compiled program using a compiled Java file named
+	<strong>hello.class</strong> with 
+	an optional command-line argument value of 5.</li>
+	<li>Pause and wait for you to dismiss the command-line screen by pressing a 
+	key on the keyboard.</li>
+</ul>
+<p>If errors occur, they will be reported on the command-line screen and the 
+program won&#39;t be executed.</p>
+<p>If your program is named something other than <strong>hello</strong>, 
+<em>(which it typically would be)</em> substitute the new name for the word <strong>hello</strong> 
+where it appears twice in the batch 
+file.</p>
+<h4>The optional command-line argument</h4>
+<p>When running a Java program, it is sometimes necessary to provide a 
+command-line argument when you start the program. See
+<a href="https://www.bleepingcomputer.com/tutorials/understanding-command-line-arguments-and-how-to-use-them/">Understanding Command Line Arguments and How to Use Them</a> for an 
+understanding of command-line arguments. The "5" following the word "hello" in
+<a href="#Listing_1">Listing 1</a> shows how to enter a command-line argument 
+when you run a Java program from the command line. If the program was written to 
+use the argument, it will access and use it. Otherwise, the program will simply 
+ignore the argument.</p>
+<h4>Don&#39;t delete the pause command</h4>
+<p>The <strong>pause</strong> command causes the command-line window to stay on the 
+screen until you dismiss it by pressing a key on the keyboard. You will need to examine the contents of the window if there are errors 
+when you attempt to compile and run your program, so don&#39;t delete the pause 
+command.</p>
+
+<blockquote>Note: it is not necessary to use a batch file to compile and run 
+	Java programs. You can also compile and run a program by opening a command 
+	line window in the folder containing the source code and entering the 
+	following statements manually. As before, the path command and the 
+	command-line argument are optional.</blockquote>
+<blockquote>
+<pre>
+path="C:\Program Files\Java\jdk-13\bin";%path%
+del *.class
+
+javac -cp .; hello.java
+java -cp .; hello 5
+</pre>
+</blockquote>
+<blockquote>
+	However, if you expect to compile and run your program more than 
+	once, it is much more convenient to create the batch file once and then use 
+	it over and over.</blockquote>
+
+<h4>Opening a command-line window
+
+</h4>
+
+<p>The instructions for opening a command-line window in a particular folder 
+normally go something like this:</p>
+<ol>
+	<li>Press the Windows Start button</li>
+	<li>Enter the following command in the input field:
+	<pre>cmd</pre>
+</li>
+	<li>Use navigation commands to navigate to the desired folder</li>
+</ol>
+<p>Here is a much easier way to do the same thing.</p>
+<ol>
+	<li>Open the desired folder in the Windows file manager</li>
+	<li>Create a batch file named WhateverYouPrefer.bat containing the following 
+	single command:
+	<pre>cmd</pre>
+	</li>
+	<li>Double-click the batch file to open the command-line window in the 
+	selected folder.</li>
+</ol>
+<p>This approach eliminates the command-line navigation issue that can be 
+tedious and prone to error. </p>
+
+<h4>Running a precompiled program</h4>
+<p>If you are given a precompiled program file, such as a file named 
+hello.class, you can create a batch file for running that program by copying the batch file in <a href="#Listing_1">Listing 1</a> and deleting all 
+lines other than the following:</p>
+<ul>
+	<li>echo off
+</li>
+	<li>cls
+</li>
+	<li>rem path="C:\Program Files\Java\jdk-13\bin";%path%
+</li>
+	<li>java -cp .; hello
+
+	5</li>
+	<li>pause</li>
+</ul>
+<p>Once again, the path and command-line arguments are optional.</p>
+<h4>Translate to other operating systems</h4>
+<p>The format of the batch file in <a href="#Listing_1">Listing 1</a> is a Windows format. If 
+you are using a different operating system, you will need to translate the 
+information in <a href="#Listing_1">Listing 1</a> into the correct format for your operating system.</p>
+<h3><a name="A_test_program">A test program with a single source code file</a></h3>
+<p>The test program in <a href="#Listing_2">Listing 2</a> can be used to confirm that Java is properly 
+installed on your computer and that you can successfully compile and execute 
+Java programs.</p>
+<div class="a">
+<a name="Listing_2">Listing 2</a>. A test program with a single source code file.
+
+<pre>class hello {
+  public static void main(String[] args){
+    System.out.println("Hello World");
+  }//end main
+}//end class
+</pre>
+</div>
+
+<h4>Instructions</h4>
+<p>Copy the code shown in <a href="#Listing_2">Listing 2</a> into a text file 
+named <strong>hello.java</strong> and store the file in an empty folder somewhere on your disk.</p>
+<p>Create a batch file named <strong>hello.bat</strong> containing the commands 
+shown in <a href="#Listing_1">Listing 1</a> and store that file in the same folder as the file named
+<strong>hello.java</strong>.</p>
+<p>Execute the batch file.</p>
+<p>If everything is working, a command-line screen 
+should open and display the following text:</p>
+<pre>Hello World
+Press any key to continue . . .</pre>
+
+<h3><a name="A_test_program2">A test program with two source code files</a></h3>
+<p>Most of the programs in this course will require two or more source code 
+files. <a href="#Listing_3">Listing 3</a> and <a href="#Listing_4">Listing 4</a> provide examples of two source code files in such 
+a program.</p>
+
+<div class="a">
+<a name="Listing_3">Listing 3</a>. Driver class for a test program with two source code files.
+
+<pre>class hello{
+  public static void main(String[] args){
+    new helloRunner().run();
+  }//end main method
+}//end class</pre>
+</div>
+
+
+<p>`</p>
+<div class="a">
+<a name="Listing_4">Listing 4</a>. Runner class for a test program with two source code files.
+
+<pre>
+class helloRunner{
+  void run(){
+    System.out.println("Hello World from helloRunner");
+  }//end run method
+}//end class</pre>
+</div>
+
+<h4>Instructions</h4>
+<p>Copy the code shown in <a href="#Listing_3">Listing 3</a> into a new text file 
+named <strong>hello.java</strong> and store the file in an empty folder somewhere on your disk.</p>
+<p>Copy the code shown in <a href="#Listing_4">Listing 4</a> into a text file 
+named <strong>helloRunner.java</strong> and store the file in the same folder.</p>
+<p>Copy the batch file named <strong>hello.bat</strong> into the same folder as the files named
+<strong>hello.java</strong> and <strong>helloRunner.java</strong>.</p>
+<p>Execute the batch file.</p>
+<p>If everything is working, a command-line screen 
+should open and display the following text:</p>
+<pre>
+Hello World from helloRunner
+Press any key to continue . . .</pre>
+
+<h3><a name="Congratulations">Congratulations</a></h3>
+<p>If both test programs compile and run successfully, you have just written, compiled and 
+executed a simple Java program on your computer.</p>
+<h3><a name="Oops">Oops</a></h3>
+<p>If that doesn&#39;t happen, you need to go back to the installation instructions 
+and see if you can determine why the JDK isn&#39;t properly installed.</p>
+<p>If you get an error message similar to the following, that probably means 
+that you didn&#39;t set the <strong>path</strong> environment variable correctly. </p>
+<pre>&#39;javac&#39; is not recognized as an internal or external command,
+operable program or batch file.</pre>
+<p>Beyond that, I can&#39;t provide much advice in the way of troubleshooting hints.</p>
+
+
+<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><p>Housekeeping material</p>
+ 
+<ul>
+<li>Author: Prof. Richard G. Baldwin</li>
+	<li>Chapter name: Jb0110: Programming Fundamentals, Getting Started</li>
+<li>File: Jb0110.htm
+</li>
+	<li>Revised: 06/06/22</li>
+</ul>
+</div>
+
+<p>-end- </p>
+
+</body>
+</html>

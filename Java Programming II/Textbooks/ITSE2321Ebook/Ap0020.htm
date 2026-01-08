@@ -1,0 +1,1399 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0020</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0020: Assignment and Arithmetic Operators</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>,
+		
+		<a href="#question11">11</a>, <a href="#question12">12</a>,
+		<a href="#question13">13</a>, <a href="#question14">14</a>,
+		<a href="#question15">15</a>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Programming_challenge_questions">Programming challenge questions</a><ul>
+		<li><a href="#question16">16</a>, <a href="#question17">17</a>, 
+		<a href="#question18">18</a>, <a href="#question19">19</a>, 
+		<a href="#question20">20</a>, <a href="#question21">21</a>, 
+		<a href="#question22">22</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p><strong>Questions and answers</strong></p>
+<p>The test consists of a series of <a href="#Questions">questions</a> with 
+<a href="#Answers">answers</a> and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p><strong>Programming challenge questions</strong></p>
+<p>The chapter also contains a section titled 
+<a href="#Programming_challenge_questions">Programming challenge questions</a>. This section provides specifications for one or 
+more programs that you should be able to write once you understand the answers 
+to all of the questions. <em>(Note that it is not always possible to confine the 
+programming knowledge requirement to this and earlier chapters. Therefore, you 
+may occasionally need to refer ahead to future chapters in order to write the 
+programs.)</em></p>
+<p>Unlike the other questions, solutions are not provided for the <em>
+Programming challenge questions</em>. However, in most cases, the specifications 
+will describe the output that your program should produce.</p>
+<p><strong>Listings</strong></p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 3.0</li>
+	<li>D. 4.0</li>
+	<li>E. 7.0</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap010{
+  public static void main(
+                        String args[]){
+    new Worker().doAsg();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doAsg(){
+    double myVar;
+    myVar = 3.0;
+    myVar += 4.0;
+    System.out.println(myVar);
+  }//end doAsg()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2.147483647E9</li>
+	<li>D. 2.14748365E9</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+
+<pre>public class Ap011{
+  public static void main(
+                        String args[]){
+    new Worker().doAsg();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doAsg(){
+    double myDoubleVar;
+    //Integer.MAX_VALUE = 2147483647
+    int myIntVar = Integer.MAX_VALUE;
+    myDoubleVar = myIntVar;
+    System.out.println(myDoubleVar);
+  }//end doAsg()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the following program? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2147483647</li>
+	<li>D. 2.147483647E9</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+
+<pre>public class Ap012{
+  public static void main(
+                        String args[]){
+    new Worker().doAsg();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doAsg(){
+    //Integer.MAX_VALUE = 2147483647
+    double myDoubleVar =
+                    Integer.MAX_VALUE;
+    int myIntVar;
+    myIntVar = myDoubleVar;
+    System.out.println(myIntVar);
+  }//end doAsg()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2147483647</li>
+	<li>D. 2.147483647E9</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+
+<pre>public class Ap013{
+  public static void main(
+                        String args[]){
+    new Worker().doAsg();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doAsg(){
+    //Integer.MAX_VALUE = 2147483647
+    double myDoubleVar =
+                    Integer.MAX_VALUE;
+    int myIntVar;
+    myIntVar = (int)myDoubleVar;
+    System.out.println(myIntVar);
+  }//end doAsg()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 4.294967294E9</li>
+	<li>D. 4294967294</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap014{
+  public static void main(
+                        String args[]){
+    new Worker().doMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMixed(){
+    //Integer.MAX_VALUE = 2147483647
+    int myIntVar = Integer.MAX_VALUE;
+    System.out.println(2.0 * myIntVar);
+  }//end doMixed()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2147483649</li>
+	<li>D. -2147483647</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap015{
+  public static void main(
+                        String args[]){
+    new Worker().doMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMixed(){
+    //Integer.MAX_VALUE = 2147483647
+    int myVar01 = Integer.MAX_VALUE;
+    int myVar02 = 2;
+    System.out.println(
+                    myVar01 + myVar02);
+  }//end doMixed()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 33.666666</li>
+	<li>D. 34</li>
+	<li>E. 33</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap016{
+  public static void main(
+                        String args[]){
+    new Worker().doMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMixed(){
+    int myVar01 = 101;
+    int myVar02 = 3;
+    System.out.println(
+                      myVar01/myVar02);
+  }//end doMixed()
+}//end class definition
+</pre>
+
+</div>
+
+
+<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Infinity</li>
+	<li>D. 11</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap017{
+  public static void main(
+                        String args[]){
+    new Worker().doMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMixed(){
+    int myVar01 = 11;
+    int myVar02 = 0;
+    System.out.println(
+                      myVar01/myVar02);
+  }//end doMixed()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Infinity</li>
+	<li>D. 11</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap018{
+  public static void main(
+                        String args[]){
+    new Worker().doMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMixed(){
+    double myVar01 = 11;
+    double myVar02 = 0;
+    System.out.println(
+                      myVar01/myVar02);
+  }//end doMixed()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2</li>
+	<li>D. -2</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap019{
+  public static void main(
+                        String args[]){
+    new Worker().doMod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMod(){
+    int myVar01 = -11;
+    int myVar02 = 3;
+    System.out.println(
+                      myVar01 % myVar02);
+  }//end doMod()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+<h2><a name="question11">Question 11</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_11">Listing 
+11</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 2</li>
+	<li>D. 11</li>
+</ul>
+<div class="a"><a name="Listing_11">Listing 11</a>. Listing for Question 
+				11.
+<pre>public class Ap020{
+  public static void main(
+                        String args[]){
+    new Worker().doMod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMod(){
+    int myVar01 = -11;
+    int myVar02 = 0;
+    System.out.println(
+                      myVar01 % myVar02);
+  }//end doMod()
+}//end class definition</pre>
+
+</div>
+
+<p><a href="#answer11">Answer and Explanation</a></p>
+
+<h2><a name="question12">Question 12</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_12">Listing 
+12</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. -0.010999999999999996</li>
+	<li>D. 0.010999999999999996</li>
+</ul>
+
+
+<div class="a"><a name="Listing_12">Listing 12</a>. Listing for Question 
+				12.
+<pre>public class Ap021{
+  public static void main(
+                        String args[]){
+    new Worker().doMod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMod(){
+    double myVar01 = -0.11;
+    double myVar02 = 0.033;
+    System.out.println(
+                      myVar01 % myVar02);
+  }//end doMod()
+}//end class definition</pre>
+
+</div>
+
+<p><a href="#answer12">Answer and Explanation</a></p>
+
+<h2><a name="question13">Question 13</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_13">Listing 
+13</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0.0</li>
+	<li>D. 1.5499999999999996</li>
+</ul>
+
+
+<div class="a"><a name="Listing_13">Listing 13</a>. Listing for Question 
+				13.
+<pre>public class Ap022{
+  public static void main(
+                        String args[]){
+    new Worker().doMod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMod(){
+    double myVar01 = 15.5;
+    double myVar02 = 1.55;
+    System.out.println(
+                      myVar01 % myVar02);
+  }//end doMod()
+}//end class definition</pre>
+
+</div>
+
+<p><a href="#answer13">Answer and Explanation</a></p>
+
+<h2><a name="question14">Question 14</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_14">Listing 
+14</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Infinity</li>
+	<li>D. NaN</li>
+</ul>
+<div class="a"><a name="Listing_14">Listing 14</a>. Listing for Question 
+				14.
+<pre>public class Ap023{
+  public static void main(
+                        String args[]){
+    new Worker().doMod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMod(){
+    double myVar01 = 15.5;
+    double myVar02 = 0.0;
+    System.out.println(
+                      myVar01 % myVar02);
+  }//end doMod()
+}//end class definition</pre>
+
+</div>
+
+<p><a href="#answer14">Answer and Explanation</a></p>
+
+<h2><a name="question15">Question 15</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_15">Listing 
+15</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. -3 2</li>
+	<li>D. -3 -2</li>
+</ul>
+
+
+<div class="a"><a name="Listing_15">Listing 15</a>. Listing for Question 
+				15.
+<pre>public class Ap024{
+  public static void main(
+                        String args[]){
+    new Worker().doMod();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doMod(){
+    int x = 11;
+    int y = -3;
+    System.out.println(
+                      x/y + &quot; &quot; + x % y);
+  }//end doMod()
+}//end class definition</pre>
+
+</div>
+
+<p><a href="#answer15">Answer and Explanation</a></p>
+<h1><a name="Programming_challenge_questions">Programming challenge questions</a></h1>
+
+<h2><a name="question16">Question 16</a></h2>
+<p>Write the program described in <a href="#Listing_16">Listing 16</a>.</p>
+
+
+<div class="a"><a name="Listing_16">Listing 16</a>. Listing for Question 16. 
+<pre>
+/*File Ap0020a1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the proper use of the combined 
+arithmetic/assignment operators such as the following
+operators:
+
++= 
+*=
+
+**********************************************************/
+public class Ap0020a1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question17">Question 17</a></h2>
+<p>Write the program described in <a href="#Listing_17">Listing 17</a>.</p>
+
+
+<div class="a"><a name="Listing_17">Listing 17</a>. Listing for Question 17. 
+<pre>
+/*File Ap0020b1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the detrimental impact of integer arithmetic
+overflow.
+
+**********************************************************/
+public class Ap0020b1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question18">Question 18</a></h2>
+<p>Write the program described in <a href="#Listing_18">Listing 18</a>.</p>
+
+
+<div class="a"><a name="Listing_18">Listing 18</a>. Listing for Question 18. 
+<pre>
+/*File Ap0020c1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the effect of integer truncation that 
+occurs with integer division.
+
+**********************************************************/
+public class Ap0020c1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question19">Question 19</a></h2>
+<p>Write the program described in <a href="#Listing_19">Listing 19</a>.</p>
+
+
+<div class="a"><a name="Listing_19">Listing 19</a>. Listing for Question 19. 
+<pre>
+/*File Ap0020d1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the effect of double divide by zero.
+2. Illustrates the effect of integer divide by zero.
+
+**********************************************************/
+public class Ap0020d1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question20">Question 20</a></h2>
+<p>Write the program described in <a href="#Listing_20">Listing 20</a>.</p>
+
+
+<div class="a"><a name="Listing_20">Listing 20</a>. Listing for Question 
+				20. 
+<pre>
+/*File Ap0020e1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the effect of the modulus operation with
+integers.
+
+**********************************************************/
+public class Ap0020e1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+
+
+
+
+
+<h2><a name="question21">Question 21</a></h2>
+<p>Write the program described in <a href="#Listing_21">Listing 21</a>.</p>
+
+
+<div class="a"><a name="Listing_21">Listing 21</a>. Listing for Question 
+				21. 
+<pre>
+/*File Ap0020f1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the effect of the modulus operation with
+doubles.
+
+**********************************************************/
+public class Ap0020f1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question22">Question 22</a></h2>
+<p>Write the program described in <a href="#Listing_22">Listing 22</a>.</p>
+
+
+<div class="a"><a name="Listing_22">Listing 22</a>. Listing for Question 
+				22. 
+<pre>
+/*File Ap0020g1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Illustrates the concatenation of the following strings
+separated by space characters.
+
+"This"
+"is"
+"fun"
+
+Cause your program to produce the following output:
+This
+is
+fun
+This is fun
+**********************************************************/
+public class Ap0020g1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1. </li>
+	<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5. </li>
+	<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6. </li>
+	<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7. </li>
+	
+	<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8. </li>
+	<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9. </li>
+	<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+	<li><a href="#Listing_11">Listing 11</a>. Listing for Question 11. </li>
+	<li><a href="#Listing_12">Listing 12</a>. Listing for Question 12. </li>
+	<li><a href="#Listing_13">Listing 13</a>. Listing for Question 13. </li>
+	<li><a href="#Listing_14">Listing 14</a>. Listing for Question 14. </li>
+	<li><a href="#Listing_15">Listing 15</a>. Listing for Question 15. </li>
+
+	<li><a href="#Listing_16">Listing 16</a>. Listing for Question 16. </li>
+	<li><a href="#Listing_17">Listing 17</a>. Listing for Question 17. </li>
+	<li><a href="#Listing_18">Listing 18</a>. Listing for Question 18. </li>
+	<li><a href="#Listing_19">Listing 19</a>. Listing for Question 19. </li>
+	<li><a href="#Listing_20">Listing 20</a>. Listing for Question 20. </li>
+	<li><a href="#Listing_21">Listing 21</a>. Listing for Question 21. </li>
+	<li><a href="#Listing_22">Listing 22</a>. Listing for Question 22. </li>
+
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0020: Assignment and 
+				Arithmetic Operators</li>
+				<li>File: Ap0020.htm </li>
+				<li>Originally published: January 7, 2002</li>
+				<li>Published at cnx.org: 12/01/12</li>
+				<li>Revised: 03/19/20</li>
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>C. -3 2 </p>
+<h3><strong>Explanation 15</strong></h3><p>
+<strong>String concatenation</strong>
+</p>
+<p>This program uses <strong>String</strong> concatenation, which has not been previously 
+discussed in this group of self-assessment chapters. </p>
+<p>In this case, the program executes both an integer divide operation and an 
+integer modulus operation, using <strong>String</strong> concatenation to display both results on 
+a single line of output. </p>
+<p><strong>Quotient = -3 with a remainder of 2 </strong> </p>
+<p>Thus, the displayed result is the integer quotient followed by the remainder.
+</p>
+<p><strong>What is String concatenation?</strong> </p>
+<p>If either operand of the plus (+) operator is of type <strong>String</strong>, no attempt is 
+made to perform arithmetic addition. Rather, the other operand is 
+converted to a <strong>String</strong>, and the two strings are concatenated. </p>
+<p><strong>A space character, &quot; &quot; </strong> </p>
+<p>The string containing a space character (&quot; &quot;) in this expression appears as 
+the right operand of one plus operator and as the left operand of the other plus 
+operator. </p>
+<p>If you already knew about <strong>String</strong> concatenation, you should have been able to 
+figure out the correct answer to the question on the basis of the answers to 
+earlier questions in this chapter. </p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>D. NaN </p>
+<h3><strong>Explanation 14</strong></h3><p>
+<strong>Floating modulus operation involves floating divide
+</strong>
+</p>
+<p>The modulus operation with floating operands and 0.0 as the right operand 
+produces <strong>NaN</strong>, which stands for <em>Not a Number</em>. </p>
+<p><strong>What is the actual value of Not a Number? </strong> </p>
+<p>A symbolic constant that is accessible as <strong>Double.NaN</strong> specifies the value that 
+is returned in this case. </p>
+<p>Be careful what you try to do with it. It has some peculiar behavior of 
+its own. </p>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>D. 1.5499999999999996 </p>
+<h3><strong>Explanation 13</strong></h3><p>
+<strong>A totally incorrect result
+</strong>
+</p>
+<p>Unfortunately, due to floating arithmetic inaccuracy, the modulus operation 
+in this program produces an entirely incorrect result. </p>
+<p>The result should be 0.0, and that is the result produced by my hand 
+calculator. </p>
+<p><strong>Terminates one step too early </strong> </p>
+<p>However, this program terminates the repetitive subtraction process one step 
+too early and produces an incorrect remainder. </p>
+<p><strong>Be careful </strong> </p>
+<p>This program is included here to emphasize the need to be very careful how 
+you interpret the result of performing modulus operations on floating operands.
+</p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>C. -0.010999999999999996 </p>
+<h3><strong>Explanation 12</strong></h3><p>
+<strong>Modulus operator can be used with floating types</strong>
+</p>
+<p>In this case, the program returns the remainder that would be produced by 
+dividing a double value of -0.11 by a double value of 0.033 and terminating the 
+divide operation at the beginning of the fractional part of the quotient. </p>
+<p><strong>Say that again </strong> </p>
+<p>Stated differently, the result of the modulus operation is the remainder that 
+results after </p>
+<ul>
+	<li>subtracting the right operand from the left operand an integral number 
+	of times, and</li>
+	<li>terminating the repetitive subtraction process when the result of the 
+	subtraction is less than the right operand</li>
+</ul><p>
+<strong>Modulus result is not exact
+</strong>
+</p>
+<p>According to my hand calculator, taking into account the fact that the left 
+operand is negative, this operation should produce a modulus result of 
+-0.011. As you can see, the result produced by the application of the 
+modulus operation to floating types is not exact. </p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 11</strong></h3><p>
+<strong>Integer modulus involves integer divide
+</strong>
+</p>
+<p>The modulus operation with integer operands involves an integer divide. </p>
+<p>Therefore, it is subject to the same kind of problem as an ordinary integer 
+divide when the right operand has a value of zero. </p>
+<p><strong>Program produces a runtime error </strong> </p>
+<p>In this case, the program produced a runtime error that terminated the 
+program. The error produced by JDK 1.3 is as follows: </p>
+
+
+
+
+<div class="a">
+				<pre>Exception in thread "main" java.lang.ArithmeticException: / by zero 
+        at Worker.doMod(Ap020.java:14) 
+        at Ap020.main(Ap020.java:6)</pre>
+</div>
+<p><strong>Dealing with the problem </strong> </p>
+<p>As with integer divide, you can either test the right operand for a zero 
+value before performing the modulus operation, or you can deal with the problem 
+after the fact using try-catch. </p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>D. -2 </p>
+<h3><strong>Explanation 10</strong></h3><p>
+<strong>What is a modulus operation?
+</strong>
+</p>
+<p>In elementary terms, we like to say that the modulus operation returns the 
+remainder that results from a divide operation. </p>
+<p>In general terms, that is true. </p>
+<p><strong>Some interesting behavior </strong> </p>
+<p>However, the modulus operation has some interesting behaviors that are 
+illustrated in this and the next several questions. </p>
+<p>This program returns the modulus of -11 and 3, with -11 being the left 
+operand. </p>
+<p><strong>What is the algebraic sign of the result?</strong> </p>
+<p>Here is a rule: </p>
+
+	<p><em>The result of the modulus operation takes the sign of the left operand, 
+	regardless of the sign of the quotient and regardless of the sign of the 
+	right operand.
+In this program, that produced a result of -2.
+</em></p>
+
+<p>Changing the sign of the right operand would <strong><em>not</em></strong> have changed the sign of the 
+result. </p>
+<p><strong>Exercise care with sign of modulus result </strong> </p>
+<p>Thus, you may need to exercise care as to how you interpret the result when 
+you perform a modulus operation having a negative left operand. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>C. Infinity </p>
+<h3><strong>Explanation 9</strong></h3><p>
+<strong>Floating divide by zero</strong>
+</p>
+<p>This program attempts to divide the <strong>double</strong> value of 11 by 
+the <strong>double</strong> value of zero. </p>
+<p><strong>No runtime error with floating divide by zero </strong></p>
+<p>In the case of floating types, an attempt to divide by zero does not produce 
+a runtime error. Rather, it returns a value that the <strong>println</strong> 
+method interprets and displays as Infinity. </p>
+<p><strong>What is the actual value?</strong> </p>
+<p>The actual value returned by this program is provided by a <strong>static 
+final</strong> variable in the <strong>Double</strong> class named <strong>
+POSITIVE_INFINITY</strong>. </p>
+<p><em>(There is also a value for NEGATIVE_INFINITY, which is the value that 
+would be returned if one of the operands were a negative value.)</em> </p>
+<p><strong>Is this a better approach? </strong></p>
+<p>Is this a better approach than throwing an exception as is the case for 
+integer divide by zero? </p>
+<p>I will let you be the judge of that. </p>
+<p>In either case, you can test the right operand before the divide to assure 
+that it isn&#39;t equal to zero. </p>
+<p><strong>Cannot use exception handling in this case</strong> </p>
+<p>For floating divide by zero, you cannot handle the problem by using 
+try-catch. </p>
+<p>However, you can test the result following the divide to see if it is equal 
+to either of the infinity values mentioned above. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 8</strong></h3><p>
+<strong>Dividing by zero
+</strong>
+</p>
+<p>This program attempts to divide the <strong>int</strong> value of 11 by the 
+<strong>int</strong> value of zero.
+</p>
+<p><strong>Integer divide by zero is not allowed </strong> </p>
+<p>This produces a runtime error and terminates the program. </p>
+<p>The runtime error is as follows under JDK 1.3: </p>
+
+
+
+
+<div class="a">
+				<pre>
+Exception in thread &quot;main&quot; java.lang.ArithmeticException: / by zero
+     at Worker.doMixed(Ap017.java:14)
+     at Ap017.main(Ap017.java:6)</pre>
+</div>
+<p><strong>Two ways to deal with this sort of problem </strong> </p>
+<p>One way is to test the right operand before each divide operation to assure 
+that it isn&#39;t equal to zero, and to take appropriate action if it is. </p>
+<p>A second <em>(possibly preferred)</em> way is to use exception handling and surround 
+the divide operation with a <em>try</em> block, followed by a <em>catch</em> block for the type
+</p>
+
+
+
+
+<div class="a">
+				<pre>java.lang.ArithmeticException.</pre>
+</div>
+<p>The code in the catch block can be designed to deal with the problem if it 
+occurs. <em>(Exception handling will be discussed in a future chapter.)
+</em> </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>E. 33 </p>
+<h3><strong>Explanation 7</strong></h3><p>
+<strong>Integer truncation
+</strong>
+</p>
+<p>This program illustrates the integer truncation that results when the 
+division operator is applied to operands of the integer types. </p>
+<p><strong>The result of simple long division </strong> </p>
+<p>We all know that when we divide 101 by 3, the result is 33.666666 with the 
+sixes extending out to the limit of our arithmetic accuracy. </p>
+<p><strong>The result of rounding </strong> </p>
+<p>If we round the result to the next closest integer, the result is 34. </p>
+<p><strong>Integer division does not round</strong> </p>
+<p>However, when division is performed using operands of integer types in Java, 
+the fractional part is simply discarded <em>(not rounded)</em>. </p>
+<p>The result is the whole number result without regard for the fractional part 
+or the remainder. </p>
+<p>Thus, with integer division, 101/3 produces the integer value 33. </p>
+<p><strong>If either operand is a floating type ... </strong> </p>
+<p>If either operand is one of the floating types, </p>
+<ul>
+	<li>the integer operand will be converted to the floating type,</li>
+	<li>the result will be of the floating type, and</li>
+	<li>the fractional part of the result will be preserved to some degree of 
+	accuracy</li>
+</ul>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>D. -2147483647 </p>
+<h3><strong>Explanation 6</strong></h3><p>
+<strong>Danger, integer overflow ahead! </strong>
+</p>
+<p>This program illustrates a very dangerous situation involving arithmetic 
+using operands of integer types. This situation involves a condition 
+commonly known as <em>integer overflow</em>. </p>
+<p><strong>The good news</strong> </p>
+<p>The good news about doing arithmetic using operands of integer types is that 
+as long as the result is within the allowable value range for the wider of the 
+integer types, the results are exact <em>(floating arithmetic often produces results 
+that are not exact)</em>. </p>
+<p><strong>The bad news </strong> </p>
+<p>The bad news about doing arithmetic using operands of integer types is that 
+when the result is not within the allowable value range for the wider of the 
+integer types, the results are garbage, having no usable relationship to the 
+correct result <em>(floating arithmetic has a high probability of producing 
+approximately correct results, even though the results may not be exact).</em> </p>
+<p><strong>For this specific case ...</strong> </p>
+<p>As you can see by the answer to this question, when a value of 2 was added to 
+the largest positive value that can be stored in type <strong>int</strong>, the incorrect result 
+was a very large negative value. </p>
+<p>The result is simply incorrect. <em>(If you know how to do binary 
+arithmetic, you can figure out how this happens.) </em> </p>
+<p><strong>No safety net in this case -- just garbage </strong> </p>
+<p>Furthermore, there was no compiler error and no runtime error. The 
+program simply produced an incorrect result with no warning. </p>
+<p>You need to be especially careful when writing programs that perform 
+arithmetic using operands of integer types. Otherwise, your programs may 
+produce incorrect results. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>C. 4.294967294E9 </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><strong>Mixed-type arithmetic
+</strong>
+</p>
+<p>This program illustrates the use of arithmetic operators with operands of 
+different types. </p>
+<p><strong>Declare and initialize an int </strong> </p>
+<p>The method named <strong>doMixed</strong> declares a local variable of type 
+<span class="style1">int</span> named <strong>myIntVar</strong> 
+and initializes it with the largest positive value that can be stored in type 
+<strong>int</strong>. </p>
+<p><strong>Evaluate an arithmetic expression</strong> </p>
+<p>An arithmetic expression involving <strong>myIntVar</strong> is evaluated and the result is 
+passed as a parameter to the <strong>println</strong> method where it is displayed on the 
+computer screen. </p>
+<p><strong>Multiply by a literal double value </strong> </p>
+<p>The arithmetic expression uses the multiplication operator (*) to multiply 
+the value stored in <strong>myIntVar</strong> by 2.0 <em>(this literal operand is type 
+<strong>double</strong> by 
+default)</em>. </p>
+<p><strong>Automatic conversion to wider type</strong> </p>
+<p>When arithmetic is performed using operands of different types, the type of 
+the operand of the narrower type is automatically converted to the type of the 
+operand of the wider type, and the arithmetic is performed on the basis of the 
+wider type. </p>
+<p><strong>Result is of the wider type</strong> </p>
+<p>The type of the result is the same as the wider type. </p>
+<p><strong>In this case ... </strong> </p>
+<p>Because the left operand is type <strong>double</strong>, the <strong>int</strong> value is 
+converted to type <strong>double</strong> and the arithmetic is performed as type 
+<strong>double</strong>. </p>
+<p>This produces a result of type <strong>double</strong>, causing the floating value 
+4.294967294E9 to be displayed on the computer screen. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>C. 2147483647 </p>
+<h3><strong>Explanation 4</strong></h3><p>
+<strong>Uses a cast operator
+</strong>
+</p>
+<p>This program, named <strong>Ap013.java</strong>, differs from the earlier program named 
+<strong>Ap012.java</strong> in one important respect. </p>
+<p>This program uses a <em>cast operator</em> to force the compiler 
+to allow a narrowing conversion in order to assign a <strong>double</strong> value to an 
+<strong>int</strong> 
+variable. </p>
+<p><strong>The cast operator</strong> </p>
+<p>The statement containing the cast operator is shown below for convenient 
+viewing. </p>
+
+
+
+
+<div class="a"><pre>    myIntVar = (int)myDoubleVar;</pre>
+</div>
+	<p><strong>Syntax of a cast operator </strong> </p>
+<p>The cast operator consists of the name of a type contained within a pair of 
+matching parentheses. </p>
+<p><strong>A unary operator </strong> </p>
+<p>The cast operator always appears to the left of an expression whose type is 
+being converted to the type specified by the cast operator. </p>
+<p><strong>Assuming responsibility for potential problems</strong> </p>
+<p>When dealing with primitive types, the cast operator is used to notify the 
+compiler that the programmer is willing to assume the risk of a possible loss of 
+precision in a narrowing conversion. </p>
+<p><strong>No loss of precision here</strong> </p>
+<p>In this case, there was no loss in precision, but that was only because the 
+value stored in the <strong>double</strong> variable was within the allowable value range for an 
+<strong>int</strong>. </p>
+<p>In fact, it was the largest positive value that can be stored in the type 
+<strong>int</strong>. Had it been any larger, a loss of precision would have occurred. </p>
+<p><strong>More on this later ... </strong> </p>
+<p>I will have quite a bit more to say about the cast operator in future 
+chapters. I will also have more to say about the use of the assignment 
+operator in conjunction with the non-primitive types. </p>
+
+	
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 3</strong></h3><p>
+<strong>Conversion from double to int is not automatic
+</strong>
+</p>
+<p>This program attempts to assign a value of type <strong>double</strong> to a variable of type 
+<strong>int</strong>. </p>
+<p>Even though we know that the specific double value involved would fit in the 
+<strong>int</strong> variable with no loss of precision, the conversion from 
+<strong>double</strong> to <strong>int</strong> is not 
+a <em>widening</em> conversion. </p>
+<p><strong>This is a narrowing conversion </strong> </p>
+<p>In fact, it is a <em>narrowing</em> conversion because the allowable value range for 
+an <strong>int</strong> is less than the allowable value range for a <strong>double</strong>. </p>
+<p>The conversion is not allowed by the compiler. The following compiler 
+error occurs under JDK 1.3: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap012.java:16: possible loss of precision 
+found   : double 
+required: int 
+    myIntVar = myDoubleVar    myIntVar = myDoubleVar; </pre>
+</div>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>C. 2.147483647E9 </p>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>Declare a double</strong>
+</p>
+<p>The method named <strong>doAsg</strong> first declares a local variable of type 
+<strong>double</strong> named <strong>myDoubleVar</strong> without providing an initial value. </p>
+<p><strong>Declare and initialize an int </strong> </p>
+<p>Then it declares an <strong>int</strong> variable named <strong>myIntVar</strong> and initializes its value to 
+the integer value 2147483647 <em>(you learned about Integer.MAX_VALUE in an earlier 
+chapter)</em>. </p>
+<p><strong>Assign the int to the double </strong> </p>
+<p>Following this, the method assigns contents of the <strong>int</strong> variable to the 
+<strong>double</strong> variable.
+</p>
+<p><strong>An assignment compatible conversion</strong> </p>
+<p>This is an <em>assignment compatible</em> conversion. In particular, the integer 
+value of 2147483647 is automatically converted to a <strong>double</strong> value and stored in 
+the <strong>double</strong> variable. </p>
+<p>The <strong>double</strong> representation of that value is what appears on the screen later 
+when the value of <strong>myDoubleVar</strong> is displayed. </p>
+<p><strong>What is an assignment compatible conversion? </strong> </p>
+<p>An assignment compatible conversion for the primitive types occurs when the 
+required conversion is a <em>widening</em> conversion. </p>
+<p><strong>What is a widening conversion? </strong> </p>
+<p>A widening conversion occurs when the allowable value range of the type of 
+the left operand of the assignment operator is greater than the allowable value 
+range of the right operand of the assignment operator. </p>
+<p><strong>A double is wider than an int</strong> </p>
+<p>Since the allowable value range of type <strong>double</strong> is greater than the allowable 
+value range of type <strong>int</strong>, assignment of an <strong>int</strong> value to a 
+<strong>double</strong> variable is 
+allowed, with conversion from <strong>int</strong> to <strong>double</strong> occurring automatically. </p>
+<p><strong>A safe conversion </strong> </p>
+<p>It is also significant to note that there is no loss in precision when 
+converting from an <strong>int</strong> to a <strong>double</strong>. </p>
+<p><strong>An unsafe but allowable conversion </strong> </p>
+<p>However, a loss of precision may occur when an <strong>int</strong> is assigned to a 
+<strong>float</strong>, or 
+when a <strong>long</strong> is assigned to a <strong>double</strong>. </p>
+<p><strong><a name="What_would_a_float_produce">What would a float produce</a>?</strong> </p>
+<p>The value of 2.14748365E9 shown for selection D is what you would see for 
+this program if you were to change the <strong>double</strong> variable to a 
+<strong>float</strong> variable. 
+<em>(Contrast this with 2147483647 to see the loss of precision.) </em> </p>
+<p><strong>Widening is no guarantee that precision will be preserved </strong> </p>
+<p>The fact that a type conversion is a widening conversion does not guarantee 
+that there will be no loss of precision in the conversion. It simply 
+guarantees that the conversion will be allowed by the compiler. In some 
+cases, such as that shown <a href="#What_would_a_float_produce">above</a>, an assignment compatible conversion can result 
+in a loss of precision, so you always need to be aware of what you are doing.
+</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>E. 7.0 </p>
+<h3><strong>Explanation 1</strong></h3><p>
+<strong>Declare but don&#39;t initialize a double variable
+</strong>
+</p>
+<p>The method named <strong>doAsg</strong> begins by declaring a <strong>double</strong> variable named
+<strong>myVar</strong> 
+without initializing it. </p>
+<p><strong>Use the simple assignment operator </strong> </p>
+<p>The simple assignment operator (=) is then used to assign the 
+<strong>double</strong> 
+value 3.0 to the variable. Following the execution of that statement, the 
+variable contains the value 3.0. </p>
+<p><strong>Use the arithmetic/assignment operator </strong> </p>
+<p>The next statement uses the combined arithmetic/assignment operator (+=) 
+to add the value 4.0 to the value of 3.0 previously assigned to the variable. 
+The following two statements are functionally equivalent: </p>
+
+
+
+
+<div class="a"><pre>
+myVar += 4.0;
+
+myVar = myVar + 4.0;</pre>
+</div>
+<p><strong>Two statements are equivalent </strong> </p>
+<p>This program uses the first statement listed above. If you were to 
+replace the first statement with the second statement, the result would be the 
+same. </p>
+<p>In this case, either statement would add the value 4.0 to the value of 3.0 
+that was previously assigned to the variable named <strong>myVar</strong>, producing the sum of 
+7.0. Then it would assign the sum of 7.0 back to the variable. When 
+the contents of the variable are then displayed, the result is that 7.0 appears 
+on the computer screen. </p>
+<p><strong>No particular benefit</strong> </p>
+<p>To the knowledge of this author, there is no particular benefit to using the 
+combined arithmetic/assignment notation other than to reduce the amount of 
+typing required to produce the source code. However, if you ever plan to 
+interview for a job as a Java programmer, you need to know how to use the 
+combined version.</p>
+<p><strong>Four other similar operators</strong></p>
+<p>Java support several combined operators. Some involve arithmetic and some 
+involve other operations such as bit shifting. Five of the combined operators 
+are shown below. These five all involve arithmetic.</p>
+<ul>
+	<li>+=</li>
+	<li>-=</li>
+	<li>*=</li>
+	<li>/=</li>
+	<li>%=</li>
+</ul><p>
+In all five cases, you can construct a functionally equivalent arithmetic and 
+assignment statement in the same way that I constructed the functionally 
+equivalent statement for += above.
+</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

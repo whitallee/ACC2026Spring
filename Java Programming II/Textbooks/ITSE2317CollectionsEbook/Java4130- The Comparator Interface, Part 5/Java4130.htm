@@ -1,0 +1,500 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4130</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4130: The Comparator Interface, Part 5</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a>
+	</li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+<li><a href="#Beginning_with_a_quiz">Beginning with a quiz</a> 
+<ul>
+	<li><a href="#Similar_to_previous_programs">Similar to previous programs</a></li>
+	<li><a href="#A_new_LinkedList_object">A new LinkedList object</a> </li>
+	<li><a href="#Populating_the_List">Populating the List</a></li>
+	<li><a href="#Displaying_the_list">Displaying the list
+</a>
+</li>
+	<li><a href="#Sort_the_list">Sort the list</a></li>
+	<li><a href="#A_very_important_point">A very important point</a></li>
+</ul>
+</li>
+<li><a href="#The_Collections_class">The Collections class</a>
+<ul>
+	<li><a href="#The_sort_method">The sort method </a> </li>
+	<li><a href="#Also_uses_an_array">Also uses an array</a></li>
+	<li><a href="#A_flexible_approach_to_sorting">A flexible approach to sorting</a></li>
+</ul>
+</li>
+<li><a href="#The_Comparator">The Comparator</a></li>
+<li><a href="#Display_the_sorted_list">Display the sorted list</a></li>
+
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>This chapter shows you how to use the <strong>sort</strong> method of the 
+<strong>Collections</strong> class along with a <strong>Comparator</strong> object to sort the 
+contents of a <strong>List</strong> into reverse natural order.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Comparator06. </li>
+	<li><a href="#Listing_2">Listing 2</a>. A new LinkedList object. </li>
+	<li><a href="#Listing_3">Listing 3</a>. The fillIt method. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Sort the list. </li>
+	<li><a href="#Listing_5">Listing 5</a>. The Comparator. </li>
+	<li><a href="#Listing_6">Listing 6</a>. Display the sorted list. </li>
+
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>In this chapter, I will teach you how to use the <b>sort</b> method of the <b>
+Collections</b> class along with a <b>Comparator</b> object to sort the contents 
+of a <b>List </b>into <i>reverse natural order</i>. </p>
+<p>The methodology that I will teach you is completely general, and can be used 
+to sort a list in a wide variety of ways, depending on how you define the <b>
+compare</b> method of a <b>Comparator</b> object. </p>
+<p>Furthermore, the same <b>sort</b> method and the same <b>Comparator</b> 
+object can be used to sort any implementation of a list, so long as the list 
+properly implements the <b>List</b> interface.</p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Beginning_with_a_quiz">Beginning with a quiz</a> </h2>
+<p>Let&#39;s begin with a quiz to test your prior knowledge of the 
+Collections Framework. </p>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. BILL Bill JOE Joe TOM Tom</li>
+	<li>D. Tom TOM Joe JOE Bill BILL</li>
+	<li>E. Joe Bill Tom </li>
+	<li>F. None of the above.</li>
+</ul>
+
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named Comparator06.</p>
+<pre>//File Comparator06.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+import java.io.Serializable;
+
+class Comparator06{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator06
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new LinkedList();
+    Populator.fillIt(ref);
+    Collections.sort((List)ref, new TheComparator());
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+}//end class Populator
+
+class TheComparator implements Comparator, Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    //Do a comparison
+    int result = ((String)o1).compareTo(((String)o2));
+    return result*(-1);
+  }//end compare()
+}//end class TheComparator
+</pre>
+
+</div>
+
+
+
+
+
+<p>The output produced by this program is shown below: </p>
+<p><strong>Tom TOM Joe JOE Bill BILL </strong> </p>
+<p>If that was your answer, you probably already understand most of the material 
+covered in this chapter. In that case, you might consider skipping this chapter 
+and moving on to the next chapter. If that wasn&#39;t your answer, you should 
+probably continue with your study of this chapter. </p>
+<h3><a name="Similar_to_previous_programs">Similar to previous programs</a> 
+</h3>
+<p>The overall structure of the program in <a href="#Listing_1">Listing 1</a> is similar to programs 
+that I have discussed in previous chapters. Therefore, I will concentrate on 
+those aspects of this program that differentiate it from the programs in 
+previous chapters. </p>
+<h3><a name="A_new_LinkedList_object">A new LinkedList object</a> </h3>
+<p>The code in <a href="#Listing_2">Listing 2</a> instantiates a new <b>LinkedList</b> object and passes 
+that object&#39;s reference to a method named <b>fillIt</b> where it is 
+populated with the names of several people.</p>
+
+
+<!--``1List02-->
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. A new 
+				LinkedList object.
+
+				</p>
+
+				<pre>    ref = new LinkedList();
+    Populator.fillIt(ref);
+</pre>
+</div>
+<!--``2-->
+
+
+
+<p>The <b>LinkedList</b> class is one of the concrete implementation classes of 
+the Collections Framework. This class implements the <b>Collection</b> interface 
+and the <b>List</b> interface. Here is part of what Oracle has to say about the
+<b>LinkedList</b> class: </p>
+<blockquote>
+	<i>&quot;Linked list implementation of the List interface. Implements all 
+	optional list operations, and permits all elements (including null). In 
+	addition to implementing the List interface, the LinkedList class provides 
+	uniformly named methods to get, remove and insert an element at the 
+	beginning and end of the list. These operations allow linked lists to be 
+	used as a stack, queue, or double-ended queue (deque).&quot;</i></blockquote>
+<h3> <a name="Populating_the_List">Populating the List</a> </h3>
+<p>The code in <a href="#Listing_3">Listing 3</a> shows the <b>fillIt</b> method that is used to populate 
+the list with references to six different <b>String</b> objects. </p>
+<p>The <b>add</b> method is used to add each new element to the end of the list. 
+As you can see, the elements are added to the list in no particular order with 
+respect to their values. </p>
+
+
+
+<!--``1List03-->
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. The fillIt 
+				method.
+
+				</p>
+
+				<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div>
+<!--``2-->
+
+
+
+<h3>
+<a name="Displaying_the_list">
+Displaying the list</a> </h3>
+<p>Although I didn&#39;t bother to do so in this program, if an iterator were to be 
+used to access and display the elements in the list following the invocation of 
+the <b>fillIt</b> method, the result would be as shown below: </p>
+<p><b>Joe Bill Tom JOE BILL TOM</b> </p>
+<p>As you can see, this is the same as the order in which the elements are added 
+to the list. The first element is added to the list at index value 0 and the 
+sixth element is added to the list at index value 5. </p>
+<h3><a name="Sort_the_list">Sort the list</a> </h3>
+<p>The code shown in <a href="#Listing_4">Listing 4</a> is new to this chapter. This code uses the <b>sort</b> 
+method of the <b>Collections</b> class, along with a <b>Comparator</b> object to 
+sort the contents of the list.</p>
+
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. Sort the list.</p>
+<pre>    Collections.sort((List)ref, new TheComparator());
+</pre>
+</div>
+<!--``2-->
+<blockquote><em>The sort method expects to receive an incoming parameter of type
+<strong>List</strong>. Therefore, it was necessary to cast the reference from 
+type <strong>Collection</strong> to type <strong>List</strong>.</em>
+</blockquote>
+<h3><a name="A_very_important_point">A very important point</a> </h3>
+<p>Unlike the programs in previous chapters that simply extracted the 
+contents of the collection into an array and sorted the array, this code 
+actually rearranges the contents of the list according to the sorting rules. </p>
+<blockquote><i>
+(The programs in previous chapters that sorted the array did not rearrange the 
+contents of the list. Only the contents of the array were rearranged.)</i> 
+</blockquote>
+<p>Thus, the relationship between an element in the list and the index 
+associated with that element can change as a result of the sorting operation 
+shown in <a href="#Listing_4">Listing 4</a>. </p>
+<p>Following the sort, when an iterator is used to access the elements, the 
+elements will be returned by the iterator in the newly-sorted order. </p>
+
+
+
+<h2>
+<a name="The_Collections_class">
+The Collections class</a></h2>
+<p>Despite the similarity of the names, the <b>Collections</b> class 
+is different from the <b>Collection</b> interface. Here is part of what 
+Oracle has to say about the <b>Collections</b> class: </p>
+<blockquote>
+	<i>&quot;This class consists exclusively of static methods that operate on or 
+	return collections. It contains polymorphic algorithms that operate on 
+	collections, &quot;wrappers&quot;, which return a new collection backed by a specified 
+	collection, and a few other odds and ends.&quot;</i></blockquote>
+<h3><a name="The_sort_method">The sort method</a> </h3>
+<p>The <b>Collections</b> class provides a large number of very interesting and 
+useful methods, such as <b>binarySearch</b>, <b>copy</b>, <b>reverse</b>, and <b>
+reverseOrder</b>. <i>(The reverseOrder method will be examined in the next 
+chapter.)</i> </p>
+<p>One of the static methods of the <b>Collections</b> class is the <b>sort</b> 
+method. One overloaded version of the <b>sort</b> method can be used to sort a list into 
+the <i>natural ordering</i> of its elements. Another overloaded version sorts a list 
+according to the order induced by a <strong>Comparator</strong>. </p>
+<p>Here is part of what Oracle has to say about this second version of the <b>
+sort </b>method that uses a <b>Comparator</b>: </p>
+<blockquote>
+	<b><i>public static void sort(List list, Comparator c)</i></b> <i>&quot;Sorts the specified list according to the order induced by the 
+	specified comparator. All elements in the list must be mutually comparable 
+	using the specified comparator ...</i>
+</blockquote>
+<blockquote>
+	<i>The specified list must be modifiable, but need not be resizable. This 
+	implementation dumps the specified list into an array, sorts the array, and 
+	iterates over the list resetting each element from the corresponding 
+	position in the array. This avoids the n2 log(n) performance that would 
+	result from attempting to sort a linked list in place.&quot;</i></blockquote>
+<h3><a name="Also_uses_an_array">Also uses an array</a> </h3>
+<p>I find it interesting that the <b>sort</b> method uses an array as an 
+intermediary in the sorting process. However, the difference between this 
+approach and the approach involving arrays shown in previous chapters is given by 
+the following excerpt from the above quotation: </p>
+<blockquote>
+	<i>&quot;iterates over the list resetting each element from the corresponding 
+	position in the array&quot;</i></blockquote>
+<p>In other words, after sorting the array, the <b>sort</b> method uses the 
+sorted results in the array to rearrange the positions of the elements in the 
+list, resulting in a sorted list. </p>
+<h3><a name="A_flexible_approach_to_sorting">A flexible approach to sorting</a> 
+</h3>
+<p>Thus, the <b>sort</b> method of the <b>Collections</b> class can be used to 
+sort the elements in a list using whatever set of comparison rules you program 
+into the <b>compare</b> method of the <b>Comparator</b> object. Furthermore, it 
+doesn&#39;t matter how the list is actually implemented so long as it properly 
+implements the <b>List</b> interface. </p>
+<h2><a name="The_Comparator">The Comparator</a> </h2>
+<p>The code in <a href="#Listing_5">Listing 5</a> shows the class from which the <b>Comparator</b> object 
+was instantiated. </p>
+
+
+<!--``1List05-->
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. The 
+				Comparator.</p>
+<pre>class TheComparator implements Comparator, Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    int result = ((String)o1).compareTo(((String)o2));
+    return result*(-1);
+  }//end compare()
+}//end class TheComparator
+</pre>
+</div>
+<!--``2-->
+
+
+<p>I have presented and explained this class in previous chapters, so I won&#39;t 
+discuss it in detail again here. Suffice it for now to say that an object 
+instantiated from this class will induce the list to be sorted into <i>reverse 
+natural order</i>. </p>
+<h2><a name="Display_the_sorted_list">Display the sorted list</a> </h2>
+<p>The code in <a href="#Listing_6">Listing 6</a> gets and uses an iterator to display the contents of 
+the sorted list. </p>
+
+
+<!--``1List06-->
+	<div class="a">
+		<p>
+<a name="Listing_6">Listing 6</a>. Display the 
+				sorted list.</p>
+<pre>    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+
+
+<p>The output produced by the code in <a href="#Listing_6">Listing 6</a> is shown below: </p>
+<p><b>Tom TOM Joe JOE Bill BILL</b> </p>
+<p>As you can see, this is <i>reverse natural order</i> as induced by the <b>
+Comparator</b> object. </p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a>. 
+Paste the code into your Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter, I taught you how to use the sort method of the <b>
+Collections</b> class along with a <b>Comparator</b> object to sort the contents 
+of a list. </p>
+<p>By using this approach, you can sort the contents of list according to any 
+set of comparison rules that you can program into the <b>compare</b> method of 
+the <b>Comparator</b> object. </p>
+<p>Furthermore, the ability to sort the list is independent of the actual 
+implementation of the list, so long as the list properly implements the <b>List</b> 
+interface. For example, the same <b>Comparator</b> object <i>(and the same code)</i> 
+can be used to sort an <b>ArrayList</b>, a <b>LinkedList</b>, or a <b>Vector</b>, 
+producing the same results regardless of which class the list object is 
+instantiated from.</p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter, I will show you how to use a <b>Comparator</b> created by 
+the <b>reverseOrder</b> method of the <b>Collections</b> class to sort a list 
+into <i>reverse natural order</i>. I will also show you how to use the <b>
+reverse</b> method of the <b>Collections</b> class to reverse the order of the 
+elements in a list. </p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4130: The Comparator Interface, Part 5</li>
+					<li>File: Java4130.htm
+</li>
+					<li>Published: 05/07/13</li>
+					<li>Revised: 04/21/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

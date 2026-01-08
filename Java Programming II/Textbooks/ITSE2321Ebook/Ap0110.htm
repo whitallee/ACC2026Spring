@@ -1,0 +1,1015 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0110</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0110: Extending classes, overriding methods, and polymorphic behavior</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap120{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap120
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap121{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap121
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    ((A)myVar).test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap122{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap122
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  abstract public void test();
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap123{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap123
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+abstract class Base{
+  abstract public void test();
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base</li>
+	<li>D. A</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap124{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap124
+
+class Worker{
+  void doIt(){
+    Base myVar = new Base();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+abstract class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base</li>
+	<li>D. A</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap125{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap125
+
+class Worker{
+  void doIt(){
+    Base myVar = new Base();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base</li>
+	<li>D. A</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap126{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap126
+
+class Worker{
+  void doIt(){
+    Base myVar = new Base();
+    ((A)myVar).test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base</li>
+	<li>D. A</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap127{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap127
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    ((A)myVar).test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base</li>
+	<li>D. A</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap128{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap128
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base</li>
+	<li>D. A B</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap129{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap129
+
+class Worker{
+  void doIt(){
+    Base myVar = new A();
+    myVar.test();
+    myVar = new B();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+
+class B extends Base{
+  public void test(){
+    System.out.print(&quot;B &quot;);
+  }//end test()
+}//end class B
+</pre>
+
+</div>
+
+
+
+
+
+
+
+<p><a href="#answer10">Answer and Explanation</a> </p>
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0110: Extending classes, 
+				overriding methods, and polymorphic behavior</li>
+				<li>File: Ap0110.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/08/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>D. A B </p>
+<h3><strong>Explanation 10</strong></h3>
+<p><strong>Another illustration of simple polymorphic behavior </strong></p>
+<p>In this program, two classes named <strong>A</strong> and <strong>B</strong> 
+extend the class named <b>Base</b>, 
+each overriding the method named <b>test</b> to produce different behavior. <em>
+(Typically, overridden methods in different classes will produce different 
+behavior, even though they have the same names.)</em> </p>
+<p><strong>Behavior appropriate for object on which method is called </strong>
+</p>
+<p>In other words, the behavior of the method named <b>test</b>, when called on 
+a reference to an object of type <strong>A</strong>, is different from the 
+behavior of the method named <b>test</b> when called on a reference to an object 
+of type <strong>B</strong>. </p>
+<p><strong>The method definitions</strong> </p>
+<p>The definitions of the two classes named <strong>A</strong> and <strong>B</strong>, 
+along with the two versions of the overridden method named <b>test</b> are shown in the following fragment.
+</p>
+<div class="a">
+				<pre>class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+
+class B extends Base{
+  public void test(){
+    System.out.print(&quot;B &quot;);
+  }//end test()
+}//end class B</pre>
+</div>
+	<p><strong>Store a subclass object&#39;s reference as a superclass type </strong>
+</p>
+<p>The program declares a reference variable of type <b>Base</b>, instantiates a 
+new object of the class named <b>A</b>, and assigns that object&#39;s reference to 
+the reference variable of type <b>Base</b>. Then it calls the method named <b>
+test</b> on that reference as shown in the following fragment. </p>
+<div class="a">
+				<pre>    Base myVar = new A();
+    myVar.test();</pre>
+</div>
+	<p><strong>Polymorphic behavior applies </strong></p>
+<p>Simple polymorphic behavior causes the overridden version of the method named <b>test</b>, defined in the class named <b>A</b>, <em>(as opposed to the 
+versions defined in class <strong>Base</strong> or class <strong>B</strong>)</em> 
+to be executed. This causes the letter <strong>A</strong> followed by a space 
+character to be displayed on the standard output device. </p>
+<p><strong>Store another subclass object&#39;s reference as superclass type </strong>
+</p>
+<p>Then the program instantiates a new object from the class named <b>B</b>, and 
+assigns that object&#39;s reference to the same reference variable, overwriting the 
+reference previously stored there. <em>(This causes the object whose reference 
+was previously stored in the reference variable to become eligible for garbage 
+collection in this case.) </em></p>
+<p>Then the program calls the method named <b>test</b> on the reference as shown 
+in the following fragment. </p>
+<div class="a">
+				<pre>    myVar = new B();
+    myVar.test();</pre>
+</div>
+<p><strong>Polymorphic behavior applies again </strong> </p>
+<p>This time, simple polymorphic behavior causes the overridden version of the 
+method named <b>test</b>, defined in the class named <strong>B</strong>, <em>(as opposed to the 
+versions defined in class <strong>Base</strong> or class <strong>A</strong>) </em> 
+to be executed. This 
+causes the letter <strong>B</strong> followed by a space character to be displayed on the 
+standard output device. </p>
+<p><strong>Once again, what is runtime polymorphic behavior?</strong> </p>
+<p>With runtime polymorphic behavior, the method selected for execution is 
+based, not on the type of the reference variable holding the reference to the 
+object, but rather on the actual class from which the object was instantiated.
+</p>
+<p>If the method was properly overridden, the behavior exhibited by the 
+execution of the method is appropriate for an object of the class from which the 
+object was instantiated. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>D. A </p>
+<h3><strong>Explanation 9</strong></h3>
+<p><strong>Compiles and executes successfully </strong></p>
+<p>This program compiles and executes successfully causing the version of the 
+method named <b>test</b>, which is overridden in the class named <strong>A</strong> 
+to be executed. That overridden method is shown in the following fragment. </p>
+<div class="a">
+				<pre>class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+</div>
+	<p><strong>So, what is the issue here?</strong> </p>
+<p>The purpose of this program is to determine if you understand polymorphic 
+behavior and the role of downcasting. Consider the following fragment taken from 
+the program in <a href="#question08">Question 8</a>.</p>
+<div class="a">
+				<pre>    Base myVar = new A();
+    ((A)myVar).test();</pre>
+</div>
+	<p><strong>The downcast is redundant</strong> </p>
+<p>As you learned in the discussion of <a href="#question08">Question 8</a>, the 
+downcast isn&#39;t required, and it has no impact on the behavior of the program in
+<a href="#question08">Question 8</a>. </p>
+<p>This program behaves exactly the same with the second statement in the above 
+fragment replaced by the following statement, which does not contain a downcast.
+</p>
+<div class="a">
+				<pre>    myVar.test();</pre>
+</div>
+	<p>Again, you need to know when downcasting is required, when it isn&#39;t 
+	required, and to make use of that knowledge to downcast appropriately. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>D. A </p>
+<h3><strong>Explanation 8</strong></h3>
+<p><strong>Compiles and executes successfully </strong></p>
+<p>This program compiles and executes successfully causing the version of the 
+method named <b>test</b>, which is overridden in the class named <strong>A</strong> 
+to be executed. That overridden method is shown in the following fragment. </p>
+<div class="a">
+				<pre>class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+</div>
+	<p><strong>So, what is the issue here?</strong> </p>
+<p>The purpose of this program is to determine if you understand polymorphic 
+behavior and the role of downcasting, as shown in the following fragment. </p>
+<div class="a">
+				<pre>    Base myVar = new A();
+    ((A)myVar).test();</pre>
+</div>
+	<p>This would be a simple case of polymorphic behavior were it not for the 
+	downcast shown in the above fragment. </p>
+<p><strong>The downcast is redundant </strong></p>
+<p>Actually, the downcast was placed there to see if you could determine that it 
+is redundant. It isn&#39;t required, and it has no impact on the behavior of this 
+program. This program would behave exactly the same if the second statement in 
+the above fragment were replaced with the following statement, which does not 
+contain a downcast. </p>
+<div class="a">
+				<pre>    myVar.test();</pre>
+</div>
+	<p>You need to know when downcasting is required, when it isn&#39;t required, 
+	and to make use of that knowledge to downcast appropriately. </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>Storing a reference as a superclass type
+</strong></p>
+<p>You can store an object&#39;s reference in any reference variable whose declared 
+type is a superclass of the actual class from which the object was instantiated.
+</p>
+<p><strong>May need to downcast later </strong> </p>
+<p>Later on, when you attempt to make use of that reference, you may need to 
+downcast it. Whether or not you will need to downcast will depend on what you 
+attempt to do. </p>
+<p><strong>In order to call a method ... </strong> </p>
+<p>For example, if you attempt to call a method on the reference, but that 
+method is not defined in or inherited into the class of the reference variable, 
+then you will need to downcast the reference in order to call the method on that 
+reference. </p>
+<p><b>Class Base defines method named test</b> </p>
+<p>This program defines a class named <b>Base</b> that defines a method named <b>
+test</b>. </p>
+<p><b>Class A extends Base and overrides test</b> </p>
+<p>The program also defines a class named <b>A</b> that extends <b>Base</b> and 
+overrides the method named <b>test</b> as shown in the following fragment. </p>
+<div class="a">
+				<pre>class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base
+
+class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+</div>
+<p><b>A new object of the class Base</b> </p>
+<p>The program instantiates a new object of the class <b>Base</b> and stores a 
+reference to that object in a reference variable of type <b>Base</b>, as shown 
+in the following fragment. </p>
+<div class="a">
+				<pre>    Base myVar = new Base();
+    ((A)myVar).test();</pre>
+</div>
+<p><strong>Could call test directly on the reference </strong> </p>
+<p>Having done this, the program could call the method named <b>test</b> 
+directly on the reference variable using a statement such as the following, 
+which is not part of this program. </p>
+<div class="a">
+				<pre>    myVar.test();</pre>
+</div>
+<p>This statement would cause the version of the method named <b>test</b> 
+defined in the class named <b>Base</b> to be called, causing the word <b>Base</b> 
+to appear on the standard output device. </p>
+<p><strong>This downcast is not allowed </strong> </p>
+<p>However, this program attempts to cause the version of the method named <b>
+test</b> defined in the class named <b>A</b> to be called, by downcasting the 
+reference to type <strong>A</strong> before calling the method named <b>test</b>. This is shown 
+in the following fragment. </p>
+<div class="a">
+				<pre>    ((A)myVar).test();</pre>
+</div>
+<p><strong>A runtime error occurs </strong> </p>
+<p>This program compiles successfully. However, the downcast shown above causes 
+the following runtime error to occur under JDK 1.3: </p>
+<div class="a">
+				<pre>Exception in thread "main" java.lang.ClassCastException: Base
+        at Worker.doIt(Ap126.java:22)
+        at Ap126.main(Ap126.java:15)
+</pre>
+</div>
+<p><strong>What you can do </strong> </p>
+<p>You can store an object&#39;s reference in a reference variable whose type is a 
+superclass of the class from which the object was originally instantiated. 
+Later, you can downcast the reference back to the type <em>(class) </em>from which the 
+object was instantiated. </p>
+<p><strong>What you cannot do </strong> </p>
+<p>However, you cannot downcast an object&#39;s reference to a subclass of the class 
+from which the object was originally instantiated. </p>
+<p>Unfortunately, the compiler is unable to detect an error of this type. The 
+error doesn&#39;t become apparent until the exception is thrown at runtime.</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. Base </p>
+<h3><strong>Explanation 6</strong></h3>
+<p><strong>Totally straightforward code</strong></p>
+<p>This rather straightforward program instantiates an object of the class named <b>Base</b> and assigns that object&#39;s reference to a reference variable of the 
+type <b>Base</b>  as shown in the <a name="following_fragment">following fragment</a>. </p>
+<div class="a">
+				<pre>    Base myVar = new Base();
+    myVar.test();</pre>
+</div>
+	<p>Then it calls the method named <b>test</b> on the reference variable. </p>
+<p><b>Class Base defines the method named test</b> </p>
+<p>The class named <b>Base</b> contains a concrete definition of the method 
+named <b>test</b>  as shown in the following fragment. This is the method that is 
+called by the code shown in the <a href="#following_fragment">above fragment</a>. </p>
+<div class="a">
+				<pre>class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);};
+}//end class Base</pre>
+</div>
+	<p><strong>Class A is just a smokescreen</strong> </p>
+<p>The fact that the class named <b>A</b> extends the class named <b>Base</b>, 
+and overrides the method named <b>test</b>, as shown in the following fragment, 
+is of absolutely no consequence in the behavior of this program. Hopefully you 
+understand why this is so. If not, then you still have a great deal of studying 
+to do on Java inheritance. </p>
+<div class="a">
+				<pre>class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+</div>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><b>Cannot instantiate an abstract class
+</b></p>
+<p>This program defines an <b>abstract</b> class named <b>Base</b>. Then it 
+violates one of the rules regarding <b>abstract</b> classes, by attempting to 
+instantiate an object of the <b>abstract</b> class as shown in the following 
+code fragment. </p>
+<div class="a">
+				<pre>    Base myVar = new Base();</pre>
+</div>
+<p>The program produces the following compiler error under JDK 1.3: </p>
+<div class="a">
+				<pre>Ap124.java:19: Base is abstract; cannot be instantiated
+    Base myVar = new Base();
+</pre>
+</div>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>C. A </p>
+<h3><strong>Explanation 4</strong></h3>
+<p><b>An abstract class with an abstract method </b></p>
+<p>This program illustrates the use of an <b>abstract</b> class containing an <b>
+abstract</b> method to achieve <em>polymorphic behavior</em>. </p>
+<p>The following code fragment shows an <b>abstract</b> class named <b>Base</b> 
+that contains an <b>abstract</b> method named <b>test</b>. </p>
+<div class="a">
+				<pre>abstract class Base{
+  abstract public void test();
+}//end class Base</pre>
+</div>
+	<p><b>Extending abstract class and overriding abstract method </b></p>
+<p>The class named <b>A</b>, shown in the following fragment extends the <b>
+abstract</b> class named <b>Base</b> and overrides the <b>abstract</b> method 
+named <b>test</b>. </p>
+<div class="a">
+				<pre>class A extends Base{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+</div>
+	<p><strong>Can store a subclass reference as a superclass type </strong></p>
+<p>Because the class named <b>A</b> extends the class named <b>Base</b>, a 
+reference to an object instantiated from the class named <strong>A</strong> can 
+be stored in a reference variable of the declared type <b>Base</b>. No cast is required in this 
+case. </p>
+<p><strong>Polymorphic behavior </strong></p>
+<p>Furthermore, because the class named <b>Base</b> contains the method named <b>
+test</b>, <em>(as an </em><b><em>abstract</em></b><em> method)</em>, when the 
+method named <b>test</b> is called on a reference to an object of the class 
+named <b>A</b>, stored in a reference variable of type <b>Base</b>, the <em>
+overridden</em> version of the method as defined in the class named <b>A</b> will 
+actually be called. This is polymorphic behavior. </p>
+<p><em>(Note, however, that this example does little to illustrate the power of 
+polymorphic behavior because only one class extends the class named <strong>Base</strong> 
+and only one version of the abstract method named <strong>test</strong> exists. 
+Thus, the system is not required to select among two or more overridden versions 
+of the method named <strong>test</strong>.)</em></p>
+<p><strong>The important code </strong></p>
+<p>The following code fragment shows the instantiation of an object of the class 
+named <b>A</b> and the assignment of that object&#39;s reference to a reference 
+variable of type <b>Base</b>. Then the fragment calls the method named <b>test</b> 
+on the reference variable. </p>
+<div class="a">
+				<pre>    Base myVar = new A();
+    myVar.test();</pre>
+</div>
+	<p>This causes the overridden version of the method named <b>test</b>, shown in 
+the following fragment, to be called, which causes the letter <strong>A</strong> 
+to be displayed on the standard output device. </p>
+<div class="a">
+				<pre>  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()</pre>
+</div>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 3</strong></h3>
+<p><strong>Classes can be final or abstract, but not both </strong></p>
+
+<p>A class in Java may be declared <strong>final</strong>. A class may also be 
+declared <strong>abstract</strong>. A class cannot be declared both <strong>
+final</strong> and <strong>abstract</strong>. </p>
+<p><strong>Behavior of final and abstract classes </strong></p>
+<p>A class that is declared <b>final</b> cannot be extended. A class that is declared 
+<b>abstract</b> cannot be instantiated. Therefore, it must be extended to be useful. </p>
+<p>An <b>abstract</b> class is normally intended to be extended. </p>
+<p><b>Methods can be final or abstract, but not both </b> </p>
+<p>A method in Java may be declared <b>final</b>. A method may also be declared 
+<b>abstract</b>. However, a method cannot be declared both <b>final</b> and <b>abstract</b>. </p>
+<p><b>Behavior of final and abstract methods </b> </p>
+<p>A method that is declared <b>final</b> cannot be overridden. A method that is 
+declared <b>abstract</b> must be overridden to be useful. </p>
+<p>An <b>abstract</b> method doesn&#39;t have a body. </p>
+<p><b>Abstract classes and methods </b> </p>
+<p>A class that contains an <b>abstract</b> method must itself be declared <b>abstract</b>. 
+However, an <b>abstract</b> class is not required to contain <b>abstract</b> methods. </p>
+<p><b>Failed to declare the class abstract</b> </p>
+<p>In this program, the class named <b>Base</b> contains an <b>abstract</b> method 
+named <b>test</b>, but the class is not declared <b>abstract</b> as required. </p>
+<div class="a">
+				<pre>class Base{
+  abstract public void test();
+}//end class Base</pre>
+</div>
+<p>Therefore, the program produces the following compiler error under JDK 1.3:
+</p>
+<div class="a">
+				<pre>Ap122.java:24: Base should be declared abstract; 
+it does not define test in Base
+class Base{
+</pre>
+</div>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>C. A </p>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>If you missed this ...</strong></p>
+
+<p>If you missed this question, you didn&#39;t pay attention to the explanation for
+<a href="#question01">Question 1</a>. </p>
+<p><strong>Define a method in a subclass</strong> </p>
+<p>This program defines a subclass named <b>A</b> that extends a superclass 
+named <b>Base</b>. A method named <b>test</b> is defined in the subclass named
+<strong>A</strong> but is not defined in any superclass of the class named <b>A</b>. </p>
+<p><strong>Store a reference as a superclass type </strong></p>
+<p>The program declares a reference variable of the superclass type, and stores 
+a reference to an object of the subclass in that reference variable as shown in 
+the following code fragment. </p>
+<div class="a">
+				<pre>    Base myVar = new A();</pre>
+</div>
+	<p><strong>Downcast and call the method </strong></p>
+<p>Then the program calls the method named <b>test</b> on the reference stored 
+as the superclass type, as shown in the following fragment. </p>
+<div class="a">
+				<pre>    ((A)myVar).test();</pre>
+</div>
+	<p>Unlike the program in <a href="#question01">Question 1</a>, the reference 
+	is downcast to the true type of the object before calling the method named
+	<b>test</b>. As a result, this 
+program does not produce a compiler error. </p>
+<p><strong>Why is the cast required? </strong></p>
+<p>As explained in <a href="#question01">Question 1</a>, it is allowable to 
+store a reference to a subclass object in a variable of a superclass type. Also, 
+as explained in <a href="#question01">Question 1</a>, it is not allowable to 
+directly call, on that superclass reference, a method of the subclass object 
+that is not defined in or inherited into the superclass. </p>
+<p>However, such a call is allowable if the programmer purposely downcasts the 
+reference to the true type of the object before calling the method. </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 1</strong></h3>
+<p><strong>Define a method in a subclass</strong></p>
+
+<p>This program defines a subclass named <b>A</b> that extends a superclass 
+named <b>Base</b>. A method named <b>test</b>, is defined in the subclass named
+<b>A</b>, which is not defined in any superclass of the class named <strong>A</strong>. </p>
+<p><strong>Store a reference as superclass type </strong> </p>
+<p>The program declares a reference variable of the superclass type, and stores 
+a reference to an object of the subclass in that reference variable as shown in 
+the following code fragment. </p>
+<div class="a">
+				<pre>    Base myVar = new A();</pre>
+</div>
+	
+<p>Note that no cast is required to store a reference to a subclass object in a 
+reference variable of a superclass type. The required type conversion happens 
+automatically in this case. </p>
+<p><strong>Call a method on the reference </strong> </p>
+<p>Then the program attempts to call the method named <b>test</b> on the 
+reference stored as the superclass type, as shown in the following fragment. 
+This produces a compiler error. </p>
+<div class="a">
+				<pre>    myVar.test();</pre>
+</div>
+<p><strong>The reason for the error </strong> </p>
+<p>It is allowable to store a reference to a subclass object in a variable of a 
+superclass type. However, it is not allowable to directly call, <em>(on that 
+superclass reference)</em>, a method of the subclass object that is not defined in or 
+inherited into the superclass. </p>
+<p>The following error message is produced by JDK 1.3. </p>
+<div class="a">
+				<pre>Ap120.java:18: cannot resolve symbol
+symbol  : method test  ()
+location: class Base
+    myVar.test();
+</pre>
+</div>
+<p><strong>The solution is ... </strong> </p>
+<p>This error can be avoided by casting the reference to type <strong>A</strong> 
+before calling the method as shown below: </p>
+<div class="a">
+				<pre>    ((A)myVar).test();</pre>
+</div>
+
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

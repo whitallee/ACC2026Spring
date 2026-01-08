@@ -1,0 +1,881 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0150.htm</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0150: A Gentle Introduction to Java Data Types</h1>
+
+
+
+<h1 class="style1">Table of Contents</h1> 
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Discussion">Discussion</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1 class="auto-style3"> <a name="Preface"></a>Preface</h1>
+<h2> <a name="General">General</a></h2>
+
+
+
+
+
+<p>This chapter is part of an Ebook designed to help you learn 
+to program computers. It introduces Java data types. </p>
+<blockquote><em>Hopefully, you have already studied </em>
+<a href="http://programmedlessons.org/Java9/chap08/ch08_01.html"><em>Kjell 
+Chapter 8</em></a><em>. If not, I strongly recommend that you do so now. Even if 
+you have studied that chapter, I recommend that you review that chapter 
+including the
+<a href="http://programmedlessons.org/Java9/chap08/chap08quiz.html">Quiz</a>, 
+the <a href="http://programmedlessons.org/Java9/chap08/progExercises08.html">
+Exercises</a>, and the
+<a href="http://programmedlessons.org/Java9/chap08/flashCards08.html">Flash 
+Cards</a> before continuing with this chapter.</em></blockquote>
+<h2><a name="Prerequisites">Prerequisites</a></h2>
+<p>The minimum prerequisites for understanding the material in these chapters 
+include:</p>
+<ul>
+	<li>An understanding of algebra.</li>
+	<li>An understanding of all of the material covered in the earlier chapters 
+	in this Ebook.</li>
+</ul>
+<h2> <a name="Viewing_tip">Viewing tip</a></h2>
+<p> I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+while you are reading about them.</p>
+<h3> <a name="Figures">Figures</a></h3>
+<ul>
+	<li><a href="#Figure_1">Figure 1</a>. Range of values for whole-number types. </li>
+	<li><a href="#Figure_2">Figure 2</a>. Definition of floating point. </li>
+	<li><a href="#Figure_3">Figure 3</a>. Different ways to represent 623.57185. </li>
+	<li><a href="#Figure_4">Figure 4</a>. Relationships between multiplicative factors and exponentiation. </li>
+	<li><a href="#Figure_5">Figure 5</a>. Other ways to represent the same information. </li>
+	<li><a href="#Figure_6">Figure 6</a>. Still other ways to represent 623.57185.</li>
+	<li><a href="#Figure_7">Figure 7</a>. Range of values for floating-point types. </li>
+	<li><a href="#Figure_8">Figure 8</a>. Example of the use of the boolean type. </li>
+</ul>
+<h1 class="auto-style3"> <a name="Discussion">Discussion</a></h1>
+<h2><a name="Introduction">Introduction</a></h2>
+<h3>Type-sensitive languages</h3>
+<p>Java and some other modern programming languages make heavy use of a concept that we refer to as 
+<em>type</em>, or <em>data type</em>.</p>
+<p>We refer to those languages as <em>type-sensitive languages</em>.
+Not all languages are type-sensitive languages. In particular, some
+languages hide the concept of type from the programmer and
+automatically deal with type issues behind the scenes.</p>
+<h3>So, what do we mean by type?</h3>
+<p><em>(Also see Kjell
+<a href="https://programmedlessons.org/Java9/chap08/ch08_02.html">Data Types</a>.)</em></p>
+<p>One analogy that comes to my mind is international currency. For
+example, many years ago, I spent a little time in Japan and quite a
+long time on an island named Okinawa <em>(Okinawa is now part of Japan)</em>. </p>
+<h3>Types of currency</h3>
+<p>At that time, as now, the type of currency used in the United States
+was the dollar. The type of currency used in Japan was the yen, and the
+type of currency used on the island of Okinawa was also the yen.
+However, even though two of the currencies had the same name, they
+were different types of currency, as determined by the value
+relationships among them.</p>
+<h3>The exchange rate
+
+</h3>
+<p>As I recall, at that time, the exchange rate between the Japanese
+yen and the U.S. dollar was 360 yen for each dollar. The exchange rate
+between the Okinawan yen and the U.S. dollar was 120 yen for each dollar.
+This suggests that the exchange rate between the Japanese yen and the
+Okinawan yen would have been 3 Japanese yen for each Okinawan yen.</p>
+<h3>Analogous to different types of data</h3>
+<p>So, why am I telling you this? I am telling you this to illustrate
+the concept that different types of currency are roughly analogous to
+different data types in programming.</p>
+<h3>Purchasing transactions were type sensitive</h3>
+<p>In particular, because there were three different types of currency involved,
+the differences in the types had to be taken into account in any
+purchasing transaction to determine the price in that particular
+currency. In other words, the purchasing process was sensitive to the
+type of currency being used for the purchase <em>(type sensitive)</em>.
+
+</p>
+<h3>Different types of data</h3>
+<p>Type-sensitive programming languages deal with different types of data.  Some data types 
+such at type <strong>int</strong> involve whole numbers only <em>(no fractional parts are allowed)</em>. Other data types such as <strong>double</strong> involve numbers with fractional parts.
+<em>(See Kjell <a href="https://programmedlessons.org/Java9/chap08/ch08_06.html">
+Numeric Primitive Data Types</a></em>.</p>
+<p>Some data types conceptually have nothing to do with numeric values, but deal only with the concept of true or false 
+<em>(<strong>boolean</strong>)</em> or with the concept of the letters of the alphabet and the punctuation characters
+<em>(<strong>char</strong>)</em>.
+
+<em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap08/ch08_15.html#boolean">Primitive Data Type boolean</a> and Kjell 
+<a href="http://programmedlessons.org/Java9/chap08/ch08_13.html#char">The char Primitive Data Type</a>.)</em></p>
+<h3>Type specification</h3>
+<p>For every different type of data used with a particular programming
+language, there is a specification somewhere that defines important
+characteristics of the type including the following:</p>
+<ol>
+	<li>What is the set of all possible data values that can be stored in an instance of the type 
+	<em>(we will learn some other names for instance later)</em>?</li>
+	<li>Once
+you have an instance of the type, what are the operations that you can
+perform on that instance alone, or in combination with other instances?</li>
+</ol>
+<h3>What do I mean by an instance of a type?</h3>
+<p>Think of the type specification as being analogous to the plan or
+blueprint for a model airplane. Assume that you build three model
+airplanes from the same set of plans. You will have created three
+<em>instances</em> of the plans.</p>
+<p>We might say that an <em>instance</em> is the physical manifestation of a plan or a type.
+
+</p>
+<h3>Using mixed types</h3>
+<p>Somewhat secondary to the specifications for the different types,
+but also extremely important, is a set of rules that define what
+happens when you perform an operation involving mixed types <em>(such as making a purchase using some yen currency in combination with some dollar currency)</em>.</p>
+<h3>The short data type</h3>
+<p>For example, in addition to the integer type <strong>int</strong>, there is a data type in Java known as 
+<strong>short</strong>.  The <strong>short</strong> type is also an integer 
+type. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap08/ch08_07.html">More Bits for More Range</a>.)</em></p>
+<p>If you have an instance of the <strong>short</strong> type, the set
+of all possible values that you can store in that instance is the set
+of all the whole numbers ranging from -32,768 to +32,767.</p>
+<p>This constitutes a set of 65,536 different values, including the
+value zero. No other value can be stored in an instance of the type <strong>short</strong>.  For example, you cannot store the value 35,000 in an instance of the type 
+<strong>short</strong> in Java.  If you need to store that value, you will need to use some type other than 
+<strong>short</strong>. 
+<em>(Also see </em> <a href="http://programmedlessons.org/Java9/chap08/ch08_06.html">
+<em>Numeric Primitive Data Types</em></a><em> 
+in Kjell.)</em></p><h3>Similar to an odometer
+
+</h3>
+<p>This is somewhat analogous to the odometer in your car <em>(the thing that records how many miles the car has been driven)</em>.
+For example, depending on the make and model of car, there is a
+specified set of values that can appear in the odometer. The value that
+appears in the odometer depends on how many miles your car has been
+driven.</p>
+<p>It is fairly common for an odometer to be able to store and to
+display the set of all positive values ranging from zero to 99999. If
+your odometer is designed to store that set of values and if you drive
+your car more than 99999 miles, it is likely that the odometer will
+roll over and start back at zero after you pass the 99999-mile mark. In
+other words, that particular odometer does not have the ability to
+store a value of 100,000 miles. Once you pass the 99999-mark, the data
+stored in the odometer is corrupt.</p>
+<h3>Now let's return to the Java type named short</h3>
+<p>Assume that you have two instances of the type <strong>short</strong> in a Java program.  What are the operations that you can perform on those instances?  For example:</p>
+<ul>
+	<li>You can add them together.
+    </li>
+	<li>You can subtract one from the other.
+    </li>
+	<li>You can multiply one by the other.
+    </li>
+	<li>You can divide one by the other.
+    </li>
+	<li>You can compare one with the other to determine which is algebraically larger.</li>
+</ul>
+<p>There are some other operations that are allowed as well. In fact,
+there is a well-defined set of operations that you are allowed to
+perform on those instances. That set of operations is defined in the
+specification for the type <strong>short</strong>.
+
+</p>
+<h3>What if you want to do something different?
+
+</h3>
+<p>However, if you want to perform an operation that is not allowed by
+the type specification, then you will have to find another way to
+accomplish that purpose.
+</p>
+<p>For example, some programming languages allow you to raise whole-number types to a power 
+<em>(examples:  four squared, six cubed, nine to the fourth power, etc.)</em>.  However, that operation is not allowed by the Java specification for the type 
+<strong>short</strong>.  If you need to do that operation with a data value of the Java 
+<strong>short</strong> type, you must find another way to do it.</p>
+<h3>Two major categories of type
+
+</h3>
+<p>Java data types can be subdivided into two major categories:
+
+    </p>
+<ul>
+	<li>Primitive types
+    </li>
+	<li>User-defined or reference types</li>
+</ul>
+<p>These categories are discussed in more detail in the following sections. <em>
+(Also 
+see a related topic in </em>
+<a href="http://programmedlessons.org/Java9/chap08/ch08_05.html"><em>Kjell</em></a><em>.)</em></p>
+<h2><a name="Primitive_types">Primitive types</a></h2>
+<h3 class="auto-style4">Java is an extensible programming language</h3>
+<p>What this means is that there is a core component to the language that
+is always available.  Beyond this, individual programmers can extend
+the language to provide new capabilities.  The primitive types discussed
+in this section are the types that are part of the core language. 
+A later section will discuss user-defined types that become available when
+a programmer extends the language. 
+</p>
+<blockquote><em>If you have a background in C++, note that unlike C++, Java does not allow programmers to create 
+overloaded operators for the primitive types. (If you don't have a background in 
+C++, don't worry about it. You will learn more about 
+overloading in future chapters of this Ebook.) (Also see Kjell 
+	<a href="http://programmedlessons.org/Java9/chap44/ch44_11.html">+ Operator</a>.)</em></blockquote>
+<h3>Subdivision 
+</h3>
+<p>It seems that when teaching programming, I constantly find myself dividing
+topics into sub-topics.  I am going to subdivide the topic of Primitive
+Types into four categories:</p>
+<ul>
+  <li>Whole-number types
+  </li>
+  <li>Floating-point types
+  </li>
+  <li>Character types
+  </li>
+  <li>Boolean types 
+  </li>
+</ul>
+<p>Hopefully this categorization will make it possible for me to explain these
+types in a way that is easier for you to understand. 
+</p>
+<h3><a name="WholeNumber_types_">Whole-number types </a>
+</h3>
+<p>The whole-number types, often called <em>integer</em> types, are relatively 
+easy to understand.  These are types that can be used to represent
+data without fractional parts. 
+</p>
+<h4>Applesauce and hamburger 
+</h4>
+<p>For example, consider purchasing applesauce and hamburger.  At
+the grocery store where I shop, I am allowed to purchase cans of applesauce
+only in whole-number or integer quantities. 
+</p>
+<h4>Can purchase integer quantities only 
+</h4>
+<p>For example, the grocer is happy to sell me one can of applesauce and
+is even happier to sell me 36 cans of applesauce.  However, she would
+be very unhappy if I were to open a can of applesauce in the store and
+attempt to purchase 6.3 cans of applesauce. 
+</p>
+<h4>Counting doesn't require fractional parts 
+</h4>
+<p>A count of the number of cans of applesauce that I purchase is somewhat
+analogous to the concept of whole-number data types in Java.  Applesauce
+is not available in fractional parts of cans <em>(at my grocery store)</em>. 
+</p>
+<h4>Fractional pounds of hamburger are available 
+</h4>
+<p>On the other hand, the grocer is perfectly willing to sell me 6.3 pounds
+of hamburger.  This is somewhat analogous to <em>floating-point data types</em>
+in Java. 
+</p>
+<h4>Accommodating applesauce and hamburger in a
+program<strong> </strong>
+</h4>
+<p>Therefore, if I were writing a program dealing with quantities of applesauce
+and hamburger, I might elect to use a whole number type to represent cans
+of applesauce and to use a floating-point type to represent pounds of hamburger. 
+</p>
+<h4>Different whole-number types 
+</h4>
+<p>In Java, there are five different whole-number types:
+</p>
+<ul>
+  <li>byte</li>
+  <li>short</li>
+  <li>int</li>
+  <li>long 
+  </li>
+	<li>char</li>
+</ul>
+<p><em>(The <strong>char</strong> type is a whole number type, but since it is not intended 
+to be used for arithmetic, I discuss it later as a character type. References in 
+subsequent paragraphs to four whole number types refer to the types in the list 
+above exclusive of the <strong>char</strong> type.)</em></p>
+<p>The four types differ primarily in terms of the range of values that they
+can accommodate and the amount of computer memory required to store instances
+of the types. 
+</p>
+<h4>Differences in operations? 
+</h4>
+<p>Although there are some subtle differences among the four whole-number types in terms of the
+operations that you can perform on them, I will defer a discussion of those
+differences until a more advanced chapter. <em>(For example some operations require
+instances of the <strong>byte</strong> and <strong>short</strong> types to be converted to
+type
+<strong>int</strong> before the operation takes place.) </em>
+</p>
+<h4>Algebraically signed values 
+</h4>
+<p>Other than type <strong>char</strong>, these types can be used to represent 
+algebraically signed values ranging from a specific negative value to a specific 
+positive value. Also, other than type <strong>char</strong>, there are no unsigned 
+whole-number primitive types in Java.</p>
+<blockquote>See the following 
+<a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">here</a>: By default, the int data type is a 32-bit signed two's complement integer, which has a minimum value of -2^31 and a maximum value of 2^31-1. In Java SE 8 and later, you can use the int data type to represent an unsigned 32-bit integer, which has a minimum value of 0 and a maximum value of 2^32-1. 
+<strong><em>Use the Integer class to use int data type as an unsigned integer.</em></strong> See the section The Number Classes for more information. Static methods like compareUnsigned, divideUnsigned etc have been added to the Integer class to support the arithmetic operations for unsigned integers.</blockquote>
+<h4>Range of the byte type 
+</h4>
+<p>For example, the <strong>byte</strong> type can be used to represent the set of
+whole numbers ranging from -128 to +127 inclusive.  <em>(This
+constitutes a set of 256 different values, including the value zero.) </em>
+</p>
+<p>The <strong>byte</strong> type cannot be used to
+represent any value outside this range.  For example, the <strong>byte</strong>
+type cannot be used to represent either -129 or +128. 
+</p>
+<h4>No fractional parts allowed by the byte type 
+</h4>
+<p>Also, the <strong>byte</strong> type cannot be used to represent fractional values
+within the allowable range.  For example, the byte type cannot
+be used to represent the value of 63.5 or any other value that has a fractional
+part. 
+</p>
+<h4>Like a strange odometer 
+</h4>
+<p>To form a crude analogy, the byte type is sort of like a strange
+odometer in a new <em>(and unusual)</em> car that shows a mileage value of -128 
+when you first purchase the car. As you drive the car, the negative values shown 
+on the odometer increment toward zero and then pass zero. Beyond that point they 
+increment up toward the value of +127 and probably roll over to -128 when your 
+actual mileage reaches 128.</p>
+<h4>Oops, numeric overflow! 
+</h4>
+<p>When the value passes <em>(or attempts to pass)</em> +127 miles, something bad
+happens.  From that point forward, the value shown on the odometer
+is not a reliable indicator of the number of miles that the car has been
+driven. 
+</p>
+<h4>Ranges for each of the whole-number types<strong> </strong>
+</h4>
+<p><a href="#Figure_1">Figure 1</a> shows the range of values that can be 
+accommodated by each of the four whole-number types supported by the Java 
+programming language. Also see the
+<a href="http://programmedlessons.org/Java9/chap08/ch08_06.html">Kjell</a> 
+explanation of the same topic.</p>
+
+	
+<div class="a">
+	<p><a name="Figure_1">Figure 1</a>. Range of values for whole-number types.
+	</p>
+<pre>
+byte
+-128 to +127
+
+short
+-32768 to +32767
+
+int
+-2147483648 to +2147483647
+
+long
+-9223372036854775808 to +9223372036854775807</pre></div>
+
+
+
+	
+<h4>Can represent some fairly large values </h4>
+<p>As you can see, the <strong>int</strong> and <strong>long</strong> types can represent some fairly large values.  However, if your task involves calculations such as distances in interstellar space, these ranges probably won't accommodate your needs.  This will lead you to consider using the 
+<em>floating-point</em> types discussed in the upcoming sections. I will discuss 
+the operations that can be performed on whole-number types more fully in future 
+chapters.</p>
+<h3><span class="auto-style1"><a name="Floating_point_types">Floating-point types</a></span> </h3>
+<p>Floating-point types are a little more complicated than whole-number types.  I found the definition of floating-point 
+shown in <a href="#Figure_2">Figure 2</a> in the 
+<em>Free On-Line Dictionary of Computing</em> at this 
+<a href="http://foldoc.org/floating+point">URL</a>. <em>(Also see </em>
+<a href="http://programmedlessons.org/Java9/chap08/ch08_08.html"><em>Floating 
+Point Types</em></a><em> in Kjell)</em></p>
+
+	
+<div class="a">
+	<p><a name="Figure_2">Figure 2</a>. Definition of floating point.
+</p>
+<p>A number representation consisting of a mantissa, M, an exponent, E, and an (assumed) radix 
+<em>(or "base") </em>. The number represented is M*R^E where R is the radix - usually ten but sometimes 2.</p></div>
+
+
+
+	
+<h4>So what does this really mean?
+
+</h4>
+<p>Assuming a base or radix of 10, I will attempt to explain it using an example.
+
+</p>
+<p>Consider the following value:
+
+</p>
+<p>623.57185
+
+</p>
+<p>I can represent this value in any of the ways shown in <a href="#Figure_3">
+Figure 3</a> <em>(where * indicates multiplication). </em> </p>
+
+
+<div class="a">
+	<p><a name="Figure_3">Figure 3</a>. Different ways to represent 623.57185.
+	</p>
+<pre>
+.62357185*1000
+6.2357185*100
+62.357185*10
+623.57185*1
+6235.7185*0.1
+62357.185*0.01
+623571.85*0.001
+6235718.5*0.0001
+62357185.*0.00001 </pre></div>
+
+
+
+	
+	<p>In other words, I can represent the value as a mantissa (62357185) multiplied by a factor where the purpose of the factor is to represent a left or right shift in the position of the decimal point.
+
+</p>
+<h4>Now consider the factor
+
+</h4>
+<p>Each of the factors shown in <a href="#Figure_3">
+Figure 3</a> represents the value of ten raised to some specific power, such as ten squared, ten cubed, ten raised to the fourth power, etc. </p>
+<h4>Exponentiation<strong>
+
+</strong> </h4>
+<p>If we allow the following symbol (^) to represent exponentiation <em>(raising to a power)</em> and allow the following symbol (/) to represent division, then we can write the values for the above factors in the 
+ways shown in <a href="#Figure_4">Figure 4</a>.</p>
+<p>Note in particular the characters 
+following the first equal character (=) on each line, which I will refer to later as the exponents. </p>
+	
+
+<div class="a">
+	<p><a name="Figure_4">Figure 4</a>. Relationships between multiplicative factors 
+and exponentiation.
+</p>
+<pre>1000 = 10^+3 = 1*10*10*10
+100 = 10^+2 = 1*10*10
+10 = 10^+1 = 1*10
+1 = 10^+0 = 1
+0.1 = 10^-1 = 1/10
+0.01 = 10^-2 = 1/(10*10)
+0.001 = 10^-3 = 1/(10*10*10)
+0.0001 = 10^-4 = 1/(10*10*10*10)
+0.00001 = 10^-5 = 1/(10*10*10*10*10) </pre></div>
+
+
+
+	
+	<p>In the above notation, the term 10^+3 means 10 raised to the third power.
+
+</p>
+<h4>The zeroth power </h4>
+<p>By definition, the value of any value raised to the zeroth power is 1.  <em>(Check this out in your high-school algebra book.)
+</em> </p>
+<h4>The exponent and the factor
+
+</h4>
+<p>Hopefully, at this point you will understand the relationship between the exponent 
+and the factor introduced earlier in <a href="#Figure_3">
+Figure 3</a>.</p>
+<h4>Different ways to represent the same value </h4>
+<p>Having reached this point, by using substitution, I can rewrite the 
+<a href="#Figure_3">original set of representations</a> of the value 623.57185 in the ways 
+shown in <a href="#Figure_5">Figure 5</a>.  </p>
+<p><em>(It is very important to for you to understand that these are simply different ways to represent the same value.)</em> </p>
+	
+
+<div class="a">
+	<p><a name="Figure_5">Figure 5</a>. Other ways to represent the same information.
+	</p>
+<pre>.62357185*10^+3
+6.2357185*10^+2
+62.357185*10^+1
+623.57185*10^+0
+6235.7185*10^-1
+62357.185*10^-2
+623571.85*10^-3
+6235718.5*10^-4
+62357185.*10^-5 </pre></div>
+
+
+
+	
+	<h4>A simple change in notation </h4>
+<p>Finally, by making a simplifying change in notation where I replace (*10^) by 
+(E) I can rewrite the different representations of the value of 623.57185 in the 
+ways shown in <a href="#Figure_6">Figure 6</a>. <em>(Also see
+<a href="http://programmedlessons.org/Java9/chap08/ch08_10.html">Scientific 
+Notation</a> in Kjell.)</em></p>
+	
+	
+<div class="a">
+	<a name="Figure_6">Figure 6</a>. Still other ways to represent 623.57185.
+
+
+
+<pre>.62357185E+3
+6.2357185E+2
+62.357185E+1
+623.57185E+0
+6235.7185E-1
+62357.185E-2
+623571.85E-3
+6235718.5E-4
+62357185.E-5 </pre></div>
+
+
+
+	
+<h4>Getting the true value
+
+</h4>
+<p>Floating point types represent values as a mantissa containing a decimal point along with an exponent value 
+that tells how many places to shift the decimal point to the left or to the right in order to determine the true value.</p>
+<p>Positive exponent values mean that the decimal point should be shifted to the right.  Negative exponent values mean that the decimal point should be shifted to the left. </p>
+<h4>Maintaining fractional parts </h4>
+<p>One advantage of floating-point types is that they can be used to maintain 
+fractional parts in data values, such as 6.3 pounds of hamburger.</p>
+<h4>Accommodating a very large range of values
+
+</h4>
+<p>Another advantage is that a very large range of values can be represented using a reasonably small amount of computer memory for storage of the values.
+
+</p>
+<h4>Another example </h4>
+<p>For example <em>(assuming that I counted the number of digits correctly)</em> the following very large value </p>
+<pre>62357185000000000000000000000000000000.0 </pre>
+<p>can be represented as
+
+</p>
+<pre>6.2357185E+37 </pre>
+<p>Similarly, again assuming that I counted the digits correctly, the following very small value
+
+</p>
+<pre>0.0000000000000000000000000000062357185 </pre>
+<p>can be represented as
+
+</p>
+<pre>6.2357185E-30 </pre>
+<h4>When would you use floating-point? </h4>
+<p>If you happen to be working in an area where you</p>
+<ul>
+	<li>need to keep track of fractional parts <em>(such as the amount of hamburger in a package)</em>, 
+	</li>
+	<li>have to work with extremely large numbers <em>(distances between galaxies)</em>, or 
+	</li>
+	<li>have to work with extremely small values <em>(the size of atomic particles)</em>, 
+	</li>
+</ul>
+<p>then you will need to use the floating-point types. </p>
+<h4>Don&#39;t use floating-point in financial transactions</h4>
+<p>You probably don&#39;t want to use floating-point in financial calculations, 
+however, because there is a lot of rounding that takes place in floating-point 
+calculations. In other words, floating point calculations provide answers that 
+are very close to the truth but the answers are often not exact.</p>
+<h4>Two floating-point types
+
+</h4>
+<p>Java supports two different floating point types:
+
+    </p>
+<ul>
+	<li>float
+    </li>
+	<li>double </li>
+</ul>
+<p>These two types differ primarily in terms of the range of values that they can support.</p>
+<h4>Range of values for floating point types</h4>
+<p>The table in <a href="#Figure_7"><strong>Figure 7</strong></a> shows the smallest and largest values that can be accommodated by each of the floating-point types.  Values of either type can be either positive or negative. </p>
+	
+
+<div class="a">
+	<p><a name="Figure_7">Figure 7</a>. Range of values for floating-point types.
+	</p>
+<pre>float
+1.4E-45 to 3.4028235E38
+
+double
+4.9E-324 to 1.7976931348623157E308</pre></div>
+
+
+
+	
+<p>I will discuss the operations that can be performed on floating-point types in a 
+future chapter.
+
+</p>
+<h3><a name="The_character_type">The character type</a> </h3>
+<p>Computers deal only in numeric values.  They don't know how to deal directly with the letters of the alphabet and punctuation characters.
+
+This gives rise to a type named <strong>char</strong>. <em>(Also see
+<a href="http://programmedlessons.org/Java9/chap08/ch08_13.html">The char 
+Primitive Data Type</a> in Kjell.)</em></p>
+<h4>Purpose of the char type </h4>
+<p>The purpose of the character (char) type is to make it possible to represent the letters of the alphabet, the punctuation characters, and the numeric characters internally in the computer.  This is accomplished by assigning a numeric value to each character, much as you may have done to create secret codes when you were a child.
+
+</p>
+<h4>A single character type
+
+</h4>
+<p>Java supports a single character type named <strong>char</strong>.  The 
+<strong>char</strong> type uses a standard character representation known as 
+<strong>Unicode</strong> to represent up to 65,535 different characters. </p>
+<h4>Why so many characters? </h4>
+<p>The reason for the large number of possible characters is to make it possible to represent the characters making up the alphabets of many different countries and many different 
+spoken languages.
+
+</p>
+<p><strong>What are the numeric values representing characters?</strong> </p>
+<p>As long as the characters that you use in your program appear on your keyboard, you usually don't have a need to know the numeric value associated with the different characters.
+
+If you are curious, however, the upper-case A is represented by the value 65 in 
+the Unicode character set.</p>
+<h4>Representing a character symbolically
+
+</h4>
+<p>In Java, you usually represent a character in your program by surrounding it with apostrophes 
+<em>(sometimes known as single quotes)</em> as 
+shown below:</p>
+<pre>'A' </pre>
+<p>The Java programming tools know how to cross reference that specific character symbol against the Unicode table to obtain the corresponding numeric value.  
+<em>(A discussion of the use of the <strong>char</strong> type to represent characters that don't appear on your keyboard is beyond the scope of this 
+chapter.)</em></p>
+<p>I will discuss the operations that can be performed on the <strong>char</strong> type in a 
+future chapter. </p>
+<h3><a name="The_boolean_type">The boolean type</a></h3>
+<p>The boolean type is the simplest type supported by Java.  It can have only two values:
+
+    </p>
+<ul>
+	<li>true
+    </li>
+	<li>false
+
+</li>
+</ul>
+<p>Generally speaking, about the only operations that can be directly applied to an instance of the
+<strong>boolean</strong> type are to change it from <strong>true</strong> to 
+<strong>false</strong>, and vice versa. <em>(Unlike C++, you cannot do 
+arithmetic with boolean types in Java.)</em> However, the <strong>boolean</strong> 
+type can be included in a large number of somewhat higher-level operations. <em>
+(Also see <a href="http://programmedlessons.org/Java9/chap08/ch08_15.html">Primitive Data Type boolean</a> in Kjell.)</em></p>
+<p>The <strong>boolean</strong> type is commonly used in some sort of a test to determine what to do next, such as 
+that shown in <a href="#Figure_8">Figure 8</a>.</p>
+
+	
+<div class="a" style="text-align: left">
+
+		<p>
+
+		<a name="Figure_8">Figure 8</a>. Example of the use of the boolean type.
+
+		</p>
+
+<pre>
+Perform a test that returns a value of type boolean.
+if that value is true,
+  do one thing 
+otherwise (meaning that value is false)
+  do a different thing</pre></div>
+
+
+
+	
+<p> I will discuss the operations that can be performed on the <strong>boolean</strong> type in 
+more detail in a future chapter.</p>
+
+<h2><a name="User_defined_types">User-defined or reference types</a></h2>
+<h3>Extending the language
+
+</h3>
+<p>Java is an <em>extensible</em> programming language.  By this, I mean that there is a core component to the language that is always available.  Beyond 
+the core component, different programmers can extend the language in different ways to meet their individual needs. </p>
+<h3>Creating new types
+
+</h3>
+<p><em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap11/ch11_03.html">Objects and Primitive Data
+</a>and the pages following that one.)</em></p>
+<p>One of the ways that individual programmers can extend the language is to create new types.  When creating a new type, the 
+programmer must define the set of values that can be stored in an instance of the 
+new type as well as the operations that can be performed on instances of the new type. </p>
+<h3>No magic involved
+
+</h3>
+<p>While this might initially seem like magic, once you get to the heart of the matter, it is really pretty straightforward.  New types are created by combining instances of primitive types 
+along with instances of 
+other user-defined types. In other words, the process begins with the 
+primitive types explained earlier and builds upward from there. <em>(Also see 
+Kjell <a href="http://programmedlessons.org/Java9/chap08/ch08_05.html">Objects</a>.)</em></p>
+<h3>An example </h3>
+<p>For example, a <strong>String</strong> type, which can be used to represent a person's last name, is just a group of instances of the primitive 
+<strong>char</strong> or character type.</p>
+<p>A user-defined <strong>Person</strong> type, which could be used to represent a person's first and last names might simply be a group 
+of two instances of the <strong>String</strong> type. <em>(The 
+<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html">String</a> type is part of 
+the Java standard library. However, the standard library doesn't have a type 
+named <strong>Person</strong>. If you need that type, you will have to define it 
+yourself.)</em></p>
+<h3>Differences</h3>
+<p>The biggest conceptual difference between the <strong>String</strong> type and the
+<strong>Person</strong> type is that the <strong>String</strong> type is 
+contained in the 
+standard Java library while the <strong>Person</strong> type isn&#39;t in that 
+library. However, you could put it in a library of your own design if you choose 
+to do so.</p>
+<h3>Removing types</h3>
+<p>You could remove the <strong>String</strong> type from your copy of the 
+standard Java library if you chose to do so, although that would probably be a 
+bad idea. However, you cannot remove the primitive <strong>char</strong> type 
+from the core language without making major modifications to the language.</p>
+<h3>The company telephone book </h3>
+<p>A programmer responsible for producing the company telephone book might create a new type that can be used to store the first and last names along with the telephone numbers of 
+each individual that works for the company. 
+That programmer might choose to give the new type the name <strong>Employee</strong>.</p>
+<p>The programmer could create an instance of the <strong>Employee</strong> type 
+to represent each employee in the company, populating each such instance with 
+the name and telephone number for an individual employee.  
+<em>(At this point, let me sneak a little jargon in and tell you that we will be referring to such instances as objects.)
+</em> </p>
+<h3>A comparison operation </h3>
+<p>The programmer might define one of the allowable operations for the new 
+<strong>Employee</strong> type to be a comparison between two objects of the new type to determine which is greater in an alphabetical sorting sense.  This operation could be used to sort the set of objects representing all of the employees into alphabetical order.  The set of sorted objects could then be used to print a new telephone book.
+
+</p>
+<h3>A name-change operation
+
+</h3>
+<p>Another allowable operation that the programmer might define would be the ability to change the name stored in an object representing 
+a particular employee.
+
+For example when Suzie Smith marries Tom Jones, she might elect to thereafter be known as </p>
+<ul>
+	<li>Suzie Smith</li>
+	<li>Suzie Jones, </li>
+	<li>Suzie Smith-Jones, </li>
+	<li>Suzie Jones-Smith, or</li>
+	<li>something entirely different.</li>
+</ul>
+<p>In this case, there would be a need to modify the object that represents 
+Suzie 
+in order to reflect her newly-elected surname.  <em>(Or perhaps Tom Jones might elect to thereafter be known as Tom 
+Jones-Smith, in which case it would be necessary to modify the object that represents him.)</em> </p>
+<h3>An updated telephone book </h3>
+<p>The person charged with maintaining the database could </p>
+<ul>
+	<li>Use the name-changing operation to modify the object and change the name, </li>
+	<li>Make use of the sorting operation to re-sort the set of objects, and </li>
+	<li>Print and distribute an updated version of the telephone Ebook. </li>
+</ul>
+<h3>Many user-defined types already exist
+
+</h3>
+<p>Unlike the primitive types which are predefined in the core language, I am unable to give you much in the way of specific information about user-defined types, simply because they don't exist until 
+a user defines them.
+
+</p>
+<p>I can tell you, however, that when you obtain the Java programming tools from 
+Oracle, you not only receive the core language containing the primitive types, you also receive a large library containing several thousand user-defined types that have already been defined.  A large 
+<a href="https://docs.oracle.com/en/java/javase/18/docs/api/index-files/index-1.html">documentation</a> package is available from 
+Oracle to help you determine the individual characteristics of these user-defined types.
+<em>(See type
+<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html">
+String</a> for example.)</em></p>
+<h3>The most important thing<strong>
+
+</strong> </h3>
+<p>At this stage in your development as a Java programmer, the most important thing for you to know about user-defined types is that they are possible.
+
+</p>
+<p>You can define new types.  Unlike earlier procedural programming languages such as C and Pascal, you are no longer forced to adapt your problem to the available tools.  Rather, you now have the opportunity to extend the tools to make them better suited to solve your problem.
+
+</p>
+<h3>The class definition
+
+</h3>
+<p>The specific mechanism that makes it possible for you to define new types in 
+Java is a mechanism known as the 
+<em>class definition</em>.
+
+<em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap40/ch40_07.html#class,_definition">
+Class</a>.)</em></p>
+<p>In Java, whenever you define a new class, you are at the same time defining a new type.  Your new type can be as simple, or as 
+complex and powerful as you want it to be.
+
+</p>
+<p>An object <em>(instance)</em> of your new type can contain a very small amount of data, or it can contain a very large amount of data.
+
+The operations that you allow to be performed on an object of your new type can be rudimentary, or they can be very powerful.
+
+</p>
+<h3>It is all up to you
+
+</h3>
+<p>Whenever you define a new class <em>(type)</em> you not only have the opportunity to define the data definition and the operations, you also have a responsibility to do so.</p>
+<h3>Much to learn and much to do </h3>
+<p>But, you still have much to learn and much to do before you will need to define new types.
+
+</p>
+<p>There are a lot of fundamental programming concepts that we need to cover before we seriously embark on a study involving the definition of new types.
+
+</p>
+<p>For the present then, simply remember that such a capability exists, and if you work to expand your knowledge of Java programming one small step at a time, when we reach the point of defining new types, you will be ready and eager to do so. </p>
+<h2><a name="Sample_program">Sample program</a></h2>
+<p>I&#39;m not going to provide a sample program in this chapter. Instead, I will be 
+using what you have learned about Java data types in the sample 
+programs in future chapters.</p>
+
+
+<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">	<p>Housekeeping material 
+</p>
+
+<ul>
+<li>Author: Prof. Richard G. Baldwin</li>
+	<li>Chapter name: Jb0150: A Gentle Introduction to Java Data Types</li>
+<li>File: Jb0150.htm </li>
+	<li>Revised: 06/07/22</li>
+</ul>
+</div>
+
+<p>-end- </p>
+
+</body></html>

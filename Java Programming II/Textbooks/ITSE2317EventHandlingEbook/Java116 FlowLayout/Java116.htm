@@ -1,0 +1,523 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>... in Java by Richard G Baldwin</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MSOFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff">
+
+<P><!--start--></P>
+<I><H3 ALIGN="CENTER">Richard G Baldwin (512) 223-4758, </I><A HREF="mailto:baldwin@austin.cc.tx.us"><I>baldwin@austin.cc.tx.us</I></A><I>, </I><A HREF="http://www2.austin.cc.tx.us/baldwin/"><I>http://www2.austin.cc.tx.us/baldwin/</I></A></H3>
+<H2 ALIGN="CENTER"><!--title-->The AWT Package, Arranging Components in Containers, FlowLayout<!--endtitle--></H2>
+<P>Java Programming, Lecture Notes # 116, Revised 03/03/99. </P>
+
+<UL>
+<LI><A HREF="#preface">Preface</A> </LI>
+<LI><A HREF="#introduction">Introduction</A> </LI>
+<LI><A HREF="#flowlayout_manager">FlowLayout Manager</A> </LI>
+<LI><A HREF="#plain_vanilla_sample_program">Plain Vanilla Sample Program</A> </LI>
+
+<UL>
+<LI><A HREF="#discussion_of_first_program">Discussion of First Program</A> </LI>
+<LI><A HREF="#interesting_code_fragments_in">Interesting Code Fragments in First program</A> </LI>
+<LI><A HREF="#program_listing_of_first_program">Program Listing of First Program</A></LI></UL>
+
+<LI><A HREF="#second_sample_program">Second Sample Program</A> </LI>
+
+<UL>
+<LI><A HREF="#discussion">Discussion</A> </LI>
+<LI><A HREF="#interesting_code_fragments">Interesting Code Fragments</A> </LI>
+<LI><A HREF="#program_listing">Program Listing</A></LI></UL>
+
+<LI><A HREF="#review">Review</A></LI></UL>
+
+<P><HR></P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="preface"></A>Preface</H2>
+</FONT><P>Students in Prof. Baldwin's <B><U>Intermediate Java Programming</B></U> classes at ACC are responsible for knowing and understanding all of the material in this chapter. </P>
+<P>JDK 1.1 was formally released on February 18, 1997. This chapter was originally written on March 7, 1997 using the software and documentation in the JDK 1.1 download package. It has been updated on various occasions since that time. </P>
+<P>The sample programs in this chapter were confirmed to compile and run properly under JDK 1.2 on 2/3/99.</P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="introduction"></A>Introduction</H2>
+</FONT><P>This is one in a series of chapters that concentrate on the package <B>java.awt </B>where most of the functionality exists for providing the user interface to your application or applet. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="flowlayout_manager"></A>FlowLayout Manager</H2>
+</FONT><P>In earlier chapters, we have learned about absolute positioning and sizing of components in a container and have learned about the <B>BorderLayout</B> manager. </P>
+<P>Absolute positioning allows you to place any (reasonable) number of components in a container, but has some problems with cross-platform compatibility. </P>
+<P>The <B>BorderLayout</B> manager solves some of the cross-platform compatibility problems, but limits the number of components that can be placed in a container to a maximum of five. In addition, the placement of the components may or may not be suitable for your purposes. </P>
+<P>JDK 1.1 provides the <B>FlowLayout</B> manager, which also solves the cross-platform compatibility problems and allows you to place any (reasonable) number of components in a container. In addition, the placement of the components may (or may not) be more suitable for your needs than the <B>BorderLayout</B>. </P>
+<B><P>FlowLayout </B>arranges components left to right until no more components fit on the same line. When no more components will fit on a line, a new line is started below the current line. Each line of components can either be <I>centered</I>, <I>left aligned</I>, or <I>right aligned</I> in the container. </P>
+<P>If the container is resized by the user at runtime, the locations of the components will be automatically adjusted to place the maximum possible number of components on the first and each successive line. </P>
+<P>The <B>FlowLayout</B> class has three <I>Fields</I>, three <I>Constructors</I>, and about a dozen <I>methods</I>. </P>
+<P>In most cases, you will probably only be concerned with the <I>Fields </I>and the <I>Constructors </I>unless you need to dynamically modify the layout at runtime. </P>
+<P>The three fields are: </P>
+
+<UL>
+<B><LI>CENTER -- </B>The center alignment variable. </LI>
+<B><LI>LEFT -- </B>The left alignment variable. </LI>
+<B><LI>RIGHT -- </B>The right alignment variable.</LI></UL>
+
+<P>The three constructors are: </P>
+
+<UL>
+<B><LI>FlowLayout()</B> -- Constructs a new Flow Layout with a centered alignment and a default five-unit horizontal and vertical gap. </LI>
+<B><LI>FlowLayout(int)</B> -- Constructs a new Flow Layout with the specified alignment and a default five-unit horizontal and vertical gap. </LI>
+<B><LI>FlowLayout(int, int, int)</B> -- Constructs a new Flow Layout with the specified alignment and the specified horizontal and vertical gaps. .</LI></UL>
+
+<P>This chapter contains two sample programs. The first, a "plain vanilla" program, will use the third form of the constructor along with the <B>LEFT</B> alignment variable to construct a <B>FlowLayout</B> object with the components <I>left-aligned</I>, a <U>ten-pixel horizontal gap</U> between components, and a <U>fifteen-pixel vertical gap</U> between components. </P>
+<P>The second sample program will make use of one of the methods to adjust the layout dynamically at runtime. </P>
+<P>Note that as of 3/7/97, there are some typographical errors in the JDK 1.1 documentation package regarding the <B>FlowLayout</B> class. In particular, the documentation indicates that the class can only be used to layout buttons when in fact, it can be used for any component that is a subclass of <B>Component</B>. </P>
+<P>Second, the documentation indicates that the Field <B>CENTER</B> corresponds to the <B>right</B> alignment variable instead of the <B>center</B> alignment variable as it should. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="plain_vanilla_sample_program"></A>Plain Vanilla Sample Program</H2>
+</FONT><P>The following application, named Layout04, creates a "Plain Vanilla" visual object by placing five non-functional <B>Button </B>objects on a <B>Frame </B>object using the <B>FlowLayout </B>manager. (The buttons are non-functional because no event listener objects were created and registered on the buttons.) </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="discussion_of_first_program"></A>Discussion of First Program</H3>
+</FONT><P>The <B>FlowLayout </B>object is constructed with LEFT alignment, a <U>ten-pixel</U> horizontal gap between components, and a <U>fifteen-pixel</U> vertical gap between components. The alignment and the gaps were defined by using the version of the constructor that allows for specification of these parameters. It is also possible to modify these parameters at runtime using methods of the class <B>FlowLayout</B>. </P>
+<P>Manually resizing the <B>Frame </B>object at runtime causes the positions of the components to adjust automatically, placing the maximum possible number of components on the first line. </P>
+<P>For simplicity, no event listeners were created and registered. Therefore, the "close" box is <U>not operational</U> and you will need to use some other method to terminate the program. </P>
+<P>The program was tested using JDK 1.1 running under Win95. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="interesting_code_fragments_in">Interesting Code Fragments in First Program</A></H3>
+</FONT><P>There isn't much code to be discussed in this program. The first statement creates a new <B>Frame</B> object. The second statement sets the layout manager for the <B>Frame</B> object to be <B>FlowLayout</B> with <B>LEFT</B> alignment, a horizontal gap of 10 pixels between components, and a vertical gap of 15 pixels between components. </P>
+<P>The third statement is typical of the statements used to <B>add</B> the components to the <B>Frame</B> object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=486>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ myFrame.setLayout(//align,Hgap,Vgap
+ new <B>FlowLayout(FlowLayout.LEFT,10,15</B>));
+ myFrame.add(new Button("First"));</PRE></TD>
+</TR>
+</TABLE>
+
+<P>A complete listing of the program is provided in the next section. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="program_listing_of_first_program"></A>Program Listing of First Program</H3>
+</FONT><P>This section contains a complete listing of the program. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=479>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Layout04.java Copyright, R.G.Baldwin
+Revised 10/28/97 to better accommodate the width
+requirements of the document.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+This program creates a "Plain Vanilla" visual object by
+placing five non-functional Button objects on a Frame
+object using the FlowLayout manager. The buttons are
+non-functional because no event listener objects were
+created and registered on the buttons.
+
+The FlowLayout object is constructed with LEFT alignment,
+a ten-pixel horizontal gap between components, and a
+fifteen-pixel vertical gap between components.
+
+Resizing the Frame object causes the positions of the
+components to adjust automatically.
+
+For simplicity, no event listeners were created and
+registered. Therefore, the "close" box is not operational
+and you will need to use some other method to terminate
+the program.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class Layout04 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout04
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ myFrame.setLayout(//align,Hgap,Vgap
+ new FlowLayout(FlowLayout.LEFT,10,15));
+ myFrame.add(new Button("First"));
+ myFrame.add(new Button("Second"));
+ myFrame.add(new Button("Third"));
+ myFrame.add(new Button("Fourth"));
+ myFrame.add(new Button("Fifth"));
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+ }//end constructor
+}//end class GUI definition
+//=======================================================//</PRE></TD>
+</TR>
+</TABLE>
+
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="second_sample_program"></A>Second Sample Program</H2>
+</FONT><P>This program has more substance that the previous one. Although it doesn't do anything particularly useful, it does illustrate how to modify a layout dynamically at runtime. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="discussion"></A>Discussion</H3>
+</FONT><P>This program is designed to be compiled and run under JDK 1.1 </P>
+<P>Five buttons are added to a frame using a <B>FlowLayout </B>object as the layout manager with a <U>three-pixel gap</U> between components in both the horizontal and vertical direction. </P>
+<P>An <B>ActionListener</B> object is instantiated and registered to listen for action events <U>on all five</U> of the buttons, with all five buttons <U>sharing</U> the same event handler. </P>
+<P>The behavior of the <B>ActionEvent </B>handler is to <U>increase the spacing</U> between components whenever any of the buttons is pressed. This is accomplished by </P>
+
+<UL>
+<LI>increasing the <B>Vgap </B>and <B>Hgap </B>attributes of the <B>FlowLayout </B>object, </LI>
+<LI>setting the layout manager of the frame to be the modified <B>FlowLayout </B>object, and </LI>
+<I><LI>validating </I>the frame.</LI></UL>
+
+<P>The validation step is required in order for the change to take effect and become visible. </P>
+<P>Repeatedly clicking any of the buttons causes the buttons to move apart. Eventually they will not all fit on the frame and they begin to disappear off the edges. They can be made to reappear by enlarging the frame. </P>
+<P>A <B>windowClosing()</B> event listener object is instantiated and registered on the frame to terminate the program when the frame is closed. </P>
+<P>The program was tested using JDK 1.1 running under Win95. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="interesting_code_fragments"></A>Interesting Code Fragments</H3>
+</FONT><P>This program contains several interesting code fragments. </P>
+<P>The following code fragment instantiates a <B>FlowLayout</B> object for <B>CENTER</B> alignment with a three-pixel gap between components in both the horizontal and vertical directions. This object is then passed to the <B>setLayout()</B> method to establish the layout manager for the <B>Frame</B> object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> FlowLayout myFlowLayout =
+ new <B>FlowLayout(FlowLayout.CENTER,3,3</B>);
+ myFrame.setLayout(myFlowLayout);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The following code is typical of that used to instantiate an <B>ActionListener </B>object and register it on all five buttons. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> MyActionListener myActionListener =
+ new MyActionListener(myFlowLayout,myFrame);
+ button1.addActionListener(myActionListener);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The following is the operative code in the <B>ActionListener </B>object that modifies the layout dynamically at runtime. </P>
+<P>This code responds whenever one of the buttons is clicked, using the <B>get</B> and <B>set</B> methods on the <B>Vgap</B> and <B>Hgap</B> attributes of the <B>FlowLayout</B> object to modify the spacing between components in the layout object. </P>
+<P>Then the <B>setLayout()</B> method is used to establish the modified layout object as the layout manager for the <B>Frame</B> object. After that, the <B>Frame</B> object is <I>validated</I>, a process that is necessary to cause the changes to become effective and to become visible. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> public void actionPerformed(ActionEvent e){
+ myFlowLayoutObject.setHgap(
+ myFlowLayoutObject.getHgap() + 5 );
+ myFlowLayoutObject.setVgap(
+ myFlowLayoutObject.getVgap() + 5 );
+ myFrameObject.setLayout(myFlowLayoutObject);
+ myFrameObject.<B>validate</B>();
+ }//end actionPerformed()</PRE></TD>
+</TR>
+</TABLE>
+
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="program_listing"></A>Program Listing</H3>
+</FONT><P>A complete listing of the program follows. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=479>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Layout05.java Copyright, R.G.Baldwin
+Revised 10/28/97 to better accommodate the display width
+of the document.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+This program has more substance that the previous one in
+this chapter. Although it doesn't do anything particularly
+useful, it does illustrate how to modify a flow layout
+dynamically at runtime.
+
+Five buttons are added to a frame using a FlowLayout object
+as the layout manager with a three-pixel gap between
+components in both the horizontal and vertical direction.
+
+An action listener object is instantiated and registered to
+listen for action events on all five of the buttons, with
+all five buttons sharing the same event handler.
+
+The behavior of the ActionEvent handler is to increase the
+spacing between components whenever any of the buttons is
+pressed. This is accomplished by increasing the Vgap and
+Hgap attributes of the FlowLayout object, setting the
+layout manager of the frame to the modified FlowLayout
+object, and validating the frame. The validation step is
+required in order for the change to become visible.
+
+Repeatedly clicking any of the buttons causes the buttons
+to move apart. Eventually they will not all fit on the
+frame and they begin to disappear off the edges. They can
+be made to reappear by enlarging the frame.
+
+A windowClosing() event listener object is instantiated and
+registered on the frame to terminate the program when the
+frame is closed.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class Layout05 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout05
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Instantiate a FlowLayout object with CENTER
+ // alignment and a Vgap and Hgap of 3 pixels.
+ FlowLayout myFlowLayout =
+ new FlowLayout(FlowLayout.CENTER,3,3);
+ //Set the layout manager for the frame to be the
+ // FlowLayout object.
+ myFrame.setLayout(myFlowLayout);
+
+ //Instantiate five Button objects
+ Button button1 = new Button("First");
+ Button button2 = new Button("Second");
+ Button button3 = new Button("Third");
+ Button button4 = new Button("Fourth");
+ Button button5 = new Button("Fifth");
+
+ //Add the five Button objects to the Frame object in
+ // the order specified.
+ myFrame.add(button1);
+ myFrame.add(button2);
+ myFrame.add(button3);
+ myFrame.add(button4);
+ myFrame.add(button5);
+
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+
+ //Instantiate an action listener object and register it
+ // on all five buttons.
+ MyActionListener myActionListener =
+ new MyActionListener(myFlowLayout,myFrame);
+ button1.addActionListener(myActionListener);
+ button2.addActionListener(myActionListener);
+ button3.addActionListener(myActionListener);
+ button4.addActionListener(myActionListener);
+ button5.addActionListener(myActionListener);
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class MyActionListener implements ActionListener{
+ FlowLayout myFlowLayoutObject;
+ Frame myFrameObject;
+
+ //constructor
+ MyActionListener(FlowLayout layoutObject,Frame inFrame){
+ myFlowLayoutObject = layoutObject;
+ myFrameObject = inFrame;
+ }//end constructor
+
+ //When an action event occurs, increase the horizontal
+ // and vertical gap between components in the FlowLayout
+ // object. Then set the layout manager for the frame to
+ // be the newly-modified FlowLayout object. Then
+ // validate the frame to ensure a valid layout so that
+ // the new visual will take effect.
+ public void actionPerformed(ActionEvent e){
+ myFlowLayoutObject.setHgap(
+ myFlowLayoutObject.getHgap() + 5 );
+ myFlowLayoutObject.setVgap(
+ myFlowLayoutObject.getVgap() + 5 );
+ myFrameObject.setLayout(myFlowLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class MyActionListener
+
+
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</PRE></TD>
+</TR>
+</TABLE>
+
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="review"></A>Review</H2>
+</FONT><P>Q - Without viewing the solution that follows, write a Java application that starts with a Frame object on the screen with a width of 280 and a height of 100 pixels. Use the <B>setSize()</B> method on the Frame object to obtain this exact size. </P>
+<P>Your name must appear in the banner at the top of the frame. </P>
+<P>The frame contains five square buttons with no captions. The five buttons are in a row across the client area of the frame with equal separation between the buttons. </P>
+<P>The buttons are separated from one another by a gap of approximately 3 pixels. </P>
+<P>When you click on any of the buttons, the gap between the buttons increases by 5 pixels and the size of every button is decreased. </P>
+<P>As you continue to click on the buttons, the gap continues to increase by five pixels each click, the buttons continue to decrease in size, and the horizontal position of each button stays the same. In other words, the horizontal distance between the centers of the buttons does not change as the size of the gap between them increases. </P>
+<P>Eventually, the buttons become so small that they disappear. </P>
+<P>When you close the frame, the program terminates. </P>
+<FONT SIZE=2 COLOR="#0000ff"><P>A - See solution below.</FONT><br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=492>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE><FONT COLOR="#0000ff">/*File SampProg136.java Copyright, R.G.Baldwin
+
+The program starts with a Frame object on the screen with
+a size of 280 wide by 100 pixels tall.
+
+Your name must appear in the banner at the top of the
+frame.
+
+The frame contains five square buttons with no captions.
+The five buttons are in a row across the client area
+of the frame with equal separation between the buttons.
+
+The buttons are separated from one another by a gap of
+approximately 3 pixels.
+
+When you click on any of the buttons, the gap between
+the buttons increases by 5 pixels and the size of every
+button is decreased.
+
+As you continue to click on the buttons, the gap continues
+to increase by five pixels each click, the buttons
+continue to decrease in size, and the horizontal
+position of each buttons stay the same. In other words,
+the horizontal distance between the centers of the
+buttons does not change as the size of the gap between
+them increases.
+
+Eventually, the buttons become so small that they disappear.
+
+When you close the frame, the program terminates.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class SampProg136 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class SampProg136
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Instantiate a FlowLayout object with CENTER
+ // alignment and a Vgap and Hgap of 3 pixels.
+ FlowLayout myFlowLayout =
+ new FlowLayout(FlowLayout.CENTER,3,3);
+ //Set the layout manager for the frame to be the
+ // FlowLayout object.
+ myFrame.setLayout(myFlowLayout);
+
+ //Instantiate five MyButtonClass objects
+ MyButtonClass button1 = new MyButtonClass();
+ MyButtonClass button2 = new MyButtonClass();
+ MyButtonClass button3 = new MyButtonClass();
+ MyButtonClass button4 = new MyButtonClass();
+ MyButtonClass button5 = new MyButtonClass();
+
+ //Add the five MyButtonClass objects to the Frame
+ // object in the order specified.
+ myFrame.add(button1);
+ myFrame.add(button2);
+ myFrame.add(button3);
+ myFrame.add(button4);
+ myFrame.add(button5);
+
+ myFrame.setSize(280,100);
+ myFrame.setVisible(true);
+
+ //Instantiate an action listener object and register
+ // it on all five buttons.
+ MyActionListener myActionListener =
+ new MyActionListener(myFlowLayout,myFrame);
+ button1.addActionListener(myActionListener);
+ button2.addActionListener(myActionListener);
+ button3.addActionListener(myActionListener);
+ button4.addActionListener(myActionListener);
+ button5.addActionListener(myActionListener);
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class MyActionListener implements ActionListener{
+ FlowLayout myFlowLayoutObject;
+ Frame myFrameObject;
+
+ //constructor
+ MyActionListener(FlowLayout layoutObject,Frame inFrame){
+ myFlowLayoutObject = layoutObject;
+ myFrameObject = inFrame;
+ }//end constructor
+
+ //When an action event occurs, increase the horizontal
+ // and vertical gap between components in the FlowLayout
+ // object. Then set the layout manager for the frame to
+ // be the newly-modified FlowLayout object. Then
+ // validate the frame to ensure a valid layout so that
+ // the new visual will take effect.
+ //Each time the frame is validated, the overridden
+ // getPreferredSize() method is called to determine the
+ // preferred size of the buttons. This method reduces
+ // the preferredSize by five pixels each time it is
+ // called to offset the increase in the gap between the
+ // buttons. This, in turn, causes the buttons to remain
+ // centered in the same horizontal position even though
+ // the gap between them is increasing.
+
+ public void actionPerformed(ActionEvent e){
+ myFlowLayoutObject.setHgap(
+ myFlowLayoutObject.getHgap() + 5 );
+ myFlowLayoutObject.setVgap(
+ myFlowLayoutObject.getVgap() + 5 );
+ myFrameObject.setLayout(myFlowLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class MyActionListener
+
+//=======================================================//
+
+//Extend the Button class to make it possible to override
+// the getPreferredSize() method. The overridden
+// method decreases the size of the button by five pixels
+// each time it is called.
+class MyButtonClass extends Button{
+ int side = 55;
+
+ public synchronized Dimension getPreferredSize(){
+ side -= 5;
+ return new Dimension(side,side);
+ }//end getPreferredSize()
+}//end MyButtonClass
+
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</PRE></FONT></TD>
+</TR>
+</TABLE>
+
+<P>-end-<!--end--></P></BODY>
+</HTML>

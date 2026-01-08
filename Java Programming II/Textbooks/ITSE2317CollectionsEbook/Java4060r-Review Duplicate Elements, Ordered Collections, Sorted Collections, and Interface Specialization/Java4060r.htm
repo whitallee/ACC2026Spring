@@ -1,0 +1,441 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4060r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4060r: Review: Duplicate Elements, Ordered Collections, Sorted Collections, and Interface Specialization</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>, 
+		<a href="#question11">11</a>, <a href="#question12">12</a>, 
+		<a href="#question13">13</a>, 
+		<a href="#question14">14</a>, 
+		<a href="#question15">15</a>,
+		<a href="#question16">16</a>,
+		<a href="#question17">17</a>, 
+		<a href="#question18">18</a>,
+		<a href="#question19">19</a>,
+		<a href="#question20">20</a>,
+		<a href="#question21">21</a>,
+		<a href="#question22">22</a>,
+		<a href="#question23">23</a></li>
+	</ul>
+	</li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4060: Duplicate Elements, Ordered Collections, Sorted Collections, and 
+Interface Specialization</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? The Java Collections Framework defines eight core interfaces, 
+in two distinct trees.</p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? All eight of the core interfaces are rooted in the interface 
+named <strong>Collection</strong>.</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? A <b>Set</b> object can contain duplicate elements, but a <b>
+List</b> object cannot contain duplicate elements.</p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>True or False? The <b>TreeSet</b> class is a direct implementation of the <b>
+Collection</b> interface. <em>(See the Java documentation.)</em></p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? The interface hierarchy for the Java Collections Framework is 
+shown below with indentation used to show a parent-child relationship:</p>
+<ul>
+	<li>Collection 	<ul>
+		<li>Set
+		<ul>
+			<li>SortedSet</li>
+		</ul>
+		</li>
+		<li>List</li>
+		<li>Queue</li>
+		<li>Deque</li>
+	</ul>
+	</li>
+	<li>Map
+	<ul>
+		<li>SortedMap</li>
+	</ul>
+	</li>
+</ul>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? The <strong>ArrayList</strong> class is a direct 
+implementation of the Collection interface. <em>(See the Java documentation.)</em></p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h2><a name="question07">Question 7</a></h2>
+<p>True or False? In Java, a <b>Set</b> is a collection that contains no duplicate 
+elements. The <strong>Set</strong> interface models the mathematical <em>set</em> 
+abstraction.</p>
+<p><a href="#answer07">Answer 7</a></p>
+
+<h2><a name="question08">Question 8</a> </h2>
+<p>True or False? In Java, a <b>List</b> is an ordered collection <em>(also 
+known as a sequence)</em>. The user of the <strong>List</strong> interface has 
+precise control over where in the list each element is inserted. The user can 
+access elements by their integer index <em>(position in the list)</em>, and 
+search for elements in the list.</p>
+
+
+<p><a href="#answer08">Answer 8</a> </p>
+
+<h2><a name="question09">Question 9</a></h2>
+<p>True or False? The term <em>ordered</em> is a synonym for <em>sorted</em>.</p>
+<p><a href="#answer09">Answer 9</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>True or False? An <em>ordered</em> collection is one in which the position of 
+each element is determined by its value relative to the values of its 
+predecessors and successors.</p>
+<p><a href="#answer10">Answer 10</a></p>
+	
+<h2><a name="question11">Question 11</a></h2>
+<p>True or False? A <em>sorted</em> collection is one in which the position 
+of each element is determined by its value relative to the values of its 
+predecessors and successors.</p>
+<p><a href="#answer11">Answer 11</a></p>
+	
+<h2><a name="question12">Question 12</a></h2>
+<p>True or False? Ascending sort order is always required for a Java collection.</p>
+<p><a href="#answer12">Answer 12</a></p>
+	
+<h2><a name="question13">Question 13</a></h2>
+<p>True or False? Ascending sort order is always required for a Java collection 
+that implements the <strong>SortedSet</strong> interface.</p>
+<p><a href="#answer13">Answer 13</a></p>
+	
+<h2><a name="question14">Question 14</a></h2>
+<p>True or False? If a <b>SortedSet</b> object contains references to <b>
+String</b> objects, the <em>natural ascending sort</em> would take the 
+difference between upper case and lower case characters into account. </p>
+<p><a href="#answer14">Answer 14</a></p>
+	
+<h2><a name="question15">Question 15</a></h2>
+<p>True or False? A <b>SortedSet</b> object containing references to <b>
+String</b> objects will always take the difference between upper case and lower 
+case characters into account when establishing the sort order.</p>
+<p><a href="#answer15">Answer 15</a></p>
+	
+<h2><a name="question16">Question 16</a></h2>
+<p>True or False? Specific sub-interfaces of the <b>Collection</b> interface can 
+define requirements that do not apply to all sub-interfaces of the <b>Collection</b> 
+interface. </p>
+<p><a href="#answer16">Answer 16</a></p>
+
+<h2><a name="question17">Question 17</a></h2>
+<p>True or False? A collection that implements the <b>List</b> interface 
+maintains its elements in ascending alphanumeric order.</p>
+<p><a href="#answer17">Answer 17</a></p>
+
+<h2><a name="question18">Question 18</a></h2>
+<p>True or False? A collection that implements the <b>List</b> interface is an 
+unordered collection.</p>
+<p><a href="#answer18">Answer 18</a></p>
+
+<h2><a name="question19">Question 19</a></h2>
+<p>True or False? A collection that implements the <b>List</b> interface is 
+allowed to contain duplicate values.</p>
+<p><a href="#answer19">Answer 19</a></p>
+
+<h2><a name="question20">Question 20</a></h2>
+<p>True or False? The contracts of the methods in the <b>List</b> interface are 
+the same as the contracts of the methods inherited from the <b>Collection</b> 
+interface.</p>
+<p><a href="#answer20">Answer 20</a></p>
+
+<h2><a name="question21">Question 21</a></h2>
+<p>True or False? The <b>iterator</b> method for the <strong>Collection</strong> 
+interface returns an iterator over the elements in the collection in proper 
+sequence, where the sequence is determined by the numeric index.</p>
+<p><a href="#answer21">Answer 21</a></p>
+
+<h2><a name="question22">Question 22</a></h2>
+<p>True or False? The <b>iterator</b> method for the <b>List</b> interface 
+returns an iterator over the elements in the collection in proper sequence, 
+where the sequence is determined by the numeric index.</p>
+<p><a href="#answer22">Answer 22</a></p>
+
+<h2><a name="question23">Question 23</a></h2>
+<p>True or False? The <b>SortedSet</b> interface <i>"guarantees that its 
+iterator will traverse the set in ascending element order, sorted according to 
+the natural ordering of its elements (see <strong>Comparable</strong>), or by a
+<strong>Comparator</strong> provided at sorted set creation time."</i></p>
+<p><a href="#answer23">Answer 23</a></p>
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+<h2><a name="answer23">Answer 23</a></h2>
+<p>True.</p>
+<p><a href="#question23">Back to Question 23</a> </p>
+
+<h2><a name="answer22">Answer 22</a></h2>
+<p>True.</p>
+<p><a href="#question22">Back to Question 22</a> </p>
+
+<h2><a name="answer21">Answer 21</a></h2>
+<p>False. The <b>iterator</b> method for the <strong>Collection</strong> 
+interface returns an iterator over the elements in the collection where there 
+are no guarantees concerning the order in which the elements are returned by the 
+methods of the <b>Iterator</b> object.</p>
+<p><a href="#question21">Back to Question 21</a> </p>
+
+<h2><a name="answer20">Answer 20</a></h2>
+<p>False. According to Oracle, <i>"The <b>List</b> interface places additional 
+stipulations, beyond those specified in the <b>Collection</b> interface, on the 
+contracts of the <b>iterator</b>, <b>add</b>, <b>remove</b>, <b>equals</b>, and
+<b>hashCode</b> methods."</i></p>
+<p><a href="#question20">Back to Question 20</a> </p>
+
+<h2><a name="answer19">Answer 19</a></h2>
+<p>True. Unlike a collection that implements the <b>Set</b> interface, a 
+collection that implements the <b>List</b> interface is typically allowed to 
+contain duplicate values.</p>
+<p><a href="#question19">Back to Question 19</a> </p>
+
+<h2><a name="answer18">Answer 18</a></h2>
+<p>False. A collection that implements the <b>List</b> interface is an ordered 
+collection <i>(also known as a sequence)</i>. According to Oracle, <i>"The user 
+of the interface has precise control over where in the list each element is 
+inserted." </i>Elements can be inserted and retrieved on the basis of their 
+integer index <i>(position in the list)</i> using the following methods: </p>
+<ul>
+	<li><b>add(int index, Object element)</b> </li>
+	<li><b>get(int index)</b></li>
+</ul>
+<p>Valid index values are positive integers that begin with zero.</p>
+<p>Another version of the <b>add</b> method takes a reference to an object as an 
+incoming parameter and appends the specified element to the end of the 
+collection.</p>
+<p><a href="#question18">Back to Question 18</a> </p>
+
+<h2><a name="answer17">Answer 17</a></h2>
+<p>False. Unlike collections that implement the <b>SortedSet</b> interface, the 
+order of the elements in a collection that implements the <b>List</b> interface 
+is not based on the values of the objects referred to by the elements in the 
+list. </p>
+<p><a href="#question17">Back to Question 17</a> </p>
+
+<h2><a name="answer16">Answer 16</a></h2>
+<p>True. For example, the <b>add</b> method of the <b>Set</b> interface 
+stipulates the following:</p>
+<blockquote>
+	<i>"Adds the specified element to this set if it is not already present."</i></blockquote>
+<p>On the other hand, the <b>add</b> method of the <b>Collection</b> interface 
+simply states:</p>
+<blockquote>
+	<i>"Ensures that this collection contains the specified element."</i></blockquote>
+<p>Thus, the contract for the <b>add</b> method of an object of a class that 
+implements the <b>Set</b> interface is more specialized than the contract for 
+the <b>add</b> method of an object of a class that implements the <b>Collection</b> 
+interface.</p>
+<p><a href="#question16">Back to Question 16</a> </p>
+
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>False. You can cause the sort order to ignore case by providing an object of 
+a class that implements the <b>Comparator</b> interface, and which defines the <b>compare 
+method </b>and the <b>equals</b> method in such a way as to eliminate case 
+considerations for comparisons of <b>String</b> objects.</p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>True.</p>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>False. Implementations of the interface named <b>SortedSet </b>do maintain 
+their elements in sorted order. However, that order is not necessarily 
+ascending. When an object is instantiated from a class that implements the <b>
+SortedSet</b> interface, the sorting order 
+for that object can be established by providing an object instantiated from a 
+class that implements the <b>Comparator</b> interface. In that case, the author 
+of the class that implements the <b>Comparator</b> interface determines the 
+order imposed on the elements in the collection. </p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>False. Not all implementations of the <b>Collection</b> interface maintain 
+the elements in ascending sort order. Some may, and others do not. For example, 
+implementations of the <b>List</b> interface <i>(such as
+<strong>ArrayList</strong>)</i> do not maintain their elements in sorted order 
+at all. In other words, the position of an element in an <b>ArrayList</b> does 
+not depend on the value of the element.</p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>True.</p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>False. An <em>ordered</em> collection is one in which each element in the 
+collection has a specific position specified by an index. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>False. An <i>ordered</i> collection is not the same as a <i>sorted</i> 
+collection. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>True, according to Oracle.</p>
+
+
+
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>True, according to Oracle.</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>False.</p>
+
+
+
+
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>ArrayList class:</strong>
+				</p>
+				<pre>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+  implements List&lt;E&gt;, RandomAccess, Cloneable, Serializable</pre>
+</div>
+<p>The Java Collections Framework doesn't provide any direct implementations of 
+the <b>Collection</b> interface. All of the implementations of the interfaces in 
+the <strong>Collection</strong> hierarchy implement one of the sub-interfaces of 
+the <b>Collection</b> interface. In the case of the <strong>ArrayList</strong> class, that 
+sub-interface is the <strong>List</strong> interface, which extends the <strong>Collection</strong> interface. 
+As you can see from the above, the ArrayList class also implements three other 
+interfaces.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>True.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>False. The <b>TreeSet</b> class is not a direct implementation of the <b>
+Collection</b> interface. Rather, the <b>TreeSet</b> class is a direct 
+implementation of the <b>SortedSet</b> interface. The <b>SortedSet</b> interface 
+extends the <b>Set</b> interface, and the <b>Set</b> interface extends the <b>
+Collection</b> interface.</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False. A <b>Set</b> object cannot contain duplicate elements, but a <b>List</b> 
+object can contain duplicate elements.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>False. One of the trees, which consists of six interfaces, is rooted in the 
+interface named <strong>Collection</strong>. The other tree, which consists of 
+two interfaces, is rooted in the interface named <strong>Map</strong>.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>True.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4060r: Review: Duplicate Elements, Ordered Collections, Sorted Collections, and Interface Specialization</li>
+				<li>File: Java4060r.htm </li>
+				<li>Published: 11/30/13</li>
+				<li>Revised: 04/15/20</li>
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

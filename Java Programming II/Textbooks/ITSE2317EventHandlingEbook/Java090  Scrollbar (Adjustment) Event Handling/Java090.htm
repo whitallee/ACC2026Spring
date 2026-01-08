@@ -1,0 +1,1065 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java090</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java090 Scrollbar (Adjustment) Event Handling</h1>
+
+
+<h1 class="style1"><a name="Table_of_contents">Table of contents</a></h1>
+
+
+
+<ul><li><a href="#Table_of_contents">Table of contents</a>
+</li><li><a href="#Preface">Preface</a>
+<ul><li><a href="#Viewing_tip">Viewing tip</a>
+<ul><li><a href="#Figures">Figures</a>
+</li><li><a href="#Listings">Listings</a>
+</li></ul></li></ul></li><li><a href="#Introduction">Introduction</a>
+</li><li><a href="#Overview">Overview</a>
+</li><li><a href="#The_sample_program">The sample program</a>
+<ul><li><a href="#Discussion">Discussion</a>
+</li><li><a href="#Interesting_code_fragments">Interesting code fragments</a>
+</li><li><a href="#Complete_program_listings">Complete program listing</a>
+</li></ul></li><li><a href="#Review">Review</a>
+</li><li><a href="#Miscellaneous">Miscellaneous</a>
+</li></ul>
+
+
+	<h1><a name="Preface">Preface</a></h1>
+	
+	<p>This chapter is one in a collection of chapters designed for teaching <em>
+	ITSE2317 - Java Programming (Intermediate)</em> at Austin Community College 
+	in Austin, TX.</p>
+<p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written around 1997. However, despite many improvements in Java since 
+then, most of what was true then is still true in 2020.)</em></p>
+	
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<p>Author's Note: An object of the <strong>JSlider</strong> class in Java 8 and 
+later versions can be used for some 
+<em>(but no all)</em> of the purposes for which 
+a <strong>Scrollbar</strong> object may have been used in the early days of 
+Java. Note also that a <strong>JSlider</strong> object is programmed in much the 
+same way as the other components that you have seen discussed previously in this
+<strong>eBook</strong>. That is not the case for the <strong>Scrollbar</strong>. 
+Programming a <strong>Scrollbar</strong> is much more complicated. As a 
+practical matter, until you have a need to write a program for a <strong>
+Scrollbar</strong>, you might just want to skip this chapter.</p>
+</div>	
+
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+
+
+<ul>
+<li><a href="#Figure_1">Figure 1.</a>
+ Graphic screen output for Event18.
+</li>
+<li><a href="#Figure_2">Figure 2.</a>
+ Output produced by clicking right scrollbar 
+button.
+</li>
+<li><a href="#Figure_3">Figure 3.</a>
+ Graphic screen output from SampProg125.java.
+</li>
+</ul>
+
+
+	<h3><a name="Listings">Listings</a></h3>
+<ul>
+<li><a href="#Listing_1">Listing 1.</a>
+ The controlling class for Event18.java.
+</li>
+<li><a href="#Listing_2">Listing 2.</a>
+ Beginning of the GUI class.
+</li>
+<li><a href="#Listing_3">Listing 3.</a>
+ Beginning of the constructor for the GUI 
+class.
+</li>
+<li><a href="#Listing_4">Listing 4.</a>
+ Set the unit and block increments.
+</li>
+<li><a href="#Listing_5">Listing 5.</a>
+ Complete the GUI.
+</li>
+<li><a href="#Listing_6">Listing 6.</a>
+ Beginning of class that implements 
+AdjustmentListener.
+</li>
+<li><a href="#Listing_7">Listing 7.</a>
+ Beginning of the adjustmentValueChanged 
+method.
+</li>
+<li><a href="#Listing_8">Listing 8.</a>
+ Get and display the value of the scrollbar.
+</li>
+<li><a href="#Listing_9">Listing 9.</a>
+ Complete listing of the program named 
+	Event18.java.
+</li>
+<li><a href="#Listing_10">Listing 10.</a>
+ Complete listing of the program named SampProg125.java.
+</li>
+</ul>
+
+
+<h1><a name="Introduction">Introduction</a></h1>
+<p>JDK 1.1 was formally released on February 18, 1997. This chapter was 
+originally written on February 21, 1997 using the software in JDK 1.1. It was 
+upgraded to JDK 1.2 on 12/18/98. It was converted to CNXML with minor updates for publication on 
+OpenStax on 07/11/16. It was partially revised for inclusion in this eBook in 
+May, 2020.</p>
+	
+	<h1><a name="Overview">Overview</a></h1>
+	
+	<p>Event handling on a <strong>Scrollbar </strong>object differs from the 
+	event handling in previous chapters in several respects. The 
+	following paragraphs 
+	contrast the <strong>Scrollbar </strong>with the <strong>Mouse</strong> in order to illustrate 
+	some of the differences. </p>
+<p>To create a listener object for the mouse, you either implement the <strong>
+MouseListener </strong>interface, or you extend the <strong>MouseAdapter </strong>
+class. </p>
+<p>However, to create a listener object for a <strong>Scrollbar</strong>, you do 
+not implement a <em>ScrollbarListener </em>interface or extend a <em>
+ScrollbarAdapter </em>class, because they do not exist. </p>
+<p>Instead, you implement the <strong>AdjustmentListener </strong>interface. The 
+single method declared in the <strong>AdjustmentListener</strong> interface receives an
+<strong>AdjustmentEvent</strong> object as a parameter. This is one of the <em>
+semantic</em> events <em>(as opposed to low-level events) </em>similar to
+<strong>ActionEvent</strong>, <strong>ItemEvent</strong>, and <strong>TextEvent.</strong>
+</p>
+<p>As mentioned above, there is no <em>AdjustmentAdapter</em> class. It isn't needed 
+because the <strong>AdjustmentListener </strong>interface declares only one 
+method, which is shown below:</p>
+	
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<pre>
+public abstract void adjustmentValueChanged(AdjustmentEvent e) 
+</pre>
+</div>	
+
+<p>The <strong>adjustmentValueChanged</strong> method is invoked when the 
+value of the adjustable object <em>(the Scrollbar object in this chapter)</em> has changed.</p>
+<p>Recall also that there are five different types of mouse events declared in 
+the <strong>MouseListener </strong>interface: </p>
+<ul>
+	<li>mouseClicked,</li>
+	<li>mouseEntered,</li>
+	<li>mouseExited,</li>
+	<li>mousePressed</li>
+	<li>mouseReleased.</li>
+</ul>
+<p>There are two additional types of 
+mouse events that are declared in the <strong>MouseMotionListener </strong>
+interface: </p>
+<ul>
+	<li>mouseDragged</li>
+	<li>mouseMoved</li>
+</ul>
+<p>Each of these different types of mouse events is represented by a method 
+declaration in one or the other of the two interfaces defined for creating 
+listener classes for mouse activity. You <em>override the method(s)</em> for 
+those types of events which interest you. </p>
+<p>There are five different types of adjustment events that correspond to the 
+five ways of moving the bubble in a <strong>Scrollbar</strong> object. However, 
+as mentioned above, there is only one method declared in the <strong>
+AdjustmentListener</strong> interface. It is named <strong>
+adjustmentValueChanged</strong>. It receives an object of type <strong>
+AdjustmentEvent </strong>as a parameter when invoked. </p>
+<p>The type of event is encoded into the object that is passed in as a parameter 
+along with other information such as the <em>value</em><strong> </strong>of the <strong>
+Scrollbar </strong>and the <em>name</em><strong> </strong>of the <strong>Scrollbar
+</strong>object. The <em>value</em> of the <strong>Scrollbar</strong> is 
+determined by the position of the bubble on the <strong>Scrollbar</strong>. </p>
+<p>The <strong>AdjustmentEvent </strong>class defines several methods that can 
+be used to extract information from the object in case you need access to that 
+information. This is discussed in more detail later. </p>
+<p>The types of adjustment events <em>(corresponding to physical methods of moving 
+the bubble on the </em> <strong><em>Scrollbar</em></strong>) are defined as static variables in 
+the <strong>AdjustmentEvent</strong> class. The five different types of adjustment events and 
+their relationship to moving the bubble are: </p>
+<ul>
+	<li><strong>UNIT_INCREMENT</strong> - click button on one end of the Scrollbar
+	</li>
+	<li><strong>UNIT_DECREMENT</strong> - click button on the other end of the Scrollbar
+	</li>
+	<li><strong>BLOCK_INCREMENT</strong> - click in space between bubble and one button
+	</li>
+	<li><strong>BLOCK_DECREMENT</strong> - click in space between bubble and other button
+	</li>
+	<li><strong>TRACK</strong> - drag the bubble </li>
+</ul>
+<p>As indicated, the two <em>UNIT</em> types are generated by clicking on the buttons at 
+either end of the Scrollbar. </p>
+<p>The two <em>BLOCK</em> types are generated by clicking interior to the 
+<strong>Scrollbar</strong> on 
+either side of the bubble. </p>
+<p>The <em>TRACK</em> event is generated by dragging the bubble. </p>
+<p>Methods are available for setting various parameters of the <strong>Scrollbar</strong> 
+including the range, the width of the bubble <em>(alternately referred to in the 
+documentation as page size or visible</em>), the size of the unit 
+and block increments or decrements, etc. </p>
+<p>One might surmise that this rather general purpose adjustment 
+approach was defined to support a family of components that operate on an 
+adjustment basis. However, a quick search of the index in the JDK 1.1.3 
+documentation package did not identify any other components that use the 
+adjustment interface. Perhaps other adjustable objects are planned for future 
+versions of the AWT. 
+<em>(Note that as of Java 8, the <strong>AdjustmentListener </strong>interface is also implemented by the <strong>AWTEventMulticaster</strong> class. 
+However, that class is not discussed in this chapter.)</em></p>
+
+<h1><a name="The_sample_program">The sample program</a></h1>
+
+<p>This section presents a discussion of the program followed by the program 
+listing. </p>
+<h2><a name="Discussion">Discussion</a></h2>
+<p>This program places a <strong>Scrollbar </strong>object and a <strong>
+TextField </strong>object in a <strong>Frame</strong> object as shown in 
+<a href="#Figure_1">Figure 1</a>.</p>
+<div class="a">
+	<p>
+<a name="Figure_1">Figure 1.</a> Graphic screen output for Event18.
+</p>
+<p><img alt="A Scrollbar object and a TextField object in a Frame object" height="76" src="event18a.jpg" width="301"/></p>
+</div>
+
+<p>Whenever the <em>bubble
+</em>in the <strong>Scrollbar </strong>is moved using any of the five available 
+physical methods for moving the bubble, the <em>value</em> of the
+<strong>Scrollbar</strong> <em>(which normally should represent the position of the 
+center of the bubble</em>) is extracted from the event object and displayed 
+in the TextField object. <em>(Certain arithmetic corrections are required to cause 
+the value to represent the center of the bubble because the actual value 
+returned represents the left-hand edge of the bubble for a horizontal </em> <strong>
+<em>Scrollbar</em></strong><em>.) </em> </p>
+<p>Also, whenever the bubble is moved, several other pieces of information are 
+extracted from the object and displayed on the command-line screen. This includes the 
+identification of the adjustable object and the type of adjustable event. </p>
+<p>Note also that although five different initialization parameters are included 
+as parameters to the <strong>Scrollbar </strong>constructor, other important 
+initialization parameters such as <strong>BlockIncrement</strong> and <strong>
+UnitIncrement</strong> are not included in the parameter list. They must be set 
+following instantiation using methods such as <strong>setBlockIncrement</strong>.
+</p>
+<p>Experimentation indicates that the default value for <strong>BlockIncrement</strong> 
+is ten units and the default value for <strong>UnitIncrement</strong> is one 
+unit. </p>
+<p>Reiterating what was mentioned earlier, the <strong>Scrollbar</strong> listener object is not 
+added as a <em>ScrollbarListener </em>but rather is defined by implementing the
+<strong>AdjustmentListener </strong>interface and then added as an <strong>
+AdjustmentListener</strong>. </p>
+<p>The <strong>AdjustmentListener</strong> interface declares only one method 
+that may be overridden: <strong>adjustmentValueChanged</strong>. </p>
+<p>This method receives an object of type <strong>AdjustmentEvent</strong> that
+<em>(as of Java 8)</em> 
+provides five methods that can be used to obtain information about the event.
+</p>
+<ul>
+	<li>The <strong>getAdjustable</strong> method of the <strong>
+	AdjustmentEvent</strong> class returns information containing the 
+	identification of the object that generated the event.</li>
+	<li>The <strong>getAdjustmentType</strong> method returns information 
+	containing the identification of the type of event (click the buttons on the 
+	Scrollbar, drag the bubble, etc.).</li>
+	<li>The <strong>paramString</strong> method contains a variety of 
+	information which overlaps the two above methods to some extent.</li>
+	<li>The <strong>getValue</strong> method returns the value produced by the 
+	adjustment.</li>
+	<li>The <strong>getValueIsAdjusting</strong> method returns true if this is 
+	one of multiple adjustment events. <em>(This method was not defined in the 
+	class when this chapter was originally written in 1997.)</em></li>
+</ul>
+<p>Three of these five methods are used in the following program. The <strong>
+paramString</strong> and <strong>getValueIsAdjusting</strong> methods are not used. </p>
+<p>There are many important comments in the program that 
+add to this discussion, particularly with respect to bugs in the <strong>
+Scrollbar</strong> component, and arithmetic adjustments required to compensate 
+for the width of the bubble. <em>(Note, however, that the comments related to 
+bugs may no longer apply in Java 8 and beyond.)</em></p>
+<h2><a name="Interesting_code_fragments">Interesting code fragments</a></h2>
+<p>I will discuss and explain this program in fragments. A complete listing is 
+provided in <a href="#Listing_9">Listing 9</a>.</p>
+<p><a href="#Listing_1">Listing 1</a> shows the controlling class that contains the requisite <strong>main</strong> method. The <strong>main</strong> method 
+instantiates an object of type <strong>GUI</strong> where all of the work is 
+done.</p>
+
+
+<div class="a">
+	<p>
+<a name="Listing_1">Listing 1.</a> The controlling class for Event18.java.
+</p>
+<pre>
+import java.awt.*;
+import java.awt.event.*;
+
+class Event18{
+  public static void main(String[] args){
+    GUI gui = new GUI(); 
+  }//end main
+}//end class Event18
+</pre>
+</div>
+<p><a href="#Listing_2">Listing 2</a> shows the beginning of the <strong>GUI</strong> class along 
+with some instance variables used later in the program.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_2">Listing 2.</a> Beginning of the GUI class.
+</p>
+<pre>
+class GUI{
+  Scrollbar myScrollbar;
+  TextField displayWindow;
+  int bubbleWidth;//needs to be accessible by event handler
+</pre>
+</div>
+<p><a href="#Listing_3">Listing 3</a> shows the beginning of the constructor for the <strong>GUI</strong> 
+class. The constructor begins by instantiating a <strong>Frame</strong> object 
+to serve as a top-level window for the application.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_3">Listing 3.</a> Beginning of the constructor for the GUI 
+class.
+</p>
+<pre>
+  GUI(){
+    Frame myFrame = new Frame("Copyright, R.G.Baldwin");
+
+    bubbleWidth = 20;
+    int initialPosition = 50 - bubbleWidth/2;
+    int min = 0 - bubbleWidth/2;
+    int max = 100 + bubbleWidth/2;
+    myScrollbar = new Scrollbar(Scrollbar.HORIZONTAL, 
+                     initialPosition, bubbleWidth, min, max);
+</pre>
+</div>
+<p>This is followed by instantiation of a horizontal <strong>Scrollbar</strong> 
+object with a range from 0 to 100, an initial position at 50, a bubble width <em>(page 
+size) </em>of 20, a unit increment of 2 <em>(see <a href="#Listing_4">Listing 4</a>)</em>, and a block increment of 15
+<em>(see Listing 4)</em>. </p>
+<p>The <strong>Scrollbar</strong> component does not center the bubble on the value. 
+Rather, the left edge of the bubble is lined up with the value. The result is 
+that values in the upper end of the range cannot be reached unless appropriate 
+adjustments are made using half the bubble width. This distributes the 
+unreachable values at each end of the Scrollbar. You can then set the <em>min</em> and 
+<em>max</em> values to extend beyond the desired values by one-half the bubble width.</p>
+<p><a href="#Listing_4">Listing 4</a> sets the unit increment to 2 and the block increment to 15. 
+The unit increment is the amount of change resulting from clicking a button on 
+the end of the <strong>Scrollbar</strong>. The block increment is the amount of change resulting 
+from clicking between the bubble and the button on the end.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_4">Listing 4.</a> Set the unit and block increments.
+</p>
+<pre>
+    myScrollbar.setBlockIncrement(15);
+    myScrollbar.setUnitIncrement(2);
+</pre>
+</div>
+<p>The code in <a href="#Listing_5">Listing 5</a> should be very 
+familiar to you by now. It really isn't very interesting at this point, and is 
+included in this section solely for completeness.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_5">Listing 5.</a> Complete the GUI.
+</p>
+<pre>
+    displayWindow = new TextField("Initial Text");
+    displayWindow.setEditable(false);//make non-editable
+
+    //add components to the GUI
+    myFrame.add("South", myScrollbar); 
+    myFrame.add("North", displayWindow);
+    myFrame.setSize(300,75);
+    myFrame.setVisible(true);
+
+    //Instantiate a listener object for the Scrollbar and 
+    // register it to receive notification of adjustment 
+    // events.    
+    MyScrollbarListener myScrollbarListener = 
+      new MyScrollbarListener(this);    
+    //Note that the Scrollbar listener is not added as a 
+    // ScrollbarListener but rather is added as an 
+    // AdjustmentListener.
+    myScrollbar.addAdjustmentListener(myScrollbarListener);
+
+    //Close Frame to terminate.    
+    myFrame.addWindowListener(new MyWindowListener());
+  }//end constructor
+}//end class GUI
+</pre>
+</div>
+<p>This fragment creates the display window using a <strong>
+TextField</strong> object. It also adds the two components to the <strong>Frame</strong>, 
+sets the size of the <strong>Frame</strong>, and makes the whole thing visible.</p>
+<p>The fragment also includes typical code to instantiate a 
+listener object for the <strong>Scrollbar</strong> and register it to receive 
+notification of adjustment events.</p>
+<p>This is followed by typical code to register a window listener 
+to terminate the program when the user clicks the close box on the <strong>Frame</strong>.</p>
+<p>That ends the constructor and also ends the definition of the
+<strong>GUI</strong> class. </p>
+<p>The code in <a href="#Listing_6">Listing 6</a> shows the beginning of 
+the <strong>AdjustmentListener</strong> class from which a listener object is 
+instantiated and registered on the <strong>Scrollbar</strong> to listen for 
+adjustment events. This fragment shows the constructor for the class that saves 
+a reference to the <strong>Scrollbar</strong>.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_6">Listing 6.</a> Beginning of class that implements 
+AdjustmentListener.</p>
+<pre>
+class MyScrollbarListener implements AdjustmentListener{
+  GUI thisObject; //save ref to GUI object here
+  
+  MyScrollbarListener(GUI objectIn){//constructor
+    thisObject = objectIn;
+  }//end constructor
+</pre>
+</div>
+<p><a href="#Listing_7">Listing 7</a> shows the beginning of the <strong>adjustmentValueChanged</strong> method, 
+which is the only method declared by the <strong>AdjustmentListener</strong> 
+interface. This method receives a parameter which is an object of type <strong>
+AdjustmentEvent</strong> and serves as the heart of this program.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_7">Listing 7.</a> Beginning of the adjustmentValueChanged 
+method.
+</p>
+<pre>
+  public void adjustmentValueChanged(AdjustmentEvent e){
+    int value;
+    //Display the entire AdjustmentEvent object
+    System.out.println(e); 
+    System.out.println("Adjustable = " + e.getAdjustable());
+    System.out.println("AdjustmentType = " 
+                                   + e.getAdjustmentType());
+</pre>
+</div>
+<p>This fragment uses the incoming object to obtain and display </p>
+<ul>
+	<li>the 
+incoming object, </li>
+	<li>the source of the event, and </li>
+	<li>the type of the event. </li>
+</ul>
+<p>The text output shown in <a href="#Figure_2">Figure 2</a> was produced by the above fragment when the button on 
+the right end of the scrollbar was clicked with the program running under Java 8 
+and Windows 7.</p>
+
+<div class="a">
+	<p>
+<a name="Figure_2">Figure 2.</a> Output produced by clicking right scrollbar 
+button.
+</p>
+<pre>
+java.awt.event.AdjustmentEvent[ADJUSTMENT_VALUE_CHANGED,adjType=UNIT_INCREMENT,
+value=42,isAdjusting=false] on scrollbar0
+Adjustable = java.awt.Scrollbar[scrollbar0,4,51,292x20,val=42,vis=20,min=-10,max
+=110,horz,isAdjusting=false]
+AdjustmentType = 1
+value = 42
+value = 42
+</pre>
+	</div>
+
+<p><a href="#Listing_8">Listing 8</a> uses the incoming object to get the <em>value</em> 
+of the scrollbar and display it in the <strong>TextField</strong> object. The 
+value should represent the position of the bubble <em>(it really represents the 
+position of the left edge of the bubble, not the center).</em></p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_8">Listing 8.</a> Get and display the value of the scrollbar.
+	</p>
+<pre>
+    value = e.getValue();//get and save the value
+    
+    //The following code is here to work around a possible
+    // bug in the Scrollbar object where small negative
+    // values are reported as very large positive values
+    // when the Scrollbar is adjusted by sliding the bubble.
+    // Note that this bug still exists in JDK 1.1.6 but has
+    // been fixed in JDK 1.2.
+    System.out.println("value = " + value);
+    if(value &gt; 65000) value = value - 65536;
+    System.out.println("value = " + value);
+    thisObject.displayWindow.setText("Value = " 
+                      + (value + thisObject.bubbleWidth/2));
+            
+    //The following seems like a kludge but is required to
+    // make the scrollbar bubble stay put. Otherwise, it
+    // jumps back to the previous value when you try to
+    // move it.
+    //Note that this statement is required for JDK 1.1.6
+    // but is not required for the first release of JDK 1.2
+    thisObject.myScrollbar.setValue(value);
+  }//end adjustmentValueChanged()
+  
+}//end class MyScrollbarListener
+</pre>
+</div>
+<p>This fragment contains code to serve as a workaround for a bug 
+in JDK 1.1.6 where small negative values are reported as very large positive 
+values when the Scrollbar is adjusted by dragging the bubble. <em>(Note that this bug 
+has been fixed in JDK 1.2.)</em></p>
+<p>The fragment also contains code to adjust the reported value to 
+the center of the bubble instead of the left edge of the bubble by increasing 
+the value by one-half the width of the bubble. The adjusted value is displayed 
+in the <strong>TextField</strong> object.</p>
+<p>It also contains code to resolve another bug which causes the 
+bubble to jump back to its previous value when you attempt to drag it in JDK 
+1.1.6. <em>(This also has been fixed in JDK 1.2.)</em></p>
+<p>That concludes the interesting code fragments for this program. A complete 
+listing is provided in the next section.</p>
+<h2><a name="Complete_program_listings">Complete program listing</a></h2>
+<p><a href="#Listing_9">Listing 9</a> provides a complete listing of the program. As mentioned earlier, 
+some of the comments related to bugs may no longer apply in Java 8 and beyond.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_9">Listing 9.</a> Complete listing of the program named 
+	Event18.java.</p>
+<pre>
+/*File Event18.java Copyright, R.G.Baldwin
+
+Revised 12/18/97
+This program was designed to be compiled and executed under
+JDK 1.1.3 or later version.
+
+In an earlier version of this program compiled under 
+JDK 1.1, in February 1997, I reported numerous bugs in the
+JDK Scrollbar handling.  I have now recompiled the program 
+and can report that most of the bugs seem to have been fixed,
+although a couple of bugs still seem to exist.
+
+One remaining bug is that if you adjust the scrollbar by
+dragging the bubble into an area which would report negative
+values, large positive values are reported instead of small
+negative values (i.e.: something like 65536 instead of -1).
+This does not happen if the scrollbar is adjusted by 
+clicking on the end buttons or in the area between the
+bubble and the buttons.  A numeric workaround was
+implemented in this program to work around that bug. Note
+that the bug still exists in JDK 1.1.6 but was fixed in the
+first release of JDK 1.2.
+
+Another possible bug is that the scrollbar seems to be able
+to report a value that is one unitIncrement too large for 
+the specified maximum value and bubble width.  Note
+that the bug still exists in JDK 1.1.6 but was fixed in the
+first release of JDK 1.2.
+
+This program places a Scrollbar object and a TextField 
+object in a Frame.  Whenever the bubble in the Scrollbar is
+moved using any of the five available methods for moving 
+the bubble the value of the Scrollbar (which should 
+represent the position of the bubble) is displayed in the
+TextField object.
+
+Also, whenever the bubble is moved, several other pieces of
+information are displayed on the screen which identify
+various parameters of the adjustment.
+
+Closing the frame terminates the program.
+*/
+//=========================================================
+import java.awt.*;
+import java.awt.event.*;
+
+class Event18{
+  public static void main(String[] args){
+    GUI gui = new GUI(); 
+  }//end main
+}//end class Event18
+//==========================================================
+class GUI{
+  Scrollbar myScrollbar;
+  TextField displayWindow;
+  int bubbleWidth;//needs to be accessible by event handler
+  
+  GUI(){
+    Frame myFrame = new Frame("Copyright, R.G.Baldwin");
+    
+    //Instantiate a horizontal Scrollbar object with range 
+    // from 0 to 100, initial position at 50, bubble width 
+    // (page size) of 20, unitIncrement of 2 and a 
+    // blockIncrement of 15.  
+    
+    // The Scrollbar component does not center the bubble on
+    // the value.  Rather, the left edge of the bubble is 
+    // lined up with the value.  The result is that values 
+    // in the upper end of the range cannot be reached 
+    // unless appropriate adjustments are made using half
+    // the bubble width.  This distributes the unreachable
+    // values at each end of the Scrollbar. You can then
+    // set the min and max values to extend beyond the
+    // desired values by one-half the bubble width.
+    bubbleWidth = 20;
+    int initialPosition = 50 - bubbleWidth/2;
+    int min = 0 - bubbleWidth/2;
+    int max = 100 + bubbleWidth/2;
+    myScrollbar = new Scrollbar(Scrollbar.HORIZONTAL, 
+                    initialPosition, bubbleWidth, min, max);
+    
+    //It would have been nice to have included unitIncrement
+    // and blockIncrement as parameters to the constructor 
+    // along with the other constructor parameters. See 
+    // next two statements which set the unitIncrement and
+    // the blockIncrement.  The unitIncrement is the amount
+    // of change resulting from clicking a button on the
+    // end of the Scrollbar.  The blockIncrement is the 
+    // amount of change resulting from clicking between the
+    // bubble and the button on the end.
+    myScrollbar.setBlockIncrement(15);
+    myScrollbar.setUnitIncrement(2);
+    
+    displayWindow = new TextField("Initial Text");
+    displayWindow.setEditable(false);//make non-editable
+
+    //add components to the GUI
+    myFrame.add("South", myScrollbar); 
+    myFrame.add("North", displayWindow);
+    myFrame.setSize(300,75);
+    myFrame.setVisible(true);
+
+    //Instantiate a listener object for the Scrollbar and 
+    // register it to receive notification of adjustment 
+    // events.    
+    MyScrollbarListener myScrollbarListener = 
+      new MyScrollbarListener(this);    
+    //Note that the Scrollbar listener is not added as a 
+    // ScrollbarListener but rather is added as an 
+    // AdjustmentListener.
+    myScrollbar.addAdjustmentListener(myScrollbarListener);
+
+    //Close Frame to terminate.    
+    myFrame.addWindowListener(new MyWindowListener());
+  }//end constructor
+}//end class GUI
+//=========================================================
+
+//Note that unlike some other components which have their 
+// own listener interface, this class does not implement 
+// ScrollbarListener because there is no such interface.
+// Rather, the AdjustmentListener interface is used as a 
+// listener interface for Scrollbars.
+class MyScrollbarListener implements AdjustmentListener{
+  GUI thisObject; //save ref to GUI object here
+  
+  MyScrollbarListener(GUI objectIn){//constructor
+    thisObject = objectIn;
+  }//end constructor
+  
+  public void adjustmentValueChanged(AdjustmentEvent e){
+    int value;
+    //Display the entire AdjustmentEvent object
+    System.out.println(e); 
+    System.out.println("Adjustable = " + e.getAdjustable());
+    System.out.println("AdjustmentType = " 
+                                   + e.getAdjustmentType());
+     
+    //Display the value of the Scrollbar object in the 
+    // TextField.  The value should represent the position 
+    // of the bubble.
+    value = e.getValue();//get and save the value
+    
+    //The following code is here to work around a possible
+    // bug in the Scrollbar object where small negative
+    // values are reported as very large positive values
+    // when the Scrollbar is adjusted by sliding the bubble.
+    // Note that this bug still exists in JDK 1.1.6 but has
+    // been fixed in JDK 1.2.
+    System.out.println("value = " + value);
+    if(value &gt; 65000) value = value - 65536;
+    System.out.println("value = " + value);
+    thisObject.displayWindow.setText("Value = " 
+                      + (value + thisObject.bubbleWidth/2));
+            
+    //The following seems like a kludge but is required to
+    // make the scrollbar bubble stay put. Otherwise, it
+    // jumps back to the previous value when you try to
+    // move it.
+    //Note that this statement is required for JDK 1.1.6
+    // but is not required for the first release of JDK 1.2
+    thisObject.myScrollbar.setValue(value);
+  }//end adjustmentValueChanged()
+  
+}//end class MyScrollbarListener
+//=========================================================
+//Listener to terminate the program when the Frame is 
+// closed.
+class MyWindowListener extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class MyWindowListener
+//=========================================================
+</pre></div>
+<h1><a name="Review">Review</a></h1>
+<p>Q - All of the <strong>Scrollbar </strong>bugs were eliminated in JDK 1.1.3: 
+True or False? If false, explain why. </p>
+<p>A - False. JDK 1.1.3 appears to still have at least two Scrollbar bugs. One 
+bug causes the <em>track</em> event <em>(which involves dragging the bubble in the 
+Scrollbar object) </em>to return large positive values such as 65535 when it should 
+be returning small negative values such as -1. The other apparent bug allows the 
+different versions of the event to return a value larger than would be 
+calculated using the minimum and maximum values along with the width of the 
+bubble. </p>
+<p>Q - The <strong>Scrollbar </strong>bugs listed above cause the <strong>Scrollbar</strong> 
+component to be completely unusable: True or False? If false, explain why. </p>
+<p>A - False. While these two bugs represent a significant inconvenience, it is 
+probably possible to work around both of them by making numeric corrections. </p>
+<p>Q - To create a listener object for a <strong>Scrollbar</strong>, you must 
+implement the <em>ScrollbarListener </em>interface or extend a <em>
+ScrollbarAdapter</em> class: True or False? If false, explain why. </p>
+<p>A - False. To create a listener object for a <strong>Scrollbar</strong>, you 
+do not implement a <em>ScrollbarListener </em>interface or extend a <em>
+ScrollbarAdapter </em>class, because they do not exist. Instead, you implement 
+an <strong>AdjustmentListener </strong>interface. </p>
+<p>Q - To create a listener object for a <strong>Scrollbar</strong>, you can 
+either implement the <em>AdjustmentListener</em> interface or extend the <em>
+AdjustmentAdapter</em> class: True or False? If False, explain why. </p>
+<p>A - False. There is no <em>AdjustmentAdapter</em> class. It isn't needed 
+because the <strong>AdjustmentListener </strong>interface declares only one 
+method with the following signature: </p>
+	
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<pre>
+public abstract void adjustmentValueChanged(AdjustmentEvent e) 
+</pre>
+</div>	
+
+<p>Q - The <strong>adjustmentValueChanged</strong> method is invoked when the 
+value of the <strong>Scrollbar </strong>object is changed: True or False? If 
+false, explain why. </p>
+<p>A - True. </p>
+<p>Q - There are five different types of adjustment events that correspond to 
+the different methods of moving the bubble in a <strong>Scrollbar</strong> 
+object: True or False. If false, explain why. </p>
+<p>A - True. </p>
+<p>Q - As with most of the other classes in the AWT, the <em>AdjustmentListener</em> 
+interface declares a separate method for each type of adjustment event. Each of 
+these methods must be implemented in any class that implements the <em>
+AdjustmentListener</em> interface: True or False? If false, explain why. </p>
+<p>A - False. Only one method is declared in the <em>AdjustmentListener</em> 
+interface. The name of the method is <strong>adjustmentValueChanged</strong>.
+</p>
+<p>Q - The <strong>adjustmentValueChanged</strong> method receives an object 
+of type <strong>AdjustmentEvent</strong> as a parameter, and the type of event 
+is encoded into the object: True or False? If false, explain why. </p>
+<p>A - True. </p>
+<p>Q - In addition to the type of the event, additional information is also 
+encoded into the object that is passed to the <strong>adjustmentValueChanged</strong> 
+method. Give examples of two other kinds of information encoded into the 
+object.. </p>
+<p>A - Information such as the <em>value</em><strong> </strong>of the <strong>Scrollbar
+</strong>and the <em>name</em><strong> </strong>of the <strong>Scrollbar </strong>
+component is also encoded into the object. </p>
+<p>Q - The types of adjustment events are defined as static variables in the 
+<strong>AdjustmentEvent</strong> class. What are the names of these variables, and how 
+do they 
+correspond to user actions on the <strong>Scrollbar </strong>object? </p>
+<p>A - The names of the <strong>static</strong> variables and their relationship 
+to the <strong>Scrollbar </strong>object are:</p>
+<ul>
+	<li>UNIT_INCREMENT - click button on one end of the Scrollbar</li>
+	<li>UNIT_DECREMENT - click button on the other end of the Scrollbar</li>
+	<li>BLOCK_INCREMENT - click in space between bubble and one button</li>
+	<li>BLOCK_DECREMENT - click in space between bubble and other button</li>
+	<li>TRACK - drag the bubble</li>
+</ul>
+<p>Q - The width of the bubble is also referred to by at least two other terms 
+in the <strong>Scrollbar</strong> documentation. What are they? </p>
+<p>A - The other terms used to describe the bubble width are <em>page size</em> 
+and <em>visible</em>. These terms seem to be related to the use of a <strong>
+Scrollbar</strong> on the side or bottom of a window of text where the size of 
+the bubble is indicative of the amount of text that is visible in the window in 
+relation to the amount of text in the entire document.. </p>
+<p>Q - In JDK 1.1.3, the <em>value</em><strong> </strong>of the <strong>Scrollbar</strong> 
+object is represented by the center of the bubble: True or False? If false, 
+explain why. </p>
+<p>A - False. The <em>value</em><strong> </strong>of the <strong>Scrollbar</strong> 
+object is represented by an edge of the bubble. For example, the <em>value</em> 
+is represented by the position of the left edge of the bubble for a horizontal
+<strong>Scrollbar</strong>. If you want the position of the center of the bubble 
+to represent a <em>value</em>, you must perform a numeric correction <em>(involving 
+half the width of the bubble)</em> on the <em>value</em> of the <strong>
+Scrollbar </strong>actually extracted from the event object. </p>
+<p>Q - All necessary initialization parameters for a <strong>Scrollbar</strong> 
+object are provided as parameters to one of the <strong>Scrollbar</strong> 
+constructors: True or False: If false, explain why. </p>
+<p>A - False. Although five different initialization parameters are included as 
+parameters to the <strong>Scrollbar </strong>constructor, other important 
+initialization parameters such as <strong>BlockIncrement</strong> and <strong>
+UnitIncrement</strong> are not included in the parameter list. They must be set 
+following instantiation using methods such as <strong>setBlockIncrement</strong>.
+</p>
+<p>Q - The <strong>AdjustmentEvent</strong> class provides five methods that can 
+be used to obtain information about the event. What are they and what kinds of 
+information do they return? </p>
+<p>A - The five methods and the information that they return are listed below:</p>
+<ul>
+	<li>The <strong>getAdjustable</strong> method returns the identification 
+	of the object that generated the event.</li>
+	<li>The <strong>getAdjustmentType</strong> method returns the 
+	identification of the type of event.</li>
+	<li>The <strong>paramString</strong> method returns a variety of 
+	information which overlaps the two above methods to some extent.</li>
+	<li>The <strong>getValue</strong> method returns the <strong>value
+	</strong>produced by the adjustment.</li>
+	<li>The <strong>getValueIsAdjusting</strong> method returns true if this is one of multiple adjustment events. 
+	<em>(This method was not defined in the class when this chapter was originally written in 1997.)</em></li>
+</ul>
+<p>Q - Write an application that meets the specifications given in the comments 
+in the program shown in <a href="#Listing_10">Listing 10</a>. The graphic screen output produced by the 
+program is shown in <a href="#Figure_3">Figure 3</a>.</p>
+
+<div class="a">
+	<p>
+<a name="Figure_3">Figure 3.</a> Graphic screen output from SampProg125.java.
+	</p>
+<p><img alt="A vertical scrollbar and a label on a Frame object." height="301" src="sampprog125a.jpg" width="301"/></p>
+</div>
+
+
+
+
+
+<p>`</p>
+<div class="a">
+<a name="Listing_10">Listing 10.</a> Complete listing of the program named SampProg125.java.
+<pre>
+/*File SampProg125.java  from chapter 90
+Copyright, R. G. Baldwin
+Without viewing the following solution, write a Java
+application that meets the specifications given below.
+
+To accommodate this program, you will need to be using
+JDK 1.1.3 or a later version.
+
+Write an application that places a vertical Scrollbar and a
+Label on a Frame.  The Label is used to display the 
+position of the center of the bubble in the Scrollbar.
+
+The Scrollbar values should range from approximately -50
+to +50 (exact end points are difficult to achieve).
+
+The width of the bubble should be 10 units.
+
+When you click on the buttons at the end of the Scrollbar,
+the bubble should move by 3 units.
+
+When you click in the area between the bubble and the
+buttons, the bubble should move by 6 units.
+
+When the program starts, the bubble should be centered
+and the Label should indicate a bubble position of 0.
+
+Closing the frame terminates the program.
+
+End of specifications.
+*/
+//=========================================================
+import java.awt.*;
+import java.awt.event.*;
+
+class SampProg125{
+  public static void main(String[] args){
+    GUI gui = new GUI(); 
+  }//end main
+}//end class SampProg125
+//==========================================================
+class GUI{
+  Scrollbar myScrollbar;
+  Label displayWindow;
+  int bubbleWidth;//needs to be accessible by event handler
+  
+  GUI(){
+    Frame myFrame = new Frame("Copyright, R.G.Baldwin");
+    
+    bubbleWidth = 10;
+    int initialPosition = 0 - bubbleWidth/2;
+    int min = -50 - bubbleWidth/2;
+    int max = 50 + bubbleWidth/2;
+    myScrollbar = new Scrollbar(Scrollbar.VERTICAL, 
+                    initialPosition, bubbleWidth, min, max);
+       
+    myScrollbar.setBlockIncrement(6);
+    myScrollbar.setUnitIncrement(3);    
+    
+    displayWindow = new Label("value = 0");
+
+    //add components to the GUI
+    myFrame.add("East", myScrollbar); 
+    myFrame.add("North", displayWindow);
+    myFrame.setSize(300,300);
+    myFrame.setVisible(true);
+
+    //Instantiate a listener object for the Scrollbar and 
+    // register it to receive notification of adjustment 
+    // events.    
+    MyScrollbarListener myScrollbarListener = 
+                            new MyScrollbarListener(this);
+    //Note that the Scrollbar listener is not added as a 
+    // ScrollbarListener but rather is added as an 
+    // AdjustmentListener.
+    myScrollbar.addAdjustmentListener(myScrollbarListener);
+
+    //Close Frame to terminate.    
+    myFrame.addWindowListener(new MyWindowListener());
+  }//end constructor
+}//end class GUI
+//=========================================================
+
+//Note that unlike some other components which have their 
+// own listener interface, this class does not implement 
+// ScrollbarListener because there is no such interface.
+// Rather, the AdjustmentListener interface is used as a 
+// listener interface for Scrollbars.
+class MyScrollbarListener implements AdjustmentListener{
+  GUI thisObject; //save ref to GUI object here
+  
+  MyScrollbarListener(GUI objectIn){//constructor
+    thisObject = objectIn;
+  }//end constructor
+  
+  public void adjustmentValueChanged(AdjustmentEvent e){
+    int value;
+     
+    //Display the value of the Scrollbar object in the 
+    // Label.  The value should represent the position 
+    // of the bubble.
+    value = e.getValue();//get and save the value
+    
+    //The following code is here to work around a possible
+    // bug in the Scrollbar object where small negative
+    // values are reported as very large positive values
+    // when the Scrollbar is adjusted by sliding the bubble.
+    if(value &gt; 65000) value = value - 65536;
+    thisObject.displayWindow.setText("Value = " 
+                      + (value + thisObject.bubbleWidth/2));
+            
+    //The following seems like a kludge but is required to
+    // make the scrollbar bubble stay put. Otherwise, it
+    // jumps back to the previous value when you try to
+    // move it.
+    thisObject.myScrollbar.setValue(value);
+  }//end adjustmentValueChanged()
+  
+}//end class MyScrollbarListener
+//=========================================================
+//Listener to terminate the program when the Frame is 
+// closed.
+class MyWindowListener extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class MyWindowListener
+
+</pre>
+</div>
+
+
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong> </p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java090 Scrollbar (Adjustment) Event 
+					Handling</li>
+					<li>File: Java090.htm</li>
+					<li>Originally published: 1997</li>
+					<li>Revised: 05/06/20</li>
+
+				</ul>
+
+				</div>
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+	
+<p>-end- </p>
+
+
+</body>
+</html>

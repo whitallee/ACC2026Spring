@@ -1,0 +1,418 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb130.htm</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0130: A Gentle Introduction to Methods in Java</h1> 
+
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Discussion">Discussion and sample code</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Complete_program_listings">Complete program listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1 class="auto-style3"> <a name="Preface"></a>Preface</h1>
+<h2> <a name="General">General</a></h2>
+
+
+
+
+
+<p>This chapter is part of an Ebook designed to help you learn 
+to program computers. </p>
+<p>It provides a gentle introduction to Java programming methods.</p>
+<h2><a name="Prerequisites">Prerequisites</a></h2>
+<p>The minimum prerequisites for understanding the material in these chapters 
+include:</p>
+<ul>
+	<li>An understanding of algebra.</li>
+	<li>An understanding of all of the material covered in the earlier chapters 
+	in this Ebook.</li>
+</ul>
+<h2> <a name="Viewing_tip">Viewing tip</a></h2>
+<p> I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3> <a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The price of beans. </li>
+	<li><a href="#Listing_2">Listing 2</a>. Compute the square root of the price of beans.</li>
+	<li><a href="#Listing_3">Listing 3</a>. Display the square root value. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Calling the same methods again. </li>
+	<li><a href="#Listing_5">Listing 5</a>. The program named SqRt01. </li>
+	<li><a href="#Listing_6">Listing 6</a>. A batch file for compiling and running the program named SqRt01. </li>
+</ul>
+<h1 class="auto-style3"> <a name="Discussion">Discussion and sample code</a></h1>
+<h2><a name="Introduction">Introduction</a></h2>
+<p>Methods have been used in computer programming since the early days of programming.  Methods are often called functions, procedures, subroutines, and various other names.
+
+</p>
+<h3>Calculate the square root</h3>
+<p>Suppose that your program needs to calculate the square root of a number.  Referring 
+back to your high-school algebra book, you could refresh your memory on how to calculate a square root.  Then you could 
+construct the algorithm describing that process.</p>
+<p>Having the algorithm available, you could write the code to calculate the square root and insert it into your program code.  Then you could compile, and run your program.  If you did it all correctly, your program should calculate the square root.  
+<em>(For reasons that will become apparent later, I will refer to the code that you inserted as in-line code.)
+</em> </p>
+<h3>Oops, need to do it all over again</h3>
+<p>Suppose that further on in your program you discover that you need to calculate the square root of another number.  And later, you discover that you need to calculate the square root of still another number.  Obviously, with a few changes, you could copy your original code and insert it as 
+<em>in-line code</em> at each location in your program where you need to calculate the square root of a number. </p>
+<h3>Is there a better way?</h3>
+<p>However, after doing this a few times, you might start asking if there is a better way.  The answer is 
+<em>"yes, there is a better way." </em> </p>
+<h3>A method provides a better way</h3>
+<p>The better way is to create a separate program module that has the ability to calculate the square root and make that 
+module available for use as a helper to your main program each time your main program needs to calculate a square root.  In Java, this separate program 
+module is called a 
+<strong>method</strong>. </p>
+<h2><a name="Standard_methods">Standard methods</a></h2>
+<p>The Java programming language contains a large number of methods <em>(in the class libraries)</em> that are already available for your use.  
+<em>(Later, I will illustrate the use of a standard method for calculating the square root of a number.)</em></p>
+<p>In addition to the standard methods that are already available, if you need a method to perform some function and there is no standard method already available to perform that function, you can write your own method. 
+<em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap46/ch46_09.html#method_definition,_syntax">
+Method Definition</a>.)</em></p>
+<h2><a name="Passing_parameters">Passing parameters</a></h2>
+<h3>Make the method general
+
+</h3>
+<p>Normally, when designing and writing a method such as one that can calculate the square root of a number, it is desirable to write it in such a way that it can calculate the square root of any number 
+<em>(as opposed to only one specific number)</em>.  This is accomplished through the use of something called 
+<em>parameters</em>. <em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap51/ch51_08.html#parameter,_assignment_to">
+Assigning to a Parameter</a>.)</em></p>
+<p>The process of causing a method to be executed is commonly referred to as <em>calling the method</em>. </p>
+<h3>Pass me the number please
+
+</h3>
+<p>When your program calls the square-root method, it will need to tell the method the value for which the square root is needed.</p>
+<p>In general, many methods will require that you provide certain kinds of information when you 
+<em>call</em> them.  The code in the method needs this information to be able to accomplish its purpose. </p>
+<h3>Passing parameters </h3>
+<p>This process of  providing information to a method when you call it is commonly referred to as 
+<em>passing parameters</em> to the method.  For the square-root method, you need to pass a parameter whose value is the value of the number for which you need the square root. 
+<em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap51/ch51_02.html#parameter_passing">
+Parameters</a>.)</em></p>
+<h2><a name="Returning_values">Returning values</a></h2>
+<p>A method will usually
+
+    </p>
+<ul>
+	<li>perform an action</li>
+	<li>send back an answer. or</li>
+	<li>some combination of the two </li>
+</ul>
+<h3>Performing an action
+
+</h3>
+<p>An example of a method that performs an action is the standard method named <strong>println</strong>.  We used the 
+<strong>println</strong> method in an earlier chapter to cause information to be displayed on the computer screen.  This method does not need to send back an answer, because that is not the objective of the method.  The objective is simply to display some information. </p>
+<h3>Sending back an answer
+
+</h3>
+<p>On the other hand, a method that is designed to calculate the square root of a number needs to be able to send the square-root value back to the program that called the method.  After all, it wouldn't be very useful if the method calculated the square root and then kept it a secret.  The process of sending back an answer is commonly referred to as 
+<em>returning a value</em>. <em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap52/ch52_05.html#return_statement">
+Returning a Value</a>.)</em></p>
+<h3>Returned values can be ignored
+
+</h3>
+<p>Methods can be designed in such a way that they either will or will not return a value.
+
+When a method does return a value, the program that called the method can either pay attention to that value and use it for some purpose, or ignore it entirely.</p>
+<p>For example, in some cases where a method performs an action and also returns a value, the calling program may elect to ignore the returned value.
+
+On the other hand, if the sole purpose of a method is to return a value, it wouldn't make much sense for a program to call that method and then ignore the value that is returned 
+<em>(although that would be technically possible)</em>.</p>
+<h2><a name="Writing_your_own_methods">Writing your own methods</a></h2>
+<p>As mentioned earlier, you can write your own methods in Java.  I mention this here so you will know that it is 
+possible. I will have more to say about writing your own methods in future 
+chapters.</p>
+<h2><a name="Sample_program">Sample program</a></h2>
+<p>A complete listing of a sample program named <strong>SqRt01.java</strong> is 
+provided in <a href="#Listing_5">Listing 5</a> near the end of the chapter. A 
+batch file that you can use to compile and run the program is provided in
+<a href="#Listing_6">Listing 6</a>.</p>
+<p>When you compile and run the program, the following output should appear on your computer screen:</p>
+<pre>5.049752469181039 
+6.0 </pre>
+<p>As you will see shortly, these are the square root values respectively for 25.5 and 36.</p>
+<h3><a name="What_does_Kjell_have_to_say_about_this">What does Kjell have to say 
+about this</a>?</h3>
+<p>Hopefully by now you will have studied
+<a href="http://programmedlessons.org/Java9/index.html#part02">Kjell</a> 
+Chapters 1 through 7. If not, I suggest that you do that before continuing. 
+Following that, I strongly recommend that you study Kjell
+<a href="http://programmedlessons.org/Java9/chap08/ch08_01.html">Chapter 8, 
+Primitive Data</a>.</p>
+<h3><a name="Interesting_code_fragments">Interesting code fragments</a></h3>
+<p>I will explain portions of this program in fragments.  I will explain only those portions of the program that are germane to this 
+chapter.  Don't worry about the other details of the program.  You will learn about those details in 
+future chapters.</p>
+<p>You may find it useful to open this chapter in another browser window so that you can easily scroll back and forth among the fragments while reading the discussion. 
+Also see links to the program listings <a href="#Listings">here</a>.</p>
+<p>The first code fragment that I will explain is shown in <a href="#Listing_1">
+Listing 1</a>.</p>
+
+<div class="a">
+<a name="Listing_1">Listing 1</a>. The price of beans.
+
+<pre>
+    double beans;
+    beans = 25.5;
+</pre>
+</div>
+
+<h3>What is the price of beans?</h3>
+<p>The code fragment shown in <a href="#Listing_1">
+Listing 1</a> declares a <em>variable</em> named <strong>beans</strong> and assigns a value of 25.5 to the variable.  
+<em>(I briefly discussed the declaration of variables in a previous chapter.  I will discuss them in more detail in a 
+future chapter.) </em> </p>
+<h3>What is that double thing?</h3>
+<p>In an earlier chapter, I declared a variable with a type named <strong>int</strong>. At 
+that time, I explained that only integer values could be stored in that variable.</p>
+<p>The variable named <strong>beans</strong> in <a href="#Listing_1">
+Listing 1</a> is declared to be of the type <strong>double</strong>.  I will 
+explain the concept of data types in detail in a future chapter. <em>(Actually 
+you have already learned a lot about data types in
+<a href="http://programmedlessons.org/Java9/chap08/ch08_02.html">Kjell Data 
+Types</a>.)</em> Briefly, <strong>
+double</strong> 
+means that you can store (almost) any numeric value in this variable, with or without a 
+decimal part. In other words, you can store a value of 3 or a value of 3.33 in 
+this variable, whereas a variable with a declared type of <strong>int</strong> 
+won&#39;t accept a value of 3.33. <em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap13/ch13_02.html#double">Size of 
+Floats</a>.)</em></p>
+<h3>Every method has a name</h3>
+<p>Every method, every variable, and some other things as well have names. The 
+names in Java are <em>case sensitive</em>.  
+By case sensitive, I mean that the method named <strong>amethod</strong> is not the same as the method named 
+<strong>aMethod</strong>.
+
+<em>(See Kjell <a href="http://programmedlessons.org/Java9/chap09/ch09_06.html">
+Names for Variables</a>.)</em></p>
+<h3>A few words about names in Java</h3>
+<p>There are several rules that define the format of allowable names in Java. 
+You can dig into this in more detail on the web if you like, but if you follow 
+these two rules, you will be okay:</p>
+<ul>
+	<li>Use only letters and numbers in Java names.</li>
+	<li>Always make the first character a letter.</li>
+</ul>
+<h3>A standard method named sqrt</h3>
+<p>Java provides a <strong>Math</strong> library that contains many standard methods.  Included in those methods is 
+a method named 
+<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#sqrt-double-">sqrt</a> that will calculate and return the square root of a number that is passed as a parameter when 
+the method is 
+called.</p>
+<p>The <strong>sqrt</strong> method is called on the right-hand side of the equal sign 
+(=) in the code fragment in <a href="#Listing_2">Listing 2</a>. <em>(You will 
+learn later that the equal sign when used in this way is called the <strong>
+assignment operator</strong>.) (See Kjell
+<a href="http://programmedlessons.org/Java9/chap09/ch09_11.html#assignment_statement">
+Assignment Statement Syntax</a>.)</em></p>
+<div class="a">
+<a name="Listing_2">Listing 2</a>. Compute the square root of the price of 
+beans.
+<pre>
+    double sqRtBns = Math.sqrt(beans);
+</pre>
+</div>
+
+<h3>Calling the sqrt method</h3>
+<p>The code fragment in <a href="#Listing_2">Listing 2</a></p>
+<ul>
+	<li>calls the <strong>sqrt</strong> method and </li>
+	<li>passes a copy of the value stored in the <strong>beans</strong> variable as a parameter.</li>
+</ul>
+<p>The <strong>sqrt</strong> method calculates and returns the square root of the number that it receives as its incoming parameter. 
+In this case, it returns the square root of the price of a can of beans.</p>
+<h3>A place to save the square root
+
+</h3>
+<p>I needed some place to save the square root value until I could display it on the computer screen 
+later in the program. I declared another variable named <strong>sqRtBns</strong> in the code fragment in <a href="#Listing_2">Listing 2</a>.  I also caused the value returned from the 
+<strong>sqrt</strong> method to be stored in, or <strong><em>assigned to</em></strong>, this new variable named
+<strong>sqRtBns</strong>.</p>
+<h3>How should we interpret this code fragment?</h3>
+<p>You can think of the process implemented by the code fragment in <a href="#Listing_2">Listing 2</a> as follows.</p>
+<p>First note that there is an equal sign (=) near the center of the line of 
+code.  <em>(As promised earlier, this is called the <strong>assignment operator</strong>.)</em></p>
+<p>The code on the left-hand side of the assignment operator causes a new chunk of memory to be set aside and named
+<strong>sqRtBns</strong>.  <em>(We call this chunk of code a <strong>variable</strong>.)</em></p>
+<p>The code on the right-hand side of the assignment operator calls the <strong>sqrt</strong> method, passing a copy of the value stored in the 
+<strong>beans</strong> variable to the method.</p>
+<p>When the <strong>sqrt</strong> method returns the value that is the square root of its incoming parameter, the assignment operator causes that value to be stored and saved in 
+<em>(assigned to)</em> the variable named
+<strong>sqRtBns</strong>.</p>
+<h3>Now display the square root value</h3>
+<p>The code in the fragment in <a href="#Listing_3">Listing 3</a> causes the value now stored in 
+<strong>sqRtBns</strong> to be displayed on the computer screen. </p>
+<div class="a">
+<a name="Listing_3">Listing 3</a>. Display the square root value.
+
+<pre>
+    System.out.println(sqRtBns);
+</pre>
+</div>
+
+<h3>Another method is called here</h3>
+<p>The display of the square root value is accomplished by </p>
+<ul>
+	<li>calling another standard method named 
+	<a href="https://docs.oracle.com/javase/8/docs/api/java/io/PrintStream.html#println--">println</a> and </li>
+	<li>passing a copy of the value stored in <strong>sqRtBns</strong> as a parameter to the method.</li>
+</ul>
+<p>The <strong>println</strong> method performs an action <em>(displaying something on the computer screen)</em> and doesn't return a value. </p>
+<h3>A method exhibits behavior</h3>
+<p>We say that a method exhibits behavior. The behavior of the <strong>sqrt</strong> method is to calculate and return the square root of the value passed 
+to it as a parameter.  </p>
+<p>The behavior of the <strong>println</strong> method is to cause its incoming parameter to be displayed on the computer screen. </p>
+<h3>What do we mean by syntax?</h3>
+<p>Syntax is a word that is often used in computer programming. The 
+thesaurus in the editor that I am using to type this document says that a 
+synonym for syntax is grammar.</p>
+<h3>Syntax for passing parameters</h3>
+<p>Note the syntax in <a href="#Listing_2">Listing 2</a> and
+<a href="#Listing_3">Listing 3</a> for passing a parameter to the method.  The syntax consists of following the name of the method with a pair of matching parentheses that contain the parameter.  If 
+more than one parameter is being passed, they are all included within the parentheses and separated by commas. 
+Usually, the order of the parameters is important if more than one parameter is 
+being passed.</p>
+<h3>Reusing the methods</h3>
+<p>The purpose of the code fragment in <a href="#Listing_4">Listing 4</a> is to 
+illustrate the reusable nature of methods. </p>
+<div class="a">
+<a name="Listing_4">Listing 4</a>. Calling the same methods again.
+
+<pre>
+    double peas;
+    peas = 36.;
+    double sqRtPeas = Math.sqrt(peas);
+    System.out.println(sqRtPeas); 
+</pre>
+</div>
+
+<p>The code in this fragment calls the same <strong>sqrt</strong> method 
+that was called before. In this case, the method is called to calculate the 
+square root of the value stored in the variable named <strong>peas </strong>
+instead of the value stored in the variable named <strong>beans</strong>.</p>
+<p>This fragment saves the value returned from the <strong>sqrt</strong> method 
+in a new variable named <strong>sqRtPeas</strong>.  Then 
+the fragment calls the same <strong>println</strong> method as before to display the value now stored in the variable named
+<strong>sqRtPeas</strong>. </p>
+<h3>Write once and use over and over</h3>
+<p>Methods make it possible to write some code once and then use that code many times in the same program.  This is the opposite of 
+<em>in-line code</em>, which requires you to write essentially the same code multiple times in order to accomplish the same purpose more than once in 
+a program.</p>
+<p>Methods that have been written and stored in libraries can be used many times 
+in many different programs. In Java, the compiled versions of methods, commonly 
+known as class files, are stored in the library. The compiled version of the 
+method named <strong>sqrt</strong> is stored in a standard Java library 
+that comes as part of the Java Development Kit (JDK).</p>
+<h1 class="auto-style3"><a name="Run_the_program">Run the program</a></h1>
+	<p>I encourage you to run the program that I presented in this chapter 
+	to confirm that you get the same results. Experiment with 
+the code, making changes, and observing the results of your changes. Make 
+certain that you can explain why your changes behave as they do. </p>
+<h1 class="style1"><a name="Complete_program_listings">Complete program listings</a></h1>
+<p><a href="#Listing_5">Listing 5</a> is a complete listing of the program 
+named <strong>SqRt01</strong>.</p>
+<div class="a">
+<a name="Listing_5">Listing 5</a>. The program named SqRt01.
+
+<pre>
+//File SqRt01.java
+class SqRt01 { 
+  public static void main(String[] args){
+    double beans;
+    beans = 25.5;
+    double sqRtBns = Math.sqrt(beans);
+    System.out.println(sqRtBns);
+    double peas;
+    peas = 36.;
+    double sqRtPeas = Math.sqrt(peas);
+    System.out.println(sqRtPeas); 
+  }//end main 
+}//End SqRt01 class</pre>
+</div>
+
+<p><a href="#Listing_6">Listing 6</a> contains the commands for a batch file that can be used to 
+compile and run the program named <strong>SqRt01</strong>.</p>
+
+
+<div class="a">
+<a name="Listing_6">Listing 6</a>. A batch file for compiling and running the 
+program named SqRt01.
+
+<pre>
+echo off
+cls
+
+del *.class
+
+javac -cp .; SqRt01.java
+java -cp .; SqRt01
+
+pause</pre>
+</div>
+
+
+<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+
+<div class="a">	<p>Housekeeping material 
+</p>
+
+<ul>
+<li>Prof. Richard G. Baldwin</li>
+	<li>Chapter name: Jb0130: A Gentle Introduction to Methods in Java</li>
+<li>File: Jb0130.htm </li>
+	<li>Revised: 06/06/22</li>
+</ul>
+</div>
+
+<p>-end- </p>
+
+</body>
+</html>

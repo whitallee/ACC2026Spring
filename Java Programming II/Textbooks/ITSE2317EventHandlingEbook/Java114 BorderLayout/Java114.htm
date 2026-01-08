@@ -1,0 +1,719 @@
+<html><head>
+   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+   <meta name="generator" content="mozilla/4.04 [en] (win95; i) [netscape]">
+   <meta name="author" content="richard g. baldwin">
+   <title>... in Java by Richard G Baldwin</title></head><body><!--start-->
+
+<center><h3><b><i>Richard G Baldwin (512) 223-4758, <a href="mailto:baldwin@austin.cc.tx.us">baldwin@austin.cc.tx.us</a>,
+<a href="http://www2.austin.cc.tx.us/baldwin/">http://www2.austin.cc.tx.us/baldwin/</a></i></b></h3></center>
+
+<center><h2><b><!--title-->The AWT Package, Arranging Components in Containers, BorderLayout<!--endtitle--></b></h2></center>
+Java Programming, Lecture Notes # 114, Revised 02/21/98.
+<ul><li><a href="#preface">Preface</a></li>
+
+<li><a href="#introduction">Introduction</a></li>
+
+<li><a href="#borderlayout">BorderLayout</a></li>
+
+<li><a href="#plain vanilla sample program">Plain Vanilla Sample Program</a></li>
+
+<ul><li><a href="#discussion of first program">Discussion of First Program</a></li>
+
+<li><a href="#interesting code fragments in first program">Interesting Code
+Fragments in First Program</a></li>
+
+<li><a href="#program listing of first program">Program Listing of First Program</a></li></ul>
+
+<li><a href="#second sample program">Second Sample Program</a></li>
+
+<ul><li><a href="#discussion">Discussion</a></li>
+
+<li><a href="#interesting code fragments">Interesting Code Fragments</a></li>
+
+<li><a href="#program listing">Program Listing</a></li></ul>
+
+<li><a href="#review">Review</a></li></ul>
+
+<hr width="100%"><center><h2><a name="preface"></a><b><font color="#ff0000">Preface</font></b></h2></center>
+Students in Prof. Baldwin's <b><u>Intermediate Java Programming</u></b>
+classes at ACC are responsible for knowing and understanding all of the
+material in this chapter.
+
+<p>JDK 1.1 was formally released on February 18, 1997. This chapter was
+originally written on March 6, 1997 using the software and documentation
+in the JDK 1.1 download package.
+<center><h2><a name="introduction"></a><font color="#ff0000">Introduction</font></h2></center>
+This is one in a series of chapters that concentrate on the package <b>java.awt
+</b>where most of the functionality exists for providing the user interface
+to your application or applet.
+<center><h2><a name="borderlayout"></a><font color="#ff0000">BorderLayout</font></h2></center>
+In a previous chapter, we learned how to create a <b>Frame</b> object and
+place <b>Button</b> and <b>Label</b> components in the frame using <i>absolute
+coordinates</i>. We also learned that there can be some cross-platform
+compatibility problems with such an approach.
+
+<p>This chapter looks at the first of several different approaches designed
+to place components in a container while minimizing cross-platform compatibility
+problems. This is accomplished using <i>layout manager classes</i>. In
+this chapter, we will concentrate on the <b>BorderLayout</b> class.
+
+<p>With the <b>BorderLayout</b> class, you can place <u>up to five</u>
+different components in a container. If you place all five components in
+the container, four of the components will be positioned along the edges
+of the container and the fifth will be in the center.
+
+<p>You specify the position of each component when you <b>add</b> the component
+to the container using the strings <font color="#000000">"<b>North</b>",
+"<b>South</b>", "<b>East</b>", "<b>West</b>" and "<b>Center</b>".</font>
+
+<p><font color="#000000">For example, the following three statements would</font><ul><li><font color="#000000">create a new <b>Panel</b> container,</font></li>
+
+<li><font color="#000000">specify that components are to be placed in the container
+using a <b>BorderLayout</b> manager, and</font></li>
+
+<li><font color="#000000">place a single <b>Button</b> object at the bottom
+("<b>South</b>") position in the container.</font></li></ul><font color="#000000">.</font><br/>
+<div class="a"><b><tt><font color="#000000">//create a Panel container object</font></tt></b>
+<br/><b><tt><font color="#000000">Panel p = new Panel();</font></tt></b>
+
+<p><b><tt><font color="#000000">//specify use of the BorderLayout manager</font></tt></b>
+<br/><b><tt><font color="#000000">p.setLayout(new BorderLayout());</font></tt></b>
+<pre><b><tt><font color="#000000">//add a button at the bottom
+p.add(new Button("Okay"), "South");</font></tt></b></pre></div><font color="#000000"><b>BorderLayout </b>interprets the <u>absence</u>
+of a string location specification the same as "<b>Center</b>".</font>
+
+<p><font color="#000000">The "<b>North</b>", "<b>South</b>", "<b>East</b>"
+and "<b>West</b>" components get sized and positioned according to their
+<i>preferred sizes</i> and the constraints of the container's size. The
+"<b>Center</b>" component gets any <u>space left over</u>.</font>
+
+<p><font color="#000000">Regarding the <i>preferred size</i> mentioned
+above, according to <u>Exploring Java</u> by Niemeyer &amp; Peck:</font><br/>
+<div class="a"><font color="#000000">"Every component has two important pieces of
+information used by the layout manager in placing and sizing it: <u>a preferred
+size</u> and a <u>minimum size</u>. ... For example, a plain <b>Button</b>
+object can be resized to any proportions. However, the button's designer
+can provide a preferred size for a good-looking button. The layout manager
+might use this size when there are no other constraints, or it might ignore
+it, depending on its scheme. Now, if we give the button a label, the button
+may need a minimum size in order to display itself properly. The layout
+manager might show more respect for the button's minimum size and guarantee
+that it has at least that much space."</font></div><font color="#000000">According to <u>Java AWT Reference</u> by John Zukowski:</font><br/>
+<div class="a"><font color="#000000">"The <b>getPreferredSize()</b> method returns
+the <b>Dimension</b> (width and height) for the preferred size of the components
+within the container. The container determines its preferred size by calling
+the <b>preferredLayoutSize()</b> method of the current <b>LayoutManager</b>,
+which says how much space the layout manager needs to arrange the components.
+If you override this method, you are overriding the default preferred size."</font></div><font color="#000000">For example, the following code fragment is taken
+from a subsequent chapter on Java Beans. A Java Bean is a reusable component
+having certain specific characteristics. In this case, the <b>getPreferredSize()</b>
+method of the class that defines the Java Bean has been overridden to establish
+the preferred size for the Java Bean object to be a square, fifty pixels
+on each side.</font><br/>
+<div class="a"><pre> //This method defines the preferred display size of the
+ // bean object.
+ public synchronized Dimension getPreferredSize(){
+ return new Dimension(50,50);
+ }//end getPreferredSize()</pre></div><font color="#000000">Our first example program will illustrate how the
+<b>BorderLayout</b> manager adjusts the size of a button to accommodate
+the minimum size needed to display a long label on the button.</font>
+
+<p><font color="#000000">The most straightforward way to specify a layout
+manager is to invoke the <b>setLayout()</b> method on the <b>Container</b>
+object passing an object of a class that <i>implements</i> the <b>LayoutManager
+</b>interface as a parameter.</font>
+
+<p><font color="#000000"><b>BorderLayout</b> is a class that extends <b>Object</b>
+and implements <b>LayoutManager2</b>. (If you are curious about the minimal
+difference between <b>LayoutManager</b> and <b>LayoutManager2</b>, it would
+be a good exercise to look it up in the JDK 1.1 documentation.)</font>
+
+<p><font color="#000000">The documentation defines the <b>setLayout()</b>
+method as follows:</font><br/>
+<div class="a"><tt><font color="#000000">public void setLayout(LayoutManager mgr)</font></tt>
+<ul><pre><tt><font color="#000000">Parameters: mgr - the specified layout manager</font></tt></pre></ul></div><font color="#000000"><b>BorderLayout</b> has the following constructors:</font><br/>
+<div class="a"><tt><font color="#000000">BorderLayout() -- Constructs a new BorderLayout
+with no gaps between components.</font></tt>
+
+<p><tt><font color="#000000">BorderLayout(int, int) -- Constructs a BorderLayout
+with the specified gaps.</font></tt></div><font color="#000000">In addition, the <b>BorderLayout</b> class has numerous
+methods as shown in the following list. We will look at a couple of these
+methods in the example programs in this chapter. The term <i>Deprecated</i>
+in the following list indicates an old method from JDK 1.0 that has been
+replaced by another method in JDK 1.1 and should no longer be used. Apparently
+the interpretation of <i>Deprecated</i> is that the method is still being
+supported, but won't be supported in some future release of the JDK.</font><ul><li><b><font color="#000000">addLayoutComponent(Component, Object)</font></b><font color="#000000">
+-- Adds the specified component to the layout, using the specified constraint
+object.</font></li>
+
+<li><b><font color="#000000">addLayoutComponent(String, Component)</font></b><font color="#000000">
+-- Replaced by addLayoutComponent(Component, Object). <i>Deprecated</i>.</font></li>
+
+<li><b><font color="#000000">getHgap()</font></b><font color="#000000"> --
+Returns the horizontal gap between components.</font></li>
+
+<li><b><font color="#000000">getLayoutAlignmentX(Container) </font></b><font color="#000000">--
+Returns the alignment along the x axis.</font></li>
+
+<li><b><font color="#000000">getLayoutAlignmentY(Container)</font></b><font color="#000000">
+-- Returns the alignment along the y axis.</font></li>
+
+<li><b><font color="#000000">getVgap() </font></b><font color="#000000">--
+Returns the vertical gap between components.</font></li>
+
+<li><b><font color="#000000">invalidateLayout(Container)</font></b><font color="#000000">
+-- Invalidates the layout, indicating that if the layout manager has cached
+information it should be discarded.</font></li>
+
+<li><b><font color="#000000">layoutContainer(Container)</font></b><font color="#000000">
+-- Lays out the specified container.</font></li>
+
+<li><b><font color="#000000">maximumLayoutSize(Container)</font></b><font color="#000000">
+-- Returns the maximum dimensions for this layout given the components
+in the specified target container.</font></li>
+
+<li><b><font color="#000000">minimumLayoutSize(Container)</font></b><font color="#000000">
+-- Returns the minimum dimensions needed to layout the components contained
+in the specified target container.</font></li>
+
+<li><b><font color="#000000">preferredLayoutSize(Container)</font></b><font color="#000000">
+-- Returns the preferred dimensions for this layout given the components
+in the specified target container.</font></li>
+
+<li><b><font color="#000000">removeLayoutComponent(Component)</font></b><font color="#000000">
+-- Removes the specified component from the layout.</font></li>
+
+<li><b><font color="#000000">setHgap(int) </font></b><font color="#000000">--
+Sets the horizontal gap between components.</font></li>
+
+<li><b><font color="#000000">setVgap(int)</font></b><font color="#000000">
+-- Sets the vertical gap between components.</font></li>
+
+<li><b><font color="#000000">toString() </font></b><font color="#000000">--
+Returns the String representation of this BorderLayout's values.</font></li></ul><font color="#000000">We will take a look at two different example programs
+in this chapter. The first one will be designed for extreme simplicity while
+the second one will provide additional functionality.</font><center><h2><a name="plain vanilla sample program"></a><font color="#ff0000">Plain
+Vanilla Sample Program</font></h2></center><font color="#000000">This program was designed to be extremely simple.
+It contains only the code necessary to create a "Plain Vanilla" visual
+object by placing five <u>non-functional</u> Button objects on a Frame
+object using the <u>default</u> <b>BorderLayout</b> manager. (The buttons
+are non-functional because there are no event listener objects registered
+for them.)</font>
+
+<p><font color="#000000">One of the buttons is given a <u>long label</u>
+to force the layout manager to allocate space according to the minimum
+size requirement of that particular button.</font><center><h3><a name="discussion of first program"></a><font color="#ff0000">Discussion
+of First Program</font></h3></center><font color="#000000">If you compile and execute this program, you will
+see that you can resize the <b>Frame</b> object, and that <u>within limits</u>,
+the components will automatically be resized to accommodate the overall
+size of the frame.</font>
+
+<p><font color="#000000">You will also note that not all of the possible
+problems are eliminated. It is still possible to make the frame sufficiently
+small that</font><ul><li><font color="#000000">first the labels begin to be truncated,</font></li>
+
+<li><font color="#000000">then the center button disappears completely, and</font></li>
+
+<li><font color="#000000">finally the buttons on the side can be made to disappear.</font></li></ul><font color="#000000">However, this visual component is much better able
+to accommodate resizing than was the case in an earlier chapter that contained
+components placed and sized on an <u>absolute</u> coordinate basis.</font>
+
+<p><font color="#000000">Another thing to notice is the way in which the
+larger <u>minimum size requirement</u> of the button on the "East" (caused
+by a longer label) is accommodated automatically with the extra space needed
+being taken from the button in the "Center".</font><center><h3><a name="interesting code fragments in first program"></a><font color="#ff0000">Interesting
+Code Fragments in First Program</font></h3></center><font color="#000000">The following code fragment was extracted from the
+constructor of the the GUI object.</font><br/>
+<div class="a"><pre> Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ myFrame.add(new Button("South"),"South");
+ myFrame.add(new Button("West"),"West");
+ myFrame.add(new Button("North"),"North");
+ myFrame.add(new Button(
+ "East with a long label"),"East");
+ myFrame.add(new Button("Center"),"Center");
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);</pre></div><font color="#000000">These statements create a new <b>Frame</b> object
+and add five <i>anonymous </i><b>Button</b> objects to the frame specifying
+the location of each object using the strings: "South", "West", etc.</font>
+
+<p><font color="#000000">Then the size of the frame is established, and
+frame and its components are made visible.</font>
+
+<p><font color="#000000">The label on the button in the "East" position
+was made longer than the others to cause the minimum size of that button
+to be larger than the minimum size of each of the other buttons.</font><center><h3><a name="program listing of first program"></a><font color="#ff0000">Program
+Listing of First Program</font></h3></center><font color="#000000">A complete listing of the program follows.</font><br/>
+<div class="a"><pre>/*File Layout02.java Copyright, R.G.Baldwin
+Revised 10/27/97 to better fit within the space.
+This program is designed to be compiled and run under
+JDK 1.1
+
+This program creates a "Plain Vanilla" visual object by
+placing five non-functional Button objects on a Frame
+object using the default BorderLayout manager.
+
+One of the buttons is given a long label in order to force
+the layout manager to allocate space according to the
+minimum size requirement of that particular button.
+
+The program was tested using JDK 1.1 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class Layout02 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout02
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ myFrame.add(new Button("South"),"South");
+ myFrame.add(new Button("West"),"West");
+ myFrame.add(new Button("North"),"North");
+ myFrame.add(new Button(
+ "East with a long label"),"East");
+ myFrame.add(new Button("Center"),"Center");
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+ }//end constructor
+}//end class GUI definition
+//=======================================================//</pre></div><font color="#000000">The next sample program is slightly more realistic
+in that it includes functional buttons and makes use of some of the methods
+and parameters of the <b>BorderLayout</b> Class</font><center><h2><a name="second sample program"></a><font color="#ff0000">Second Sample
+Program</font></h2></center>
+This program has more substance that the previous one in this chapter, although
+it still doesn't do anything particularly useful. It is designed simply
+to illustrate additional aspects of the use of the <b>BorderLayout</b>
+class as a layout manager.
+<center><h3><a name="discussion"></a><font color="#ff0000">Discussion</font></h3></center>
+Five buttons are added to a frame using a <b>BorderLayout </b>object as
+the layout manager with a <u>three-pixel gap</u> between components in
+both the horizontal and vertical direction.
+
+<p>An <u>action listener object</u> is instantiated and registered to listen
+for action events on all five of the buttons, with all five buttons <u>sharing</u>
+the same action event handler.
+
+<p>The behavior of the action event handler is to <u>increase the spacing</u>
+between components by five pixels whenever any of the buttons is pressed.
+This is accomplished by
+<ul><li>
+increasing the <b>Vgap </b>and <b>Hgap </b>attributes of the <b>BorderLayout</b>
+object,</li>
+
+<li>
+setting the layout manager of the frame to the modified <b>BorderLayout</b>
+object, and</li>
+
+<li>
+validating the frame.</li></ul>
+The validation step is required in order for the change to take effect
+and become visible.
+
+<p>If you click the buttons repeatedly, three of the buttons will <u>shrink
+entirely out of sight</u>. They can be made to <u>reappear</u> by physically
+enlarging the frame.
+
+<p>A <b>windowClosing()</b> event listener object is instantiated and registered
+on the frame to terminate the program when the frame is closed.
+
+<p>The program was tested using JDK 1.1 running under Win95.
+<center><h3><a name="interesting code fragments"></a><font color="#ff0000">Interesting
+Code Fragments</font></h3></center>
+The three statements in the following code fragment
+<ul><li>
+instantiate a <b>Frame </b>object,</li>
+
+<li>
+instantiate a <b>BorderLayout</b> object with a gap of three pixels between
+components in both the horizontal and vertical directions, and</li>
+
+<li>
+establish this <b>BorderLayout</b> object as the layout manager for the
+<b>Frame </b>object.</li></ul>
+.
+<br/>
+<div class="a"><pre> Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+
+ BorderLayout myBorderLayout = new BorderLayout(3,3);
+
+ myFrame.setLayout(myBorderLayout);</pre></div>
+The following statement is typical of those used to instantiate five Button
+objects.
+<br/>
+<div class="a"><pre> Button button1 = new Button("South");</pre></div>
+The following statement is typical of those used to add all five Button
+objects to the Frame object.
+<br/>
+<div class="a"><pre> myFrame.add(button1,"South");</pre></div>
+The following statements are typical of those used to instantiate an action
+listener object and register it to listen for action events on <u>all five</u>
+buttons.
+<br/>
+<div class="a"><pre> MyActionListener myActionListener =
+ new MyActionListener(myBorderLayout,myFrame);
+ button1.addActionListener(myActionListener);</pre></div>
+The following code in the <b>actionPerformed()</b> event handler uses the
+<b>BorderLayout</b> methods <b>getHgap(), setHgap(), getVgap(), and setVgap()</b>
+to modify the vertical and horizontal gap attributes of the <b>BorderLayout</b>
+object.
+
+<p>Then the modified <b>BorderLayout()</b> object is used in conjunction
+with <b>setLayout()</b> to cause the <u>modified</u> <b>BorderLayout</b>
+object to become the layout manager for the <b>Frame</b> object. (Note
+that the layout manager for the <b>Frame</b> object is being modified at
+runtime.)
+
+<p>Then the <b>validate()</b> method is used to force the <b>Frame</b>
+object to readjust the size and locations of its components and to display
+the modified version of itself.
+<br/>
+<div class="a"><pre> public void actionPerformed(ActionEvent e){
+ myBorderLayoutObject.setHgap(
+ myBorderLayoutObject.getHgap() + 5 );
+ myBorderLayoutObject.setVgap(
+ myBorderLayoutObject.getVgap() + 5 );
+ myFrameObject.setLayout(myBorderLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()</pre></div>
+
+<pre>.</pre>
+
+<center><h3><a name="program listing"></a><font color="#ff0000">Program Listing</font></h3></center>
+A complete listing of the program with additional comments follows.
+<br/>
+<div class="a"><pre>/*File Layout03.java Copyright, R.G.Baldwin
+Revised 10/26/97 to cause the source code to better fit in
+the allocated space in the chapter.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+This program has more substance that the previous one in
+this chapter, although it doesn't do anything particularly
+useful.
+
+Five buttons are added to a frame using a BorderLayout
+object as the layout manager with a three-pixel gap between
+components in both the horizontal and vertical direction.
+
+An action listener object is instantiated and registered to
+listen for action events on all five of the buttons, with
+all five buttons sharing the same event handler.
+
+The behavior of the action event handler is to increase the
+spacing between components whenever any of the buttons is
+pressed. This is accomplished by increasing the Vgap and
+Hgap attributes of the BorderLayout object, setting the
+layout manager of the frame to the modified BorderLayout
+object, and validating the frame. The validation step is
+required in order for the change to become visible.
+
+If you continue to click the buttons long enough, three of
+the buttons will shrink entirely out of sight. They can be
+made to reappear by manually enlarging the frame.
+
+A windowClosing() event listener object is instantiated and
+registered on the frame to terminate the program when the
+frame is closed.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class Layout03 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout03
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Instantiate a BorderLayout object with default Center
+ // alignment and a Vgap and Hgap of 3 pixels.
+ BorderLayout myBorderLayout = new BorderLayout(3,3);
+ //Set the layout manager for the frame to be the
+ // BorderLayout object.
+ myFrame.setLayout(myBorderLayout);
+
+ //Instantiate five Button objects
+ Button button1 = new Button("South");
+ Button button2 = new Button("West");
+ Button button3 = new Button("North");
+ Button button4 = new Button("East");
+ Button button5 = new Button("Center");
+
+ //Add the five Button objects to the Frame object in
+ // the positions specified.
+ myFrame.add(button1,"South");
+ myFrame.add(button2,"West");
+ myFrame.add(button3,"North");
+ myFrame.add(button4,"East");
+ myFrame.add(button5,"Center");
+
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+
+ //Instantiate an action listener object and register
+ // it on all five buttons.
+ MyActionListener myActionListener =
+ new MyActionListener(myBorderLayout,myFrame);
+ button1.addActionListener(myActionListener);
+ button2.addActionListener(myActionListener);
+ button3.addActionListener(myActionListener);
+ button4.addActionListener(myActionListener);
+ button5.addActionListener(myActionListener);
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class MyActionListener implements ActionListener{
+ BorderLayout myBorderLayoutObject;
+ Frame myFrameObject;
+
+ //constructor
+ MyActionListener(
+ BorderLayout layoutObject,Frame inFrame){
+ myBorderLayoutObject = layoutObject;//save references
+ myFrameObject = inFrame;
+ }//end constructor
+
+ //When an action event occurs, increase the horizontal
+ // and vertical gap between components in the
+ // BorderLayout object. Then set the layout manager for
+ // the frame to be the newly-modified BorderLayout
+ // object. Then validate the frame to ensure a valid
+ // layout so that the new visual will take effect.
+ public void actionPerformed(ActionEvent e){
+ myBorderLayoutObject.setHgap(
+ myBorderLayoutObject.getHgap() + 5 );
+ myBorderLayoutObject.setVgap(
+ myBorderLayoutObject.getVgap() + 5 );
+ myFrameObject.setLayout(myBorderLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class MyActionListener
+
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</pre></div>
+
+<center><h2><a name="review"></a><font color="#ff0000">Review</font></h2></center>
+Q - Without viewing the solution that follows, rewrite the program named
+Layout03 with the following changes:
+
+<p>As in the program named Layout03, five buttons are added to a Frame
+object using a BorderLayout object as the layout manager with a one-pixel
+gap between components in both the horizontal and vertical direction. There
+are no captions on any of the buttons.
+
+<p>When the program starts, the buttons in the East and West positions
+are each approximately 100 pixels wide and the button in the Center is
+approximately 50 pixels wide.
+
+<p>Each time you click on any of the buttons, the horizontal gap between
+buttons increases by five pixels. However, the widths of the East and West
+buttons don't change appreciably. In other words, the increase in horizontal
+gap is accommodated almost entirely as a result of the Center button becoming
+narrower.
+
+<p>If you continue to click the buttons long enough, the Center button
+will shrink entirely out of sight but the other four buttons will continue
+to be visible with no apparent change in size. The Center button can be
+made to reappear by manually enlarging the Frame.
+
+<p>If you manually increase the width of the Frame, the widths of the East
+and West buttons don't change appreciably. Rather, the Center button increases
+in width to accommodate the change in the width of the Frame object.
+
+<p>If you start the program running and then manually decrease the width
+of the Frame object, the Center button decreases in width to accommodate
+the reduction in overall width. Eventually the Center button will shrink
+completely out of sight and then the East and West buttons will collide
+and begin to change width.
+
+<p><font color="#0000ff"><font size=-1>A - See the solution below.</font></font><br/>
+<div class="a"><pre><font color="#0000ff">/*File SampProg135.java Copyright, R.G.Baldwin
+
+Without viewing the solution that follows, rewrite the
+program named Layout03 with the following changes:
+
+As in the program named Layout03, five buttons are added to
+a Frame object using a BorderLayout object as the layout
+manager with a one-pixel gap between components in both the
+horizontal and vertical direction.
+
+There are no captions on any of the buttons.
+
+When the program starts, the buttons in the East and West
+positions are each approximately 100 pixels wide and the
+button in the Center is approximately 50 pixels wide.
+
+Each time you click on any of the buttons, the horizontal
+gap between buttons increases by five pixels. However,
+the widths of the East and West buttons don't change
+appreciably. In other words, the increase in horizontal
+gap is accommodated almost entirely as a result of the
+Center button becoming narrower.
+
+If you continue to click the buttons long enough, the
+Center button will shrink entirely out of sight but the
+other four buttons will continue to be visible with no
+apparent change in size. The Center button can be made to
+reappear by manually enlarging the Frame.
+
+If you manually increase the width of the Frame, the
+widths of the East and West buttons don't change
+appreciably. Rather, the Center button increases in width
+to accommodate the change in the width of the Frame
+object.
+
+If you start the program running and then manually
+decrease the width of the Frame object, the Center button
+decreases in width to accommodate the reduction in
+overall width. Eventually the Center button will shrink
+completely out of sight and then the East and West buttons
+will collide and begin to change width.
+
+A windowClosing() event listener object is instantiated and
+registered on the frame to terminate the program when the
+frame is closed.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class SampProg135 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class SampProg135
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Instantiate a BorderLayout object with a Vgap
+ // and Hgap of 1 pixel.
+ BorderLayout myBorderLayout = new BorderLayout(1,1);
+ //Set the layout manager for the frame to be the
+ // BorderLayout object.
+ myFrame.setLayout(myBorderLayout);
+
+ //Instantiate five button-like objects. Note that two
+ // of these objects are of type MyButton instead of
+ // type Button.
+ Button button1 = new Button();
+ MyButton button2 = new MyButton();
+ Button button3 = new Button();
+ MyButton button4 = new MyButton();
+ Button button5 = new Button();
+
+ //Add the five button-like objects to the Frame object
+ // in the positions specified.
+ myFrame.add(button1,"South");
+ myFrame.add(button2,"West");
+ myFrame.add(button3,"North");
+ myFrame.add(button4,"East");
+ myFrame.add(button5,"Center");
+
+ myFrame.setSize(250,150);//set size of frame
+ myFrame.setVisible(true);
+
+ //Instantiate an action listener object and register
+ // it on all five buttons.
+ MyActionListener myActionListener =
+ new MyActionListener(myBorderLayout,myFrame);
+ button1.addActionListener(myActionListener);
+ button2.addActionListener(myActionListener);
+ button3.addActionListener(myActionListener);
+ button4.addActionListener(myActionListener);
+ button5.addActionListener(myActionListener);
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class MyActionListener implements ActionListener{
+ BorderLayout myBorderLayoutObject;
+ Frame myFrameObject;
+
+ //constructor
+ MyActionListener(
+ BorderLayout layoutObject,Frame inFrame){
+ myBorderLayoutObject = layoutObject;//save references
+ myFrameObject = inFrame;
+ }//end constructor
+
+ //When an action event occurs, increase the horizontal
+ // gap between components in the BorderLayout object.
+ // Then set the layout manager for the frame to be the
+ // newly-modified BorderLayout object. Then validate
+ // the frame to ensure a valid layout so that the new
+ // visual will take effect.
+ public void actionPerformed(ActionEvent e){
+ myBorderLayoutObject.setHgap(
+ myBorderLayoutObject.getHgap() + 5 );
+ myFrameObject.setLayout(myBorderLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class MyActionListener
+
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//
+
+//This class extends the standard Button class in order
+// to make it possible to override the getPreferredSize()
+// method. The BorderLayout manager honors the width of
+// the preferred size insofar as possible to maintain the
+// specified preferred width.
+class MyButton extends Button{
+
+ public synchronized Dimension getPreferredSize(){
+ return new Dimension(100,100);
+ }//end getPreferredSize()
+
+}//end class MyButton</font></pre></div>
+-end-<!--end--></body></html>

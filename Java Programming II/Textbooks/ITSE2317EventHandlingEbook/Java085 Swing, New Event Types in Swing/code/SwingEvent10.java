@@ -1,0 +1,104 @@
+/*File SwingEvent10.java Copyright, R.G.Baldwin
+Rev 1/12/99 to be JDK 1.2 Swing compatible
+
+Illustrates use of getContentPane() to add a JButton to
+a JFrame.
+
+Illustrates use of AncestorListener on a JButton.
+
+Running the program and moving the resulting JFrame on the
+screen produced the following output.  Note that line breaks
+were manually added to this presentation to make the lines
+fit in this format. Note that these outputs don't seem to
+provide a good match for the descriptions and names of the
+methods in the JavaSoft documentation.
+
+Make JFrame visible
+ancestorAdded method invoked
+Event source: com.sun.java.swing.JButton[,0,0,0x0,
+            invalid,layout=com.sun.java.swing.OverlayLayout]
+Ancestor: com.sun.java.swing.JButton[,0,0,0x0,
+            invalid,layout=com.sun.java.swing.OverlayLayout]
+Parent: com.sun.java.swing.JPanel[null.contentPane,0,0,0x0,
+              invalid,layout=com.sun.java.swing.JRootPane$1]
+Component: com.sun.java.swing.JButton[,0,0,0x0,
+            invalid,layout=com.sun.java.swing.OverlayLayout]
+ID value: 1
+ancestorMoved method
+ancestorMoved method
+
+Tested using JDK 1.1.6 and Swing 1.0.1 under Win95.
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+//import com.sun.java.swing.*;//JDK 1.1 version
+//import com.sun.java.swing.event.*;//JDK 1.1 version
+import javax.swing.*;//JDK 1.2 version
+import javax.swing.event.*;//JDK 1.2 version
+
+public class SwingEvent10 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class SwingEvent10
+//=======================================================//
+
+//The following class is used to instantiate a 
+// graphical user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create a new JFrame object, set size, title, etc.
+    JFrame displayWindow = new JFrame();
+    displayWindow.setSize(300,300);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");
+    //Add window listener to terminate the program
+    displayWindow.addWindowListener(new WProc1());
+    
+    //Create a JButton object
+    JButton theButton = new JButton("Button");
+    
+    //Register an AncestorListener object on the JButton
+    theButton.addAncestorListener(new MyAncestorListener());
+    
+    //Add the JButton to the JFrame using content pane
+    displayWindow.getContentPane().add(theButton);
+
+    System.out.println("Make JFrame visible");
+    displayWindow.setVisible(true);    
+  }//end constructor
+  //.....................................................//
+  //Begin inner class definitions
+  //The following listener is used to terminate the program
+  // when the user closes the frame.
+  class WProc1 extends WindowAdapter{
+    public void windowClosing(WindowEvent e){
+      System.exit(0);
+    }//end windowClosing()
+  }//end class WProc1
+  //.....................................................//
+
+  //Define an AncestorListener class
+  class MyAncestorListener implements AncestorListener{
+    //Define three methods declared in AncestorListener
+    // interface.
+    
+    public void ancestorAdded(AncestorEvent e){
+      System.out.println("ancestorAdded method invoked");
+      System.out.println("Event source: " + e.getSource());
+      System.out.println("Ancestor: " + e.getAncestor());
+      System.out.println("Parent: " + e.getAncestorParent());
+      System.out.println("Component: " + e.getComponent());
+      System.out.println("ID value: " + e.getID());
+    }//end ancestorAdded()
+      
+    public void ancestorRemoved(AncestorEvent e){
+      System.out.println("ancestorRemoved method");
+    }//end ancestorRemoved()
+      
+    public void ancestorMoved(AncestorEvent e){
+      System.out.println("ancestorMoved method");
+    }//end ancestorMoved
+  }//end class MyAncestorListener
+  //.....................................................//
+}//end class GUI definition
+//=======================================================//

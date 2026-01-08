@@ -1,0 +1,161 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java073</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+.auto-style2 {
+	text-align: left;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+
+
+
+<h1 class="auto-style1">Java073 The AWT and Swing, A Preview</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	</li>
+	<li><a href="#Discussion_and_sample_code">Discussion</a></li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is part of a collection of chapters designed to teach you about Object-Oriented Programming (OOP) using Java. </p>
+<p><em>(Author's note: As you will see when you read this chapter, the original 
+version was written about twenty-two years ago. However, despite numerous 
+improvements that have occurred in Java since then, most of what was true on 
+this topic in 1998 is still true in 2020. A wise man once said, &quot;If it ain&#39;t 
+broke, don&#39;t fix it.&quot; </em></p>
+<p><em>One of the changes that you will see in subsequent chapters is that the 
+name of the package that contains the <strong>Swing</strong> classes has been 
+changed to <strong>javax.swing</strong>.)</em></p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion</a></h1>
+
+<p>This chapter provides a very brief preview of some of what you can 
+expect to find in subsequent chapters regarding the Abstract Windows Toolkit (<b>AWT</b>) 
+and the <b>Swing</b> component set. </p>
+<p>The user interface of a modern computer program often involves techniques to 
+activate many of the human senses. We use <i>icons, text boxes, images, sound, 
+boardroom graphics, etc.</i> </p>
+<p>We weren&#39;t too concerned with these aspects of 
+programming in the prerequisite course <em>(ITSE 2321)</em> because there was a lot that you needed to learn to prepare yourself 
+for understanding material of this sort. That is about to change. </p>
+<p>Much of the actual programming that you will do with Java will involve those 
+aspects of the interface that we commonly refer to as the <b>Graphical User 
+Interface (GUI)</b>. </p>
+<p>As of 5/10/98, there are two primary packages that are used for <b>GUI </b>
+
+programming under JDK 1.1.6:</p>
+<ol>
+	<li>java.<b>awt</b>.*</li>
+	<li>com.sun.java.<b>swing</b>.*</li>
+</ol>
+<p>There are, of course, numerous other packages that are used in support of 
+these two packages. </p>
+<p>The <b>AWT</b> material was made available to Java programmers early in the 
+life of Java. This was the original material that was used to create graphical 
+user interfaces. Major improvements to the <b>AWT</b> were introduced with the 
+release of JDK 1.1. </p>
+<p>The <b>Swing</b> components became available in released form for use with 
+JDK 1.1 around the beginning of 1998. These components added significantly to 
+the ability of the programmer to create GUIs, both in terms of functionality and 
+cosmetics. </p>
+<p>The capability and cosmetics of the <strong>AWT</strong> were very limited but <b>Swing</b> 
+made GUI programming in Java competitive in the real world. A Java programmer no 
+longer needs to apologize for the quality of the GUIs that she can create. </p>
+<p>We expect that these two packages may become more integrated (causing changes 
+in your <b>import</b> directives) with the release of JDK 1.2, <em>(probably 
+sometime in 1998)</em> but hopefully the concepts involved won&#39;t be greatly 
+different. </p>
+<p>As of 3/5/97, there were more than fifty classes defined in package <b>
+java.awt</b>. We will discuss some of the more important <b>AWT</b> classes in 
+subsequent chapters. </p>
+<p>As of 5/10/98, the <i>com.sun.java.swing</i> package contains more than 75 
+classes and about 20 interfaces. You might expect, therefore, that learning to 
+use this material effectively won&#39;t be a trivial task. </p>
+<p>It is very important to understand that <b>Swing</b> is an extension of, and
+not a replacement for the <strong>AWT</strong>. While it is true that there is some 
+overlap between the two. <em>(For example a </em> <b><em>Swing JButton</em></b><em> component might be viewed as an 
+improved functional replacement for an </em> <b><em>AWT Button</em></b><em> component, and once you 
+begin using </em> <b><em>Swing</em></b><em> buttons you may choose to never again use an 
+</em> <b><em>AWT</em></b><em> 
+button.)</em> However, the basic functionality of <b>Swing</b> is built upon the functionality 
+of the <b>AWT</b>. </p>
+<p>Therefore, as a student, you cannot simply skip over an understanding of the <b>
+AWT</b> and move on to <b>Swing</b>. The <b>AWT</b> is the foundation for
+<b>Swing</b>. </p>
+<p>You must first understand the <b>AWT</b> and then understand how <b>Swing</b> 
+extends and improves on the <b>AWT</b>. I will attempt to integrate an 
+understanding of both the <b>AWT</b> and <b>Swing</b> in the remaining chapters 
+in this eBook. </p>
+<p>I will begin by introducing you to a few simple components of each type and 
+use these components to teach you about such topics as event-driven programming, 
+layout, graphics, etc. Then, time permitting, I will dig a little deeper into 
+the more complex aspects of both the <b>AWT</b> and <b>Swing </b>components and 
+other features. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter in this eBook will take a first look at <em>callbacks</em>.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java073 The AWT and Swing, A Preview</li>
+					<li>File: Java073.htm
+</li>
+					<li>Published: 1998</li>
+					<li>Revised: 05/01/20</li>
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+	<p>-end- </p>
+
+
+</body>
+</html>

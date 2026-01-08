@@ -1,0 +1,215 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0180</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+
+}
+
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0180: The main method</h1>
+ 
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	</li>
+	<li><a href="#The_main_method_in_Java">The main method in Java</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>This chapter is part of an Ebook designed to help you 
+	learn to program computers. </p>
+<p>Every Java application requires a class containing a method named <strong>
+main</strong>. 
+This chapter provides information on the <strong>main</strong> method. <em>(Also 
+see Kjell <a href="http://programmedlessons.org/Java9/chap06/ch06_04.html">Between the Braces</a>.)</em></p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. The method signature according to Niemeyer and Peck. </li>
+		<li><a href="#Figure_2">Figure 2</a>. The method signature according to Oracle. </li>
+		<li><a href="#Figure_3">Figure 3</a>. Allowable signatures for the main method. </li>
+
+	</ul>
+	<h1><a name="The_main_method_in_Java">The main method in Java</a></h1>
+	<p>There must be a <strong>main</strong> method in the controlling <em>
+	(driver)</em> class in 
+	every Java application.</p>
+<p>Any and/or all classes in a Java application can have a <strong>main</strong> 
+method. Only the one in the <em>controlling class</em> for the program being 
+executed is actually called.</p>
+<p>It is often desirable to provide a <b>main</b> method for a class that will 
+not ultimately be the <i>controlling class</i> to allow the class to be tested 
+in a stand-alone mode, independent of other classes. </p>
+<h2>The method signature</h2>
+<p>The Java literature frequently refers to the signature of a method, or the
+<em>method signature</em>. </p>
+<p><em>Exploring Java</em> by Patrick Niemeyer and Joshua Peck (O&#39;Reilly) provides 
+the definition of a method signature shown in <a href="#Figure_1">Figure 1</a>.
+<em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap47/ch47_10.html#signature">Method Definition</a>, which doesn't agree entirely with <a href="#Figure_1">Figure 1</a>.)</em></p>
+
+<div class="a">
+	<p>
+<a name="Figure_1">Figure 1.</a> The method signature according to 
+Niemeyer and Peck.</p>
+	<p>&nbsp;&quot;A method signature is a collection of information about the method, as in a 
+C prototype or a forward function declaration in other languages. It includes 
+the method&#39;s name, type, and visibility, as well as its arguments and return 
+type.&quot;</p>
+</div>
+
+
+
+
+<h2>Type</h2>
+<p>Apparently in this definition, the authors are referring to the <em>type</em> 
+of the method as distinguishing between static and non-static. <em>(Other 
+literature refers to the type of a function or method as being the return type 
+which according to the above definition is a separate part of the signature.) </em></p>
+<h2>Visibility</h2>
+<p>Apparently also the use of the word visibility in the above definition refers 
+to the use of <strong>public</strong>, <strong>private</strong>, etc. Kjell 
+refers to this as
+<a href="http://programmedlessons.org/Java9/chap47/ch47_10.html#signature">
+modifiers</a>.</p>
+<h2>According to Oracle...</h2>
+<p>Oracle&#39;s
+<a href="http://docs.oracle.com/javase/tutorial/java/javaOO/methods.html">Java 
+Tutorials</a>, on the other hand, describe the method signature as in 
+<a href="#Figure_2">Figure 2</a>. </p>
+
+
+
+
+<div class="a">
+<p>
+<a name="Figure_2">Figure 2.</a> The method signature according to Oracle.</p>
+<p>Definition: Two of the components of a method declaration comprise the method signature -- the method's name and the parameter types. 
+</p>
+
+<p>As you can see, the Oracle definition is more restrictive than the Niemeyer and Peck definition 
+and agrees with the Kjell definition.</p>
+</div>
+<h2>Bottom line on method signature</h2>
+<p>The method signature can probably be thought of as providing information about the programming interface to the method. In other words, it 
+provides the information that you need to be able to call the 
+method in your program code. </p>
+<h2>Signature of main method</h2>
+<p>The controlling class of every Java application must contain a <strong>main </strong>method having one of the signatures 
+shown in <a href="#Figure_3">Figure 3</a>.</p>
+<!--``1Fig003-->
+<div class="a">
+	<p>
+<a name="Figure_3">Figure 3</a>. Allowable signatures for 
+				the main method.
+</p>
+<pre>
+public static void main(String[] args)
+
+public static void main(String args[])
+</pre></div>
+
+<p><em>(I prefer the first 
+signature in </em><a href="#Figure_3"><em>Figure 3</em></a><em> as being the most descriptive of an array of
+</em> <strong><em>String </em> </strong>
+<em>references which is what is passed in as an argument.)</em></p>
+<h2>public</h2>
+<p>The keyword <strong>public</strong> indicates that the method can be called 
+by any object. A future chapter will discuss the keywords <strong>public</strong>,
+<strong>private</strong>, and <strong>protected</strong> in more detail. </p>
+<h2>static</h2>
+<p>The keyword <strong>static</strong> indicates that the method is a <em>class</em> 
+method, which can be called without the requirement to instantiate an object of 
+the class. This is used by the JVM to launch the program by calling the <strong>
+main</strong> method of the class identified in the command to start 
+the program. </p>
+<h2>void</h2>
+<p>The keyword <strong>void</strong> indicates that the method doesn&#39;t return 
+any value. </p>
+<h2>args</h2>
+<p>The formal parameter <strong>args</strong> is a reference to an array object 
+of type <strong>String</strong>. The array elements contain references to
+<strong>String</strong> objects that encapsulate <strong>String</strong> 
+representations of the arguments, if any, entered at the 
+command line. </p>
+<p>Note that the <strong>args</strong> parameter must be specified 
+whether or not the user is required to enter command-line arguments and whether 
+or not the code in the program actually makes use of the argument. Also note 
+that the name can be any legal Java identifier. It doesn&#39;t have to be 
+<strong>args</strong>. It 
+could be joe or sue, for example but args is more descriptive of the purpose.</p>
+<h2>The length property</h2>
+<p>The parameter named <strong>args</strong> is a reference to an array object. Java array 
+objects have a property named 
+<a href="https://www.javatpoint.com/how-to-find-array-length-in-java">length</a>, which specifies the 
+number of elements in the array. <em>(Also see J<a href="https://www.softwaretestinghelp.com/java/java-array-length/">ava Array Length Tutorial With Code Examples</a>.)</em></p>
+<p>The runtime system monitors for the entry of command-line arguments by the 
+user and constructs the <strong>String </strong>array containing those 
+arguments.</p>
+<h2>Processing command-line arguments</h2>
+<p>The <strong>args.length</strong> property can be used by the code in the 
+program to determine the number of arguments actually entered by the user. </p>
+<p>If the <strong>length</strong> property is not equal to zero, the first 
+string in the array corresponds to the first argument entered on the command 
+line.</p>
+<p>Command-line arguments along with strings and <strong>String</strong> arrays 
+will be discussed in more detail in a future chapter.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	<p>Housekeeping material</p>
+ 
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0180: The main method</li>
+					<li>File: Jb0180.htm
+</li>
+					<li>Revised: 06/10/22</li>
+				</ul>
+</div>
+
+<p>end- </p>
+
+
+</body>
+</html>

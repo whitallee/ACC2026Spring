@@ -1,0 +1,1037 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java1627</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1627: Static Members</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about Object-Oriented Programming (OOP) using Java.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Output date and time. </li>
+		<li><a href="#Figure_2">Figure 2</a>. Five seconds later. </li>
+		<li><a href="#Figure_3">Figure 3</a>. Same date and time as before.</li>
+		<li><a href="#Figure_4">Figure 4</a>. A new date and time. </li>
+		<li><a href="#Figure_5">Figure 5</a>. Same date and time as before. </li>
+		<li><a href="#Figure_6">Figure 6</a>. Output from overridden toString method in Date class.</li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Beginning of the class named MyClass01.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Signature of the main method. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Display some text. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Display date information. </li>
+		<li><a href="#Listing_5">Listing 5</a>. A five-second delay.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Instantiate a new object.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Display the new Date object.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Accessing class variable via an object.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Another new object.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Display the date and time.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Display date information.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Revisiting System.out.println.</li>
+		<li><a href="#Listing_13">Listing 13</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p><strong>Static members</strong></p>
+<p>There is another aspect of OOP in Java that I have mainly avoided up to this point 
+in the discussion: <em><strong>static</strong></em> variables and <em><strong>static</strong></em> methods. </p>
+<p><strong>Tends to complicate ...</strong> </p>
+<p>I have avoided this topic because, while not particularly difficult, the 
+existence of <strong>static</strong> members tends to break up the simple structures that I have 
+discussed in previous chapters in this Ebook. </p>
+<p>While <strong>static</strong> members can be useful in some situations, the existence of 
+<strong>static</strong> members tends to complicate the overall object-oriented structure of 
+Java. </p>
+<p><strong>Avoid overuse of <strong>static</strong> members</strong> </p>
+<p>Furthermore, the overuse of <strong>static</strong> members can lead to problems similar to 
+those experienced in languages like C and C++ that support global variables and 
+global functions. </p>
+<p><strong>When to use static members</strong> </p>
+<p>I will discuss the use of <strong>static</strong> members in this chapter, and will provide 
+some guidelines for their use. </p>
+<p><strong>The class named Class</strong> </p>
+<p>I will also introduce the class named <strong>Class</strong> and discuss how 
+it enters into the use of <strong>static</strong> variables and methods. </p>
+<p><strong>Instance members versus class members</strong> </p>
+<p>I will describe the differences between <em>instance</em> members and <em>
+class</em> members with particular emphasis being placed on their accessibility.
+</p>
+<p><strong>Three kinds of objects</strong> </p>
+<p>From a conceptual viewpoint, there are at least three kinds of objects 
+involved in a Java program:</p>
+<ul>
+	<li>Ordinary objects</li>
+	<li>Array objects</li>
+	<li>Class objects</li>
+</ul>
+<p><strong>Ordinary objects</strong></p>
+<p>Much of the discussion up to this point in the 
+Ebook deals with what I have referred to in the above list as <em>ordinary 
+objects</em>. </p>
+<p>These are the objects that you instantiate in you code by applying the
+<strong>new</strong> operator to a constructor for a class in order to create a 
+new instance <em>(object)</em> of that class. <em>(There are also a couple of 
+other ways to create ordinary objects, but I&#39;m not going to get into that at 
+this time.)</em> </p>
+<p><strong>Array objects</strong> </p>
+<p>I also discussed array objects in three previous chapters. Recall that array objects are objects whose purpose is to 
+encapsulate a one-dimensional array structure that can contain either primitive 
+values, or references to other objects <em>(including other array objects).</em> </p>
+<p><strong>Class objects</strong></p>
+<p>I will discuss Class objects in this chapter.</p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>Class objects</strong></p>
+<p>Let me emphasize at the beginning that the following discussion is <strong>
+<em>conceptual</em></strong> in nature. In this discussion, I will describe how 
+the Java system behaves, not necessarily how it is implemented. In other words, 
+however it is implemented, it behaves as though it is implemented in the manner 
+described below. </p>
+<p><strong>The class named Class</strong> </p>
+<p>There is a class whose name is <strong>Class</strong>. The purpose of this 
+class is to encapsulate information about some other class <em>(actually, it can 
+also be used to encapsulate information about primitive types as well as class 
+types).</em> </p>
+<p>Here is part of what Sun has to say about this class: </p>
+<div class="a">
+<p><em>&quot;Instances of the class <strong>Class</strong> represent classes and 
+interfaces in a running Java application. ...</em> </p>
+<p><em><strong>Class</strong> has no public constructor. Instead <strong>Class</strong> 
+objects are constructed automatically by the Java Virtual Machine as classes are 
+loaded ...&quot;</em> </p>
+</div>
+<p><strong>What does this mean?</strong> </p>
+<p>As a practical matter, when one or more objects are instantiated from a given 
+class, an extra object of the <strong>Class</strong> class is also instantiated 
+automatically. This object contains information about the class from which the 
+objects were instantiated. <em>(Note that it is also possible to cause a <strong>
+Class</strong> object that describes a specific class to be created in the 
+absence of objects of that class, but that is a topic that will be reserved for 
+more advanced courses.)</em> </p>
+<p><strong>A real-world analogy</strong> </p>
+<p>Here is an attempt to describe a real-world analogy. Remember that a class 
+definition contains the blueprint for objects instantiated from that class. </p>
+<p>A certain large construction company is in the business of building 
+condominium projects. This contractor builds condos of many different sizes, 
+types, and price ranges. However, each different condo project contains condos 
+of only two or three different types or price ranges. </p>
+<p><strong>A library of blueprints</strong> </p>
+<p>There is a large library of blueprints at the contractor&#39;s central office. 
+This library contains blueprints for all of the different types of condos that 
+the contractor has built or is building. <em>(This library is analogous to the 
+class libraries available to the Java programmer.)</em> </p>
+<p><strong>A subset from the blueprint library</strong> </p>
+<p>When a condo project begins, the contractor delivers copies of several sets 
+of blueprints to the construction site. The blueprints delivered to that site 
+describe only the types of condos being constructed on that site. </p>
+<p><strong>Condo is analogous to an object</strong> </p>
+<p>Each condo unit is analogous to an <em>ordinary Java object</em>. </p>
+<p>Each set of blueprints delivered to the construction site is roughly 
+analogous to an <em>object of the class named <strong>Class</strong>.</em> In 
+other words, each set of blueprints describes one or more condo units 
+constructed from that set of blueprints. </p>
+<p><strong>When construction is complete</strong> </p>
+<p>When the construction project is complete, the contractor delivers a set of 
+blueprints for each type of condo unit to the management firm that has been 
+hired to manage the condo complex. Each set of blueprints continues to be 
+analogous to an object of the class named <strong>Class</strong>. The blueprints 
+remain at the site of the condo units. </p>
+<p><strong>RTTI</strong> </p>
+<p>Thus, information regarding the construction, wiring, plumbing, air 
+conditioning, etc., for each condo unit <em>(object)</em> continues to be 
+available at the site even after the construction has been completed. <em>(This 
+is somewhat analogous to something called runtime type information and often 
+abbreviated as RTTI. A Class object contains RTTI for objects instantiated from 
+that class.)</em> </p>
+<p><strong>What are those analogies again?</strong> </p>
+<p>In the above scenario, each condo unit is <em>(roughly)</em> analogous to an 
+object instantiated from a specific class <em>(set of blueprints).</em> </p>
+<p>Each set of blueprints remaining onsite after construction is complete is 
+roughly analogous to a <strong>Class</strong> object that describes the 
+characteristics of one or more condo units. </p>
+<p><strong>What do you care?</strong> </p>
+<p>Until you get involved in such advanced topics as <em>reflection</em> and <em>
+introspection</em>, you don&#39;t usually have much involvement or much interest in
+<strong>Class</strong> objects. They are created automatically, and are 
+primarily used by the Java virtual machine during runtime to help it do the 
+things that it needs to do. </p>
+<p><strong>An exception to that rule</strong> </p>
+<p>However, there is one area where you will be interested in the use of these
+<strong>Class</strong> objects from early on. You will be interested whenever 
+variables or methods in the class definition are declared to be <strong>static</strong>.
+</p>
+<p><strong>Class variables and class methods</strong> </p>
+<p>According to the current jargon, declaring a member variable to be <strong>
+static</strong> causes it to be a <em>class variable</em>. <em>(Note that local 
+variables cannot be declared <strong>static</strong>. Only member variables can 
+be declared <strong>static</strong>.)</em> Similarly, declaring a method to be
+<strong>static</strong> causes it to be a <em>class method.</em> </p>
+<p><strong>Instance variables and methods</strong> </p>
+<p>On the other hand, according to the current jargon, not declaring a variable 
+to be <strong>static</strong> causes it to be an <em>instance variable</em>, and 
+not declaring a method to be <strong>static</strong> causes it to be an <em>
+instance method</em>. </p>
+<p>In general, we can refer to them as <em>class members</em> and <em>instance 
+members</em>. </p>
+<p><strong>What is the difference?</strong> </p>
+<p>Here are some of the differences between <em>class</em> and <em>instance</em> 
+members insofar as this discussion is concerned. </p>
+<p><strong>How many copies of member variables exist?</strong> </p>
+<p>Every object instantiated from a given class has its own copy of each <em>
+instance variable</em> defined in the class. <em>(Instance variables are not 
+shared among objects.)</em> However, every object instantiated from a given 
+class shares the same copy of each <em>class variable</em> defined in the class.
+<em>(It is as though the class variable belongs to the single <strong>Class</strong> 
+object and not to the individual objects instantiated from that class.)</em> </p>
+<p><strong>Access to an instance variable</strong> </p>
+<p>Every object has its own copy of each instance variable <em>(the object owns 
+the instance variable).</em> Therefore, the only way that you can access an 
+instance variable is to use that object&#39;s reference to send a message to the 
+object requesting access to the variable <em>(even then, you may not be given 
+access, depending on access modifiers).</em> </p>
+<p><strong>Why call it an instance variable?</strong> </p>
+<p>According to the current jargon, <em><strong>an object is an instance of a 
+class</strong>.</em> <em>(I probably told you that somewhere before in this 
+Ebook.)</em> Each object has its own copy of each non-static variable. 
+Hence, they are often called instance variables. <em>(Every instance of the 
+class owns one and they are not implicitly shared among instances.)</em> </p>
+<p><strong>Access to a class variable</strong> </p>
+<p>You can also send a message to an object requesting access to a class 
+variable that the object shares with other objects instantiated from the same 
+class. <em>(Again, you may or may not gain access, depending the access 
+modifiers).</em> </p>
+<p><strong>Access using the Class object</strong> </p>
+<p>More important, however, you can also access a class variable without a requirement 
+to go through an object instantiated from the class. <em>(In fact, a class 
+variable can be accessed in the total absence of objects of that class.)</em>
+<em>(Remember, this discussion is conceptual in nature, and may not represent an 
+actual implementation.)</em> </p>
+<p>Assuming that a class variable is otherwise accessible, you can access the 
+class variable by sending an access request message to the <strong>Class</strong> 
+object to which the variable belongs. </p>
+<p><strong>One way to think of this</strong> </p>
+<p>To help you keep track of things in a message-passing sense, you can pretend 
+that there is a global reference variable whose name is the same as the name of 
+a class. </p>
+<p>This <em>(hypothetical)</em> reference variable contains a reference to the
+<strong>Class</strong> object that owns the class variable. Using standard Java 
+message-passing syntax, you can access the class variable by joining the name of 
+the reference variable to the name of the class variable with a period. Example 
+syntax is shown below: </p>
+<div class="a">
+
+<pre>ReferenceVariableName.ClassVariableName</pre>
+</div><p>As a result of the hypothetical substitution process that I described above, 
+this is equivalent to the following: </p>
+<div class="a">
+<pre>ClassName.ClassVariableName</pre>
+</div>
+
+<p>We will see an example of this in the sample program that I will discuss 
+later. </p>
+<p><strong><em>Be careful with this thought process</em></strong> </p>
+<p><em>While this thought process may be useful when thinking about <strong>static</strong> 
+variables and methods, I want to point out, that the thought process breaks down 
+very quickly when dealing with <strong>Class</strong> objects in a deeper sense.</em>
+</p>
+<p><em>For example, when calling the <strong>getName</strong> method on a
+<strong>Class</strong> object, an actual reference of type <strong>Class</strong> 
+is required to access the members of the <strong>Class</strong> object. The name 
+of the class will not suffice.</em> </p>
+<p><em>If this discussion of a global reference variable whose name matches the 
+name of the class is confusing to you, just forget it. Simply remember that you 
+can access class variables by joining the name of the class to the name of the 
+class variable using a period as the joining operator.</em> </p>
+<p><strong>
+Characteristics of class methods</strong> </p>
+<p>I&#39;m not going to talk very much about instance methods and class methods in 
+this chapter. However, there are a couple of characteristics of class methods 
+that deserve a brief discussion in this context. </p>
+<p><strong>Cannot access instance members</strong> </p>
+<p>First, the code in a class method has direct access only to other <strong>
+static</strong> members of the class. <em>(A class method does not have direct 
+access to instance variables or instance methods of the class.)</em> This is 
+sort of like saying that a class method has access to the methods and variables 
+belonging to the <strong>Class</strong> object, but does not have access to the 
+methods and variables belonging to the <em>ordinary objects</em> instantiated 
+from the class described by the <strong>Class</strong> object.</p>
+<p><strong><em>Once 
+again, be careful</em></strong> </p>
+<p><em>Once again, this thinking breaks down very quickly once you get beyond 
+<strong>static</strong> members. A <strong>Class</strong> object also has instance methods, such 
+as <strong>getName</strong>, which can only be accessed using an actual 
+reference to the <strong>Class</strong> object.</em> </p>
+<p><em>Now you are probably beginning to understand why I deferred this 
+discussion until after I finished discussing the easy stuff.</em> </p>
+<p><strong>No 
+object required</strong> </p>
+<p>Another important characteristic is that a class method can be accessed 
+without a requirement for an object of the class to exist. </p>
+<p>As with class variables, class methods can be accessed by joining the name of 
+the class to the name of the method with a period. </p>
+<p>I will illustrate much of this with a sample program named <strong>MyClass01</strong>.
+</p>
+<p><strong>Discuss in fragments</strong> </p>
+<p>I will discuss the program in fragments. You will find a complete listing of 
+the program in <a href="#Listing_13">Listing 13</a> near the end of the chapter. </p>
+<p><a href="#Listing_1">Listing 1</a> shows the beginning of the class definition. </p>
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. Beginning of the class 
+				named MyClass01.</p>
+<pre>class MyClass01{
+ static Date v1 = new Date();
+ Date v2 = new Date();</pre>
+</div>
+
+
+	<p><strong>Two member variables</strong> </p>
+<p>The code in <a href="#Listing_1">Listing 1</a> declares two member variables, 
+named <strong>v1</strong> and <strong>v2</strong>, and initializes each of those 
+variables with a reference to a new object of the <strong>Date</strong> class.
+<em>(When instantiated using the constructor with no arguments, the new <strong>
+Date</strong> object encapsulates the current date and time from the system 
+clock.)</em> </p>
+<p><strong>Note the static keyword</strong> </p>
+<p>The important thing to note here is the use of the <strong>static</strong> 
+keyword when declaring the variable named <strong>v1</strong>. This causes
+<strong>v1</strong> to be a <em>class variable</em>, exhibiting the 
+characteristics of class variables described earlier. </p>
+<p><strong>An instance variable</strong> </p>
+<p>On the other hand, the variable named <strong>v2</strong> is not declared
+<strong>static</strong>. This causes it to be an <em>instance variable</em>, as 
+described above. </p>
+<p><strong>The main method is a class method</strong> </p>
+<p><a href="#Listing_2">Listing 2</a> shows the signature for the <strong>main</strong> method. </p>
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a>. Signature of the main 
+				method.</p>
+<pre>public static void main(String[] args){</pre>
+</div>	<p>The important thing to note here is that the <strong>main</strong> method 
+	is declared <strong>static</strong>. That causes it to be a <em>class method</em>.
+</p>
+<p>As a result, the <strong>main</strong> method can be called without a 
+requirement for an object of the class to exist. <em>(Also, the main method has 
+direct access only to other <strong>static</strong> members.)</em> </p>
+<p><strong>How a Java application starts running</strong> </p>
+<p>In fact, that is how the Java Virtual Machine starts an application running.
+</p>
+<p>First the JVM finds the specified file having an extension of<strong><em> 
+.class.</em></strong> Then it examines that file to see if it has a <strong>main</strong> 
+method with the correct signature. If not, an error occurs. </p>
+<p>If the JVM finds a <strong>main</strong> method with the correct signature, 
+it calls that method without instantiating an object of the class. That is how 
+the Java Virtual Machine causes a Java application to start running. </p>
+<p><strong>A poor programming technique</strong> </p>
+<p>Basically, this entire sample program is coded inside the <strong>main</strong> 
+method. As a practical manner, this is a very poor programming technique, but it 
+works well for this example. <em>(I also used this approach in the early 
+chapters in this Ebook in order to minimize the use of objects.)</em></p>
+<p><strong>Display some text</strong> </p>
+<p>The code in <a href="#Listing_3">Listing 3</a>, which is the first executable statement in the <strong>
+main</strong> method, causes the words <strong>Static variable</strong> to 
+appear on the computer screen. I will come back and discuss the details of this 
+and similar statements later in the chapter. </p>
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a>. Display some text.</p>
+<pre> System.out.println("Static variable");</pre>
+</div>	<p><strong>Display date information</strong> </p>
+<p>Continuing with the code in the <strong>main</strong> method, the 
+code in <a href="#Listing_4">Listing 4</a> causes the current contents of the <strong>Date</strong> 
+object referred to by the contents of the class variable named <strong>v1</strong> 
+to be displayed on the computer screen. </p>
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a>. Display date information.
+
+				
+</p>
+
+				
+<pre> System.out.println(MyClass01.v1);</pre>
+</div>	<p><strong>No object required</strong> </p>
+<p>For the moment, concentrate on the text inside the parentheses in the 
+statement in <a href="#Listing_4">Listing 4</a>. </p>
+<p>Because the variable named <strong>v1</strong> is 
+a class variable, it&#39;s value is accessed by joining the name of the class to the 
+name of the variable with a period. </p>
+<p><strong>What was the output?</strong> </p>
+<p>I will discuss the remaining portion of statements of this sort later. For 
+now, just be aware that the code in <a href="#Listing_4">Listing 4</a> caused 
+the output shown in <a href="#Figure_1">Figure 1</a> to be displayed on my 
+computer screen when I ran the program.</p>
+<div class="a">
+	<p><a name="Figure_1">Figure 1</a>. Output date and time.</p>
+<pre>Mon Sep 17 09:52:27 CDT 2001</pre>
+</div>
+
+
+</div>
+	<p><strong>Displays date and time</strong> </p>
+<p>The date and time displayed will depend on when you run the 
+program. As you can see, I first wrote this chapter and ran this program in 2001.</p>
+<p>Pay particular attention to the seconds portion of the time. I will refer 
+back to this later. </p>
+<p><strong>A five-second delay</strong> </p>
+<p>The code in <a href="#Listing_5">Listing 5</a> <em>(still in the <strong>main</strong> method)</em> 
+causes the main thread of the program to go to sleep for five seconds. Don&#39;t 
+worry about it if you don&#39;t understand this code. The only reason that I 
+included it in the program was to force a five-second delay in the execution of 
+the program. </p>
+<div class="a">
+	<p><a name="Listing_5">Listing 5</a>. A five-second delay.
+				
+</p>
+				
+<pre> try{
+  Thread.currentThread().sleep(5000);
+ }catch(InterruptedException e){}</pre>
+</div>	<p><strong>Instantiate a new object</strong> </p>
+<p>Having caused the program to sleep for five seconds, the code in 
+<a href="#Listing_6">Listing 6</a> 
+instantiates a new object of the class named <strong>MyClass01</strong>. This 
+code stores the new object&#39;s reference in the reference variable named <strong>
+ref1</strong>. </p>
+<div class="a">
+	<p><a name="Listing_6">Listing 6</a>. Instantiate a new object
+.
+				
+</p>
+				
+<pre> MyClass01 ref1 = new MyClass01();</pre>
+</div>	<p><strong>A new Date object also</strong> </p>
+<p>Recall from <a href="#Listing_1">Listing 1</a> above that the class declares 
+an instance variable named <strong>v2</strong> of the type <strong>Date</strong>. </p>
+<p>When the new object is instantiated by the code in <a href="#Listing_6">Listing 6</a>, 
+a new <strong>Date</strong> object is also instantiated. A reference to that 
+object is stored in the instance variable named <strong>v2</strong>. <em>(In 
+other words, the new object of the class <strong>MyClass01</strong> owns a 
+reference to a new object of the class <strong>Date</strong>. That reference is 
+stored in an instance variable named <strong>v2</strong> in the new <strong>
+MyClass01</strong> object.)</em> </p>
+<p><strong>Display the new Date object</strong> </p>
+<p>The code in <a href="#Listing_7">Listing 7</a> causes a textual representation of the new <strong>Date</strong> 
+object referred to by the reference variable named <strong>v2</strong> belonging 
+to the object referred to by the reference variable named <strong>ref1</strong>, 
+to be displayed on the standard output device. </p>
+<div class="a">
+	<p><a name="Listing_7">Listing 7</a>. Display the new Date object .</p>
+<pre> System.out.println(ref1.v2);</pre>
+</div>	<p><strong>Five seconds later</strong> </p>
+<p>This code caused the date and time shown in <a href="#Figure_2">Figure 2</a> to appear on the 
+computer screen when I ran the program: </p>
+<div class="a">
+	<p><a name="Figure_2">Figure 2</a>. Five seconds later.
+
+
+							
+</p>
+
+
+							
+<pre>Mon Sep 17 09:52:32 CDT 2001</pre>
+</div>
+
+
+</div>
+	<p>The date and time shown in <a href="#Figure_2">Figure 2</a> is five 
+	seconds later than the time reflected in the <strong>Date</strong> object 
+	referred to by the <em>class variable</em> named <strong>v1</strong> <em>(see
+	<a href="#Figure_1">Figure 1</a>)</em>. That time was displayed by the code 
+	in <a href="#Listing_4">Listing 4</a> earlier. </p>
+<p><strong>So, what does this mean?</strong> </p>
+<p>It means that the <strong>Date</strong> object referred to by the <strong>
+static</strong> reference variable named <strong>v1</strong> was created five 
+seconds earlier than the <strong>Date</strong> object referred to by the 
+instance variable named <strong>v2</strong>. </p>
+<p><strong>When is a class variable created?</strong> </p>
+<p>I can&#39;t tell you precisely when a class variable comes into existence. All I 
+can say is that the virtual machine brings it into existence as soon as it is 
+needed. </p>
+<p>My guess is that it comes into existence at the first mention <em>(in the 
+program)</em> of the class to which it belongs. </p>
+<p><strong>When is an instance variable created?</strong> </p>
+<p>An instance variable doesn&#39;t come into existence until the object to which it 
+belongs is created. <em>(An instance variable cannot exist until the object to 
+which it belongs exists.)</em> </p>
+<p>If the instance variable is initialized with a reference to a new object <em>
+(such as a new <strong>Date</strong> object in this sample program),</em> that 
+new object comes into existence when the object to which it belongs comes into 
+existence. </p>
+<p><strong>A five-second delay</strong> </p>
+<p>In this program, I purposely inserted a five-second delay between the first 
+mention of the class named <strong>MyClass01</strong> in <a href="#Listing_4">
+Listing 4</a>, and the instantiation of the object of the class named <strong>
+MyClass01</strong> in <a href="#Listing_6">Listing 6</a>. </p>
+<p>As a result, the <strong>Date</strong> object referred to by the instance 
+variable named <strong>v2</strong> was created about five seconds later than the
+<strong>Date</strong> object referred to by the class variable named <strong>v1</strong>.
+</p>
+<p>This is reflected in the date and time values displayed and discussed above.
+</p>
+<p><strong>Accessing class variable via an object</strong> </p>
+<p>While it is possible to access a class variable using the name of the class 
+joined to the name of the variable, it is also possible to access a class 
+variable using a reference to any object instantiated from the class. </p>
+<p><em>(As mentioned earlier, if two or more objects are instantiated from the 
+same class, they share the same class variable.)</em> </p>
+<p>The code in parentheses in <a href="#Listing_8">Listing 8</a> uses the reference variable named <strong>ref1</strong> 
+to access the class variable named <strong>v1</strong>, and to cause the 
+contents of the <strong>Date</strong> object referred to by the class variable 
+to be displayed. </p>
+<div class="a">
+	<p><a name="Listing_8">Listing 8</a>. Accessing class variable via an object.
+				
+	</p>
+				
+<pre> System.out.println(ref1.v1);</pre>
+</div>	<p><strong>The output</strong> </p>
+<p>This caused the date and time shown in <a href="#Figure_3">Figure 3</a> to be displayed on my 
+computer screen. </p>
+<div class="a">
+	<p><a name="Figure_3">Figure 3</a>. Same date and time as 
+				before.
+
+
+							
+</p>
+
+
+							
+<pre>Mon Sep 17 09:52:27 CDT 2001</pre>
+</div>
+
+
+</div>
+	<p><strong>Same date and time as before</strong> </p>
+<p>As you have probably already surmised, this is the same date and time shown 
+earlier in <a href="#Figure_1">Figure 1</a>. This is because the code in
+<a href="#Listing_8">Listing 8</a> refers to the same class variable as the code 
+in <a href="#Listing_4">Listing 4</a>. </p>
+<p>Nothing has caused the contents of that class variable to change, so both
+<a href="#Figure_1">Figure 1</a> and <a href="#Figure_3">Figure 3</a> display 
+the contents of the same <strong>Date</strong> object. </p>
+<p><em>(Only one class variable exists and it doesn&#39;t matter how you access it. 
+Either way, you gain access to the same <strong>Date</strong> object whose 
+reference is stored in the class variable. Thus, the same date and time is shown 
+in both cases.)</em> </p>
+<p><strong>Another new object</strong> </p>
+<p>If you examine the code in <a href="#Listing_13">Listing 13</a> near the end 
+of the program, you will see that an additional five-second delay is introduced 
+at this point in the program. </p>
+<p>Following that delay, the code in <a href="#Listing_9">Listing 9</a> 
+instantiates another new object of the class named <strong>MyClass01</strong>, and stores the object&#39;s reference 
+in a new reference variable named <strong>ref2</strong>. </p>
+<p><em>(The object 
+referred to by <strong>ref1</strong> is a different object than the object 
+referred to by <strong>ref2</strong>. Each object has its own instance variable 
+named <strong>v2</strong>, and in this case, each instance variable is 
+initialized to instantiate and refer to a new <strong>Date</strong> object when 
+the new <strong>MyClass01</strong> object is instantiated.)</em> </p>
+<div class="a">
+	<p><a name="Listing_9">Listing 9</a>. Another new object. </p>
+				
+<pre> MyClass01 ref2 = new MyClass01();</pre>
+</div>	<p><strong>Display the date and time</strong> </p>
+<p>Then, the code in <a href="#Listing_10">Listing 10</a> causes the contents of the <strong>Date</strong> 
+object referred to by the instance variable named <strong>v2</strong> in the 
+second object of the class named <strong>MyClass01 </strong>to be displayed. </p>
+<div class="a">
+	<p><a name="Listing_10">Listing 10</a>. Display the date and time
+.
+				
+</p>
+				
+<pre> System.out.println(ref2.v2);</pre>
+</div>	<p>This caused the output shown in <a href="#Figure_4">Figure 4</a> to be displayed on my computer 
+	screen when I ran the program.</p>
+<p><em>(Once again, you will get different results if 
+	you compile and run the program because the date and time shown is the date 
+	and time that you run the program.)</em> </p>
+<div class="a">
+	<p><a name="Figure_4">Figure 4</a>. A new date and time.</p>
+<pre>Mon Sep 17 09:52:37 CDT 2001</pre>
+</div>
+
+
+</div>
+	<p><strong>Five seconds later</strong> </p>
+<p>As you have probably figured out by now, the time encapsulated in this
+<strong>Date</strong> object is five seconds later than the time encapsulated in 
+the <strong>Date</strong> object displayed in <a href="#Figure_2">Figure 2</a>. 
+This is because the program was put to sleep for five seconds between the 
+instantiation of the two objects referred to by <strong>ref1</strong> and <strong>ref2</strong>. </p>
+<p><strong>Every object has one</strong> </p>
+<p>Every object instantiated from a given class has its own copy of each 
+instance variable declared in the class definition. There is no sharing of 
+instance variables among objects. </p>
+<p>Each instance variable comes into existence when the object to which it 
+belongs comes into existence, and ceases to exist when the object to which it 
+belongs ceases to exist. </p>
+<p><strong><em>Eligible for garbage collection</em></strong></p>
+<p><em>If the instance variables are reference variables holding references to 
+other objects, as is the case here, and if there are no other reference 
+variables holding references to those same objects, the secondary objects cease 
+to exist when the primary objects cease to exist.</em></p>
+<p><em>Technically, the objects may not actually cease to exist. Technically 
+they become eligible for garbage collection, which means that the memory that 
+they occupy becomes eligible for reuse. However, as a practical matter, they 
+cease to exist insofar as the program is concerned because they are no longer 
+accessible.</em></p>
+<p><strong>A five-second difference in the time of creation</strong></p>
+<p>Since the two objects referred to by <strong>ref1</strong> and <strong>ref2</strong> 
+came into existence with a five-second delay, the <strong>Date</strong> objects 
+belonging to those two object reflect a five-second difference in the time 
+encapsulated in the objects. </p>
+<p><strong>Only one copy of class variable exists</strong> </p>
+<p>Also remember that if a variable is a class variable, only one copy of the 
+variable exists, and all objects instantiated from the class share that one 
+copy. </p>
+<p>This is illustrated by the code in <a href="#Listing_11">Listing 11</a>, which uses the reference to 
+the second object instantiated from the class named <strong>MyClass01</strong>, 
+to cause the contents of the class variable named <strong>v1</strong> to be 
+displayed. </p>
+
+	
+<div class="a">
+	<p><a name="Listing_11">Listing 11</a>. Display date 
+				information.
+				
+</p>
+				
+<pre>  System.out.println(ref2.v1);
+ }//end main</pre>
+</div>	<p>The output produced by the code in <a href="#Listing_11">Listing 11</a> is shown in 
+	<a href="#Figure_5">Figure 5</a>. </p>
+<div class="a">
+	<p><a name="Figure_5">Figure 5</a>. Same date and time as 
+				before.
+
+
+							
+</p>
+
+
+							
+<pre>Mon Sep 17 09:52:27 CDT 2001</pre>
+</div>
+
+
+</div>
+	<p><strong>Same output as before</strong> </p>
+<p>As you can see, this is the same as the output shown in <a href="#Figure_1">
+Figure 1</a> and <a href="#Figure_3">Figure 3</a> earlier. </p>
+<p><strong>Accessing the same physical class variable</strong> </p>
+<p>Since only one class variable named <strong>v1</strong> exists, and all 
+objects instantiated from the class named <strong>MyClass01</strong> share that 
+single copy, it doesn&#39;t matter whether you access the class variable using the 
+name of the class, or access it using a reference to either of the objects 
+instantiated from the class. In all three cases, you are accessing the same 
+physical class variable. </p>
+<p>Since nothing was done to cause the contents of the class variable to change 
+after it came into existence and was initialized, <a href="#Figure_1">Figure 1</a>,
+<a href="#Figure_3">Figure 3</a>, and <a href="#Figure_5">Figure 5</a> are 
+simply three different displays of the date and time encapsulated in the same
+<strong>Date</strong> object whose reference is stored in the class variable. </p>
+<p><strong>Let&#39;s revisit System.out.println...</strong> </p>
+<p>Now, I want to revisit the statement originally shown in <a href="#Listing_8">
+Listing 8</a> and repeated in <a href="#Listing_12">Listing 
+12</a> for viewing convenience. </p>
+
+	
+<div class="a">
+	<p><a name="Listing_12">Listing 12</a>. Revisiting System.out.println.
+				
+</p>
+				
+<pre> System.out.println(ref1.v1);</pre>
+</div>	<p><strong>Java programmer wanted</strong> </p>
+<p>I sometimes tell my students that if I were out in industry interviewing 
+prospective Java programmers, my first question would be to ask the prospective 
+employee to tell me everything that she knows about the statement in <a href="#Listing_12">Listing 
+12</a>. </p>
+<p><strong>Covers a lot of Java OOP technology</strong> </p>
+<p>This is not because there is a great demand for the use of this statement in 
+real-world problems. <em>(In fact, in a GUI-driven software product world, there 
+is probably very little demand for the use of this statement.)</em> Rather, it 
+is because a lot of Java object-oriented technology is embodied in this single 
+statement. </p>
+<p>In that scenario, I would expect to receive a verbal dissertation of fifteen 
+to twenty minutes in length to cover all the important points. </p>
+<p><strong>The short version</strong> </p>
+<p>Let me give you the short version. There is a class named <strong>System</strong>. 
+The <strong>System</strong> class declares three <strong>static</strong> <em>
+(class)</em> variables having the following types, names, and modifiers:</p>
+<ul>
+	<li>public static final PrintStream <strong>out</strong></li>
+	<li>public static final InputStream <strong>in</strong></li>
+	<li>public static final PrintStream <strong>err</strong></li>
+</ul>
+<p><em>(Note that these class variables are also declared <strong>final</strong>, 
+causing them to behave as constants.)</em> </p>
+<p>A<strong>ccess the out variable 
+without an object</strong></p>
+<p>Because <strong>out</strong> is a class variable, <strong>System.out</strong> 
+returns the contents of the class variable named <strong>out </strong><em>(an 
+object of the <strong>System</strong> class is not required in order to access a class variable 
+of the <strong>System</strong> class).</em> </p>
+<p>In general, <em>(ignoring the possibility of subclasses and interfaces)</em> 
+because <strong>out</strong> is a reference variable of type <strong>PrintStream</strong>, 
+the returned value must either be <strong>null</strong> <em>(no object 
+reference)</em> or a reference to a valid <strong>PrintStream</strong> object.
+</p>
+<p><strong>Object of the PrintStream class</strong> </p>
+<p>When the Java Virtual Machine starts an application running, it automatically instantiates 
+an object of the <strong>PrintStream</strong> class and connects it to the
+<strong>standard output device</strong>. <em>(By default, the standard output 
+device is typically the computer screen, but it can be redirected at the 
+operating system level to be some other device. The following discussion assumes 
+that the screen is the standard output device.)</em> </p>
+<p><strong>Assign object&#39;s 
+reference to out variable</strong> </p>
+<p>When the <strong>PrintStream</strong> object is instantiated by the virtual 
+machine, the object&#39;s reference is assigned to the class variable of the <strong>
+System</strong> class named <strong>out</strong>. <em>(Because the variable 
+named <strong>out</strong> is final, the contents of the variable cannot be 
+modified later.)</em> </p>
+<p><strong>Reference to a PrintStream object</strong> </p>
+<p>Therefore, the expression <strong>System.out</strong> returns a reference to 
+the <strong>PrintStream</strong> object, which is connected to the standard 
+output device. </p>
+<p><strong>Many instance methods</strong> </p>
+<p>An object of the <strong>PrintStream</strong> class contains many instance 
+methods. This includes numerous overloaded versions of a method named <strong>
+println</strong>. The signature of one of those overloaded 
+<a name="versions_of_the_println_method_follows">versions of the
+<strong>println</strong> method follows</a>: </p>
+<div class="a">
+<pre>public void println(Object x)</pre>
+</div>
+
+<p><strong>Textual representation of an object </strong> </p>
+<p>The purpose of this overloaded version of the <strong>println</strong> method 
+is to:</p>
+<ul>
+	<li>Create a textual representation of the object referred to by the 
+	incoming parameter of type <strong>Object </strong><em>(because <strong>
+	Object</strong> is a totally generic type, this version of the <strong>
+	println</strong> method can accept an incoming parameter that is a reference 
+	to any type of object)</em></li>
+	<li>Send that textual representation to the output device</li>
+</ul>
+<p><strong>In general...</strong></p>
+<p>A new <strong>PrintStream</strong> object can be connected to a variety of output devices when 
+it is instantiated. However, in the special case of the <strong>PrintStream</strong> 
+object instantiated by the virtual machine when the program starts, whose 
+reference is stored in the class variable named <strong>out</strong> of the
+<strong>System</strong> class, the purpose of the object is to provide a display 
+path to the standard output device. </p>
+<p><strong>Our old friend, the toString method</strong> </p>
+<p>To accomplish this, the code in the version of the <strong>println</strong> method shown
+<a href="#versions_of_the_println_method_follows">above</a> calls the
+<strong>toString</strong> method on the incoming reference. <em>(I discussed the
+<strong>toString</strong> method in detail in earlier chapters in this 
+Ebook.)</em> The <strong>toString</strong> method may, or may not, have 
+been overridden in the definition of the class from which the object was 
+instantiated, or in some superclass of the class from which the object was 
+instantiated. </p>
+<p><strong>Default version of toString</strong> </p>
+<p>If not overridden, the default version of the <strong>toString</strong> 
+method defined in the <strong>Object</strong> class is used to produce a textual 
+representation of the object. As we learned in an earlier chapter, that textual 
+representation looks something like the following: </p>
+<div class="a">
+<pre>ClassName@HexHashCode</pre>
+</div>
+
+<p><strong>Overridden version of toString method</strong> </p>
+<p>If the class from which the object was instantiated <em>(or some superclass 
+of that class)</em> contains an overridden version of the <strong>toString</strong> 
+method, runtime polymorphism kicks in and the overridden version of the method 
+is executed to produce the textual representation of the object. </p>
+<p><strong>The Date class overrides toString</strong> </p>
+<p>In the case of this sample program, the object was instantiated from the
+<strong>Date</strong> class. The <strong>Date</strong> class does override the
+<strong>toString</strong> method. </p>
+<p>When the overridden <strong>toString</strong> method is called on a <strong>
+Date</strong> object&#39;s reference, the <strong>String</strong> returned by the 
+method looks something like that shown in <a href="#Figure_6">Figure 6</a>. </p>
+<div class="a">
+	<p><a name="Figure_6">Figure 6</a>. Output from overridden 
+				toString method in Date class.</p>
+<pre>Mon Sep 17 09:52:27 CDT 2001</pre>
+</div>
+
+
+</div>
+	<p>You will recall that this is the output that was produced by the code 
+	shown in <a href="#Listing_8">Listing 8</a> and <a href="#Listing_12">
+	Listing 12</a>. </p>
+<p><strong>More than you ever wanted to know ...</strong> </p>
+<p>And that is probably more than you ever wanted to know about the expression
+<strong>System.out.println...</strong>. </p>
+<p>It is also probably more than you ever wanted to know about class variables, 
+class methods, instance variables, and instance methods. </p>
+<p><strong>Some cautions</strong> </p>
+<p>Before leaving this topic, I do want to express some cautions. Basically, I 
+want to suggest that you use <em><strong>static</strong></em> members very sparingly, if at all.
+</p>
+<p><strong>Static variables</strong> </p>
+<p>To begin with, don&#39;t ever use <strong>static</strong> variables without 
+declaring them <strong>final</strong> unless you understand exactly why you are declaring them <strong>static</strong>.
+</p>
+<p><em>(<strong>static</strong> <strong>final</strong> variables, or constants, are often very 
+appropriate. See the fields in the <strong>Color</strong> class for example.)</em>
+</p>
+<p>I can think of only a very a few situations in which the use of a 
+non-final <strong>static</strong> variable might be appropriate. </p>
+<p><em>(One appropriate use might be to count the number of objects instantiated 
+from a specific class.)</em> </p>
+<p><strong>Static methods</strong> </p>
+<p>Don&#39;t declare methods <strong>static</strong> if there is any requirement for 
+the method to remember anything from one call to the next. </p>
+<p>There are many appropriate uses for <strong>static</strong> methods, but in 
+most cases, the purpose of the method will be to completely perform some action 
+with no requirement to remember anything from that call to the next. </p>
+<p>The method should probably also be self-contained. By this I mean that all 
+information that the method needs to do its job should either come from incoming 
+parameters or from <strong>final</strong> <strong>static</strong> member 
+variables <em>(constants).</em> The method probably should not depend on the 
+values stored in non-final <strong>static</strong> member variables, which are subject to change 
+over time.</p>
+<p><em>(A <strong>static</strong> method only has access to other <strong>static</strong> members of the class, so 
+it cannot depend on instance variables defined in the class.)</em> </p>
+<p>An appropriate example of a <strong>static</strong> method is the <strong>sqrt </strong>method 
+of the <strong>Math</strong> class. This method computes and <em>&quot;Returns the 
+correctly rounded positive square root of a double&quot;</em> where the <strong>double</strong> value 
+is provided as a parameter to the method. Each time the method is called, it 
+completes its task and doesn&#39;t attempt to save any values from that call to the 
+next. Furthermore, it gets all the information that it needs to do its job from 
+an incoming parameter.</p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p><strong>Added complexity</strong></p>
+<p>The existence of <strong>static</strong> members tends to break up the simple OOP structures 
+that I have discussed in previous chapters in this Ebook. </p>
+<p>While <strong>static</strong> members can be useful in some situations, the existence of 
+<strong>static</strong> members tends to complicate the overall object-oriented structure of 
+Java. </p>
+<p>Furthermore, the overuse of <strong>static</strong> members can lead to problems similar to 
+those experienced in languages like C and C++ that support global variables and 
+global functions. </p>
+<p><strong>The class named Class</strong> </p>
+<p>I discussed the class named <strong>Class</strong> and how a <em>conceptual</em> 
+object of type <strong>Class</strong> exists in memory following a reference to 
+a specific class in the program code. </p>
+<p>The <strong>Class</strong> object represents the referenced class in memory, 
+and contains the <strong>static</strong> variables and <strong>static</strong> methods belonging to that class.
+<em>(It contains some other information as well, such as the name of the 
+superclass.)</em> </p>
+<p><strong>Class members and instance members</strong> </p>
+<p><em>Class variables</em> and <em>class methods</em> are declared <strong>static</strong> <em>(declaring a member 
+<strong>static</strong> in the class definition causes to be called a class member)</em>. </p>
+<p>Instance variables and instance methods are not declared <strong>static</strong>. </p>
+<p><strong>Each object has its own copy ...</strong> </p>
+<p>Every object instantiated from a given class has its own copy of each 
+instance variable declared in the class definition. <em>(Instance variables are 
+not shared among objects.)</em> </p>
+<p>Every object instantiated from a given class acts like it has its own copy of 
+every instance method declared in the class definition. <em>(Apparently instance 
+methods are physically shared among objects in order to reduce the amount of 
+memory required, but they are shared in such a way that they don&#39;t appear to be 
+shared.)</em> </p>
+<p><strong>Every object shares ...</strong> </p>
+<p>Every object instantiated from a given class shares the same single copy of 
+each class variable declared in the class definition. Similarly, every object 
+instantiated from a given class shares the same copy of each class method. </p>
+<p><strong>Accessing an instance member</strong> </p>
+<p>An instance variable or an instance method can only be accessed by using a 
+reference to the object that owns it. Even then, it may or may not be accessible 
+depending on the access modifier assigned by the programmer. </p>
+<p><strong>Accessing a class member</strong> </p>
+<p>The single shared copy of a class variable or a class method can be accessed 
+in either of two ways:</p>
+<ul>
+	<li>Via a reference to any object instantiated from the class.</li>
+	<li>By simply joining the name of the class to the name of the class 
+	variable or the class method.</li>
+</ul>
+<p>Again, the variable or method may or may not be accessible, depending on the 
+access modifiers assigned by the programmer.</p>
+<p><strong>When to use class variables</strong> </p>
+<p>It is very often appropriate to use <strong>final</strong> <strong>static</strong> variables, as constants in 
+your programs. It is rarely, if ever, appropriate to use non-final <strong>static</strong> 
+variables in your programs. The use of non-final <strong>static</strong> variables should 
+definitely be minimized. </p>
+<p><strong>When to use <strong>static</strong> methods</strong> </p>
+<p>It is often appropriate to use <strong>static</strong> methods in your programs, provided 
+there is no requirement for the method to remember anything from one call to the 
+next. <strong>Static</strong> methods should be self-contained.</p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter (following the review chapter) in this Ebook will 
+explain the use of the <b><i>this</i></b> 
+and <b><i>super</i></b> keywords.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1627: Static Members</li>
+					<li>File: Java1627.htm
+</li>
+					<li>Published: 04/24/02 </li>
+					<li>Revised: 03/17/20</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the sample program is shown in <a href="#Listing_13">
+Listing 13</a>. </p>
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_13">Listing 13</a>. <strong>Complete program listing.</strong></p>
+<pre>/*File MyClass01.java
+Copyright, R.G.Baldwin
+
+This program illustrates static
+members of a class. Output is:
+
+Static variable
+Mon Sep 17 09:52:27 CDT 2001
+
+Instance variable
+Mon Sep 17 09:52:32 CDT 2001
+Static variable
+Mon Sep 17 09:52:27 CDT 2001
+
+
+Instance variable
+Mon Sep 17 09:52:37 CDT 2001
+Static variable
+Mon Sep 17 09:52:27 CDT 2001
+**************************************/
+import java.util.Date;
+class MyClass01{
+ static Date v1 = new Date();
+ Date v2 = new Date();
+
+ public static void main(
+ String[] args){
+ //Display static variable
+ System.out.println(
+ "Static variable");
+ System.out.println(MyClass01.v1);
+
+ //Delay for five seconds
+ try{
+ Thread.currentThread().sleep(5000);
+ }catch(InterruptedException e){}
+
+ //Instantiate an object and
+ // display instance variable
+ MyClass01 ref1 = new MyClass01();
+ System.out.println();//blank line
+ System.out.println(
+ "Instance variable");
+ System.out.println(ref1.v2);
+
+ //Now, display the static
+ // variable using object reference
+ System.out.println(
+ "Static variable");
+ System.out.println(ref1.v1);
+
+ System.out.println();//blank line
+
+ //Delay for five seconds
+ try{
+ Thread.currentThread().sleep(5000);
+ }catch(InterruptedException e){}
+
+ //Instantiate another object
+ MyClass01 ref2 = new MyClass01();
+ System.out.println();//blank line
+ System.out.println(
+ "Instance variable");
+ System.out.println(ref2.v2);
+
+ //Now, display the same static
+ // variable using object reference
+ System.out.println(
+ "Static variable");
+ System.out.println(ref2.v1);
+ }//end main
+}//end class MyClass01</pre>
+</div>
+
+
+</div>
+<p>-end- </p>
+
+
+</body>
+</html>

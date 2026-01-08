@@ -1,0 +1,281 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4110r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4110r Review: The Comparator Interface, Part 3</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4110: The Comparator Interface, Part 3</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+
+	
+
+
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>? </p>
+<ul>
+	<li>Compiler Error</li>
+	<li>Runtime Error</li>
+	<li>BILL Bill JOE Joe TOM Tom</li>
+	<li>Tom TOM Joe JOE Bill BILL</li>
+	<li>Joe Bill Tom</li>
+	<li>None of the above.</li>
+</ul>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? The <strong>fillIt</strong> method in <a href="#Listing_1">
+Listing 1</a> populates the <strong>TreeSet</strong> object referred by the 
+incoming parameter with the following names in the following order:</p>
+<p>Joe Bill Tom JOE BILL TOM</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? When the <strong>fillIt</strong> method in <a href="#Listing_1">
+Listing 1</a> returns, the <strong>TreeSet</strong> object is populated with 
+six names in descending order taking case into account.</p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>True or False? In the output from <a href="#Listing_1">
+Listing 1</a>, descending order means that names beginning with letters that 
+are low in the alphabet occur before names beginning with letters that are 
+higher in the alphabet. In addition, names containing lower case characters 
+appear before the same names containing only upper case characters. </p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? In <a href="#Listing_1">Listing 1</a>, names with the same 
+spelling but different case were considered to be duplicates and therefore were 
+excluded from the collection</p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? Given: <a href="#Listing_1">Listing 1</a> contains the 
+following statement:</p>
+<p><strong>return result * (-1);</strong></p>
+<p>If you were to change the value in parentheses from -1 to -2, the program 
+output would be:</p>
+<p><b>BILL Bill JOE Joe TOM Tom</b></p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Comparator04.java.</li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>False. If you were to change the value in parentheses from -1 to -2, the 
+program output would still be:</p>
+<p><strong>Tom TOM Joe JOE Bill BILL</strong></p>
+<p>It is the sign of the result and not the value of the result that determines 
+the sorting order of the output in <a href="#Listing_1">Listing 1</a>. You would 
+need to multiply by a positive value (or not multiply by any value) to cause the output to be</p>
+<p><b>BILL Bill JOE Joe TOM Tom</b></p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>False. In <a href="#Listing_1">Listing 1</a>, names with the same spelling 
+but different case were not considered to be duplicates insofar as the contract 
+for the <strong>set</strong> was concerned.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>False. In the output from <a href="#Listing_1">
+Listing 1</a>, descending order means that names beginning with letters that are 
+high in the alphabet occur before names beginning with letters that are lower in 
+the alphabet. In addition, names containing lower case characters appear before 
+the same names containing only upper case characters. </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>True.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>False. Even without the use of a <strong>Comparator</strong> object, the 
+order would be incorrect. A <strong>TreeSet</strong> object requires its 
+elements to be in either ascending natural order or in an order specified by a
+<strong>Comparator</strong> object. This program uses a <strong>Comparator</strong> 
+object but it doesn't result in the order shown in the question.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p><b>Tom TOM Joe JOE Bill BILL</b></p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. Comparator04.java.</p>
+<pre>//File Comparator04.java
+//Copyright, R.G.Baldwin
+
+import java.util.*;
+import java.io.Serializable;
+
+public class Comparator04{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator04
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new TreeSet(new TheComparator());
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add("Joe");
+    ref.add("Bill");
+    ref.add("Tom");
+    ref.add("JOE");
+    ref.add("BILL");
+    ref.add("TOM");
+  }//end fillIt()
+}//end class Populator
+
+class TheComparator implements Comparator, Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    int result = ((String)o1).compareTo(((String)o2));
+    return result*(-1);
+  }//end compare()
+
+  public boolean equals(Object o){
+    if(!(o instanceof TheComparator))
+        return false;
+    else return true;
+  }//end overridden equals()
+}//end class TheComparator
+</pre>
+
+</div>
+	
+
+	
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4110r Review: The Comparator Interface, Part 3</li>
+				<li>File: Java4110r.htm </li>
+				<li>Published: 12/02/13</li>
+				<li>Revised: 04/18/20</li>
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,939 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0230</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0230: Flow of Control</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a><ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li>
+
+	<a href="#Introduction">Introduction</a><ul>
+		<li>
+
+		<a href="#flowofcontrol">Flow of control</a></li>
+		<li>
+
+		<a href="#thewhilestatement">The while statement</a></li>
+		<li>
+
+		<a href="#theifelsestatement">The if-else statement</a></li>
+		<li>
+
+		<a href="#theswitchcasestatement">The switch-case statement</a></li>
+		<li>
+
+<a href="#theforloop">The for 
+loop</a></li>
+		<li><a href="#The_for_each_loop">The for-each loop</a></li>
+		<li>
+
+		<a href="#thedowhileloop">The do-while loop</a></li>
+		<li>
+
+		<a href="#thebreakandcontinuestatements">The break and continue statements</a></li>
+		<li>
+
+		<a href="#unlabeledbreakandcontinue">Unlabeled break and continue</a></li>
+		<li>
+
+		<a href="#labeledbreakandcontinue">Labeled break and continue statements</a><ul>
+	<li>
+
+		<a href="#labeledbreakstatements">Labeled break statements</a></li>
+	<li>
+
+		<a href="#labeledcontinuestatements">Labeled continue statements</a></li>
+</ul>
+		</li>
+		<li>
+
+		<a href="#Even_or_odd">Even or odd</a></li>
+		<li>
+
+		<a href="#thereturnstatement">The return statement</a></li>
+		<li>
+
+		<a href="#exceptionhandling">Exception handling</a></li>
+	</ul>
+	</li>
+
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>Java supports several different statements designed to alter or control 
+	the logical flow of the program. This chapter explores those statements. 
+	Before continuing with this chapter, I recommend that you read Kjell
+	<a href="http://programmedlessons.org/Java9/chap16/ch16_01.html">CHAPTER 16 — Decision Making</a> through 
+	<a href="http://programmedlessons.org/Java9/chap25/ch25_01.html">CHAPTER 25 — More about the for Statement</a>, 
+	<a href="http://programmedlessons.org/Java9/chap34/ch34_01.html">CHAPTER 34 — More Ways to Make Decisions</a>,
+	<a href="http://programmedlessons.org/Java9/chap35/ch35_01.html">CHAPTER 35 — The Daring do Statement</a>,
+	<a href="http://programmedlessons.org/Java9/chap61/ch61_14.html">Enhanced for loop</a>, </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Statements that support flow of control.</li>
+		<li><a href="#Figure_2">Figure 2</a>. Syntax of a while statement. </li>
+		<li><a href="#Figure_3">Figure 3</a>. Syntax of an if-else statement.</li>
+		<li><a href="#Figure_4">Figure 4</a>. Syntax of a switch-case statement.</li>
+		<li><a href="#Figure_5">Figure 5</a>. Syntax of a for loop.</li>
+		<li><a href="#Figure_6">Figure 6</a>. Syntax of a do-while loop. </li>
+		<li><a href="#Figure_7">Figure 7</a>. Syntax of a labeled statement. </li>
+		<li><a href="#Figure_8">Figure 8</a>. An empty return statement. </li>
+		<li><a href="#Figure_9">Figure 9</a>. Returning a value from a method. </li>
+
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Sample Java while statement. </li>
+		<li><a href="#Listing_2">Listing 2</a>. A program that won't compile. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Another program that won't compile. </li>
+		<li><a href="#Listing_4">Listing 4</a>. A program that will compile. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Another program that will compile.</li>
+		<li><a href="#Listing_6">Listing 6</a>. The program named switch1.java.</li>
+		<li><a href="#Listing_7">Listing 7</a>. The program named switch2.java.</li>
+		<li><a href="#Listing_8">Listing 8</a>. The program named Odd.java.</li>
+	</ul>
+<h1><a name="Introduction">Introduction</a></h1>
+<p>The first step in learning to use a new programming language is usually to 
+learn the foundation concepts such as variables, types, expressions, 
+flow-of-control, etc. This chapter concentrates on <em>flow-of-control</em>.</p>
+<h1><a name="flowofcontrol">Flow of 
+control</a></h1>
+<p><strong>What is flow of control?</strong></p>
+<p>Java supports several different kinds of 
+statements designed to alter or control the logical flow of the program. </p>
+<p>The ability to alter the logical flow of the program is often referred to as 
+<em>Flow of Control</em>.</p>
+<p><strong>Statements that support flow of 
+control</strong></p>
+<p><a href="#Figure_1">Figure 1</a> lists the statements supported by Java 
+for controlling the logical flow of the 
+program. </p>
+
+<!--``1Fig001-->
+
+
+
+
+<!--``1Fig001-->
+<div class="a">				<p><a name="Figure_1">Figure 1</a>. Statements that support flow of control.</p>
+<pre>
+Statement            Type
+
+if-else              selection
+switch-case          selection
+for                  loop
+for-each             loop
+while                loop
+do-while             loop
+try-catch-finally    exception handling
+throw                exception handling
+break                miscellaneous
+continue             miscellaneous
+label:               miscellaneous
+return               miscellaneous
+goto                 reserved by Java but not supported
+</pre>
+</div>
+
+<h2><a name="thewhilestatement">The 
+while statement</a></h2>
+<p>We have seen the <strong>while</strong> 
+statement in earlier chapters. Some of the programs in earlier chapters contained a 
+<strong>while</strong> 
+statement designed to control the logical flow of the program. </p>
+
+<p><strong>Syntax of a while statement</strong></p>
+<p>The general syntax of a <strong>while</strong> 
+statement is shown in <a href="#Figure_2">Figure 2</a>.</p>
+<!--``1Fig002-->
+<div class="a">				<p><a name="Figure_2">Figure 2</a>. Syntax of a while 
+				statement.
+</p>
+<pre>
+while (conditional expression)
+  statement or compound statement;
+</pre>
+
+</div>
+<p><strong>Behavior of a while statement</strong></p>
+<p>The <a name="three_pillars">three pillars</a> of procedural programming are</p>
+<ul>
+	<li>sequence</li>
+	<li>selection</li>
+	<li>loop</li>
+</ul>
+<p>The <strong>while</strong> statement is commonly used to create a loop 
+structure, often referred to as a <em>while loop</em>.</p>
+<p>Once the <strong>while</strong> statement is encountered in the sequence of 
+code, the program will continue to execute 
+the statement or compound statement shown in <a href="#Figure_2">Figure 2</a> for as long as the conditional expression 
+evaluates to true. <em>(Note that a compound statement is created by enclosing 
+two or more statements inside a pair of matching curly brackets, thus creating a 
+block of code as the body of the <strong>while</strong> statement or loop.)</em></p>
+<p><strong>Sample Java <em>while</em> statement</strong></p>
+<p>The <strong>while</strong> statement shown in <a href="#Listing_1">Listing 1</a> was extracted from a 
+Java program in an earlier chapter.</p>
+<!--``1List01-->
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. Sample Java while 
+				statement.
+</p>
+<pre>
+while( (ch1 = System.in.read() ) != &#39;#&#39;) 
+  ch2 = ch1;
+</pre>
+
+</div><!--``2-->
+<p><strong>The <em>in</em> variable of the <em>System</em> class</strong></p>
+<p>The <strong>System</strong> class defines a <em>class</em> variable named 
+<strong>in</strong>. Because it is a <em>class</em> variable, it can be accessed using the name 
+of the <strong>System</strong> class without the requirement to instantiate an object of 
+the <strong>System</strong> class. </p>
+<p><strong>What the <em>in</em> variable contains</strong></p>
+<p>The <strong>in</strong> variable refers to an instance of a class that 
+provides a <strong>read</strong> method that returns a character from the standard 
+input device <em>(typically the keyboard)</em>. </p>
+<p>Therefore, the expression <strong>System.in.read()</strong> in
+<a href="#Listing_1">Listing 1</a> constitutes a call 
+to the <strong>read</strong> method of the object referred to by the <strong>in</strong> variable of 
+the <strong>System</strong> class. </p>
+<p><strong>A <em>while</em> loop is an entry condition 
+loop</strong></p>
+<p>The <strong>while</strong> statement is used to form an 
+<em>entry condition</em> loop. The significance of an entry condition loop is 
+that the conditional expression is tested before the statements in the loop are 
+executed. If it tests false initially, the statements in the loop are never 
+executed.</p>
+<p>The <strong>while</strong> loop shown in <a href="#Listing_1">Listing 1</a> 
+will continue reading characters from the keyboard for as long as the character 
+entered is not the # character. <em>(Recall the not equal (!=) operator from an 
+earlier chapter.)</em></p>
+
+<h2><a name="theifelsestatement">The 
+if-else statement</a></h2>
+<p>The general syntax of an <strong>if-else</strong> statement is shown in
+<a href="#Figure_3">Figure 3</a>.</p>
+<!--``1Fig003-->
+<div class="a">
+	<p><a name="Figure_3">Figure 3</a>. Syntax of an if-else statement.</p>
+<pre>
+if(conditional expression)
+  statement or compound statement;
+else //optional
+  statement or compound statement; //optional
+</pre>
+
+</div>	<p>The <strong>if-else</strong> statement is the most basic of the statements used to control the logical flow 
+	of a Java program. It is used to satisfy the <em>selection</em> pillar 
+	mentioned <a href="#three_pillars">earlier</a>.</p>
+<p>This statement will execute a specified block of code if some particular 
+condition is true, and optionally, will execute a different block of code if the 
+condition is not true.</p>
+<p>The <strong>else</strong> clause shown in
+<a href="#Figure_3">Figure 3</a> is optional. If it is not provided and the 
+condition is not true, control simply passes to the next statement following the
+<strong>If</strong> statement with none of the code in the body of the <strong>if</strong> 
+statement being executed. If the condition is true, the code in the body of the
+<strong>if</strong> statement is executed.</p>
+<p>If the <strong>else</strong> clause is provided and the condition is true, 
+the code in the body of the <strong>if</strong> clause is executed and the code in the
+body of the
+<strong>else</strong> clause is ignored.</p>
+<p>If the <strong>else</strong> clause is provided and the condition is false, 
+the code in the body of the <strong>if</strong> clause is ignored and the code in the
+body of the
+<strong>else</strong> clause is executed.</p>
+<p>In all cases, control passes to the next statement following the <strong>
+if-else</strong> statement when the code in the <strong>if-else</strong> 
+statement has finished executing. In other words, this is not a loop structure.</p>
+<h2><a name="theswitchcasestatement">The switch-case statement</a></h2>
+<p>The <strong>switch-case</strong> statement is another implementation of the
+<em>selection</em> pillar mentioned
+<a href="#three_pillars">earlier</a>. The general syntax of a 
+<strong>switch-case</strong> statement is shown in <a href="#Figure_4">Figure 4</a>.</p>
+<!--``1Fig004-->
+<div class="a">
+	<p><a name="Figure_4">Figure 4</a>. Syntax of a switch-case statement.</p>
+<pre>
+switch(expression){
+  case constant:
+    //sequence of optional statements
+    break; //optional
+  case constant:
+    //sequence of optional statements
+    break; //optional
+.
+.
+.
+  default //optional
+    //sequence of optional statements
+}
+</pre>
+
+</div>	<p><strong>The type of the <em>expression</em></strong></p>
+<p>According to the book titled <em>Java Language Reference</em>, by Mark 
+Grand, the expression shown in the first line in <a href="#Figure_4">Figure 4</a> must be 
+of type <strong>byte</strong>, <strong>char</strong>, <strong>short</strong>, or 
+<strong>int</strong>. However, according to 
+<a href="http://programmedlessons.org/Java9/chap34/ch34_14.html">Kjell</a>,</p>
+<blockquote> "Starting with Java 7.0 the expression can be a String reference and the case labels can be String literals.
+
+</blockquote>
+<blockquote> Matching of the expression with the case labels is done as if by String.equals()."</blockquote>
+<p><strong>The behavior of the switch-case statement</strong></p>
+<p>The expression is tested against a series of <em>case</em> constants 
+of the same type as the expression. If a match 
+is found, the sequence of optional statements associated with that <em>case</em> is executed. </p>
+<p>Execution of statements continues until the optional <strong>break</strong> is 
+encountered. When <strong>break</strong> is encountered, execution of the switch 
+statement is terminated and control passes to the next statement following 
+the switch statement.</p>
+<p>If there is no <strong>break</strong> statement, all of the statements 
+following the matching case will be executed including those in cases further 
+down the page.</p>
+<p><strong>The optional default keyword</strong></p>
+<p>If no match is found and the optional default keyword 
+along with a sequence of optional statements has been provided, those statements 
+will be executed. </p>
+<p><strong>Labeled break</strong></p>
+<p>Java also supports labeled break statements. 
+This capability can be used to cause Java to exhibit different behavior when 
+switch statements are nested. This will be explained more fully in a later 
+section on labeled break statements. </p>
+
+<h2><a name="theforloop">The for 
+loop</a></h2>
+<p>The <strong>for</strong> statement is another implementation of the <em>loop</em> 
+pillar mentioned <a href="#three_pillars">earlier</a>.</p>
+<p><strong>Actions of a <em>for loop</em></strong></p>
+<p>The operation of a loop normally involves three actions in 
+addition to executing the code in the body of the loop: </p>
+
+<ul>
+<li>Initialize a control variable. </li>
+<li>Test the control variable in a conditional expression. </li>
+<li>Update the control variable.</li></ul>
+
+<p><strong>Grouping the actions</strong></p>
+<p>Java provides the <strong>for</strong> loop construct that groups these 
+three actions in one place.</p>
+<p><strong>The syntax of a for loop</strong></p>
+<p>A <strong>for</strong> loop consists of three clauses separated 
+by semicolons as shown in <a href="#Figure_5">Figure 5</a>.</p>
+<!--``1Fig005-->
+<div class="a">
+	<p><a name="Figure_5">Figure 5</a>. Syntax of a for loop.
+</p>
+<pre>
+for (first clause; second clause; third clause)
+  single or compound statement
+</pre>
+
+</div>	<p><strong>Contents of the clauses</strong></p>
+<p>The first and third clauses can contain one or more 
+expressions, separated by the <em>comma operator</em>. </p>
+<p><strong>The <em>comma operator</em></strong></p>
+<p>The comma operator guarantees 
+that its left operand will be executed before its right operand. </p>
+
+<p><strong>Behavior and purpose of the first 
+clause</strong></p>
+<p>The expressions in the first clause are 
+executed only once, at the beginning of the loop. Any legal expression(s) 
+may be contained in the first clause, but typically the first clause is used for 
+initialization. </p>
+<p><strong>Declaring and initializing variables 
+in the first clause</strong></p>
+<p>Variables can be declared and initialized in 
+the first clause, and this has an interesting ramification regarding scope that 
+will be discussed later. </p>
+<p><strong>Behavior of the second clause</strong></p>
+<p>The second clause consists of a single 
+expression that must evaluate to a <strong>boolean</strong> type with a value 
+of true or false. The expression in the second clause must eventually evaluate to false to cause the loop to 
+terminate.</p>
+<p>Typically relational expressions or relational and conditional 
+expressions are used in the second clause. </p>
+<p><strong>When the test is performed</strong></p>
+<p>The value of the second clause is tested when the statement 
+first begins execution, and at the beginning of each iteration thereafter. 
+Therefore, just like the <strong>while</strong> loop, the <strong>for</strong> loop is an <em>entry condition loop</em>. </p>
+<p><strong>When the third clause is executed</strong></p>
+<p>Although the third clause appears physically at the top of the loop, it isn&#39;t 
+executed until the statements in the body of the loop have completed 
+execution. </p>
+
+<p>This is an important point since this clause is typically used to update the 
+control variable, and perhaps other variables as well. </p>
+<p><strong>What the third clause can contain</strong></p>
+<p>Multiple expressions can appear in the third clause, separated 
+by the comma operator. Again, those expressions will be executed from 
+left to right. If variables are updated in the third clause and used in the body 
+of the loop, it is important to understand that they do not get updated until 
+the execution of the body is completed. </p>
+<p><strong>Declaring a variable in a <em>for</em> loop</strong></p>
+<p>As mentioned earlier, it is allowable to declare 
+variables in the first clause of a <strong>for</strong> loop.</p>
+
+<p>You can declare a variable with a given name outside 
+<em>(prior to)</em> the <strong>for</strong> loop, or you can declare it inside the 
+<strong>for</strong> 
+loop, but not both. </p>
+<p>If you declare it outside the <strong>for</strong> loop, you can access it either 
+outside or inside the loop. </p>
+<p>If you declare it inside the loop, you can access it only inside the 
+loop. In other words, the scope of variables declared inside a <strong>for</strong> 
+loop is limited to the loop. </p>
+<p>This is illustrated in following sequence of four simple programs. </p>
+<p><strong>This program won&#39;t compile</strong></p>
+<p>The Java program shown in <a href="#Listing_2">Listing 2</a> refuses to compile with a complaint 
+that a variable named <strong>cnt</strong> has already been declared in the method when 
+the attempt is made to declare it in the <strong>for</strong> loop. </p>
+<!--``1List02-->
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a>. A program that won&#39;t 
+				compile.
+</p>
+<pre>
+/*File for1.java Copyright, R.G.Baldwin
+This program will not compile because the variable 
+named cnt is declared twice.
+********************************************************/
+class for1 { //define the controlling class
+  public static void main(String[] args){ //main method
+    int cnt = 5; //declare local method variable
+    System.out.println(
+          &quot;Value of method var named cnt is &quot; + cnt);
+
+    for(int cnt = 0; cnt &lt; 2; cnt++)
+      System.out.println(
+              &quot;Value of loop var named cnt is &quot; + cnt);
+
+    System.out.println(
+            &quot;Value of method var named cnt is &quot; + cnt);
+  }//end main
+}//End controlling class.  Note no semicolon required
+</pre>
+
+</div><!--``2-->
+	<p>The program shown in <a href="#Listing_3">Listing 3</a> also won&#39;t compile, but 
+for a different reason.</p>
+<!--``1List03-->
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a>. Another program that 
+				won&#39;t compile.
+</p>
+<pre>
+/*File for2.java Copyright, R.G.Baldwin
+This program will not compile because the variable 
+declared inside the for loop is not accessible 
+outside the loop.
+********************************************************/
+class for2 { //define the controlling class
+  public static void main(String[] args){ //main method
+ 
+    for(int cnt = 0; cnt &lt; 2; cnt++)
+      System.out.println(
+                  &quot;Value of loop var named cnt is &quot; + cnt);
+
+    System.out.println(
+                &quot;Value of method var named cnt is &quot; + cnt);
+  }//end main
+}//End controlling class.  Note no semicolon required
+</pre>
+
+</div><!--``2-->
+<p>The declaration of the variable named <strong>cnt</strong>, outside the 
+<strong>for</strong> loop, was removed from <a href="#Listing_3">Listing 3</a> and the declaration inside the 
+loop was allowed to remain. This eliminated the problem of attempting to declare 
+the variable twice. </p>
+<p>However, this program refused to compile because an attempt was made to 
+access the variable named <strong>cnt</strong> outside the <strong>for</strong> loop. This was not 
+allowed because the variable was declared inside the <strong>for</strong> loop and the 
+scope of the variable was limited to the loop. </p>
+<p><strong>This program will compile</strong></p>
+<p>The Java program shown in <a href="#Listing_4">Listing 4</a> will compile and run because the 
+variable named <strong>cnt</strong> that is declared inside the <strong>for</strong> loop is 
+accessed only inside the <strong>for</strong> loop. No reference to a variable with the 
+same name appears outside the loop. </p>
+<!--``1List04-->
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a>. A program that will 
+				compile.
+</p>
+<pre>
+/*File for3.java Copyright, R.G.Baldwin
+This program will compile because the variable declared 
+inside the for loop is accessed only inside the loop.
+**********************************************************/
+class for3 { //define the controlling class
+  public static void main(String[] args){ //main method
+ 
+    for(int cnt = 0; cnt &lt; 2; cnt++)
+      System.out.println(
+                  &quot;Value of loop var named cnt is &quot; + cnt);
+  }//end main
+}//End controlling class.
+</pre>
+
+</div><p><strong>This program will also compile</strong></p>
+<p>Similarly, the program shown in <a href="#Listing_5">Listing 5</a> will compile and run 
+because the variable named <strong>cnt</strong> was declared outside the <strong>for</strong> loop 
+and was not declared inside the <strong>for</strong> loop. This made it possible to access 
+that variable both inside and outside the loop. </p>
+<!--``1List05-->
+<div class="a">
+	<p><a name="Listing_5">Listing 5</a>. Another program that will 
+				compile.
+</p>
+<pre>
+/*File for4.java Copyright, R.G.Baldwin
+This program will compile and run because the variable 
+named cnt is declared outside the for loop and is not
+declared inside the for loop.
+**********************************************************/
+class for4 { //define the controlling class
+  public static void main(String[] args){ //main method
+    int cnt = 5; //declare local method variable
+    System.out.println(
+              &quot;Value of method var named cnt is &quot; + cnt);
+
+    for(cnt = 0; cnt &lt; 2; cnt++)
+      System.out.println(
+                  &quot;Value of loop var named cnt is &quot; + cnt);
+
+    System.out.println(
+                &quot;Value of method var named cnt is &quot; + cnt);
+  }//end main
+}//End controlling class.  Note no semicolon required
+</pre>
+
+</div><!--``2-->
+	<p><strong>Empty clauses in a <em>for</em> loop</strong></p>
+<p>The first and third clauses in a <strong>for</strong> loop can be 
+left empty but the semicolons must be there as placeholders.&nbsp; </p>
+<p>One author suggests that even the middle clause can be empty, but it isn&#39;t 
+obvious to this author how the loop would ever terminate if there is no 
+conditional expression to be evaluated. Perhaps the loop could be terminated by 
+using a break inside the loop, but in that case, you might just as well 
+use a <strong>while</strong> loop. </p>
+<h2><a name="The_for_each_loop">The for-each loop</a></h2>
+<p>There is another form of loop structure that is often referred to as a
+<strong>for-each</strong> loop. In order to appreciate the benefits of 
+this loop structure, you need to be familiar with Java collections and iterators, 
+both of which are beyond the scope of this chapter.</p>
+<p>As near as I can tell, there is nothing that you can do with the <strong>
+for-each</strong> loop that you cannot also do with the conventional <strong>for</strong> 
+loop described above. Therefore, I rarely use it. You can find a description of 
+the <strong>for-each</strong> loop on this Oracle
+<a href="http://docs.oracle.com/javase/1.5.0/docs/guide/language/foreach.html">
+website</a>. </p>
+<p>I don&#39;t plan to discuss it further in this chapter. However, before you go for 
+a job interview, you should probably do some online research and learn about it 
+because an interviewer could use a question about the <strong>for-each</strong> 
+loop to trip you up in the Q and A portion of the interview.</p>
+
+<h2><a name="thedowhileloop">The 
+do-while loop</a></h2>
+<p>The <strong>do-while</strong> loop is another implementation of the <em>loop</em> 
+pillar mentioned <a href="#three_pillars">earlier</a>. However, it differs from 
+the <strong>while</strong> loop and the <strong>for</strong> loop in one 
+important respect; it is an <em>exit-condition</em> loop.</p>
+<p><strong>An exit-condition loop</strong></p>
+<p>Java provides an <em>exit-condition</em> loop 
+having the syntax shown in <a href="#Figure_6">Figure 6</a>. </p>
+<!--``1Fig006-->
+<div class="a">
+	<p><a name="Figure_6">Figure 6</a>. Syntax of a do-while loop.
+</p>
+<pre>
+do {
+    statements
+              } while (conditional expression);
+</pre>
+
+</div>	<p><strong>Behavior</strong></p>
+<p>The statements in the body of the loop continue to be 
+executed for as long as the conditional expression evaluates to true. 
+An exit-condition loop guarantees that the body of the loop will be 
+executed at least one time, even if the conditional expression 
+evaluates to false the first time it is tested. </p>
+<h2><a name="thebreakandcontinuestatements">The break and continue statements</a></h2>
+<p><strong>General behavior</strong></p>
+<p>Although some authors suggest that the <strong>break</strong> and <strong>
+continue</strong> statements provide an 
+alternative to the infamous <strong>goto</strong> statement of earlier 
+programming languages, it appears that the behaviors of the <strong>labeled break</strong> and <strong>labeled continue</strong> statements 
+are much 
+more restrictive than a general <strong>goto</strong>. </p>
+
+<h2><a name="unlabeledbreakandcontinue">Unlabeled break and continue</a></h2>
+<p>The <strong>break</strong> and <strong>continue</strong> statements are 
+supported in both labeled and unlabeled form.</p>
+<p>First consider the behavior of break and continue in 
+their unlabeled configuration. </p>
+<p><strong>Use of a <em>break</em> statement</strong></p>
+<p>The <strong>break</strong> statement can be used in a switch 
+statement or in a loop. When encountered in a switch statement, break 
+causes control to be passed to the next statement outside the innermost 
+enclosing switch statement. </p>
+<p>When break is encountered in a loop, it causes control to be passed to 
+the next statement outside the innermost enclosing loop. </p>
+<p>As you will see later, labeled break statements can be used to 
+pass control to the next statement following switch or loop statements 
+beyond the innermost switch or loop statement when those 
+statements are nested. </p>
+<p><strong>Use of a continue statement</strong></p>
+<p>The continue statement cannot be used in a switch statement, but can be used 
+inside a loop.</p>
+<p>When an unlabeled continue statement is encountered, it causes the current iteration 
+of the current loop to be terminated and the next 
+iteration to begin. </p>
+<p>A labeled continue statement can cause control to be passed to the 
+next iteration of an outer enclosing loop in a nested loop 
+situation. </p>
+
+<h2><a name="labeledbreakandcontinue">Labeled break and continue statements</a></h2>
+<p>This section discusses the use of labeled break and 
+continue statements. </p>
+
+<h3><a name="labeledbreakstatements"></a>
+Labeled break Statements</h3>
+<p>One way to describe the behavior of a labeled break in 
+Java is to say: &quot;Break all the way out of the labeled statement.&quot; </p>
+<p><strong>Syntax of a labeled statement</strong></p>
+<p>To begin with, the syntax of a labeled statement is a label followed by a colon ahead of the statement 
+as shown in <a href="#Figure_7">Figure 7</a>.</p>
+
+
+
+
+	
+<!--``1Fig007-->
+<div class="a">
+	<p><a name="Figure_7">Figure 7</a>. Syntax of a labeled 
+				statement.</p>
+<pre>
+myLabel:  myStatement;
+</pre>
+
+</div>	<p>The label can be any legal Java identifier.</p>
+<p><strong>Behavior of labeled break</strong></p>
+<p>The behavior of a labeled break can best be 
+illustrated using nested switch statements. For a comparison of 
+labeled and unlabeled switch statements, consider the 
+program shown in <a href="#Listing_6">Listing 6</a> named <strong>switch1</strong>, which does not use a labeled 
+break. Even though this program has a labeled statement, that statement is 
+not referenced by a <strong>break</strong>. Therefore, the label is of no consequence.</p>
+<!--``1List06-->
+<div class="a">
+	<p><a name="Listing_6">Listing 6</a>. The program named 
+				switch1.java.</p>
+<pre>
+/*File switch1.java
+This is a Java application which serves as a baseline
+comparison for switch2.java which uses a labeled break.
+Note that the program uses nested switch statements.
+
+The program displays the following output:
+
+Match and break from here
+Case 6 in outer switch
+Default in outer switch
+Beyond switch statements
+
+********************************************************/
+class switch1 { //define the controlling class
+  public static void main(String[] args){ //main method
+
+  //Note that the following labeled switch statement is
+  // not referenced by a labeled break in this program.
+  // It will be referenced in the next program.  
+  outerSwitch: switch(5){//labeled outer switch statement
+    case 5: //execute the following switch statement
+    //Note that the code for this case is not followed 
+    // by break. Therefore, execution will fall through
+    // the case 6 and the default.
+      switch(1){ //inner switch statement
+        case 1: System.out.println(
+                            &quot;Match and break from here&quot;);
+                break; //break with no label
+        case 2: System.out.println(
+                           &quot;No match for this constant&quot;);
+                break;
+      }//end inner switch statement
+
+    case 6: System.out.println(&quot;Case 6 in outer switch&quot;);
+    default: System.out.println(
+                              &quot;Default in outer switch&quot;);
+  }//end outer switch statement
+
+  System.out.println(&quot;Beyond switch statements&quot;);
+  }//end main
+}//End switch1 class.
+</pre>
+
+</div><!--``2-->
+<p>After reviewing <strong>switch1.java</strong>, consider the same program 
+named <strong>switch2.java</strong> shown in <a href="#Listing_7">Listing 7</a>, 
+which was modified to 
+use a labeled break. </p>
+<p>The 
+outputs from both programs are shown in the comments at the beginning of the 
+program. By examining the second program, and comparing the output from the 
+second program with the first program, you should be able to see how the use of 
+the labeled break statement causes control to break all the way out of 
+the labeled switch statement. </p>
+<!--``1List07-->
+<div class="a">
+	<p><a name="Listing_7">Listing 7</a>. The program named 
+				switch2.java.</p>
+<pre>
+/*File switch2.java
+This is a Java application which uses a labeled break.
+Note that the program uses nested switch statements.
+
+See switch1.java for a comparison program which does not
+use a labeled break.
+
+The program displays the following output:
+
+Match and break from here
+Beyond switch statements
+**********************************************************/
+class switch2 { //define the controlling class
+  public static void main(String[] args){ //main method
+
+  outerSwitch: switch(5){//labeled outer switch statement
+    case 5: //execute the following switch statement
+    //Note that the code for this case is not followed by
+    // break. Therefore, except for the labeled break at 
+    // case 1, execution would fall through the case 6 and
+    // the default as demonstrated in the program named
+    // switch1. However, the use of the labeled break
+    // causes control to break all the way out of the
+    // labeled switch bypassing case 6 and the default.
+      switch(1){ //inner switch statement
+        case 1: System.out.println(
+                              &quot;Match and break from here&quot;);
+                break outerSwitch; //break with label
+        case 2: System.out.println(
+                             &quot;No match for this constant&quot;);
+                break;
+      }//end inner switch statement
+
+    case 6: System.out.println(
+                                 &quot;Case 6 in outer switch&quot;);
+    default: System.out.println(&quot;Default in outer switch&quot;);
+  }//end outer switch statement
+
+  System.out.println(&quot;Beyond switch statements&quot;);
+  }//end main
+}//End switch1 class.
+</pre>
+
+</div><!--``2-->
+<p>The modified program in <a href="#Listing_7">Listing 7</a> uses a labeled break statement 
+in the code group for <em>case 1</em> whereas the original program in
+<a href="#Listing_6">Listing 6</a> has an unlabeled break in that position. </p>
+<p>By comparing the output from this program with the output from the 
+previous program, you can see that execution of the labeled break 
+statement caused control to break all the way out of the labeled 
+switch statement completely bypassing <em>case 6</em> and default. </p>
+
+<p>As you can see from examining the output, the labeled break 
+statement causes the program to break all the way out of 
+the switch statement which bears a matching label. </p>
+
+<p>A similar situation exists when a labeled break is used in 
+nested loops with one of the enclosing outer loops being labeled. Control will 
+break out of the enclosing loop to which the labeled break refers. 
+It will be left as an exercise for the student to demonstrate this behavior to 
+his or her satisfaction. </p>
+
+<h3><a name="labeledcontinuestatements"></a>
+Labeled continue statements</h3>
+<p>Now consider use of the labeled continue statement. A 
+<strong>continue</strong> statement can only be used in a loop; it cannot be used in a 
+switch. The behavior of a labeled continue statement can be 
+described as follows: &quot;Terminate the current iteration and continue 
+with the next iteration of the loop to which the label refers.&quot; </p>
+<p>Again, it will be left as an exercise for the student to demonstrate this 
+behavior to his or her satisfaction. </p>
+<h3><a name="Even_or_odd">Even or odd</a></h3>
+<p>It is often useful to be able to determine if a numeric value is even or odd. 
+The code in <a href="#Listing_8">Listing 8</a> shows how to do that.</p>
+<div class="a">
+<p><a name="Listing_8">Listing 8</a>. The program named Odd.java.</p>
+<pre>/*File Odd.java
+The purpose of this program is to demonstrate how to
+determine if a given numeric value is even or odd. The
+output is:
+3 is Odd
+4 is Even
+**********************************************************/
+
+class Odd { //define the controlling class
+  public static void main(String[] args){ //define main
+    int val = 3;
+    System.out.print(val);
+    if(val % 2 == 0){
+      System.out.println(" is Even");
+    }else{
+      System.out.println(" is Odd");
+    }
+    
+    val = 4;
+    System.out.print(val);
+    if(val % 2 == 0){
+      System.out.println(" is Even");
+    }else{
+      System.out.println(" is Odd");
+    }
+  }//end main
+}//End Odd class
+</pre>
+</div>
+
+<h2><a name="thereturnstatement">The 
+return statement</a></h2>
+<p><strong>Use of the return statement</strong></p>
+<p>Java supports the use of the <strong>return</strong> 
+statement to terminate a method and <em>(optionally)</em> return a value to 
+the calling method.</p>
+<p><strong>The return type</strong></p>
+<p>The type of value returned must match the type 
+of the declared return value for the method. </p>
+<p><strong>The void return type</strong></p>
+<p>If the return value is declared as <strong>void</strong>, you can use 
+the syntax shown in <a href="#Figure_8">Figure 8</a> to terminate the method. <em>(You can also simply allow the 
+method to run out of statements to execute.) </em> </p>
+
+
+
+
+	
+<!--``1Fig008-->
+<div class="a">
+	<p><a name="Figure_8">Figure 8</a>. An empty return statement.</p>
+<pre>
+return;</pre>
+
+</div>	<p><strong>Returning a value</strong></p>
+<p>If the method returns a value, follow the word 
+return with an expression <em>(or constant)</em> that evaluates to the value 
+being returned as shown in <a href="#Figure_9">Figure 9</a>.</p>
+
+
+
+
+	
+<!--``1Fig009-->
+<div class="a">
+	<p><a name="Figure_9">Figure 9</a>. Returning a value from a 
+				method.</p>
+<pre>
+return x+y;
+</pre>
+
+</div>	<p><strong>Return by value only</strong></p>
+<p>You are allowed to return only by <em>value</em>. 
+In the case of primitive types, this returns a copy of the returned item. In the 
+case of objects, returning by value returns a copy of the object&#39;s reference.</p>
+<p><strong>What you can do with a copy the object&#39;s reference</strong></p>
+<p>Having a copy of the reference is just as good as 
+having the original reference. A copy of the reference gives you access to the 
+object.</p>
+<p><strong>When Java objects are destroyed</strong></p>
+<p>All objects in Java are stored in dynamic memory 
+and that memory is not overwritten until all references to that memory cease 
+to exist. </p>
+<p>Java uses a garbage collector running on a background thread to reclaim 
+memory from objects that have become <em>eligible for garbage collection</em>. </p>
+<p>An object becomes eligible for garbage collection when there are no longer 
+any variables, array elements, or similar storage locations containing a 
+reference to the object. In other words, it becomes eligible when there is no 
+way for the program code to find a reference to the object. </p>
+
+
+
+<h2><a name="exceptionhandling">Exception handling</a></h2>
+<p>Exception handling is a process that modifies the flow of control of 
+a program, so it merits being mentioned in this chapter. However, it is a fairly 
+complex topic, which will be discussed in detail in 
+future chapters. </p>
+<p>Suffice it at this point to say that whenever an exception is detected, 
+control is transferred to exception handler code if such code has been provided. Otherwise, the program will terminate. Thus, 
+the exception handling system merits being mentioned in discussions regarding flow 
+of control. </p>
+	
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+
+<div class="a">	
+	<p>Housekeeping material</p>
+<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0230: Flow of Control</li>
+					<li>File: Jb0230.htm
+</li>
+					<li>Revised: 08/04/22</li>
+				</ul>
+</div>
+
+	<p>-end- </p>
+
+
+</body>
+</html>

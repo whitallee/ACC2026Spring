@@ -1,0 +1,310 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java124r</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1624r Review: Array Objects, Part 2</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>, 
+		<a href="#question11">11</a>, <a href="#question12">12</a>, 
+		<a href="#question13">13</a>, 
+		<a href="#question14">14</a>, 
+		<a href="#question15">15</a>,
+		<a href="#question16">16</a>,
+		<a href="#question17">17</a>, 
+		<a href="#question18">18</a>,
+		<a href="#question19">19</a></li>
+	</ul>
+	</li>
+	<li><a href="#Figures">Figures</a></li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter contains review questions and answers keyed to the chapter titled 
+<em>Java1624: Array Objects, Part 2.</em></p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? When declaring a reference variable capable of referring to an 
+array object, the array type is declared by writing the name of an element type 
+followed by some number of empty pairs of square brackets []. </p>
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? The components in an array object may refer to other array 
+objects. The number of bracket pairs used in the declaration of the reference 
+variable indicates the depth of array nesting <em>(in the sense that array 
+elements can refer to other array objects).</em></p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? An array's length is part of its type or reference variable 
+declaration. </p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>True or False? Multi-dimensional arrays are not required to represent 
+rectangles, cubes, etc. They can be <em>ragged.</em></p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? The normal rules of<em> type conversion</em> and <em>
+assignment compatibility</em> apply when creating and populating array objects. </p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? <strong>Object</strong> is the superclass of all other 
+classes. Therefore, an array of element type <strong>Object</strong> is capable 
+of storing references to objects instantiated from any other class. The type 
+declaration for such an array object would be <strong>Object[]</strong>. </p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h2><a name="question07">Question 7</a></h2>
+<p>True or False? An array of element type <strong>Object</strong> is not 
+capable of storing references to other array objects. </p>
+<p><a href="#answer07">Answer 7</a></p>
+
+<h2><a name="question08">Question 8</a> </h2>
+<p>True or False? If the declared element type for the array object is one of 
+the primitive types, the elements of the array can be used to store values of 
+any primitive type that is <em>assignment compatible</em> with the declared type
+<em>(without the requirement for a cast).</em></p>
+<p><a href="#answer08">Answer 8</a> </p>
+
+<h2><a name="question09">Question 9</a></h2>
+<p>True or False? If the declared element type is the name of a class, <em>
+(which may or may not be abstract),</em> a null reference or a reference to any 
+object instantiated from the class or any subclass of the class may be stored in 
+the array element. </p>
+<p><a href="#answer09">Answer 9</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>True or False? If the declared element type is an interface type, a null 
+reference or a reference to any object instantiated from any class that 
+implements the interface can be stored in the array element. </p>
+<p><a href="#answer10">Answer 10</a></p>
+	
+<h2><a name="question11">Question 11</a></h2>
+<p>True or False? A reference variable whose declared type is an array type 
+contains space for the array components.</p>
+<p><a href="#answer11">Answer 11</a></p>
+	
+<h2><a name="question12">Question 12</a></h2>
+<p>True or False? A reference to an array object can refer to different array 
+objects <em>(of the same element type and different lengths)</em> at different 
+points in the execution of a program. </p>
+<p><a href="#answer12">Answer 12</a></p>
+	
+<h2><a name="question13">Question 13</a></h2>
+<p>True or False? When declaring an array reference variable, the square 
+brackets [] must appear following the variable name. </p>
+<p><a href="#answer13">Answer 13</a></p>
+	
+<h2><a name="question14">Question 14</a></h2>
+<p>True or False? Once an array object is created, its type and length never 
+changes. </p>
+<p><a href="#answer14">Answer 14</a></p>
+	
+<h2><a name="question15">Question 15</a></h2>
+<p>True or False? The length of the array (number of elements in the array) is 
+always available as a final instance variable named <strong>length</strong>. </p>
+<p><a href="#answer15">Answer 15</a></p>
+	
+<h2><a name="question16">Question 16</a></h2>
+<p>True or False? An array element is accessed by an expression whose value is 
+an array reference followed by an indexing expression enclosed by matching 
+square brackets. </p>
+<p><a href="#answer16">Answer 16</a></p>
+
+<h2><a name="question17">Question 17</a></h2>
+<p>True or False? If an attempt is made to access the array with an invalid 
+index value, a non-fatal warning is displayed.</p>
+<p><a href="#answer17">Answer 17</a></p>
+
+<h2><a name="question18">Question 18</a></h2>
+<p>True or False? If the elements in an array are not purposely initialized when 
+the array is created, the array elements will be automatically initialized with 
+default values. </p>
+<p><a href="#answer18">Answer 18</a></p>
+
+<h2><a name="question19">Question 19</a></h2>
+<p>True or False? The values in the array elements may be purposely initialized 
+when the array object is created using a comma-separated list of expressions 
+enclosed by matching curly brackets. </p>
+<p><a href="#answer19">Answer 19</a></p>
+
+<hr/>
+
+<p>Additional review questions with answers are provided in the appendix to this 
+Ebook. It is highly recommended that you study that material also.</p>
+
+
+
+
+
+<hr/>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+<h2><a name="answer19">Answer 19</a></h2>
+<p>True </p>
+<p><a href="#question19">Back to Question 19</a> </p>
+
+<h2><a name="answer18">Answer 18</a></h2>
+<p>True </p>
+<p><a href="#question18">Back to Question 18</a> </p>
+
+<h2><a name="answer17">Answer 17</a></h2>
+<p>False</p>
+<p>If an attempt is made to access the array with an invalid index value, an
+<strong>ArrayIndexOutOfBoundsException</strong> will be thrown, which will 
+terminate the program unless caught and processed.</p>
+<p><a href="#question17">Back to Question 17</a> </p>
+
+<h2><a name="answer16">Answer 16</a></h2>
+<p>True </p>
+<p><a href="#question16">Back to Question 16</a> </p>
+
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>True </p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>True </p>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>False</p>
+<p>When declaring an array reference variable, the square brackets [] may appear 
+as part of the type, or following the variable name, or both. </p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>True </p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>False</p>
+<p>A reference variable whose declared type is an array type <em>does not 
+contain an array.</em> Rather, it contains either null, or a reference to an 
+array object. Declaring the reference variable does not create an array, nor 
+does it allocate any space for the array components.</p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>True </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>True </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>True </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>False </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>True </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>True </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>True </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False</p>
+<p>An array's length is <strong>not</strong> part of its type or reference 
+variable declaration.&nbsp; </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>True </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>True </p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<div class="a"><strong>Housekeeping material</strong>
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java1624r Review: Array Objects, Part 2</li>
+				<li>File: Java1624r.htm </li>
+				<li>Published: 03/17/20</li>
+			</ul>
+</div>
+
+	<p>-end- </p>
+
+
+</body>
+</html>

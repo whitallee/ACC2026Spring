@@ -1,0 +1,558 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4100</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+.auto-style2 {
+	font-weight: normal;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4100: The Comparator Interface, Part 2</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+		<li><a href="#Generics">Generics</a></li>
+		<li><a href="#Beginning_with_a_quiz">Beginning with a quiz</a><ul>
+			<li><a href="#The_program_output">The program output</a> </li>
+			<li><a href="#From_the_previous_chapter_">From the previous chapter</a></li>
+			<li><a href="#Doing_more_with_a_Comparator_">Doing more with a Comparator</a>
+			</li>
+		</ul>
+		</li>
+		<li><a href="#Two_steps_in_the_program">Two steps in the program</a><ul>
+			<li><a href="#The_first_step">The first step</a></li>
+			<li><a href="#The_second_step_">The second step</a></li>
+			<li><a href="#Duplicate_names_eliminated_from_the_set_">Duplicate names eliminated from the set</a></li>
+			<li><a href="#Does_Joe_equal_JOE">Does Joe equal JOE?</a></li>
+		</ul>
+		</li>
+		<li><a href="#Lets_see_some_code_">Let's see some code</a><ul>
+			<li><a href="#The_actual_Populator_code_">The Populator code</a></li>
+			<li><a href="#Populating_the_collection_with_String_objects">Populating the collection with String objects</a>
+			</li>
+			<li><a href="#Populating_the_TreeSet_collection_">Populating the TreeSet collection</a></li>
+			<li><a href="#Beginning_of_the_Comparator_class">Beginning of the Comparator class</a></li>
+			<li><a href="#The_interesting_code_">The interesting code</a></li>
+			<li><a href="#Convert_to_upper_case_">Convert to upper-case</a></li>
+			<li><a href="#Making_the_comparison">Making the comparison</a></li>
+			<li><a href="#Just_what_I_was_looking_for_">Just what I was looking for</a></li>
+			<li><a href="#The_results_">The results</a></li>
+		</ul>
+		</li>
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>This chapter shows you how to use a <strong>Comparator</strong> object to achieve 
+natural <em>(ascending)</em> order on a set of names added as <strong>String</strong> 
+objects to a <strong>TreeSet</strong> collection while ignoring the case used to write the names.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Comparator03</li>
+	<li><a href="#Listing_2">Listing 2</a>. Create, populate, and display a TreeSet collection.</li>
+	<li><a href="#Listing_3">Listing 3</a>. The class named Populator. </li>
+	<li><a href="#Listing_4">Listing 4</a>. A TreeSet with a Comparator. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Populating the TreeSet collection.</li>
+	<li><a href="#Listing_6">Listing 6</a>. Beginning of the Comparator class. </li>
+	<li><a href="#Listing_7">Listing 7</a>. The interesting code in the compare method.</li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>In this chapter, I will show you how to use a <b>Comparator</b> object to 
+achieve a <i>natural ordering</i> of a set of names <em>(<strong>String</strong> 
+objects)</em> added to a <b>TreeSet</b> 
+collection while ignoring the case used to write the names. <em>(The natural 
+ordering for <strong>String</strong> objects is ascending.)</em></p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Generics">Generics</a></h2>
+<p>The code in this chapter is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile this code, you will probably 
+get a warning about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h2><a name="Beginning_with_a_quiz">Beginning with a quiz</a> </h2>
+<p>Let&#39;s begin with a quiz to test your prior knowledge of the 
+Java Collections Framework. </p>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Joe Bill Tom JOE BILL TOM</li>
+	<li>D. Tom TOM Joe JOE Bill BILL</li>
+	<li>E. Joe Bill Tom</li>
+	<li>F. None of the above.</li>
+</ul>
+
+
+
+
+
+
+
+
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named Comparator03.</p>
+<pre>//File Comparator03.java
+//Copyright R.G.Baldwin
+import java.util.*;
+import java.io.Serializable;
+
+public class Comparator03{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator03
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+    System.out.println(&quot;Natural ordering&quot;);
+    ref = new TreeSet();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+    System.out.println();
+
+    System.out.println(&quot;Comparator in use&quot;);
+    ref = new TreeSet(new TheComparator());
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+}//end class Populator
+
+class TheComparator
+        implements Comparator,Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    //Do an upper-case comparison
+    int result =
+            ((String)o1).toUpperCase().
+                compareTo(((String)o2).
+                        toUpperCase());
+    return result;
+  }//end compare()
+
+  public boolean equals(Object o){
+    if(!(o instanceof TheComparator))
+        return false;
+    else return true;
+  }//end overridden equals()
+}//end class TheComparator
+</pre>
+
+</div>
+<p>If your answer was <b>None of the above</b>, you are correct. </p>
+<h3><a name="The_program_output">The program output</a> </h3>
+<p>The output produced by the program shown in <a href="#Listing_1">Listing 1</a> is four lines long as 
+shown below. <em>(Note that the bullets shown below do not appear in the actual 
+program output.)</em> </p>
+<ul>
+	<li><b>Natural ordering</b></li>
+	<li><b>BILL Bill JOE Joe TOM Tom</b></li>
+	<li><b>Comparator in use</b></li>
+	<li><b>Bill Joe Tom</b> </li>
+</ul>
+<h3><a name="From_the_previous_chapter_"><span class="auto-style2">From the previous chapter</span> </a> 
+</h3>
+<p>In the previous chapter, I introduced you to the essentials of defining and 
+using a <b>Comparator</b> for controlling the sort order of the elements 
+contained in a <b>TreeSet</b> collection. </p>
+<p>In that chapter, I explained the difference between <i>natural ordering</i> 
+and the <em>sort ordering</em> produced through the use of a <b>Comparator</b> object.
+</p>
+<p>However, what I showed you generally replicated the <i>natural ordering</i>, 
+and therefore, wasn&#39;t too exciting. </p>
+<h3><a name="Doing_more_with_a_Comparator_">Doing more with a Comparator </a> 
+</h3>
+<p>In this and several subsequent chapters, I am going to show you some of the 
+things that you can do with a <b>Comparator</b> object. By using a <b>Comparator</b> 
+object, you can achieve comparisons and sort orders that are different from the
+<i>natural ordering</i> for a given element type. </p>
+<h2><a name="Two_steps_in_the_program">Two steps in the program</a> </h2>
+<p>The program shown in <a href="#Listing_1">Listing 1</a> goes through two major steps. </p>
+<h3><a name="The_first_step">The first step</a></h3>
+<p>First it 
+populates a <b>TreeSet</b> collection with the names of six people without using 
+a <b>Comparator</b>. Then it displays the contents of that collection using an 
+iterator. That produces the following output <em>(without the bullets)</em>: </p>
+<ul>
+	<li><b>Natural ordering</b></li>
+	<li><b>BILL Bill JOE Joe TOM Tom</b> </li>
+</ul>
+<p>As you will see later, the names were added to the collection in a different 
+order than the output order shown above. </p>
+<p>In this step, each of the six names that were added to the collection were 
+displayed after they were arranged into their <i>natural ordering</i>. </p>
+<p>In case you are unfamiliar with this aspect of character encoding, upper-case characters appear 
+before lower-case characters in the <i>natural ordering</i> of characters in the 
+Unicode character set. Therefore, the names consisting of all upper-case 
+characters appear in the output ahead of the same names consisting of a mixture 
+of upper-case and lower-case characters. </p>
+<h3><a name="The_second_step_">The second step </a> </h3>
+<p>Then the program shown in <a href="#Listing_1">Listing 1</a> instantiates a new <b>TreeSet</b> object, 
+providing a <b>Comparator</b> for use in comparing and managing the sort order 
+of the elements. </p>
+<p>The program populates the new <b>TreeSet</b> collection with the same set of 
+six names in the same order as before. After the collection is populated, its 
+contents are displayed producing the following output <em>(without the bullets)</em>: </p>
+<ul>
+	<li><b>Comparator in use</b></li>
+	<li><b>Bill Joe Tom</b> </li>
+</ul>
+<h3><a name="Duplicate_names_eliminated_from_the_set_">Duplicate names eliminated from the set
+</a> </h3>
+<p>Three of the names appear in the output in the same order as the <i>natural 
+ordering</i> shown earlier. However, the duplicate names were eliminated and only 
+three names appear. </p>
+<p>This is because a <b>Comparator</b> was used by the <b>TreeSet</b> object to 
+compare the elements as they were added. The <b>Comparator</b> was designed to 
+eliminate the distinction between upper-case and lower-case characters. </p>
+<h3><a name="Does_Joe_equal_JOE">Does Joe equal JOE?</a> </h3>
+<p>For the earlier case that didn&#39;t use a <b>Comparator</b>, the names <b>Joe</b> 
+and <b>JOE</b> were considered to be different elements. Therefore, after 
+population, both names appeared in the collection. </p>
+<p>When the <b>Comparator</b> was used to eliminate the distinction between 
+upper-case and lower-case characters, the names <b>Joe</b> and <b>JOE</b> were 
+considered to be duplicates. As a result, only the first of the two was allowed 
+into the collection and the second of the two was rejected. </p>
+<h2><a name="Lets_see_some_code_">Let&#39;s see some code </a> </h2>
+<p>The code shown in <a href="#Listing_2">Listing 2</a> is the code that was used </p>
+<ul>
+	<li>To instantiate a <b>TreeSet</b> object without a <b>Comparator</b>,</li>
+	<li>To populate the collection, and</li>
+	<li>To display the contents of the collection after it was populated.</li>
+</ul>
+
+
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. Create, 
+				populate, and display a TreeSet collection.</p>
+<pre>    ref = new TreeSet();
+    Populator.fillIt(ref);
+
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+</pre>
+</div>
+
+<h3><a name="The_actual_Populator_code_">The Populator code</a></h3>
+<p>The code in <a href="#Listing_3">Listing 3</a> was used to populate the collection in both 
+cases, both with, and without a <b>Comparator</b> <i>(to be discussed later).</i> 
+</p>
+
+
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. The class 
+				named Populator.</p>
+<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div>
+
+
+
+<h3><a name="Populating_the_collection_with_String_objects">Populating the collection with String objects</a> 
+</h3>
+<p>Note that in <a href="#Listing_3">Listing 3</a>, unlike earlier chapters, I did not use a class of my own design from which to 
+instantiate the objects used to populate the collection. Rather, I used the <b>
+String</b> class from the standard library. </p>
+<p>The <b>String</b> class implements the <b>Comparable</b> interface. 
+Therefore, objects instantiated from the <b>String</b> class have a <i>natural 
+ordering</i> when placed in a collection. </p>
+<p>Because the <b>compareTo</b> method of the <b>String</b> class, <i>(which 
+implements the Comparable interface)</i> considers upper-case and lower-case 
+characters to be different, there were no duplicate elements added to the 
+collection when only the <b>compareTo</b> method was used to compare elements. The 
+six <b>String</b> objects were simply arranged so that the iterator would return 
+references to those objects in sorted order. This produced the output shown 
+below: </p>
+<p><b>BILL Bill JOE Joe TOM Tom</b> </p>
+<h3><span class="auto-style2">A TreeSet with a Comparator</span> </h3>
+<p>The code shown in <a href="#Listing_4">Listing 4</a> was used to instantiate a new <b>TreeSet</b> 
+object. A <b>Comparator</b> object&#39;s reference was passed to the <b>TreeSet</b> 
+constructor. The <b>Comparator</b> object <em>(instead of the <strong>compareTo</strong> 
+method)</em> was subsequently used for comparing 
+and controlling the sorting order of the elements in the <b>TreeSet</b> 
+collection. </p>
+
+
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. A TreeSet with a Comparator.</p>
+<pre>    ref = new TreeSet(new TheComparator());
+    
+    Populator.fillIt(ref);
+    
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+</pre>
+</div>
+
+<p>The code in <a href="#Listing_4">Listing 4</a> was also used to populate the collection, and to 
+display the contents of the collection after it was populated. </p>
+<h3><a name="Populating_the_TreeSet_collection_">Populating the TreeSet collection
+</a></h3>
+<p>As before, the <b>fillIt</b> method shown in <a href="#Listing_5">Listing 5</a> was used to 
+populate the collection. The same six names as before were added to the <b>
+TreeSet</b> collection. However, the result of adding those six names was 
+determined by the behavior of the <b>compare</b> method in the <b>Comparator</b> 
+object used by the <b>TreeSet</b> object for managing the collection. <i>(Three 
+of the names were rejected as duplicates.)</i></p>
+
+
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. Populating the TreeSet collection.</p>
+<pre>  public static void fillIt(Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+</pre>
+</div>
+
+
+
+<h3><a name="Beginning_of_the_Comparator_class">Beginning of the Comparator 
+class</a></h3>
+<p>The code in <a href="#Listing_6">Listing 6</a> shows the beginning of the class from which the <b>
+Comparator</b> object was instantiated. Note that this class implements the <b>
+Comparator</b> interface, and therefore defines a concrete version of the method 
+named <strong>compare</strong>.</p>
+
+
+	<div class="a">
+		<p>
+<a name="Listing_6">Listing 6</a>. Beginning of 
+				the Comparator class.</p>
+<pre>class TheComparator
+           implements Comparator,Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+</pre>
+</div>
+
+<p><a href="#Listing_6">Listing 6</a> doesn&#39;t contain the interesting part of this class. The code in 
+<a href="#Listing_6">Listing 6</a> simply throws an exception if the <b>compare</b> method receives any 
+incoming parameters of types other than <b>String</b>. </p>
+<h3><a name="The_interesting_code_">The interesting code </a> </h3>
+<p>The interesting code in the method named <strong>compare</strong> is shown in <a href="#Listing_7">Listing 7</a>. </p>
+
+	<div class="a">
+		<p>
+<a name="Listing_7">Listing 7</a>. The 
+				interesting code in the compare method.</p>
+<pre>  int result =
+    ((String)o1).toUpperCase().
+          compareTo(((String)o2).
+                        toUpperCase());
+    return result;
+}//end compare()
+</pre>
+</div>
+
+<p>The code in <a href="#Listing_7">Listing 7</a> makes use of two methods of the <b>String</b> class to 
+compare the two incoming objects. </p>
+<h3><a name="Convert_to_upper_case_">Convert to upper-case </a> </h3>
+<p>The method named <b>toUpperCase</b> is used to produce a version of each of 
+the incoming strings that consists of upper-case characters only. In other 
+words, lower-case characters in each of the two strings are replaced by the 
+corresponding upper-case characters. This conversion occurs before the strings 
+are compared. </p>
+<p>For example, the string <b>Joe</b> is temporarily converted to <b>JOE</b> inside the <b>
+compare</b> method, before the actual comparison is made. This results in the 
+two strings containing <b>Joe</b> and <b>JOE</b> being considered to be 
+duplicates. If one of them is already in the collection when an attempt is made 
+to add the other, the second will be rejected as a duplicate. </p>
+<h3><a name="Making_the_comparison">Making the comparison</a> </h3>
+<p>Then the <b>compareTo</b> method of the <strong>String</strong> class is used to make the 
+actual comparison. <i>(Note that this is the same method that is used to make 
+the comparison in the absence of a <strong>Comparator</strong> object. However, in the case of 
+the <strong>Comparator</strong> object, the case of the strings is modified before they are 
+passed to the <strong>compareTo</strong> method.)</i> </p>
+<p>This code calls the <b>compareTo</b> method on the upper-case version of the 
+string represented by <b>o1</b>, passing the upper-case version of the string 
+represented by <b>o2</b> as a parameter. Here is part of what Oracle has to say 
+about the behavior of the <b>compareTo</b> method. </p>
+<blockquote>
+	<i>&quot;Returns: the value 0 if the argument is a string lexicographically equal 
+	to this string; a value less than 0 if the argument is a string 
+	lexicographically greater than this string; and a value greater than 0 if 
+	the argument is a string lexicographically less than this string.&quot;</i></blockquote>
+<h3><a name="Just_what_I_was_looking_for_">Just what I was looking for </a> 
+</h3>
+<p>That is exactly the behavior that I was looking for, so all that I needed to 
+do after calling the <b>compareTo</b> method on the upper-case versions of the 
+two strings was to return the value that was returned by the <b>compareTo</b> 
+method. </p>
+<p><i>(Note, while writing this chapter and explaining the behavior of this 
+program, I discovered that I could have used a method of the <strong>String</strong> class named
+<strong>compareToIgnoreCase</strong> to accomplish the same thing with a little less work.)</i>
+</p>
+<h3><a name="The_results_">The results </a> </h3>
+<p>When the <b>TreeSet</b> object used the <b>Comparator</b> object to compare 
+and arrange the elements in the collection, the three <i>duplicate</i> names 
+were eliminated and the iterator delivered references to the remaining three 
+names in the following order: </p>
+<p><b>Bill Joe Tom</b></p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a> and paste it into your 
+Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter, I showed you how to use a <b>Comparator</b> object to achieve 
+a <i>natural ordering</i> of a set of names <em>(<strong>String</strong> 
+objects)</em> added to a <b>TreeSet</b> collection 
+while ignoring the case used to write the names. <em>(Natural ordering for
+<strong>String</strong> objects is ascending.)</em></p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter, I will show you how to use a <b>Comparator</b> to cause a
+<b>TreeSet</b> collection containing references to <strong>String</strong> 
+objects to be sorted in descending order while preserving 
+differences in case. </p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4100: The Comparator Interface, Part 2</li>
+					<li>File: Java4100.htm
+</li>
+					<li>Published: 05/07/13</li>
+					<li>Revised: 04/18/20</li>
+				</ul>
+</div>
+
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

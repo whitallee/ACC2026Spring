@@ -1,0 +1,352 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4140r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4140r Review: The Comparator Interface, Part 6</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>, 
+		<a href="#question11">11</a>, <a href="#question12">12</a>, 
+		<a href="#question13">13</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4140: The Comparator Interface, Part 6</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? The <strong>reverseOrder</strong> method of the <strong>
+Collections</strong> class returns a reference to an object of type <strong>
+String</strong>.</p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? The <strong>reverse</strong> method of the <strong>Collections</strong> 
+class returns a reference to an object of the interface type <strong>List</strong>.</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? A <b>Comparator</b> created by the <b>reverseOrder</b> method 
+of the <b>Collections</b> class can be used to sort a list into <i>reverse 
+natural order</i>.</p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a> <i>(select one or more answers)</i>? </p>
+<ul>
+	<li>Compiler Error</li>
+	<li>Runtime Error</li>
+	<li>Joe Bill Tom JOE BILL TOM</li>
+	<li>BILL Bill JOE Joe TOM Tom</li>
+	<li>TOM BILL JOE Tom Bill Joe</li>
+	<li>Joe Bill Tom JOE TOM BILL</li>
+	<li>Tom TOM Joe JOE Bill BILL</li>
+	<li>Joe Bill Tom</li>
+	<li>None of the above.</li>
+</ul>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? The <b>ArrayList</b> class implements both the <b>Collection</b> interface and the <b>List</b> interface. Therefore, it is both a
+<em>collection</em> and a <em>list</em>, and adheres to the contracts and 
+stipulations of both interfaces.</p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? The <b>reverseOrder</b> method 
+returns a <strong>Comparator</strong> that imposes the reverse of the natural ordering on 
+	a collection of objects that implement the <strong>Comparable</strong> 
+interface. </p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h2><a name="question07">Question 7</a></h2>
+<p>True or False? The <em>natural ordering</em> of the elements in a collection 
+is the ordering imposed by the objects' own <strong>compare</strong> method.</p>
+<p><a href="#answer07">Answer 7</a></p>
+
+<h2><a name="question08">Question 8</a> </h2>
+<p>True or False? All Java objects have a <em>natural ordering</em>.</p>
+
+
+<p><a href="#answer08">Answer 8</a> </p>
+
+<h2><a name="question09">Question 9</a></h2>
+<p>True or False? The <b>Comparator</b> object returned by the <b>reverseOrder</b> 
+method can be used to impose a <i>reverse natural order</i> on any collection of 
+objects that implement the <b>Comparable</b> interface.</p>
+<p><a href="#answer09">Answer 9</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>True or False? If you don't understand interfaces, you can't possibly 
+understand Java.</p>
+<p><a href="#answer10">Answer 10</a></p>
+
+	
+<h2><a name="question11">Question 11 - Bonus Question</a></h2>
+<p>True or False? A <strong>SortedMap</strong> is a <strong>Map</strong> that 
+maintains its entries in ascending order, sorted according to the <em>values'</em> 
+natural ordering, or according to a <strong>Comparator</strong> provided at the 
+time of the <strong>SortedMap</strong> creation.</p>
+<p><a href="#answer11">Answer 11</a></p>
+	
+<h2><a name="question12">Question 12 - Bonus Question</a></h2>
+<p>True or False? An object of type <strong>Map</strong> is an object that maps 
+keys to values. Such an object can contain duplicate keys but cannot contain 
+duplicate values</p>
+<p><a href="#answer12">Answer 12</a></p>
+	
+<h2><a name="question13">Question 13 - Bonus Question</a></h2>
+<p>True or False? An object of type <strong>Deque</strong> allows elements to be 
+inserted, retrieved, and removed at both ends.</p>
+<p><a href="#answer13">Answer 13</a></p>
+	
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Comparator07.java. </li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>True. </p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>False. Such an object can contain duplicate <strong>values</strong> but 
+cannot contain duplicate <strong>keys</strong>.</p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>False. A <strong>SortedMap</strong> is a <strong>Map</strong> that maintains 
+its entries in ascending order, sorted according to the <strong><em>keys'</em></strong> 
+natural ordering, or according to a <strong>Comparator</strong> provided at the 
+time of the <strong>SortedMap</strong> creation.</p>
+<p><a href="#question11">Back to Question 11</a></p>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>True, in the opinion of this author.</p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>True.</p>
+<p><a href="#question09">Back to Question 9</a> </p>
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>False. The natural ordering of a collection of objects of a given class is 
+determined by the code written into the concrete <strong>compareTo </strong>
+method when the <strong>compareTo</strong> method inherited from the <strong>
+Comparable</strong> interface is defined. Objects instantiated from a class that 
+doesn't implement the <strong>Comparable</strong> interface don't have a natural 
+ordering.</p>
+
+
+
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>False. The <em>natural ordering</em> of the elements in a collection is the 
+ordering imposed by the objects' own <strong>compareTo</strong> method. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>True.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>True.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>The program output is the three lines of text shown below <em>(without the 
+bullets)</em>.</p>
+<ul>
+	<li>Joe Bill Tom JOE BILL TOM</li>
+	<li>TOM BILL JOE Tom Bill Joe</li>
+	<li>Tom TOM Joe JOE Bill BILL</li>
+</ul>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>True.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>False? While it is true that the <strong>reverse</strong> method of the <strong>Collections</strong> 
+class reverses the order of the elements in a specified list, the method has a <strong>void</strong> return type.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>False. The <strong>reverseOrder</strong> method of the <strong>Collections</strong> 
+class returns a reference to an object of the interface type <strong>Comparator</strong>.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. Comparator07.java.</p>
+<pre>//File Comparator07.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+
+class Comparator07{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator07
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+    Collections.reverse((List)ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+    Comparator aComparator= Collections.reverseOrder();
+    Collections.sort((List)ref, aComparator);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next() + " ");
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add("Joe");
+    ref.add("Bill");
+    ref.add("Tom");
+    ref.add("JOE");
+    ref.add("BILL");
+    ref.add("TOM");
+  }//end fillIt()
+}//end class Populator
+</pre>
+
+</div>
+
+
+
+
+
+
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4140r Review: The Comparator Interface, Part 6</li>
+				<li>File: Java4140r.htm </li>
+				<li>Published: 12/03/13</li>
+				<li>Revised: 04/21/20</li>
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+
+
+</body>
+</html>

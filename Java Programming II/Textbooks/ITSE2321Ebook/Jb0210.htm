@@ -1,0 +1,736 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0210</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+<h1 class="auto-style1">Jb0210: Operators</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a></li>
+	</ul>
+	</li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#Operators">Operators</a><ul>
+<li><a href="#Unary_and_binary_operators">Unary and binary operators</a></li>
+<li><a href="#ternary_">A ternary (conditional) operator</a></li>
+<li><a href="#Overloaded_operators">Overloaded operators</a></li>
+<li><a href="#Operators_from_previous_programs">Operators from previous programs</a></li>
+<li><a href="#The_plus_and_cast_operators">The plus and cast operators</a></li>
+<li><a href="#The_increment_operator">The increment operator</a></li>
+<li><a href="#Prefix_and_postfix_increment_operators">Prefix and postfix increment and decrement operators</a></li>
+<li><a href="#Binary_operators_and_infix_notation">Binary operators and infix notation</a></li>
+<li><a href="#General_behavior_of_an_operator">General behavior of an operator</a></li>
+<li><a href="#Operator_categories">Operator categories</a></li>
+<li><a href="#Arithmetic_operators">Arithmetic operators</a></li>
+<li><a href="#Relational_and_conditional_logical_operators">Relational and conditional (logical) operators</a></li>
+<li><a href="#Bitwise_operators">Bitwise operators</a></li>
+<li><a href="#Assignment_operators">Assignment operators</a></li>
+<li><a href="#The_lambda_operator">The lambda operator</a></li>
+<li><a href="#The_method_reference_operator">The method reference operator</a></li>
+	</ul>
+	</li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>Earlier chapters have touched briefly on the topic of <strong>operators</strong>. This 
+	chapter discusses Java <strong>operators</strong> in depth. </p>
+<p>However, before you continue with this chapter, I strongly recommend that you 
+study the Kjell Ebook beginning with Chapter 9,
+<a href="http://programmedlessons.org/Java9/chap09/ch09_22.html">Arithmetic 
+Operators</a> and continuing though all of 
+<a href="http://programmedlessons.org/Java9/chap10/ch10_01.html">CHAPTER 10 — Expressions and Arithmetic Operators</a>. Please also work through the
+<a href="http://programmedlessons.org/Java9/chap10/chap10quiz.html">Quiz</a>,
+<a href="http://programmedlessons.org/Java9/chap10/progExercises10.html">Exercises</a>, and
+<a href="http://programmedlessons.org/Java9/chap10/flashCards10.html">Flash 
+Cards</a> for Kjell Chapter 10. Please also read Kjell 
+<a href="http://programmedlessons.org/Java9/chap31/ch31_01.html">CHAPTER 31 — Increment, Decrement, and Assignment Operators</a> and work through the 
+<a href="http://programmedlessons.org/Java9/chap31/chap31quiz.html">Quiz</a> and
+<a href="http://programmedlessons.org/Java9/chap31/progExercises31.html">Exercises</a> for that chapter.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Illustration of prefix and postfix notation. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Illustration of relational operators.</li>
+		<li><a href="#Listing_3">Listing 3</a>. A simple lambda expression.</li>
+		<li><a href="#Listing_4">Listing 4</a>. A method reference operator</li>
+		<li><a href="#Listing_5">Listing 5</a>. The apply method of the Function 
+		interface</li>
+	</ul>
+	<h1><a name="Introduction">Introduction</a></h1>
+<p>The first step in learning to use a new programming language is usually to 
+learn the foundation concepts such as </p>
+<ul>
+	<li>variables, </li>
+	<li>operators, </li>
+	<li>types, </li>
+	<li>expressions, 
+</li>
+	<li>flow-of-control, etc. </li>
+</ul>
+<p>This chapter concentrates on the <strong>operators</strong> 
+used in Java. </p>
+<h1><a name="Operators">Operators</a></h1>
+<h2><a name="Unary_and_binary_operators">Unary and binary operators</a></h2>
+<p>Java provides a set of operators that can be used to perform an action on one, two, 
+or three operands.</p>
+<blockquote>According to Kjell, "<a href="http://programmedlessons.org/Java9/chap10/ch10_02.html#operand">An 
+operand is a value that is acted upon by an operator.</a>"</blockquote>
+<p>An operator that operates on one operand is called a <em>unary</em> 
+operator. An operator that operates on two operands is called a <em>binary</em> 
+operator. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap10/ch10_10.html">Subexpressions</a>.)</em>&nbsp; An operator that operates on three operands is called a <em>ternary</em> 
+operator. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap34/ch34_02.html">If-Else Absolute Value</a>.)</em></p>
+<p>Some operators can behave either as a unary or as a binary operator. The best 
+known such operator is probably the minus sign <em>(-)</em>. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap09/ch09_25.html">Unary Minus</a>.)</em> As a binary operator, the minus sign 
+causes its right operand to be subtracted from its left operand. As a unary 
+operator, the minus sign causes the algebraic sign of the right operand to be 
+changed. </p>
+<h2>A <a name="ternary_">ternary</a> (conditional) operator</h2>
+<p>Java has only one operator that takes three operands. It is a 
+<a href="http://programmedlessons.org/Java9/chap34/ch34_02.html">conditional operator</a>, which I 
+sometimes refer to as a cheap <strong>if</strong> statement.</p>
+<p>The first operand is a <strong>boolean</strong> expression, which is followed by a question 
+mark character <em>(?)</em>. The question mark is followed by a second operand, which is 
+followed by a colon character <em>(:)</em>. The colon character is followed by the third 
+operand.</p>
+<p>If the <strong>boolean</strong> expression evaluates to true, the value of the operand following the ? is 
+returned. Otherwise, the value of the operand following the : is returned.</p>
+<p>An example of the syntax follows:</p>
+
+
+
+<div class="a">
+	<p><strong>Ternary operator syntax</strong>
+				</p>
+				<p>boolean expression ? value1 : value2</p>
+				</div>
+<h2><a name="Overloaded_operators">Overloaded operators</a></h2>
+<p>Unlike C++, Java does not allow programmers to create overloaded operators in 
+program code although Java does have built-in <a href="#overloaded_operator">
+overloaded operators</a>.</p>
+<h2>Operators from previous programs</h2>
+<p>The statements in the following box illustrate the use of some of the 
+operators from Java <a name="programs_in_earlier_chapters">programs in earlier chapters</a>:</p>
+<pre
+>=
+!= 
++ 
+(char)
+</pre>
+
+
+
+<div class="a">				<p><strong><a name="Operators_from_previous_programs">Operators from previous programs</a></strong>
+				</p>
+				<pre>
+int ch1, ch2 = &#39;0&#39;;
+while( (ch1 = System.in.read() ) != &#39;#&#39;) ch2 = ch1;
+System.out.println(&quot;The char before the # was &quot; + (char)ch2);</pre>
+</div>	<h2 ><a name="The_plus_and_cast_operators">The plus and cast operators</a></h2>
+<p>Of particular interest in this list 
+is the plus sign <em>(+)</em> and the cast operator <em>(char)</em>. </p>
+<p>In Java, the plus sign can be 
+used to perform arithmetic addition. It can also be used to concatenate strings. 
+<em>(This means that the + operator is an <a name="overloaded_operator">overloaded operator</a>.)</em> <em>(Also 
+see Kjell
+<a href="http://programmedlessons.org/Java9/chap44/ch44_11.html#overloaded">+ Operator</a>.) </em>When the plus sign is used in 
+the manner shown above, the operand on the right is automatically converted to a character 
+string before being concatenated with the operand on the left. </p>
+<blockquote>
+<a href="https://www.techopedia.com/definition/3470/concatenation-programming">What Does Concatenation Mean?</a>
+Concatenation, in the context of programming, is the operation of joining two strings together. The term "concatenation" literally means to merge two things together.</blockquote>
+<p>The <a href="https://www.w3schools.com/java/java_type_casting.asp">cast operator</a> is used in the above example to purposely convert the integer value 
+contained in the <strong>int</strong> variable named <strong>ch2</strong> to a character type suitable for concatenating 
+with the string on the left of the plus sign. <em>(See Kjell </em> 
+<a href="http://programmedlessons.org/Java9/chap85/ch85_24.html"><em>Testing for Equality</em></a><em> and 
+</em> 
+<a href="http://programmedlessons.org/Java9/chap12/ch12_12.html"><em>nextInt</em></a><em> for 
+more examples of the use of the cast operator.)</em> Otherwise, Java would attempt to 
+convert and display the value of the <strong>int</strong> variable as a series of digits representing the 
+<em>numeric value</em> of the character because the character is stored in a variable of 
+type <strong>int</strong>. </p>
+	<h2><a name="The_increment_operator">The increment operator</a></h2>
+<p><em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap31/ch31_06.html#increment_operator,_postfix">Prefix Increment Operator</a>.)</em></p>
+<p>An extremely important <i>unary</i> operator is the increment operator 
+identified by two plus characters with no space between them <em>(++)</em>. </p>
+<p>The increment operator causes the value of its operand to be increased by 
+one.
+</p>
+
+
+
+<div class="a">
+	<p><strong>The decrement operator</strong></p>
+<p>There is also a decrement operator <em>(--)</em> that causes 
+				the value of its operand to be decreased by one.</p>
+</div><p>The increment and decrement operators are used in both <i>prefix</i> and <i>postfix</i> notation.
+</p>
+<h2><a name="Prefix_and_postfix_increment_operators">Prefix and postfix increment 
+and decrement operators</a></h2>
+<p>With the <i>prefix </i>version, the operand appears to the right of the 
+operator <em>( ++X)</em>, while with the <i>postfix</i> version, the operand 
+appears to the left of the operator <em>(X++)</em>. </p>
+<h3>What&#39;s the difference in prefix and postfix?</h3>
+<p>The difference in prefix and postfix has to do with the point in the sequence 
+of operations that 
+the increment <em>(or decrement)</em> actually occurs if the operator and its operand appear as part of 
+a larger overall expression. </p>
+<p><em>(There is effectively no difference if the operator and its operand do 
+not appear as part of a larger overall expression.)</em></p>
+<h4>Prefix behavior</h4>
+<p>With the <i>prefix</i> version, the variable is incremented <em>(or 
+decremented)</em> before it is used 
+to evaluate the larger overall expression. </p>
+<h4>Postfix behavior</h4>
+<p>With the <i>postfix</i> version, the variable is used to evaluate the larger 
+overall expression before it is incremented <em>(or decremented)</em>. </p>
+<h4>Illustration of prefix and postfix behavior</h4>
+<p>The use of both the <i>prefix</i> and <i>postfix</i> versions of the 
+increment operator is illustrated in the Java program shown in
+<a href="#Listing_1">Listing 1</a>. The output produced by the program is show 
+in the comments at the beginning of the program.</p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. Illustration of prefix 
+				and postfix notation.
+
+<pre>
+/*File incr01.java Copyright, n
+Illustrates the use of the prefix and the postfix increment
+operator.
+
+The output from the program follows:
+
+a = 5
+b = 5
+a + b++ = 10
+b = 6
+
+c = 5
+d = 5
+c + ++d = 11
+d = 6
+
+*********************************************************/
+class incr01 { //define the controlling class
+  public static void main(String[] args){ //main method
+    int a = 5, b = 5, c = 5, d = 5;
+    System.out.println(&quot;a = &quot; + a );
+    System.out.println(&quot;b = &quot; + b );
+    System.out.println(&quot;a + b++ = &quot; + (a + b++) );
+    System.out.println(&quot;b = &quot; + b );
+    System.out.println();
+
+    System.out.println(&quot;c = &quot; + c );
+    System.out.println(&quot;d = &quot; + d );
+    System.out.println(&quot;c + ++d = &quot; + (c + ++d) );
+    System.out.println(&quot;d = &quot; + d );    
+  }//end main
+}//End incr01 class.
+</pre>
+
+</div>
+<!--``2-->
+	<h2><a name="Binary_operators_and_infix_notation">Binary operators and infix notation</a></h2>
+<p>Binary operators use <i>infix</i> notation, which means that the operator 
+appears between its operands. </p>
+<h2><a name="General_behavior_of_an_operator">General behavior of an operator</a></h2>
+<p>As a result of performing the specified action, an operator can be said to 
+return a value <em>(or evaluate to a value)</em> of a given type. The type of 
+value returned depends on the operator and the type of the operands. </p>
+
+
+
+<div class="a">
+	<p><strong>Evaluating to a value</strong>
+				</p>
+				<p>To evaluate to a value means that after the action is performed, the operator and its operands are effectively replaced in the expression by the value that is returned. </p>
+</div>	<h2><a name="Operator_categories">Operator categories</a></h2>
+<p>I will divide Java&#39;s operators into the following categories for further 
+discussion: </p>
+<ul>
+	<li>arithmetic operators</li>
+	<li>relational and conditional <em>(logical)</em> operators</li>
+	<li>bitwise operators</li>
+	<li>assignment operators</li>
+	<li>the lambda operator</li>
+	<li>the method reference operator</li>
+</ul>
+<h2><a name="Arithmetic_operators">Arithmetic operators</a></h2>
+<p><em>(Also see Kjell
+<a href="http://programmedlessons.org/Java9/chap09/ch09_22.html#operators,_table_of">
+operators, table</a>.)</em></p>
+<p>Java supports various arithmetic operators on all floating point and integer 
+numbers.</p>
+<h4>The binary arithmetic operators</h4>
+<p>The following table lists the <i>binary</i> arithmetic operators supported by 
+Java. </p>
+
+
+
+<div class="a">
+	<p><strong>The binary arithmetic operators</strong></p>
+<pre>
+Operator    Description                              
+   
+   +        Adds its operands                        
+   -        Subtracts the right operand from the left 
+            operand
+   *        Multiplies the operands                  
+   /        Divides the left operand by the right operand
+   %        Remainder of dividing the left operand by 
+            the right operand</pre>
+</div>	<h4>String concatenation</h4>
+<p>As mentioned earlier, the plus operator <em>(+)</em> is also used to 
+concatenate strings as in the following code fragment: </p>
+
+
+
+<div class="a">
+	<p><strong><a name="String_concatenation">String concatenation</a>
+</strong>
+				</p>
+				<pre>
+&quot;MyVariable has a value of  &quot; 
+                      + MyVariable + &quot; in this program.&quot;</pre>
+</div>	<h4>Coercion</h4>
+<p>Note that this operation also coerces the 
+value of <strong>MyVariable</strong> to a string representation for use in the 
+expression only. The value stored in the variable is not modified in any lasting 
+way. </p>
+<h4>Unary arithmetic operators</h4>
+<p>Java supports the following <i>unary</i> arithmetic operators.
+</p>
+
+
+
+<div class="a"><p><strong>Unary arithmetic operators</strong> </p>
+				<pre>
+Operator    Description                              
+
+   +        Indicates a positive value       
+   -        Negates, or changes algebraic sign
+   ++       Adds one to the operand, 
+            both prefix and postfix
+   --       Subtracts one from operand, 
+            both prefix and postfix</pre>
+</div>	<p>The result of the increment and decrement operators being either <i>
+	prefix</i> or <i>postfix</i> was discussed
+	earlier. </p>
+	
+<h2><a name="Relational_and_conditional_logical_operators">Relational and 
+conditional (logical) operators</a></h2>
+<h3>Binary Relational operators</h3>
+<p>Java supports the set of <i>binary </i>relational operators shown 
+in the following table. <em>(Also see Kjell </em>
+<a href="http://programmedlessons.org/Java9/chap16/ch16_13.html"><em>Boolean Expressions</em></a><em>.) 
+</em>Relational operators in Java return either <i>true</i> or <i>false</i> as a <strong>boolean</strong> type. </p>
+
+
+
+<div class="a">
+	<p><strong>Binary Relational operators</strong>
+				</p>
+				<pre>
+Operator    Returns true if   
+   &gt;        Left operand is greater than right operand
+   &gt;=       Left operand is greater than or equal to 
+            right operand
+   &lt;        Left operand is less than right operand  
+   &lt;=       Left operand is less than or equal to 
+            right operand
+   ==       Left operand is equal to right operand   
+   !=       Left operand is not equal to right operand</pre>
+</div>	<h3>Conditional expressions</h3>
+<p>Relational operators are frequently used in the conditional expressions of 
+control statement such as the one in the code fragment shown below.</p>
+
+
+
+<div class="a"><strong>Conditional expressions
+</strong>
+				<pre>
+if(LeftVariable &lt;= RightVariable). . .</pre>
+</div>	<h3>Illustration of relational operators</h3>
+<p>The program shown in <a href="#Listing_2">Listing 2</a> illustrates the 
+result of applying relational operators in Java. The output is shown in the 
+comments at the beginning of the program. Note that the program automatically 
+displays <strong>true</strong> and
+<strong>false</strong> as a result of applying the relational operators. </p>
+<!--``1List02-->
+<div class="a"><a name="Listing_2">Listing 2</a>. Illustration of relational operators.
+<pre>
+/*File relat01.java Copyright, R.G.Baldwin
+Illustrates relational operators.
+
+Output is
+
+The relational 6&lt;5 is false
+The relational 6&gt;5 is true
+
+*********************************************************/
+class relat01 { //define the controlling class
+  public static void main(String[] args){ //main method
+    System.out.println(&quot;The relational 6&lt;5 is &quot; 
+      +(6&lt;5));
+    System.out.println(&quot;The relational 6&gt;5 is &quot; 
+      +(6&gt;5));
+  }//end main
+}//End relat01 class.
+</pre>
+
+</div>
+<!--``2-->
+	<h3>Conditional operators</h3>
+<p>The relational operators are often combined with another set of operators <i>
+(referred to as conditional or logical operators)</i> to construct more complex 
+expressions. </p>
+<p>Java supports three such operators as shown in the following table. <em>(Also see 
+Kjell </em> <a href="http://programmedlessons.org/Java9/chap18/ch18_21.html">
+<em>Difference between AND and OR</em></a><em> and </em>
+<a href="http://programmedlessons.org/Java9/chap18/ch18_22.html"><em>NOT!</em></a><em>.)</em></p>
+
+
+
+<div class="a">
+	<p><strong><a name="Conditional_operators">Conditional 
+				or logical operators</a></strong></p>
+<pre>
+Operator  Typical Use            Returns true if 
+    
+   &amp;&amp;     Left &amp;&amp; Right     Left and Right are both true
+   ||     Left || Right     Either Left or Right is true
+   !      ! Right           Right is false</pre>
+</div>	<p>The operands shown in the table above must 
+	be <strong>boolean</strong><i> </i>types, or must have 
+	been created by the evaluation of an expression that returns a <strong>
+	boolean</strong> 
+	type.</p>
+	
+	<h3>Left to right evaluation</h3>
+<p>An important characteristic of the behavior of the logical <strong><em>and</em></strong> 
+and
+the logical <strong><em>or</em></strong> operators is that the expressions are evaluated from left to 
+right, and the evaluation of the expression is terminated as soon as the result 
+of evaluating the expression can be determined. <em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap09/ch09_24.html">Evaluate Equal Precedence from Left to Right</a> and 
+<a href="http://programmedlessons.org/Java9/chap32/ch32_01.html">CHAPTER 32 — Boolean Expressions and
+Short-circuit Operators</a>.)</em></p>
+<p>For example, in the following expression, if the variable <strong>a</strong> 
+is less than the variable <strong>b</strong> , there is no need to evaluate the 
+right operand of the <strong>||</strong> to determine that the result of 
+evaluating the entire expression would be <strong>true</strong>. Therefore, evaluation will terminate as soon as the answer can be 
+determined. </p>
+
+
+
+<div class="a">
+	<p><strong>Left to right evaluation</strong></p>
+<pre>
+(a &lt; b) || (c &lt; d)</pre>
+</div>	
+<h2><a name="Bitwise_operators">Bitwise operators</a></h2>
+<p>Java provides a set of 
+<a href="https://www.tutorialspoint.com/Java-Bitwise-Operators">bitwise operators</a> that perform actions on their operands one 
+bit at a time as shown in the following table. </p>
+
+
+
+<div class="a">
+	<p><strong>Bitwise operators</strong>
+				</p>
+				<pre>
+Operator   Typical Use         Operation                  
+
+ &gt;&gt;     OpLeft &gt;&gt; Dist      Shift bits of OpLeft right 
+                            by Dist bits (signed)  
+ &lt;&lt;     OpLeft &lt;&lt; Dist      Shift bits of OpLeft left 
+                            by Dist bits
+ &gt;&gt;&gt;    OpLeft &gt;&gt;&gt; Dist     Shift bits of OpLeft right 
+                            by Dist bits (unsigned)
+ &amp;      OpLeft &amp; OpRight    Bitwise and of the 
+                            two operands
+ |      OpLeft | OpRight    Bitwise <i>inclusive </i>or of the 
+                            two operands
+ ^      OpLeft ^ OpRight    Bitwise <i>exclusive </i>or (xor) of 
+                            the two operands
+ ~      ~ OpRight           Bitwise complement of the right
+                            operand (unary)</pre>
+</div>	<h3>Populating vacated bits for shift operations</h3>
+<p>The <i>signed</i> right shift operation populates the vacated bits 
+with the sign bit, while the left shift and the <i>unsigned</i> right shift 
+populate the vacated bits with zeros. </p>
+<p>In all cases, bits shifted off the end are lost. </p>
+<h3>The rule for bitwise <em>and</em></h3>
+<p>The bitwise <strong>and</strong> operation operates according to the rule 
+that the bitwise <strong>and</strong> of two 1 bits is a 1 bit. </p>
+<p>Any other 
+combination results in a 0 bit. </p>
+<h3>Bitwise inclusive<i> </i><em>or</em></h3>
+<p>For the <i>inclusive or</i>, if either bit is a 1, the result is a 1. 
+</p>
+<p>Otherwise, the result is a 0. </p>
+<h3>Bitwise exclusive<i> </i><em>or</em></h3>
+<p>For the <i>exclusive or</i>, if either but not both bits is a 1, the result 
+is a 1. </p>
+<p>Otherwise, the result is a 0. </p>
+<p>Another way to state this is if the bits 
+are different, the result is a 1. If the two bits are the same, the result is a 
+0. </p>
+<h3>The complement operator</h3>
+<p>Finally, the complement operator changes each 1 to a 0 and changes each 0 to 
+a 1. </p>
+<h2><a name="Assignment_operators">Assignment operators</a></h2>
+<h3>Simple assignment operator</h3>
+<p>The <em>(=)</em> operator is a value assigning <i>binary </i>operator in Java. 
+The value stored in memory and represented by the right operand is copied into 
+the memory represented by the left operand. <em>(Also see Kjell </em>
+<a href="http://programmedlessons.org/Java9/chap09/ch09_11.html"><em>Assignment Statement Syntax</em></a><em>.)</em></p>
+<h4>Using the assignment operator with reference variables</h4>
+<p>You need to be careful and think about what you are doing when you use the 
+assignment operator with reference variables in Java. If you assign one 
+reference variable to another, you simply end up with two reference variables 
+that refer to the same object. You do not end up with two different objects. </p>
+<p><em>(If what you need is another copy of the object, you may be able to use the
+</em>
+<strong><em>clone</em></strong><em> 
+method to accomplish that.)</em></p>
+<h3>Shortcut assignment operators</h3>
+<p>Java supports the following list of 
+<a href="https://www.w3schools.in/java/operators/compound-assignment"> <i>shortcut</i> 
+assignment operators</a>. These operators allow you to perform an assignment and 
+another operation with a single operator. </p>
+
+
+
+<div class="a">
+	<p><strong>Shortcut assignment operators</strong>
+</p>
+<pre>
++= 
+-= 
+*= 
+/= 
+%= 
+&amp;= 
+|= 
+^= 
+&lt;&lt;= 
+&gt;&gt;= 
+&gt;&gt;&gt;=
+</pre>
+</div><p>For example, the two statements that follow perform the same operation. </p>
+
+
+
+<div class="a">
+	<p><strong>Illustration of shortcut assignment operation</strong>
+				</p>
+				<pre>
+x += y;
+x = x + y;</pre>
+</div>	
+
+<h2><a name="The_lambda_operator">The lambda operator</a></h2>
+<p>Note that this section and the next may be beyond your level of 
+understanding at this point. You won't fully understand the code or the 
+explanations that follow until you understand Java interfaces and generics. 
+Interfaces are covered in this introductory course but generics are more complex 
+and are not covered in this course.</p>
+<p>However, I need to introduce you to these operators so that you will 
+recognize them and won't be confused when you see them being used in code 
+written by others. As far as I know, prior to the release of Java version 8, 
+Java didn't support functions, only methods were supported. Something called 
+lambda expressions were included in the release of version 8.</p>
+<p>According to <a href="https://openai.com/blog/chatgpt/">ChatGPT</a>, A lambda expression is a way to define a small anonymous function in a single line of code. It is also known as an<em> anonymous function</em> or a 
+<em>closure</em>. The syntax for a lambda expression is </p>
+<pre><code class="!whitespace-pre-wrap hljs language-rust">(parameters) <span class="hljs-punctuation">-&gt;</span> { function_body }</code></pre>
+<p>Here, parameters are the input parameters for the lambda function and function_body is the functionality that the lambda function performs on the input.
+The lambda expression can only have one statement. If it has multiple statement then it needs to be enclosed in curly braces.
+
+For example, the following lambda expression takes two integers as input and returns their sum:
+
+</p>
+<pre>(int a, int b) -&gt; a + b </pre>
+<p>It can also be written like this
+
+because Java 8 and later can infer the types of the parameters.</p>
+<pre>(a, b) -&gt; a + b </pre>
+<p>The character -&gt; is known as the lambda operator.</p>
+<p>The lambda function can be assigned to a variable or passed as an argument to a higher-order function. The main use case of lambda expressions is to define simple, throwaway functions in a concise way, typically as a function argument.</p>
+<p>Listing 3 illustrates the definition and use of simple lambda expression. </p>
+<div class="a">
+
+<a name="Listing_3">Listing 3</a>. A simple lambda expression.
+
+<pre>
+import java.util.function.Consumer;
+
+public class Main {
+  public static void main(String[] args) {
+    // Define a lambda expression that takes a string and prints it
+    Consumer&lt;String&gt; printString = (String s) -&gt; System.out.println(s);
+        
+    // Use the lambda expression to print a string
+    printString.accept("Hello, World!");
+  }//End main
+}}//End class
+</pre>
+
+</div>
+
+<p>Continuing with information gleaned from <a href="https://openai.com/blog/chatgpt/">ChatGPT</a>, 
+in this example, a lambda expression is defined that takes 
+a single <strong>String</strong> parameter s and prints it to the console 
+using the <strong>System.out.println</strong> method. The lambda expression is 
+assigned to a variable named <strong>printString</strong> of type <strong>Consumer</strong> which is a 
+functional interface.
+
+</p>
+<p>When the lambda expression is later used to print a string, the<strong> accept()</strong> method of the 
+<strong>Consumer</strong> interface is called and 
+passed the string "Hello, World!" as a parameter.
+
+</p>
+<p>When the program is run, it will output "Hello, World!" to 
+the console.
+
+</p>
+<p>This example demonstrates how a lambda expression can be used to define a 
+simple function and how it can be assigned to a variable and used just like any 
+other object.</p>
+<h2><a name="The_method_reference_operator">The method reference operator</a></h2>
+<p>According to <a href="https://openai.com/blog/chatgpt/">ChatGPT</a>, the :: operator is known as the 
+<em>method reference operator</em> in 
+Java. It is used to refer to an existing method by name, 
+without invoking it. Method references are a shorthand for a 
+lambda expression that simply calls an existing method. It's 
+a way to pass a method as an argument to another method, 
+without having to explicitly create a lambda expression that 
+calls that method.</p>
+<p>The code in Listing 4 illustrates the use of the method reference operator.</p>
+<div class="a">
+
+<a name="Listing_4">Listing 4</a>. A method reference operator
+
+<pre>
+import java.util.function.Function;
+
+public class Main01 {
+  public static void main(String[] args) {
+
+    Function&lt;String, Integer&gt; parseInt = Integer::parseInt;
+    
+    int result = parseInt.apply("123");
+    System.out.println(++result);
+    
+  }//End main
+}//End class
+</pre>
+
+</div>
+
+<p>Continuing with information gleaned from <a href="https://openai.com/blog/chatgpt/">ChatGPT</a>, 
+in the above program, the "::" operator is used to <em>refer to</em> the <strong>parseInt</strong> method of the
+<strong>Integer</strong> class. The <strong>parseInt</strong> 
+method is being passed to the <strong>apply</strong> method of the 
+<strong>Function</strong> interface. </p>
+<p>When the <strong>apply</strong> method is called with the argument "123", 
+it invokes the <strong>parseInt</strong> method 
+and converts the string "123" to an integer 123 and saves it in a variable named
+<strong>result</strong> of type <strong>int</strong>. The next statement 
+increments result to prove that it is fact an integer and then prints it.</p>
+<p>The <strong>apply</strong> method of the <strong>java.util.function.Function</strong> interface 
+is a functional interface method that represents a function that takes in one 
+argument and produces a result. The function is applied to the input argument 
+and the result is returned. Listing 5 shows an example of how 
+to use the <strong>apply</strong> method in program code.</p>
+<div class="a">
+
+<a name="Listing_5">Listing 5</a>. The apply method of the Function interface
+
+<pre>
+import java.util.function.Function;
+
+public class Main02 {
+  public static void main(String[] args) {
+    Function&lt;Integer, String&gt; intToString = Object::toString;
+    String result = intToString.apply(5);
+    
+    Class&lt;?&gt; type = result.getClass();
+    System.out.println("Type of result is: " + type.getName());
+  }//End main
+}//End class
+</pre>
+
+</div>
+
+<p>The first two lines of code convert the value 5 of type <strong>int</strong> 
+to type <strong>String</strong>. The last two lines of code confirm the 
+conversion by printing "Type of result is: java.lang.String".</p>
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	<p>Housekeeping material</p>
+ 
+
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0210: Operators</li>
+					<li>File: Jb0210.htm</li>
+					<li>Revised: 01/25/23</li>
+				</ul>
+</div>
+
+<p>-end- </p>
+
+
+</body>
+</html>

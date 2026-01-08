@@ -1,0 +1,428 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1608</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1608: Polymorphism Based on Overloaded Methods </h1>
+ 
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listings</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Definition of the class named A. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Definition of the class named B. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Definition of the driver class named Poly01. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Complete program listing. </li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>Previous chapters introduced <em>overloading</em> and <em>overriding</em> methods. This chapter concentrates on the use of method overloading to achieve 
+	<em>compile-time polymorphism</em>. Before continuing with this chapter I 
+	recommend that you review Kjell 
+	<a href="http://programmedlessons.org/Java9/chap51/ch51_01.html">CHAPTER 51 — Parameters, Local Variables, and Overloading</a> 
+	and 
+	<a href="http://programmedlessons.org/Java9/chap81/ch81_16.html#polymorphism">Polymorphism</a>.</p>
+<p>Every class in Java is a direct or indirect subclass of the class named 
+<strong>Object</strong>. <em>(The Object class is part of the core distribution 
+of the Java Development Kit.)</em> Thus, the Object class forms the top or root 
+of a hierarchy of classes. <em>(Think of the hierarchy as an upside down tree 
+with the root at the top.)</em> If you come from a C++ programming background, 
+you will recognize this as being different from C++, which allows multiple 
+hierarchical class file structures and multiple inheritance. If not, don't worry 
+about it.</p>
+<p>Methods defined in the class named <strong>Object</strong> are inherited into all other classes. 
+Inherited methods that are not declared <strong>final</strong> may be overridden to make their behavior more appropriate 
+for objects instantiated from the new class.</p>
+<p>Overloaded methods have the same name and different formal argument lists as 
+compared to the methods that they overload. They may or may not have the same return type.</p>
+<p>Polymorphism manifests itself in Java in the form of multiple methods having the same name. This chapter concentrates on method overloading, sometimes referred to as 
+<em>compile-time polymorphism</em>. A previous chapter provided a brief 
+discussion of method overriding Subsequent chapters will concentrate in more 
+detail on method overriding, sometimes referred to as 
+<em>runtime polymorphism</em>.</p>
+<p>Overloaded methods may all be defined in the same class, or may be defined in different classes as long as those classes have a superclass-subclass relationship 
+in the hierarchy of classes. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>Three concepts</strong></p>
+<p>In an earlier chapter, I explained that most books on OOP will tell you that in order to understand OOP, you must understand the following three concepts:</p>
+<ul>
+	<li>Encapsulation</li>
+	<li>Inheritance</li>
+	<li>Polymorphism</li>
+</ul>
+<p>I agree with that assessment.</p>
+<p><strong>Encapsulation and inheritance</strong></p>
+<p>Previous chapters in this series have explained Encapsulation and Inheritance. This chapter will tackle the somewhat more complex topic of Polymorphism.</p>
+<p><strong>Overloading and overriding methods</strong></p>
+<p>In the chapters on inheritance, you learned a little about overloading and overriding methods 
+<em>(you will learn more about these concepts as you progress through these chapters)</em>. This chapter concentrates on the use of overloaded methods to achieve 
+<em>compile-time polymorphism.</em> </p>
+	<p><strong>Real-world scenarios</strong></p>
+<p>The sample programs that I used in the previous chapters in this series dealt with two kinds of car radios:</p>
+<ul>
+	<li>Plain car radios</li>
+	<li>Car radios having built-in tape players</li>
+</ul>
+<p>I couched those programs in a real-world scenario in an attempt to convince you that encapsulation and inheritance really do have a place in the real world.</p>
+<p><strong>Programs were fairly long</strong></p>
+<p>However, even though those programs were simple in concept, they were relatively long. That made them somewhat difficult to explain due simply to the amount of code involved. </p>
+	<p><strong>Keep it short and simple</strong></p>
+<p>Beginning with this chapter, I am going to back away from real-world scenarios and begin using sample programs that are as short and as simple as I know how to make them, while still illustrating the important points under discussion.</p>
+<p>My objective in this and future chapters is to make the polymorphic concepts as clear as possible without having those concepts clouded by other programming issues.</p>
+<p>I will simply ask you to trust me when I tell you that polymorphism has enormous applicability in the real world.</p>
+<p><strong>Every class extends some other class</strong></p>
+<p>There is another aspect of inheritance that I didn't explain in the previous chapters.</p>
+<p>Every class in Java extends some other class. If you don't specify the class that your new class extends, it will automatically extend the class named 
+<strong>Object</strong> that exists at the root of the class hierarchy.</p>
+	<p><strong>A class hierarchy</strong></p>
+<p>Thus, all classes in Java exist in a class hierarchy where the class named 
+<strong>Object</strong> forms the root of the hierarchy. </p>
+<p>Some classes extend <strong>Object</strong> directly, while other classes are subclasses of 
+<strong>Object</strong> further down the hierarchy. </p>
+	<p><strong>Methods in the Object class</strong></p>
+<p>The class named <strong>Object</strong> defines default versions of the following methods:</p>
+<ul>
+	<li>clone()</li>
+	<li>equals(Object obj)</li>
+	<li>finalize()</li>
+	<li>getClass()</li>
+	<li>hashCode()</li>
+	<li>notify()</li>
+	<li>notifyAll()</li>
+	<li>toString()</li>
+	<li><strong>wait()</strong></li>
+	<li><strong>wait(long timeout)</strong></li>
+	<li><strong>wait(long timeout, int </strong><strong>nanos)</strong></li>
+</ul>
+<p>This list includes three overloaded versions of the method named 
+<strong>wait</strong>.<strong> </strong>The three versions have the same name but different formal argument lists. 
+Thus, these three methods are <em>overloaded</em> versions of the method name <strong>
+wait</strong>.</p>
+	<p><strong>Every class inherits these eleven methods</strong></p>
+	<p>Because every class is either a direct or indirect subclass of <strong>Object</strong>, every class in Java, 
+	<em>(including new classes that you define)</em>, inherit these eleven methods. </p>
+<p><strong>To be overridden ...</strong></p>
+<p>Some of these eleven methods are intended to be overridden for various purposes. However, some of them, such as
+<strong>getClass</strong>, <strong>notify</strong>, and the three versions of
+<strong>wait</strong>, are intended to be used directly without overriding.
+<em>(Although not shown here, these five methods are declared to be <strong>
+final</strong>, meaning that they may not be overridden.)</em></p>
+<p><strong>What is polymorphism?</strong></p>
+<p>The meaning of the word polymorphism is something like <em>one name, many forms.</em> </p>
+<p><strong>How does Java implement polymorphism?</strong></p>
+<p>Polymorphism manifests itself in Java in the form of multiple methods having the same name.</p>
+<p>In some cases, multiple methods have the same name, same return type, and 
+same formal argument list but they must appear in different classes in the class 
+hierarchy 
+<em>(overridden methods)</em>. </p>
+<p>In other cases, multiple methods have the same name, but different formal argument lists 
+<em>(overloaded methods)</em>. Overloaded methods may appear in the same, or in 
+different classes in the class hierarchy.</p>
+	<p><strong>Three distinct forms of polymorphism</strong></p>
+<p>From a practical programming viewpoint, polymorphism manifests itself in three distinct forms in Java:</p>
+<ul>
+	<li>Method overloading
+    </li>
+	<li>Method overriding through inheritance
+    </li>
+	<li>Method overriding through the Java interface </li>
+</ul>
+<p><strong>Method overloading</strong></p>
+<p>I will begin the discussion of polymorphism with method overloading, which is the simplest of the three. I will cover method overloading in this chapter and will cover polymorphism based on overridden methods and interfaces in subsequent chapters. </p>
+	<p><strong>Method overloading versus method overriding</strong></p>
+<p>Don't confuse method <em>overloading</em> with method <em>overriding</em>.</p>
+<p>Java allows you to have two or more method definitions in the same scope with the same name, provided that they have different formal argument lists.</p>
+<p>More specifically, here is what Roberts, Heller, and Ernest have to say about overloading methods in their excellent book 
+titled <strong>The Complete Java 2 Certification Study Guide</strong>: </p>
+<p><em>"A valid overload differs in the number or type of its arguments. Differences in argument names are not significant. A different return type is permitted, but is not sufficient by itself to distinguish an overloading method."</em></p>
+<p>Similarly, as a preview of things to come, here is what they have to say about method overriding:</p>
+<p><em>"A valid override has identical argument types and order, identical return type, and is not less accessible than the original method. The overriding method must not throw any checked exceptions that were not declared for the original method."</em></p>
+<p>You should read these two descriptions carefully and make certain that you recognize the differences.</p>
+	<p><strong>Compile-time polymorphism</strong></p>
+<p>Some authors refer to method overloading as a form of <em>compile-time polymorphism</em>, as distinguished from 
+<em>run-time polymorphism</em>.</p>
+<p>This distinction comes from the fact that, with overloaded methods, for each method call, the compiler determines which method 
+<em>(from a group of overloaded methods)</em> will be executed, and this decision is made when the program is compiled. 
+<em>(In contrast, I will tell you later that the determination of which overridden method to execute isn't made until runtime.)</em></p>
+<p><strong>Selection based on the argument list</strong></p>
+<p>In practice, the compiler simply examines the types, number, and order of the parameters being passed in an 
+overloaded method call, and selects the overloaded method having a matching formal argument list.</p>
+<p><strong>A sample program</strong></p>
+<p>I will discuss a sample program named <strong>Poly01</strong> to illustrate method overloading. A complete listing of the program can be viewed in 
+<a href="#Listing_4">Listing 4</a> near the end of the chapter. </p>
+	<p><strong>Within the class and the hierarchy</strong></p>
+<p>Method overloading can occur both within a class definition, and vertically within the class inheritance hierarchy. 
+<em>(In other words, an overloaded method can be inherited into a class that defines other overloaded versions of the method.)</em> The program named 
+<strong>Poly01</strong> illustrates both aspects of method overloading.</p>
+<p><strong>Class B extends class A, which extends Object</strong></p>
+<p>Upon examination of the program, you will see that the class named <strong>A</strong> extends the class named
+<strong>Object</strong>. You will also see that the class named <strong>B</strong> extends the class named 
+<strong>A</strong>.
+
+</p>
+<p>The class named <strong>Poly01</strong> is a driver class whose <strong>main</strong> method exercises the methods defined in the classes named 
+<strong>A</strong> and <strong>B</strong>.</p>
+<p>Once again, this program is not intended to correspond to any particular real-world scenario. Rather, it is a very simple program designed specifically to illustrate method overloading.</p>
+<p><strong>Will discuss in fragments</strong></p>
+<p>As is my usual approach, I will discuss this program in fragments.
+
+The code in <a href="#Listing_1">Listing 1</a> defines the class named <strong>A</strong>, which explicitly extends 
+<strong>Object</strong>. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Definition of the class 
+				named A.
+
+				<pre>class A extends Object{
+  public void m(){
+    System.out.println("m()");
+  }//end method m()
+}//end class A</pre>
+</div>
+	<p><strong>Redundant code</strong></p>
+<p>Explicitly extending <strong>Object</strong> is not required <em>(but it also doesn't hurt anything to do it)</em>.
+
+</p>
+<p>By default, the class named <strong>A</strong> would extend the class named 
+<strong>Object</strong> automatically, unless the class named <strong>A</strong> explicitly extends some other class.</p>
+<p><strong>The method named m()</strong></p>
+<p>The code in <a href="#Listing_1">Listing 1</a> defines a method named <strong>m()</strong>. Note that this version of the method has an empty argument list 
+<em>(it doesn't receive any parameters when it is executed)</em>. The behavior of the method is simply to display a message indicating that it has been called.</p>
+<p><strong>The class named B</strong></p>
+<p><a href="#Listing_2">Listing 2</a> contains the definition for the class named 
+<strong>B</strong>. The class named <strong>B</strong> extends the class named 
+<strong>A</strong>, and inherits the method named <strong>m</strong> defined in the class named 
+<strong>A</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Definition of the class 
+				named B.
+
+				<pre>class B extends A{
+  public void m(int x){
+    System.out.println("m(int x)");
+  }//end method m(int x)
+  //---------------------------------//
+  
+  public void m(String y){
+    System.out.println("m(String y)");
+  }//end method m(String y)
+}//end class B</pre>
+</div>
+	<p><strong>Overloaded methods</strong></p>
+<p>In addition to the inherited method named <strong>m</strong>, the class named 
+<strong>B</strong> defines two overloaded versions of the method named <strong>m</strong>:
+
+    </p>
+<ul>
+	<li>m(int x)
+    </li>
+	<li>m(String y) </li>
+</ul>
+<p><em>(Note that each of these two versions of the method receives a single parameter, and the type of the parameter is different in each case.)
+
+</em> </p>
+<p>As with the version of the method having the same name defined in the class named 
+<strong>A</strong>, the behavior of each of these two methods is to display a message indicating that it has been called. </p>
+<p><strong>The driver class</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> contains the definition of the driver class named 
+<strong>Poly01</strong>. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Definition of the driver 
+				class named Poly01.
+
+				<pre>public class Poly01{
+  public static void main(String[] args){
+    B var = new B();
+    var.m();
+    var.m(3);
+    var.m("String");
+  }//end main
+}//end class Poly01</pre>
+</div>
+	<p><strong>Call all three overloaded methods</strong> </p>
+<p>The code in the <strong>main</strong> method
+
+    </p>
+<ul>
+	<li>Instantiates a new object of the class named <strong>B</strong>, and</li>
+	<li>Successively calls each of the three overloaded versions of the method named 
+	<strong>m</strong> on the reference to that object. </li>
+</ul>
+<p><strong>One version is inherited</strong> </p>
+<p>The overloaded version of the method named <strong>m</strong>, defined in the class named 
+<strong>A</strong>, is inherited into the class named <strong>B</strong>. 
+Therefore, it can be called on a reference to an object instantiated from the class named 
+<strong>B</strong>. </p>
+<p><strong>Two versions defined in class B</strong> </p>
+<p>The other two versions of the method named <strong>m</strong> are defined in the class named 
+<strong>B</strong>. Thus, they also can be called on a reference to an object instantiated from the class named 
+<strong>B</strong>. </p>
+	<p><strong>The output</strong> </p>
+<p>As you would expect, the output produced by sending messages to the object asking it to execute each of the three overloaded versions of the method named 
+<strong>m</strong> is:
+</p>
+<div class="a">
+<pre>m() 
+m(int x) 
+m(String y) </pre>
+</div>
+<p>Note that the values of the parameters passed to the methods do not appear in the output. Rather, 
+in this simple example, the parameters are used solely to make it possible for the compiler to select the correct version of the overloaded method to execute.
+
+</p>
+<p>This output confirms that each overloaded version of the method is properly selected for execution based on the matching of method parameters to the formal argument list of each method. </p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>Previous chapters introduced <em>overloading</em> and <em>overriding</em> methods. This chapter concentrates on the use of method 
+<em>overloading</em> to achieve <em>compile-time polymorphism</em>. </p>
+<p>All classes in Java form a hierarchy with a class named <strong>Object</strong> at the root of the hierarchy. Thus, every class in Java is a direct or indirect subclass of the class named 
+<strong>Object</strong>. </p>
+<p>If a new class doesn't explicitly extend some other class, it will, by default, automatically extend the class named 
+<strong>Object</strong>. </p>
+<p>The <strong>Object</strong> class defines default versions of eleven different methods. These methods are inherited into all other classes, and some
+<em>(those not declared <strong>final</strong>)</em> may be overridden to make their behavior more appropriate for objects instantiated from the new class. </p>
+<p>Overloaded methods have the same name and different formal argument lists. They may or may not have the same return type.
+
+</p>
+<p>Three of the eleven methods defined in the class named <strong>Object</strong> are overloaded 
+versions of the method name <strong>wait</strong>. One version takes no parameters. A second version takes a single parameter of type 
+<strong>long</strong>. The third version takes two parameters, one of type 
+<strong>long</strong>, and one of type <strong>int</strong>. </p>
+<p>The word <em>polymorphism</em> means something like <em>one name, many forms</em>. Polymorphism manifests itself in Java in the form of multiple methods having the same name. </p>
+<p>Polymorphism manifests itself in three distinct forms in Java:
+
+    </p>
+<ul>
+	<li>Method overloading
+    </li>
+	<li>Method overriding through inheritance
+    </li>
+	<li>Method overriding through the Java interface </li>
+</ul>
+<p>This chapter concentrates on method <em>overloading</em>, sometimes referred to as 
+<em>compile-time polymorphism</em>. This form of polymorphism is distinguished by the fact that the compiler selects 
+a specific method from two or more overloaded methods on the basis of the types and the number of parameters passed to the method when it is called. The selection is made when the program is compiled 
+<em>(rather than being made later when the program is run)</em>. </p>
+<p>Overloaded methods may all be defined in the same class, or may be defined in different classes as long as those classes have a superclass-subclass relationship in the class hierarchy.
+
+</p>
+<p>The sample program in this chapter illustrates three overloaded versions of the same method name with two of the versions being defined in a single class, and the other version being defined in the superclass of that class. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter in this collection (following the review chapter) teaches you about assignment compatibility, type conversion, and casting for both primitive and reference types.</p>
+<p>It also teaches you about the relationship between reference types, method calls, and the location in the class hierarchy where a method is defined. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1608: Polymorphism Based on Overloaded 
+					Methods
+					</li>
+					<li>File: Java1608.htm
+</li>
+					<li>Revised: 08/06/22</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listings</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_4">Listing 4</a> below.</p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Complete program listing.
+
+				<pre>/*File Poly01.java
+Copyright, R.G.Baldwin
+
+Program output is:
+m()
+m(int x)
+m(String y)
+**************************************/
+
+class A extends Object{
+  public void m(){
+    System.out.println("m()");
+  }//end method m()
+}//end class A
+//===================================//
+
+class B extends A{
+  public void m(int x){
+    System.out.println("m(int x)");
+  }//end method m(int x)
+  //---------------------------------//
+  
+  public void m(String y){
+    System.out.println("m(String y)");
+  }//end method m(String y)
+}//end class B
+//===================================//
+
+public class Poly01{
+  public static void main(String[] args){
+    B var = new B();
+    var.m();
+    var.m(3);
+    var.m("String");
+  }//end main
+}//end class Poly01</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

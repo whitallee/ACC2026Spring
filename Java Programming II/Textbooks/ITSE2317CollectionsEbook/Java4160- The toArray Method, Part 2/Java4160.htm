@@ -1,0 +1,801 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4160</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4160: The toArray Method, Part 2</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> 
+	<ul>
+		<li><a href="#Generics">Generics</a></li>
+	</ul>
+	</li>
+
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+<li><a href="#Beginning_with_a_quiz">Beginning with a quiz</a><ul>
+	<li><a href="#And_the_answer_is_">And the answer is ... </a> </li>
+	<li><a href="#Similar_to_previous_program">Similar to previous program</a></li>
+	<li><a href="#A_populated_array_">A populated array </a> </li>
+	<li><a href="#Display_the_array_contents_">Display the array contents </a> </li>
+	<li><a href="#A_new_LinkedList_collection_">A new LinkedList collection </a> </li>
+	<li><a href="#Populating_the_LinkedList_collection_">Populating the LinkedList collection 
+	</a> </li>
+	<li><a href="#Four_buttons_and_two_labels_">Four buttons and two labels </a> </li>
+	<li><a href="#The_toolTipText_property_">The toolTipText property </a> </li>
+	<li><a href="#JButton_and_JLabel_">JButton and JLabel </a> </li>
+	<li><a href="#Making_the_objects_distinguishable">Making the objects distinguishable</a></li>
+	<li><a href="#Identifying_the_buttons_and_labels">Identifying the buttons and labels</a></li>
+	<li><a href="#Display_the_collection">Display the collection</a></li>
+	<li><a href="#Copy_collection_elements_into_an_array">Copy collection elements into an array</a></li>
+</ul>
+</li>
+<li><a href="#The_toArray_method_">The toArray method </a>
+<ul>
+	<li><a href="#The_essential_difference_">The essential difference</a> </li>
+	<li><a href="#Type_is_not_an_issue_for_the_simpler_version">Type is not an issue for the simpler version</a></li>
+	<li><a href="#Size_is_not_an_issue_for_the_simpler_version_">Size is not an issue for the simpler version 
+	</a></li>
+</ul>
+</li>
+<li><a href="#More_complex_version_presents_some_issues">More-complex version presents some issues</a><ul>
+	<li><a href="#The_type_issue">The type issue</a></li>
+	<li><a href="#Two_types_of_objects_in_this_collection">Two types of objects in this collection</a></li>
+	<li><a href="#The_size_issue_">The size issue </a> </li>
+	<li><a href="#So_what_did_I_do">So, what did I do?</a></li>
+	<li><a href="#More_information_from_Oracle_">More information from Oracle 
+	</a> </li>
+</ul>
+</li>
+<li><a href="#The_output">The output</a><ul>
+	<li><a href="#Demonstrates_same_array_was_used_">Demonstrates same array was used 
+	</a> </li>
+	<li><a href="#What_if_the_array_was_too_small">What if the array was too small?</a></li>
+	<li><a href="#Not_difficult_to_demonstrate_">Not difficult to demonstrate 
+	</a> </li>
+	<li><a href="#Array_as_large_as_or_larger_than_collection_">Array as large as or larger than collection 
+	</a> </li>
+	<li><a href="#Array_smaller_than_the_collection_">Array smaller than the collection</a>
+	</li>
+</ul>
+</li>
+<li><a href="#Modify_an_object_">Modify an object 
+</a> 
+<ul>
+	<li><a href="#Now_for_the_caution">Now for the caution</a></li>
+</ul>
+</li>
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>This chapter shows you how to use the more-complex version of the <strong>toArray</strong> method declared in the 
+<strong>Collection</strong> interface. The chapter discusses issues regarding the type of the array and the types of the objects referred to by the elements in the collection. 
+The chapter also discusses issues regarding the relative sizes of the array and the collection. Finally, 
+the chapter reaffirms that you need to exercise caution when using the elements stored in the array, to avoid corrupting the state of the objects referred to by the elements in the collection.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named ToArray02. </li>
+	<li><a href="#Listing_2">Listing 2</a>. A populated array. </li>
+	<li><a href="#Listing_3">Listing 3</a>. A new LinkedList collection.</li>
+	<li><a href="#Listing_4">Listing 4</a>. The fillIt method. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Copy collection elements into an array.</li>
+	<li><a href="#Listing_6">Listing 6</a>. Modify an object .</li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>The <b>Collection</b> interface declares the following two overloaded 
+versions of the <b>toArray</b> method: </p>
+
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				
+<pre>
+public Object[] toArray()
+
+public Object[] toArray(Object[] a)</pre>
+</div>
+<p>In the previous chapter, I taught you how to use the first <i>(simpler)</i> of 
+the two methods. I also discussed the need to exercise care when using the 
+elements stored in the returned array to avoid corrupting the state of the 
+objects referred to by elements in the collection. </p>
+<p>In this chapter, I will teach you how to use the second <i>(more-complex)</i> 
+version of the <b>toArray</b> method declared in the <b>Collection</b> 
+interface. I will discuss issues regarding the type of the array and the types 
+of the objects referred to by the elements in the collection. I will also 
+discuss issues regarding the relative sizes of the array and the collection. </p>
+<p>Finally, I will reaffirm that you need to exercise care when using the 
+elements stored in the array, to avoid corrupting the state of the objects 
+referred to by the elements in the collection. </p>
+
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Beginning_with_a_quiz">Beginning with a quiz</a> </h2>
+<p>As has been the case in the last few chapters, let&#39;s begin with a quiz 
+to test your prior knowledge of the Collections Framework. To take this quiz, 
+examine the program shown in <a href="#Listing_1">Listing 1</a> and write down the output produced by 
+that program.</p>
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named ToArray02.</p>
+<pre>//File ToArray02.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+import javax.swing.*;
+
+class ToArray02{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class ToArray02
+//===================================//
+
+class Worker{
+  public void doIt(){
+    Collection ref;
+
+    //Create, populate, and display
+    // the contents of an array
+    JComponent[] array = new JComponent[8];
+    for(int cnt=0;cnt&lt;8;cnt++){
+      array[cnt] = new JButton();
+      array[cnt].setToolTipText(&quot;&quot; + (cnt+10));
+    }//end for loop
+    System.out.println();
+    showArray(array,&quot;Original array contents&quot;);
+
+
+    //Create, populate, and display the
+    // contents of a collection
+    ref = new LinkedList();
+    Populator.fillIt(ref);
+    showCollection(ref,&quot;Collection contents&quot;);
+
+    //Get collection contents into the
+    // array and display the new
+    // contents of the array.
+    array = (JComponent[])ref.toArray(array);
+    showArray(array,&quot;New array contents&quot;);
+
+    //Modify a property of an object
+    // referred to by one of the
+    // elements in the array. Display
+    // array contents after
+    // modification
+    ((JComponent)array[0]).setToolTipText(&quot;XX&quot;);
+    showArray(array,&quot;Modified array contents&quot;);
+
+    //Display the contents of the collection
+    showCollection(ref,&quot;Collection contents&quot;);
+  }//end doIt()
+//-----------------------------------//
+
+  //Utility method for displaying
+  // array contents
+  void showArray(Object[] array,String title){
+    System.out.println(title);
+    for(int i = 0; i &lt; array.length;i++){
+      if(array[i] == null){
+        System.out.print(&quot;null &quot;);
+      }else{
+        System.out.print(((JComponent)array[i]).
+                                 getToolTipText() + &quot; &quot;);
+      }//end else
+    }//end for loop
+    System.out.println();
+  }//end showArray()
+//-----------------------------------//
+
+  //Utility method for displaying
+  // collection contents
+  void showCollection(Collection ref,String title){
+    System.out.println(title);
+    Iterator iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(((JComponent)iter.next()).
+                                 getToolTipText() + &quot; &quot;);
+    }//end while loop
+    System.out.println();
+  }//end showCollection
+}// end class Worker
+//===================================//
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new JButton());
+    ref.add(new JButton());
+    ref.add(new JLabel());
+    ref.add(new JButton());
+    ref.add(new JButton());
+    ref.add(new JLabel());
+
+    Iterator iter = ref.iterator();
+    int cnt = 0;
+    JComponent refVar;
+    while(iter.hasNext()){
+      refVar = (JComponent)iter.next();
+      if(refVar instanceof JButton){
+        refVar.setToolTipText(&quot;B&quot;+cnt++);
+      }else{
+        refVar.setToolTipText(&quot;L&quot; + cnt++);
+      }//end else
+    }//end while loop
+
+  }//end fillIt()
+}//end class Populator
+</pre>
+
+</div>
+
+<h3><a name="And_the_answer_is_">And the answer is ... </a> </h3>
+<p>The correct answer to the quiz is the program output shown below: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+Original array contents
+10 11 12 13 14 15 16 17 
+Collection contents
+B0 B1 L2 B3 B4 L5 
+New array contents
+B0 B1 L2 B3 B4 L5 null 17 
+Modified array contents
+XX B1 L2 B3 B4 L5 null 17 
+Collection contents
+XX B1 L2 B3 B4 L5</pre>
+</div>
+<p>If that was your answer, you probably already understand most of the material 
+covered in this chapter. In that case, you might consider skipping this chapter 
+and moving on to some more productive activity. If that wasn&#39;t your answer, you should 
+probably continue with your study of this chapter. </p>
+<h3><a name="Similar_to_previous_program">Similar to previous program</a> </h3>
+<p>Except for the use of a different version of the <b>toArray</b> method, the 
+overall structure of the program in <a href="#Listing_1">Listing 1</a> is similar to the program in the 
+previous chapter. Therefore, I will concentrate on those aspects of this program 
+that differentiate it from the program in the previous chapter. </p>
+<h3><a name="A_populated_array_">A populated array </a> </h3>
+<p>Unlike the program in the previous chapter, the code in <a href="#Listing_2">Listing 2</a> creates and 
+populates an eight-element array of type <b>JComponent</b>. This array 
+will be <em>(partially)</em> re-populated by the <b>toArray</b> method later in the program. The 
+array is populated with a set of initial element values at this point to make it 
+obvious when it is re-populated <i>(overwritten elements)</i> by the <b>toArray</b> 
+method later. </p>
+
+
+<!--``1List02-->
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. A populated 
+				array.
+
+				</p>
+
+				<pre>    JComponent[] array = new JComponent[8];
+
+    for(int cnt=0;cnt&lt;8;cnt++){
+      array[cnt] = new JButton();
+      array[cnt].setToolTipText(&quot;&quot; + (cnt+10));
+    }//end for loop
+    System.out.println();
+    showArray(array,&quot;Original array contents&quot;);
+</pre>
+</div>
+<!--``2-->
+
+<p>The <b>JButton</b> class, the <b>JLabel</b> class, and the <b>setToolTipText</b> 
+method were discussed in detail in the previous chapter, so I won&#39;t repeat that 
+discussion here. </p>
+<h3><a name="Display_the_array_contents_">Display the array contents </a> </h3>
+<p>After the array is populated by the code in <a href="#Listing_2">Listing 2</a>, a reference to the 
+array object is passed to the <b>showArray</b> method <i>(also in <a href="#Listing_2">Listing 2</a>)</i> 
+to display the contents of the array. </p>
+<p>With the exception of some minor changes implemented in this program to make 
+the use of the <b>showArray</b> method more compact, this is the same <b>
+showArray</b> method used in the previous chapter. Therefore, I won&#39;t discuss 
+that method further in this chapter. The output produced by the code in <a href="#Listing_2">Listing 2</a> 
+is as follows: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+Original array contents
+10 11 12 13 14 15 16 17</pre>
+</div>
+<p>As you can see, each of the eight elements in the array was initialized with 
+an easily-recognizable and unique value, (<i>which may be overwritten by the 
+<strong>toArray</strong> method later).</i> </p>
+<h3><a name="A_new_LinkedList_collection_">A new LinkedList collection </a> 
+</h3>
+<p>The code in <a href="#Listing_3">Listing 3</a> creates and populates a new <b>LinkedList</b> 
+collection. The collection is populated by passing the <b>LinkedList</b> 
+object&#39;s reference to a method named <b>fillIt</b>. </p>
+<p>The code in <a href="#Listing_2">Listing 2</a> also displays the contents of the <b>LinkedList</b> 
+collection after it has been populated. The list is displayed by passing the <b>
+LinkedList</b> object&#39;s reference to a method named <b>showCollection</b>. 
+</p>
+
+
+<!--``1List03-->
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. A new LinkedList collection.
+				</p>
+				<pre>    ref = new LinkedList();
+    Populator.fillIt(ref);
+    showCollection(ref,&quot;Collection contents&quot;);
+</pre>
+</div>
+<!--``2-->
+<p>Except for a couple of minor changes to the <b>showCollection</b> method, the 
+code to create, populate, and display the collection is the same as the code in 
+the previous chapter. </p>
+<h3><a name="Populating_the_LinkedList_collection_">Populating the LinkedList collection
+</a> </h3>
+<p>A couple of points regarding the <b>fillIt</b> method <i>(shown in <a href="#Listing_4">Listing 4</a>)</i> 
+are worthy of note. </p>
+
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. The fillIt 
+				method.</p>
+<pre>  public static void fillIt(Collection ref){
+    ref.add(new JButton());
+    ref.add(new JButton());
+    ref.add(new JLabel());
+    ref.add(new JButton());
+    ref.add(new JButton());
+    ref.add(new JLabel());
+
+    Iterator iter = ref.iterator();
+    int cnt = 0;
+    JComponent refVar;
+    while(iter.hasNext()){
+      refVar = (JComponent)iter.next();
+      if(refVar instanceof JButton){
+        refVar.setToolTipText(&quot;B&quot;+cnt++);
+      }else{
+        refVar.setToolTipText(&quot;L&quot; + cnt++);
+      }//end else
+    }//end while loop
+
+  }//end fillIt()
+</pre>
+</div>
+<!--``2-->
+
+<p>The <b>fillIt</b> method begins by calling the <b>add</b> method six times in 
+succession, passing references to new anonymous objects <i>(of types JButton and 
+JLabel)</i> as a parameter to the <b>add</b> method. </p>
+<h3><a name="Four_buttons_and_two_labels_">Four buttons and two labels </a> 
+</h3>
+<p>Four of the objects are instantiated from the class named <b>JButton</b>. The 
+other two objects are instantiated from the class named <b>JLabel</b>. </p>
+<p>Both <b>JButton</b> and <b>JLabel</b> belong to the <b>javax.swing</b> 
+package. Further, both are subclasses of the class named <b>JComponent</b>. </p>
+<h3><a name="The_toolTipText_property_">The toolTipText property </a> </h3>
+<p>Finally, both classes have a property named <b>toolTipText</b>, which can be 
+set and accessed by calling the following methods on a reference to the object:</p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+void setToolTipText(String text)
+
+String getToolTipText()</pre>
+</div>
+<h3><a name="JButton_and_JLabel_">JButton and JLabel </a> </h3>
+<p>I chose to use objects of these two classes for illustration purposes simply 
+because they possess the characteristics that I need for this chapter. Those 
+characteristics are: </p>
+<ul>
+	<li>Both classes subclass the class named JComponent <i>(a common superclass 
+	below the Object class).</i></li>
+	<li>Both classes inherit a property <i>(toolTipText)</i> that can be used to 
+	identify them later.</li>
+</ul>
+<h3><a name="Making_the_objects_distinguishable">Making the objects distinguishable</a> 
+</h3>
+<p>After adding the objects&#39; references to the collection, the code in <a href="#Listing_4">Listing 4</a> 
+uses the <b>setToolTipText</b> method to store a unique <b>String </b>value in 
+the <b>toolTipText</b> property of the object referred to by each of the 
+elements in the collection. </p>
+<h3><a name="Identifying_the_buttons_and_labels">Identifying the buttons and labels</a> 
+</h3>
+<p>In addition to storing a unique value in the <b>toolTipText</b> property of 
+the object referred to by each element, the code in <a href="#Listing_4">Listing 4</a> also makes it 
+possible to distinguish between the <b>JButton</b> objects and the <b>JLabel</b> 
+objects. This is accomplished by including an upper-case &quot;B&quot; in the property 
+value for each <b>JButton</b>, and including an upper-case &quot;L&quot; in the property 
+value for each <b>JLabel</b> button. </p>
+<h3><a name="Display_the_collection">Display the collection</a> </h3>
+<p>The code in <a href="#Listing_3">Listing 3</a> above calls the <b>showCollection</b> method to display 
+the contents of the populated <b>LinkedList</b> collection. The output produced 
+by the code in <a href="#Listing_3">Listing 3</a> is shown below: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+Collection contents
+B0 B1 L2 B3 B4 L5</pre>
+</div>
+<p>Each term in the output is the <b>String</b> value of the <b>toolTipText</b> 
+property for a particular object. Hence, there are six terms in the output, one 
+for each element in the collection. </p>
+<h3><a name="Copy_collection_elements_into_an_array">Copy collection elements into an array</a> 
+</h3>
+<p>Having completed the preliminaries, we have now reached the point that is the main thrust of this chapter. </p>
+<p>The code in <a href="#Listing_5">Listing 5</a> shows how to use the more-complex version of the <b>
+toArray</b> method to copy the elements in the collection into an array. 
+</p>
+
+
+<!--``1List05-->
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. Copy collection elements into an array.
+				</p>
+				<pre>    array = (JComponent[])ref.toArray(array);
+    showArray(array,&quot;New array contents&quot;);
+</pre>
+</div>
+<!--``2-->
+<p>The code in <a href="#Listing_5">Listing 5</a> also causes the contents of the array to be displayed 
+after it receives the elements from the collection. </p>
+<p>The first statement in <a href="#Listing_5">Listing 5</a> causes the first 
+<strong><em>seven</em></strong> elements in the array 
+to be overwritten with element values from the collection <i>(plus one null 
+value).</i> </p>
+<p>The second statement in <a href="#Listing_5">Listing 5</a> causes the contents of the array to be 
+displayed. </p>
+<h2><a name="The_toArray_method_">The toArray method </a> </h2>
+<p>The most important thing to note about <a href="#Listing_5">Listing 5</a> is that a reference to an 
+array object is passed as a parameter to the <b>toArray</b> method. <i>(The 
+simpler version of the toArray method, discussed in the previous chapter, doesn&#39;t 
+take any parameters.)</i> </p>
+<h3><a name="The_essential_difference_">The essential difference </a> </h3>
+<p>The essential difference between the two overloaded versions of the <b>
+toArray</b> method has to do with the origin of the array into which the <b>
+toArray</b> method copies the elements from the collection. </p>
+<p>With the simpler version of the <b>toArray</b> method that takes no 
+parameters. The <b>toArray</b> method creates a new array object of type <b>
+Object</b>, populates it, and returns that object&#39;s reference as type <b>Object</b>.
+</p>
+<h3><a name="Type_is_not_an_issue_for_the_simpler_version">Type is not an issue for the simpler version</a> 
+</h3>
+<p>Since the new array object is of type <b>Object</b>, <em>(when the rules for 
+Generics are not adhered to)</em> there are no issues 
+regarding type compatibility between the type of the array and the types of the 
+elements stored in the collection. A reference to an object of any type can be 
+stored in an array of the generic type <b>Object[]</b>. </p>
+<h3><a name="Size_is_not_an_issue_for_the_simpler_version_">Size is not an issue for the simpler version
+</a> </h3>
+<p>Also, since the array is created when it is needed by the simpler version of 
+the <b>toArray</b> method, there are also no size issues. The array is created 
+to be of the correct size to contain copies of all of the elements in 
+the collection. </p>
+<h2><a name="More_complex_version_presents_some_issues">More-complex version presents some issues</a> 
+</h2>
+<p>With the more-complex version of the <b>toArray</b> method<i> (shown in 
+<a href="#Listing_5">Listing 5</a>)</i>, the programmer must provide the array object that will be 
+populated by the <b>toArray</b> method. In this situation, there are size issues 
+as well as type issues to be dealt with. </p>
+<h3><a name="The_type_issue">The type issue</a> </h3>
+<p>Here is some of what the Oracle documentation for the <b>LinkedList</b> class 
+has to say about the type issue for this version of the <b>toArray</b> method:
+</p>
+<blockquote>
+	<i>&quot;Returns an array containing all of the elements in this list in the 
+	correct order. The runtime type of the returned array is that of the 
+	specified array. ... Throws: ArrayStoreException - if the runtime type of 
+	(the specified array) is not a supertype of the runtime type of every 
+	element in this list.</i></blockquote>
+<p>In other words, the type of the array passed as a parameter to the <b>toArray</b> 
+method must be a superclass of the classes from which all of the objects being 
+managed by the collection were instantiated. </p>
+<h3><a name="Two_types_of_objects_in_this_collection">Two types of objects in this collection</a> 
+</h3>
+<p>In this program, the collection is managing objects of the types <b>JButton</b> 
+and <b>JLabel</b>. Each of these types is a subclass of the class named <b>
+JComponent</b>. For that reason, the type of array that I instantiated and 
+passed to the <b>toArray</b> method is <b>JComponent[]</b>. </p>
+<h3><a name="The_size_issue_">The size issue </a> </h3>
+<p>Here is some of what the Oracle documentation for the <b>LinkedList</b> class 
+has to say about the size issue for this version of the <b>toArray</b> method.
+</p>
+<blockquote>
+	<i>&quot;If the list fits in the specified array, it is returned therein. 
+	Otherwise, a new array is allocated with the runtime type of the specified 
+	array and the size of this list. If the list fits in the specified array 
+	with room to spare (i.e., the array has more elements than the list), the 
+	element in the array immediately following the end of the collection is set 
+	to null. This is useful in determining the length of the list only if the 
+	caller knows that the list does not contain any null elements.&quot;</i></blockquote>
+<h3><a name="So_what_did_I_do">So, what did I do?</a> </h3>
+<p>Knowing all of this in advance, I purposely caused the size of the <b>
+JComponent</b> array to be larger <i>(by two elements)</i> than the number of 
+elements in the collection. Therefore, the array that I passed to the <b>toArray</b> 
+method was populated and a reference to that populated array was returned. </p>
+<blockquote><i>(Had my array been smaller than the number of elements in the collection, 
+the toArray method would have created and populated a new array of type 
+JComponent and would have returned a reference to that new array object. In that 
+case, my array would have been used by the toArray method only for the purpose 
+of determining the runtime type of my array.)</i></blockquote>
+<h3><a name="More_information_from_Oracle_">More information from Oracle </a> 
+</h3>
+<p>Here is some additional information about the <b>toArray</b> method provided 
+by the Oracle documentation for the <b>Collection</b> interface: </p>
+<blockquote>
+	<i>&quot;If this collection makes any guarantees as to what order its elements 
+	are returned by its iterator, this method must return the elements in the 
+	same order.&quot;</i></blockquote>
+<p>Because the iterator for a <b>LinkedList</b> object returns the elements in 
+increasing index order, the <b>toArray</b> method, in this case, copies the 
+element at each index position in the collection into the element at the same 
+index position in the array. Thus, reference values are copied from each element 
+in the collection into the first six elements in the array. </p>
+<h2><a name="The_output">The output</a> </h2>
+<p>The output produced by the code in <a href="#Listing_5">Listing 5</a> is shown below:</p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+New array contents
+B0 B1 L2 B3 B4 L5 null 17</pre>
+</div>
+<p>You will note that the first six elements in the array match the six elements 
+in the collection <i>(the initial values placed in the array earlier when the 
+array was instantiated have been overwritten).</i> </p>
+<p>You will also note that the value of the seventh element in the array <i>
+(index value 6)</i> has been overwritten with a null reference. </p>
+<h3><a name="Demonstrates_same_array_was_used_">Demonstrates same array was used
+</a> </h3>
+<p>Note finally that the last element in the array was not overwritten. It still 
+contains the value placed there when the array object was instantiated. This 
+demonstrates that the array that I passed to the <b>toArray</b> method was 
+populated with the collection data, and a reference to that array was returned 
+by the <b>toArray</b> method. </p>
+<h3><a name="What_if_the_array_was_too_small">What if the array was too small?</a> 
+</h3>
+<p>Had my array been too small, it would have been discarded by the <b>toArray</b> 
+method. The <b>toArray</b> method would have created and populated a new array 
+object of the correct size and runtime type, and would have returned a reference 
+to that new array. </p>
+<h3><a name="Not_difficult_to_demonstrate_">Not difficult to demonstrate </a> 
+</h3>
+<p>Although this is not demonstrated by this program, it is easy to modify the 
+program to demonstrate this feature. </p>
+<p>A <b>String</b> representation of the array object can be displayed using a
+<b>System.out.println(array) </b>statement before and after the array is passed 
+to the <b>toArray</b> method. </p>
+<h3><a name="Array_as_large_as_or_larger_than_collection_">Array as large as or larger than collection
+</a> </h3>
+<p>For the cases where my array contained six, seven, or eight elements, and the 
+collection contained six elements, the <b>String</b> representations of the 
+array object before and after the call to the <b>toArray</b> method were the 
+same. For one case, those <b>String</b> representations were as follows:</p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+[Ljavax.swing.JComponent;@49ba38
+[Ljavax.swing.JComponent;@49ba38</pre>
+</div>
+<p>In other words, the reference variable named <b>array </b>referred to the 
+same array object before and after the call to the <b>toArray</b> method. </p>
+<h3><a name="Array_smaller_than_the_collection_">Array smaller than the collection
+</a> </h3>
+<p>When I reduced the size of the array to five elements, keeping the size of 
+the collection at six elements, the before and after <b>String</b> 
+representations of the array object were as follows: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<pre>
+[Ljavax.swing.JComponent;@506411
+[Ljavax.swing.JComponent;@21807c</pre>
+</div>
+<p>In this case, the reference to the array object returned by the <b>toArray</b> 
+method was different from the reference that was passed to the <b>toArray</b> 
+method. In other words, the returned reference referred to a different array 
+object than was referred to by the reference that was passed to the <b>toArray</b> 
+method. </p>
+<h2><a name="Modify_an_object_">Modify an object </a> </h2>
+<p>As in the program in the previous chapter, the code shown in <a href="#Listing_6">Listing 6</a> modifies the value of the <b>toolTipText</b> 
+property of the object whose reference is stored in index 0 of the array. 
+</p>
+
+
+<!--``1List06-->
+	<div class="a">
+		<p>
+<a name="Listing_6">Listing 6</a>. Modify an object.</p>
+<pre>    ((JComponent)array[0]).setToolTipText(&quot;XX&quot;);
+    showArray(array,&quot;Modified array contents&quot;);
+
+    showCollection(ref,&quot;Collection contents&quot;);
+</pre>
+</div>
+<!--``2-->
+<p>The code in <a href="#Listing_6">Listing 6</a> also displays the contents of the array and the 
+contents of the collection after the modification is made. </p>
+<p>The output produced by the code in <a href="#Listing_6">Listing 6</a> is shown below: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+
+<pre>
+Modified array contents
+XX B1 L2 B3 B4 L5 null 17 
+Collection contents
+XX B1 L2 B3 B4 L5</pre>
+</div>
+<h3><a name="Now_for_the_caution">Now for the caution</a></h3>
+<p>Note that the value of the <b>toolTipText</b> property of the object referred 
+to by the reference at index 0 of the array, and the same property of the object 
+referred to by the reference at index 0 of the collection was overwritten by 
+&quot;XX&quot;. <i>(This is true because both references refer to the same object.)</i>
+</p>
+<p>This is the case regardless of which version of the <b>toArray</b> method is 
+used. Therefore, the same cautions discussed in the previous chapter apply here 
+as well.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a>, 
+Paste the code into your Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter, I taught you how to use the more-complex version of the two 
+overloaded versions of the <b>toArray</b> method, declared in the <b>Collection</b> 
+interface, to copy the elements from a collection into an array of type <b>
+JComponent</b>. </p>
+<p>I discussed issues regarding the type of the array and the type of the 
+objects referred to by the elements in the container. I also discussed issues 
+regarding the size of the array as compared to the number of elements in the 
+collection. </p>
+<p>Finally, I reaffirmed that you need to exercise care when using the elements 
+stored in the array, to avoid corrupting the state of the objects referred to by 
+the elements in the collection. </p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>For now, at least, this chapter concludes the series of chapters on the Java 
+Collections Framework. If I have time later, I will come back and add more 
+chapters to teach you how to use the <b>Map</b> and
+<b>SortedMap </b>interfaces, and the concrete class implementations of those 
+interfaces.</p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4160: The toArray Method, Part 2</li>
+					<li>File: Java4160.htm
+</li>
+					<li>Published: 05/07/13</li>
+					<li>Revised: 04/21/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

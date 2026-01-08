@@ -1,0 +1,214 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0260r</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0260r Review: Command-Line Arguments</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter contains review questions and answers keyed to the chapter titled 
+<em>Jb0260: Java OOP: Command-Line Arguments.</em></p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>Provide a common example of a command-line statement that illustrates the use 
+of command-line-arguments. </p>
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>Describe the purpose of command-line-arguments. </p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or false? In Java, syntax provisions must be made in the method 
+signature for the <strong>main</strong> method to accommodate 
+command-line-arguments even if the remainder of the program is not designed to 
+make use of them. If False, explain why. </p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>Provide the method signature for the <strong>main</strong> method in a Java 
+application that is designed to accommodate the use of command-line-arguments. 
+Identify the part of the method signature that applies to command-line-arguments 
+and explain how it works. </p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>Explain how a Java application can determine the number of 
+command-line-arguments actually entered by the user. </p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>Write a program that illustrates the handling of command-line
+arguments in Java.</p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Handling command-line arguments in Java.</li>
+</ul>
+
+<hr/>
+
+<p>Additional review questions with answers are provided in the appendix to this 
+Ebook. It is highly recommended that you study that material also.</p>
+<hr/>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer06">Answer 6</a></h2>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. Handling command-line
+arguments in Java.
+				<pre>
+/*File SampProg11.java from chapter 32
+Copyright, R.G.Baldwin
+Without reviewing the following solution, write a Java
+application that illustrates the handling of command-line
+arguments in Java.
+
+Provide a termination message that displays your name.
+**********************************************************/
+class SampProg11 { //define the controlling class
+  public static void main(String[] args){ //define main
+    for(int i=0; i &lt; args.length; i++)
+      System.out.println( args[i] );
+    System.out.println(&quot;Terminating, Dick Baldwin&quot;);     
+  }//end main
+}//End SampProg11 class.
+</pre>
+
+</div>
+<!--``2-->
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>The number of command-line arguments is equal to the number of elements in 
+the array of references to <strong>String</strong> objects referred to by
+<strong>args</strong>. The number of 
+elements is indicated by the value of the <strong>length</strong> 
+property of the array. If the value is zero, the user didn&#39;t enter any 
+command-line arguments.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>The Java syntax for command-line arguments is shown below.</p>
+
+
+
+<div class="a"><strong>Java syntax for command-line arguments.</strong>
+				<pre>
+public static void main(String[] args){
+. . . 
+}//end main method</pre>
+</div>
+	<p>Each of the elements in the array object referred to by <strong>args</strong>
+	<em>(including the element at position zero)</em> contains a reference to a
+	<strong>String</strong> object that encapsulates one of the command-line 
+	arguments.</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>True. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>Command-line-arguments are used in many programming and computing 
+environments to provide information to the program at startup that it will need 
+to fulfill its mission during that particular invocation. </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>DOS users will 
+be familiar with commands such as the following:</p>
+
+
+
+<div class="a"><strong>Command-line arguments in DOS</strong>
+				<pre>
+copy fileA fileB</pre>
+</div>
+<p>In this case, <strong>copy</strong> is the name of the program to be 
+executed, while <strong>fileA</strong> and <strong>fileB</strong> are 
+command-line arguments. </p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<div class="a"><p>Housekeeping material </p>
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Jb0260r Review: Command-Line Arguments</li>
+				<li>File: Jb0260r.htm </li>
+				<li>Originally published: 1997</li>
+				<li>Published at cnx.org: 11/25/12</li>
+				<li>Revised: 03/02/20</li>
+			</ul>
+</div>
+
+
+
+	<p>-end- </p>
+
+
+</body>
+</html>

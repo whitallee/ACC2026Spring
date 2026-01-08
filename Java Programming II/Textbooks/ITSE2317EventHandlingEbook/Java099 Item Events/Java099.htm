@@ -1,0 +1,266 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>... in Java by Richard G Baldwin</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MSOFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff">
+
+<P><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><!--start--></P>
+<I><H3 ALIGN="CENTER">Richard G Baldwin (512) 223-4758, </I><A HREF="mailto:baldwin@austin.cc.tx.us"><I>baldwin@austin.cc.tx.us</I></A><I>, </I><A HREF="http://www2.austin.cc.tx.us/baldwin/"><I>http://www2.austin.cc.tx.us/baldwin/</I></A></H3>
+<H2 ALIGN="CENTER"><!--title-->Event Handling in JDK 1.1, Item Events<!--endTitle--></H2>
+<P>Java Programming, Lecture Notes # 99, Revised 02/24/99. </P>
+
+<UL>
+<LI><A HREF="#Preface">Preface</A> </LI>
+<LI><A HREF="#Introduction">Introduction</A> </LI>
+<LI><A HREF="#Overview">Overview</A> </LI>
+<LI><A HREF="#Sample_Program">Sample_Program</A> </LI>
+
+<UL>
+<LI><A HREF="#Interesting_Code_Fragments">Interesting_Code_Fragments</A> </LI>
+<LI><A HREF="#Program_Listing">Program Listing</A> </LI></UL>
+</UL>
+
+<P><HR></P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Preface"></A>Preface</H2>
+</FONT><P>Students in Prof. Baldwin's <B><U>Intermediate Java Programming</B></U> classes at ACC will be responsible for knowing and understanding all of the material in this chapter beginning with the Spring semester of 1999. </P>
+<P>On 2/24/99, the sample program in this chapter was confirmed to operate properly under JDK 1.2 and Win95.<br/>
+ <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Introduction"></A>Introduction</H2>
+</FONT><P>This chapter was originally written on September 22, 1998, using the JDK 1.1.6 download package. The purpose of this chapter is to illustrate the use of <I>item</I> events. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Overview"></A>Overview</H2>
+</FONT><P>If you instantiate an object of type <B>ItemListener</B> and register that object on an object that has an <B>addItemListener()</B> method, the <B>itemStateChanged()</B> method of the listener object will be invoked whenever the state of the source object changes. </P>
+<P>An item event is a semantic event, and several different sources can multicast the event. I will explain the use of the <B>ItemListener</B> interface and <B>ItemEvent</B> class using radio buttons and checkboxes. </P>
+<P>Information regarding the event is passed into the <B>itemStateChanged() </B>method in the form of an object of type <B>ItemEvent</B>. <br/>
+ <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Sample_Program"></A>Sample Program</H2>
+</FONT><P>The program creates three radio buttons in a group. When any one of the three buttons is selected, the other two are automatically deselected. </P>
+<P>An <B>ItemListener</B> object is registered on all three buttons. When a button is selected, an <B>ItemEvent</B> occurs. </P>
+<P>The program also creates an ordinary <B>Checkbox</B> object. The <B>ItemListener</B> object is also registered on the checkbox. When the checkbox is either selected or deselected an <B>ItemEvent</B> occurs. </P>
+<P>When an <B>ItemEvent</B> occurs, the <B>itemStateChanged()</B> method of the <B>ItemListener</B> object is invoked on the listener object. Code in this method invokes methods of the <B>ItemEvent</B> object (received as a parameter) to display the following information about the event: </P>
+<P>1. the <I>label</I> of the item, <br/>
+2. the <I>"StateChange"</I> of the item, and <br/>
+3. the new <I>state</I> of the item. </P>
+<P>The labels on the three buttons are <B>AButton</B>, <B>BButton</B>, and <B>CButton</B>. The label on the checkbox is <B>Check Box</B>. </P>
+<P>The following is the output produced by selecting BButton, selecting Check Box, and then deselecting Check Box, in that order. </P>
+<B><P>Item: BButton</B> <br/>
+<B>State Change: 1</B> <br/>
+<B>State: true</B> </P>
+<B><P>Item: Check Box</B> <br/>
+<B>State Change: 1</B> <br/>
+<B>State: true</B> </P>
+<B><P>Item: Check Box</B> <br/>
+<B>State Change: 2</B> <br/>
+<B>State: false</B> </P>
+<P>Several things are worthy of note here. First, a state change from deselected to selected produces a state change value of 1, while a change from selected to deselected produces a value of 2. At least that is true on the checkbox. So far, I have found no documentation to explain the significance of these values. </P>
+<P>Second, the checkbox generates an item event when it is selected, and also when it is deselected. </P>
+<P>Third, whenever one of the radio buttons is selected, the others are automatically deselected. However, only one item event occurs, and it is attributed to the button that is selected. Automatic deselection of the other buttons does not cause them to generate item events. </P>
+<P>Tested using JDK1.1.6 under Win95. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="Interesting_Code_Fragments"></A>Interesting Code Fragments</H3>
+</FONT><P>We will begin with the first line of the definition of the controlling class, which simply shows that this class extends <B>Frame</B> and implements <B>ItemListener</B>. Because it implements <B>ItemListener</B>, an object of the controlling class is a listener object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=498>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>public class Event35 <I>extends</I> <B>Frame</B> <I>implements</I> <B>ItemListener</B>{</PRE></TD>
+</TR>
+</TABLE>
+
+<P>I will skip the <B>main</B> method (that does nothing but instantiate an instance of the controlling class) and move on to the constructor. </P>
+<P>The next fragment shows the instantiation of a set of three radio buttons in a group. Another chapter discusses radio buttons in detail. Since the objective of this chapter is to understand item events, and not radio buttons, I won't discuss this code further here. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=498>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Event35(){//constructor
+ //Create a CheckboxGroup object
+ CheckboxGroup cbGrp = new CheckboxGroup();
+
+ //Create three radio buttons in the group
+ Checkbox aButton = new Checkbox("AButton",true, cbGrp);
+ Checkbox bButton = new Checkbox("BButton",false,cbGrp);
+ Checkbox cButton = new Checkbox("CButton",false,cbGrp);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next fragment uses a typical registration method to register <B>this</B> object (which is a listener object because it is of a class that implements the <B>ItemListener</B> interface) on each of the radio buttons. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=492>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> //Register item listener object on each radio button
+ aButton.<B>addItemListener</B>(<B>this</B>);
+ bButton.addItemListener(this);
+ cButton.addItemListener(this);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next fragment creates an ordinary <B>Checkbox</B> object and registers the item listener on it also. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=492>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Checkbox theCheckbox = new Checkbox("Check Box");
+ theCheckbox.addItemListener(this);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>Following this, I add the radio buttons and the checkbox to the frame, adjust the parameters of the frame, and make the whole thing visible. That is very familiar code, so I didn't highlight it here. I also instantiated an anonymous <B>WindowListener</B> to terminate the program when the user clicks on the <I>close</I> button on the frame. I didn't highlight that here either because you should already be familiar with it. You can view all of this code in the programming listing that follows later. </P>
+<P>The next fragment defines the <B>itemStateChanged()</B> method of the listener interface. This method is invoked whenever an <B>ItemEvent</B> occurs on one of the source objects on which the listener is registered. As you can see, the code in this method extracts information from the incoming <B>ItemEvent</B> object and displays that information as shown earlier. </P>
+<P>Note that this is a method of the controlling class, causing an object of the controlling class to also be a listener. <br/>
+ <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=486>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> //Define the method of the ItemListener interface
+ public void <B>itemStateChanged</B>(ItemEvent e){
+ System.out.println("Item: " + e.<B>getItem</B>());
+ System.out.println("State Change: "
+ + e.<B>getStateChange</B>());
+
+ //Note the cast in the following statement
+ System.out.println("State: "
+ + ((Checkbox)e.<B>getSource</B>()).<B>getState</B>());
+ System.out.println();//blank line
+ }//end itemStateChanged()
+
+}//end class Event35 definition</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The code in the program that was not highlighted in the above fragments can be viewed in the complete listing of the program that follows in the next section. <br/>
+ <br/>
+ </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="Program_Listing"></A>Program Listing</H3>
+</FONT><P>This section contains program listings.</P>
+<TABLE BORDER CELLSPACING=1 WIDTH=486>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Event35.java, Copyright, R.G.Baldwin
+Illustrates Item events.
+
+This program creates three radio buttons in a group. When
+any of the three buttons is selected, the other two are
+automatically deselected.
+
+An ItemListener object is registered on all three buttons.
+When a button is selected, an ItemEvent occurs.
+
+The program also creates an ordinary checkbox. The
+ItemListener object is also registered on the checkbox.
+When the checkbox is either selected or deselected an
+ItemEvent occurs.
+
+When an ItemEvent occurs, the itemStateChanged() method
+of the ItemListener object is invoked. Code in this method
+invokes methods of the ItemEvent object received as a
+parameter to display
+
+1. the label of the item,
+2. the "StateChange" of the item, and
+3. the new state of the item.
+
+The labels on the three buttons are AButton, BButton, and
+CButton. The label on the checkbox is Check Box.
+
+The following is the output produced by selecting BButton,
+selecting Check Box, and then deselecting Check Box, in
+that order.
+
+Item: BButton
+State Change: 1
+State: true
+
+Item: Check Box
+State Change: 1
+State: true
+
+Item: Check Box
+State Change: 2
+State: false
+
+Several things are worthy of note here. First, a state
+change from deselected to selected produces a state
+change value of 1, while a change from selected to
+deselected produces a value of 2. So far, I have found no
+documentation to explain the significance of these values.
+
+Second, the checkbox generates an item event when it is
+selected, and also when it is deselected.
+
+Third, whenever one of the radio buttons is selected, the
+others are automatically deselected. However, only one
+item event results, and it is attributed to the button
+that is selected. Automatic deselection of the other
+buttons does not cause them to generate item events.
+
+Tested using JDK1.1.6 under Win95.
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+//=======================================================//
+public class Event35 extends Frame implements ItemListener{
+ public static void main(String[] args){
+ new Event35();
+ }//end main
+ //-----------------------------------------------------//
+
+ Event35(){//constructor
+ //Create a CheckboxGroup object
+ CheckboxGroup cbGrp = new CheckboxGroup();
+
+ //Create three radio buttons in the group
+ Checkbox aButton = new Checkbox("AButton",true, cbGrp);
+ Checkbox bButton = new Checkbox("BButton",false,cbGrp);
+ Checkbox cButton = new Checkbox("CButton",false,cbGrp);
+
+ //Register item listener object on each radio button
+ aButton.addItemListener(this);
+ bButton.addItemListener(this);
+ cButton.addItemListener(this);
+
+ //Create an ordinary checkbox and register the item
+ // listener on it.
+ Checkbox theCheckbox = new Checkbox("Check Box");
+ theCheckbox.addItemListener(this);
+
+ //Add the radio buttons and the checkbox to the Frame
+ this.add(aButton);
+ this.add(bButton);
+ this.add(cButton);
+ this.add(theCheckbox);
+
+ //Adjust Frame parameters and make it visible
+ this.setLayout(new FlowLayout());
+ this.setSize(350,100);
+ this.setTitle("Copyright, R.G.Baldwin");
+ this.setVisible(true);
+
+ // Anonymous inner class to terminate program.
+ addWindowListener(new WindowAdapter() {
+ public void windowClosing(WindowEvent e) {
+ System.exit(0);}});//end WindowListener
+ }//end constructor
+ //-----------------------------------------------------//
+
+ //Define the method of the ItemListener interface
+ public void itemStateChanged(ItemEvent e){
+ System.out.println("Item: " + e.getItem());
+ System.out.println("State Change: "
+ + e.getStateChange());
+
+ //Note the cast in the following statement
+ System.out.println("State: "
+ + ((Checkbox)e.getSource()).getState());
+ System.out.println();//blank line
+ }//end itemStateChanged()
+
+}//end class Event35 definition
+//=======================================================//</PRE></TD>
+</TR>
+</TABLE>
+
+<P>-end- <!--end--></P></BODY>
+</HTML>

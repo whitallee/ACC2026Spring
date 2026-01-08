@@ -1,0 +1,441 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1602</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1602: Classes</h1> 
+
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a><ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listings">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is part of a collection of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+	and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Screen output. </li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The class named Radio01.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Constructing a Radio object. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Programming the radio buttons. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Pressing a button on the radio. </li>
+		<li><a href="#Listing_5">Listing 5</a>. The Radio class.</li>
+		<li><a href="#Listing_6">Listing 6</a>. An instance variable.</li>
+		<li><a href="#Listing_7">Listing 7</a>. The setStationNumber method.</li>
+		<li><a href="#Listing_8">Listing 8</a>. The playStation method.</li>
+		<li><a href="#Listing_9">Listing 9</a>. The program named Radio01.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter will concentrate primarily on a discussion of the Java 
+	<strong>class</strong>. Before continuing with this chapter, I recommend 
+	that you review Kjell 
+	<a href="http://programmedlessons.org/Java9/chap40/ch40_01.html">CHAPTER 40 — Objects</a> through 
+	<a href="http://programmedlessons.org/Java9/chap49/ch49_01.html">CHAPTER 49 — Class Design Example
+Checking Account</a>.</p>
+<p>A simple Java program will be discussed to illustrate the definition and use of two different classes. Taken in combination, these two classes simulate the manufacture and 
+the use of the car radio object discussed in an earlier chapter.</p>
+<p>You will see how to write code to create a new <strong>Radio</strong> object by applying the 
+<strong>new</strong> operator to the class named <strong>Radio</strong>. You will also see how to save that object's reference in a reference variable of type 
+<strong>Radio</strong>.</p>
+<p>You will see how to write code that is used to simulate the association of a radio button with a particular radio station.</p>
+<p>You will see how to write code that is used to simulate the pressing of a radio button to play the radio station associated with that button.</p>
+<p>You will see the definition of a class named <strong>Radio01</strong>. This class consists simply of the 
+<strong>main</strong> method. The <strong>main</strong> method of a Java application is executed by the Java Virtual Machine when the application is run. Thus, it is the driver for the entire application.</p>
+<p>You will see the definition of a class named <strong>Radio</strong>. This class includes one instance variable and two instance methods.</p>
+<p><em>(The instance variable is a reference variable that refers to a special kind of object that I refer to as an array object. I will provide a very brief discussion on array objects in this chapter. I will have more to say about array objects in a 
+future chapter.)</em></p>
+<p>I will also provide a short discussion of class variables, which are not used in this program. I will explain that the use of class variables can often lead to undesirable side effects.</p>
+<p>Finally, I will provide a very brief discussion of the syntax of a simple class definition in Java. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>What is a class?</strong></p>
+<p>I explained in an earlier chapter that a class is a plan from which many objects can be created. I likened the class definition to the plans from which millions of nearly identical car radios can be produced.</p>
+<p><strong>A simple Java program</strong></p>
+<p>In order to help you to get started on the right foot, and in support of future discussions, it will be advantageous to provide and discuss a simple Java program in this chapter.</p>
+<p><strong>The car radio example</strong></p>
+<p>Harking back to an earlier chapter, <a href="#Listing_9">Listing 9</a>, near the end of this chapter, shows the code for a simple Java application that simulates the manufacture and use of a car radio.</p>
+<p><strong>Explain in fragments</strong></p>
+<p>In order to help you to focus specifically on important sections of code, I will explain the 
+code for this program in fragments.</p>
+<p><strong>Top-level classes</strong></p>
+<p>This program contains two top-level class definitions. <em>(Java also supports inner classes as opposed to top-level classes. Inner classes will be explained in detail in subsequent chapters in this series.)</em></p>
+<p><strong>The class named Radio01</strong></p>
+<p>One of those class definitions, named <strong>Radio01</strong>, is shown in its entirety in 
+<a href="#Listing_1">Listing 1</a>. The other class named <strong>Radio</strong> will be discussed later. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. The class named Radio01.
+
+				<pre>public class Radio01{
+  public static void main(
+                        String[] args){
+    Radio myObjRef = new Radio();
+    myObjRef.setStationNumber(3,93.5);
+    myObjRef.playStation(3);
+  }//end main
+}//end class Radio01</pre>
+</div>
+	<p>The class named <strong>Radio01</strong> consists simply of the <strong>main</strong> method. The 
+	<strong>main</strong> method of a Java application is executed by the Java Virtual Machine when the application is run. Thus, it is the driver for the entire application.</p>
+<p><strong>The driver class</strong></p>
+<p>The code in  
+<a href="#Listing_1">Listing 1</a> simulates the manufacturer of the radio and the use of the radio by the end user.
+
+Without getting into a lot of detail regarding Java syntax, I will further subdivide and discuss this code in the following listings.</p>
+<p><strong>Constructing a Radio object</strong></p>
+<p>As discussed in a previous chapter, the code in <a href="#Listing_2">Listing 2</a> applies the 
+<strong>new</strong> operator to the constructor for the <strong>Radio</strong> class, causing a new object to be created according to the plans specified in the class named 
+<strong>Radio</strong>.</p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Constructing a Radio object.
+
+				<pre>    Radio myObjRef = new Radio();</pre>
+</div>
+<p><strong>Saving a reference to the Radio object</strong></p>
+<p>Also as discussed in a previous chapter, the code in <a href="#Listing_2">Listing 2</a> declares a reference variable of type 
+<strong>Radio</strong> and stores the new object's reference in that variable.</p>
+<p><strong>Programming the radio buttons</strong></p>
+<p>The code in <a href="#Listing_3">Listing 3</a> is new to this discussion. This statement simulates the process of associating a particular radio station with a particular button 
+- programming a button on the radio. </p>
+<p>As I explained in a previous chapter, this is accomplished for my car radio by manually tuning the radio to a desired station and then holding the radio button down until it beeps.
+
+You have probably done something similar to this to the radio in your car. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Programming the radio buttons.
+
+				<pre>    myObjRef.setStationNumber(3, 93.5);</pre>
+</div>
+	<p>The statement in <a href="#Listing_3">Listing 3</a> accomplishes the association of a simulated button to a simulated radio station by calling the method named
+	<strong>setStationNumber</strong> on the reference to the <strong>Radio</strong> object. 
+	<em>(Recall that this sends a message to the object asking it to change its state.)</em></p>
+<p>The parameters passed to the method cause radio button number 3 to be associated with the frequency 93.5 MHz.
+<em>(The value 93.5 is stored in the variable that represents button number 3.)</em></p>
+<p><strong>Sending a message to the object</strong></p>
+<p>Using typical OOP jargon, the statement in <a href="#Listing_3">Listing 3</a> sends a message to the 
+<strong>Radio</strong> object, asking it to change its state according to the values passed as parameters.</p>
+<p><strong>Pressing a button on the radio</strong></p>
+<p>Finally, the code in <a href="#Listing_4">Listing 4</a> calls the method named
+<strong>playStation</strong> on the <strong>Radio</strong> object, passing the integer value 3 
+<em>(the button number)</em> as a parameter. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Pressing a button on the radio.
+
+				<pre>    myObjRef.playStation(3);</pre>
+</div>
+	<p><strong>Another message</strong></p>
+<p>This code sends a message to the object asking it to perform an action.
+
+In this case, the action requested by the message is:</p>
+<ul>
+	<li>Tune yourself to the frequency previously associated with button number 3</li>
+	<li>Play the radio station that you find at that frequency through the speakers</li>
+</ul>
+<p><strong>How does this simulated radio play?</strong></p>
+<p>This simple program doesn't actually play music. As you will see later, this causes the 
+message shown in <a href="#Figure_1">Figure 1</a> to appear on the computer screen, simulating the selection and playing of a specific radio station.</p>
+<div class="a"><a name="Figure_1">Figure 1</a>. Screen output.
+
+
+							<pre>Playing the station at 93.5 Mhz</pre>
+
+</div>
+<p><strong>The Radio class</strong></p>
+<p><a href="#Listing_5">Listing 5</a> shows the class definition for the <strong>Radio</strong> class in its entirety. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. The Radio class
+.
+
+				<pre>class Radio{
+  //This class simulates the plans from
+  // which the radio object is created.
+  protected double[] stationNumber = 
+                         new double[5];
+                            
+  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+  }//end method setStationNumber
+  
+  public void playStation(int index){
+    System.out.println(
+            &quot;Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+  }//end method playStation
+  
+}//end class Radio</pre>
+</div>
+	<p>Note that the code in <a href="#Listing_5">Listing 5</a> does not contain an explicit constructor. If you don't define a constructor when you define a new class, a default version of the constructor is provided on your behalf. That is the case for this simple program.</p>
+<p><em>(Constructors will be explained in detail in subsequent chapters.)</em></p>
+<p><strong>The plans for an object</strong></p>
+<p>The code in <a href="#Listing_5">Listing 5</a> provides the plans from which 
+one or more objects that simulate physical radios can be constructed.</p>
+<p>An object instantiated <em>(an object is an instance of a class)</em> from the code in <a href="#Listing_5">Listing 5</a> simulates a physical radio. I will subdivide this code into fragments and discuss it in the following listings.</p>
+<p><strong>An instance variable</strong></p>
+<p>In a previous chapter, I explained that we often say that an object is an instance of a class.<em> (A physical radio is one instance of the plans used to produce it.)</em>
+
+The code in <a href="#Listing_6">Listing 6</a> shows the declaration and initialization of what is commonly referred to as an 
+<em>instance variable</em>. </p>
+	
+<div class="a"><a name="Listing_6">Listing 6</a>. An instance variable.
+				<pre>  protected double[] stationNumber = 
+                         new double[5];</pre>
+</div>
+	<p><strong>Why call it an instance variable?</strong></p>
+<p>The name instance variable comes from the fact that every instance of the class 
+<em>(object)</em> has one. <em>(Every radio produced from the same set of plans has the ability to associate a frequency with each selector button on the front of the radio.)</em></p>
+<p><strong>Class variables - an aside</strong></p>
+<p>Note that Java also supports something called a <em>class variable</em>, which is different from an instance variable.</p>
+<p>Class variables are shared among all of the objects created from a given class. Stated differently, no matter how many objects are instantiated from a class definition, they all share a single copy of each class variable.</p>
+<p>There is no analogy to a class variable in a physical radio object. Radios are installed in different cars separated from each other by thousands of miles. Therefore, there can be no sharing of anything among different physical radio objects.</p>
+<p><em>(Well, that may not be entirely true. In today's technology, different radio objects could potentially share something at a common location 
+in the cloud, but my car radio doesn't do anything like that.)</em></p>
+<p><strong>Class variables can cause undesirable side effects</strong></p>
+<p>While class variables are relatively easy to use in Java, they are difficult to explain from an OOP viewpoint.
+
+Also, it is my opinion that from a good overall design viewpoint, class variables should be used very sparingly, if at all.</p>
+<p>Therefore, for the first several chapters, I will exclude the possibility of class variables in this series of chapters. 
+<em>(I will explain the use of class variables in Java in a subsequent chapter.)</em></p>
+<blockquote><em>The early chapters in this Ebook made heavy use of class 
+variables and class methods in order to minimize the complexity of the code. In 
+those cases, I was careful to avoid the undesirable side effects. That should 
+not be taken as an indication that the use of class variables and class methods 
+is a good thing.</em></blockquote>
+<p><strong>Reference to an array object</strong></p>
+<p>Now, let's get back to the instance variable named <strong>stationNumber</strong> shown in <a href="#Listing_6">Listing 6</a>. Without getting into a lot of detail, this variable is also a reference variable, referring to an array object.</p>
+<p>The array object encapsulates a simple one-dimensional array with five elements of type 
+<strong>double</strong>. <em>(Java array indices begin with zero, so the index values for this array extend from 0 to 4 inclusive. I will also discuss array objects in more detail in a subsequent chapter.)</em></p>
+<p><strong>Persistence</strong></p>
+<p>The array object is where the data is stored that associates the frequency of a radio station with the simulated physical button on the front of the radio.</p>
+<p>Each element in the array corresponds to one frequency-selector button on the front of the radio. Hence, the radio simulated by an object of the 
+<strong>Radio</strong> class has five simulated frequency-selector buttons.</p>
+<p>The array object exists when the code in <a href="#Listing_6">Listing 6</a> has finished executing. Each element in the array has been 
+automatically initialized to a value of 0.0 
+<em>(double-precision float value of zero)</em>.</p>
+<p><strong>The setStationNumber method</strong></p>
+<p><a href="#Listing_7">Listing 7</a> shows the setStationNumber method in its entirety </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. The setStationNumber method.
+				<pre>  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+  }//end method setStationNumber</pre>
+</div>
+	<p><strong>Associates radio station with button</strong></p>
+<p>This is the method that is used to simulate the behavior of having the user associate a particular button with a particular radio station. 
+<em>(Recall that this is accomplished on my car radio by manually tuning the radio to a specific station and then holding the button down until it beeps. Your car radio probably operates in some similar way.)</em></p>
+<p>This method receives two incoming parameters:</p>
+<ul>
+	<li>An integer that corresponds to a button number <em>(button numbers are assumed to begin with 0 and extend through 4 in order to match array indexes)</em></li>
+	<li>A frequency value to be associated with the indicated button.</li>
+</ul>
+<p><strong>Save the frequency value</strong></p>
+<p>The code in the method stores the frequency value in an element of the array object discussed earlier.</p>
+<p>The element number is specified by the value of index shown in square brackets in the assignment expression. 
+<em>(This syntax is similar to storing a value in an array element in most programming languages that I am familiar with.)</em></p>
+<p><strong>Pressing a radio button to select a station</strong></p>
+<p><a href="#Listing_8">Listing 8</a> shows the <strong>playStation</strong> method. This is the method that simulates the result of having the user press a button on the front of the radio to select a particular radio station for play. </p>
+<div class="a"><a name="Listing_8">Listing 8</a>. The playStation method.
+				<pre>  public void playStation(int index){
+    System.out.println(
+            &quot;Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+  }//end method playStation</pre>
+</div>
+	<p><strong>Selecting and playing a radio station</strong></p>
+<p>The method receives an integer index value as an incoming parameter. This index corresponds to the number of the button pressed by the user.
+
+This method simulates the playing of the radio station by </p>
+<ul>
+	<li>extracting the appropriate frequency value from the array object, and</li>
+	<li>displaying that value on the computer screen along with some surrounding text.</li>
+</ul>
+<p>When called by code in the <strong>main</strong> method of this program, this method produces the 
+message shown in <a href="#Figure_1">Figure 1</a> on the computer screen</p>
+<p>That summarizes the code and the behavior of this simple program.</p>
+<p><strong>Class definition syntax</strong></p>
+<p>There are a number of items that can appear in a class definition, including the following:</p>
+<ul>
+	<li>Instance variables
+    </li>
+	<li>Class variables
+    </li>
+	<li>Instance methods
+    </li>
+	<li>Class methods
+    </li>
+	<li>Constructors
+    </li>
+	<li>Static initializer blocks
+    </li>
+	<li>Inner classes</li>
+</ul>
+<p><strong>Let's keep it simple</strong></p>
+<p>In order to make these chapters as easy to understand as possible, the first several chapters will ignore the possibility of class variables, class methods, static initializer blocks, and inner classes.</p>
+<p>As mentioned in the earlier discussion of class variables, these elements aren't particularly difficult to use, but they create a lot of complications when attempting to explain OOP from the viewpoint of Java programming.</p>
+<p>Therefore, the first several chapters in the series will assume that class definitions are limited to the following elements:</p>
+<ul>
+	<li>Instance variables</li>
+	<li>Instance methods</li>
+	<li>Constructors</li>
+</ul>
+<p><strong>A constructor</strong></p>
+<p>A constructor is used only once in the lifetime of an object. It participates in the task of creating 
+<em>(instantiating)</em> and initializing the object. Following instantiation, the state and behavior of an object depends entirely on instance variables, class variables, instance methods, and class methods.</p>
+<p><strong>Instance variables and methods</strong></p>
+<p>The class named <strong>Radio</strong> discussed earlier contains</p>
+<ul>
+	<li>one instance variable named <strong>stationNumber</strong>, and</li>
+	<li>two instance methods named <strong>setStationNumber</strong> and <strong>playStation</strong>.
+	</li>
+</ul>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>This chapter has concentrated primarily on a discussion of the Java class.</p>
+<p>A simple Java program was discussed to illustrate the definition and use of two different classes. Taken in combination, these two classes simulate the manufacture and use of the car radio object 
+introduced in an earlier chapter.</p>
+<p>You saw how to write code to create a new <strong>Radio</strong> object by applying the 
+<strong>new</strong> operator to the class named <strong>Radio</strong>.</p>
+<p>You also saw how to save that object's reference in a reference variable of type 
+<strong>Radio</strong>.</p>
+<p>You saw how to write code <em>(in an instance method named <strong>setStationNumber</strong>)</em> used to simulate the association of a radio button with a particular radio station.</p>
+<p>You saw how to write code <em>(in an instance method named <strong>playStation</strong>)</em> to simulate the pressing of a radio button to play the radio station associated with that button.</p>
+<p>You saw the definition of the class named <strong>Radio01</strong>, which consists simply of the 
+<strong>main</strong> method. The <strong>main</strong> method of a Java application is executed by the Java Virtual Machine when the application is run.</p>
+<p>You saw the definition of the class named <strong>Radio</strong>. This class includes one instance variable and two instance methods. 
+<em>(The instance variable is a reference variable that refers to a special kind of object that I refer to as an array object. I provided a very brief discussion on array objects. I will have more to say on this topic in a subsequent chapter.)</em></p>
+<p>I provided a short discussion of class variables, which are not used in this program. I explained that the use of class variables 
+can often lead to undesirable side effects.</p>
+<p>Finally, I provided a very brief discussion of the syntax of a simple class definition in Java. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>Recall that in order to understand OOP, you must understand the following three concepts:</p>
+<ul>
+	<li>Encapsulation
+    </li>
+	<li>Inheritance
+    </li>
+	<li>Polymorphism</li>
+</ul>
+<p>The next chapter (following the review chapter) will begin a discussion of inheritance. Overall, the discussion of inheritance will require more than one chapter.
+
+In the next chapter, I will discuss how the definition of a class defines a new data type. I will show you how to extend an existing class. I will explain what is inherited through inheritance. I will discuss code reuse and explicit constructors.</p>
+<p>Finally, I will illustrate all of the above in a simple program that extends the 
+<strong>Radio</strong> class discussed in this chapter into a new class named 
+<strong>Combo</strong> that simulates an upgraded radio containing a tape player.
+<em>(Yes, at one point in history, car radios did contain tape players.)</em></p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1602: Classes</li>
+					<li>File: Java1602.htm
+</li>
+					<li>Revised: 08/06/22</li>
+				</ul>
+</div>
+
+
+<h1><a name="Complete_program_listings">Complete program listing</a></h1>
+<p><a href="#Listing_9">Listing 9</a> provides a complete listing of the program named <strong>Radio01</strong>.</p>
+<div class="a"><a name="Listing_9">Listing 9</a>. The program named Radio01.
+				<pre>/*File Radio01.java
+Copyright, R.G.Baldwin
+Simulates manufacture and use of a 
+car radio.
+
+This program produces the following
+output on the computer screen:
+  
+Playing the station at 93.5 Mhz
+**************************************/
+
+public class Radio01{
+  //This class simulates the 
+  // manufacturer and the human user
+  public static void main(
+                        String[] args){
+    Radio myObjRef = new Radio();
+    myObjRef.setStationNumber(3,93.5);
+    myObjRef.playStation(3);
+  }//end main
+}//end class Radio01
+  //---------------------------------//
+
+class Radio{
+  //This class simulates the plans from
+  // which the radio object is created.
+  protected double[] stationNumber = 
+                         new double[5];
+                            
+  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+  }//end method setStationNumber
+  
+  public void playStation(int index){
+    System.out.println(
+            &quot;Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+  }//end method playStation
+  
+}//end class Radio</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

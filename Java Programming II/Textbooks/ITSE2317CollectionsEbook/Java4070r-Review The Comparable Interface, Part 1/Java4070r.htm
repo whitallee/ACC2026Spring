@@ -1,0 +1,489 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4070r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4070r Review: The Comparable Interface, Part 1</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>, 
+		<a href="#question11">11</a>, <a href="#question12">12</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listings">Complete program listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4070: The Comparable Interface, Part 1</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? The fact that the location of each element can be controlled 
+in a <b>List</b> is what causes a <b>List</b> to be an unordered collection. </p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False? It is not necessary for objects to implement the <b>Comparable</b> 
+interface to make them eligible for inclusion in a <b>List</b>.</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? It is not necessary for objects to implement the <b>Comparable</b> 
+interface to make them eligible for inclusion in a <strong>SortedSet</strong>.</p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>? </p>
+<ul>
+	<li>Compiler Error</li>
+	<li>44321</li>
+	<li>4321</li>
+	<li>1234</li>
+	<li>12344</li>
+</ul>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? The <strong>Collection</strong> interface declares the 
+following overloaded versions of the <b>add</b> method. <em>(See the Java 
+documentation.)</em></p>
+<ul>
+	<li><b>add(Object o)</b> </li>
+	<li><b>add(int index, Object element)</b> </li>
+</ul>
+
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False? A <b>List</b> object is a more-specialized collection than a
+<b>Collection</b> object.</p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h2><a name="question07">Question 7</a></h2>
+<p>True or False? The version of the <b>add</b> method that requires two 
+parameters cannot be called on a reference to an <b>ArrayList</b> object when 
+that object is treated as the generic type <b>Collection</b>. <em>(See the Java 
+documentation.)</em></p>
+<p><a href="#answer07">Answer 7</a></p>
+
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>Compiler Error</li>
+	<li>44321</li>
+	<li>4321</li>
+	<li>1234</li>
+	<li>12344</li>
+	<li>443521</li>
+</ul>
+
+
+<p><a href="#answer08">Answer 8</a> </p>
+
+<h2><a name="question09">Question 9</a></h2>
+<p>True or False? A List is an ordered collection because the user has control 
+over the location of each element in the collection relative to the other 
+elements in the collection.</p>
+<p><a href="#answer09">Answer 9</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>Compiler Error</li>
+	<li>Runtime Error</li>
+	<li>44321</li>
+	<li>4321</li>
+	<li>1234</li>
+	<li>12344</li>
+</ul>
+<p><a href="#answer10">Answer 10</a></p>
+	
+<h2><a name="question11">Question 11</a></h2>
+<p>True or False? Because a <b>List</b> makes no attempt to eliminate duplicate 
+elements, or to sort the elements on the basis of their values, there is no 
+requirement to <i>compare</i> objects when placing them in a <b>List</b>. 
+Therefore, objects whose references are stored in a <b>List</b> are not required 
+to implement the <b>Comparable</b> interface <i>(but they may implement the 
+Comparable interface without causing any harm)</i>.</p>
+<p><a href="#answer11">Answer 11</a></p>
+	
+<h2><a name="question12">Question 12</a></h2>
+<p>True or False? Because a <b>SortedSet</b> does eliminate duplicates and does 
+sort the elements on the basis of their values, there is a requirement to <i>
+compare</i> each new element with the existing elements in a <b>SortedSet</b> 
+whenever a new element is added to the collection. Therefore, objects whose 
+references are stored in a <b>SortedSet</b> are required to implement the <b>
+Comparable</b> interface. </p>
+<p><a href="#answer12">Answer 12</a></p>
+
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Comparable01.java. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Comparable02.java. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Comparable03.java. </li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>True.</p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>True.</p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>44321</p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>True.</p>
+<p><a href="#question09">Back to Question 9</a> </p>
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>443521</p>
+
+
+
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>True.</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>True</p>
+
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>False. The <b>List</b> interface declares the following overloaded versions 
+of the <b>add</b> method but the <strong>Collection</strong> interface declares 
+only the first one of the two.</p>
+<ul>
+	<li><b>add(Object o)</b> </li>
+	<li><b>add(int index, Object element)</b> </li>
+</ul>
+
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>Compiler Error. The method named <b>fillIt</b> receives a reference to an 
+object of the <b>ArrayList</b> class as the interface type <b>Collection</b>, 
+and attempts to call the following overloaded method on that reference: </p>
+<p><b>add(int index, Object element)</b> </p>
+<p>However, the <strong>Collection</strong> interface knows nothing about a 
+method having that signature.</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False. It is necessary for objects to implement the <b>Comparable</b> 
+interface to make them eligible for inclusion in a <strong>SortedSet</strong>.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>True.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>False. The fact that the location of each element can be controlled in a <b>
+List</b> is what causes a <b>List</b> to be an <i><strong>ordered</strong></i> 
+collection. </p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<h1><a name="Complete_program_listings">Complete program listings</a></h1>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. Comparable01.java.</p>
+<pre>//File Comparable01.java
+
+import java.util.*;
+
+public class Comparable01{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable01
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(0,new MyClass(4));
+    ref.add(1,new MyClass(4));
+    ref.add(2,new MyClass(3));
+    ref.add(3,new MyClass(2));
+    ref.add(4,new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return "" + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+
+
+
+
+<!--A table containing text with a footer. -->
+<p>.</p>
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_2">Listing 2</a>. Comparable02.java. </p>
+
+<pre>//File Comparable02.java
+
+import java.util.*;
+
+public class Comparable02{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable02
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ((List)ref).add(0,new MyClass(4));
+    ((List)ref).add(1,new MyClass(4));
+    ((List)ref).add(2,new MyClass(3));
+    ((List)ref).add(3,new MyClass(2));
+    ((List)ref).add(4,new MyClass(1));
+    ((List)ref).add(3,new MyClass(5));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return "" + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+
+
+
+
+<!--A table containing text with a footer. -->
+<p>.</p>
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_3">Listing 3</a>. Comparable03.java.</p>
+<pre>//File Comparable03.java
+
+import java.util.*;
+
+public class Comparable03{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable03
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return "" + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4070r Review: The Comparable Interface, Part 1</li>
+				<li>File: Java4070r.htm </li>
+				<li>Revised: 04/15/20</li>
+
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

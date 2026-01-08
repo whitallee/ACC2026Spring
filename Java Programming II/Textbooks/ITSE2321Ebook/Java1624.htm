@@ -1,0 +1,1339 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java1624</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1624: Array Objects, Part 2</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<center>
+	<h1><a name="Preface">Preface</a></h1>
+	</center>
+	<p>This chapter is one of a series of chapters designed to teach you about Object-Oriented Programming (OOP) using Java.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Reference variable declaration..</li>
+		<li><a href="#Listing_2">Listing 2</a>. A three-dimensional array object of element type 
+		Button. </li>
+		<li><a href="#Listing_3">Listing 3</a>. The generic class Object. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Primitive type conversions. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Initialization.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Placement of square brackets.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Creating the actual array object.</li>
+		<li><a href="#Listing_8">Listing 8</a>. An array access expression.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Explicit initialization of array elements.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Create a two-dimensional rectangular array structure.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Using length to populate the leaves of the tree structure.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Display leaf object contents.</li>
+		<li><a href="#Listing_13">Listing 13</a>. Beginning of a ragged array with two rows and three columns.</li>
+		<li><a href="#Listing_14">Listing 14</a>. Create the leaf array objects.</li>
+		<li><a href="#Listing_15">Listing 15</a>. Create the array object.</li>
+		<li><a href="#Listing_16">Listing 16</a>. Populate the root object.</li>
+		<li><a href="#Listing_17">Listing 17</a>. Populate the leaf array objects.</li>
+		<li><a href="#Listing_18">Listing 18</a>. Display data in leaf array objects.</li>
+		<li><a href="#Listing_19">Listing 19</a>. A triangular array.</li>
+		<li><a href="#Listing_20">Listing 20</a>. Populate the leaf array objects.</li>
+		<li><a href="#Listing_21">Listing 21</a>. A more general approach.</li>
+		<li><a href="#Listing_22">Listing 22</a>. Populate the leaf objects.</li>
+		<li><a href="#Listing_23">Listing 23</a>. Beginning of a more general case.</li>
+		<li><a href="#Listing_24">Listing 24</a>. Populate the leaf array elements.</li>
+		<li><a href="#Listing_25">Listing 25</a>. Display the output.</li>
+		<li><a href="#Listing_26">Listing 26</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter explains various details regarding the use of array objects 
+	in Java, and illustrates many of those details through the use of sample 
+	code.</p>
+<p>A sample program shows you three ways to emulate traditional two-dimensional 
+rectangular arrays, and also shows you how to create and use ragged arrays.</p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>Array objects</strong></p>
+<p>A different syntax is required to create array objects than the syntax 
+normally used to create ordinary objects. </p>
+<p>Array objects are accessed via 
+references. </p>
+<p>Any of the methods of the <strong>Object</strong> class can be called on a 
+reference to an array object. </p>
+<p><strong>The indices of a Java array object</strong> </p>
+<p>Array objects encapsulate a group of variables, which don&#39;t have individual 
+names. They are accessed using positive integer index values. The integer 
+indices of a Java array object always extend from <strong>0</strong> to <strong>(n-1)</strong> where
+<strong>n</strong> is the <strong>length</strong> of the array encapsulated in the object. </p>
+<p><strong>Multidimensional arrays</strong> </p>
+<p>Array objects in Java encapsulate one-dimensional arrays. However, the 
+component type of an array may itself be an array type. This makes it possible 
+to create array objects whose individual components refer to other array 
+objects. This is the mechanism for creating <em>multi-dimensional</em> or <em>
+ragged</em> arrays in Java. </p>
+<p>Such a structure of array objects can be thought of as a tree of array 
+objects, with the data being stored in the array objects that make up the leaves 
+of the tree. </p>
+<p><strong>Array types</strong> </p>
+<p>When declaring a reference variable capable of referring to an array object, 
+the array type is declared by writing the name of an element type followed by 
+some number of empty pairs of square brackets []. This is illustrated in
+<a href="#Listing_1">Listing 1</a>, which declares a reference variable named <strong>
+v1</strong>, capable of storing a 
+reference to a <em>two-dimensional</em> array of type <strong>int</strong>. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Reference variable 
+				declaration.
+
+				<pre>  int[][] v1;</pre>
+</div>
+	<p><em>(Note that Listing 1 doesn&#39;t really declare a two-dimensional array in 
+	the traditional sense of other programming languages. Rather, it declares a 
+	reference variable capable of storing a reference to a one-dimensional array 
+	object, which in turn is capable of storing references to one-dimensional 
+	array objects of type <strong>int</strong>.)</em></p>
+<p><strong>Multiple pairs of square brackets are allowed</strong> </p>
+<p>The components in an array object may refer to other array objects. The 
+number of bracket pairs used in the declaration of the reference variable 
+indicates the depth of array nesting <em>(in the sense that array elements can 
+refer to other array objects).</em> This is one of the ways that Java implements 
+the concept of traditional multi-dimensional arrays <em>(I will show you some 
+other ways later in this chapter).</em></p>
+<p>The code in Listing 1 shows two levels of nesting for the reference variable 
+of type</p>
+<div class="a">
+<pre>int[][]</pre>
+</div>
+<p><strong>Length not part of variable declaration</strong> </p>
+<p>Note that an array&#39;s length is not part of its type or reference variable 
+declaration. </p>
+<p><strong>Ragged arrays</strong> </p>
+<p>Note also that multi-dimensional arrays, when implemented in this fashion, 
+are not required to represent rectangles, cubes, etc. For example, the number of 
+elements in each row of a Java two-dimensional array can be different. Some 
+authors refer to this as a <em>ragged array</em>.</p>
+<p><strong>Allowable types</strong> </p>
+<p>The specified element type of an array may be any primitive or reference 
+type. Note, however, that all elements of the array must be of the same type <em>
+(consistent with the type-conversion rules discussed below)</em>.</p>
+<p><a href="#Listing_2">Listing 2</a> shows the declaration of a reference 
+variable capable of referring to a three<em>-dimensional</em> array object of element type <strong>Button<em> </em></strong>
+(<em><strong>Button</strong> is one of the classes in the standard class library).</em> </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. A three-dimensional array object of element type Button.
+
+				<pre>  Button[][][] v2;</pre>
+</div>
+	<p><strong>Rules of type conversion and assignment compatibility apply</strong></p>
+<p>The normal rules of<em> type conversion</em> and <em>assignment compatibility</em> 
+apply when creating and populating array objects. For example, if the specified 
+type is the name of a non-abstract class, a null reference or a reference to any 
+object instantiated from that class or any subclass of that class may be stored 
+in the array element.</p>
+<p><strong>The generic class Object</strong></p>
+<p>For example, <a href="#Listing_3">Listing 3</a> shows the declaration of a 
+reference variable capable of referring to a one-dimensional array object of 
+element type <strong>Object</strong>.</p>
+<p>Since <strong>Object</strong> is the superclass of all other classes, this array object 
+is capable of storing references to objects instantiated from any other class.
+<em>(As we saw in the previous chapter, it is also capable of storing a reference 
+to any other array object as well.)</em> </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. The generic class Object.
+
+				<pre>  Object[] v3;</pre>
+</div>
+	<p><strong>Primitive type conversions</strong></p>
+<p>Similarly, if the declared element type for the array object is one of the 
+primitive types, the elements of the array can be used to store values of any 
+primitive type that is <em>assignment compatible</em> with the declared type <em>
+(without the requirement for a cast).</em></p>
+<p>For example, the code in <a href="#Listing_4">Listing 4</a> shows the 
+creation of a one-dimensional array object capable of storing values of type <strong>
+int</strong>. The array object has 
+a length of 3 elements, and the object&#39;s reference is stored in a reference 
+variable named <strong>v1</strong>. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Primitive type conversions.
+
+				<pre>
+    int[] v1;
+    v1 = new int[3];
+    byte x1 = 127;
+    short x2 = 16384;
+    int x3 = 32000;
+    v1[0] = x1;
+    v1[1] = x2;
+    v1[2] = x3;</pre>
+</div>
+	<p><strong>Assignment-compatible assignments</strong></p>
+<p>Values of the types <strong>byte</strong>, <strong>short</strong>, and <strong>int</strong>, are stored in 
+the elements of the array object in <a href="#Listing_4">Listing 4</a>.</p>
+<p><strong>Actual type is lost in the process</strong> </p>
+<p>It should be noted that the <strong>byte</strong> and <strong>short</strong> values are converted 
+to type <strong>int</strong> as they are stored. When retrieved later, they will be 
+retrieved as type <strong>int</strong>. Any indication that these values were ever of any 
+type other than <strong>int</strong> is lost in the process of storing and retrieving the 
+values.</p>
+<p><strong>What about class types?</strong></p>
+<p>If the declared element type is the name of a class, <em>(which may or may not 
+be abstract),</em> a null reference or a reference to any object instantiated 
+from the class or any subclass of the class may be stored in the array element.</p>
+<p><em>(Obviously you can&#39;t store a reference to an object instantiated from an 
+abstract class, because you can&#39;t instantiate an abstract class.)</em></p>
+<p><strong>What about an interface type?</strong></p>
+<p>If the declared element type is an interface type, a null reference or 
+a reference to any object instantiated from any class that implements the 
+interface can be stored in the array element.</p>
+<p><em>(This is an extremely powerful concept, allowing references to objects 
+instantiated from many different classes to be collected into an array as the 
+interface type.)</em></p>
+<p><strong>Array reference variables</strong></p>
+<p>All array objects are accessed via references. A reference variable 
+whose declared type is an array type <em>does not contain an array.</em> Rather, it 
+contains either null, or a reference to an array object.</p>
+<p><strong>Allocation of memory</strong></p>
+<p>Declaring the reference variable does not create an array, nor does it 
+allocate any space for the array components. It simply causes memory to be 
+allocated for the reference variable itself, which may later contain a reference 
+to an array object.</p>
+<p><strong>Initialization</strong></p>
+<p>In the same sense that it is possible to declare a reference variable for an 
+ordinary object, and initialize it with a reference to an object when it is 
+declared, it is also possible to declare a reference to an array object and 
+initialize it with a reference to an array object when it is declared. This is 
+illustrated in <a href="#Listing_5">Listing 5</a>, which shows the following 
+operations combined into a single statement:</p>
+<ul>
+	<li>Declaration of a variable to contain a reference to an array object</li>
+	<li>Creation of the array object</li>
+	<li>Storage of the array object&#39;s reference in the reference variable</li>
+</ul>
+<div class="a"><a name="Listing_5">Listing 5</a>. Initialization.
+				<pre>    int[] v1 = new int[3];</pre>
+</div>
+	<p><strong>Can refer to different array objects</strong></p>
+<p>The <strong>length</strong> of an array is not established when the reference 
+variable is declared. As with references to ordinary objects, a reference to an 
+array object can refer to different array objects at different points in the 
+execution of a program.</p>
+<p>For example, a reference variable that is capable of referring to an array of 
+type <strong>int[]</strong> can refer to an array object of a given <strong>length</strong> 
+at one point in the program and can refer to a different array object of the 
+same type but a different <strong>length </strong>later in the program.</p>
+<p><strong>Placement of square brackets</strong></p>
+<p>When declaring an array reference variable, the square brackets [] may appear 
+as part of the type, or following the variable name, or both. This is 
+illustrated in <a href="#Listing_6">Listing 6</a>. </p>
+<div class="a"><a name="Listing_6">Listing 6</a>. Placement of square brackets.
+				<pre>
+    int[][] v1;
+    int[] v2[];
+    int v3[][];</pre>
+</div>
+<p>The second format shown in <a href="#Listing_6">Listing 6</a> can be 
+confusing. I recommend that you not use it.</p>
+	<p><strong>Type and length</strong></p>
+<p>Once an array object is created, its type and length never changes. A 
+reference to a different array object must be assigned to the reference variable 
+to cause the reference variable to refer to an array of different length.</p>
+<p><strong>Creating the actual array object</strong></p>
+<p>An array object is created by an array creation expression or an array 
+initializer.</p>
+<p>An array creation expression <em>(or an array initializer) </em>specifies:</p>
+<ul>
+	<li>The element type</li>
+	<li>The number of levels of nested arrays</li>
+	<li>The length of the array for at least one of the levels of nesting</li>
+</ul>
+<p>Two valid array creation expressions are illustrated by the statements in
+<a href="#Listing_7">Listing 7</a>. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Creating the actual array object.
+				<pre>
+    int[][] v1;
+    int v2[][];
+
+    v1 = new int[2][3];
+    v2 = new int[10][];</pre>
+</div>
+	<p><strong>A two-dimensional rectangular array</strong></p>
+<p>The third statement in
+<a href="#Listing_7">Listing 7</a> creates an array object of element type <strong>
+int</strong> with two levels of nesting. This array object can be thought of as a 
+traditional two-dimensional rectangular array having two rows and three columns.
+<em>(This is a somewhat arbitrary choice as to which dimension specifies the 
+number of rows and which dimension specifies the number of columns. You may 
+prefer to reverse the two.)</em></p>
+<p><strong>A ragged array</strong></p>
+<p>The fourth statement also creates an array object of element type <strong>int</strong> with two levels of nesting. However, the number of elements in each 
+column is not specified at this point, and it is not appropriate to think of 
+this as a two-dimensional rectangular array. In fact, once the number of 
+elements in each column has been specified, it may not describe a rectangle at 
+all. Some authors refer to an array of this type as a <em>ragged array.</em></p>
+<p><strong>The length of the array</strong></p>
+<p>The <strong>length</strong> of the array is always available as a <strong>final</strong> 
+instance variable named <strong>length</strong>. I will show you how to use the value of <strong>length</strong> in a 
+sample program later in this chapter.</p>
+<p><strong>Accessing array elements</strong></p>
+<p>An array element is accessed by an <em>array access expression</em>. The access 
+expression consists of an expression whose value is an array reference followed 
+by an indexing expression enclosed by matching square brackets.</p>
+<p>The expression in parentheses in <a href="#Listing_8">Listing 8</a> illustrates an array 
+access expression <em>(or perhaps two concatenated array access expressions).</em> </p>
+<div class="a"><a name="Listing_8">Listing 8</a>. An array access expression.
+				<pre>
+    int[][] v1 = new int[2][3];
+    System.out.println(v1[0][1]);</pre>
+</div>
+	<p><strong>First-level access</strong></p>
+<p>This <em>array access expression</em> first accesses the contents of the 
+element at index 0 in the array object referred to by the reference variable 
+named <strong>v1</strong>. This element contains a reference to a second array object <em>
+(note the double matching square brackets, [][] in the declaration of the 
+variable named <strong>v1</strong>).</em></p>
+<p><strong>Second-level access</strong></p>
+<p>The <em>array access expression</em> in <a href="#Listing_8">Listing 8</a> uses 
+that reference to access the value stored in the element at index value 1 in the 
+second array object. That value is then passed to the <strong>println</strong> method for display on the 
+standard output device.</p>
+<p><em>(In this case, the value 0 is displayed, because array elements are 
+automatically initialized to default values when the array object is created. 
+The default value for all primitive numeric values is zero.)</em></p>
+<p><strong>Zero-based indexing</strong> </p>
+<p>All array indexes in Java begin with <strong>0</strong>. An array with length <strong>n</strong> 
+can be indexed by the integers <strong>0</strong> to <strong>(n-1)</strong>. Array accesses are 
+checked at runtime. If an attempt is made to access the array with any other 
+index value, an <strong>ArrayIndexOutOfBoundsException</strong> will be thrown.</p>
+<p><strong>Index value types</strong></p>
+<p>Arrays must be indexed by integer values of the following types: <strong>int</strong>,
+<strong>short</strong>, <strong>byte</strong>, or <strong>char</strong>. For any of these types other than <strong>
+int</strong>, the value will be promoted to an <strong>int</strong> and used as the index.</p>
+<p>An array cannot be accessed using an index of type <strong>long</strong>. Attempting to 
+do so results in a compiler error.</p>
+<p><strong>Default initialization</strong></p>
+<p>If the elements in an array are not purposely initialized when the array is 
+created, the array elements will be automatically initialized with default 
+values. The default values are:</p>
+<ul>
+	<li>All reference types: null</li>
+	<li>Primitive numeric types: 0</li>
+	<li>Primitive boolean type: false</li>
+	<li>Primitive char type: the Unicode character with 16 zero-valued bits</li>
+</ul>
+<p><strong>Explicit initialization of array elements</strong> </p>
+<p>The values in the array elements may be purposely initialized when the array 
+object is created using a comma-separated list of expressions enclosed by 
+matching curly brackets. This is illustrated in <a href="#Listing_9">Listing 9</a>. </p>
+<div class="a"><a name="Listing_9">Listing 9</a>. Explicit initialization of array elements.
+				<pre>    int[] v1 = {1,2,3,4,5};</pre>
+</div>
+	<p><strong>No new operator</strong> </p>
+<p>Note that this format does not use the <strong>new</strong> operator. Also note 
+that the expressions in the list may be much more complex than the simple 
+literal values shown in <a href="#Listing_9">Listing 9</a>.</p>
+<p><strong>Length and order</strong> </p>
+<p>When this format is used, the length of the constructed array will equal the 
+number of expressions in the list.</p>
+<p>The expressions in an array initializer are executed from left to right in 
+the order that they occur in the source code. The first expression specifies the 
+value at index value zero, and the last expression specifies the value at index 
+value n-1 <em>(where n is the length of the array).</em></p>
+<p>Each expression must be assignment-compatible with the array&#39;s component 
+type, or a compiler error will occur.</p>
+<p><strong>A sample program</strong></p>
+<p>The previous paragraphs in this chapter have explained some of the rules and 
+characteristics regarding array objects. They have also illustrated some of the 
+syntax involved in the use of array objects in Java.</p>
+<p><strong>More powerful and complex</strong></p>
+<p>Many aspiring Java programmers find the use of array objects to be something 
+less than straightforward, and that is understandable. In fact, Java array 
+objects are somewhat more powerful than array structures in many other 
+programming languages, and this power often manifests itself in additional 
+complexity.</p>
+<p><strong>A traditional two-dimensional rectangular array</strong></p>
+<p>Some of that complexity is illustrated by the program named <strong>Array07</strong>, 
+shown in <a href="#Listing_26">Listing 26</a> near the end of this chapter. This 
+program illustrates three different ways to accomplish essentially the same task 
+using array objects in Java. That task is to emulate a traditional 
+two-dimensional rectangular array as found in other programming languages. Two 
+of the ways that are illustrated are essentially ragged arrays with sub-arrays 
+having equal length. </p>
+<p><strong>Ragged arrays</strong> </p>
+<p>The program also illustrates two different ways to work with array objects 
+and ragged arrays. </p>
+<p><strong>Will discuss in fragments</strong> </p>
+<p>As is my practice, I will discuss and explain the program in fragments. </p>
+<p>All of the interesting code in this program is contained in the <strong>main</strong> 
+method, so I will begin my discussion with the first statement in the <strong>main</strong> 
+method. </p>
+<p><strong>Create a two-dimensional rectangular array structure</strong> </p>
+<p><a href="#Listing_10">Listing 10</a> creates an array structure that emulates a traditional rectangular 
+array with two rows and three columns. </p>
+<div class="a"><a name="Listing_10">Listing 10</a>. Create a two-dimensional rectangular array structure.
+				<pre>    Object[][] v1 = new Object[2][3];</pre>
+</div>
+	<p><em>(Note that unlike the ragged array structures to be discussed later, 
+	this approach requires all rows to be the same length and all columns to be 
+	the same length.)</em></p>
+<p><strong>Reference variable declaration</strong> </p>
+<p>The code to the left of the assignment operator <em>(=)</em> in <a href="#Listing_10">Listing 10</a> 
+declares a reference variable named <strong>v1</strong>. This reference variable is capable of 
+holding a reference to an array object whose elements are of the type <strong>Object[]</strong>.</p>
+<p>In other words, this reference variable is capable of </p>
+<ul>
+	<li>holding a reference to an array object, </li>
+	<li>whose elements are capable of holding references to other array objects,
+	</li>
+	<li>whose elements are of type <strong>Object</strong>. </li>
+</ul>
+<p><strong>Two levels of nesting</strong> </p>
+<p>The existence of double matching square brackets in the variable declaration 
+in <a href="#Listing_10">Listing 10</a> indicates two levels of nesting.</p>
+<p><strong>Restrictions</strong> </p>
+<p>The elements in the array object referred to by <strong>v1</strong> can only hold references to other array objects 
+whose element type is <strong>Object </strong><em>(or references to array objects whose 
+element type is a subclass of <strong>Object</strong>).</em> </p>
+<p>The elements in the array object referred to by <strong>v1</strong> cannot hold 
+references to array objects whose 
+element type is a primitive type. </p>
+<p>In other words, the elements in the array object referred to by <strong>v1</strong> can 
+only hold references to other array objects. The element types of those array 
+objects must be <em>assignment compatible</em> with the type <strong>Object </strong><em>
+(this includes interface types and class types but not primitive types).</em> </p>
+<p><strong>A tree of empty array objects</strong>  </p>
+<p>The code to the right of the assignment operator <em>(=) </em>in <a href="#Listing_10">Listing 10</a> 
+creates a <em>tree structure</em> of array objects. The object at the root of the 
+tree is an array object of type <strong>Object[]</strong>, having two elements <em>(a <strong>
+length</strong> of two).</em> </p>
+<p>The reference variable named <strong>v1</strong> refers to the array object that forms 
+the root of the tree. </p>
+<p>Each of the two elements in the root array object is initialized with a 
+reference to another array object. </p>
+<p><em>(These two objects might be viewed as sub-arrays, or as child nodes in the 
+tree structure).</em></p>
+<p>Each of the child nodes is an array object of type <strong>Object</strong>, and has a
+<strong>length</strong> of three. </p>
+<p>Each element in each of the two child node array objects is initialized to 
+the value <strong>null</strong> <em>(this is the default initialization for array elements 
+of reference types that don&#39;t yet refer to an object).</em> </p>
+<p><strong>Recap</strong> </p>
+<p>To recap, the reference variable named <strong>v1</strong> contains a reference to a 
+two-element, one-dimensional array object. Each element in that array object is 
+capable of storing a reference of type <strong>Object[]</strong> <em>(a reference to 
+another one-dimensional array object of type <strong>Object</strong>).</em> </p>
+<p><strong>Two sub-array objects</strong> </p>
+<p>Two such one-dimensional sub-array <em>(or child node)</em> objects, of element 
+type <strong>Object</strong>, are created. References to the two sub-array objects are 
+stored in the elements of the two-element array object at the root of the tree.
+</p>
+<p>Each of the sub-array objects has three elements. Each element is capable of 
+storing a reference to an object as type <strong>Object</strong>. </p>
+<p><strong>The leaves of the tree</strong></p>
+<p>These two sub-array objects might be viewed as the leaves of the tree 
+structure.</p>
+<p><strong>Initialize elements to null</strong> </p>
+<p>However, the objects of type <strong>Object</strong> don&#39;t exist yet. Therefore, each 
+element in each of the sub-array objects is automatically initialized to <strong>null</strong>.
+</p>
+<p><strong>Arrays versus sub-arrays</strong> </p>
+<p>Note that there is no essential 
+difference between an array object and a sub-array object in the above 
+discussion. The use of the sub prefix is used to indicate that an ordinary array 
+object belongs to another array object, because the reference to the sub-array 
+object is stored in an element of the owner object.</p>
+<p><strong>Many dimensions are possible</strong> </p>
+<p>Multi-dimensional arrays of any <em>(reasonable)</em> depth can be emulated in 
+this manner. An array object may contain references to other array objects, 
+which may contain references to other array objects, and so on. </p>
+<p><strong>The leaves of the tree structure</strong> </p>
+<p>Eventually, however, the elements of the leaves in the tree structure must be 
+specified to contain either primitive values or references to ordinary objects. This is where the 
+data is actually stored. </p>
+<p><em>(Note however, that if the leaves are specified to contain references of 
+type <strong>Object</strong>, they may contain references to other array objects of any 
+type, and the actual data could be stored in those array objects.)</em></p>
+<p><strong>The length of an array</strong> </p>
+<p>Every array object contains a public <strong>final</strong> instance variable named <strong>length</strong>, 
+which contains an integer value specifying the number of elements in the array.
+</p>
+<p>Once created, the length of the array encapsulated in an array object cannot 
+change. Therefore, the value of <strong>length</strong> specifies the length of the array 
+throughout the lifetime of the array object. </p>
+<p><strong>Using length to populate the leaves of the tree structure</strong> </p>
+<p>The value of <strong>length</strong> is very handy when processing array objects. This 
+is illustrated in <a href="#Listing_11">Listing 11</a>, which uses a nested <strong>for</strong> loop to populate 
+the elements in the leaves of the tree structure referred to by <strong>v1</strong>. <em>
+(The elements in the leaf objects are populated with references to objects of 
+type <strong>Integer</strong>. Note that <strong>Integer</strong> is not a 
+primitive type. Instead, it is a wrapper class for primitive data of type
+<strong>int</strong>.)</em> </p>
+
+	
+<div class="a"><a name="Listing_11">Listing 11</a>. Using length to populate the leaves of the tree structure.
+				<pre>
+    for(int i=0;i&lt;v1.length;i++){
+      for(int j=0;j&lt;v1[i].length;j++){
+        v1[i][j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop</pre>
+</div>
+	<p><strong>Using length in loop&#39;s conditional expressions</strong> </p>
+<p>Hopefully by now you can read and understand this code without a lot of help 
+from me. I will point out, however, that the value returned by <strong>v1.length</strong>
+<em>(in the conditional expression for the outer loop)</em> is the number of 
+leaves in the tree structure <em>(this tree structure has two leaves).</em> </p>
+<p>I will also point out that the value returned by <strong>v1[ i ].length
+</strong><em>(in the conditional expression for the inner loop)</em> is the 
+number of elements in each leaf array object <em>(each leaf object in this tree 
+structure has three elements).</em> </p>
+<p>Finally, I will point out that the expression <strong>v1[ i ][ j ]</strong> 
+accesses the <strong><em>jth</em></strong> element in the <strong><em>ith</em></strong> 
+leaf, or sub-array. In the traditional sense of a rectangular array, this could 
+be thought of as the <strong><em>jth</em></strong> column of the <strong><em>ith
+</em></strong>row. This mechanism is used to store object references in each 
+element of each of the leaf array objects. </p>
+<p><strong>Populate with references to Integer objects</strong></p>
+<p>Thus, each element in each leaf array object is populated with a 
+reference to an object of the type <strong>Integer</strong>. Each object of the type <strong>
+Integer </strong>encapsulates an <strong>int</strong> value calculated from the current values of 
+the two loop counters. </p>
+<p><strong>Display leaf object contents</strong> </p>
+<p>In a similar manner, the code in <a href="#Listing_12">Listing 12</a> uses 
+the <strong>length</strong> 
+values in the conditional expressions of nested <strong>for</strong> loops to 
+access the references stored in the elements of the leaf array objects, and to 
+use those references to access and display the values encapsulated in the
+<strong>Integer</strong> objects whose references are stored in those elements.
+</p>
+
+	
+<div class="a"><a name="Listing_12">Listing 12</a>. Display leaf object contents.
+				<pre>    for(int i=0;i&lt;v1.length;i++){
+      for(int j=0;j&lt;v1[i].length;j++){
+        System.out.print(
+                       v1[i][j] + &quot; &quot;);
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop</pre>
+</div>
+	<p><strong>The rectangular output</strong> </p>
+<p>The code in <a href="#Listing_12">Listing 12</a> produces the following output on the screen. </p>
+<div class="a">
+<pre>1 2 3
+2 4 6</pre>
+</div>
+<p>As you can see, this emulates a traditional two-dimensional array having two 
+rows and three columns. </p>
+<p><strong>A ragged array with two rows and three columns</strong> </p>
+<p>The second approach to emulating a traditional two-dimensional rectangular 
+array will create a <em>ragged array</em> where each row is the same length. </p>
+<p><em>(It is very important to note that, unlike this case, 
+with a ragged array, the number of elements in each row or the number of 
+elements in each column can be 
+different.)</em></p>
+<p>The most significant thing about this approach is the manner in which the 
+tree of array objects is created <em>(see <a href="#Listing_13">Listing 13</a>).</em> </p>
+
+	
+<div class="a"><a name="Listing_13">Listing 13</a>. Beginning of a ragged array with two rows and three columns.
+				<pre>    Object[][] v2 = new Object[2][];</pre>
+</div>
+	<p><strong>Three statements required</strong> </p>
+<p>With this approach, three statements are required to replace one statement 
+from the previous approach. <em>(Two additional statements are shown in
+<a href="#Listing_14">Listing 14</a>.)</em> </p>
+<p>A single statement in the previous approach <em>(<a href="#Listing_10">Listing 
+10</a>)</em> created all three array objects required to construct the tree of 
+array objects, and initialized the elements in the leaf array objects with
+<strong>null</strong> values. </p>
+<p><strong>Create only the root array object</strong> </p>
+<p>However, the code in <a href="#Listing_13">Listing 13</a> creates 
+only the array object at the root of the tree. That array object is an array 
+object having two elements capable of storing references of type <strong>
+Object[]</strong>. </p>
+<p><strong>Empty square brackets</strong> </p>
+<p>If you compare this statement with the statement in <a href="#Listing_10">
+Listing 10</a>, you will notice that the right-most pair of square brackets in
+<a href="#Listing_13">Listing 13</a> is empty. Thus, <a href="#Listing_13">
+Listing 13</a> creates only the array object at the root of the tree, and 
+initializes the elements in that array object with <strong>null</strong> values.
+</p>
+<p><strong>Leaf array objects don&#39;t exist yet</strong> </p>
+<p>The leaf array objects don&#39;t exist at the completion of execution of the 
+statement in <a href="#Listing_13">Listing 13</a>. </p>
+<p><strong>Create the leaf array objects</strong> </p>
+<p>The statements in <a href="#Listing_14">Listing 14</a> create two array 
+objects of element type <strong>Object</strong>. </p>
+
+	
+<div class="a"><a name="Listing_14">Listing 14</a>. Create the leaf array objects.
+				<pre>
+    v2[0] = new Object[3];
+    v2[1] = new Object[3];</pre>
+</div>
+	<p><strong>Save the references to the leaves</strong> </p>
+<p>References to these two leaf objects are stored in the elements of the array 
+object at the root of the tree, <em>(which was created in </em> <a href="#Listing_13">Listing 13</a><em>). </em>
+Thus, these two array objects become the leaves of the tree structure of array 
+objects. </p>
+<p>This completes the construction of the tree structure. Each element in each 
+leaf object is initialized with <strong>null</strong>. </p>
+<p><strong>Why bother?</strong> </p>
+<p>You might ask why I would bother to use this approach, which requires three 
+statements in place of only one statement in the previous approach. </p>
+<p>The answer is that I wouldn&#39;t normally use this approach if my objective 
+is 
+to emulate a traditional rectangular array. However, this approach is somewhat 
+more powerful than the previous approach. </p>
+<p><strong>The lengths of the leaf objects can differ</strong> </p>
+<p>With this approach, the <strong>length</strong> values of the two leaf array objects 
+need not be the same. Although I caused the <strong>length</strong> value of the leaf 
+objects to be the same in this case, I could just as easily have caused them to 
+be different lengths <em>(I will illustrate this capability later in the 
+program).</em> </p>
+<p><strong>Populate and display the data</strong> </p>
+<p>If you examine the complete program in <a href="#Listing_26">Listing 26</a> near the end of the chapter, 
+you will see that nested <strong>for</strong> loops, along with the value of
+<strong>length</strong> was used to populate and display the contents of the 
+leaf array objects. Since that portion of the code is the same as with the 
+previous approach, I won&#39;t show and discuss it here. </p>
+<p><strong>The rectangular output</strong> </p>
+<p>This approach produced the following output on the screen, <em>(which is the 
+same as before):</em> </p>
+<div class="a">
+<pre>1 2 3
+2 4 6</pre>
+</div>
+<p><strong>Now for something really different</strong> </p>
+<blockquote><em>Note: The material that is presented between this point and </em>
+<a href="#Ragged_arrays"><em>Ragged arrays </em></a><em>is beyond the scope of 
+	this introductory OOP course. The material is presented here solely for the benefit of students 
+who would like to dig deeper into the technology. ITSE 2321 students in Prof. 
+	Baldwin's classes will not be 
+expected to know and will not be tested on the material that is presented 
+between here and <a href="#Ragged_arrays">Ragged arrays</a> unless it was presented earlier 
+	in this chapter or in another chapter.</em></blockquote>
+<p>The next approach that I am going to show you for emulating a two-dimensional 
+rectangular array is significantly different from either of the previous two 
+approaches. </p>
+<p><strong>Not element type Object[]</strong> </p>
+<p>In this approach, I will create a one-dimensional array object of element 
+type <strong>Object</strong> <em>(not element type <strong>Object[]</strong>)</em>. 
+I will populate the elements of that array object with references to other array 
+objects of element type <strong>Object</strong>. In doing so, I will create a 
+tree structure similar to those discussed above. </p>
+<p><strong>The length of the leaf objects</strong> </p>
+<p>As with the second approach above, the array objects that make up the leaves 
+of the tree can be any length, but I will make them the same length in order to 
+emulate a traditional rectangular two-dimensional array. </p>
+<p><strong>Create the array object</strong> </p>
+<p>First consider the statement shown in <a href="#Listing_15">Listing 15</a>. Compare this statement with 
+the statements shown earlier in <a href="#Listing_10">Listing 10</a> and 
+<a href="#Listing_13">Listing 13</a>. </p>
+
+	
+<div class="a"><a name="Listing_15">Listing 15</a>. Create the array object.
+				<pre>Object[] v3 = new Object[2];</pre>
+</div>
+	<p><strong>No double square brackets</strong> </p>
+<p>Note in particular that the statement in <a href="#Listing_15">Listing 15</a> 
+does not make use of double square brackets, as was the case in <a href="#Listing_10">Listing 10</a> 
+and 
+<a href="#Listing_13">Listing 13</a>. Thus, the statement show in <a href="#Listing_15">Listing 15</a> 
+is entirely different from the statements shown in <a href="#Listing_10">Listing 10</a> 
+and 
+<a href="#Listing_13">Listing 13</a>. </p>
+<p><strong>Declare a reference variable</strong> </p>
+<p>That portion of the statement to the left of the assignment operator<em> (=) </em>
+declares a reference variable capable of storing a reference to an array object 
+whose elements are capable of storing references of the type <strong>Object</strong> <em>(not type <strong>Object[]</strong> as in the 
+previous examples).</em> </p>
+<p><strong>Refer to the root object</strong> </p>
+<p>This reference variable will refer to an array object that forms the root of 
+the tree structure. However, the root object in this case will be considerably 
+different from the root objects in the previous two cases. </p>
+<p>In the previous two cases, the elements of the root object were required to 
+store references of type <strong>Object[]</strong> <em>(note the square 
+brackets). </em>In other words, an array object whose elements are of type
+<strong>Object[]</strong> can only store references to other array objects whose 
+elements are of type <strong>Object</strong>. </p>
+<p><strong>A more general approach</strong> </p>
+<p>However, an array object whose elements are of type <strong>Object</strong>
+<em>(as is the case here),</em> can store:</p>
+<ul>
+	<li>References to any object instantiated from any class</li>
+	<li>References to array objects whose elements are of any type <em>
+	(primitive or reference)</em></li>
+	<li>A mixture of the two kinds of references<em>.</em></li>
+</ul>
+<p>Therefore, this is a much more general, and much more powerful approach. </p>
+<p><strong>A price to pay</strong> </p>
+<p>However, there is a price to pay for the increased generality and power. In 
+particular, the programmer who uses this approach must have a much better 
+understanding of Java object-oriented programming concepts than the programmer 
+who uses the two approaches discussed earlier in this chapter. </p>
+<p><strong>Particularly true relative to first approach</strong> </p>
+<p>This is particularly true relative to the first approach discussed earlier. 
+That approach is sufficiently similar to the use of multi-dimensional arrays in 
+other languages that a programmer with little understanding of Java 
+object-oriented programming concepts can probably muddle through the syntax 
+based on prior knowledge. However, it is unlikely that a programmer could muddle 
+through this approach without really understanding what she is doing. </p>
+<p><strong>Won&#39;t illustrate true power</strong> </p>
+<p>Although this approach is very general and very powerful, this sample program 
+won&#39;t attempt to illustrate that power and generality. Rather, this sample 
+program will use this approach to emulate a traditional two-dimensional 
+rectangular array just like the first two approaches discussed earlier. <em>
+(Later, I will also use this approach for a couple of ragged arrays.)</em> </p>
+<p><strong>Populate the root object</strong> </p>
+<p>The two statements in <a href="#Listing_16">Listing 16</a> create two array 
+objects, each having three elements. Each element is capable of storing a 
+reference to any object that is <em>assignment compatible</em> with the <strong>Object</strong> type. </p>
+<p><em>(Assignment compatibility includes a reference to any object instantiated 
+from any class, or a reference to any array object of any type (including 
+primitive types), or a mixture of the two.)</em></p>
+
+	
+<div class="a"><a name="Listing_16">Listing 16</a>. Populate the root object.
+				<pre>
+    v3[0] = new Object[3];
+    v3[1] = new Object[3];</pre>
+</div>
+	<p>References to the two new array objects are stored in the elements of the 
+	array object that forms the root of the tree structure. The two new array 
+	objects form the leaves of the tree structure. </p>
+<p><strong>Populate the leaf array objects</strong> </p>
+<p>As in the previous two cases, the code in <a href="#Listing_17">Listing 17</a> 
+uses nested <strong>for</strong> 
+loops to populate the array elements in the leaf objects with references to new
+<strong>Integer</strong> objects. <em>(The <strong>Integer</strong> objects 
+encapsulate <strong>int</strong> values based on the loop counter values for the 
+outer and inner loops.)</em> </p>
+
+	
+<div class="a"><a name="Listing_17">Listing 17</a>. Populate the leaf array objects.
+				<pre>
+    for(int i=0;i&lt;v3.length;i++){
+      for(int j=0;j&lt;((Object[])v3[i]).length;j++){
+        ((Object[])v3[i])[j] = new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop</pre>
+</div>
+	<p><strong>Added complexity</strong> </p>
+<p>The added complexity of this approach manifests itself in</p>
+<ul>
+	<li>The <em>cast operators</em> shown in <a href="#Listing_17">Listing 17</a></li>
+	<li>The attendant required grouping of terms within parentheses</li>
+</ul>
+<p><strong>Inside and outside the parentheses</strong> </p>
+<p>Note that within the inner loop, one of the square-bracket accessor 
+expressions is inside the parentheses and the other is outside the parentheses.
+</p>
+<p><strong>Why are the casts necessary?</strong> </p>
+<p>The casts are necessary to convert the references retrieved from the array 
+elements from type <strong>Object</strong> to type <strong>Object[]</strong>. 
+For example, the reference stored in <strong>v3[ i ]</strong> is stored as type
+<strong>Object</strong>. </p>
+<p><strong>Get length of leaf array object</strong> </p>
+<p>The cast in the following expression converts that reference to type <strong>
+Object[]</strong> before attempting to get the value of <strong>length</strong> 
+belonging to the array object whose reference is stored there. </p>
+<div class="a">
+<pre>((Object[])v3[i]).length</pre>
+</div>
+<p><strong>Assign a value to an element in the leaf array object</strong> </p>
+<p>Similarly, the following expression converts the reference stored in <strong>
+v3[ i ]</strong> from type <strong>Object</strong> to type <strong>Object[]</strong>. 
+Having made the conversion, it then accesses the <strong>jth</strong> element of 
+the array object whose reference is stored there <em>(in order to assign a value 
+to that element).</em> </p>
+<div class="a">
+<pre>((Object[])v3[i])[j]= <strong>...</strong></pre>
+</div>
+<p><strong>Display data in leaf array objects</strong> </p>
+<p><a href="#Listing_18">Listing 18</a> uses similar casts to get and display 
+the values encapsulated in the <strong>Integer</strong> objects whose references are stored in the elements 
+of the leaf array objects. </p>
+
+	
+<div class="a"><a name="Listing_18">Listing 18</a>. Display data in leaf array objects.
+				<pre>    for(int i=0;i&lt;v3.length;i++){
+      for(int j=0;j&lt;((Object[])v3[i]).length;j++){
+        System.out.print(((Object[])v3[i])[j] + &quot; &quot;);
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop</pre>
+</div>
+	<p><strong>The rectangular output</strong> </p>
+<p>This approach produced the following output on the screen, <em>(which is the 
+same as the previous two approaches):</em> </p>
+<div class="a">
+<pre>1 2 3
+2 4 6</pre>
+</div>
+<p><strong><a name="Ragged_arrays">Ragged arrays</a></strong> </p>
+<p>All the code in the previous three cases has been used to emulate a 
+traditional rectangular two-dimensional array. In the first case, each row was 
+required to have the same number of elements by the syntax used to create the 
+tree of array objects. </p>
+<p>In the second and third cases, each row was not required to have the same 
+number of elements, but they were programmed to have the same number of elements 
+in order to emulate a rectangular two-dimensional array. </p>
+<p><strong>A triangular array, sort of ...</strong> </p>
+<p>Now I am going to show you some cases that take advantage of the <em>
+ragged-array</em> capability of Java array objects. In the next case, <em>
+(beginning with <a href="#Listing_19">Listing 19</a>),</em> I will create a ragged array having two rows. 
+The first row will have two elements and the second row will have three 
+elements. <em>(This array object might be thought of as being sort of 
+triangular.)</em> </p>
+
+	
+<div class="a"><a name="Listing_19">Listing 19</a>. A triangular array.
+				<pre>
+    Object[][] v4 = new Object[2][];
+    v4[0] = new Object[2];
+    v4[1] = new Object[3];</pre>
+</div>
+	<p><strong>You have seen this before</strong> </p>
+<p>You saw code like this in the second case discussed earlier. However, in that 
+case, the second and third statements created new array objects having the same 
+length. In this case, the second and third statements create array objects 
+having different lengths. This is one of the ways to create a ragged array in 
+Java <em>(you will see another way in the next case that I will discuss).</em> </p>
+<p><strong>Populate the leaf array objects</strong> </p>
+<p><a href="#Listing_20">Listing 20</a> populates the elements of the leaf array objects with references 
+to objects of the class <strong>Integer</strong>. </p>
+
+	
+<div class="a"><a name="Listing_20">Listing 20</a>. Populate the leaf array objects.
+				<pre>    for(int i=0;i&lt;v4.length;i++){
+      for(int j=0;j&lt;v4[i].length;j++){
+        v4[i][j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop</pre>
+</div>
+	<p><strong>You have seen this before also</strong> </p>
+<p>You have also seen the code in <a href="#Listing_20">Listing 20</a> before. I repeated it here because 
+this case clearly emphasizes the value of the <strong>length</strong> constant 
+that is available in all Java array objects. In the earlier case, the <strong>
+length</strong> of the two leaf array objects was the same, so it would have 
+been feasible to simply hard-code that value into the conditional expression of 
+the inner <strong>for</strong> loop. </p>
+<p><strong>The length is not the same now</strong> </p>
+<p>However, in this case, the <strong>length</strong> of the two leaf array 
+objects is not the same. Therefore, it wouldn&#39;t work to hard-code a limit into 
+the conditional expression of the inner <strong>for</strong> loop. However, 
+because the <strong>length</strong> of each leaf array object is available as a 
+public member of the array object, that value can be used to control the number 
+of iterations of the inner loop for each separate leaf array object. </p>
+<p><strong>The triangular output</strong> </p>
+<p>The next section of code in the program shown in <a href="#Listing_26">Listing 26</a> near the end of 
+the chapter uses the same code as before to display the <strong>int</strong> 
+values encapsulated in the <strong>Integer</strong> objects whose references are 
+stored in the leaf array objects. Since it is the same code as before, I won&#39;t 
+repeat it here. </p>
+<p>The output produced by this case is shown below: </p>
+<div class="a">
+<pre>1 2
+2 4 6</pre>
+</div>
+<p>Note that this is not the same as before, and this output does not describe a 
+rectangular array. Rather, it describes a ragged array where the rows are of 
+different lengths. </p>
+<p><em>(As I indicated earlier, it is sort of triangular. However, it could be 
+any shape that you might want it to be.)</em></p>
+<p><strong>A more general approach</strong> </p>
+<blockquote><em>Note: The material that is presented between this point and
+<a href="#Summary">Summary</a> is beyond the scope of this introductory OOP 
+	course. The material is 
+presented here solely for the benefit of students who would like to dig 
+deeper into the technology. ITSE 2321 students in Prof. Baldwin's classes will not be expected to know and 
+will not be tested on the material that is presented between this point and
+<a href="#Summary">Summary</a> unless it was presented earlier in this chapter 
+	or in another chapter.</em></blockquote>
+<p>The next case, shown in <a href="#Listing_21">Listing 21</a>, is the same as the third case discussed 
+earlier, except that the lengths of the leaf array objects are not the same. </p>
+<p>As before, this case creates a one-dimensional array object of type <strong>
+Object </strong><em>(having two elements)</em> that forms the root of a tree. 
+Each element in the root object contains a reference to another array object of 
+type <strong>Object</strong>. </p>
+<p>One of those leaf objects has two elements and the other has three elements, 
+thus producing a ragged array <em>(you could make the lengths of those objects 
+anything that you want them to be).</em> </p>
+
+	
+<div class="a"><a name="Listing_21">Listing 21</a>. A more general approach.
+				<pre>
+    Object[] v5 = new Object[2];
+    v5[0] = new Object[2];
+    v5[1] = new Object[3];</pre>
+</div>
+	<p><strong>Populate the leaf objects</strong> </p>
+<p>As before, the elements in the leaf array objects are populated with 
+references to objects of the class <strong>Integer</strong>, which encapsulate
+<strong>int</strong> values based on the current value of the loop counters. 
+This is shown in <a href="#Listing_22">Listing 22</a>. </p>
+
+	
+<div class="a"><a name="Listing_22">Listing 22</a>. Populate the leaf objects.
+				<pre>    for(int i=0;i&lt;v5.length;i++){
+      for(int j=0;
+            j&lt;((Object[])v5[i]).length;
+                                  j++){
+        ((Object[])v5[i])[j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop</pre>
+</div>
+	<p><strong>Same code as before</strong> </p>
+<p>This is the same code that you saw in <a href="#Listing_17">Listing 17</a>. I repeated it here to 
+emphasize the requirement for casting<em>.</em>
+</p>
+<p><strong>Display the data</strong> </p>
+<p>This case uses the same code as <a href="#Listing_18">Listing 18</a> to display the <strong>int</strong> 
+values encapsulated by the <strong>Integer</strong> objects whose references are 
+stored in the elements of the leaf array objects. I won&#39;t repeat that code here.
+</p>
+<p><strong>The triangular output</strong> </p>
+<p>The output produced by this case is shown below: </p>
+<div class="a">
+<pre>1 2
+2 4 6</pre>
+</div>
+<p>Note that this is the same as the case immediately prior to this one. Again, 
+it does not describe a rectangular array. Rather, it describes a ragged array 
+where the rows are of different lengths. </p>
+<p><strong>A more general case</strong> </p>
+<p>I&#39;m going to show you one more general case for a ragged array. This case 
+illustrates a more general approach. In this case, I will create a 
+one-dimensional array object of element type <strong>Object</strong>. I will 
+populate the elements of that array object with references to other array 
+objects. These array objects will be the leaves of the tree. </p>
+<p><strong>Leaf array objects are type int</strong> </p>
+<p>In this case, the leaves won&#39;t be of element type <strong>Object</strong>. 
+Rather, the elements in the leaf objects will be designed to store primitive
+<strong>int</strong> values. </p>
+<p><em>(An even more general case would be to populate the elements of the root 
+object with references to a mixture of objects of class types, interface types, 
+and array objects where the elements of the array objects are designed to store 
+primitives of different types, and references of different types. Note, however, 
+each leaf array object must be designed to store a single type, but will accept 
+for storage any type that is assignment-compatible with the specified type for 
+the array object.)</em></p>
+<p>This case begins in <a href="#Listing_23">Listing 23</a>, which creates the root array object, and 
+populates its elements with references to leaf array objects of type <strong>int</strong>.
+</p>
+
+	
+<div class="a"><a name="Listing_23">Listing 23</a>. Beginning of a<strong> more general case</strong>.
+				<pre>
+    Object[] v6 = new Object[2];
+    v6[0] = new int[7];
+    v6[1] = new int[3];</pre>
+</div>
+	<p><strong>Leaf objects are different lengths</strong> </p>
+<p>One of the leaf array objects has a length of 7. The other has a length of 3.
+</p>
+<p><strong>Populate the leaf array elements</strong> </p>
+<p><a href="#Listing_24">Listing 24</a> populates the elements in the leaf array 
+objects with values of type <strong>int</strong>. </p>
+
+	
+<div class="a"><a name="Listing_24">Listing 24</a>. Populate the leaf array elements.
+				<pre>    for(int i=0;i&lt;v6.length;i++){
+      for(int j=0;j&lt;((int[])v6[i]).length;j++){
+        ((int[])v6[i])[j] = (i+2)*(j+2);
+      }//end inner loop
+    }//end outer loop</pre>
+</div>
+	<p><strong>Similar to previous code</strong> </p>
+<p>The code in <a href="#Listing_24">Listing 24</a> is similar to code that you 
+saw earlier. The differences are:</p>
+<ul>
+	<li>Cast is to type <strong>int[]</strong> instead of <strong>object[]</strong></li>
+	<li>Values assigned are type <strong>int</strong> instead of references to
+	<strong>Integer</strong> objects</li>
+</ul>
+<p><strong>Display the output</strong> </p>
+<p>Finally, <a href="#Listing_25">Listing 25</a> displays the <strong>int</strong> values stored in the 
+elements of the leaf array objects. </p>
+
+	
+<div class="a"><a name="Listing_25">Listing 25</a>. Display the output.
+				<pre>    for(int i=0;i&lt;v6.length;i++){
+      for(int j=0;j&lt;((int[])v6[i]).length;j++){
+        System.out.print(((int[])v6[i])[j] + &quot; &quot;);
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop</pre>
+</div>
+	<p>The code in <a href="#Listing_25">Listing 25</a> is very similar to what you have seen before, and 
+	there should be no requirement for an explanation of this code. </p>
+<p>The code in <a href="#Listing_25">Listing 25</a> produces the following output: </p>
+<div class="a">
+<pre>4 6 8 10 12 14 16
+6 9 12</pre>
+</div>
+<p>I will leave it as an exercise for the student to correlate the output with 
+the code. </p>
+
+	
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>When declaring a reference variable capable of referring to an array object, 
+the array type is declared by writing the name of an element type followed by 
+some number of empty pairs of square brackets []. </p>
+<p>The components in an array object may refer to other array objects. The 
+number of bracket pairs used in the declaration of the reference variable 
+indicates the depth of array nesting <em>(in the sense that array elements can 
+refer to other array objects).</em> </p>
+<p>An array&#39;s length is not part of its type or reference variable declaration.
+</p>
+<p>Multi-dimensional arrays are not required to represent rectangles, cubes, 
+etc. They can be <em>ragged.</em> </p>
+<p>The normal rules of<em> type conversion</em> and <em>assignment compatibility</em> 
+apply when creating and populating array objects. </p>
+<p><strong>Object</strong> is the superclass of all other classes. Therefore, an 
+array of element type <strong>Object</strong> is capable of storing references 
+to objects instantiated from any other class. The type declaration for such an 
+array object would be <strong>Object[]</strong>. </p>
+<p>An array of element type <strong>Object</strong> is also capable of storing 
+references to any other array object. </p>
+<p>If the declared element type for the array object is one of the primitive 
+types, the elements of the array can be used to store values of any primitive 
+type that is <em>assignment compatible</em> with the declared type <em>(without 
+the requirement for a cast).</em> </p>
+<p>If the declared element type is the name of a class, <em>(which may or may 
+not be abstract),</em> a null reference or a reference to any object 
+instantiated from the class or any subclass of the class may be stored in the 
+array element. </p>
+<p>If the declared element type is an interface type, a null reference or a 
+reference to any object instantiated from any class that implements the 
+interface can be stored in the array element. </p>
+<p>A reference variable whose declared type is an array type <em>does not 
+contain an array.</em> Rather, it contains either null, or a reference to an 
+array object. Declaring the reference variable does not create an array, nor 
+does it allocate any space for the array components. </p>
+<p>It is possible to declare a reference to an array object and initialize it 
+with a reference to an array object when it is declared. </p>
+<p>A reference to an array object can refer to different array objects <em>(of 
+the same element type and different lengths)</em> at different points in the 
+execution of a program. </p>
+<p>When declaring an array reference variable, the square brackets [] may appear 
+as part of the type, or following the variable name, or both. </p>
+<p>Once an array object is created, its type and length never changes. </p>
+<p>An array object is created by an array creation expression or an array 
+initializer. </p>
+<p>An array creation expression <em>(or an array initializer)</em> specifies:</p>
+<ul>
+	<li>The element type</li>
+	<li>The number of levels of nested arrays</li>
+	<li>The length of the array for at least one of the levels of nesting</li>
+</ul>
+<p>The length of the array is always available as a final instance variable 
+named <strong>length</strong>. </p>
+<p>An array element is accessed by an expression whose value is an array 
+reference followed by an indexing expression enclosed by matching square 
+brackets. </p>
+<p>If an attempt is made to access the array with an invalid index value, an
+<strong>ArrayIndexOutOfBoundsException</strong> will be thrown. </p>
+<p>Arrays must be indexed by integer values of the types <strong>int</strong>,
+<strong>short</strong>, <strong>byte</strong>, or <strong>char</strong>. An 
+array cannot be accessed using an index of type <strong>long</strong>. </p>
+<p>If the elements in an array are not purposely initialized when the array is 
+created, the array elements will be automatically initialized with default 
+values. </p>
+<p>The values in the array elements may be purposely initialized when the array 
+object is created using a comma-separated list of expressions enclosed by 
+matching curly brackets. </p>
+<p>The program in this chapter illustrated three different ways to emulate 
+traditional rectangular two-dimensional arrays. </p>
+<p>The program also illustrated two different ways to create and work with 
+ragged arrays.</p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter (following the review chapter) I will provide some additional information about array 
+objects, and then illustrate the use of the classes named <strong>Array</strong> 
+and <strong>Arrays</strong> for the creation and manipulation of array objects. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1624: Array Objects, Part 2</li>
+					<li>File: Java1624.htm
+</li>
+					<li>Published: 05/22/02</li>
+					<li>Revised: 03/15/20</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_26">Listing 
+26</a> below.</p>
+
+<div class="a">
+<a name="Listing_26">Listing 26</a>. <strong>Complete program listing.</strong>
+
+<pre>/*File Array07.java
+Copyright, R.G.Baldwin
+
+This program illustrates three
+different ways to emulate a traditional
+rectangular array in Java.  Two of
+those ways are essentially ragged
+arrays with equal-length sub arrays.
+
+The program also illustrates two ways
+to create ragged arrays in Java.
+
+Tested using JDK 1.3 under Win 2000.
+**************************************/
+
+public class Array07{
+  public static void main(
+                        String[] args){
+
+    //Create an array structure that
+    // emulates a traditional
+    // rectangular array with two rows
+    // and three columns.  This
+    // approach requires all rows to
+    // be the same length.
+    Object[][] v1 = new Object[2][3];
+    //Populate the array elements with
+    // references to objects of type
+    // Integer.
+    for(int i=0;i&lt;v1.length;i++){
+      for(int j=0;j&lt;v1[i].length;j++){
+        v1[i][j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop
+    //Display the array elements
+    for(int i=0;i&lt;v1.length;i++){
+      for(int j=0;j&lt;v1[i].length;j++){
+        System.out.print(
+                       v1[i][j] + " ");
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop
+    System.out.println();//new line
+
+    //Create a ragged array with two
+    // rows.  The first row has three
+    // columns and the second row has
+    // three columns.  The length of
+    // each row could be anything, but
+    // was set to three to match the
+    // above array structure.
+    Object[][] v2 = new Object[2][];
+    v2[0] = new Object[3];
+    v2[1] = new Object[3];
+    //Populate the array elements with
+    // references to objects of type
+    // Integer.
+    for(int i=0;i&lt;v2.length;i++){
+      for(int j=0;j&lt;v2[i].length;j++){
+        v2[i][j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop
+    //Display the array elements
+    for(int i=0;i&lt;v2.length;i++){
+      for(int j=0;j&lt;v2[i].length;j++){
+        System.out.print(
+                       v2[i][j] + " ");
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop
+    System.out.println();//new line
+
+    //Create a one-dimensional array
+    // of type Object, which contains
+    // references to array objects of
+    // type Object.  The secondary
+    // array objects could be of any
+    // length, but were set to three
+    // to match the above array
+    // structure.
+    Object[] v3 = new Object[2];
+    v3[0] = new Object[3];
+    v3[1] = new Object[3];
+    //Populate the array elements with
+    // references to objects of type
+    // Integer.
+    for(int i=0;i&lt;v3.length;i++){
+      for(int j=0;
+            j&lt;((Object[])v3[i]).length;
+                                  j++){
+        ((Object[])v3[i])[j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop
+    //Display the array elements
+    for(int i=0;i&lt;v3.length;i++){
+      for(int j=0;
+            j&lt;((Object[])v3[i]).length;
+                                  j++){
+        System.out.print(
+           ((Object[])v3[i])[j] + " ");
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop
+    System.out.println();//new line
+
+    //Create a ragged array with two
+    // rows.  The first row has two
+    // columns and the second row has
+    // three columns.
+    Object[][] v4 = new Object[2][];
+    v4[0] = new Object[2];
+    v4[1] = new Object[3];
+    //Populate the array elements with
+    // references to objects of type
+    // Integer.
+    for(int i=0;i&lt;v4.length;i++){
+      for(int j=0;j&lt;v4[i].length;j++){
+        v4[i][j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop
+    //Display the array elements
+    for(int i=0;i&lt;v4.length;i++){
+      for(int j=0;j&lt;v4[i].length;j++){
+        System.out.print(
+                       v4[i][j] + " ");
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop
+    System.out.println();//new line
+
+    //Create a one-dimensional array
+    // of type Object, which contains
+    // references to array objects of
+    // type Object.  The secondary
+    // array objects could be of any
+    // length, but were set to two and
+    // three to match the ragged array
+    // above.
+    Object[] v5 = new Object[2];
+    v5[0] = new Object[2];
+    v5[1] = new Object[3];
+    //Populate the array elements with
+    // references to objects of type
+    // Integer.
+    for(int i=0;i&lt;v5.length;i++){
+      for(int j=0;
+            j&lt;((Object[])v5[i]).length;
+                                  j++){
+        ((Object[])v5[i])[j] =
+              new Integer((i+1)*(j+1));
+      }//end inner loop
+    }//end outer loop
+    //Display the array elements
+    for(int i=0;i&lt;v5.length;i++){
+      for(int j=0;
+            j&lt;((Object[])v5[i]).length;
+                                  j++){
+        System.out.print(
+           ((Object[])v5[i])[j] + " ");
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop
+    System.out.println();
+
+    //Create a one-dimensional array
+    // of type int, which contains
+    // references to array objects of
+    // type Object.  The secondary
+    // array objects could be of any
+    // length.
+    Object[] v6 = new Object[2];
+    v6[0] = new int[7];
+    v6[1] = new int[3];
+    //Now illustrate that the elements
+    // of the leaves of a ragged array
+    // implemented in this manner can
+    // contain primitive values.
+    // Populate the array elements with
+    // type int.
+    for(int i=0;i&lt;v6.length;i++){
+      for(int j=0;
+            j&lt;((int[])v6[i]).length;
+                                  j++){
+        ((int[])v6[i])[j] = (i+2)*(j+2);
+      }//end inner loop
+    }//end outer loop
+    //Display the array elements
+    for(int i=0;i&lt;v6.length;i++){
+      for(int j=0;
+            j&lt;((int[])v6[i]).length;
+                                  j++){
+        System.out.print(
+           ((int[])v6[i])[j] + " ");
+      }//end inner loop
+      System.out.println();//new line
+    }//end outer loop
+
+  }//end main
+}//end class Array07</pre>
+
+</div>
+<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java0410</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java0410: Getting Started with Java Collections </h1>
+
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a></li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Introduction">Introduction</a><ul>
+		<li><a href="#A_little_quiz_">A quiz </a> </li>
+		<li><a href="#Elements_of_the_Framework_are_easy_to_use">Elements of the Framework are easy to use 
+		</a> </li>
+		<li><a href="#Dont_reinvent_the_wheel_">Don't reinvent the wheel</a></li>
+		<li><a href="#Collections_Framework_encourages_reuse">Collections Framework encourages reuse</a></li>
+	</ul>
+	</li>
+	<li><a href="#Sample_program">Sample program</a></li>
+	<li><a href="#InterestingCodeFragments">Interesting code fragments</a><ul>
+		<li><a href="#An_object_of_the_TreeSet_class">An object of the TreeSet class</a></li>
+		<li><a href="#Collection_is_an_interface">Collection is an interface</a></li>
+		<li><a href="#What_is_a_TreeSet_object">What is a TreeSet object?</a>
+		<ul>
+			<li><a href="#What_does_ascending_element_order_mean_">What does ascending element order mean?</a>
+			</li>
+			<li><a href="#What_does_log_time_cost_mean">What does log(n) time cost mean? 
+			</a></li>
+			<li><a href="#A_TreeSet_object_is_a_Set_">A TreeSet object is a Set 
+			</a></li>
+			<li><a href="#A_TreeSet_object_is_a_SortedSet_">A TreeSet object is a SortedSet 
+			</a></li>
+			<li><a href="#A_TreeSet_object_is_a_Collection_">A TreeSet object is a Collection 
+			</a></li>
+		</ul>
+		</li>
+		<li><a href="#Populate_the_Collection">Populate the Collection </a>
+		<ul>
+			<li><a href="#Dont_know_dont_care_">Don't know, don't care </a></li>
+			<li><a href="#Polymorphism_in_action">Polymorphism in action</a></li>
+			<li><a href="#Add_five_elements_with_some_duplicates_">Add five elements with some duplicates 
+			</a></li>
+			<li><a href="#Filter_out_the_duplicates_">Filter out the duplicates 
+			</a></li>
+			<li><a href="#Notification_of_duplicates_">Notification of duplicates</a></li>
+			<li><a href="#Sort_the_elements_">Sort the elements</a></li>
+			<li><a href="#The_TreeSet_object_is_now_populated_">The TreeSet object is now populated 
+			</a></li>
+		</ul>
+		</li>
+		<li><a href="#Get_an_Iterator_object_">Get an Iterator object 
+		</a> 
+		<ul>
+			<li><a href="#Againdontknowdontcare_">Again, don&#39;t know, don&#39;t care</a></li>
+			<li><a href="#An_Iterator_object_acts_as_a_doorkeeper_">An Iterator object acts as a doorkeeper 
+			</a> </li>
+			<li><a href="#Traverse_the_collection">Traverse the collection</a></li>
+			<li><a href="#Four_elements_with_no_duplicates_">Four elements with no duplicates</a></li>
+		</ul>
+		</li>
+		<li><a href="#An_editorial_opinion_">An editorial opinion 
+		</a> 
+		<ul>
+			<li><a href="#What_kind_of_knowledge_is_needed_">What kind of knowledge is needed? 
+			</a> </li>
+			<li><a href="#The_same_concept_applies_to_software_design_">The same concept applies to software design</a> </li>
+			<li><a href="#An_analogy_">An analogy</a></li>
+			<li><a href="#Its_time_to_reinvent_the_CS2_curriculum_">Its time to reinvent the CS2 curriculum 
+			</a> </li>
+	
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#WhatsNext">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming in general and the Java Collections 
+framework in particular.</p>
+<p>The purpose of this chapter is to introduce you to the Java Collections Framework. Once you learn how to use the framework, it is unlikely that you will need to reinvent common data structures, search algorithms, or sorting algorithms 
+ever again, because those capabilities are neatly packaged within the framework.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. A new object of the TreeSet class. </li>
+	<li><a href="#Listing_2">Listing 2</a>. Populate the collection. </li>
+	<li><a href="#Listing_3">Listing 3</a>. The Populator class. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Get an Iterator object.</li>
+	<li><a href="#Listing_5">Listing 5</a>. Traverse the collection. </li>
+	<li><a href="#Listing_6">Listing 6</a>. Complete program listing</li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>This chapter provides a brief introduction to the use of the <em>Java Collections 
+Framework</em>. The framework is designed to encourage you to reuse rather than to 
+reinvent collections and maps.</p>
+<p>A collection represents a group of objects, known as its elements. Some 
+collections allow duplicate elements while others do not. Some collections are 
+ordered and others are not. <i>(Maps will be discussed in future chapters.)</i>
+</p>
+<p>The <em>Collections Framework</em> is defined by a set of interfaces and associated 
+contracts, and provides concrete implementations of the interfaces for the most 
+common data structures. In addition, the framework also provides several 
+abstract implementations, which are designed to make it easier for you to create 
+new and different implementations while still maintaining the structural 
+polymorphic integrity of the framework.</p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Introduction">Introduction</a></h1>
+<h2><a name="A_little_quiz_">A quiz </a> </h2>
+<p>Let&#39;s begin with a little quiz to establish your baseline knowledge of the 
+Collections Framework. Take a look at the program in <a href="#Listing_6">Listing 6</a> near the end of 
+this chapter. Which of the following is the output produced by that program?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321</li>
+	<li>D. 12344</li>
+	<li>E. 1234</li>
+	<li>F. None of the above.</li>
+</ul>
+<p>If your answer was <b>1234</b> <em>(and it wasn&#39;t a guess)</em> then you may already know quite a lot about the 
+use of the Collections Framework. If not, keep reading to begin learning about 
+the framework.</p>
+<h2><a name="Elements_of_the_Framework_are_easy_to_use">Elements of the Framework are easy to use</a> 
+</h2>
+<p>This simple introductory program is not intended to do anything useful. 
+Instead, it was designed to illustrate several important features of the 
+framework, including the ease with which elements of the framework can be reused 
+in your programs. </p>
+<h2><a name="Dont_reinvent_the_wheel_">Don&#39;t reinvent the wheel </a> </h2>
+<p>As many of you already know, I am a college professor. I specialize in 
+teaching OOP using Java. In the past, many college courses in Data Structures <i>
+(often referred to as CS2 courses)</i> have emphasized the concept of <i>
+reinventing the wheel</i>. Students were required to learn how to reinvent a 
+variety of complex data structures in order to successfully complete the course.
+</p>
+<p>Hopefully, with the conversion of these CS2 courses to Java OOP, the emphasis 
+will change to <i>reuse</i> instead of <i>reinvent</i>. </p>
+<h2><a name="Collections_Framework_encourages_reuse">Collections Framework encourages reuse</a> 
+</h2>
+<p>The Java Collections Framework is designed to encourage programmers to reuse 
+existing interfaces and classes instead of inventing new ones. In the event that 
+it is necessary to invent a new class or interface, the programmer is encouraged 
+to integrate it into the framework in a polymorphic manner.</p>
+<h1><a name="Sample_program">Sample program</a></h1>
+<p>I am going to provide a brief discussion of the sample program <i>(shown in 
+<a href="#Listing_6">Listing 6</a>)</i> in this chapter. Later, I will provide more detailed discussions 
+of many of the features used in that program.</p>
+<h1><a name="InterestingCodeFragments">Interesting code fragments</a></h1>
+<p>I will break this program down and discuss it in fragments. </p>
+<h2><a name="An_object_of_the_TreeSet_class">An object of the TreeSet class</a> 
+</h2>
+<p>The code fragment in <a href="#Listing_1">Listing 1</a> instantiates an object of the <b>TreeSet</b> 
+class and stores the object&#39;s reference in a reference variable of type <b>
+Collection </b>named<b>
+ref</b>.</p>
+
+
+
+
+
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. A new object 
+				of the TreeSet class.
+				</p>
+				<pre>class Worker{
+  public void doIt(){
+    Collection ref = new TreeSet();
+</pre>
+</div><!--``2-->
+
+<h2><a name="Collection_is_an_interface">Collection is an interface</a></h2>
+<p>The <b>TreeSet</b> class implements the <b>SortedSet</b> interface, which 
+extends the <b>Set</b> interface, which in turn extends the <b>Collection</b> 
+interface. Thus, a <b>TreeSet</b> object <i>is a</i> <b>Collection</b>. 
+Therefore, a reference to a <b>TreeSet</b> object can be stored in a reference 
+variable of type <b>Collection</b>, and can be treated as the generic type <b>
+Collection</b>. </p>
+<h2><a name="What_is_a_TreeSet_object">What is a TreeSet object?</a> </h2>
+<p>Among other things, in CS2 courses, we worry about the time and memory cost 
+of a collection. According to Sun/Oracle, the <b>TreeSet</b> class guarantees that the 
+sorted set will be in ascending element order, and provides guaranteed log(n) 
+time cost for the basic operations (<i>add</i>, <i>remove</i> and <i>contains</i>).
+</p>
+<h3><a name="What_does_ascending_element_order_mean_">What does ascending element order mean?
+</a> </h3>
+<p>Again, according to Sun, the elements will be sorted according to the <i>
+natural order</i> of the elements <i>(see the 
+<a href="../Java4070-%20The%20Comparable%20Interface,%20Part%201/Java4070.htm">Comparable</a> interface)</i> or by a 
+comparator <i>(see the 
+<a href="../Java4090-%20The%20Comparator%20Interface,%20Part%201/Java4090.htm">Comparator</a> interface)</i> provided at the time the set is 
+created. This depends on which overloaded constructor is used. I will have more 
+to say about these alternatives in a future chapter. </p>
+<h3><a name="What_does_log_time_cost_mean">What does log(n) time cost mean?</a> 
+</h3>
+<p>I&#39;m not going to try to explain the details of log(n) time cost here. Suffice 
+it to say that the <i>add</i>, <i>remove</i>, and <i>contains</i> methods 
+execute very fast.</p>
+<h3><a name="A_TreeSet_object_is_a_Set_">A TreeSet object is a Set </a> </h3>
+<p>An object of the <b>TreeSet</b> class also <i>is a</i> <b>Set</b>. One of the 
+characteristics of a Java <b>Set</b> <i>(an object that implements the <strong>Set</strong> 
+interface)</i> is that it can contain no duplicate elements. Therefore, a <b>
+TreeSet</b> object can contain no duplicate elements. If the <b>add</b> method 
+of a <b>TreeSet</b> object is called in an attempt to add a duplicate element, 
+the element will not be added. </p>
+<h3><a name="A_TreeSet_object_is_a_SortedSet_">A TreeSet object is a SortedSet
+</a> </h3>
+<p>The <b>TreeSet</b> class also implements the <b>SortedSet</b> interface. This 
+guarantees that the contents of a <b>TreeSet</b> object will be in ascending 
+element order, regardless of the order in which the elements are added. <i>(In a 
+future chapter, I will discuss how comparisons are made to enforce the 
+ordering of the elements.)</i> </p>
+<h3><a name="A_TreeSet_object_is_a_Collection_">A TreeSet object is a Collection
+</a> </h3>
+<p>Because an object of the <b>TreeSet</b> class <i>is a</i> <b>Collection</b>, 
+a reference to such an object can be passed to any method that requires an 
+incoming parameter of type <b>Collection</b>. The receiving method can call any 
+method on that reference that is declared in the <b>Collection</b> interface<b>.
+</b><i>(I will discuss such methods in detail in future chapters.)</i> </p>
+<h2><a name="Populate_the_Collection">Populate the Collection</a> </h2>
+<p>The statement in <a href="#Listing_2">Listing 2</a> passes the <b>TreeSet</b> object&#39;s reference 
+to a method named <b>fillIt</b>, which is a static method of the <b>Populator</b> 
+class. <i>(The Populator class is a class of my own design whose only purpose is 
+to illustrate the polymorphic behavior achieved using the Collections 
+Framework.)</i> The behavior of this method is to add elements to the incoming
+<b>Collection</b> object without regard for the actual type of the object <i>
+(the class from which the object was instantiated).</i></p>
+
+
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a>. Populate the 
+				collection.
+				</p>
+				<pre>    Populator.fillIt(ref);
+</pre>
+</div><!--``2-->
+
+
+<p>At this point, I am going to discuss the <b>fillIt</b> method of the <b>
+Populator</b> class called in <a href="#Listing_2">Listing 2</a>. The entire class definition of 
+the <b>Populator</b> class, including the <strong>fillIt</strong> method, is shown in <a href="#Listing_3">Listing 3</a>.</p>
+
+<div class="a">
+	<p>
+<a name="Listing_3">Listing 3</a>. The Populator 
+				class. </p>
+				<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new Integer(4));
+    ref.add(new Integer(4));
+    ref.add(new Integer(3));
+    ref.add(new Integer(2));
+    ref.add(new Integer(1));
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div><!--``2-->
+
+
+
+<h3><a name="Dont_know_dont_care_">Don&#39;t know, don&#39;t care </a> </h3>
+<p>As you can see in the above fragment, the <b>fillIt</b> method receives the 
+reference to the <b>TreeSet</b> object as type <b>Collection</b>. This method 
+doesn&#39;t know, and doesn&#39;t care, what the actual type of the object is. All it 
+cares about is that the object <i>is a</i> <b>Collection</b> object. <i>
+(Otherwise, the object&#39;s reference couldn&#39;t be passed in as a parameter. A type 
+mismatch would occur.)</i> </p>
+<p>Because the incoming parameter is a reference to a <b>Collection</b> object, 
+the <b>fillIt </b>method can call the <b>add</b> method on the object with 
+confidence that the behavior of the <b>add</b> method will be appropriate for 
+the specific type of object involved. <i>(For example, the behavior of the 
+<strong>add</strong> 
+method for an object of the <strong>TreeSet</strong> class will probably be different from the 
+behavior of the <strong>add</strong> method for an object of some other class that implements 
+the <strong>Collection</strong> interface.)</i> </p>
+<h3><a name="Polymorphism_in_action">Polymorphism in action</a> </h3>
+<p>The great thing about polymorphic behavior is that the author of the <b>
+fillIt</b> method doesn&#39;t need to be concerned about the implementation 
+details of the <b>add</b> method. </p>
+<h3><a name="Add_five_elements_with_some_duplicates_">Add five elements with some duplicates
+</a> </h3>
+<p>The code in the <b>fillIt</b> method adds five elements to the object. Each 
+element is a reference to a new object of type <b>Integer</b>. Two of the 
+objects encapsulate the <b>int</b> value 4, and thus are duplicates. </p>
+<blockquote>Author's note:</blockquote>
+<blockquote>Sometime after Java version 8, Oracle introduced
+<a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">
+Autoboxing and Unboxing</a> into the language.&nbsp; Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes. For example, converting an int to an Integer, a double to a Double, and so on. If the conversion goes the other way, this is called unboxing. 
+</blockquote>
+<blockquote>While it is still not possible to store primitive values in a 
+	Collection object, it is no longer necessary to purposely wrap the primitive 
+	values in an object to store them in a collection. Therefore, you can add a 
+	primitive value to a Collection object and it will be automatically 
+	converted to its corresponding object wrapper type. Unless you make proper use of generics, conversion back to the original 
+	primitive type is not nearly as smooth when you extract the value from the 
+	collection.</blockquote>
+<blockquote>The material in this eBook was written before the advent of 
+Autoboxing and the existence of Autoboxing is not reflected in the text of this 
+eBook.</blockquote>
+<blockquote>If you compile and run this code with a recent version of Java, you will 
+receive a warning message that the Integer class is deprecated. You can 
+eliminate that warning by adding the primitive int values directly to the 
+Collection object.</blockquote>
+
+
+
+
+<p>The <b>int</b> values encapsulated in the <b>Integer</b> objects are not in 
+ascending order. Rather, they are added to the object in descending order. <i>
+(They could be added in any order and the end result would be the same.)</i> </p>
+<h3><a name="Filter_out_the_duplicates_">Filter out the duplicates </a> </h3>
+<p>The <b>add</b> method 
+for the <strong>TreeSet</strong> object filters out the duplicate element in order to satisfy the contract of the <b>
+Collection</b> interface. </p>
+<h3><a name="Notification_of_duplicates_">Notification of duplicates </a> </h3>
+<p>In this case, the author didn&#39;t care what happens in the case of duplicate 
+elements. If the author of the <b>fillIt</b> method does care what happens in the 
+case of duplicates, she can find out when an object is a duplicate. </p>
+<p>According to the contract of the <b>Collection</b> interface, the <b>add</b> 
+method must return <i>true</i> if the call to the method modifies the 
+contents of the object and must return <i>false</i> if the collection does not 
+permit duplicates and the collection already contains the specified element. </p>
+<h3><a name="Sort_the_elements_">Sort the elements </a> </h3>
+<p>Even though the 
+elements are passed to the <strong>add</strong> method in descending order <i>(or could be 
+passed in any other order),</i> they are stored and maintained in the <b>TreeSet</b> 
+object in such a way that they can later be accessed in ascending order. </p>
+<h3><a name="The_TreeSet_object_is_now_populated_">The TreeSet object is now populated
+</a> </h3>
+<p>When the <b>fillIt</b> method returns, the <b>TreeSet</b> object contains 
+four <i>(not five)</i> elements with no duplicates. Each element is a reference 
+to an object of type <b>Integer</b>. Those references are maintained in such a 
+way as to make them accessible in ascending order, based on the <b>int</b> 
+values encapsulated in each of the <b>Integer</b> objects. </p>
+<h2><a name="Get_an_Iterator_object_">Get an Iterator object </a> </h2>
+<p>Returning now to the <b>doIt</b> method in the <strong>Worker</strong> 
+class that was called in <a href="#Listing_1">Listing 1</a>, the statement in <a href="#Listing_4">Listing 4</a> calls the <b>
+iterator</b> method on the <b>TreeSet</b> object&#39;s 
+reference that is stored in the reference variable of type <b>Collection</b>.</p>
+
+
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a>. Get an Iterator object.
+				</p>
+				<pre>    Iterator iter = ref.iterator();
+</pre>
+</div><!--``2-->
+
+
+
+<p>The call to the <b>iterator</b> method on any <b>Collection</b> object 
+returns an instance of a class that implements the <b>Iterator</b> interface. 
+The <b>Iterator</b> object can be used to traverse the collection, gaining 
+access to each element in order. <i>(The concept of in order means different 
+things for different kinds of collections. For a collection instantiated from 
+the TreeSet class, in order means in ascending order.)</i> </p>
+<h3><a name="Againdontknowdontcare_">Again, don&#39;t know, don&#39;t care
+</a> </h3>
+<p>Again, the author of the method that uses the <b>Collection</b> object 
+doesn&#39;t need to know or care about the internal implementation of the 
+collection, or the implementation of the methods of the <b>Iterator</b> object. 
+They simply do what they do, and can be used for their intended purpose. </p>
+<h3><a name="An_Iterator_object_acts_as_a_doorkeeper_">An Iterator object acts as a doorkeeper
+</a> </h3>
+<p>The <b>Iterator</b> interface declares three methods:</p>
+<ul>
+	<li>hasNext()</li>
+	<li>next()</li>
+	<li>remove()</li>
+</ul>
+<p>You might say that an <b>Iterator</b> object acts as a doorkeeper for the 
+collection object that it represents, providing access to the contents of the 
+collection in a very specific manner. </p>
+<h3><a name="Traverse_the_collection">Traverse the collection</a></h3>
+<p>The code fragment in <a href="#Listing_5">Listing 5</a> below shows how the first two of the above 
+methods can be used to</p>
+<ul>
+	<li>Traverse the collection, accessing each of the object&#39;s elements in 
+	succession.</li>
+	<li>Display the value encapsulated in the object referred to by each element.</li>
+</ul>
+<p>As mentioned earlier, when the collection is an object instantiated from the
+<b>TreeSet</b> class, access to the elements is provided in ascending order.</p>
+
+
+<div class="a">
+	<p><a name="Listing_5">Listing 5</a>. Traverse the 
+				collection.
+				</p>
+				<pre>    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+</pre>
+</div><!--``2-->
+
+
+
+<h3><a name="Four_elements_with_no_duplicates_">Four elements with no duplicates
+</a> </h3>
+<p>At this point, the <b>TreeSet</b> object contains four elements, with no 
+duplicates. Each of the elements is a reference to an object of type <b>Integer</b>. 
+The code in the loop in <a href="#Listing_5">Listing 5</a> causes each of those elements to be accessed and 
+displayed in ascending order. This causes the following text to appear on the 
+screen: </p>
+<p><strong>1234 </strong> </p>
+<h2><a name="An_editorial_opinion_">An editorial opinion </a> </h2>
+<p>In my opinion, this is the kind of knowledge that a computer science student 
+in a modern data structures course should be learning. This is a far departure 
+from courses of the past where CS2 students were required to memorize the 
+intricate details of how to implement various data structures. </p>
+<h3><a name="What_kind_of_knowledge_is_needed_">What kind of knowledge is needed?
+</a> </h3>
+<p>Does an architect need to understand the detailed inner workings of an air 
+conditioning compressor to design a cooling system into a building? Of 
+course not! </p>
+<p>However, the architect does need to know the tradeoffs among the available 
+cooling systems in terms of initial cost, operating cost, size, efficiency, etc.
+</p>
+<p>Does an audio technician need to understand the detailed inner workings of an 
+electronic audio equalizer in order to construct an integrated audio system? 
+Absolutely not! If that were a requirement, there would likely be very few audio 
+systems in existence. </p>
+<p>However, the audio technician does need to understand the tradeoffs among the 
+various available audio equalizers. </p>
+<h3><a name="The_same_concept_applies_to_software_design_">The same concept applies to software design
+</a> </h3>
+<p>Does an OOP software designer need to know the detailed inner workings of the 
+various kinds of collection objects in order to use them effectively? No! </p>
+<p>However, the software designer does need to know the tradeoffs among the 
+various types of collection objects in terms of their operational behavior. </p>
+<p>Modern CS2 students should be learning about the performance and operational 
+differences among the different types of collections, and how to use available 
+frameworks to create and use those collections. They should not be wasting their 
+time learning how to reinvent them. They have more important ways to spend their 
+time, and they have more important things to learn. </p>
+<h3><a name="An_analogy_">An analogy </a> </h3>
+<p>Frankly, I don&#39;t care how the programmers at Sun implemented the <b>TreeSet</b> 
+class, so long as the behavior of objects instantiated from that class meets the 
+published specifications. </p>
+<p>As an analogy, I also don&#39;t care how they implemented the <b>Random</b> 
+class, so long as objects instantiated from the <b>Random</b> class provide the 
+pseudo random values that I need in my programs. </p>
+<p>I see no conceptual differences between the <b>TreeSet </b>class and the <b>
+Random</b> class from a software reuse viewpoint.</p>
+<ul>
+	<li>I can instantiate an object of the <b>Random</b> class to produce pseudo 
+	random values, without caring how those values are actually generated. 
+	However, if I am working in cryptography, I might need to know how many such 
+	values can be generated before the sequence repeats.</li>
+	<li>I can use any of the thirty or so methods of the <b>Math</b> class to 
+	produce a variety of complex mathematical values without caring about how 
+	those values are actually produced. However, since many of those values are 
+	approximations, I might need to know something about the quality of the 
+	approximation.</li>
+	<li>I can instantiate an object of the <b>TreeSet</b> class to create a 
+	collection object that guarantees that the sorted set will be in ascending 
+	element order, and provide log(n) time cost for the basic operations of <i>
+	add</i>, <i>remove</i>, and <i>contains</i>. As long as I know that, I have 
+	very little need to know exactly how the collection object is implemented.</li>
+</ul>
+<h3><a name="Its_time_to_reinvent_the_CS2_curriculum_">Its time to reinvent the CS2 curriculum
+</a> </h3>
+<p>Having worked for 32 years in high-tech industry before becoming a college 
+professor, I&#39;m confident that the future employers of most students share my opinion on 
+this. I don&#39;t know of any employer who wants their programmers to spend time 
+and dollars reinventing the classical data structures. What those employers are 
+looking for is a staff of programmers who understand the tradeoffs among the 
+data structures, and when it is appropriate to use each of the different 
+structures. </p>
+<p>It is time to reinvent the curriculum in CS2 courses by</p>
+<ul>
+	<li>Encouraging the understanding of techniques for software reuse.</li>
+	<li>Teaching when, why, and how each of the different structures should be 
+	used.</li>
+	<li>Discouraging the reinvention of those structures.</li>
+</ul>
+
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>Okay, I will step down from my soapbox. I encourage you to copy the code from <a href="#Listing_6">Listing 6</a> and paste it into your text 
+editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter, I have provided a brief introduction to the use of the <em>Java 
+Collections Framework</em>. The framework is designed to encourage you to reuse 
+rather than to reinvent collections and maps. </p>
+<p>A collection represents a group of objects, known as its elements. </p>
+<p>While some collections allow duplicate elements, others do not. Some 
+collections are ordered and others are not ordered. </p>
+<p>The <em>Collections Framework </em>is defined by a set of interfaces and associated 
+contracts. The framework provides concrete implementations of the interfaces <i>
+(classes)</i> for the most common data structures. In addition, the framework 
+also provides several abstract implementations, which are designed to make it 
+easier for you to create new and different concrete implementations. </p>
+<p>The <b>TreeSet</b> class is a concrete implementation of the <b>SortedSet</b> 
+interface. The <b>SortedSet</b> interface extends <b>Set</b>, which extends <b>
+Collection</b>. Thus, a <b>TreeSet</b> object <i>is a </i><b>SortedSet</b>. Also 
+it <i>is a</i> <b>Set</b>, and it <i>is a</i> <b>Collection</b>. </p>
+<p>The <b>TreeSet</b> class guarantees that the sorted set will be in ascending 
+element order, and provides guaranteed log(n) time cost for the basic operations 
+(<i>add</i>, <i>remove</i> and <i>contains</i>). </p>
+<p><b>TreeSet</b> objects can be treated as the generic type <b>Collection</b>. 
+Methods declared in the <b>Collection</b> interface can be called on a <strong>
+Collection</strong> 
+object without regard for the actual class from which the object was 
+instantiated. <i>(This is polymorphic behavior.)</i> </p>
+<p>When such methods are called, the author of the program can have confidence 
+that the behavior of the method will be appropriate<b><i> </i></b>for an object 
+of the class from which the object was instantiated. In my opinion, this is the 
+true essence of object-oriented behavior.</p>
+<h1><a name="WhatsNext">What&#39;s next</a>?</h1>
+<p>This is the first chapter in a miniseries on the <em>Collection Framework</em>. 
+Subsequent chapters will teach you how to use the framework for creating and 
+using various types of collections and maps.</p>
+<p>Once you learn how to use the framework, it is unlikely that you will need to 
+reinvent classical data structures, search algorithms, or sorting algorithms, 
+because those capabilities are neatly packaged within the framework.</p>
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+					<li>Author: Professor Richard G. Baldwin</li>
+					<li>Chapter name: Java0410: Getting Started with Java 
+					Collections </li>
+					<li>File: Java0410.htm
+</li>
+					<li>Published: 04/18/13</li>
+					<li>Revised: 04/14/20</li>
+					
+				</ul>
+</div>
+
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is provided in <a href="#Listing_6">Listing 
+6</a> below.</p>
+
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Complete 
+				program listing.
+				<pre>import java.util.TreeSet;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class AP400{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class AP400
+
+class Worker{
+  public void doIt(){
+    Collection ref = new TreeSet();
+    Populator.fillIt(ref);
+    Iterator iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(
+                       Collection ref){
+    ref.add(new Integer(4));
+    ref.add(new Integer(4));
+    ref.add(new Integer(3));
+    ref.add(new Integer(2));
+    ref.add(new Integer(1));
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div><!--``2-->
+<p>-end- </p>
+
+
+</body>
+</html>

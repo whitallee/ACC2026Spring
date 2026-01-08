@@ -1,0 +1,588 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1604</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1604: Inheritance, Part 1</h1> 
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Program output. </li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Beginning of the Combo class.</li>
+		<li><a href="#Listing_2">Listing 2</a>. The insertTape method. </li>
+		<li><a href="#Listing_3">Listing 3</a>. The removeTape method. </li>
+		<li><a href="#Listing_4">Listing 4</a>. The playTape method. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Modified Radio class.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Tape status.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Change to the playStation method.</li>
+		<li><a href="#Listing_8">Listing 8</a>. The class named Radio02.</li>
+		<li><a href="#Listing_9">Listing 9</a>. The program named Radio02.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p><strong>Extending a class</strong></p>
+<p>This chapter shows you how to extend an existing class to create a new class. The new class is the blueprint for a new type. 
+Before continuing with this chapter, I recommend that you review Kjell 
+<a href="http://programmedlessons.org/Java9/chap80/ch80_01.html">CHAPTER 80 — Inheritance</a> through 
+<a href="http://programmedlessons.org/Java9/chap82/ch82_01.html">CHAPTER 82 — More About Polymorphism</a>.</p>
+<p><strong>Inheritance and code reuse</strong></p>
+<p>The existing class is often called the <em>superclass</em> and the new class is often called the 
+<em>subclass</em>. This is the mechanism for class inheritance in Java. Inheritance provides a formal mechanism for code reuse.</p>
+<p>The subclass inherits all of the variables and all of the methods defined in the superclass.</p>
+<p><strong>Car radios with tape players</strong></p>
+<p>A class from a previous chapter <em>(whose objects represent car radios)</em> is extended to define a new class, whose objects represent expanded car radios that contain tape players. 
+<em>(Yes, at one point in history, car radios did contain tape players.)</em></p>
+<p><strong>Sending messages to the object</strong></p>
+<p>Objects of the new class know how to respond to messages for inserting, playing, and removing a tape, in addition to those messages that are appropriate for objects of the original Radio class. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>The three pillars of OOP</strong></p>
+<p>In an earlier chapter, I explained that most books on OOP will tell you that in order to understand OOP, you must understand the following three concepts:</p>
+<ul>
+	<li>Encapsulation</li>
+	<li>Inheritance</li>
+	<li>Polymorphism</li>
+</ul>
+<p>I agree with that assessment.</p>
+<p><strong>Encapsulation</strong></p>
+<p>The first chapter in this series provided an explanation of encapsulation.</p>
+<p><strong>Inheritance</strong></p>
+<p>This chapter <em>(and some chapters to follow)</em> will provide an explanation of inheritance. I will use another simple program to explain the concept of inheritance. </p>
+	<p><strong>Polymorphism</strong></p>
+<p>Polymorphism is the most complex of the three, and will be explained in future chapters.</p>
+<p><strong>A new data type</strong></p>
+<p>Whenever you define a class in Java, you cause a new data type to become available to the program. Therefore, whenever you need a new data type, you can define a new class to make that type available.</p>
+<p><strong>Extending a class</strong></p>
+<p>Defining a new class <em>(to create a new type)</em> can involve a lot of effort 
+if the class is complex. Sometimes you have an option that can greatly reduce the effort required to create your new type. If a class 
+<em>(type)</em> already exists that is close to what you need, you can often extend that class to produce a new class that is closer to what you need.</p>
+<p>In many cases, this will require much less effort than that required to start from scratch and define a new class to establish a new type.
+
+The ability to extend one class into another new class is the <em>essence of inheritance</em>. 
+It is also the mechanism that leads to Java being described as an extensible 
+programming language.</p>
+	<p>According to the current jargon, the new class is called the <em>subclass</em> and the class that is extended is called the 
+	<em>superclass</em>.</p>
+<p>Although not explicitly demonstrated in this chapter, whenever you declare a 
+reference variable whose type is defined by a class, that variable can be used 
+to store references to objects instantiated from that class or instantiated from 
+any subclass of that class. Furthermore, that reference can be used to call 
+methods defined in or inherited into that class with no requirement for a cast. 
+If the method is defined in that class and overridden in the subclass, and if 
+the object is actually of the subclass type, the overridden version will be 
+executed. This is polymorphism. </p>
+<p><strong>What is inherited?</strong></p>
+<p>The subclass inherits all of the variables and all of the methods defined in 
+<em>(or inherited into)</em> the superclass, almost as if you had completely defined the new class from scratch, and had reproduced all of the code already defined in the existing superclasses.</p>
+<p><strong>Code reuse</strong></p>
+<p>Therefore, inheritance often makes it possible to define a new class with a minimum requirement to write new code by formally reusing the code that was previously written into the superclasses.
+
+Sometimes you can get by with simply extending the existing class.</p>
+<p>Sometimes, however, it is also necessary to make changes to the existing class to improve its ability to be extended in a meaningful way. 
+<em>(That is the case with the sample program discussed in this chapter, but the next chapter will show you how to avoid that issue.)</em> It all depends on how the existing class was designed in the first place. 
+Ideally the original design of the class will be such that modification of the 
+original class is not necessary.</p>
+	<p><strong>The Radio class</strong></p>
+	<p>A previous program defined a class named <strong>Radio</strong>. Objects instantiated from the 
+	<strong>Radio</strong> class <em>(see the previous chapters for a discussion of instantiating objects)
+	</em>were intended to simulate car radios. <em>(Note that the car radios simulated by objects of the 
+	<strong>Radio</strong> class didn't have built-in tape players.)</em></p>
+<p><strong>The Combo class</strong></p>
+<p>In this chapter, I will use inheritance to extend the <strong>Radio</strong> class into a new class named 
+<strong>Combo</strong>. Objects instantiated from the <strong>Combo</strong> class are intended to simulate car radios with a built-in tape player.</p>
+<p>A complete listing of the new program is shown in <a href="#Listing_9">Listing 9</a> near the end of the chapter.</p>
+<p><strong>Will discuss in fragments</strong></p>
+<p>As usual, I will discuss this program in fragments. I will begin my discussion with the definition of the new class named 
+<strong>Combo</strong>. Then I will come back and discuss the class named 
+<strong>Radio</strong> and the driver class named <strong>Radio02</strong>. </p>
+<p><strong>The combo class</strong></p>
+<p>The code in <a href="#Listing_1">Listing 1</a> shows the beginning of the class named 
+<strong>Combo</strong>.</p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Beginning of the Combo 
+				class.
+
+				<pre>class Combo extends Radio{
+  
+  public Combo(){//constructor
+    System.out.println(
+           &quot;Combo object constructed&quot;);
+  }//end constructor</pre>
+</div>
+	<p><strong>Two new items</strong></p>
+<p>There are two new items in <a href="#Listing_1">Listing 1</a> that you did not see in the code in the previous chapters.</p>
+<p><strong>Combo extends Radio</strong></p>
+<p>First, the class named <strong>Combo</strong> <strong><em>extends</em></strong> the class named <strong>Radio</strong>. This means that an object instantiated from the 
+<strong>Combo</strong> class will contain all of the variables and all the methods defined in the 
+<strong>Combo</strong> class, plus all the variables and methods defined in the 
+<strong>Radio</strong> class, and its superclasses. <em>(The variables and methods of the superclass are inherited into the subclass.)</em></p>
+<p><strong>An explicit constructor</strong></p>
+<p>Second, the class named <strong>Combo</strong> defines an explicit constructor.</p>
+<p><strong>Defining a constructor is optional</strong></p>
+<p>When defining a new class, it is not necessary to define a constructor. If you don't define a constructor, a default constructor will be provided automatically.</p>
+<p><strong>Why define a constructor?</strong></p>
+<p>The intended purpose of a constructor is to initialize the instance variables belonging to the new object. However, constructors can do other things as well. In this case, I used an explicit constructor to display a message when the object is instantiated from the class named 
+<strong>Combo</strong>.</p>
+<p><strong>Brief discussion of constructors</strong></p>
+<p>I'm not going to discuss constructors in detail at this point. However, I will give you a few rules regarding constructors.</p>
+<ul>
+	<li>Constructors <em>(like methods)</em> can be overloaded. <em>(I will explain what overloading means in a subsequent chapter.)</em></li>
+	<li>The names of constructors must match the names of the classes in which they are defined.</li>
+	<li>A constructor signature never indicates a return type <em>(such as void or double)</em>.</li>
+	<li>The code in a constructor never contains a return statement.</li>
+</ul>
+<p><strong>Instance methods</strong></p>
+<p>The new class named <strong>Combo</strong> defines three instance methods, each of which has to do with the handling of tape in the tape player:</p>
+<ul>
+	<li>insertTape</li>
+	<li>removeTape</li>
+	<li>playTape</li>
+</ul>
+<p><em>(If you feel ambitious, you could upgrade this class even further to add features such as rewind, fast forward, pause, etc.).</em></p>
+<p><strong>The insertTape method</strong></p>
+<p>The entire method named <strong>insertTape</strong> is shown in 
+<a href="#Listing_2">Listing 2</a>. This is the method that is used to simulate the insertion of a tape by the user. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. The insertTape method.
+
+				<pre>  public void insertTape(){
+    System.out.println(&quot;Insert Tape&quot;);
+    tapeIn = true;
+    System.out.println(&quot;  Tape is in&quot;);
+    System.out.println(
+                     &quot;  Radio is off&quot;);
+  }//end insertTape method</pre>
+</div>
+	<p>The most significant thing about the code in  
+<a href="#Listing_2">Listing 2</a> is the assignment of the <strong>true</strong> value to the 
+	<strong>boolean</strong> variable named <strong>tapeIn</strong>. Other than setting the value of the 
+	<strong>tapeIn</strong> variable to <strong>true</strong>, the code in  
+<a href="#Listing_2">Listing 2</a> simply prints some messages to indicate what is going on.</p>
+<p><strong>What is tapeIn used for?</strong></p>
+<p>As you will see shortly, the value of the variable named <strong>tapeIn</strong> is used to determine if it is possible to play the tape or to play the radio.</p>
+<p>According to that logic:</p>
+<ul>
+	<li>If <strong>tapeIn</strong> is true, it is possible to play the tape but it is not possible to play the radio.</li>
+	<li>If <strong>tapeIn</strong> is false, it is possible to play the radio, but it is not possible to play the tape.</li>
+</ul>
+<p><strong>tapeIn is not declared in the Combo class</strong></p>
+<p>It is also worthy of note that in this version of the program, the variable named
+<strong>tapeIn</strong> is not declared in the <strong>Combo</strong> class <em>(this will change in the next chapter where the program uses method overriding)</em>. Rather, this variable is inherited from the 
+<strong>Radio</strong> class that is extended by the <strong>Combo</strong> class.</p>
+<p><strong>The removeTape method</strong></p>
+<p>The <strong>removeTape</strong> method of the <strong>Combo</strong> class is shown in 
+<a href="#Listing_3">Listing 3</a>. Its behavior is pretty much the reverse of the 
+<strong>insertTape</strong> method, so I won't discuss it further. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. The removeTape method.
+
+				<pre>  public void removeTape(){
+    System.out.println(&quot;Remove Tape&quot;);
+    tapeIn = false;
+    System.out.println(
+                      &quot;  Tape is out&quot;);
+    System.out.println(
+                      &quot;  Radio is on&quot;);
+  }//end removeTape method\</pre>
+</div>
+	<p><strong>The playTape method</strong></p>
+<p><a href="#Listing_4">Listing 4</a> shows the method named <strong>playTape</strong> defined in the new 
+<strong>Combo</strong> class. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. The playTape method
+.
+
+				<pre>public void playTape(){
+    System.out.println("Play Tape");
+    if(!tapeIn){//tapeIn is false
+      System.out.println(
+            "  Insert the tape first");
+    }else{//tapeIn is true
+      System.out.println(
+                  "  Tape is playing");
+    }//end if/else
+  }//end playTape</pre>
+</div>
+	<p><strong>Confirm that the tape is ready</strong></p>
+<p>Calling the method named <strong>playTape</strong> can be thought of as sending a message to the 
+<strong>Combo</strong> object asking it to play the tape. The code in the 
+<strong>playTape</strong> method checks to confirm that the value stored in the 
+<strong>tapeIn</strong> variable is <strong>true</strong> before executing the request to play the tape.</p>
+<p>If <strong>tapeIn</strong> is <strong>false</strong>, an error message is displayed advising the user to insert the tape first.</p>
+<p>If <strong>tapeIn</strong> is <strong>true</strong>, the method prints a message indicating that the tape is playing.</p>
+<p><strong>Modified Radio class</strong></p>
+<p><a href="#Listing_5">Listing 5</a> shows the definition of the modified version of the class named 
+<strong>Radio</strong>.</p>
+<div class="a"><a name="Listing_5">Listing 5</a>. Modified Radio class.
+				<pre>class Radio{
+  protected double[] stationNumber = 
+                         new double[5];
+  protected boolean tapeIn = false;
+  //---------------------------------//
+  
+  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+    System.out.println(&quot;Button &quot; 
+              + index + &quot; programmed&quot;);
+  }//end method setStationNumber
+  //---------------------------------//
+  
+  public void playStation(int index){
+    System.out.println(&quot;Play Radio&quot;);
+    if(!tapeIn){//tapeIn is false
+      System.out.println(
+          &quot;  Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+    }else{//tapeIn is true
+      System.out.println(
+            &quot;  Remove the tape first&quot;);
+    }//end if/else
+  }//end method playStation
+  
+}//end class Radio</pre>
+</div>
+	<p><strong>Tape status</strong></p>
+<p>The first significant change that was made to the class named <strong>Radio</strong> is shown in 
+<a href="#Listing_6">Listing 6</a> below. </p>
+	
+<div class="a"><a name="Listing_6">Listing 6</a>. Tape status.
+				<pre>  protected boolean tapeIn = false;</pre>
+</div>
+	<p>The statement in  
+<a href="#Listing_6">Listing 6</a> declares and initializes a new instance variable named 
+	<strong>tapeIn</strong>. As explained earlier, this instance variable is used to indicate whether or not a tape is inserted. 
+	<em>(The Combo class inherits this variable.)</em></p>
+<p>Earlier in this chapter, I explained how the <strong>playTape</strong> method of the 
+<strong>Combo</strong> class uses this value to determine whether or not to attempt to play a tape.</p>
+<p><strong>Change to the playStation method</strong></p>
+<p>The significant change that was made to the method named <strong>playStation</strong> of the 
+<strong>Radio</strong> class is shown in <a href="#Listing_7">Listing 7</a> below. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Change to the playStation method.
+				<pre>    if(!tapeIn){//tapeIn is false
+      System.out.println(
+          &quot;  Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+    }else{//tapeIn is true
+      System.out.println(
+            &quot;  Remove the tape first&quot;);
+    }//end if/else</pre>
+</div>
+	<p><strong>Check the tape status</strong></p>
+<p>The code in <a href="#Listing_7">Listing 7</a> uses <strong>tapeIn</strong> to check the tape status before attempting to tune the radio station and play the radio. If a tape is inserted, this method simply displays an error message instructing the user to remove the tape first.</p>
+<p><strong>So, what's the big deal with inheritance?</strong></p>
+<p>The fact that it was necessary for me to make changes to the class named 
+<strong>Radio</strong> greatly reduced the benefit of inheritance in this case. However, even in this case, the use of inheritance eliminated the need for me to define a new class that reproduces all of the code in the class named 
+<strong>Radio</strong>.</p>
+<p><em>(In the next chapter (following the review chapter) I will explain the process of overriding methods. I will show you how to use method overriding to accomplish these same purposes by extending the 
+<strong>Radio</strong> class, without any requirement to modify the code in the 
+<strong>Radio</strong> class. That will be a much better illustration of the benefits of inheritance.)</em></p>
+<p><strong>The driver class</strong></p>
+<p>The new driver class named <strong>Radio02</strong> is shown in 
+<a href="#Listing_8">Listing 8</a>. </p>
+<div class="a"><a name="Listing_8">Listing 8</a>. The class named Radio02.
+				<pre>public class Radio02{
+  //This class simulates the 
+  // manufacturer and the human user
+  public static void main(
+                        String[] args){
+    Combo myObjRef = new Combo();
+    myObjRef.setStationNumber(3,93.5);
+    myObjRef.playStation(3);
+    myObjRef.insertTape();
+    myObjRef.playStation(3);
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+    myObjRef.playTape();
+    myObjRef.insertTape();
+    myObjRef.playTape();
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+  }//end main
+}//end class Radio02</pre>
+</div>
+	<p><strong>New object of the Combo class</strong></p>
+<p>The most significant change in this class <em>(relative to the driver class named
+</em><strong><em>Radio01</em></strong><em> in a previous chapter)</em> is the statement that instantiates a new object of the 
+<strong>Combo</strong> class <em>(instead of the Radio class)</em>.</p>
+<p>All of the other new code in  
+<a href="#Listing_8">Listing 8</a> is used to send messages to the new object in order to exercise its behavior. </p>
+	<p><strong>Program output</strong></p>
+<p>The <strong>Combo</strong> object responds to those messages by producing the 
+screen output shown in <a href="#Figure_1">Figure 1</a>.</p>
+<div class="a"><a name="Figure_1">Figure 1</a>. Program output.
+
+
+							<pre>Combo object constructed
+Button 3 programmed
+Play Radio
+  Playing the station at 93.5 Mhz
+Insert Tape
+  Tape is in
+  Radio is off
+Play Radio
+  Remove the tape first
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz
+Play Tape
+  Insert the tape first
+Insert Tape
+  Tape is in
+  Radio is off
+Play Tape
+  Tape is playing
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz</pre>
+
+</div>
+	<p><strong>An exercise for the student</strong></p>
+<p>As the old saying goes, I will leave it as an exercise for the student to 
+correlate the messages in <a href="#Listing_8">Listing 8</a> with the output 
+shown in <a href="#Figure_1">Figure 1</a>.</p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>Extending an existing class often provides an easy way to create a new type. This is primarily true when an existing class creates a type whose features are close to, but not identical to the features needed in the new type.</p>
+<p>When an existing class is extended to define a new class, the existing class is often called the 
+<em>superclass</em> and the new class is often called the <em>subclass</em>.</p>
+<p>The subclass inherits all of the variables and all of the methods defined in the superclass and its superclasses.</p>
+<p>Although not explicitly demonstrated in this chapter, whenever you declare a 
+reference variable whose type is defined by a class, that variable can be used 
+to store references to objects instantiated from that class or instantiated from 
+any subclass of that class. Furthermore, that reference can be used to call 
+methods defined in or inherited into that class with no requirement for a cast. 
+If the method is defined in that class and overridden in the subclass, and if 
+the object is actually of the subclass type, the overridden version will be 
+executed. This is polymorphism. </p>
+<p>Inheritance provides a formal mechanism for code reuse.</p>
+<p>This chapter modifies slightly, and then extends the <strong>Radio</strong> class from a previous chapter to define a new class named 
+<strong>Combo</strong>. Objects of the <strong>Combo</strong> class simulate car radios that contain tape players. Objects of the 
+<strong>Combo</strong> class know how to respond to messages for inserting, playing, and removing a tape, in addition to those messages appropriate for an object of the 
+<strong>Radio</strong> class.</p>
+<p>The changes that were required in the definition of the <strong>Radio</strong> class provide for the fact that it is not possible to play a radio station and to play a tape at the same time. This change was necessary because the original designer of the 
+<strong>Radio</strong> class <em>(this author)</em> didn't design that class with the idea of extending it to include a tape player. This points out the importance of thinking ahead when defining a new class. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter (following the review chapter) I will show you how to use <em>method overriding</em> to cause the behavior of a method inherited into a subclass to be appropriate for an object instantiated from the subclass.</p>
+<p>I will also show you how to use method overriding to eliminate the above requirement to modify the 
+<strong>Radio</strong> class before extending it. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1604: Inheritance, Part 1</li>
+					<li>File: Java1604.htm&nbsp;
+</li>
+					<li>Revised: 08/06/22</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_9">Listing 9</a> below.</p>
+<p>The primary difference between this program and the program in the earlier chapter 
+<em>(whose objects simulate car radios)</em> is the inclusion in this program of a new class named 
+<strong>Combo</strong>. The class named <strong>Combo</strong> extends the original 
+<strong>Radio</strong> class to create a new type of radio that also contains a tape player. </p>
+<div class="a"><a name="Listing_9">Listing 9</a>. The program named Radio02.
+				<pre>/*File Radio02.java
+Copyright, R.G.Baldwin
+Simulates the manufacture and use of a 
+combination car radio and tape player.
+
+This program produces the following
+output on the computer screen:
+  
+Combo object constructed
+Button 3 programmed
+Play Radio
+  Playing the station at 93.5 Mhz
+Insert Tape
+  Tape is in
+  Radio is off
+Play Radio
+  Remove the tape first
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz
+Play Tape
+  Insert the tape first
+Insert Tape
+  Tape is in
+  Radio is off
+Play Tape
+  Tape is playing
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz
+**************************************/
+
+public class Radio02{
+  //This class simulates the 
+  // manufacturer and the human user
+  public static void main(
+                        String[] args){
+    Combo myObjRef = new Combo();
+    myObjRef.setStationNumber(3,93.5);
+    myObjRef.playStation(3);
+    myObjRef.insertTape();
+    myObjRef.playStation(3);
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+    myObjRef.playTape();
+    myObjRef.insertTape();
+    myObjRef.playTape();
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+  }//end main
+}//end class Radio02
+//===================================//
+
+class Radio{
+  //This class simulates the plans from
+  // which the radio object is created.
+  protected double[] stationNumber = 
+                         new double[5];
+  protected boolean tapeIn = false;
+  //---------------------------------//
+  
+  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+    System.out.println(&quot;Button &quot; 
+              + index + &quot; programmed&quot;);
+  }//end method setStationNumber
+  //---------------------------------//
+  
+  public void playStation(int index){
+    System.out.println(&quot;Play Radio&quot;);
+    if(!tapeIn){
+      System.out.println(
+          &quot;  Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+    }else{
+      System.out.println(
+            &quot;  Remove the tape first&quot;);
+    }//end if/else
+  }//end method playStation
+  
+}//end class Radio
+//===================================//
+
+class Combo extends Radio{
+  
+  public Combo(){//constructor
+    System.out.println(
+           &quot;Combo object constructed&quot;);
+  }//end constructor
+  //---------------------------------//
+  
+  public void insertTape(){
+    System.out.println(&quot;Insert Tape&quot;);
+    tapeIn = true;
+    System.out.println(&quot;  Tape is in&quot;);
+    System.out.println(
+                     &quot;  Radio is off&quot;);
+  }//end insertTape method
+  //---------------------------------//
+  
+  public void removeTape(){
+    System.out.println(&quot;Remove Tape&quot;);
+    tapeIn = false;
+    System.out.println(
+                      &quot;  Tape is out&quot;);
+    System.out.println(
+                      &quot;  Radio is on&quot;);
+  }//end removeTape method
+  //---------------------------------//
+  
+  public void playTape(){
+    System.out.println(&quot;Play Tape&quot;);
+    if(!tapeIn){
+      System.out.println(
+            &quot;  Insert the tape first&quot;);
+    }else{
+      System.out.println(
+                  &quot;  Tape is playing&quot;);
+    }//end if/else
+  }//end playTape
+}//end class combo</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

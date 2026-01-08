@@ -1,0 +1,680 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>ava081</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java081 Swing and the Delegation Event Model</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a><ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#introduction">Introduction</a></li>
+	<li><a href="#sample_program">Sample Program</a><ul>
+		<li><a href="#interesting_code_fragments">Interesting Code Fragments</a></li>
+		<li><a href="#program_listing">Program Listing</a></li>
+	</ul>
+	</li>
+	<li><a href="#Another_Sample_Program">Another Sample Program</a><ul>
+		<li><a href="#swingevent09_interesting_code_fragments">Interesting Code Fragments</a></li>
+		<li><a href="#Program_Listing01">Program 
+			Listing</a></li>
+	</ul>
+	</li>
+	<li><a href="#summary0">Summary</a></li>
+	<li><a href="#Run_the_program">Run the programs</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Listings01">Listings</a></li>
+</ul>
+
+
+	<h1><a name="Preface">Preface</a></h1>
+	
+	<p>This chapter is one in a collection of chapters designed for teaching 
+	<em>ITSE2317 - Java Programming (Intermediate)</em> at Austin 
+	Community College in Austin, TX.</p>
+<p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written around 1997. However, despite many improvements in Java since 
+then, most of what was true then is still true in 2020.)</em></p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Beginning of the constructor for the GUI class. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Complete listing of the program 
+		named SwingEvent08. </li>
+		<li><a href="#Listing_3">Listing 3</a>. The class named MyFrame. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Complete listing of the program named SwingEvent09. </li>
+	</ul>
+
+<h1 ><a name="introduction"></a><b>Introduction</b></h1>
+
+<p>To begin with, what is Swing? </p>
+
+<p>Swing is the name given to a new set of lightweight components developed by 
+Sun to supplement <em>(and possibly replace)</em> the components in the AWT. <em>(The general topic of lightweight components is covered in a separate chapter.)</em> 
+With the exception of top-level containers, Swing components are developed 
+completely using Java and don't depend on the <i>peer</i>
+component rendering provided by the operating system. </p>
+
+<p>Swing components have several advantages over AWT components, and probably 
+some disadvantages as well. </p>
+
+<p>One of the advantages is that because the components are not rendered on the 
+screen by the operating system, the look and feel of a component does not change 
+as the application is executed on different platforms running under 
+different operating systems. </p>
+
+<p>Furthermore, it is possible to cause Swing components to mimic the look and 
+feel of a specific platform no matter what platform the program is running on. 
+This is known as <i>pluggable look and feel</i>.</p>
+
+<p>From this point forward 
+in this eBook, I will attempt to incorporate Swing into the chapters 
+in a meaningful way. </p>
+
+<p>Swing components support the 
+JDK 1.1 Delegation Event Model discussed in an earlier chapter. If you want to use Swing components, 
+you must program using the Delegation Event Model. </p>
+
+<p>In some cases, conversion of an application or applet from AWT components to 
+Swing components involves nothing more complex than replacing the AWT components 
+with corresponding Swing components. For example, the Swing component that 
+corresponds to the AWT <b>Button</b> component is the Swing <b>JButton</b>
+component. </p>
+
+<p>In all cases that you use Swing you will need to import, or otherwise 
+recognize the package that contains the Swing classes so that the compiler and 
+interpreter will have access to those classes.</p>
+
+<p>This chapter is designed as a follow-on to the earlier chapter titled <em>Java080 Delegation Event Model, A First Look</em>. As such, 
+material presented in that chapter will not be repeated here. </p>
+
+<p>The two AWT sample programs in that chapter were converted to Swing programs 
+for presentation in this chapter using the simple substitution procedure 
+described above. As you will see, the Swing version of one of the sample 
+program behaves essentially the same as its AWT counterpart. The Swing 
+version of the other sample program does not behave the same as its AWT 
+counterpart. </p>
+
+<p>So, where does that leave us? Well, fortunately, from an event handling 
+viewpoint, Swing components operate the same as AWT components <em>(except that 
+Swing provides a number of new event types)</em>. From other viewpoints, Swing 
+components may or may not behave the same as their AWT counterparts. </p>
+
+<p>In addition, many Swing components don't have an AWT counterpart. A 
+number of new components are included in the Swing library that 
+don't exist in the AWT <em>(tooltips, progress bars, trees, etc.)</em>. </p>
+
+<p >Since this chapter is primarily concerned with event handling, we 
+will pursue the Swing components from an event-handling viewpoint in this chapter 
+and leave other considerations surrounding Swing components for later 
+chapters. As you will see, this chapter will raise some interesting questions 
+regarding the behavior of Swing components, but won't provide the answers to 
+those questions.</p>
+
+<h1 ><a name="sample_program"></a>Sample Program</h1>
+
+<p>The sample program in this section, named <a href="#Listing_2">SwingEvent08</a>, was created by 
+replacing each instance of <b>Frame</b> in the program named <b>Event08</b>, 
+with an instance of <b>JFrame</b>. In addition, an import declaration was 
+added to cause the Swing classes to be accessible to the compiler and the 
+interpreter.</p>
+
+<p>The event handling in this program is exactly the same as in <b>Event08</b> 
+from the earlier chapter. 
+If you haven't reviewed that program, and the chapter on the Delegation Event 
+Model, you should probably go back and review it now. </p>
+
+<p>This program illustrates the use of <i>Event Sources</i>,<i>
+Event Listeners</i>, and <i>Adapters </i>in the <i>Delegation Event Model</i> 
+for Swing components. </p>
+
+<p>Briefly, this application instantiates an object that creates a user 
+interface consisting of a simple <b>JFrame </b>object. This object is an <i>
+Event Source</i> that notifies two different <i>Event Listener</i> objects of <b>
+Window </b>events. </p>
+
+<p>One of the <b>Listener </b>objects <i>implements </i>the <b>WindowListener
+</b>interface and defines all of the methods declared in that interface. </p>
+
+<p>The other <b>Listener </b>object <i>extends </i>the <b>Adapter
+</b>class named <b>WindowAdapter</b>. As explained in the earlier chapter, the 
+purpose of <b>Adapter </b>classes <em>(as used in this context)</em> is to implement the <b>
+Listener </b>interfaces and to define all of the methods with empty methods.</p>
+
+<p>Classes that <i>extend </i>the <b>Adapter </b>classes can then 
+selectively override only those methods of interest. This Listener object 
+overrides only two of the methods. </p>
+
+<p>This program was tested using JDK 1.1.6 and Swing 1.0.1 under Win95. <em>
+(It was more recently tested using JDK 12.0.1 running under Windows 7.)</em></p>
+
+<p >The output produced by running the program is presented in the 
+comments at the beginning of the program listing.</p>
+
+<h2 ><a name="interesting_code_fragments"></a>Interesting Code Fragments</h2>
+
+<p><a href="#Listing_1">Listing 1</a> provides the first and only code fragment, that I am going to show and discuss. 
+This fragment shows the 
+beginning of the constructor for the <b>GUI</b>
+class. The fragment illustrates that this program uses the <b>JFrame</b> class to 
+instantiate a top-level container for the graphical user interface instead of a
+<strong>Frame</strong> object as in the 
+earlier chapter.</p>
+
+<p >If you compile and run this program, you will see that it 
+behaves essentially the same as its AWT counterpart named
+<b>Event08</b> that was discussed extensively in the 
+earlier chapter. </p>
+
+<h2 ><sub><a name="program_listing"></a></sub>Program Listing</h2>
+
+<p>A complete listing of the program is provided in <a href="#Listing_2">Listing 2</a>.</p>
+
+<h1 ><a name="Another_Sample_Program">Another Sample Program</a></h1>
+
+<p>This is a Swing version of the program named <b>Event09</b> from the 
+earlier chapter.</p>
+
+<p>The purpose of this program is to illustrate that in some cases, conversion 
+of an AWT program to a Swing program isn't as simple as importing the Swing 
+package and replacing the AWT components with their Swing counterparts. </p>
+
+<p>That is what was done with this program. This program is identical to 
+the AWT program named <b>Event09</b> except that all instances of <b>Frame</b> 
+were replaced by <b>JFrame</b> and the Swing package was imported. </p>
+
+<p>The intended behavior of this program <em>(go back and review </em> <b><em>Event09</em></b><em>
+if necessary)</em> is to display the coordinates of the mouse pointer each time the mouse is clicked inside the client area of the
+<b>JFrame</b>. </p>
+
+<p>Initially, this program appears to work correctly. As each new click 
+occurs on the client area of the <b>JFrame</b>, a new pair of coordinate values 
+is displayed. However, the previous pairs of coordinate values does not disappear as 
+is the case with the program named <b>Event09</b>. Thus, the behavior is 
+significantly different.</p>
+<p>It will be left as an exercise for the student to dig into the documentation on Swing in order to understand and explain this 
+behavior. </p>
+
+<p>As explained earlier, this chapter is concerned with event handling in Swing 
+and this program is adequate to illustrate the use of the Delegation Event Model 
+with Swing. I will leave the subtle behavior of the Swing components for 
+discussion in future chapters. </p>
+
+<p >If you compile and execute this program, whenever you click the 
+mouse inside the <b>JFrame</b>, you should see the coordinates of the mouse 
+pointer displayed above the mouse pointer. </p>
+
+<h2 ><a
+name="swingevent09_interesting_code_fragments"></a>Interesting Code Fragments</h2>
+
+<p><a href="#Listing_3">Listing 3</a> shows the only code fragment that will be highlighted 
+for this program in this chapter. 
+This fragment illustrates 
+how this program extends <b>JFrame</b> into a new class named <b>MyFrame</b> to 
+make it possible to override the <b>paint()</b> method of the <b>JFrame</b> 
+class. Recall that in the program named <b>Event09</b>, the <b>Frame</b> class 
+was extended in a similar way. </p>
+
+<h2 ><a name="Program_Listing01">Program Listing</a></h2>
+
+<p>A complete listing of this program is provided in <a href="#Listing_4">
+Listing 4</a>.</p>
+
+<h1 ><a name="summary0">Summary</a></h1>
+
+<p>Swing provides a new set of lightweight components that can be programmed 
+using the Delegation Event Model first introduced in JDK 1.1. </p>
+
+<p>In some cases, all that is necessary to convert a program built around AWT 
+components to a program built around Swing components is to import the Swing 
+classes and replace all instances of AWT components with their Swing 
+counterparts. </p>
+
+<p>In other cases, a simple substitution as described above will not produce the 
+same behavior. </p>
+
+<p>Many of the Swing components do not have an AWT counterpart. The Swing 
+classes contain a number of components that were never added to the AWT 
+component library. </p>
+
+<p>This chapter has dealt exclusively with the use of the Delegation Event Model 
+for programming Swing components and has left some unanswered questions 
+regarding how the behavior of Swing components does, and in some cases does not, 
+mirror that of their AWT counterparts. </p>
+
+<h1><a name="Run_the_program">Run the programs</a></h1>
+
+<p>I encourage you to copy the code from <a href="#Listing_2">Listing 2</a> and 
+<a href="#Listing_4">Listing 4</a>. Compile the code and 
+execute it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong> </p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java081 Swing and the Delegation Event 
+					Model</li>
+					<li>File: Java081.htm
+</li>
+					<li>Published: 11/17/13</li>
+<li>Revised: 05/04/20</li>
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+	
+<h1><a name="Listings01">Listings</a></h1>
+<!--``1List01-->
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. Beginning of the 
+				constructor for the GUI class.</p>
+<pre>class GUI{
+  public GUI(){//constructor
+    //Create a new JFrame object
+    JFrame displayWindow = new JFrame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");</pre>
+
+
+
+</div>
+<p>.</p>
+<div class="a">	
+<p><strong><a name="Listing_2">Listing 2</a>. Complete listing of the 
+				program named SwingEvent08.</strong></p>
+
+<pre>
+/*File SwingEvent08.java Copyright, R.G.Baldwin
+Rev 05/09/98
+
+This is a Swing version of the program named Event08.
+
+The purpose of this program is to illustrate that in many
+respects, programming with Swing components is no different
+from programming with AWT components.
+
+Conversion of this program from AWT to Swing involved
+nothing more complex than using the search and replace
+feature of an editor to replace all instances of Frame
+with JFrame and to import the swing package.
+
+Illustrates the use of Event Sources, Event Listeners, and
+Adapters in the Delegation Event Model for Swing
+components.
+
+Briefly, this application instantiates an object which;
+creates a user interface consisting of a simple JFrame;
+object.  This object is an Event Source which notifies two
+different Event Listener objects of Window events.
+
+One of the Listener objects implements the WindowListener
+interface and overrides all of the methods declared in;
+that interface.
+
+The other Listener object extends the Adapter class named;
+WindowAdapter.  The purpose of Adapter classes is to
+implement the  Listener interfaces and to define all of
+the methods with empty methods.  Classes which extend the
+Adapter classes can then selectively override only those
+methods of interest.  This Listener object overrides only
+two of the methods.
+
+Note that this application does not terminate and return
+control to the operating system.  You must forcefully
+terminate it.
+
+Tested using JDK 1.1.6 and Swing 1.0.1 under Win95.
+
+When executed, this application places a simple empty;
+JFrame object on the screen.
+
+Starting the program produces screen output similar to
+the following:
+
+WProc1 windowActivated test msg
+Wproc1 windowOpened test msg
+
+Pressing the minimize button on the JFrame produces the;
+output similar to the following:
+
+WProc1 windowIconified test msg
+******** WProc2 windowIconified test msg
+WProc1 windowDeactivated test msg
+
+Restoring the JFrame after minimization produces the;
+output similar to the following:
+
+WProc1 windowActivated test msg
+WProc1 windowDeiconified test msg
+******** WProc2 windowDeiconified test msg
+WProc1 windowActivated test msg
+
+Closing the JFrame by pressing the X-icon in the upper;
+right of the JFrame produces output similar to the;
+following:
+
+WProc1 windowClosing test msg
+WProc1 windowDeactivated test msg
+WProc1 windowClosed test msg
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SwingEvent08 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUInterface object
+  }//end main
+}//end class SwingEvent08
+//=======================================================//
+
+//The following class is used to instantiate a user;
+// interface object, to instantiate two Listener objects,
+// and to register those two objects for notification;
+// whenever a Window event occurs.
+class GUI{
+  public GUI(){//constructor
+    //Create a new JFrame object
+    JFrame displayWindow = new JFrame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");
+
+    //Instantiate two Listener objects which will process
+    // Window events
+    WProc1 winProcCmd1 = new WProc1(displayWindow);
+    WProc2 winProcCmd2 = new WProc2();
+
+    //Register the Listener objects for notification of
+    // Window events. This object is the Event Source.
+    displayWindow.addWindowListener(winProcCmd1);
+    displayWindow.addWindowListener(winProcCmd2);
+
+    //windowActivated and windowOpened test messages
+    // are produced here
+    displayWindow.setVisible(true);
+
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//The following two classes can be used to instantiate;
+// Listener objects. Note that this class implements the;
+// WindowListener interface.  This requires that all the
+// methods declared in the interface be overridden in this
+// class. This class overrides all of the methods  and
+// displays a descriptive message whenever one of the
+// methods is invoked.
+class WProc1 implements WindowListener{
+  //used to save a reference to the JFrame object
+  JFrame displayWindowRef;
+
+  WProc1(JFrame windowIn){//constructor
+    // save ref to JFrame object
+    this.displayWindowRef = windowIn;
+  }//end constructor
+
+  public void windowClosed(WindowEvent e){
+    System.out.println("WProc1 windowClosed test msg");
+  }//end windowClosed()
+
+  public void windowIconified(WindowEvent e){
+    System.out.println("WProc1 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowOpened(WindowEvent e){
+    System.out.println("WProc1 windowOpened test msg");
+  }//end windowOpened()
+
+  public void windowClosing(WindowEvent e){
+    System.out.println("WProc1 windowClosing test msg");
+    displayWindowRef.dispose();//generate WindowClosed
+  }//end windowClosing()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+                      "WProc1 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+  public void windowActivated(WindowEvent e){
+    System.out.println("WProc1 windowActivated test msg");
+  }//end windowActivated()
+
+  public void windowDeactivated(WindowEvent e){
+    System.out.println(
+                     "WProc1 windowDeactivated test msg");
+  }//end windowDeactivated()
+}//end class WProc1
+//=======================================================//
+
+//This and the previous class can be used to instantiate;
+// Listener objects. Note that this class extends an;
+// Adapter class which can be used to avoid the;
+// requirement to define all of the methods of the
+// actual Listener class named WindowListener. This class
+// overrides only two of the methods declared in the;
+// interface.  It displays a message whenever one of the
+// methods is invoked.
+class WProc2 extends WindowAdapter{
+
+  public void windowIconified(WindowEvent e){
+    System.out.println(
+              "******** WProc2 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+            "******** WProc2 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+}//end class WProc2
+</pre>
+</div>
+<p>.</p>
+	
+<!--``1List03-->
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a>. The class named MyFrame.</p>
+<pre>
+class MyFrame extends JFrame{
+  int clickX;
+  int clickY;
+
+  public void paint(Graphics g){
+    g.drawString(
+             "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint()
+}//end class MyFrame
+</pre>
+
+</div>
+<!--``2-->
+<p>.</p>
+<div class="a">
+<p><strong><a name="Listing_4">Listing 4</a>. Complete listing of the 
+				program named SwingEvent09.</strong></p>
+
+<pre>
+/*File SwingEvent09.java Copyright, R.G.Baldwin
+Rev 5/9/98 by RGB
+This is a Swing version of the program named Event09.
+
+The purpose of this program is to illustrate that in some
+cases, conversion of an AWT program to a Swing program
+isn't as simple as importing the Swing package and replacing
+the AWT components with Swing components.
+
+That is what was done with this program.  In other words,
+this program is identical to the AWT program named Event09
+except that all instances of Frame were replaced by JFrame
+and the Swing package was imported.
+
+At the surface, the program appears to work correctly.
+However, as each new click occurs on the client area of
+the JFrame, a new pair of coordinate values is displayed,
+but the previous pairs of coordinate values don't disappear
+as is the case with the program named Event09.
+
+Furthermore, in some cases, while this GUI is on the screen,
+if focus is transferred to a different application, all of
+the coordinate values except the last one created will;
+disappear.
+
+It will be left as an exercise for the student to dig into
+the (currently very sparse) documentation on Swing in order
+to understand and explain this behavior.
+
+Illustrates the use of Event Sources, Event Listeners, and;
+Adapters in the Delegation Event Model for Swing.
+
+This program instantiates a Listener object to process;
+mouse events. When a mouse press occurs in a JFrame object,
+the program gets the coordinates and then displays those
+coordinates near the point of the mouse press.
+
+Tested using JDK 1.1.6 and Swing 1.0.1 under Win95.
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class SwingEvent09 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class SwingEvent09
+//=======================================================//
+
+//Subclass JFrame in order to override the paint method.
+class MyFrame extends JFrame{
+  int clickX;
+  int clickY;
+
+  public void paint(Graphics g){
+    g.drawString(
+             "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint()
+}//end class MyFrame
+//=======================================================//
+
+//The following class is used to instantiate a;
+// graphical user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create a new JFrame object, set size, title, etc.
+    MyFrame displayWindow = new MyFrame();
+    displayWindow.setSize(300,300);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");
+    displayWindow.setVisible(true);
+
+    //Instantiate and register an anonymous Listener;
+    // object which will terminate the program when the;
+    // user closes the JFrame.
+    displayWindow.addWindowListener(new WProc1());
+
+    //Instantiate and register an anonymous Listener;
+    // object that will process mouse events to determine
+    // and display the coordinates when the user presses
+    // the mouse button in the client area of the JFrame.
+    displayWindow.addMouseListener(
+                             new MouseProc(displayWindow));
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//This listener class monitors for mouse presses and;
+// displays the coordinates of the mouse pointer when the
+// mouse is pressed on the source object. Note that this
+// class extends is an adapter class.
+class MouseProc extends MouseAdapter{
+  MyFrame refToWin; //save a reference to the source here
+
+  MouseProc(MyFrame inWin){//constructor
+    refToWin = inWin;//save ref to window
+  }//end constructor
+
+  //Override the mousePressed method to determine and;
+  // display the coordinates when the mouse is pressed.
+  public void mousePressed(MouseEvent e){
+    //Get X and Y coordinates of mouse pointer and store
+    // in an instance variable of the JFrame object
+    refToWin.clickX = e.getX();
+    refToWin.clickY = e.getY();
+
+    //Force the JFrame object to be repainted in order to
+    // display the coordinate information.
+    refToWin.repaint();
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+//The following listener is used to terminate the program
+// when the user closes the frame.  Note that this class
+// extends an adapter class.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//
+</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

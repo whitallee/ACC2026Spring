@@ -1,0 +1,708 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4070</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4070: The Comparable Interface, Part 1</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a>
+	<ul>
+		<li><a href="#Generics">Generics</a></li>
+		<li><a href="#Specialization">Specialization</a></li>
+		<li><a href="#To_cast_or_not_to_cast_">To cast, or not to cast</a></li>
+		<li><a href="#Comparable_not_required_for_a_List_">Comparable interface not required for a List</a></li>
+	</ul>
+	</li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+		<li><a href="#We_will_begin_with_a_quiz">We will begin with a quiz</a><ul>
+			<li><a href="#What_caused_the_compiler_error">What caused the compiler error?</a></li>
+			<li><a href="#Implements_Collection_and_List_">Implements Collection and 
+		List </a></li>
+			<li><a href="#Specialization_">Specialization</a></li>
+		</ul>
+		</li>
+		<li><a href="#Modified_program">Modified program</a><ul>
+			<li><a href="#The_corrected_code">The corrected code</a></li>
+			<li><a href="#Casting_to_type_List">Casting to type List</a></li>
+		</ul>
+		</li>
+		<li><a href="#The_List_contract_for_the_add_method_">The List contract for the add method</a><ul>
+			<li><a href="#Controlling_the_locations_of_the_elements">Controlling the locations of the elements</a></li>
+			<li><a href="#Add_method_actually_does_an_insert">Add method actually does an insert</a></li>
+		</ul>
+		</li>
+		<li><a href="#An_aside_regarding_the_Vector_class">The Vector class</a></li>
+		<li><a href="#More_on_the_List_contract_">More on the List contract 
+		</a> 
+		<ul>
+			<li><a href="#Duplicates_are_allowed_in_a_List_">Duplicates are allowed in a List</a></li>
+		</ul>
+		</li>
+		<li><a href="#One_more_sample_program">One more sample program</a><ul>
+			<li><a href="#No_need_to_cast_to_type_List">No need to cast to type List</a></li>
+		</ul>
+		</li>
+		<li><a href="#What_happened_to_the_Comparable_interface">What happened to the Comparable interface?</a><ul>
+			<li><a href="#Comparable_interface_is_not_required_for_a_List">Comparable interface is not required for a List</a></li>
+			<li><a href="#No_requirement_to_compare">No requirement to compare 
+			</a> </li>
+			<li><a href="#Comparison_is_required">Comparison is required for a SortedSet 
+			</a> </li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java <em>Collections Framework</em> in particular.</p>
+<p>This is also the first chapter in a pair of chapters on the <strong>Comparable</strong> interface. The purpose of the chapters in 
+this pair is to teach you about the interactions between the 
+<strong>Comparable</strong> interface and the Collections Framework, particularly with respect to the 
+<strong>Set</strong>, <strong>SortedSet</strong>, and <strong>SortedMap</strong> interfaces of the Collections Framework.</p>
+<p>This chapter also explains the <em>(lack of)</em> interaction between the <strong>Comparable</strong> interface and the Java Collections Framework with respect to collections of type 
+<strong>List</strong>.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Comparable01. </li>
+	<li><a href="#Listing_2">Listing 2</a>. The code with the problem. </li>
+	<li><a href="#Listing_3">Listing 3</a>. The program named Comparable02. </li>
+	<li><a href="#Listing_4">Listing 4</a>. The corrected code. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Display using an iterator. </li>
+	<li><a href="#Listing_6">Listing 6</a>. The program named Comparable03.</li>
+	<li><a href="#Listing_7">Listing 7</a>. No need to cast to type List. </li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>In this chapter, I will begin discussing the interaction between the <b>
+Comparable</b>  interface and the Collections Framework. </p>
+<h2><a name="Generics">Generics</a></h2>
+<p>The code in this chapter is written with no thought given to 
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">Generics</a>. As a 
+result, if you copy and compile this code, you will probably get a warning about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this course. Therefore, for 
+purposes of this course, you can simply ignore those warnings.</p>
+<h2><a name="Specialization">Specialization</a> </h2>
+<p>I will provide a concrete example of the specialization that occurs while 
+moving down the interface hierarchy from <b>Collection</b> to <b>List</b>. I 
+will show an example of using two different overloaded versions of the <b>add</b> 
+method to add new elements to an <b>ArrayList</b> object. One version is 
+declared in the <b>Collection</b> interface and both versions are declared in 
+the <b>List</b> interface. </p>
+<h2><a name="To_cast_or_not_to_cast_">To cast, or not to cast </a> </h2>
+<p>I will illustrate the use of a <i>cast</i> to change the type of a reference 
+from <b>Collection</b> to <b>List</b>, in order to call a version of the <b>add</b> 
+method that is declared only in the <b>List</b> interface. </p>
+<p>This version of the program, <i>
+(in which the <strong>add</strong> method actually does an insert)</i> makes it possible for the user to control 
+the location of each individual element added to a <b>List</b>. The fact that 
+the location of each element can be controlled in a <b>List</b> is what causes a
+<b>List</b> to be an <i>ordered</i> collection. </p>
+<p>I will illustrate that a cast is not required on a reference being treated as 
+type <b>Collection</b> in order to call the version of the <b>add</b> method 
+that is declared in the <b>Collection</b> interface. This version of the <b>add</b> 
+method supports the addition of new elements only at the end of the <b>List</b>.</p>
+<h2><a name="Comparable_not_required_for_a_List_">Comparable interface not required for a List
+</a> </h2>
+<p>Finally, I will show that it is not necessary for objects to implement the <b>
+Comparable</b> interface to make them eligible for inclusion in a <b>List</b>. I 
+will tell you that it is necessary for objects to implement the <b>Comparable</b> 
+interface to make them eligible for inclusion in a <b>SortedSet</b>, although I 
+won&#39;t demonstrate that in this chapter. </p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="We_will_begin_with_a_quiz">We will begin with a quiz</a> </h2>
+<p>Let&#39;s begin with a quiz to test your prior knowledge of the 
+Collections Framework. </p>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321</li>
+	<li>D. 4321</li>
+	<li>E. 1234</li>
+	<li>F. 12344</li>
+	<li>G. None of the above.</li>
+</ul>
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named Comparable01.</p>
+<pre>//File Comparable01.java
+
+import java.util.*;
+
+public class Comparable01{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable01
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+//--------------------
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(0,new MyClass(4));
+    ref.add(1,new MyClass(4));
+    ref.add(2,new MyClass(3));
+    ref.add(3,new MyClass(2));
+    ref.add(4,new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+//--------------------
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+<p>If your answer was <b>A. Compiler Error</b>, you were correct. </p>
+<h3><a name="What_caused_the_compiler_error">What caused the compiler error?</a> 
+</h3>
+<p>The compiler error was caused by the code shown in <a href="#Listing_2">Listing 2</a>.</p>
+
+<!--``1List02-->
+<div class="a">
+	<p>
+<a name="Listing_2">Listing 2</a>. The code with the problem.</p>
+<pre>  public static void fillIt(Collection ref){
+    ref.add(0,new MyClass(4));
+</pre>
+</div>
+<!--``2-->
+<p>The problem here is that the method named <b>fillIt</b> receives a 
+reference to an object of the <b>ArrayList</b> class as the interface type <b>
+Collection</b>, and attempts to call the following overloaded method on that 
+reference: </p>
+<p><b>add(int index, Object element)</b> </p>
+<p>However, the <strong>Collection</strong> interface knows nothing about a method having 
+that signature.</p><h3><a name="Implements_Collection_and_List_">Implements Collection and List </a>
+</h3>
+<p>The <b>ArrayList</b> class implements both the <b>Collection</b> interface 
+and the <b>List</b> interface. As you may recall from earlier chapters 
+in this series, <b>List</b> is a sub-interface of <b>Collection</b>. The <b>List</b> 
+interface declares the following overloaded versions of the <b>add</b> method:
+</p>
+<ul>
+	<li><b>add(Object o)</b> </li>
+	<li><b>add(int index, Object element)</b> </li>
+</ul>
+<p>The second of these two methods, which is called in <a href="#Listing_2">
+Listing 2</a>, is unknown to the <b>Collection</b> 
+interface. The <b>Collection</b> interface declares only the first version of 
+the <b>add</b> method shown above. </p>
+<h3><a name="Specialization_">Specialization </a> </h3>
+<p>This is the result of specialization. A <b>List</b> object is a 
+more-specialized collection than a <b>Collection</b> object.</p>
+<p>Therefore, the version of the <b>add</b> method that requires two parameter 
+cannot be called on a reference to an <b>ArrayList</b> object when that object 
+is treated as the generic type <b>Collection</b>. </p>
+<h2><a name="Modified_program">Modified program</a> </h2>
+<p>Now, take a look at the modified version of the program as shown in 
+<a href="#Listing_3">Listing 
+3</a>. </p>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321</li>
+	<li>D. 4321</li>
+	<li>E. 1234</li>
+	<li>F. 12344</li>
+	<li>G. 443521</li>
+	<li>H. None of the above.</li>
+</ul>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_3">Listing 3</a>. The program named Comparable02.
+
+	</p>
+
+<pre>//File Comparable02.java
+
+import java.util.*;
+
+public class Comparable02{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable02
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+//--------------------
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ((List)ref).add(0,new MyClass(4));
+    ((List)ref).add(1,new MyClass(4));
+    ((List)ref).add(2,new MyClass(3));
+    ((List)ref).add(3,new MyClass(2));
+    ((List)ref).add(4,new MyClass(1));
+    ((List)ref).add(3,new MyClass(5));
+  }//end fillIt()
+}//end class Populator
+//--------------------
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+
+}//end MyClass</pre>
+
+</div>
+<p>If your answer was <b>G. 443521</b>, you are correct. </p>
+<h3><a name="The_corrected_code">The corrected code</a> </h3>
+<p>This version of the program illustrates a mechanism for correcting 
+the problem in the earlier program shown in <a href="#Listing_1">Listing 1</a>. The updated code that 
+corrected the problem is shown in <a href="#Listing_4">Listing 4</a>. </p>
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. The corrected 
+				code.</p>
+<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ((List)ref).add(0,new MyClass(4));
+    ((List)ref).add(1,new MyClass(4));
+    ((List)ref).add(2,new MyClass(3));
+    ((List)ref).add(3,new MyClass(2));
+    ((List)ref).add(4,new MyClass(1));
+    ((List)ref).add(3,new MyClass(5));
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div>
+<!--``2-->
+<p>The incoming parameter to the <b>fillIt </b>method in <a href="#Listing_4">Listing 4</a> is a 
+reference to an object instantiated from the <b>ArrayList</b> class. That 
+reference is passed to the <strong>fillIt</strong> method as type <b>Collection</b>, which is legal because the <b>
+ArrayList</b> class implements both the <b>Collection</b> interface and the <b>
+List</b> interface. </p>
+<h3><a name="Casting_to_type_List">Casting to type List</a> </h3>
+<p>The code in <a href="#Listing_4">Listing 4</a> uses a cast to temporarily convert the incoming reference from type
+<b>Collection</b> to type <b>List</b>. Because the version of the <b>add</b> 
+method that is used in <a href="#Listing_4">Listing 4</a> is declared in the <b>List</b> interface, and 
+because the <b>ArrayList</b> class correctly implements the <b>List</b> 
+interface, that version of the <b>add</b> method can be called on the reference 
+to the <b>ArrayList</b> object when it is treated as the interface type <b>List</b>. 
+Hopefully this is review material for you at this point. If not, you may need to 
+go back and study some of my earlier chapters. </p>
+<h2><a name="The_List_contract_for_the_add_method_">The List contract for the add method
+</a> </h2>
+<p><a href="#Listing_4">Listing 4</a> also illustrates part of the contract for this version of the <b>
+add</b> method in the <b>List</b> interface. This version of the <b>add</b> 
+method makes it possible to specify the position of each element added to the <b>
+ArrayList</b> object. </p>
+<blockquote><i>(A List is an ordered collection because the user has 
+control over the location of each element in the collection relative to the 
+other elements in the collection.)</i> </blockquote>
+<h3><a name="Controlling_the_locations_of_the_elements">Controlling the locations of the elements</a> 
+</h3>
+<p>In <a href="#Listing_4">Listing 4</a>, the elements are added to the <b>ArrayList</b> object in 
+increasing element order during the first five invocations of the <b>add</b> 
+method. However, the sixth invocation of the <b>add</b> method adds a new 
+element at index position 3. </p>
+<h3><a name="Add_method_actually_does_an_insert">Add method actually does an insert</a> 
+</h3>
+<p>A portion of the contract for this version of the <b>add</b> method in the <b>
+List</b> interface is as follows:</p>
+<blockquote>
+	<i>&quot;Inserts the specified element at the specified position in this list 
+	(optional operation). Shifts the element currently at that position (if any) 
+	and any subsequent elements to the right (adds one to their indices).&quot;</i></blockquote>
+<p>Thus, the new element is inserted at that position, and the other elements 
+are pushed up, as required, toward higher index values to make room for the new 
+element. </p>
+<h2><a name="An_aside_regarding_the_Vector_class">The Vector class</a> 
+</h2>
+<p>Here is an interesting side note. The Java <b>Vector</b> class has been around 
+longer than the Collections Framework. Somewhere along the way, the <b>Vector</b> 
+class was upgraded to cause it to become a concrete implementation of the <b>
+Collection</b> interface and the <b>List</b> interface. </p>
+<p>As a result of the upgrade, the <b>Vector</b> class now provides an 
+implementation of the <b>add</b> method described above. Except for the order of 
+the parameters, that <b>add </b>method appears to have the same behavior as the 
+older method named: </p>
+<p><b>insertElementAt(Object elem, int index)</b> </p>
+<p>You can insert elements into a <b>Vector</b> object by calling the <b>add</b> 
+method on that object while treating it as type <b>List</b>. However, since the 
+older <b>insertElementAt</b> method is not declared in the <b>List</b> 
+interface, you cannot insert an element into the <b>Vector</b> object by 
+calling the <b>insertElementAt</b> method while treating it as a <b>List</b>. 
+In order to call that method, you must treat it as type <b>Vector</b>. </p>
+<h2><a name="More_on_the_List_contract_">More on the List contract </a> </h2>
+<p>Another portion of the contract for a <b>List</b> object is that the <b>
+iterator</b> method</p>
+<blockquote>
+	<i>&quot;Returns an iterator over the elements in this list in proper sequence.&quot;</i></blockquote>
+<p>As a result, the code shown in <a href="#Listing_5">Listing 5</a>, along with the overridden <b>
+toString</b> method of the <b>MyClass</b> class causes the program to display 
+the elements in the following order: </p>
+<p><b>443521</b>. </p>
+
+<!--``1List05-->
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. Display using 
+				an iterator.</p>
+<pre>    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+<h2><a name="Duplicates_are_allowed_in_a_List_">Duplicates are allowed in a List
+</a></h2>
+<p>One final thing that is worthy of note in this program is that a <b>List</b> 
+objects allows duplicates. Hence, the populated collection contains references 
+to two separate 
+objects that are equal to one another in the sense that they both contain the 
+same values in their instance variables. </p>
+<h2><a name="One_more_sample_program">One more sample program</a> </h2>
+<p>Let&#39;s take a look at one more sample program. What output is produced by the 
+program shown in <a href="#Listing_6">Listing 6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321</li>
+	<li>D. 4321</li>
+	<li>E. 1234</li>
+	<li>F. 12344</li>
+	<li>G. None of the above.</li>
+</ul>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_6">Listing 6</a>. The program named Comparable03. </p>
+
+<pre>//File Comparable03.java
+
+import java.util.*;
+
+public class Comparable03{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable03
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new ArrayList();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+<p>If you selected <b>C. 44321</b>, you are correct. </p>
+<h3><a name="No_need_to_cast_to_type_List">No need to cast to type List</a> 
+</h3>
+<p>As shown in <a href="#Listing_7">Listing 7</a>, this program takes a different approach to solving the 
+problem originally exposed in the program shown in <a href="#Listing_1">Listing 1</a>. </p>
+
+<!--``1List07-->
+	<div class="a">
+<a name="Listing_7">Listing 7</a>. No need to 
+				cast to type List.
+
+				<pre>class Populator{
+  public static void fillIt(
+                       Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div>
+<!--``2-->
+<p>This program does not change the type of the incoming reference to the <b>
+ArrayList</b> object in the <b>fillIt</b> method. Rather, it continues to treat 
+the incoming reference as type <b>Collection</b>, and calls the version of the
+<b>add</b> method that is declared in the <b>Collection</b> interface. This 
+avoids the requirement to cast the incoming reference to type <b>List</b>. </p>
+<p>The contract for this version of the <b>add</b> method in the <b>List</b> 
+interface is</p>
+<blockquote>
+	<i>&quot;Appends the specified element to the end of this list (optional 
+	operation).&quot;</i></blockquote>
+<p>As a result, the new elements are added to the collection in increasing index 
+order. Since an iterator on a <b>List</b> returns the elements in increasing 
+index order, this program displays the elements in the same order that they are 
+added. </p>
+<h2><a name="What_happened_to_the_Comparable_interface">What happened to the Comparable interface?</a> 
+</h2>
+<p>By now, you are probably wondering what all of this has to do with the <b>
+Comparable</b> interface, because I haven&#39;t mentioned that interface since the 
+introductory comments at the beginning of the chapter. </p>
+<h3><a name="Comparable_interface_is_not_required_for_a_List">Comparable interface is not required for a List</a> 
+</h3>
+<p>Actually, the purpose of this chapter is to illustrate <strong><em>the lack of</em></strong> any 
+requirement to make use of the <b>Comparable</b> interface with <b>List</b> 
+objects. In particular, the purpose is to illustrate that this is one of the 
+features that differentiates between a <b>List</b> object and a <b>Set</b> or <b>
+SortedSet</b> object. </p>
+<p>A <b>List</b> can be used as a container for other objects regardless of 
+whether or not those objects implement the <b>Comparable</b> interface. However, 
+in the next chapter, we will see that objects must implement the <b>Comparable</b> 
+interface in order to be eligible for inclusion in collections that implement 
+the <b>SortedSet</b> interface. </p>
+<p>This and the next several chapters are intended to provide you with an 
+understanding of the interaction between the <b>Comparable</b> interface, the <b>Comparator</b> 
+interface, and the Collections Framework. </p>
+<h3><a name="No_requirement_to_compare">No requirement to compare</a> </h3>
+<p>Because a <b>List</b> makes no attempt to eliminate duplicate elements, or to 
+sort the elements on the basis of their values, there is no requirement to <i>
+compare</i> objects when placing them in a <b>List</b>. Therefore, objects whose 
+references are stored in a <b>List</b> are not required to implement the <b>
+Comparable</b> interface <i>(but they may implement the Comparable interface 
+without causing any harm)</i>. </p>
+<h3><a name="Comparison_is_required">Comparison is required</a> for a SortedSet 
+</h3>
+<p>Because a <b>SortedSet</b> does eliminate duplicates and does sort the 
+elements on the basis of their values, there is a requirement to <i>compare</i> 
+each new element with the existing elements in a <b>SortedSet</b> whenever a new 
+element is added to the collection. Therefore, objects whose references are 
+stored in a <b>SortedSet</b> are required to implement the <b>Comparable</b> 
+interface. </p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a>, <a href="#Listing_3">Listing 3</a>, and <a href="#Listing_6">Listing 6</a>. 
+Paste the code into your Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter, I began discussing the interaction between the <b>Comparable</b> 
+interface and the Collections Framework. </p>
+<p>I provided a concrete example of the specialization that occurs when moving 
+down the interface hierarchy from <b>Collection</b> to <b>List</b>. I showed an 
+example of using two different overloaded versions of the <b>add</b> method to 
+add new elements to an <b>ArrayList</b> object. One version is declared in the
+<b>Collection</b> interface and both versions are declared in the <b>List</b> 
+interface. </p>
+<p>I illustrated the use of a <i>cast</i> to change the type of a reference from
+<b>Collection</b> to <b>List</b>, in order to call a version of the <b>add</b> 
+method that is declared only in the <b>List</b> interface. This version makes it 
+possible for the user to control the location of each individual element added 
+to a <b>List</b>. </p>
+<p>I illustrated that a cast is not required on a reference being treated as 
+type <b>Collection</b> in order to call the version of the <b>add</b> method 
+that is declared in the <b>Collection</b> interface. This version of the <b>add</b> 
+method supports the addition of new elements only at the end of the <b>List</b>.
+</p>
+<p>Finally, I explained that it is not necessary for objects to implement the <b>
+Comparable</b> interface to make them eligible for inclusion in a <b>List</b>.
+</p>
+<p>Although I didn&#39;t demonstrate it, I told you that it is necessary for objects 
+to implement the <b>Comparable</b> interface to make them eligible for inclusion 
+in a <b>SortedSet</b>. </p>
+
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter will begin exploring the interaction 
+between the <b>Comparable</b> interface and the <b>SortedSet</b> interface of 
+the <i>Collections Framework.</i></p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4070: The Comparable Interface, Part 1</li>
+					<li>File: Java4070.htm
+</li>
+					<li>Published: 04/19/13</li>
+					<li>Revised: 04/15/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

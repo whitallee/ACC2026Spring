@@ -1,0 +1,643 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java095</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+.auto-style2 {
+	text-align: left;
+}
+
+.auto-style3 {
+	color: blue;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+
+
+
+<h1 class="auto-style1">Java095 Container Events and More on Inner Classes</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><span class="auto-style3">
+    <a href="#Overview">Overview</a>
+    </span>
+	<ul>
+		<li><a href="#Figures">Figures</a></li>
+		<li><a href="#Listings">Listings</a></li>
+	</ul>
+	</li>
+	<li><span class="auto-style3">
+    <a href="#First_sample_program">First sample program
+        </a>
+        </span>
+	<ul>
+		<li><span class="auto-style3"><a href="#Interesting_code_fragments">Interesting code fragments
+        </a>
+        </span></li>
+		<li><span class="auto-style3"><a href="#First_sample_program_listing">First sample program listing
+    	</a>
+    </span></li>
+	</ul>
+	</li>
+	<li><span class="auto-style3">
+    <a href="#Second_sample_program_discussion">Second sample program discussion</a>
+        </span>
+	<ul>
+		<li><span class="auto-style3"><a href="#Second_sample_program_listing">Second sample program listing</a> </span></li>
+	</ul>
+	</li>
+	<li><span class="auto-style3"><a href="#Miscellaneous">Miscellaneous</a></span></li>
+</ul>
+	<h1 class="auto-style2"><a name="Overview">Overview</a></h1>
+	<p>If you instantiate an object of type <strong>ContainerListener</strong> and register that object on a 
+	<strong>Container</strong> object, the listener object will be notified whenever an object is added to or removed from the container. Information regarding the object that was added is passed into the
+	<strong>ContainerListener</strong> methods in the form of an object of type 
+	<strong>ContainerEvent</strong>. </p>
+<p>I recommend that you open another copy of this chapter in a separate browser 
+window and use the following links to easily find and view the Figures and 
+Listings while you are reading about them.</p>
+<h2><a name="Figures">Figures</a></h2>
+<ul>
+	<li><a href="#Figure_1">Figure 1. Output image from program Event32.</a></li>
+</ul>
+<h2><a name="Listings">Listings</a></h2>
+<ul>
+	<li><a href="#Listing_1">Listing 1. Beginning of the class</a></li>
+	<li><a href="#Listing_2">Listing 2. The addButtons method</a></li>
+	<li><a href="#Listing_3">Listing 3. Set the layout.</a></li>
+	<li><a href="#Listing_4">Listing 4. Register a listener object to be notified of container events.</a></li>
+	<li><a href="#Listing_5">Listing 5. Add the buttons.</a></li>
+	<li><a href="#Listing_6">Listing 6. Add a display label.</a></li>
+	<li><a href="#Listing_7">Listing 7. Add a WindowListener</a></li>
+	<li><a href="#Listing_8">Listing 8. The componentAdded method.</a></li>
+	<li><a href="#Listing_9">Listing 9. The actionPerformed method.</a></li>
+	<li><a href="#Listing_10">Listing 10. Event32 program listing.</a></li>
+	<li><a href="#Listing_11">Listing 11. Event33 program listing.</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="First_sample_program">First sample program</a></h1>
+	<p>This program illustrates container events. It also further illustrates 
+	the use of inner classes, both named and anonymous. </p>
+<p>The program also illustrates a programming style involving the use of 
+the controlling class as a listener class that implements multiple 
+listener interfaces. In this situation, the listener methods are defined as 
+methods of the controlling class rather than being defined as methods of 
+separately compiled listener classes. </p>
+<p>Finally, it illustrates the fact that the code in one event handler can 
+register event listeners for other components. </p>
+<p>In this program, a <b>ContainerListener </b>object monitors for the addition 
+of buttons to a <b>Frame </b>object. Each time a new button is added to the <b>
+Frame</b>, an <b>ActionEvent </b>listener is registered on that new <b>Button
+</b>object. All of the <b>ActionEvent </b>listener objects that are registered 
+on the buttons are of the same <b>ActionEvent </b>class. </p>
+<p>To make the whole thing interesting, this program creates the keyboard and 
+provides the skeleton code for a four-function calculator, including the event 
+handler needed to respond to calculator keystrokes (pressing the buttons on the 
+calculator with the mouse) and identify the button that was pressed on the 
+calculator keyboard. The output image is shown in <a href="#Figure_1">Figure 1</a> below.</p>
+<p><a name="Figure_1">Figure 1</a>. Output image from program Event32.</p>
+<p><img alt="Missing image" height="351" src="event32.jpg" width="351"/></p>
+<p>The program does not provide the code that would be required to 
+process the keystrokes to do the calculations, or to display the results of the 
+calculations since that is not the primary purpose of the program. </p>
+<p>However, the program does provide a place to display results in the form of a 
+yellow <b>Label </b>object and it uses that display area to display the text on 
+the button each time a calculator button is pressed.. </p>
+<p>When you run the program and click on the buttons in the <b>Frame </b>object, 
+the labels on the buttons are displayed in the yellow <b>Label</b> object. </p>
+	<h2><a name="Interesting_code_fragments">Interesting code fragments</a></h2>
+	<p>Because of its unusual structure, this program contains a number of 
+	interesting code fragments. We will begin with the first few lines of the 
+	definition of the controlling class as shown in <a href="#Listing_1">Listing 1</a>. Note in particular that the 
+	controlling class implements two listener interfaces. Having done this, 
+	the listener methods declared in these interfaces can be (must be) defined 
+	in the controlling class, and an object of the controlling class (<b>this</b>) 
+	is the listener object that gets registered on itself (<b>this</b>). </p>
+<p>We also declare an instance variable named <b>displayLabel</b>. Later we will 
+use this variable to refer to a yellow <b>Label</b> object that has been added 
+to the <b>Frame</b> object to serve as a display window. </p>
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a>. Beginning of the class</p>
+
+<pre>
+class Event32 extends Frame
+  implements ContainerListener,ActionListener{
+
+  Label displayLabel;//reference to a Label for display
+</pre>
+</div>
+
+<p>We will skip the <strong>main</strong> method (that does nothing but instantiate an instance of the controlling class) and move on to a method that will add a series of buttons to the 
+<strong>Frame</strong> object. (See <a href="#Listing_2">Listing 2</a>.) The number of buttons added and the labels on the buttons are determined from the length and the substring values of an incoming String object.</p>
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a>. The addButtons method</p>
+
+<pre>
+void addButtons(String labels){
+  for(int cnt = 0; cnt &lt; labels.length();cnt++){
+    this.add(new Button(labels.substring(cnt,cnt+1)));
+  }//end for loop
+}//end addButtons()
+</pre>
+</div>
+
+<p>That brings us to the constructor where we set the layout manger to <b>
+GridLayout </b>with four columns and an unspecified number of rows. (Setting the 
+number of rows to zero causes it to be unspecified.) We also set a vertical and 
+horizontal gap size of three pixels between the components that are to be placed 
+in the container. (See <a href="#Listing_3">Listing 3</a>.)</p>
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a>. Set the layout.</p>
+
+<pre>
+  this.setLayout(new GridLayout(0,4,3,3));
+</pre>
+</div>
+
+<p>The next interesting code fragment is shown in <a href="#Listing_4">Listing 4</a>. 
+This is a statement in the constructor to 
+register a listener object to be notified of container events. This listener 
+object will receive an event notification each time a component is added to the 
+container. </p>
+<p>The most interesting thing about this code fragment is the dual use of the <b>
+this</b> reference. The object of the controlling class is the <i>source </i>of 
+events. In this case, it is a <b>Frame</b> object. </p>
+<p>The <i>listener </i>object that is being registered to receive notification 
+of events is also the object of the controlling class. This is possible because 
+the controlling class implements the <b>ContainerListener</b> interface and 
+contains definitions of the two methods declared in that interface. </p>
+<p>Thus, this statement registers the object of the controlling class as a 
+listener on itself as a source (hence <b>this </b>object is both a source and a 
+listener). </p>
+
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a>. Register a listener object to be 
+	notified of container events.</p>
+
+<pre>
+  this.addContainerListener(this);
+</pre>
+</div>
+
+<p>Next, we call the <b>addButtons()</b> method, defined in <a href="#Listing_2">
+Listing 2</a> above, to add a 
+series of buttons to this <b>Frame </b>object with the labels being determined 
+by the individual characters in the <b>String </b>object passed as a parameter. </p>
+<div class="a">
+	<p><a name="Listing_5">Listing 5</a>. Add the buttons.</p>
+
+<pre>
+  this.addButtons("789+456-123=0.X/C");
+</pre>
+</div>
+
+<p>As shown in <a href="#Figure_1">Figure 1</a>, we also add a display label and make it yellow in
+<a href="#Listing_6">Listing 6</a>. This is a quick and easy way 
+to create a place to display information but the placement of the display area 
+doesn't look much like a calculator. A better way would be to construct two <b>
+Panel</b> objects, one for the display and the other for the keyboard, and to 
+place one above the other in the layout. </p>
+<div class="a">
+	<p><a name="Listing_6">Listing 6</a>. Add a display label.</p>
+
+<pre>
+  displayLabel = new Label("00000");
+  this.add(displayLabel);
+  displayLabel.setBackground(Color.yellow);
+</pre>
+</div>
+
+<p>Following this, we register an anonymous <b>WindowListener</b> object using 
+an anonymous <b>WindowListener</b> class. This listener object will cause the 
+program to terminate when the user clicks the <i>close</i> button on the <b>
+Frame</b> object. Note that this class automatically <b>extends</b> the <b>
+WindowAdapter</b> class. </p>
+<p>If you don't understand this syntax, you should go back and review the 
+chapter on inner classes. </p>
+<div class="a">
+	<p><a name="Listing_7">Listing 7</a>. Add a WindowListener</p>
+
+<pre>
+  this.addWindowListener(
+    new WindowAdapter(){//anonymous class definition
+      public void windowClosing(WindowEvent e){
+        System.exit(0);//terminate the program
+      }//end windowClosing()
+    }//end WindowAdapter
+  );//end addWindowListener
+}//end constructor
+</pre>
+</div>
+
+<p>That completes the interesting code in the constructor. </p>
+<p>Following the constructor, we define the <b>componentAdded</b> method that is 
+declared in the <b>ContainerListener</b> class (which is implemented by the 
+controlling class of this program). This method is called each time a new 
+component is added to this <b>Frame </b>object. </p>
+<p>Each time a component is added, this method confirms that the new component 
+is a button, and if so, it registers an <b>ActionListener</b> object to process 
+action events on that individual button. All of the <b>ActionListener</b> 
+objects are of the same <b>ActionListener</b> class. The <b>ActionListener</b> 
+class is this extended <b>Frame </b>class which implements the <b>ActionListener
+</b>interface and defines the <b>actionPerformed</b> method of that interface.
+</p>
+<p>Again note that <b>this</b> object is the action listener object being 
+registered because the controlling class implements the <b>ActionListener</b> 
+interface, and the <b>actionPerformed()</b> method is defined in the controlling 
+class. </p>
+<p>The <b>getChild()</b> method of the <b>ContainerEvent</b> object returns a 
+reference to the component that was added to the container creating the event in 
+the first place. The reference is returned as type <b>Component, </b>cast to a
+<b>Button</b>, and assigned to the reference variable named <b>button</b>. The 
+object named <b>button</b> then becomes the source on which the <b>
+ActionListener</b> object is registered. </p>
+<p>We also define an empty <b>componentRemoved()</b> method to satisfy the 
+compiler (all methods declared in the <b>ContainerListener</b> interface must be 
+defined). </p>
+<div class="a">
+	<p><a name="Listing_8">Listing 8</a>. The componentAdded method.</p>
+
+<pre>
+public void componentAdded(ContainerEvent e){
+  if(e.getID() == ContainerEvent.COMPONENT_ADDED){
+    if(e.getChild() instanceof Button){
+      Button button = (Button)e.getChild();
+      //Register an ActionListener object on the button
+      button.addActionListener(this);
+    }//end if statement
+  }//end if statement
+}//end componentAdded()
+
+
+ public void componentRemoved(ContainerEvent e){}
+</pre>
+</div>
+
+<p>Finally, we see the <b>actionPerformed </b>method in <a href="#Listing_9">
+Listing 9</a> that is called whenever the user clicks one of the buttons that 
+were added to the <b>Frame </b>object.
+</p>
+<p>All this method does is display the button's label. However, if you wanted to 
+expend the programming effort, you could implement the calculator logic at this 
+point. </p>
+<div class="a">
+	<p><a name="Listing_9">Listing 9</a>. The actionPerformed method.</p>
+
+<pre>
+public void actionPerformed(ActionEvent e){
+  displayLabel.setText(e.getActionCommand());
+}//end actionPerformed
+</pre>
+</div>
+
+	<h2><a name="First_sample_program_listing">First sample program listing</a></h2>
+	<p>A complete listing of the program named <strong>Event32</strong> is shown in
+	<a href="#Listing_10">Listing 10</a>.</p>
+<div class="a">
+	<p><a name="Listing_10">Listing 10</a>. Event32 program listing.</p>
+
+<pre>
+
+/*File Event32.java
+Copyright, R.G.Baldwin
+
+This program illustrates container events.
+
+It also illustrates the use of inner classes.
+
+It also illustrates the use of the controlling class as a
+listener class that implements multiple listener
+interfaces. In this situation, the listener methods are
+defined as methods of the controlling class rather than
+being defined as methods of separately compiled listener
+classes.
+
+It also illustrates the fact that the code in one event
+handler can register event listeners for other components.
+
+In particular, a ContainerListener object monitors for the
+addition of buttons to a Frame object. Each time a new
+button is added to the Frame, an ActionEvent listener is
+registered on that new Button object. All of the
+ActionEvent listener objects that are registered on the
+buttons are of the same ActionEvent class.
+
+To make the whole thing interesting, this program creates
+the keyboard and provides the skeleton code for a
+four-function calculator, including the event handler
+needed to respond to keystrokes and identify the key.
+However, it does not provide the code that would be
+required to process the keystrokes or display the results
+of the calculations since that is not the primary purpose
+of the program. It does provide a place to display results
+in the form of a yellow Label object.
+
+When you run the program and click on the buttons in the
+Frame object, the labels on the buttons are displayed in
+the yellow display area.
+
+This program was tested using JDK 1.1.3 under Win95.
+
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+//Note that the controlling class implements both the
+// ContainerListener interface and the ActionListener
+// interface.
+class Event32 extends Frame
+ implements ContainerListener,ActionListener{
+
+ Label displayLabel;//reference to a Label for display
+
+ //=====================================================//
+
+ public static void main(String[] args){
+ new Event32();//instantiate this object
+ }//end main
+ //=====================================================//
+
+ //This method adds a series of Button objects to this
+ // Frame object. The number of buttons added and the
+ // labels on the buttons are determines from the length
+ // and the substring values of an incoming String object.
+ void addButtons(String labels){
+ for(int cnt = 0; cnt &lt; labels.length();cnt++){
+ this.add(new Button(labels.substring(cnt,cnt+1)));
+ }//end for loop
+ }//end addButtons()
+
+ //=====================================================//
+
+ public Event32(){//constructor
+
+ //Set the layout manager to GridLayout with 4 col and
+ // an unspecified number of rows (0) with a three-pixel
+ // horizontal and vertical gap.
+ this.setLayout(new GridLayout(0,4,3,3));
+
+ this.setSize(280,280);
+ this.setTitle("Copyright R.G.Baldwin");
+
+ //Add a container listener which will receive an event
+ // notification each time a component is added to the
+ // container. The container is this Frame object. Also
+ // the listener class that implements the
+ // ContainerListener interface is this extended Frame
+ // class (hence this as an argument).
+ this.addContainerListener(this);
+
+ //Add a series of buttons to this Frame object with
+ // the labels determined by the individual characters
+ // in the String object passed as a parameter.
+ this.addButtons("789+456-123=0.X/C");
+
+ //Add a display label and make it yellow.
+ displayLabel = new Label("00000");
+ this.add(displayLabel);
+ displayLabel.setBackground(Color.yellow);
+
+
+ this.setVisible(true);
+
+ //---------------------------------------------------//
+ //Anonymous inner-class listener to terminate program
+ this.addWindowListener(
+ new WindowAdapter(){//anonymous class definition
+ public void windowClosing(WindowEvent e){
+ System.exit(0);//terminate the program
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ }//end constructor
+
+ //=====================================================//
+ //This is the overridden componentAdded method of the
+ // ContainerListener class. It is invoked each time a
+ // new component is added to this Frame object. Note
+ // that each time a component is added, it confirms that
+ // the component is a button, and if so, it registers an
+ // ActionListener object to process Action events on that
+ // individual button. All of the ActionListener objects
+ // are of the same class. The ActionListener class is
+ // this extended Frame class which implements the
+ // ActionListener interface and overrides the
+ // actionPerformed method of that interface.
+ public void componentAdded(ContainerEvent e){
+ if(e.getID() == ContainerEvent.COMPONENT_ADDED){
+ if(e.getChild() instanceof Button){
+ Button button = (Button)e.getChild();
+ //Register an ActionListener object on the button
+ button.addActionListener(this);
+ }//end if statement
+ }//end if statement
+ }//end componentAdded()
+
+ //This empty method is required to satisfy the compiler
+ // because this extended Frame class implements the
+ // ContainerListener interface.
+ public void componentRemoved(ContainerEvent e){}
+
+ //=====================================================//
+ //This is the actionPerformed method that is invoked
+ // whenever the user clicks one of the buttons that are
+ // added to the Frame object. All it does is display
+ // the button's label.
+ // However, if you wanted to expend the programming
+ // effort, you could implement the calculator at this
+ // point.
+ public void actionPerformed(ActionEvent e){
+ displayLabel.setText(e.getActionCommand());
+ }//end actionPerformed
+ //=====================================================//
+}//end class Event32
+//=======================================================//
+</pre>
+</div>
+
+<h1><a name="Second_sample_program_discussion">Second sample program discussion</a></h1>
+	<p>This program, named <strong>Event33</strong> replicates the functionality of the previous program named 
+	<strong>Event32</strong>. However, it does so using only anonymous inner classes. This 
+	program is provided so that you can compare the syntax using only anonymous 
+	inner classes with the comparable version named <strong>Event32</strong> that uses named 
+	inner classes for the listener classes. </p>
+<h2><a name="Second_sample_program_listing">Second sample program listing</a></h2>
+
+<p>A complete listing of the program named <strong>Event33</strong> is shown in
+<a href="#Listing_11">Listing 11</a>. Note that this program illustrates nested anonymous inner classes. In 
+particular, the anonymous inner class for the <b>ActionListener</b> is nested inside the anonymous inner class for the <b>
+ContainerListener</b>. </p>
+<div class="a">
+	<p><a name="Listing_11">Listing 11</a>. Event33 program listing.</p>
+
+<pre>
+/*File Event33.java
+Copyright, R.G.Baldwin
+
+This program replicates the functionality of the program
+named Event32.java. However, it does so using only
+anonymous inner classes. This program is provided so
+that you can compare the syntax using only anonymous
+inner classes with a comparable version named Event32 that
+uses named inner classes for the listener classes.
+
+This program was tested using JDK 1.1.3 under Win95.
+
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+//Note that this controlling class does not implement any
+// listener interfaces. They are effectively implemented
+// in the inner classes.
+class Event33 extends Frame{
+
+ Label displayLabel;//reference to a Label for display
+
+ //=====================================================//
+ public static void main(String[] args){
+ new Event33();//instantiate this object
+ }//end main
+ //=====================================================//
+
+ //This method adds a series of Button objects to this
+ // Frame object. The number of buttons added and the
+ // labels on the buttons are determines from the length
+ // and the substring values of an incoming String object.
+ void addButtons(String labels){
+ for(int cnt = 0; cnt &lt; labels.length();cnt++){
+ this.add(new Button(labels.substring(cnt,cnt+1)));
+ }//end for loop
+ }//end addButtons()
+ //=====================================================//
+
+ public Event33(){//constructor
+
+ this.setLayout(new GridLayout(0,4,3,3));
+ this.setSize(280,280);
+ this.setTitle("Copyright R.G.Baldwin");
+
+
+ //The following anonymous class definition registers an
+ // anonymous ContainerListener object on this Frame
+ // object. The ContainerListener object in turn
+ // registers an anonymous Action Listener object on
+ // each of the buttons that are added to the Frame
+ // object.
+ this.addContainerListener(//add anonymous Listener
+ new ContainerListener(){
+ public void componentAdded(ContainerEvent e){
+ if(e.getID() == ContainerEvent.COMPONENT_ADDED){
+ if(e.getChild() instanceof Button){
+ Button button = (Button)e.getChild();
+ //The following code registers an anonymous
+ // ActionListener object on each button
+ // object that is added to the Frame object.
+ button.addActionListener(
+ new ActionListener(){
+ public void actionPerformed(ActionEvent e){
+ displayLabel.setText(e.getActionCommand());
+ }//end actionPerformed
+ }//end new actionListener
+ );//end add anonymous ActionListener
+ }//end if statement
+ }//end if statement
+ }//end componentAdded()
+
+ //The following empty method is required to satisfy
+ // the requirement to define all of the methods
+ // that are declared in the ContainerListener
+ // interface.
+ public void componentRemoved(ContainerEvent e){}
+ }//end new ContainerListener
+ );//end add anonymous ContainerListener
+
+ //---------------------------------------------------//
+ //Add a series of buttons to this Frame object with
+ // the labels determined by the individual characters
+ // in the String object passed as a parameter.
+ this.addButtons("789+456-123=0.X/C");
+
+ //Add a display label and make it yellow.
+ displayLabel = new Label("00000");
+ this.add(displayLabel);
+ displayLabel.setBackground(Color.yellow);
+ this.setVisible(true);
+
+ //---------------------------------------------------//
+ //Anonymous inner-class listener to terminate program
+ this.addWindowListener(
+ new WindowAdapter(){//anonymous class definition
+ public void windowClosing(WindowEvent e){
+ System.exit(0);//terminate the program
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ }//end constructor
+ //=====================================================//
+}//end class Event33
+//=======================================================//
+</pre>
+</div>
+
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name:Java095 Container Events and More on Inner Classes</li>
+					<li>File: Java095.htm</li>
+					<li>Published: December 10, 1997</li>
+					<li>Revised: May 5, 2021</li>
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+	<p>-end- </p>
+
+
+</body>
+</html>

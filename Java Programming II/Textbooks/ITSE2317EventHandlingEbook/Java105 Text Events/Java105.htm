@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>... in Java by Richard G Baldwin</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MSOFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><!--start--></P>
+<I><H3 ALIGN="CENTER">Richard G Baldwin (512) 223-4758, </I><A HREF="mailto:baldwin@austin.cc.tx.us"><I>baldwin@austin.cc.tx.us</I></A><I>, </I><A HREF="http://www2.austin.cc.tx.us/baldwin/"><I>http://www2.austin.cc.tx.us/baldwin/</I></A></H3>
+<H2 ALIGN="CENTER"><!--title-->Event Handling in JDK 1.1, Text Events<!--endTitle--></H2>
+<P>Java Programming, Lecture Notes # 105, Revised 02/24/99. </P>
+
+<UL>
+<LI><A HREF="#Preface">Preface</A> </LI>
+<LI><A HREF="#Introduction">Introduction</A> </LI>
+<LI><A HREF="#Overview">Overview</A> </LI>
+<LI><A HREF="#Sample_Program">Sample Program</A> </LI>
+
+<UL>
+<LI><A HREF="#Interesting_Code_Fragments">Interesting Code Fragments</A> </LI>
+<LI><A HREF="#Program_Listing">Program Listing</A> </LI></UL>
+</UL>
+
+<P><HR></P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Preface"></A>Preface</H2>
+</FONT><P>Students in Prof. Baldwin's <B><U>Intermediate Java Programming</B></U> classes at ACC will be responsible for knowing and understanding all of the material in this chapter beginning with the Spring semester of 1999. </P>
+<P>On 2/24/99, it was confirmed that the sample program in this chapter operates properly under JDK 1.2. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Introduction"></A>Introduction</H2>
+</FONT><P>This chapter was originally written on September 22, 1998, using the JDK 1.1.6 download package. The purpose of this chapter is to illustrate the use of <B>text</B> events. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Overview"></A>Overview</H2>
+</FONT><P>If you instantiate an object of type <B>TextListener</B> and register that object on an object that has an <B>addTextListener()</B> method, the <B>textValueChanged()</B> method of the listener object will be invoked whenever the text contents of the source object changes. </P>
+<P>A text event is a semantic event, and several different sources can multicast the event. I will explain the use of the <B>TextListener</B> interface and <B>TextEvent</B> class using a simple <B>TextField</B> object.. </P>
+<P>Information regarding the event is passed into the <B>textValueChanged() </B>method in the form of an object of type <B>TextEvent</B>. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Sample_Program"></A>Sample Program</H2>
+</FONT><P>This program places a <B>TextField</B> object in a <B>Frame</B> object and registers a <B>TextListener</B> object on the <B>TextField</B>. </P>
+<P>Whenever the text contents of the <B>TextField</B> change, a <B>TextEvent</B> is generated causing the <B>textValueChanged()</B> method of the listener object to be invoked.<br/>
+<br/>
+Code in the <B>textValueChanged()</B> method extracts the source of the event from the incoming <B>TextEvent</B> object, and uses that source information to get and display the current text contents of the <B>TextField</B> object. </P>
+<P>You can exercise the program by typing into the <B>TextField</B>. </P>
+<P>Tested using JDK1.1.6 under Win95. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="Interesting_Code_Fragments"></A>Interesting Code Fragments</H3>
+</FONT><P>We will begin with the first line of the definition of the controlling class, which simply shows that this class extends <B>Frame</B> and implements <B>TextListener</B>. Because it implements <B>TextListener</B>, an object of the controlling class is a listener object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>public class Event36 <I>extends</I> <B>Frame</B> <I>implements</I> <B>TextListener</B>{</PRE></TD>
+</TR>
+</TABLE>
+
+<P><br/>
+I will skip the <B>main()</B> method that simply instantiates an object of the controlling class (which is a <B>TextListener</B> object). </P>
+<P>The next fragment shows that part of the constructor that instantiates the <B>TextField </B>object, registers the listener (<B>this</B>) on it, and places it in the <B>Frame</B> object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Event36(){//constructor
+ TextField myTextField =
+ new <B>TextField</B>("Initial String",30);
+ myTextField.<B>addTextListener</B>(this);
+ this.<B>add</B>(myTextField);</PRE></TD>
+</TR>
+</TABLE>
+
+<P><br/>
+After this, I perform the necessary chores associated with the <B>Frame</B> parameters. That code can be viewed in the program listing later, and is not shown here. </P>
+<P>That brings me to the <B>textValueChanged()</B> method of the <B>TextListener</B> interface that responds to text events, and displays the contents of the <B>TextField</B> every time its value changes. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=574>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> public void <B>textValueChanged</B>(<B>TextEvent</B> e){
+ System.out.println(
+ ((TextField)e.<B>getSource</B>()).<B>getText</B>());
+ }//end TextValueChanged()
+
+}//end class Event36 definition</PRE></TD>
+</TR>
+</TABLE>
+
+<P><br/>
+That is the end of this simple program. </P>
+<P>The code in the program that was not highlighted in the above fragments can be viewed in the complete listing of the program that follows in the next section. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="Program_Listing"></A>Program Listing</H3>
+</FONT><P>This section contains a listing of the program.</P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Event36.java, Copyright, R.G.Baldwin
+Illustrates Text events.
+
+This program puts a TextField object in a Frame object and
+registers a TextListener object on the TextField. Whenever
+the text contents of the TextField change, a TextEvent is
+generated causing the textValueChanged() method of the
+listener object to be invoked.
+
+Code in the method extracts the source of the event from
+the incoming TextEvent object, and uses that information
+to get and display the current text contents of the
+TextField object.
+
+Tested using JDK1.1.6 under Win95.
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+//=======================================================//
+public class Event36 extends Frame implements TextListener{
+ public static void main(String[] args){
+ new Event36();
+ }//end main
+ //-----------------------------------------------------//
+
+ Event36(){//constructor
+ TextField myTextField =
+ new TextField("Initial String",30);
+ myTextField.addTextListener(this);
+ this.add(myTextField);
+
+ //Adjust Frame parameters and make it visible
+ this.setLayout(new FlowLayout());
+ this.setSize(350,100);
+ this.setTitle("Copyright, R.G.Baldwin");
+ this.setVisible(true);
+
+ // Anonymous inner class to terminate program.
+ addWindowListener(new WindowAdapter() {
+ public void windowClosing(WindowEvent e) {
+ System.exit(0);}});//end WindowListener
+ }//end constructor
+ //-----------------------------------------------------//
+
+ //Define the method of the TextListener interface
+ public void textValueChanged(TextEvent e){
+ System.out.println(
+ ((TextField)e.getSource()).getText());
+ }//end TextValueChanged()
+
+}//end class Event36 definition
+//=======================================================//</PRE></TD>
+</TR>
+</TABLE>
+
+<P>-end- <!--end--></P></BODY>
+</HTML>

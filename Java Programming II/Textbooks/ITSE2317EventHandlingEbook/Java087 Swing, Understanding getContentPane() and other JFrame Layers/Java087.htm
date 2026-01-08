@@ -1,0 +1,952 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java087</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java087 Swing, Understanding getContentPane() and other JFrame Layers</h1>
+
+<h1 class="style1"><a name="Table_of_contents">Table of contents</a></h1>
+
+
+<ul><li><a href="#Table_of_contents">Table of contents</a>
+</li><li><a href="#Preface">Preface</a>
+<ul><li><a href="#Viewing_tip">Viewing tip</a>
+<ul><li><a href="#Figures">Figures</a>
+</li><li><a href="#Listings">Listings</a>
+</li></ul></li></ul></li><li><a href="#Introduction">Introduction</a>
+</li><li><a href="#General_discussion">General discussion</a>
+<ul><li><a href="#Synopsis">Synopsis</a>
+</li><li><a href="#More_detailed_discussion">More detailed discussion</a>
+</li></ul></li><li><a href="#Sample_program">Sample program</a>
+<ul><li><a href="#Interesting_code_fragments">Interesting code fragments</a>
+</li><li><a href="#Complete_program_listings">Complete program listing</a>
+</li></ul></li><li><a href="#Miscellaneous">Miscellaneous</a>
+</li></ul>
+
+
+	<h1><a name="Preface">Preface</a></h1>
+	
+	<p>This chapter is one in a collection of chapters designed for teaching <em>
+	ITSE2317 - Java Programming (Intermediate)</em> at Austin Community College 
+	in Austin, TX.</p>
+<p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written around 1997. However, despite many improvements in Java since 
+then, most of what was true then is still true in 2020.)</em></p>
+	
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+<ul>
+<li><a href="#Figure_1">Figure 1.</a>
+ Graphic screen output for the program named 
+SwingPane01.
+</li>
+<li><a href="#Figure_2">Figure 2.</a>
+ Screen output after clicking green button.
+</li>
+<li><a href="#Figure_3">Figure 3.</a>
+ Text output.
+</li>
+</ul>
+
+
+	<h3><a name="Listings">Listings</a></h3>
+<ul>
+<li><a href="#Listing_1">Listing 1.</a>
+ Import declarations.
+</li>
+<li><a href="#Listing_2">Listing 2.</a>
+ Beginning of the class named SwingPane01.
+</li>
+<li><a href="#Listing_3">Listing 3.</a>
+ Beginning of the constructor.
+</li>
+<li><a href="#Listing_4">Listing 4.</a>
+ Get and display types of panes.
+</li>
+<li><a href="#Listing_5">Listing 5.</a>
+ Instantiate JLabel and JTextField objects.
+</li>
+<li><a href="#Listing_6">Listing 6.</a>
+ Instantiate a green JButton object.
+</li>
+<li><a href="#Listing_7">Listing 7.</a>
+ Instantiate a yellow JButton object.
+</li>
+<li><a href="#Listing_8">Listing 8.</a>
+ The end of the constructor.
+</li>
+<li><a href="#Listing_9">Listing 9.</a>
+ The class named MyActionListener.
+</li>
+<li><a href="#Listing_10">Listing 10.</a>
+ Complete listing of SwingPane01.
+</li>
+</ul>
+
+
+<h1><a name="Introduction">Introduction</a></h1>
+<p>Previous chapters involving Swing told you that when you add a component to a
+<strong>JFrame</strong> object, unlike with the <strong>AWT</strong>, you must 
+use statements similar to the following.</p>
+
+
+
+<div class="a">
+<pre>
+myJFrameObject.getContentPane().add(myChildComponent);
+</pre>
+</div>
+
+<p>As you have probably suspected, there is a lot more to it than just inserting
+<strong>getContentPane() </strong>between the object reference and the <strong>
+add</strong> method.</p>
+<p>The purpose of this chapter is to help you understand why you need to call
+<strong>getContentPane</strong> or some similar method to add components 
+to a <strong>JFrame</strong> object, remove components from a <strong>JFrame</strong> 
+object, or set the layout for a <strong>JFrame</strong> object. </p>
+<p>Note that this also applies to container objects of type <strong>
+JInternalFrame</strong> and <strong>JDialog</strong> as well. </p>
+	<h1 class="style1"><a name="General_discussion">General discussion</a></h1>
+<p>When programming with the <strong>AWT</strong>, you can place a <strong>Panel</strong> 
+object in a <strong>Frame</strong> object and place other components on the
+<strong>Panel</strong> object if you wish, or you can simply place other 
+components directly on the viewable area of the <strong>Frame</strong> object.</p>
+
+<div class="a">
+
+<p>The viewable area of <strong>Frame</strong> or a <strong>JFrame</strong> is the 
+<em>bounds</em> minus the <em>insets</em>. Insets are used to account for the space covered by the borders and the values of the insets on all four sides are available by invoking the method named
+<strong>getInsets()</strong> on the object.</p></div>
+
+<p>However, you should not place components directly on the viewable area of a <strong>JFrame</strong> 
+object. <em>(This was illustrated by the program named Event09 in the earlier 
+chapter titled&nbsp; Java081 Swing and the Delegation Event Model.)</em></p>
+<p>An object of type <strong>JRootPane</strong> is automatically placed in the
+<strong>JFrame</strong> completely covering the viewable area of the <strong>
+JFrame</strong> object. </p>
+<p>One way or another, if you want to place components in the <strong>JFrame</strong>, 
+you must deal with the <strong>JRootPane</strong> object. </p>
+<p>One way to deal with it, and this is the way that you will find recommended 
+in many current discussions on the subject, is simply ignore the technical 
+details and insert a call to the <strong>getContentPane</strong> method 
+between the reference to the <strong>JFrame</strong> and the <strong>add</strong> 
+method. </p>
+<p>My preference is to first understand why you need to 
+do that, and in those cases where that is the appropriate thing to do, go ahead 
+and do it. </p>
+<p>In those cases where invoking <strong>getContentPane </strong>is not the 
+most appropriate thing to do, do the thing that is most appropriate. </p>
+<p>Note: You will find much discussion in this chapter about some components 
+being on top of other components. These discussions apply only to Swing 
+lightweight components. Remember that heavyweight <em>(AWT)</em> components are always on top 
+of lightweight <em>(Swing)</em> components regardless of what the text in this chapter may 
+say. </p>
+	
+	<h2><a name="Synopsis">Synopsis</a></h2>
+	
+	<p><strong>JRootPane</strong> is a container. The instance of <strong>JRootPane</strong> that is automatically placed in a
+<strong>JFrame</strong> object contains at least two other objects. </p>
+<ul>
+	<li>An object of type <strong>JLayeredPane</strong> that we will refer to 
+	simply as the <strong><em>layeredPane</em></strong>.</li>
+	<li>An object of type <strong>JPanel</strong> that we will refer to simply 
+	as the <strong><em>glassPane</em></strong>.</li>
+</ul>
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<p>
+There is also an optional <em>menuBar</em> object that comes in here somewhere, but since it is not essential for understanding what is going on at this level, I have elected to defer the discussion until the discussion on Swing menus.</p>
+</div>	
+
+<p>The <i>layeredPane</i> and the <i>glassPane</i> also fill 
+the viewable area of the <strong>JFrame</strong> object. The <i>glassPane</i> 
+is on top of the <i>layeredPane</i>, and as the name might imply, it 
+is <em>normally</em> transparent. </p>
+<p>Components on the <i>layeredPane</i> are visible through the
+<i>glassPane</i>. Mouse events are capable of penetrating the
+<i>glassPane</i> and reaching components on the <i>layeredPane</i> 
+as long as the <i>glassPane</i> is transparent. </p>
+<p>The <i>layeredPane</i> contains another component of type <strong>
+JPanel</strong> that we will refer to as the <strong><em>contentPane</em></strong>. 
+This is the same pane that we are dealing with when we invoke the <strong>
+getContentPane</strong> method on the <strong>JFrame</strong> object. </p>
+<p>The <i>layeredPane</i> has a very interesting behavior. </p>
+<p>In the same sense that we can add components to the <i>contentPane</i>, 
+we can also add components to the <i>layeredPane</i>. </p>
+<p>When we add components to the <i>contentPane</i>, they are all 
+added at the same layer and components added first are painted on top of 
+components added later. </p>
+<p>However, when we add components to the <i>layeredPane</i>, we can 
+specify the layer number that we want the component to be drawn on. </p>
+<p>Components drawn on layers with high <em>(algebraically signed)</em> numbers are 
+painted on top of components on layers with smaller <em>(algebraically signed)</em> 
+numbers. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<p>
+Large negative numbers are smaller than small positive numbers in this case with 
+the smallest allowable layer number being -29999.</p>
+</div>	
+
+<p>In addition, a variety of methods are available to move components from one 
+layer to another at runtime. This gives us the ability to not only control the 
+order in which components are painted initially, but also to modify that order 
+later at runtime. </p>
+<p>This layering concept is a much more powerful approach than simply inserting
+<strong>getContentPane</strong> between the reference to the <strong>JFrame</strong> 
+object and the invocation of the <strong>add</strong> method.</p>
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<p>
+Layering has a long history of beneficial results in computer graphics such as 
+Computer Aided Design and game programming.</p>
+</div>	
+
+
+<p>So, where does the <i>contentPane</i> object that belongs to the
+<i>layeredPane</i> fit into this? </p>
+<p>Components on the <i>contentPane</i> are painted behind all 
+components that may be added directly to the <i>layeredPane</i>. In 
+fact, the layer position for the <i>contentPane</i> is effectively 
+layer number -30000. The smallest layer number that can be used to place a 
+component directly on a layer is -29999. <em>(We will place one there in our sample 
+program later.)</em></p>
+
+<h2><a name="More_detailed_discussion">More detailed discussion</a></h2>
+
+<p>As mentioned earlier, a <strong>JRootPane</strong> contains a <em>glassPane</em> <em>(</em><strong><em>JPanel</em></strong><em>) </em>and a <i>layeredPane</i> 
+<em>(</em><strong><em>JLayeredPane</em></strong>). The <i>layeredPane</i> contains an 
+optional <i>menuBar</i> <em>(<strong>JMenuBar</strong>)</em> and a <i>contentPane</i> <em>(</em><strong><em>JPanel</em></strong>). 
+The <i>menuBar</i> component is optional and may or may not exist at any given time. The 
+<em>layeredPane</em>, <i>contentPane</i>, and <i>glassPane</i> 
+will always be available. </p>
+<p>The syntax for dealing with these panes is somewhat different 
+from what you are accustomed to. For example, the typical syntax for adding a 
+component to a container would look something like the following: </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<pre>
+parentContainer.add(childObject);
+</pre>
+</div>	
+
+<p>However, the required syntax for dealing with these panes is more like one of the 
+following: </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+<pre>
+myJFrameObject.getContentPane().add(myChildComponent);
+
+myJFrameObject.getLayeredPane().add(
+                    myChildComponent, new Integer(5));
+</pre>
+</div>	
+
+<p>The first statement above adds a component to the <i>contentPane</i>. 
+The second statement adds a component to layer number 5 of the <em>layeredPane</em>. </p>
+<p>The same concepts apply when removing components, setting layout managers, 
+etc. </p>
+<p>The <i>contentPane</i> has a <strong>BorderLayout</strong> manager 
+by default. The <em>layeredPane</em> has no layout manager <em>(null) </em>by 
+default as you will see in the sample program that follows later in this chapter.
+</p>
+<p>If a <strong>JMenuBar</strong> component is set on the <strong>JRootPane</strong>, 
+it is positioned along the upper edge of the frame. The <i>contentPane</i> 
+is adjusted in location and size to fill the remaining area. </p>
+<p>If you examine the documentation for <strong>JLayeredPane</strong>, you will 
+see that the class has the following fields which are all <em>public static final</em>
+<strong>Integer</strong> symbolic constants. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<ul>
+		<li><strong>DEFAULT_LAYER</strong> - Object defining the Default layer. 
+		Equivalent to new Integer(0).</li>
+		<li><strong>PALETTE_LAYER</strong> - Object defining the Palette layer. 
+		Equivalent to new Integer(100). </li>
+		<li><strong>MODAL_LAYER</strong> - Object defining the Modal layer. 
+		Equivalent to new Integer(200). </li>
+		<li><strong>POPUP_LAYER</strong> - Object defining the Popup layer. 
+		Equivalent to new Integer(300). </li>
+		<li><strong>DRAG_LAYER</strong> - Object defining the Drag layer. 
+		Equivalent to new Integer(400). </li>
+		<li><strong>FRAME_CONTENT_LAYER</strong> - Object defining the Frame 
+		Content layer. This layer is normally only used to position the <strong>
+		contentPane</strong> 
+		and menuBar components of <strong>JFrame</strong>. Equivalent to new 
+		Integer(-30000).</li>
+	</ul>
+</div>	
+
+<p>The <strong>JMenuBar</strong> and the <i>contentPane</i> are added 
+to the <i>layeredPane</i> component at the following layer (-30000):
+</p>
+<pre>JLayeredPane.FRAME_CONTENT_LAYER</pre>
+<p>As mentioned earlier, the <i>layeredPane</i> object is an instance 
+of the <strong>JLayeredPane</strong> class. The purpose of this object is to be 
+the parent of all children of the <strong>JRootPane</strong>.</p>
+<p>Also, as mentioned earlier, this object provides the ability to add 
+components at several layers. This is very useful when working with popup menus, 
+dialog boxes, during dragging, or for any other situation in which you might 
+want to separate graphic objects onto different layers for display purposes. </p>
+<p>Also as indicated earlier, the <i>glassPane</i> is always added as 
+the first child of the <strong>JRootPane</strong>. This causes the <strong>
+glassPane</strong> to always be on the top of the stack. By default, the <strong>
+glassPane</strong> is not visible and is transparent. Thus, mouse events can 
+normally penetrate the <i>glassPane</i> and impinge upon the 
+components below it. </p>
+<p>It is theoretically possible to draw components on the <i>glassPane</i> <em>(although I haven't been able to purposely do it as of 5/12/98).</em> When this is 
+done, those components shadow the components below them preventing mouse events 
+from impinging on the components down below. </p>
+<p>Components drawn on the <i>glassPane</i> will always be above all 
+other lightweight components in the stacking order of components <em>(but not over 
+top of heavyweight components).</em> Thus, the <i>glassPane</i> can be used 
+to assure that such components as popup menus and tool tips are always on top of 
+the other components on the screen. </p>
+<p>As mentioned earlier, by default, the <i>glassPane</i> is not 
+visible. Developers should use setVisible on the <i>glassPane</i> to 
+control when the <i>glassPane</i> displays over the other children.
+</p>
+<p>The layout manager used by <strong>JRootPane</strong> insures that 
+the following is true: </p>
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<ul>
+		<li>The <strong>glassPane</strong>, if present, fills the entire 
+		viewable area of the <strong>JRootPane</strong> (bounds - insets).</li>
+		<li>The <strong>layeredPane</strong> fills the entire viewable area of 
+		the <strong>JRootPane</strong>. (bounds - insets)</li>
+		<li>The <strong>menuBar</strong> is positioned at the upper edge of the
+		<strong>layeredPane</strong>().</li>
+		<li>The <strong>contentPane</strong> fills the entire viewable area, 
+		minus the <strong>MenuBar</strong>, if present.</li>
+	</ul>
+</div>	
+
+<p>If you replace the layout manager of the <strong>JRootPane</strong> with a different layout manager, 
+you are responsible for managing all of those views. </p>
+<p>So now we know that the <strong>JRootPane</strong> object contains an object 
+of type <strong>JLayeredPane</strong>. While <strong>JLayeredPane</strong> manages it's list of children like
+a
+<strong>Container</strong>, it also allows for the definition of several 
+layers within itself. </p>
+<p>Children in the same layer are managed exactly like the normal <strong>
+Container</strong> object. However, children in higher layers display above the 
+children in lower layers. Each layer has a distinct integer number. </p>
+<p>Apparently each Swing <strong>Component</strong> has a layer attribute <em>(but I 
+haven't been able to find out anything about it other than as described below).
+</em>
+</p>
+<p>There are at least three ways to set the layer attribute on a <strong>
+Component</strong>: </p>
+<ul>
+	<li>Passing an Integer object with a literal integer value during the add 
+call: <strong>layeredPane.add(child,new Integer(10));</strong></li>
+	<li>Passing one of the symbolic constants mentioned earlier during the add 
+call: <strong>layeredPane.add(child,JLayeredPane.DEFAULT_LAYER)</strong></li>
+	<li>Calling the following set method on the <strong>JLayeredPane</strong> that 
+will be the parent of the component and passing the name of the component and an
+	<strong>int</strong> that specifies the layer number:
+<strong>layeredPaneParent.setLayer(child,10)</strong></li>
+</ul>
+<p>In this third case, the 
+layer should be set before adding the child to the parent. </p>
+<p>Layers with higher numbers display on top of layers with lower numbers. </p>
+<p>Higher and lower in this case includes the algebraic sign of the layer. For 
+example, a large negative number is a lower layer than a small positive number.
+</p>
+<p>These layers are simply a logical construct and layout managers 
+will affect all child components without regard for layer settings. Therefore, 
+to take advantage of this layering capability, you may need to design your own 
+layout manager or use absolute layout <em>(null layout manager)</em>. </p>
+<p>We will see some examples in the sample program that follows. </p>
+<h1><a name="Sample_program">Sample program</a></h1>
+<p>The primary purpose of this program is to illustrate the use of both the
+<i>contentPane</i> and the <i>layeredPane</i>. </p>
+<p>The program places a <strong>JFrame</strong> object on the screen as the 
+primary GUI as shown in <a href="#Figure_1">Figure 1.</a></p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Figure_1">Figure 1.</a> Graphic screen output for the program named 
+SwingPane01.</p>
+<p>
+<img alt="See a description of this image in the text before and after the image." height="201" src="swingpane01a.jpg" width="301"/>
+</p>
+</div>
+
+<p>A red <strong>JTextField</strong> object and a white <strong>JLabel</strong> object are placed on 
+the <i>contentPane</i> on the <strong>JFrame</strong> object. The
+<strong>JTextField</strong> object is placed in the <em>Center</em> of the <strong>JFrame</strong> 
+using the default border layout. The <strong>JLabel</strong> is placed in the 
+<em>South</em> position on the <strong>JFrame</strong> object. </p>
+<p>A green <strong>JButton</strong> object and a yellow <strong>JButton</strong> object are 
+placed on the <i>layeredPane</i>. Apparently the default layout for 
+the <i>layeredPane</i> is absolute or null. The <strong>JButton</strong> 
+objects are purposely placed so as to partially overlap. Both buttons appear on 
+top of the red <strong>JTextField</strong> object on the <i>contentPane</i>. 
+<em>(Components on layered panes are always on top of components on the </em> <strong>
+<em>contentPane</em></strong><em>).</em> </p>
+<p>The green <strong>JButton</strong> is initially placed at layer position +1 
+on the layered pane and the yellow <strong>JButton</strong> is initially placed 
+at layer position -29999 which is the limit in the negative direction. </p>
+<p>Action listeners are registered on the two buttons. When the top <em>(green)</em> button is 
+clicked, the action is to swap the layer positions of the two buttons causing 
+the yellow button to move to the top as shown in <a href="#Figure_2">Figure 2</a>. </p>
+
+<div class="a">
+	<p>
+<a name="Figure_2">Figure 2.</a> Screen output after clicking green button.</p>
+<p><img alt="See a description of this image in the text before and after the image." height="201" src="swingpane01b.jpg" width="301"/></p></div>
+
+<p>The program was originally tested using JDK 1.1.6 and Swing 1.0.1 under Windows 95. 
+More recently it was tested using Java 12.0.1 under Windows 7.</p>
+<p>Several lines of code are included in the program to investigate the parent child 
+relationships of the various panes. The text output from this part of the 
+program, when run using Java 8, is shown in <a href="#Figure_3">Figure 3</a>.</p>
+
+<div class="a">
+	<p>
+<a name="Figure_3">Figure 3.</a> Text output.</p>
+<pre>
+Root pane is: class javax.swing.JRootPane
+Parent of root pane is SwingPane01[frame0,0,0,0x0,invalid,hidden,layout=java.awt
+.BorderLayout,title=,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPa
+ne=javax.swing.JRootPane[,0,0,0x0,invalid,layout=javax.swing.JRootPane$RootLayou
+t,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=
+,preferredSize=],rootPaneCheckingEnabled=true]
+
+Glass pane is: class javax.swing.JPanel
+Parent of glass pane is javax.swing.JRootPane[,0,0,0x0,invalid,layout=javax.swin
+g.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maxi
+mumSize=,minimumSize=,preferredSize=]
+
+Layered pane is: class javax.swing.JLayeredPane
+Parent of layered pane is javax.swing.JRootPane[,0,0,0x0,invalid,layout=javax.sw
+ing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,ma
+ximumSize=,minimumSize=,preferredSize=]
+
+Content pane is: class javax.swing.JPanel
+Parent of content pane is javax.swing.JLayeredPane[null.layeredPane,0,0,0x0,inva
+lid,alignmentX=0.0,alignmentY=0.0,border=,flags=0,maximumSize=,minimumSize=,pref
+erredSize=,optimizedDrawingPossible=true]
+</pre>
+</div>
+
+<p>The JavaSoft documentation indicates that the <i>contentPane</i> is 
+placed at an equivalent layer position of -30000 in the <i>layeredPane</i>.
+</p>
+<p>The <i>glassPane</i> is something of a mystery to me at this point 
+in time (5/12/98). I was unable to draw on the <i>glassPane</i>. An 
+attempt to place either a <strong>JButton</strong> object or a <strong>JToolTip</strong> 
+object on the <i>glassPane</i> was rejected by the compiler with error 
+messages that the <strong>JButton</strong> and the <strong>JToolTip</strong> 
+could not be converted to type <strong>JPopupMenu</strong>. I don't know if this 
+is proper behavior or a bug. </p>
+<h2><a name="Interesting_code_fragments">Interesting code fragments</a></h2>
+<p>I will discuss and explain this program in fragments. A complete listing of 
+the program is provided in <a href="#Listing_10">Listing 10.</a>
+<a href="#Listing_1">Listing 1</a> shows the import declarations 
+required to 
+import the Swing and AWT packages using Java 8.</p>
+<div class="a">
+	<p>
+<a name="Listing_1">Listing 1.</a> Import declarations.
+</p>
+<pre>
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;//JDK 1.2 version
+</pre>
+</div>
+<p>The class definition for <strong>SwingPane01</strong> begins in 
+<a href="#Listing_2">Listing 2</a>. </p>
+
+<div class="a">
+	<p>
+<a name="Listing_2">Listing 2.</a> Beginning of the class named SwingPane01.</p>
+<pre>
+class SwingPane01 extends JFrame{
+  JLayeredPane theLayeredPane;
+  JButton greenButton;
+  JButton yellowButton;
+  
+  public static void main(String[] args){
+    new SwingPane01();
+  }//end main
+</pre>
+</div>
+<p>As you can see in <a href="#Listing_2">Listing 2</a>, the controlling class in this program is 
+an object of type <strong>JFrame</strong> because it extends <strong>JFrame</strong>. 
+This fragment also declares some instance variables that are required later in 
+the <strong>ActionEvent</strong> handler to swap the two buttons between layers.</p>
+<p>The <strong>main</strong> method is also included in <a href="#Listing_2">Listing 2</a> 
+simply to provide continuity. </p>
+<p><a href="#Listing_3">Listing 3</a> shows the beginning of the constructor where much of the 
+work in this program is accomplished. </p>
+<div class="a">
+	<p>
+<a name="Listing_3">Listing 3.</a> Beginning of the constructor.
+</p>
+<pre>
+  SwingPane01(){//constructor
+    //Get a ref to the layered pane for later use.
+    theLayeredPane = this.getLayeredPane();
+    int frameWidth = 300;
+    int frameHeight = 200;
+</pre>
+</div>
+<p><a href="#Listing_3">Listing 3</a> begins by getting a reference to the
+<i>layeredPane</i> to make it more convenient to work with it later. 
+The width and height values for the <strong>JFrame</strong> object are set in 
+this fragment as well. </p>
+
+<p><a href="#Listing_4">Listing 4</a> shows the code that is used to discover and display the 
+types of the different panes along with the parent-child relationships in the 
+hierarchy of panes. This is the code that produced most of the text output shown 
+in <a href="#Figure_3">Figure 3</a>.</p>
+
+
+<div class="a">
+	<p>
+<a name="Listing_4">Listing 4.</a> Get and display types of panes.</p>
+<pre>
+    System.out.println("Root pane is: " + 
+                            this.getRootPane().getClass());
+    System.out.println("Parent of root pane is " + 
+                    this.getRootPane().getParent() + "\n");
+
+    System.out.println("Glass pane is: " + 
+                           this.getGlassPane().getClass());
+    System.out.println("Parent of glass pane is " + 
+                   this.getGlassPane().getParent() + "\n");
+
+    System.out.println("Layered pane is: " + 
+                         this.getLayeredPane().getClass());
+    System.out.println("Parent of layered pane is " + 
+                 this.getLayeredPane().getParent() + "\n");
+                         
+    System.out.println("Content pane is: " + 
+                         this.getContentPane().getClass());
+    System.out.println("Parent of content pane is " + 
+                 this.getContentPane().getParent() + "\n");
+</pre>
+</div>
+
+<p>This code is all pretty intuitive. You should be able to 
+surmise what it is doing simply from the names of the methods being invoked. </p>
+<p><a href="#Listing_5">Listing 5</a> instantiates a <strong>JLabel</strong> object and a <strong>
+JTextField</strong> object and places them on the <i>contentPane</i>. 
+</p>
+
+<div class="a">
+	<p>
+<a name="Listing_5">Listing 5.</a> Instantiate JLabel and JTextField objects.
+	</p>
+<pre>
+    JLabel theLabel = new JLabel(
+         "  Click buttons to swap their layer positions.");
+    this.getContentPane().add(theLabel,"South");
+    
+    //Put a red JTextField in the Center of the JFrame on
+    // the content pane.
+    JTextField redTextField = new JTextField(
+                        "    redTextField on contentPane");
+    redTextField.setBackground(Color.red);
+    this.getContentPane().add(redTextField,"Center");
+</pre>
+</div>
+<p>The default layout manager for the <i>contentPane</i> is <strong>
+BorderLayout</strong>. This code places the red <strong>JTextField</strong> in 
+the <strong>Center</strong> position of the <i>contentPane</i> and 
+places the <strong>JLabel</strong> in the <strong>South</strong> position.</p>
+<p><em>(For the metal Look and Feel, the </em> <strong><em>JLabel </em> </strong>
+<em>appears to be part of the border at the bottom of the </em> <strong><em>JFrame</em></strong><em> 
+object as shown in </em> <a href="#Figure_2"><em>Figure 2</em></a><em>.)</em></p>
+<p>The <em>South</em> <strong>JLabel</strong> provides instructions regarding 
+the use of the <strong>JButton</strong> objects that will also be placed on the
+<strong>JFrame</strong> object. </p>
+<p><a href="#Listing_6">Listing 6</a> instantiates a green <strong>JButton</strong> object and 
+places it on the <i>layeredPane</i> at layer number one (1). </p>
+
+<div class="a">
+	<p>
+<a name="Listing_6">Listing 6.</a> Instantiate a green JButton object.
+</p>
+<pre>
+    greenButton = new JButton(
+                            "greenButton on Layered Pane");
+    greenButton.setBackground(Color.green);
+    greenButton.setBounds(10,10,240,40);
+    greenButton.addActionListener(new MyActionListener());
+    theLayeredPane.add(greenButton,new Integer(1));
+</pre>
+</div>
+<p>Note that 
+the <strong>setBounds</strong> method is used to establish the location and 
+size of the button in absolute pixel coordinates. Recall that I said earlier 
+that apparently the default layout manager for the <i>layeredPane</i> 
+is null. Otherwise, it would have been necessary for me to set it to null before 
+placing this object on an absolute location and size basis. </p>
+<p>Also note that an <strong>ActionListener</strong> object is registered on the <strong>
+JButton</strong> object. We will see the class that defines the behavior of the 
+listener object later. </p>
+<p><a href="#Listing_7">Listing 7</a> instantiates a yellow <strong>JButton</strong> object and places it on 
+the <i>layeredPane</i> at layer number -29999. This is the bottom-most 
+layer of all programmable layers in the <i>layeredPane</i>. The <strong>
+contentPane</strong> falls immediately below this layer. </p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_7">Listing 7.</a> Instantiate a yellow JButton object.</p>
+<pre>
+    yellowButton = new JButton(
+                           "yellowButton on Layered Pane");
+    yellowButton.setBackground(Color.yellow);
+    yellowButton.setBounds(40,20,240,40);
+    yellowButton.addActionListener(new MyActionListener());
+    theLayeredPane.add(yellowButton,new Integer(-29999));
+</pre>
+</div>
+<p><a href="#Listing_8">Listing 8</a> sets the title, size, visibility, etc., of the <strong>JFrame</strong> 
+object and register an anonymous listener to terminate the program when the user 
+closes the <strong>JFrame</strong>. </p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_8">Listing 8.</a> The end of the constructor.</p>
+<pre>
+    this.setTitle("Copyright, R.G.Baldwin");
+    this.setSize(frameWidth,frameHeight);
+    this.setVisible(true);
+    //===================================================//
+    //Anonymous inner class to terminate program.
+    this.addWindowListener(new WindowAdapter(){
+        public void windowClosing(WindowEvent e){
+          System.exit(0);}});//end addWindowListener
+          
+  }//end constructor
+</pre>
+</div>
+<p><a href="#Listing_8">Listing 8</a> also signals the end of the constructor. </p>
+<p><a href="#Listing_9">Listing 9</a> shows the <strong>ActionListener</strong> class from which listener 
+objects are registered on the two <strong>JButton</strong> objects. </p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_9">Listing 9.</a> The class named MyActionListener.
+</p>
+<pre>
+  class MyActionListener implements ActionListener{
+    public void actionPerformed(ActionEvent e){
+      if(e.getActionCommand().equals(
+                           "greenButton on Layered Pane")){
+        theLayeredPane.setLayer(greenButton,-29999);
+        theLayeredPane.setLayer(yellowButton,1);
+      }else{
+        theLayeredPane.setLayer(greenButton,1);
+        theLayeredPane.setLayer(yellowButton,-29999);
+      }//end else
+    }//end actionPerformed()
+  }//end class MyActionListener
+</pre>
+</div>
+<p>This is a 
+standard listener class that defines the <strong>actionPerformed</strong> 
+method. </p>
+<p>The behavior of the <strong>actionPerformed</strong> method in this case is 
+to cause the layer positions of the two <strong>JButton</strong> objects to be 
+swapped whenever the button on top is clicked. This causes the <strong>JButton</strong> 
+object immediately below the one on the top to move to the top of the stack. </p>
+<p>Note that this method invokes the <strong>setLayer</strong> method of the
+<strong>JLayeredPane</strong> class to rearrange the positions of the two
+<strong>JButton</strong> objects at runtime. </p>
+<h2><a name="Complete_program_listings">Complete program listing</a></h2>
+<p><a href="#Listing_10">Listing 10</a> shows a complete listing of the program named <strong>SwingPane01</strong>.</p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_10">Listing 10.</a> Complete listing of SwingPane01.</p>
+<pre>
+/*File SwingPane01 Copyright, R.G.Baldwin
+Updated 7/10/16 for Java 8 compatibility.
+
+Revised 1/12/99 for JDK 1.2 Swing compatibility
+
+The purpose of this program is to illustrate the use of
+the content pane and the layered pane.
+
+The program places a JFrame object on the screen as the
+primary GUI.
+
+A red JTextField and a white JLabel are placed on the 
+content pane on the JFrame object.  (The white label is
+actually rendered as gray in the metal L&amp;F.)
+  
+The JTextField is placed in the Center of the JFrame using
+the default border layout.  The JLabel is placed in the
+South position on the JFrame object.
+
+A green JButton and a yellow JButton are placed on the
+layered pane of the JFrame object.  Apparently the default
+layout for the layered pane is absolute or null.  The 
+JButton objects are purposely placed so as to partially
+overlap.  Both buttons appear on top of the JTextField
+object on the content pane.
+
+The green JButton is initially placed at layer position +1
+on the layered pane and the yellow JButton is initially 
+placed at layer position -29999 which is the limit in the 
+negative direction.
+
+Action listeners are registered on the two buttons.  When
+the top button is clicked, the action is to swap the layer
+positions of the two buttons causing the other one to
+move to the top layer position.
+
+Several lines of code are included to investigate the
+parent child relationships of the various panes.  The
+output from this part of the program follows.  Note that
+line breaks were manually inserted here to force the
+material to fit in this format.
+
+
+Root pane is: class com.sun.java.swing.JRootPane
+Parent of root pane is SwingPane01
+     [frame0,0,0,0x0,invalid,hidden,
+     layout=java.awt.BorderLayout,resizable,title=]
+
+Glass pane is: class com.sun.java.swing.JPanel
+Parent of glass pane is com.sun.java.swing.JRootPane
+     [,0,0,0x0,invalid,
+     layout=com.sun.java.swing.JRootPane$RootLayout]
+
+Layered pane is: class com.sun.java.swing.JLayeredPane
+Parent of layered pane is com.sun.java.swing.JRootPane
+     [,0,0,0x0,invalid,
+     layout=com.sun.java.swing.JRootPane$RootLayout]
+
+Content pane is: class com.sun.java.swing.JPanel
+Parent of content pane is com.sun.java.swing.JLayeredPane
+     [null.layeredPane,0,0,0x0,invalid]
+
+An interpretation of the above is:
+  The root pane is a child of the JFrame object.
+  The glass page is a child of the root pane.
+  The layered pane is a child of the root pane.
+  The content pane is a child of the layered pane.
+  
+  The root pane is of type JRootPane.
+  The glass pane is of type JPanel.
+  The layered pane is of type JLayeredPane.
+  The content pane is of type JPanel.
+  
+The JavaSoft documentation indicates that the content pane
+is placed at layer position -30000 in the layered pane.
+
+The glass pane is something of a mystery at this point.
+I was unable to draw upon the glass pane.  An attempt to 
+place either a JButton object or a JToolTip object on the
+glass plane was rejected by the compiler with error
+messages that the JButton and the JToolTip could not be
+converted to type JPopupMenu.
+
+Tested using JDK 1.1.6 and Swing 1.0.1 under Win95.
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+//import com.sun.java.swing.*;//JDK 1.1 version
+import javax.swing.*;//JDK 1.2 version
+
+class SwingPane01 extends JFrame{//subclass JFrame
+  JLayeredPane theLayeredPane;
+  JButton greenButton;
+  JButton yellowButton;
+  
+  public static void main(String[] args){
+    new SwingPane01();
+  }//end main
+  //-----------------------------------------------------//
+  
+  SwingPane01(){//constructor
+    //Get a ref to the layered pane for later use.
+    theLayeredPane = this.getLayeredPane();
+    int frameWidth = 300;
+    int frameHeight = 200;
+    
+    //Get and display types of different panes along with
+    // parent-child hierarchy.
+    System.out.println("Root pane is: " + 
+                            this.getRootPane().getClass());
+    System.out.println("Parent of root pane is " + 
+                    this.getRootPane().getParent() + "\n");
+
+    System.out.println("Glass pane is: " + 
+                           this.getGlassPane().getClass());
+    System.out.println("Parent of glass pane is " + 
+                   this.getGlassPane().getParent() + "\n");
+
+    System.out.println("Layered pane is: " + 
+                         this.getLayeredPane().getClass());
+    System.out.println("Parent of layered pane is " + 
+                 this.getLayeredPane().getParent() + "\n");
+                         
+    System.out.println("Content pane is: " + 
+                         this.getContentPane().getClass());
+    System.out.println("Parent of content pane is " + 
+                 this.getContentPane().getParent() + "\n");
+          
+
+    //Put instructions in a JLabel on the content pane.
+    JLabel theLabel = new JLabel(
+         "  Click buttons to swap their layer positions.");
+    this.getContentPane().add(theLabel,"South");
+    
+    //Put a red JTextField in the Center of the JFrame on
+    // the content pane.
+    JTextField redTextField = new JTextField(
+                        "    redTextField on contentPane");
+    redTextField.setBackground(Color.red);
+    this.getContentPane().add(redTextField,"Center");
+    
+    //Put a green JButton on the layered pane at a layer
+    // position of +1.
+    greenButton = new JButton(
+                            "greenButton on Layered Pane");
+    greenButton.setBackground(Color.green);
+    greenButton.setBounds(10,10,240,40);
+    greenButton.addActionListener(new MyActionListener());
+    theLayeredPane.add(greenButton,new Integer(1));
+      
+    //Put a yellow JButton on the layered pane at a layer
+    // position of -29999.
+    yellowButton = new JButton(
+                           "yellowButton on Layered Pane");
+    yellowButton.setBackground(Color.yellow);
+    yellowButton.setBounds(40,20,240,40);
+    yellowButton.addActionListener(new MyActionListener());
+    theLayeredPane.add(yellowButton,new Integer(-29999));
+
+    //Set title, size, and visibility of JFrame object.   
+    this.setTitle("Copyright, R.G.Baldwin");
+    this.setSize(frameWidth,frameHeight);
+    this.setVisible(true);
+    //===================================================//
+    //Anonymous inner class to terminate program.
+    this.addWindowListener(new WindowAdapter(){
+        public void windowClosing(WindowEvent e){
+          System.exit(0);}});//end addWindowListener
+          
+  }//end constructor
+  //=====================================================//
+  
+  //Inner class for listener objects which swap the layer
+  // positions of the two JButton objects when the one on
+  // the top is clicked.
+  class MyActionListener implements ActionListener{
+    public void actionPerformed(ActionEvent e){
+      if(e.getActionCommand().equals(
+                           "greenButton on Layered Pane")){
+        theLayeredPane.setLayer(greenButton,-29999);
+        theLayeredPane.setLayer(yellowButton,1);
+      }else{
+        theLayeredPane.setLayer(greenButton,1);
+        theLayeredPane.setLayer(yellowButton,-29999);
+      }//end else
+    }//end actionPerformed()
+  }//end class MyActionListener
+
+}//end class SwingPane01
+//=======================================================//
+</pre>
+</div>
+
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java087 Swing, Understanding 
+					getContentPane() and other JFrame Layers</li>
+					<li>File: Java087.htm</li>
+					<li>Originally published: 1997</li>
+					<li>Revised: 04/19/22</li>
+
+				</ul>
+
+				</div>
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

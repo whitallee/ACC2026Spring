@@ -1,0 +1,345 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4020</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4020: What is a Collection?</h1>
+
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Discussion">Discussion</a><ul>
+		<li><a href="#What_is_a_collection">What is a collection?</a></li>
+		<li><a href="#Slightly_different_terminology_">Slightly different terminology 
+		</a> </li>
+		<li><a href="#Store_references_rather_than_objects">Store references rather than objects</a></li>
+		<li><a href="#Stored_as_type_Object_">Stored as type Object </a> </li>
+		<li><a href="#Moving_data_among_methods_">Moving data among methods</a> </li>
+		<li><a href="#Polymorphic_behavior_">Polymorphic behavior </a> </li>
+		<li><a href="#Core_collection_interfaces_">Core collection interfaces</a> </li>
+		<li><a href="#Concrete_implementations_">Concrete implementations </a> </li>
+		<li><a href="#Iterator_is_not_a_class_">Iterator is not a class</a> </li>
+		<li><a href="#What_about_Attributes_and_RenderingHints">What about Attributes and RenderingHints?</a></li>
+		<li><a href="#What_is_a_Collections_Framework">What is a Collections Framework?</a></li>
+	</ul>
+	</li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>The purpose of this chapter is to explain some of the details surrounding the use of a Java collection for creating data structures. 
+The chapter also discusses the interfaces and some of the concrete implementations in the Java Collections Framework.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h1><a name="Preview">Preview</a></h1>
+<p><strong>Collection</strong> is not only the name of a Java interface, it is also the term 
+given to an object that groups multiple elements into a single unit. </p>
+<p>I will discuss the advantages of passing collections between methods as type
+<b>Collection</b>. </p>
+<p>I will summarize the core interfaces in the <em>Collections Framework</em> and show 
+you how they are related. </p>
+<p>I will very briefly discuss some of the concrete implementations of the 
+interfaces that are provided by the framework.</p>
+<p>And finally, I will introduce you to the three kinds of things that are part 
+of a collections framework.</p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion">Discussion</a></h1>
+<h2><a name="What_is_a_collection">What is a collection?</a> </h2>
+<p>Let&#39;s start with a little quiz. </p>
+<p>What is a collection insofar as Java programming is concerned?</p>
+<ul>
+	<li>A. Something they gather in plates at church.</li>
+	<li>B. An object that groups multiple elements into a single unit.</li>
+	<li>C. The name of a Java interface.</li>
+	<li>D. None of the above.</li>
+</ul>
+<p>If you answered A, you are probably reading an article on the wrong website 
+by mistake. If you answered <i>Both B and C</i>, then you are off to a good 
+start on this chapter. </p>
+<p><b>Collection</b> is the name of a Java interface. This interface is an 
+integral part of the <em>Java Collections Framework</em>. <b>Collection</b> is 
+one of two top-level interfaces in the framework. The other top-level interface 
+in the framework is named <b>Map</b>. </p>
+<p>According to The Java Tutorial from Oracle, a collection <i>(sometimes called 
+a container)</i> is also an object that groups multiple elements into a single 
+unit. </p>
+<p>Typical collection objects might contain information about employees in the 
+company telephone book, all the purchase orders issued during the past year, or 
+the transactions occurring in a person&#39;s checking account. </p>
+<h2><a name="Slightly_different_terminology_">Slightly different terminology </a>
+</h2>
+<p>Note that this terminology may be somewhat different from what you are 
+accustomed to. For example, if you speak of your <i>coin collection,</i> you are 
+probably speaking about the actual coins rather than the container that holds 
+the coins. </p>
+<p>This is an important distinction. The usage of the term <i>collection</i> in 
+the <em>Collections Framework</em> usually refers to the container and not to the contents 
+of the container. In the framework, the contents are usually referred to as the <i>
+elements</i>. </p>
+<h2><a name="Store_references_rather_than_objects">Store references rather than 
+objects</a> </h2>
+<p>The collections in the framework always store references to objects, rather 
+than storing the objects themselves. One consequence of this is that primitive 
+values cannot be stored in a collection without first encapsulating them in an 
+object. <i>(Standard wrapper classes are provided for encapsulating all 
+primitive types.)</i> </p>
+<blockquote>
+<blockquote>Author's note:</blockquote>
+<blockquote>Sometime after Java version 8, Oracle introduced
+<a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">
+Autoboxing and Unboxing</a> into the language.&nbsp; Autoboxing is the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes. For example, converting an int to an Integer, a double to a Double, and so on. If the conversion goes the other way, this is called unboxing. 
+</blockquote>
+<blockquote>While it is still not possible to store primitive values in a 
+	Collection object, it is no longer necessary to purposely wrap the primitive 
+	values in an object to store them in a collection. Therefore, you can add a 
+	primitive value to a Collection object and it will be automatically 
+	converted to its corresponding object wrapper type. Unless you make proper use of generics, conversion back to the original 
+	primitive type is not nearly as smooth when you extract the value from the 
+	collection.</blockquote>
+<blockquote>The material in this eBook was written before the advent of 
+Autoboxing and the existence of Autoboxing is not reflected in the text of this 
+eBook.</blockquote>
+</blockquote>
+<h2><a name="Stored_as_type_Object_">Stored as type Object </a></h2>
+<p>Furthermore, the references are always stored as type <b>Object</b>. Prior to 
+Java version 1.5, when you retrieved an element from a collection, you frequently needed to downcast 
+it before you could gain access to the members of the object to which the 
+reference refers. Version 1.5 introduced
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a> into the Java programming environment, which eliminated that 
+requirement, <em>(provided that you use the more complex syntax required by 
+Generics)</em>.</p>
+<h2><a name="Moving_data_among_methods_">Moving data among methods </a></h2>
+<p>In addition to their use for storing, retrieving, and manipulating data, 
+collections are also used to move data among methods. </p>
+<p>One of the primary advantages of the Collections Framework is the ability to 
+pass a collection to a method as the generic interface type <b>Collection</b>. 
+The receiving method doesn&#39;t need to know the actual type of the object referred 
+to by the incoming reference in order to call its methods. </p>
+<h2><a name="Polymorphic_behavior_">Polymorphic behavior </a></h2>
+<p>The receiving method can call <i>(on the reference to the Collection object)</i> 
+any of the methods declared in the <b>Collection</b> interface, with confidence 
+that the behavior of the method will be appropriate for the actual type of <b>
+Collection</b> object involved. <i>(That is polymorphic behavior.)</i> </p>
+<h2><a name="Core_collection_interfaces_">Core collection interfaces </a></h2>
+<p>If you have been working with the framework, you might be inclined to think 
+that all of the interfaces in the following list are members of the <i>core 
+collection interfaces.</i></p>
+<ul>
+	<li>Collection</li>
+	<li>Set</li>
+	<li>List</li>
+	<li>Queue</li>
+	<li>Deque</li>
+	<li>SortedSet</li>
+	<li>Map</li>
+	<li>SortedMap</li>
+	<li>Iterator</li>
+</ul>
+<p>However, that is not the case. </p>
+<p>While the <b>Iterator</b> interface is heavily used in conjunction with 
+collections, according to The Java Tutorial from Oracle, it is not one of the <i>
+core collection interfaces.</i> </p>
+<p>The core collection interfaces identified by the Oracle book are shown below, 
+with indentation showing the parent-child relationships among the 
+interfaces.</p>
+<ul>
+	<li><b>Collection</b>
+	<ul>
+		<li>Set
+		<ul>
+			<li>SortedSet</li>
+		</ul>
+		</li>
+		<li>List</li>
+		<li>Queue</li>
+		<li>Deque</li>
+	</ul>
+	</li>
+	<li><b>Map</b>
+	<ul>
+		<li>SortedMap</li>
+	</ul>
+	</li>
+</ul>
+<p>As you can see, as mentioned earlier, <b>Collection</b> and <b>Map</b> are 
+the two top-level interfaces. </p>
+<p>You should probably commit the above list of interfaces and their 
+relationships to memory. You might find that helpful when navigating the Oracle 
+documentation. </p>
+<h2><a name="Concrete_implementations_">Concrete implementations </a></h2>
+<p>In addition to interfaces, the framework provides several concrete 
+implementations of the interfaces defined in the framework. <i>(A concrete 
+implementation is a class that implements one or more of the interfaces.)</i>
+</p>
+<p>Are you still awake? If so, see if you can answer the following question. </p>
+<p>True or False? Each of the following classes provides an implementation of 
+one of the interfaces that make up the Java Collections Framework. If False, 
+which items don&#39;t belong in the list.</p>
+<ul>
+	<li>AbstractSet</li>
+	<li>AbstractList</li>
+	<li>AbstractMap</li>
+	<li>HashSet</li>
+	<li>TreeSet</li>
+	<li>LinkedList</li>
+	<li>Vector</li>
+	<li>ArrayList</li>
+	<li>HashMap</li>
+	<li>Hashtable</li>
+	<li>WeakHashMap</li>
+	<li>TreeMap</li>
+	<li>Iterator</li>
+	<li>Attributes</li>
+	<li>RenderingHints</li>
+</ul>
+<p>Hopefully your answer was False, but even so, that isn&#39;t the complete answer.
+</p>
+<h2><a name="Iterator_is_not_a_class_">Iterator is not a class </a></h2>
+<p>To begin with, <b>Iterator</b><i> </i>is not a class. I told you that a 
+couple of paragraphs back. It is an interface. Therefore, it has no place in the 
+above list of classes. </p>
+<h2><a name="What_about_Attributes_and_RenderingHints">What about Attributes and 
+RenderingHints?</a> </h2>
+<p>You may also have wondered if the classes named <b>Attributes</b> and <b>
+RenderingHints</b> belong on the list. Note that I didn&#39;t restrict the above 
+list to only those classes that might be considered part of the framework, so 
+this was sort of a trick question. <i>(Of course you could have looked them up 
+in the Oracle documentation just like I did.)</i> </p>
+<p>While these two classes are not really a part of the core Java Collections 
+Framework, they do implement interfaces that are part of the framework. </p>
+<p>The <b>RenderingHints</b> class implements the <b>Map</b> interface, and is 
+used in conjunction with the <b>Graphics2D</b> class. The <b>Attributes</b> 
+class also implements the <b>Map </b>interface, </p>
+<h2><a name="What_is_a_Collections_Framework">What is a Collections Framework?</a>
+</h2>
+<p>According to The Java Tutorial from Oracle, <i>&quot;A collections framework is a 
+unified architecture for representing and manipulating collections. All 
+collections frameworks contain three things.&quot;</i> </p>
+<p>Those three things are:</p>
+<ul>
+	<li>Interfaces</li>
+	<li>Implementations</li>
+	<li>Algorithms</li>
+</ul>
+<p>This is probably a good place to close off the discussion for this chapter. The 
+next chapter (following the review chapter) will pick up at this point and provide a more in-depth discussion of 
+the interfaces, implementations, and algorithms that make up the framework.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>I started out by telling you that a collection is not only the name of a Java 
+interface <i>(Collection)</i> but is also an object that groups multiple 
+elements into a single unit. </p>
+<p>Java <b>Collection</b> objects don&#39;t store objects or primitive values 
+directly. Rather, they store references to objects. Further, all such references 
+are stored as the type <b>Object</b>. However, the use of the <strong>Generics</strong> syntax 
+can eliminate the need to 
+downcast the reference in order to gain access to the members of the object to 
+which it refers. <em>(Generics also provide other useful properties as well.)</em></p>
+<p>If you need to store primitive values in a collection, you will first need to 
+wrap those values in appropriate objects. Standard wrapper classes are provided 
+for all the primitive types. </p>
+<blockquote>Author's note:</blockquote>
+<blockquote>Sometime after Java version 8, Oracle introduced
+<a href="https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html">
+Autoboxing and Unboxing</a> into the language. While it is still not possible to store primitive values in a Collection 
+object, it is no longer necessary to purposely wrap the primitive values in an 
+object to store them in a collection.</blockquote>
+<p>Collections are not only useful for storing and retrieving data, they are 
+also useful for moving data among methods. </p>
+<p>Because a collection can be passed to a method as type <b>Collection</b>, all 
+of the methods declared in the <b>Collection</b> interface can be called on the 
+incoming reference in a polymorphic manner. </p>
+<p>In addition to the interfaces defined in the Collections Framework, the 
+framework also provides various concrete implementations of the interfaces for 
+many of the commonly-used data structures. This makes it possible for you to 
+conveniently use the framework without the requirement to define new <b>
+Collection</b> classes. </p>
+<p>There are eight core interfaces in the Collections Framework. Although the
+<b>Iterator</b> interface is often used with collections, it is not one of the 
+core interfaces. </p>
+<p>I ended the chapter by telling you that there are basically three things in a 
+collections framework: <em>interfaces</em>, <em>implementations</em>, and <em>algorithms</em>. 
+I will have more to say about this in a future chapter.</p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4020: What is a Collection?</li>
+					<li>File: Java4020.htm
+</li>
+					<li>Published: 04/18/13</li>
+					<li>Revised: 04/14/20</li>
+					
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

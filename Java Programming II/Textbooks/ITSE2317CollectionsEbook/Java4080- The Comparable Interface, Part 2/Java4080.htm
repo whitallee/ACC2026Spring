@@ -1,0 +1,594 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4080</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4080: The Comparable Interface, Part 2</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+<li><a href="#Generics">Generics</a></li>
+<li><a href="#Begin_with_a_quiz_">Begin with a quiz</a> <ul>
+<li><a href="#What_caused_the_runtime_error_">What caused the runtime error?</a></li>
+	<li><a href="#Why_did_this_code_produce_a_runtime_error">Why did this code produce a runtime error?</a></li>
+	<li><a href="#What_does_this_mean_">What does this mean?</a></li>
+	<li><a href="#The_compareTo_method">The compareTo method </a></li>
+	<li><a href="#A_possible_exception">A possible exception </a></li>
+	<li><a href="#The_SortedSet_interface_">The SortedSet interface</a></li>
+	<li><a href="#Natural_ordering_of_the_elements_">Natural ordering of the elements</a></li>
+	<li><a href="#Conclusion_">Conclusion regarding traversal</a></li>
+	<li><a href="#The_bottom_line_">The bottom line</a></li>
+</ul>
+</li>
+<li><a href="#The_solution">The solution</a><ul>
+	<li><a href="#The_corrected_code_">The corrected code </a></li>
+	<li><a href="#ThecompareTomethod01">The compareTo method</a></li>
+	<li><a href="#Consistent_with_equals_">Consistent with equals </a> </li>
+	<li><a href="#Meeting_the_consistent_with_equals_requirement_">Meeting the consistent with equals requirement 
+	</a> </li>
+	<li><a href="#The_program_output_">The program output</a></li>
+</ul>
+</li>
+		
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>This chapter explains why the elements stored in a <strong>TreeSet</strong> collection 
+must be references to objects instantiated from a class that implements the 
+<strong>Comparable</strong> interface. The chapter also briefly discusses an alternative approach using the 
+<strong>Comparator</strong> interface.  </p>
+<p>The chapter shows you how to implement the <strong>Comparable</strong> interface for a new class definition, explains the "natural ordering of the elements" for a class, and discusses the "consistent with equals" requirement.  Finally, 
+the chapter shows you how to define a new class whose objects are eligible for inclusion in a 
+<strong>TreeSet</strong> collection.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Comparable04. </li>
+	<li><a href="#Listing_2">Listing 2</a>. The code with the problem. </li>
+	<li><a href="#Listing_3">Listing 3</a>. The program named Comparable05. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Beginning of the class named MyClass. </li>
+	<li><a href="#Listing_5">Listing 5</a>. The compareTo method. </li>
+	<li><a href="#Listing_6">Listing 6</a>. The overridden equals method. </li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>In this chapter, I will teach you why the elements stored in a <b>TreeSet</b> 
+collection must be references to objects instantiated from a class that 
+implements the <b>Comparable</b> interface. (<i>In a subsequent chapter, I 
+will teach you about an alternative approach that makes use of the <strong>Comparator</strong> 
+interface.)</i> </p>
+<p>I will provide an example of implementing the <b>Comparable</b> interface for 
+a new class definition, and will teach you about the <i>natural ordering of the 
+elements</i> for a class. </p>
+<p>I will teach you the meaning of the <i>consistent with equals</i> requirement 
+and show you how to satisfy that requirement for a new class definition. </p>
+<p>Finally, I will show you how to define a new class whose objects are eligible 
+for inclusion in a <b>TreeSet</b> collection. </p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Generics">Generics</a></h2>
+<p>The code in this chapter is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile this code, you will probably 
+get a warning about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h2><a name="Begin_with_a_quiz_">Begin with a quiz </a></h2>
+<p>Let&#39;s begin with a quiz to test your prior knowledge of the 
+Collections Framework. </p>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 44321</li>
+	<li>D. 4321</li>
+	<li>E. 1234</li>
+	<li>F. 12344</li>
+	<li>G. None of the above.</li>
+</ul>
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named Comparable04.</p>
+<pre>//File Comparable04.java
+
+import java.util.*;
+
+public class Comparable04{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable04
+//--------------------
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new TreeSet();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+//--------------------
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+//--------------------
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+<p>If your answer was <b>B. Runtime Error</b>, you were correct. </p>
+<h3><a name="What_caused_the_runtime_error_">What caused the runtime error? </a>
+</h3>
+<p>The runtime error was caused by the code shown in <a href="#Listing_2">Listing 2</a>. </p>
+
+<!--``1List02-->
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. The code with 
+				the problem.
+
+				</p>
+
+				<pre>class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Why_did_this_code_produce_a_runtime_error">Why did this code produce a runtime error?</a></h3>
+<p>The incoming parameter of the <b>fillIt</b> method is a reference to an 
+object of type <b>TreeSet</b> but it is received as type <strong>Collection</strong>. The <b>TreeSet</b> class implements the <b>
+Collection</b>, <b>Set</b>, and <b>SortedSet</b> interfaces. <em>(In this 
+chapter, we will be primarily interested in the </em> <b><em>Set</em></b><em> and 
+</em> <b><em>SortedSet</em></b><em> 
+interfaces.)</em> </p>
+<p>The contract for the <b>add</b> method of the <b>Set</b> interface reads 
+partially as follows:</p>
+<blockquote>
+	<i>&quot;Adds the specified element to this set if it is not already present ... 
+	If this set already contains the specified element, the call leaves this set 
+	unchanged and returns false. ... this ensures that sets never contain 
+	duplicate elements.&quot;</i></blockquote>
+<h3><a name="What_does_this_mean_">What does this mean? </a> </h3>
+<p>This means that whenever the <b>add</b> method is called on a <b>Set</b> 
+object, the <b>add</b> method must have a way of determining if the element 
+being added is a duplicate of an element that already exists in the collection. 
+This means that it must be possible for the <b>add</b> method to <i>compare</i> 
+the new element with all of the existing elements to determine if the new 
+element is a duplicate of any of the existing elements. </p>
+<h3><a name="The_compareTo_method">The compareTo method</a> </h3>
+<p>The documentation for the <b>TreeSet</b> class states the following:</p>
+<blockquote>
+	<i>&quot;... the <strong>Set</strong> interface is defined in terms of the equals operation, but a 
+	<strong>TreeSet</strong> instance performs all key comparisons using its <b>compareTo</b> (or 
+	<strong>compare</strong>) method ...&quot;</i></blockquote>
+<p>What this means is that insofar as the handling of duplicate elements is 
+concerned, <i>(with the possible exception given below involving a <strong>Comparator</strong>),</i> 
+in order for a reference to an object to be included in a <b>TreeSet</b> 
+collection, the class from which that object is instantiated must implement the
+<b>Comparable</b> interface. </p>
+<h3><a name="A_possible_exception">A possible exception</a> </h3>
+<p>Note that one of the constructors for the <b>TreeSet</b> class makes it 
+possible to instantiate a new object by passing a parameter that is a reference 
+to an object that implements the <b>Comparator</b> interface. </p>
+<p>The <b>Comparator</b> interface declares a method named <b>compare</b>, which 
+compares its two arguments for order. The text in the above excerpt from 
+the Oracle documentation suggests that when this parameterized constructor is used, 
+it may not be necessary for the objects included in the <b>TreeSet</b> 
+collection to implement the <b>Comparable</b> interface. </p>
+<p>I won&#39;t discuss that possibility in this chapter, but I will discuss it in a 
+future chapter that discusses the use of the <b>Comparator</b> interface. 
+For purposes of this chapter, I will concentrate on the use of a <b>TreeSet</b> 
+collection that does not receive a reference to a <b>Comparator</b> object when 
+it is instantiated. </p>
+<h3><a name="The_SortedSet_interface_">The SortedSet interface </a> </h3>
+<p>The <b>TreeSet</b> class also implements the <b>SortedSet</b> interface. 
+The documentation for the <b>SortedSet</b> interface states the following:</p>
+<blockquote>
+	<i>&quot;A set that further guarantees that its iterator will traverse the set in 
+	ascending element order, sorted according to the natural ordering of its 
+	elements (see <strong>Comparable</strong>), or by a <strong>Comparator</strong> provided at sorted set 
+	creation time.&quot;</i></blockquote>
+<h3><a name="Natural_ordering_of_the_elements_">Natural ordering of the elements
+</a> </h3>
+<p>The key term to note in the above quotation is the term <i>natural ordering 
+of its elements</i>. This takes us back to the <b>Comparable</b> 
+interface, for which the documentation states:</p>
+<blockquote>
+	<i>&quot;This interface imposes a total ordering on the objects of each class 
+	that implements it. This ordering is referred to as the class&#39;s natural 
+	ordering, and the class&#39;s <strong>compareTo</strong> method is referred to as its natural 
+	comparison method.&quot;</i></blockquote>
+<h3><a name="Conclusion_">Conclusion regarding traversal</a> </h3>
+<p>The conclusion is, in order for the iterator to be able to traverse the set 
+according to the <i>natural ordering of its elements,</i> the elements stored in 
+an object that implements the <b>SortedSet</b> interface must be instantiated 
+from a class that implements the <b>Comparable</b> interface <i>(unless a 
+<strong>Comparator</strong> is provided when the <strong>SortedSet</strong> object is instantiated.)</i> </p>
+<h3><a name="The_bottom_line_">The bottom line </a> </h3>
+<p>The bottom line is, because the class named <b>MyClass</b> in <a href="#Listing_1">Listing 1</a> does 
+not implement the <b>Comparable</b> interface, objects of that class are not 
+eligible for use with a <b>TreeSet</b> collection <i>(unless a <strong>Comparator</strong> is 
+provided when the <strong>TreeSet</strong> object is instantiated).</i> </p>
+<p>A <b>Comparator</b> was not provided when the <b>TreeSet</b> object was 
+instantiated in <a href="#Listing_1">Listing 1</a>. Therefore, the attempt in <a href="#Listing_2">Listing 2</a>, to add a <b>MyClass</b> object to the <b>
+TreeSet</b> collection resulted in a <b>ClassCastException</b> being thrown at 
+runtime. The runtime error reads partially as follows:</p>
+<blockquote>&quot;Exception ... java.lang.ClassCastException: MyClass cannot be cast
+to java.lang.Comparable"</blockquote>
+<h2><a name="The_solution">The solution</a> </h2>
+<p>To solve this problem, we must modify the definition of the class named <b>
+MyClass </b>to make it implement the <b>Comparable</b> interface <i>(assuming 
+that we don&#39;t provide a <strong>Comparator</strong> when the <strong>TreeSet</strong> object is instantiated).</i>
+</p>
+<p>This is accomplished in the modified version of the program shown in 
+<a href="#Listing_3">Listing 
+3</a>. </p>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_3">Listing 3</a>. The program named Comparable05.</p>
+<pre>//File Comparable05.java
+import java.util.*;
+
+public class Comparable05{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable05
+//--------------------
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new TreeSet();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+//--------------------
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+//--------------------
+
+class MyClass implements Comparable{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+
+  public int compareTo(Object o){
+    if(!(o instanceof MyClass))
+        throw new ClassCastException();
+    if(((MyClass)o).data &lt; data)
+      return 1;
+    if(((MyClass)o).data &gt; data)
+      return -1;
+    else return 0;
+  }//end compareTo()
+
+  public boolean equals(Object o){
+    if(!(o instanceof MyClass))
+        return false;
+    if(((MyClass)o).data == data)
+      return true;
+    else return false;
+  }//end overridden equals()
+}//end MyClass
+</pre>
+
+</div>
+
+
+<h3><a name="The_corrected_code_">The corrected code </a> </h3>
+<p>The important code to note in this modified version of the program is the new 
+definition of the class named <b>MyClass</b>. The other code in the 
+program is essentially the same as in the previous version of the program. </p>
+<p>The beginning portion of the new definition for <b>MyClass</b> is shown in 
+<a href="#Listing_4">Listing 4</a>.</p>
+
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. Beginning of 
+				the class named MyClass.
+
+				</p>
+
+				<pre>class MyClass implements Comparable{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end overridden toString()
+</pre>
+</div>
+<!--``2-->
+<p>The code shown in <a href="#Listing_4">Listing 4</a> is identical to the code in the previous version 
+with one major exception. This version of the class definition implements 
+the <b>Comparable</b> interface. That means that this class must provide a 
+concrete definition for the following method, which is the only method declared 
+in the <b>Comparable</b> interface: </p>
+<p><b>public int compareTo(Object o)</b> </p>
+<h3><a name="ThecompareTomethod01">The compareTo method</a> </h3>
+<p>The description of the <b>compareTo</b> method in the Oracle documentation 
+begins as follows: </p>
+<blockquote><i>&quot;Compares this object with the specified object for order. Returns a 
+negative integer, zero, or a positive integer as this object is less than, equal 
+to, or greater than the specified object.&quot;</i> </blockquote>
+<p>Beyond this, there are a number of additional stipulations that I won&#39;t 
+repeat here. You can view them in the Oracle documentation if you are 
+interested in that level of detail. </p>
+<p><a href="#Listing_5">Listing 5</a> shows my implementation of the <b>compareTo</b> 
+method. Although this implementation satisfies the general description given 
+above, I haven&#39;t taken the time to test it fully to confirm that it meets all of 
+the additional stipulations provided by Oracle.</p>
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. The compareTo 
+				method.
+
+				</p>
+
+				<pre>  public int compareTo(Object o){
+    if(!(o instanceof MyClass))
+        throw new ClassCastException();
+    if(((MyClass)o).data &lt; data)
+      return 1;
+    if(((MyClass)o).data &gt; data)
+      return -1;
+    else return 0;
+  }//end compareTo()
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Consistent_with_equals_">Consistent with equals </a> </h3>
+<p>The Oracle documentation strongly emphasizes the need to make certain that a 
+class&#39; natural ordering is <i>consistent with equals,</i> and provides the rules 
+for meeting that requirement. </p>
+<p>Further, the documentation for the <b>TreeSet</b> class reads partially as 
+follows:</p>
+<blockquote>
+	<i>&quot;Note that the ordering maintained by a set (whether or not an explicit 
+	comparator is provided) must be <b>consistent with equals</b> if it is to 
+	correctly implement the Set interface. ...&quot;</i></blockquote>
+<h3><a name="Meeting_the_consistent_with_equals_requirement_">Meeting the consistent with equals requirement
+</a> </h3>
+<p>In order to satisfy the rules and to cause the <i>natural ordering</i> of the
+<b>MyClass</b> class to be <i>consistent with equals</i>, it was necessary to 
+override the <b>equals</b> method inherited from the <b>Object</b> class. 
+My overridden version of the <b>equals</b> method is shown in 
+<a href="#Listing_6">Listing 6</a>. </p>
+
+<!--``1List06-->
+	<div class="a">
+		<p>
+<a name="Listing_6">Listing 6</a>. The overridden 
+				equals method.
+
+				</p>
+
+				<pre>  public boolean equals(Object o){
+    if(!(o instanceof MyClass))
+        return false;
+    if(((MyClass)o).data == data)
+      return true;
+    else return false;
+  }//end overridden equals()
+}//end MyClass
+</pre>
+</div>
+<!--``2-->
+<p>As was the case in defining the <b>compareTo</b> method, there are also a 
+large number of stipulations involved in properly overriding the <b>equals</b> 
+method. I will simply refer you to the Oracle documentation if you are 
+interested in reading about those stipulations. </p>
+<h3><a name="The_program_output_">The program output </a> </h3>
+<p>Given all of the above, this program compiles and executes correctly, 
+producing the following output. </p>
+<p><strong>1234 </strong> </p>
+<p>Note that duplicate elements were eliminated, and the iterator traversed the 
+set in ascending element order, sorted according to the natural ordering of the 
+elements, as required for a <b>SortedSet</b> collection. </p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a> and
+<a href="#Listing_3">Listing 3</a>. Paste the code into your Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>I explained why the elements stored in a <b>TreeSet</b> collection must be 
+references to objects instantiated from a class that implements the <b>
+Comparable</b> interface. (<i>In a future chapter, I will teach you 
+about an alternative approach that makes use of the <strong>Comparator</strong> interface.)</i>
+</p>
+<p>I provided an example of implementing the <b>Comparable</b> interface for a 
+new class definition, and I taught you about the <i>natural ordering of the 
+elements</i> for a class. </p>
+<p>I taught you the meaning of the <i>consistent with equals</i> requirement and 
+showed you how to satisfy that requirement for a new class definition. </p>
+<p>I showed you how to define a new class whose objects are eligible for 
+inclusion in a <b>TreeSet</b> collection. </p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter, I will discuss the use of the <b>Comparator</b> interface 
+in order to achieve a sorting order that is different from the <i>natural 
+ordering</i> of the elements in a sorted collection. </p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4080: The Comparable Interface, Part 2</li>
+					<li>File: Java4080.htm
+</li>
+					<li>Published: 04/19/13</li>
+					<li>Revised: 04/15/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p></p>
+<p>-end- </p>
+<!--``2-->
+
+
+</body>
+</html>

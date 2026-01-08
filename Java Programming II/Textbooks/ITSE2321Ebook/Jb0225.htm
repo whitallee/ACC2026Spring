@@ -1,0 +1,369 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0225</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0225: Pseudo-Random Numbers</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+		<li><a href="#Create_the_seed_and_the_generator">Create the seed and the 
+		generator</a></li>
+		<li><a href="#Get_and_display_three_random_values">Get and display three 
+		random values</a></li>
+		<li><a href="#Create_another_generator">Create another generator</a></li>
+		<li><a href="#Get_and_displayRandom_values">Get and display random 
+		values</a></li>
+	</ul>
+	</li>
+	<li><a href="#What_to_expect">What to expect</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>The purpose of this chapter is to introduce you to the generation and use of 
+pseudo-random numbers to prepare you for some upcoming assignments. Because the 
+program that I will explain in this chapter uses command-line arguments, you may 
+need to skip ahead and read the chapter titled <em>Jb0260: Command-Line 
+Arguments</em> to understand the code in this chapter. Before continuing with 
+this chapter, I recommend that you study Kjell
+<a href="https://programmedlessons.org/Java9/chap30/ch30_01.html">CHAPTER 30 — The Random Class</a>.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Beginning of the class.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Get and display random values. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Create another generator. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Get and display random values.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Initialization.</li>
+	</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>You probably played games when you were younger that were based on random 
+numbers. There is a good chance that the random numbers were created by casting 
+a dice or a pair of die or spinning a spinner. If you cast a single fair dice, 
+you will get a number between 1 and 6 with each cast. In theory, no 
+matter how much history you have on the values produced, you cannot predict the 
+next value with more than one chance in six of getting it right. In other words, 
+each new value is independent of, or not influenced by the historical values. This is a random 
+number sequence with a uniform distribution of the values of one through six 
+inclusive.</p>
+<p>I will use an object of the Java 
+<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html">Random</a> class to generate random numbers for 
+use in some of the upcoming assignments. An object of the <strong>Random</strong> class provides 
+a variety of options with regard to data type, data distribution, etc. In many 
+cases, I will generate random <strong>int</strong> values and then cast them to type 
+<strong>byte</strong> with 
+fewer digits to make them easier to use visually.</p>
+<p>An object of the <strong>Random</strong> class allows for the input of a parameter that I will 
+refer to as the <strong><em>seed</em></strong> in the program that I will explain later. 
+<em>(See Kjell </em>
+<a href="https://programmedlessons.org/Java9/chap30/ch30_04.html"><em>The Random Class</em></a><em> 
+for a discussion of the seed.) </em>I will refer 
+to an object of the <strong>Random</strong> class as the <strong><em>generator</em></strong>. If I create two different objects of the 
+<strong>Random</strong> 
+class <em>(two independent generators)</em> with the same seed, they will each produce the same 
+sequence of random numbers. This is very useful for testing a program where you 
+need a sequence of random numbers, but you don't want them to change from one 
+run to the next.</p>
+<p>If I create two generators with different seeds, they will produce difference 
+sequences of random numbers. This is useful when you need the sequence to change 
+from one run to the next. The program named <strong>Jb0225Code</strong> that you will find in 
+<a href="#Listing_5">Listing 5</a> 
+near the end of the chapter illustrates both approaches.</p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<p>The beginning of the class named <strong>Jb0225Code</strong> is shown in <a href="#Listing_1">
+Listing 1</a>.</p>
+<div class="a">
+	<p>
+	<a name="Listing_1">Listing 1</a>. Beginning of the class.
+</p>
+<pre>
+import java.util.Random;
+import java.util.Date;
+class Jb0225Code{
+  public static void main(String[] args){
+    //Create a pseudo-random number generator with a 
+    // time-based seed.
+    long seed = new Date().getTime();
+    System.out.println("Time-based seed = " + seed);
+    Random generator = new Random(seed);
+</pre></div><p>The code in <a href="#Listing_1">Listing 1</a> begins by importing 
+the classes that will be needed to generate the random numbers. </p>
+<h2><a name="Create_the_seed_and_the_generator">Create the seed and the generator</a></h2>
+<p>Once the <strong>main</strong> method starts running, it calls a method of the 
+<strong>Date</strong> class named <strong>getTime</strong> to create the seed value. Suffice it at this 
+point to say that this method returns the number of 
+milliseconds since January 1, 1970, 00:00:00 GTM, which is a very large number 
+that changes every millisecond. Then it prints the seed value, producing integer values 
+like 1584388199159.</p>
+<p>Following that, the code in <a href="#Listing_1">Listing 1</a> creates the 
+random number generator by instantiating a new object of the <strong>Random</strong> 
+class passing the seed value to the constructor. This generator will produce a 
+different sequence of random numbers each time the program is run.</p>
+<h2><a name="Get_and_display_three_random_values">Get and display three random values</a></h2>
+<p>The code in <a href="#Listing_2">Listing 2</a> calls the <strong>nextInt</strong> method on the 
+generator three times in succession to get a sequence of three random values of 
+type <strong>int</strong>. 
+The <strong>int</strong> values are then cast to type <strong>byte</strong> <em>(with 
+possible loss 
+of data) </em>to 
+make them easier on the eyes. The values are saved in the variables named
+<strong>valA</strong>,
+<strong>valB</strong>, and <strong>valC</strong>. <em>(In this case, the loss of 
+data doesn't matter.)</em></p>
+<div class="a">
+	<p><strong><a name="Listing_2">Listing 2</a>. Get and display random values. </strong></p>
+<pre>
+    //Get three random int values and convert them to
+    // byte values to make them easier to work with
+    // visually.
+    byte valA = (byte)generator.nextInt();
+    byte valB = (byte)generator.nextInt();
+    byte valC = (byte)generator.nextInt();
+    
+    //Display the random byte values.
+    System.out.println("Random bytes\n" +
+                   valA + " " + valB + " " + valC + "\n");
+</pre></div>
+<p>The code in <a href="#Listing_2">Listing 2</a> produces output similar to the 
+following:</p>
+<div class="a">
+<pre>
+Random bytes
+84 109 -80
+</pre></div><p>As mentioned earlier, these values will change each time the program 
+is run.</p>
+<h2><a name="Create_another_generator">Create another generator</a></h2>
+<p>The code in <a href="#Listing_3">Listing 3</a> creates another independent random number 
+generator. In this case, however, a decision is made regarding the seed that 
+will be used to create the generator. If the user has entered a numeric 
+command-line argument when the program was started, the value of that argument 
+will be used as the seed. Otherwise, the time-based seed that was used before 
+will be used again.</p>
+<div class="a">
+<p><a name="Listing_3">Listing 3</a>. Create another generator.</p>
+<pre>
+    //Create a new generator with either the same seed as
+    // above or a seed based on an incoming command-line
+    // argument.
+    //Get command-line arg as type String if there is one,
+    // and convert it to type long.
+    if(args.length != 0){
+      seed = Long.parseLong(args[0]);
+      System.out.println("Arg-based seed = " + seed);
+    }else{
+      System.out.println("No command-line arg.");
+      System.out.println("Use same seed as above.");
+    };
+
+    generator = new Random(seed);
+</pre></div><p>Following that, the code in <a href="#Listing_4">Listing 4</a> gets, 
+saves, and displays the three random values.</p>
+<div class="a">
+<p><a name="Listing_4">Listing 4</a>. Get and display random values.</p>
+<pre>
+    //Get three random bytes from the new generator.
+    valA = (byte)generator.nextInt();
+    valB = (byte)generator.nextInt();
+    valC = (byte)generator.nextInt();
+    
+    //Display the random bytes.
+    System.out.println("Random bytes\n" +
+                   valA + " " + valB + " " + valC + "\n");
+</pre></div>
+<h2><a name="Get_and_displayRandom_values">Get and display random values</a></h2>
+<p>If the user did not enter a command-line argument, the random values produced 
+by the new generator will be 
+the same as earlier in the program but will change from one run to the next.</p>
+<p>If the user did enter a command-line argument, the output produced by the 
+code in <a href="#Listing_4">Listing 4</a> will be different but will not change 
+from one run to the next, as long as the value of the command-line argument 
+doesn't change.</p>
+<p>The program output for a run with no command-line argument is shown below.</p>
+<div class="a">
+<pre>
+Time-based seed = 1584391372085
+Random bytes
+92 5 -5
+
+No command-line arg.
+Use same seed as above.
+Random bytes
+92 5 -5
+</pre></div>
+<p>The program output for a second run with no command-line argument is shown 
+below.</p>
+<div class="a">
+<pre>
+Time-based seed = 1584391528233
+Random bytes
+-15 -28 2
+
+No command-line arg.
+Use same seed as above.
+Random bytes
+-15 -28 2
+</pre></div>
+<p>Note the difference in the seeds and the random values produced.</p>
+<p>The program output for a run with a command-line argument value of 5 is shown 
+below.</p>
+<div class="a">
+<pre>
+Time-based seed = 1584391700582
+Random bytes
+32 -65 -27
+
+Arg-based seed = 5
+Random bytes
+-65 88 68
+</pre></div>
+<p>The program output for a second run with no change in the command-line 
+argument value is shown below.</p>
+<div class="a">
+<pre>
+Time-based seed = 1584391856119
+Random bytes
+63 -19 -127
+
+Arg-based seed = 5
+Random bytes
+-65 88 68
+</pre></div>
+<p>Note that the random values produced by the time-based seed are different, 
+but there was no change in the random values produced by the generator created 
+with the same seed as before.</p>
+<h1><a name="What_to_expect">What to expect</a></h1>
+<p>Several of the upcoming assignments will use random numbers to cause the 
+assignments to vary from run to run and from semester 
+to semester. Other assignments will use random numbers to change from one 
+semester to the next, but to stay the same from run to run within the semester.</p>
+<p>Random number generation will be handled by the driver code that I will 
+provide. As of the current state of the assignments, you won't be asked to 
+generate random numbers but that may change in the future.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">	<p>Housekeeping material 
+</p>
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0225: Pseudo-Random Numbers</li>
+					<li>File: Jb0225.htm
+</li>
+					<li>Revised: 08/04/2022</li>
+
+				</ul>
+</div>
+<h1><a name="Complete_program_listing">Complete program listing</a></h1>
+<div class="a">
+<p><strong><a name="Listing_5">Listing 5</a>. Complete program listing.</strong></p>
+<pre>
+/*File Jb0225Code.java
+The purpose of this code is to introduce the student to the
+use of pseudo-random numbers.
+***********************************************************/
+
+import java.util.Random;
+import java.util.Date;
+class Jb0225Code{
+  public static void main(String[] args){
+    //Create a pseudo-random number generator with a 
+    // time-based seed.
+    long seed = new Date().getTime();
+    System.out.println("Time-based seed = " + seed);
+    Random generator = new Random(seed);
+    
+    //Get three random int values and convert them to
+    // byte values to make them easier to work with
+    // visually.
+    byte valA = (byte)generator.nextInt();
+    byte valB = (byte)generator.nextInt();
+    byte valC = (byte)generator.nextInt();
+    
+    //Display the random byte values.
+    System.out.println("Random bytes\n" +
+                   valA + " " + valB + " " + valC + "\n");
+
+    
+    //Create a new generator with either the same seed as
+    // above or a seed based on an incoming command-line
+    // argument.
+    //Get command-line arg as type String if there is one,
+    // and convert it to type long.
+    if(args.length != 0){
+      seed = Long.parseLong(args[0]);
+      System.out.println("Arg-based seed = " + seed);
+    }else{
+      System.out.println("No command-line arg.");
+      System.out.println("Use same seed as above.");
+    };
+
+    generator = new Random(seed);
+    
+    //Get three random bytes from the new generator.
+    valA = (byte)generator.nextInt();
+    valB = (byte)generator.nextInt();
+    valC = (byte)generator.nextInt();
+    
+    //Display the random bytes.
+    System.out.println("Random bytes\n" +
+                   valA + " " + valB + " " + valC + "\n");
+
+  }//end main
+}//end class Jb0225Code
+//End program specifications.
+</pre></div>
+<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,497 @@
+<html><head>
+   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+   <meta name="generator" content="mozilla/4.04 [en] (win95; i) [netscape]">
+   <meta name="author" content="richard g. baldwin">
+   <title>... in Java by Richard G Baldwin</title></head><body><!--start-->
+
+<center><h3><b><i>Richard G Baldwin (512) 223-4758, <a href="mailto:baldwin@austin.cc.tx.us">baldwin@austin.cc.tx.us</a>,
+<a href="http://www2.austin.cc.tx.us/baldwin/">http://www2.austin.cc.tx.us/baldwin/</a></i></b></h3></center>
+
+<center><h2><b><!--title-->The AWT Package, Placing Components in Containers, Absolute Coordinates<!--endtitle--></b></h2></center>
+Java Programming, Lecture Notes # 112, Revised 02/21/98.
+<ul><li><a href="#preface">Preface</a></li>
+
+<li><a href="#introduction">Introduction</a></li>
+
+<li><a href="#absolute positioning and size">Absolute Positioning and Size</a></li>
+
+<li><a href="#sample program">Sample Program</a></li>
+
+<ul><li><a href="#discussion">Discussion</a></li>
+
+<li><a href="#interesting code fragments">Interesting Code Fragments</a></li>
+
+<li><a href="#program listing">Program Listing</a></li></ul>
+
+<li><a href="#review">Review</a></li></ul>
+
+<hr width="100%"><center><h2><a name="preface"></a><b><font color="#ff0000">Preface</font></b></h2></center>
+Students in Prof. Baldwin's <b><u>Intermediate Java Programming</u></b>
+classes at ACC are responsible for knowing and understanding all of the
+material in this chapter.
+
+<p>JDK 1.1 was formally released on February 18, 1997. This chapter was
+originally written on March 5, 1997 using the software and documentation
+in the JDK 1.1 download package. The chapter has been updated several times
+since it was originally written.
+<center><h2><a name="introduction"></a><font color="#ff0000">Introduction</font></h2></center>
+This is one in a series of chapters that concentrates on the package <b>java.awt
+</b>which contains most of the functionality for providing the user interface
+to your Java application or applet.
+
+<p>We can place components in containers using absolute position and size
+coordinates, or we can use any of several different layout managers to
+do the job.
+
+<p>Using layout managers is considered by many to be the safer approach
+because this approach is designed to automatically compensate for differences
+in screen resolution and component size/shape between platforms.
+
+<p>The different layout managers are defined in classes having the following
+names:
+<ul><li><b>BorderLayout</b></li>
+
+<li><b>CardLayout</b></li>
+
+<li><b>FlowLayout</b></li>
+
+<li><b>GridLayout</b></li>
+
+<li><b>GridBagLayout</b></li></ul>
+In addition to the layout manager classes, there is a class named <b>GridBagConstraints</b>
+that is used to work with the <b>GridBagLayout</b> class as well as a class
+named <b>Insets</b> that is used to work with other layout manager classes.
+
+<p>In addition to using the standard layout manager classes, we can <u>create
+our own</u> custom layout manager.
+
+<p>This chapter will discuss the placement of components into a container
+using <u>absolute coordinates</u>. Subsequent chapters will discuss the
+other possibilities listed above.
+<center><h2><a name="absolute positioning and size"></a><font color="#ff0000">Absolute
+Positioning and Size</font></h2></center>
+The <b>Component </b>class of JDK 1.1 provides the methods <b>setBounds(int,int,int,int)</b>
+and <b>setBounds(Rectangle)</b> that allow you to specify the location
+and size of a component in absolute coordinates measured in pixels.
+
+<p>A description of these two methods, as extracted from the JDK 1.1.3
+documentation follows:
+<br/>
+<div class="a"><pre>public void setBounds(int x,
+ int y,
+ int width,
+ int height)</pre>
+
+<dl><dd>
+Moves and resizes this component. The new location of the top-left</dd>
+
+<br/>corner is specified by <tt>x</tt> and <tt>y</tt>, and the new size
+is specified
+<br/>by <tt>width</tt> and <tt>height</tt>.
+<dl><dt><b>Parameters:</b></dt>
+
+<dd><tt>x</tt> - The new <i>x-coordinate</i> of this component.</dd>
+
+<dd><tt>y</tt> - The new <i>y-coordinate</i> of this component.</dd>
+
+<dd><tt>width</tt> - The new <tt>width</tt> of this component.</dd>
+
+<br/><tt>height</tt> - The new <tt>height</tt> of this component.</dl></dl></div>
+.
+<br/>
+<div class="a"><pre>public void setBounds(Rectangle r)</pre>
+
+<dl><dd>
+Moves and resizes this component to conform to the new bounding</dd>
+
+<br/>rectangle <tt>r</tt>. This component's new position is specified
+<br/>by <tt>r.x</tt> and <tt>r.y</tt>, and its new size is specified by
+<tt>r.width</tt> and <tt>r.height</tt>
+<dl><dt><b>Parameters:</b></dt>
+
+<br/><tt>r - The new bounding rectangle for this component.</tt></dl></dl></div>
+As you can see from the above, the location and size of the component are
+specified by the location and size of a bounding rectangle that can in
+turn be specified by four integer parameters, or can be specified as an
+object of class <b>Rectangle</b>..
+
+<p>Many authors will tell you that specifying the location and size of
+your components in absolute coordinates will make it more difficult to
+achieve satisfactory results on a variety of platforms and displays. Regardless
+of that, you probably need to know how to do it, and that is the subject
+of this chapter.
+
+<p>The following sample program illustrates the positioning and sizing
+of components on an absolute coordinate basis in JDK 1.1. Note that this
+program uses several new methods that did not exist in JDK 1.0.
+<center><h3><a name="sample program"></a><font color="#ff0000">Sample Program</font></h3></center>
+The following application, named <b>Layout01.java</b> places a <b>Button
+</b>object and a <b>Label </b>object in a <b>Frame </b>object using absolute
+coordinates in pixels. The program is designed for simplicity and therefore
+does not contain any event handlers. With no event handlers, the <i>Close</i>
+button on the Frame object is <u>not operationa</u>l, so you will have
+to terminate the program using some other method.
+<center><h4><a name="discussion"></a><font color="#ff0000">Discussion</font></h4></center>
+The program shows how to use the new methods in JDK 1.1 to set the size
+and position of components in a <b>Frame </b>object using absolute coordinates.
+
+<p>The program also illustrates some of the potential <u>problems</u> associated
+with the use of absolute coordinates.
+
+<p>A <b>Button</b> and a yellow <b>Label</b> are placed in a <b>Frame</b>
+object. Note that the specified location and size of the components may
+cause the two objects to <u>overlap</u>. This is one of the potential problems
+with the use of absolute coordinates. Note also that the initial height
+of the <b>Frame </b>object may <u>clip</u> off the bottom of the <b>Label</b>.
+Of course, problems of this sort could be avoided, on one platform at least,
+by careful design.
+
+<p>If the <b>Frame</b> is resized by the user, the <b>Button </b>and the
+<b>Label </b>remain <u>fixed in size and position</u>. The <b>Frame </b>can
+be resized to the point where the two components are <u>no longer visible</u>.
+Hopefully, a user would know not to do that.
+
+<p>Also, the <u>specified size</u> of the <b>Label </b>may <u>not be sufficient</u>
+to display the entire initial text string placed in the label. Again, this
+could be avoided, on one platform, through more careful design. Getting
+it right on one platform, however, doesn't guarantee that it will be right
+on other platforms as well.
+
+<p>The program was tested using JDK 1.1 running under Win95.
+<center><h4><a name="interesting code fragments"></a><font color="#ff0000">Interesting
+Code Fragments</font></h4></center>
+The following code fragments from the program are particularly interesting.
+<h4><font color="#ff0000">Create and Size the Button Object</font></h4>
+The following two statements
+<br/>
+<div class="a"><pre> Button myButton = new Button("Button");
+ myButton.setBounds(new<b> Rectangle(25,50,100,75))</b>;</pre></div>
+result in the following actions.
+<ul><li>
+Create a <b>Button </b>object with the caption "Button"</li>
+
+<li>
+Specify that the button is to be located at x = 25 and y = 50, measured
+in pixels from the upper left-hand corner of the containing object. Positive
+y is measured going <u>down</u> the screen. The reference point on the
+button is the upper left-hand corner of the button.</li>
+
+<li>
+Specify that the button is to be 100 pixels wide and 75 pixels high</li></ul>
+Note that at the point in the program where these two statements are executed,
+the containing object hasn't yet been identified. Thus, <b>setBounds()</b>
+provides absolute coordinate information for whatever container the <b>Button</b>
+is <u>eventually placed in</u>.
+
+<p>The <b>setBounds()</b> method is a method of the <b>Component</b> class
+that is <u>inherited by all subclasses</u> of <b>Component </b>including
+<b>Button</b>.
+
+<p>The method specifies that the component is to be located and sized according
+to a bounding rectangle whose sides are parallel to the <b>x</b> and <b>y</b>
+axes.
+
+<p>As shown earlier, there are two overloaded versions of <b>setBounds()</b>.
+One version allows the location and size of the box to specified directly
+as four integer parameters (x, y, width, height).
+
+<p>The other version, which is the version used above, requires the location
+and size of the box to be specified by an object of type <b>Rectangle</b>
+that is passed as a parameter to the method. This is the most flexible
+approach because the <b>Rectangle</b> class has about seven different constructors
+that can be used to create the bounding box.
+<h4><font color="#ff0000">Create and Size the Label Object</font></h4>
+The next interesting code fragment creates a <b>Label </b>component with
+a yellow background, again using the <b>setBounds()</b> method to specify
+its location and size. This code places the upper left-hand corner of the
+<b>Label</b> object at a coordinate position of 100 by 100 pixels, and
+causes its width to be 100 pixels and its height to be 75 pixels.
+<br/>
+<div class="a"><pre> Label myLabel = new Label(
+ "Copyright, R.G.Baldwin");
+ myLabel.setBounds(new<b> Rectangle(100,100,100,75))</b>;
+ myLabel.setBackground(Color.yellow);</pre></div>
+The <b>setBackground(Color c)</b> method is also a method of the <b>Component</b>
+class that is inherited by subclasses of <b>Component</b>. This method
+requires an object of the <b>Color </b>class as a parameter. There are
+many different ways to create the <b>Color</b> object, the simplest of
+which is simply to refer to one of the <i>class constants </i>that are
+defined in the <b>Color</b> class using syntax such as
+<br/>
+<div class="a"><pre><b><tt>public final static Color yellow</tt></b></pre></div>
+Recall that variables declared as <b>static</b> in a class can be accessed
+using the name of the class and the name of the variable. Making the variable
+<b>final</b> causes it to be a constant.
+
+<p>About thirteen different colors can be specified in this way. If you
+need a color not included in this list, you can use one of the overloaded
+constructors to specify your color using specified contributions of red,
+green, and blue. The <b>Color</b> class provides many different methods
+for dealing with colors.
+<h4><font color="#ff0000">Create the Frame Object</font></h4>
+The next interesting code fragment creates a <b>Frame</b> object with the
+title "Copyright, R.G.Baldwin" <b>Frame</b> is the type of object
+that users of the <i>Windows </i>operating system would probably consider
+to be a typical "Window". It is <i>resizable</i>, has a <i>minimize </i>button,
+a <i>maximize </i>button, a <i>control box</i> button, and a <i>close </i>button.
+
+<p>The default layout for a frame is <b>BorderLayout</b> which we will
+be studying later.
+<br/>
+<div class="a"><pre> Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ myFrame.setLayout(null<b>)</b>;</pre></div>
+In this particular example, we don't want to accept the default layout.
+Rather, we want to be able to specify the location and size of our components
+in absolute coordinates . Therefore, we will <u>override the default</u>
+layout with a specification of a <b>null</b> layout as a parameter to the
+<b>setLayout()</b> method.
+
+<p>The <b>setLayout()</b> method is a method of the <b>Container</b> class,
+of which the <b>Frame</b> class is a subclass. The <b>setLayout()</b> method
+requires an object of the <b>LayoutManager</b> class or <b>null</b> (indicating
+no layout manager) as a parameter.
+<h4><font color="#ff0000">Add the Components to the Frame</font></h4>
+The next interesting code fragment causes the two previously defined components
+to become part of the composite visual object through use of the <b>add()</b>
+method of the class <b>Container</b>. This method is inherited by the <b>Frame</b>
+class which is a subclass of <b>Container</b>.
+
+<p>As of 3/6/97, there are five overloaded versions of the <b>add()</b>
+method. We are using the version that requires an object of type <b>Component</b>
+as a parameter. Since our <b>Button</b> and <b>Label</b> objects are subclasses
+of the <b>Component</b> class, they qualify as parameters allowing us to
+use the following code:
+<br/>
+<div class="a"><pre> myFrame.add(myButton);
+ myFrame.add(myLabel);</pre></div>
+
+<h4><font color="#ff0000">Size the Frame and Make It Visible</font></h4>
+Once we reach this point, all that is left to cause our GUI to appear on
+the screen at program startup is to establish the size of the <b>Frame</b>
+object in pixels, and to make it <i>visible</i>. We accomplish this with
+the following two statements:
+<br/>
+<div class="a"><pre> myFrame.setSize(250,150);
+ myFrame.setVisible(true);</pre></div>
+A complete listing of the program is provided in the next section.
+<center><h4><a name="program listing"></a><font color="#ff0000">Program Listing</font></h4></center>
+The complete listing of the program with additional comments follows.
+<br/>
+<div class="a"><pre>/*File Layout01.java Copyright, R.G.Baldwin
+Revised 10/27/97 to improve the layout on the page.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+The program shows how to use the new methods in JDK 1.1 to
+set the size and position of components in a Frame object
+using absolute coordinates.
+
+The program also illustrates some of the problems
+associated with the use of absolute coordinates.
+
+A button and a yellow label are placed in a Frame object.
+Note that the two objects may overlap, and that the initial
+height of the Frame object may clip off the bottom of the
+Label.
+
+Note also that if the Frame is resized by the user, the
+Button and the Label remain fixed in size and position.
+The Frame can be resized to the point where the two
+components are no longer visible.
+
+Note also that the specified size of the Label may not be
+sufficient to display all of the initial text placed in the
+label.
+
+For simplicity, no event handler is provided for the Button
+and no event handler is provided for the "Close" button on
+the Frame. Therefore, it is necessary to terminate the
+program using some other method.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class Layout01 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout01
+//=======================================================//
+
+//The following class is used to instantiate a graphical
+// user interface object.
+class GUI {
+ public GUI(){//constructor
+ //Create a Button object with the specified caption and
+ // the specified size and location within its container
+ // (in pixels).
+ Button myButton = new Button("Button");
+ //Arguments are x,y,width,height
+ myButton.setBounds(new Rectangle(25,50,100,75));
+
+ //Create a Label object with the specified initial text
+ // and the specified size and location within its
+ // container (in pixels). Make it yellow so that its
+ // outline will be visible.
+ Label myLabel = new Label(
+ "Copyright, R.G.Baldwin");
+ //Arguments are x,y,width,height
+ myLabel.setBounds(new Rectangle(100,100,100,75));
+ myLabel.setBackground(Color.yellow);
+
+ //Create a Frame object with the specified title, and
+ // with no layout manager so that size and location of
+ // components shown above will be effective.
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Note the following null argument.
+ myFrame.setLayout(null);
+
+ //Add the two components to the Frame, set its size in
+ // pixels, and make it visible.
+ myFrame.add(myButton);
+ myFrame.add(myLabel);
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+ }//end constructor
+}//end class GUI definition
+//=======================================================//</pre></div>
+
+<center><h2><a name="review"></a><font color="#ff0000">Review</font></h2></center>
+Q - Without viewing the following solution, upgrade the program named Layout01
+to cause it to terminate when the close button is pressed on the Frame
+object.
+
+<p>While continuing to use absolute coordinate and sizing, modify the program
+to ensure that the components don't overlap, there is a safety margin of
+at least 25 pixels between the components and the edge of the client area
+in the Frame object, and that the Frame object is sufficiently large to
+contain the two components.
+
+<p><font color="#0000ff"><font size=-1>A - See the following program.</font></font><br/>
+<div class="a"><pre><font color="#0000ff">/*File SampProg134.java Copyright, R.G.Baldwin
+Without viewing the following solution, upgrade the
+program named Layout01 to cause it to terminate when the
+close button is pressed on the Frame object.
+
+While continuing to use absolute coordinate and sizing,
+modify the program to ensure that the components don't
+overlap, there is a safety margin of at least 25 pixels
+between the components and the edge of the Frame object,
+and that the Frame object is sufficiently large to
+contain the two components.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+A button and a yellow label are placed in a Frame object.
+
+Note that with JDK 1.1.3, if the top margin is set to zero,
+the button is partially covered by the banner at the top
+of the Frame object. Thus, the vertical coordinate of the
+white portion of the client area in the Frame object does
+not begin at zero. Rather, the zero coordinate is
+somewhere underneath the banner. Experimentation indicates
+that the banner at the top covers about the first twenty
+pixels of the white client area of the Frame object.
+
+Note that if the Frame is resized by the user, the
+Button and the Label remain fixed in size and position.
+The Frame can be resized to the point where the two
+components are no longer visible.
+
+Note also that the specified size of the Label may not be
+sufficient to display all of the initial text placed in the
+label.
+
+For simplicity, no event handler is provided for the
+Button.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class SampProg134 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class SampProg134
+//=======================================================//
+
+//The following class is used to instantiate a graphical
+// user interface object.
+class GUI {
+ int leftMargin = 25;//specify the margins
+ int topMargin = 45;
+ int rightMargin = 25;
+ int bottomMargin = 25;
+
+ int buttonWidth = 100;//specify button width and height
+ int buttonHeight = 75;
+
+ int labelWidth = 100;//specify label width and height
+ int labelHeight = 75;
+
+ public GUI(){//constructor
+ //Create a Button object with the specified caption and
+ // the specified size and location within its container
+ // (in pixels).
+ Button myButton = new Button("Button");
+ //Arguments are x,y,width,height
+ myButton.setBounds(new Rectangle(
+ leftMargin,topMargin,buttonWidth,buttonHeight));
+
+ //Create a Label object with the specified initial text
+ // and the specified size and location within its
+ // container (in pixels). Make it yellow so that its
+ // outline will be visible. Base its location on the
+ // location and the size of the Button object.
+ Label myLabel = new Label(
+ "Copyright, R.G.Baldwin");
+ //Arguments are x,y,width,height
+ myLabel.setBounds(new Rectangle(
+ leftMargin + buttonWidth,topMargin + buttonHeight,
+ labelWidth,labelHeight));
+ myLabel.setBackground(Color.yellow);
+
+ //Create a Frame object with the specified title, and
+ // with no layout manager so that size and location of
+ // components shown above will be effective.
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Note the following null argument.
+ myFrame.setLayout(null);
+
+ //Add the two components to the Frame, set its size in
+ // pixels, and make it visible.
+ myFrame.add(myButton);
+ myFrame.add(myLabel);
+ myFrame.setSize(
+ leftMargin + buttonWidth + labelWidth + rightMargin,
+ topMargin + buttonHeight +
+ labelHeight + bottomMargin);
+ myFrame.setVisible(true);
+
+ myFrame.addWindowListener(new WindowClose());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//Class used to instantiate window listener objects.
+class WindowClose extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ System.exit(1);
+ }//end windowClosing()
+}//end class WindowClose</font></pre></div>
+-end-<!--end--></body></html>

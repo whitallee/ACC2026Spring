@@ -1,0 +1,1605 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0120</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0120: Interfaces and polymorphic behavior</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers. </p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base A-intfcMethod</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap131{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap131
+
+class Worker{
+  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.inherMethod();
+    X myVar2 = new A();
+    myVar2.intfcMethod();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A-inherMethod A-intfcMethod</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap132{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap132
+
+class Worker{
+  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.inherMethod();
+    Base myVar2 = new A();
+    myVar2.intfcMethod();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base A-intfcMethod</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap133{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap133
+
+class Worker{
+  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.inherMethod();
+    A myVar2 = new A();
+    myVar2.intfcMethod();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base A-intfcMethod</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap134{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap134
+
+class Worker{
+  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.inherMethod();
+    X myVar2 = new A();
+    myVar2.intfcMethod();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A-intfcMethodX B-intfcMethodX</li>
+	<li>D. None of the above.</li>
+</ul>
+<div class="a">
+<p><strong><a name="Listing_5">Listing 5</a>. Listing for Question 5.</strong></p>
+
+<pre>public class Ap135{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap135
+
+class Worker{
+  void doIt(){
+    X myVar1 = new A();
+    myVar1.intfcMethodX();
+    X myVar2 = new B();
+    myVar2.intfcMethodX();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;A-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class A
+
+class B extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; B-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;B-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class B
+
+interface X{
+  public void intfcMethodX();
+}//end X
+</pre>
+</div>
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A-intfcMethodX B-intfcMethodX</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a">
+<p><strong><a name="Listing_6">Listing 6</a>. Listing for Question 6.</strong></p>
+
+<pre>public class Ap136{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap136
+
+class Worker{
+  void doIt(){
+    Object[] myArray = new Object[2];
+    myArray[0] = new A();
+    myArray[1] = new B();
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      myArray[i].intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;A-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class A
+
+class B extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; B-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;B-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class B
+
+interface X{
+  public void intfcMethodX();
+}//end X
+</pre>
+</div>
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A-intfcMethodX B-intfcMethodX</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a">
+<p><strong><a name="Listing_7">Listing 7</a>. Listing for Question 7.</strong></p>
+
+<pre>public class Ap137{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap137
+
+class Worker{
+  void doIt(){
+    Object[] myArray = new Object[2];
+    myArray[0] = new A();
+    myArray[1] = new B();
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      ((X)myArray[i]).intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;A-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class A
+
+class B extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; B-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;B-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class B
+
+interface X{
+  public void intfcMethodX();
+}//end X
+</pre>
+</div>
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. A-intfcMethodX B-intfcMethodX</li>
+	<li>D. None of the above.</li>
+</ul>
+<div class="a">
+<p><strong><a name="Listing_8">Listing 8</a>. Listing for Question 8.</strong></p>
+
+<pre>public class Ap138{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap138
+
+class Worker{
+  void doIt(){
+    X[] myArray = new X[2];
+    myArray[0] = new A();
+    myArray[1] = new B();
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      myArray[i].intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;A-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class A
+
+class B extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; B-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;B-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class B
+
+interface X{
+  public void intfcMethodX();
+}//end X
+</pre>
+</div>
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base A B</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap139{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap139
+
+class Worker{
+  void doIt(){
+    Base myVar = new Base();
+    myVar.test();
+    myVar = new A();
+    myVar.test();
+    myVar = new B();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);
+  }//end test()
+}//end class Base
+
+class A extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+
+class B extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;B &quot;);
+  }//end test()
+}//end class B
+
+interface X{
+  public void test();
+}//end X
+
+interface Y{
+  public void test();
+}//end Y
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Base A B B</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap140{
+  public static void main(
+                        String args[]){
+        new Worker().doIt();
+  }//end main()
+}//end class Ap140
+
+class Worker{
+  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.test();
+    myVar1 = new A();
+    myVar1.test();
+    myVar1 = new B();
+    myVar1.test();
+
+    X myVar2 = (X)myVar1;
+    myVar2.test();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);
+  }//end test()
+}//end class Base
+
+class A extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+
+class B extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;B &quot;);
+  }//end test()
+}//end class B
+
+interface X{
+  public void test();
+}//end X
+
+interface Y{
+  public void test();
+}//end Y
+</pre>
+
+</div>
+
+
+	
+	
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0120: Interfaces and 
+				polymorphic behavior</li>
+				<li>File: Ap0120.htm </li>
+				<li>Originally published: 2004</li>
+				<li>Published at cnx.org: 12/08/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>C. Base A B B </p>
+<h3><strong>Explanation 10</strong></h3>
+<p><strong>Expansion of the program from </strong> <a href="#question09"><strong>Question 9</strong></a></p>
+<p>The class and interface definitions for the classes and interfaces named
+<strong>Base</strong>, <strong>A</strong>, <strong>B</strong>, <strong>X</strong>, 
+and <strong>Y</strong> are the same as in <a href="#question09">Question 9</a>. </p>
+<p><strong>Call the test method differently </strong> </p>
+<p>However, the call of the method named <strong>test</strong> in the 
+object instantiated from the class named <strong>B</strong> is somewhat 
+different. The difference is identified by the code in the following 
+fragment. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.test();
+    myVar1 = new A();
+    myVar1.test();
+    myVar1 = new B();
+    myVar1.test();
+
+    X myVar2 = (X)myVar1;
+    myVar2.test();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+</pre>
+</div>
+	
+	<p><strong>Calling test method on Base-type reference</strong> </p>
+<p>In <a href="#question09">Question 9</a>, and in the above code fragment as well, the 
+method named <strong>test</strong> was called on each of the objects using a 
+reference stored in a reference variable of type <strong>Base</strong>. </p>
+<p><strong>Calling the overridden version of test method </strong> </p>
+<p>This might be thought of as calling the overridden version of the method, 
+through polymorphism, without regard for anything having to do with the 
+interfaces. </p>
+<p><strong>Calling test method on interface-type reference </strong> </p>
+<p>Then the code shown above calls the same method named <strong>
+test</strong> on one of the same objects using a reference variable of the 
+interface type <strong>X</strong>.</p>
+<p><strong>Only one test method in each object</strong> </p>
+<p>Keep in mind that each object defines only one method named <strong>test</strong>. 
+This single method serves the dual purpose of overriding the method having the 
+same signature from the superclass, and implementing a method with the same 
+signature declared in each of the interfaces. </p>
+<p><strong>Implementing the interface method </strong> </p>
+<p>Perhaps when the same method is called using a reference variable of the 
+interface type, it might be thought of as implementing the interface method 
+rather than overriding the method defined in the superclass. You can be the 
+judge of that.</p>
+<p><strong>The same method is called regardless of reference type</strong> </p>
+<p>In any event, in this program, the same method is called whether it is called 
+using a reference variable of the superclass type, or using a reference variable 
+of the interface type. </p>
+<p><strong>Illustrates the behavior of signature collisions </strong> </p>
+<p>The purpose of this and <a href="#question09">Question 9</a> is not necessarily to 
+illustrate a useful inheritance and implementation construct. Rather, these two 
+questions are intended to illustrate the behavior of Java for the case of 
+duplicated superclass and interface method signatures. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>C. Base A B</p>
+<h3><strong>Explanation 9</strong></h3>
+<p><strong>A question regarding signature collisions</strong></p>
+
+<p>The question often arises in my classroom as to what will happen if a class 
+inherits a method with a given signature and also implements one or more 
+interfaces that declare a method with an identical signature. </p>
+<p><strong>The answer</strong> </p>
+<p>The answer is that nothing bad happens, as long as the class provides a 
+concrete definition for a method having that signature. </p>
+<p><strong>Only one method definition is allowed</strong> </p>
+<p>Of course, only one definition can be provided for any given method 
+signature, so that definition must satisfy the needs of overriding the inherited 
+method as well as the needs of implementing the interfaces. </p>
+<p><strong>An example of signature collisions </strong> </p>
+<p>The following fragment defines a class named <strong>Base</strong> that 
+defines a method named <strong>test</strong>. The code also defines two 
+interfaces named <strong>X</strong> and <strong>Y</strong>, each of which 
+declares a method named <strong>test</strong> with an identical signature. </p>
+<div class="a">
+				<pre>class Base{
+  public void test(){
+    System.out.print(&quot;Base &quot;);
+  }//end test()
+}//end class Base
+
+interface X{
+  public void test();
+}//end X
+
+interface Y{
+  public void test();
+}//end Y
+
+class A extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A</pre>
+</div>
+<p><strong>Classes A and B extend Base 
+and implement X and Y</strong> </p>
+<p>The code in the following fragment defines two classes, named <strong>A</strong> 
+and <strong>B</strong>, each of which extends <strong>Base</strong>, and 
+each of which implements both interfaces <strong>X</strong> and <strong>Y</strong>. Each class 
+provides a concrete definition for the method named <strong>test</strong>, with 
+each class providing a different definition. </p>
+<div class="a">
+				<pre>class A extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;A &quot;);
+  }//end test()
+}//end class A
+
+class B extends Base implements X,Y{
+  public void test(){
+    System.out.print(&quot;B &quot;);
+  }//end test()
+}//end class B</pre>
+</div>
+<p><strong>Override inherited method and define interface method </strong> </p>
+<p>Each of the methods named <strong>test</strong> in the above fragment serves 
+not only to override the method inherited from the class named <strong>Base</strong>, 
+but also to satisfy the requirement to define the methods declared in the 
+implemented interfaces named <strong>X</strong> and <strong>Y</strong>. <em>
+(This can also be thought of as overriding an inherited abstract method from an 
+interface.)</em> </p>
+<p><strong>Store object&#39;s references as type Base and call test 
+method </strong> </p>
+<p>Finally, the code in the following fragment declares a reference variable of 
+the type <strong>Base</strong>. Objects respectively of the classes <strong>Base</strong>,
+<strong>A</strong>, and <strong>B</strong> are instantiated and stored in the 
+reference variable. Then the method named <strong>test</strong> is called on 
+each of the references in turn. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Base myVar = new Base();
+    myVar.test();
+    myVar = new A();
+    myVar.test();
+    myVar = new B();
+    myVar.test();
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker</pre>
+</div>
+<p>As you probably expected, this causes the following text to appear on the 
+screen: </p>
+<div class="a">
+	
+	<pre>Base A B</pre>
+</div>
+	
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>C. A-intfcMethodX B-intfcMethodX </p>
+<h3><strong>Explanation 8</strong></h3>
+<p><strong>Similar to previous two programs</strong></p>
+
+<p>This program is very similar to the programs in <a href="#question06">Question 6</a> and 
+<a href="#question07">Question 7</a>. 
+The program is <a href="#question06">Question 6</a> exposed a specific type mismatch problem. The program 
+in <a href="#question07">Question 7</a> provided one solution to the problem. </p>
+<p><strong>A different solution</strong> </p>
+<p>The following fragment illustrates a different solution 
+to the problem. </p>
+<div class="a">
+				<pre>  void doIt(){
+    X[] myArray = new X[2];
+    myArray[0] = new A();
+    myArray[1] = new B();
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      myArray[i].intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+	
+<p><strong>An array object of the interface type </strong> </p>
+<p>In this case, rather than to declare the array object to be of type <strong>Object</strong>, 
+the array is declared to be of the interface type <strong>X</strong>. </p>
+<p>This is a less generic container than the one declared to be of type <strong>Object</strong>. 
+Only references to objects instantiated from classes that implement the <strong>
+X</strong> interface, or objects instantiated from subclasses of those classes 
+can be stored in the container. However, this is often adequate. </p>
+<p><strong>What methods can be called?</strong> </p>
+<p>Since the references are stored as the interface type, any method declared in 
+or inherited into the interface can be called on the references stored in the container. 
+Of course, the objects referred to by those references must provide concrete 
+definitions of those methods or the program won&#39;t compile.</p>
+<p><em>(Although it isn&#39;t implicitly obvious, it is also possible to call any of the 
+eleven methods defined in the </em><strong><em>Object</em></strong><em> class on an object&#39;s reference being stored 
+as an interface type. Those eleven methods can be called on any object, 
+including array objects, regardless of how the references are stored.)</em></p>
+<p><strong>Not the standard approach
+</strong></p>
+<p>If you are defining your own container, this is a satisfactory approach to 
+implementation of the observer design pattern. However, you cannot use this 
+approach when using containers from the standard collections framework, because 
+those containers are designed to always store references as the generic type 
+<strong>Object</strong>. In those cases, the casting solution of 
+<a href="#question07">Question 7</a> <em>(or the use of generics)</em> is required. </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>C. A-intfcMethodX B-intfcMethodX </p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>The correct use of an interface</strong></p>
+
+<p>This program illustrates the correct use of an interface. It uses a cast of 
+the interface type in the following fragment to 
+resolve the problem that was discussed at length in <a href="#question06">Question 6</a> earlier. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Object[] myArray = new Object[2];
+    myArray[0] = new A();
+    myArray[1] = new B();
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      ((X)myArray[i]).intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+	
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 6</strong></h3>
+
+<p><strong>What is a container?</strong></p>
+
+<p>The word container is often used in Java, with at least two different 
+meaning. One meaning is to refer to the type of an object that is instantiated 
+from a subclass of the class named <strong>Container</strong>. In that case, the object can be 
+considered to be of type <strong>Container</strong>, and typically appears in a graphical user 
+interface <em>(GUI)</em>. That is not the usage of the word in the explanation of this 
+program. </p>
+<p><strong>A more generic meaning </strong> </p>
+<p>In this explanation, the word container has a more generic meaning. It is 
+common to store a collection of object references in some sort of Java 
+container, such as an array object or a <strong>Vector</strong> object. In fact, there is a 
+complete collections framework provided to facilitate that sort of thing <em>(<strong>Vector</strong> 
+is one of the concrete classes in the Java Collections Framework)</em>. </p>
+<p><strong>Storing references as type Object </strong> </p>
+<p>It is also common to declare the type of references stored in the container 
+to be of the class <strong>Object</strong>. Because <strong>Object</strong> is a completely generic type, this 
+means that a reference to any object instantiated from any class <em>(or any 
+array object)</em> can be stored 
+in the container. The standard containers such as <strong>Vector</strong> and 
+<strong>Hashtable</strong> take this 
+approach. </p>
+<p><em>(Note that this topic became a little more complicated with the release 
+of generics in jdk version 1.5.)</em></p>
+<p><strong>A class named Base and an interface named X</strong>
+</p>
+<p>In a manner similar to several previous programs, this program defines a 
+class named <strong>Base</strong> and an interface named <strong>X</strong> as 
+shown in the following fragment. </p>
+<div class="a">
+				<pre>class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+interface X{
+  public void intfcMethodX();
+}//end X</pre>
+</div>
+	
+<p><strong>Classes A and B extend Base 
+and implement X</strong> </p>
+<p>Also similar to previous programs, this program defines two classes named
+<strong>A</strong> and <strong>B</strong>. Each of these classes extends the 
+class named <strong>Base</strong> and implements the interface named <strong>X</strong>, 
+as shown in the next fragment. </p>
+<div class="a">
+				<pre>class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;A-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class A
+
+class B extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; B-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;B-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class B</pre>
+</div>
+	
+<p><strong>Concrete definitions of the interface method</strong> </p>
+<p>As before, these methods provide concrete definitions of the method named
+<strong>intfcMethodX</strong>, which is declared in the interface named <strong>
+X</strong>. </p>
+<p><strong>An array of references of type <em>Object</em> </strong> </p>
+<p>The interesting portion of this program begins in the following fragment, 
+which instantiates and populates a two-element array object <em>(container)</em> of type 
+<strong>Object</strong>. <em>(In the sense of this discussion, an array object is a container, albeit 
+a very simple one.)</em> </p>
+<div class="a">
+				<pre>  void doIt(){
+    Object[] myArray = new Object[2];
+    myArray[0] = new A();
+    myArray[1] = new B();</pre>
+</div>
+	
+<p><strong>Store object references of type <em>A</em> and </strong>B<strong> as 
+type <em>Object</em> </strong> </p>
+<p>Because the container is declared to be of type <strong>Object</strong>, references to objects 
+instantiated from any class can be stored in the container. The code in the 
+above fragment instantiates two objects, <em>(one of class </em> <strong><em>A</em></strong><em> and 
+the other of class </em> <strong><em>B</em></strong>), and stores the two object&#39;s references 
+in the container. </p>
+<p><strong>Cannot call interface method as type Object</strong> </p>
+<p>The code in the <strong>for</strong> loop in the next fragment attempts to 
+call the method named <strong>intfcMethodX</strong> on each of the two objects 
+whose references are stored in the elements of the array.</p>
+<div class="a">
+				<pre>    for(int i=0;i&lt;myArray.length;i++){
+      myArray[i].intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+	
+	<p>This produces the following compiler 
+error under JDK 1.3: </p>
+<div class="a">
+				<pre>Ap136.java:24: cannot resolve symbol
+symbol  : method intfcMethodX  ()
+location: class java.lang.Object
+      
+myArray[i].intfcMethodX();
+</pre>
+</div>
+	<p><strong>What methods can you call as type Object? </strong> </p>
+<p>It is allowable to store the reference to an object instantiated from any 
+class in a container of the type <strong>Object</strong>. However, the only methods that can be 
+directly called <em>(without a cast and not using generics)</em> on that reference are the following eleven 
+methods. These methods are defined in the class named <strong>Object</strong>: </p>
+<ul>
+	<li><a name="clone">clone</a>()</li>
+	<li>equals(Object obj)</li>
+	<li>finalize()</li>
+	<li>getClass()</li>
+	<li>hashCode()</li>
+	<li>notify()</li>
+	<li>notifyAll()</li>
+	<li>toString()</li>
+	<li>wait()</li>
+	<li>wait(long timeout)</li>
+	<li>wait(long timeout,int nanos)</li>
+</ul>
+<p><strong>Overridden methods</strong></p>
+
+<p>Some, <em>(but not all)</em>, of the methods in the above list are defined with 
+default behavior in the <strong>Object</strong> class, and are meant to be overridden in new 
+classes that you define. This includes the methods named <strong>equals</strong> and 
+<strong>toString</strong>.
+</p>
+<p>Some of the methods in the above list, such as <strong>getClass</strong>, are simply utility 
+methods, which are not meant to be overridden. </p>
+<p><strong>Polymorphic behavior applies</strong> </p>
+<p>If you call one of these methods on an object&#39;s reference <em>(being stored as 
+type Object)</em>, polymorphic behavior will apply. The version of the method 
+overridden in, or inherited into, the class from which the object was 
+instantiated will be identified and executed. </p>
+<p><strong>Otherwise, a cast is required</strong> </p>
+<p>In order to call any method other than one of the eleven methods in the above 
+<a href="#clone">list</a>, <em>(on an object&#39;s reference being stored as type 
+<strong>Object</strong> without using generics)</em>, you must cast the 
+reference to some other type. </p>
+<p><strong>Casting to an interface type</strong> </p>
+<p>The exact manner in which you write the cast will differ from one situation 
+to the next. In this case, the problem can be resolved by rewriting the program 
+using the interface cast shown in the following fragment. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Object[] myArray = new Object[2];
+    myArray[0] = new A();
+    myArray[1] = new B();
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      ((X)myArray[i]).intfcMethodX();
+    }//end for loop
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+	
+<p><strong>The observer design pattern</strong> </p>
+<p>By implementing an interface, and using a cast such as this, you can store 
+references to many different objects, of many different actual types, each of 
+which implements the same interface, but which have no required 
+superclass-subclass relationship, in the same container. Then, when needed, you 
+can call the interface methods on any of the objects whose references are stored 
+in the container. </p>
+<p>This is a commonly used design pattern in Java, often referred to as the 
+observer design pattern. </p>
+<p><strong>Registration of observers</strong> </p>
+<p>With this design pattern, none, one, or more observer objects, <em>(which 
+implement a common observer interface)</em> are registered on an observable object. 
+This means references to the observer objects are stored in a container by the 
+observable object. </p>
+<p><strong>Making a callback</strong> </p>
+<p>When the observable object determines that some interesting event has 
+occurred, the observable object calls a specific interface method on each of the 
+observer objects whose references are stored in the container. </p>
+<p>The observer objects execute whatever behavior they were designed to execute 
+as a result of having been notified of the event. </p>
+<p><strong>The model-view-control (MVC) paradigm</strong> </p>
+<p>In fact, there is a class named <strong>Observable</strong> and an interface named 
+<strong>Observer</strong> in 
+the standard Java library. The purpose of these class and interface definitions 
+is to make it easy to implement the observer design pattern. </p>
+<p><em>(The Observer interface and the Observable class are often used to implement 
+a programming style commonly referred to as the MVC paradigm.)</em></p>
+<p><strong>Delegation event model, bound properties of Beans, etc.</strong></p>
+
+<p>Java also provides other tools for implementing the observer design pattern 
+under more specific circumstances, such as the Delegation Event Model, and in 
+conjunction with bound and constrained properties in JavaBeans Components. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>C. A-intfcMethodX B-intfcMethodX </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><strong>More substantive use of an interface</strong></p>
+
+<p>This program illustrates a more substantive use of the interface than was the 
+case in the previous programs. </p>
+<p><strong>The class named Base</strong> </p>
+<p>The program defines a class named <strong>Base</strong> as shown in the 
+following fragment. </p>
+<div class="a">
+				<pre>class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base</pre>
+</div>
+	
+<p><strong>The interface named X</strong> </p>
+<p>The program also defines an interface named <strong>X</strong> as shown in 
+the next fragment. Note that this interface declares a method named <strong>
+intfcMethodX</strong>. </p>
+<div class="a">
+				<pre>interface X{
+  public void intfcMethodX();
+}//end X</pre>
+</div>
+<p><strong>Class A extends Base and implements 
+X</strong> </p>
+<p>The next fragment shows the definition of a class named <strong>A</strong> 
+that extends <strong>Base</strong> and implements <strong>X</strong>. </p>
+<div class="a">
+				<pre>class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;A-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class A</pre>
+</div>
+<p><strong>Defining interface method </strong> </p>
+<p>Because the class named <strong>A</strong> implements the interface named
+<strong>X</strong>, it must provide a concrete definition of all the methods 
+declared in <strong>X</strong>. </p>
+<p>In this case, there is only one such method. That method is named <strong>
+intfcMethodX</strong>. A concrete definition for the method is provided in the 
+class named <strong>A</strong>. </p>
+<p><strong>Class B also extends Base and implements
+X</strong> </p>
+<p>The next fragment shows the definition of another class <em>(named </em> <strong>
+<em>B</em></strong>), 
+which also extends <strong>Base</strong> and implements <strong>X</strong>. </p>
+<div class="a">
+				<pre>class B extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; B-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethodX(){
+    System.out.print(
+                    &quot;B-intfcMethodX &quot;);
+  }//end intfcMethodX()
+}//end class B</pre>
+</div>
+<p><strong>Defining the interface method </strong> </p>
+<p>Because this class also implements <strong>X</strong>, it must also provide a 
+concrete definition of the method named <strong>intfcMethodX</strong>. </p>
+<p><strong>Different behavior for interface method </strong> </p>
+<p>However <em>(and this is extremely important)</em>, there is no requirement for this 
+definition of the method to match the definition in the class named <strong>A</strong>, 
+or to match the definition in any other class that implements <strong>X</strong>.
+</p>
+<p>Only the method signature for the method named <strong>intfcMethodX </strong>is necessarily common among all the classes that 
+implement the interface. </p>
+<p>The definition of the method named <strong>intfcMethodX</strong> in 
+the class named <strong>A</strong> is different from the definition of the 
+method having the same name in the class named <strong>B</strong>. </p>
+<p><strong>The interesting behavior </strong> </p>
+<p>The interesting behavior of this program is illustrated by the code 
+in the following fragment. </p>
+<div class="a">
+				<pre>  void doIt(){
+    X myVar1 = new A();
+    myVar1.intfcMethodX();
+    X myVar2 = new B();
+    myVar2.intfcMethodX();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+<p><strong>Store object&#39;s references as interface type X</strong> </p>
+<p>The code in the above fragment causes one object to be instantiated from the 
+class named <strong>A</strong>, and another object to be instantiated from the 
+class named <strong>B</strong>. </p>
+<p>The two object&#39;s references are stored in two different reference 
+variables, each declared to be of the type of the interface <strong>X</strong>.
+</p>
+<p><strong>Call the interface method on each reference </strong> </p>
+<p>A method named <strong>intfcMethodX</strong> is called on each of the 
+reference variables. Despite the fact that both object&#39;s references are stored 
+as type <strong>X</strong>, the system selects and calls the appropriate method, 
+<em>(as defined by the class from which each object was instantiated)</em>, on each of 
+the objects. This causes the following text to appear on the screen: </p>
+<div class="a">
+				<pre>A-intfcMethodX B-intfcMethodX</pre>
+</div>
+
+<p><strong>No subclass-superclass relationship exists</strong> </p>
+<p>Thus, the use of an interface makes it possible to call methods having the 
+same signatures on objects instantiated from different classes, without any 
+requirement for a subclass-superclass relationship to exist among the classes 
+involved. </p>
+<p>In this case, the only subclass-superclass relationship between the classes 
+named <strong>A</strong> and <strong>B</strong> was that they were both 
+subclasses of the same superclass. Even that relationship was established for 
+convenience, and was not a requirement. </p>
+<p><strong>Different behavior of interface methods </strong> </p>
+<p>The methods having the same signature, <em>(declared in the common interface, and 
+defined in the classes)</em>, need not have any similarity in terms of behavior. </p>
+<p><strong>A new interface relationship</strong> </p>
+<p>The fact that both classes implemented the interface named <strong>X</strong> 
+created a new relationship among the classes, which is not based on 
+class inheritance. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>C. Base A-intfcMethod </p>
+<h3><strong>Explanation 4</strong></h3>
+<p><strong>Illustrates the use of an interface as a type</strong></p>
+
+<p>The program defines a class named <strong>Base</strong>, and a class named
+<strong>A</strong>, which extends <strong>Base</strong>, and implements an 
+interface named <strong>X</strong>, as shown below. </p>
+<div class="a">
+				<pre>class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X</pre>
+</div>
+
+<p><strong>Implementing interfaces</strong> </p>
+<p>A class may implement none, one, or more interfaces. </p>
+<p>The cardinal rule on interfaces </p>
+<p><em>If a class implements one or more interfaces, that class must either be 
+declared abstract, or it must provide concrete definitions of all methods 
+declared in and inherited into all of the interfaces that it implements. If the 
+class is declared abstract, its subclasses must provide concrete definitions of 
+the interface methods.</em> </p>
+<p><strong>A concrete definition of an interface method</strong> </p>
+<p>The interface named <strong>X</strong> in this program declares a method 
+named <strong>intfcMethod</strong>. The class named <strong>A</strong> provides 
+a concrete definition of that method. </p>
+<p>
+	<em>(The minimum requirement for a concrete definition is a method that matches 
+	the method signature and has an empty body.)</em></p>
+<p><strong>Storing object&#39;s reference as an interface type</strong></p>
+
+<p>The interesting part of the program is shown in the following 
+code fragment. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.inherMethod();
+    X myVar2 = new A();
+    myVar2.intfcMethod();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+<p>The above fragment instantiates a new object of the 
+class named <strong>A</strong>, and saves a reference to that object in a 
+reference variable of the declared type <strong>X</strong>. </p>
+<p><strong>How many ways can you save an object&#39;s reference?</strong> </p>
+<p>Recall that a reference to an object can be held by a reference variable 
+whose type matches any of the following: </p>
+<ul>
+	<li>The class from which the object was instantiated.</li>
+	<li>Any superclass of the class from which the object was instantiated.</li>
+	<li>Any interface implemented by the class from which the object was 
+	instantiated.</li>
+	<li>Any interface implemented by any superclass of the class from which the 
+	object was instantiated.</li>
+	<li>Any superinterface of the interfaces mentioned above.</li>
+</ul>
+<p><strong>Save object&#39;s reference as implemented interface type </strong></p>
+
+<p>In this program, the type of the reference variable matches the interface 
+named <strong>X</strong>, which is implemented by the class named <strong>A</strong>.
+</p>
+<p><strong>What does this allow you to do?</strong> </p>
+<p>When a reference to an object is held by a reference variable whose type 
+matches an interface implemented by the class from which the object was 
+instantiated, that reference can be used to call any method declared in or 
+inherited into that interface. </p>
+<p>
+	<em>(That reference cannot be used to call methods not declared in or not 
+	inherited into that interface.)</em></p>
+<p><strong>In this simple case ...</strong></p>
+
+<p>The method named <strong>intfcMethod</strong> is declared in the interface 
+named <strong>X</strong> and implemented in the class named <strong>A</strong>.
+</p>
+<p>Therefore, the method named <strong>intfcMethod</strong> can be called on an 
+object instantiated from the class named <strong>A</strong> when the reference 
+to the object is held in a reference variable of the interface type. </p>
+<p>
+	<em>(The method could also be called if the reference is being held in a 
+	reference variable of declared type </em> <strong><em>A</em></strong><em>.)</em></p>
+<p>The call to the method named <strong>intfcMethod</strong> causes the text 
+<strong>A-intfcMethod</strong> to appear on the 
+screen.</p>
+
+
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>C. Base A-intfcMethod </p>
+<h3><strong>Explanation 3</strong></h3>
+<p><strong>What is runtime polymorphic behavior?</strong></p>
+
+<p>One way to describe runtime polymorphic behavior is: </p>
+
+	<p><em>The runtime system selects among two or more methods having the same signature, 
+	not on the basis of the type of the reference variable in which an object&#39;s 
+	reference is stored, but rather on the basis of the class from which the 
+	object was originally instantiated.</em></p>
+<p><strong>Illustrates simple class and interface inheritance</strong></p>
+
+<p>The program defines a class named <strong>Base</strong>, and a class named
+<strong>A</strong>, which extends <strong>Base</strong>, and implements the 
+interface named <strong>X</strong>, as shown in the following fragment. </p>
+<div class="a">
+				<pre>class Base{
+  public void inherMethod(){
+    System.out.print(&quot;Base &quot;);
+  }//end inherMethod()
+}//end class Base
+
+class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X</pre>
+</div>
+<p><strong>Define an interface method </strong> </p>
+<p>The interface named <strong>X</strong> declares a method named <strong>intfcMethod</strong>. 
+A concrete definition of that method is defined in the class named <strong>A</strong>.
+</p>
+<p><strong>A new object of type Base</strong> </p>
+<p>The code in the following fragment instantiates a new object of the class
+<strong>Base</strong> and calls its <strong>inherMethod</strong>. This causes the word <strong>
+Base</strong> to appear on the output screen. There is nothing special about this. This 
+is a simple example of the use of an object&#39;s reference to call one of its 
+instance methods. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Base myVar1 = new Base();
+    myVar1.inherMethod();</pre>
+</div>
+<p><strong>A new object of type A</strong> </p>
+<p>The following fragment instantiates a new object of the 
+class <strong>A</strong> and calls its <strong>intfcMethod</strong>. This causes the
+text <strong>A-intfcMethod</strong> to appear on the output screen. There is also 
+nothing special about this. This is also a simple example of the use of an 
+object&#39;s reference to call one of its instance methods. </p>
+<div class="a">
+				<pre>    A myVar2 = new A();
+    myVar2.intfcMethod();
+
+    System.out.println(&quot;&quot;);
+  }//end doIt()</pre>
+</div>
+
+<p><strong>Not polymorphic behavior </strong> </p>
+<p>The fact that the class named <strong>A</strong> implements the interface 
+named <strong>X</strong> does not indicate polymorphic behavior in this case. 
+Rather, this program is an example of simple class and interface inheritance.
+</p>
+<p><strong>Interface type is not used </strong> </p>
+<p>The program makes no use of the interface as a type, and exhibits no 
+polymorphic behavior <em>(no decision among methods having the same signature is 
+required)</em>. </p>
+<p>The class named <strong>A</strong> inherits an abstract method named 
+<strong>intfcMethod</strong> from the interface and must define it. <em>(Otherwise, it would be 
+necessary to declare the class named </em> <strong><em>A</em></strong><em> abstract.) 
+</em> </p>
+<p>The interface is not a particularly important player in this program. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>Simple hierarchical polymorphic behavior </strong></p>
+
+<p>This program is designed to test your knowledge of simple hierarchical 
+polymorphic behavior. </p>
+<p><strong>Implement the interface named X</strong> </p>
+<p>This program defines a class named <strong>A</strong> that extends a class 
+named <strong>Base</strong>, and implements an interface named <strong>X</strong>, 
+as shown in the following code fragment. </p>
+<div class="a">
+				<pre>class A extends Base implements X{
+  public void inherMethod(){
+    System.out.print(
+                    &quot; A-inherMethod &quot;);
+  }//end inherMethod()
+    
+  public void intfcMethod(){
+    System.out.print(&quot;A-intfcMethod &quot;);
+  }//end intfcMethod()
+}//end class A
+
+interface X{
+  public void intfcMethod();
+}//end X</pre>
+</div>
+	<p><strong>Override and define some methods </strong></p>
+<p>The class named <strong>A</strong> overrides the method named <strong>inherMethod</strong>, which it inherits from the class named <strong>Base</strong>. It also provides a 
+concrete definition of the method named <strong>intfcMethod</strong>, which is declared in the 
+interface named <strong>X</strong>. </p>
+<p><strong>Store object&#39;s reference as superclass type </strong> </p>
+<p>The program instantiates an object of the class named <strong>A</strong> and 
+assigns that object&#39;s reference to a reference variable of type <strong>Base</strong>, 
+as shown in the following code fragment. </p>
+<div class="a">
+				<pre>    Base myVar2 = new A();</pre>
+</div>
+	<p><strong>Oops! Cannot call this method </strong> </p>
+<p>So far, so good. However, the next fragment shows where the program turns 
+sour. It attempts to call the method named <strong>intfcMethod</strong> on the object&#39;s 
+reference, which was stored as type <strong>Base</strong>. </p>
+<div class="a">
+				<pre>    myVar2.intfcMethod();</pre>
+</div>
+<p><strong>Polymorphic behavior doesn&#39;t apply here</strong> </p>
+<p>Because the class named <strong>Base</strong> does not define the method 
+named <strong>intfcMethod</strong>, hierarchical polymorphic behavior does not apply. Therefore 
+a reference to the object being stored as type <strong>Base</strong> cannot be 
+used to directly call the method named <strong>intfcMethod</strong>, and the program produces a 
+compiler error. </p>
+<p><strong>What is the solution?</strong> </p>
+<p>Hierarchical polymorphic behavior is possible only when the class defining 
+the type of the reference <em>(or some superclass of that class) </em>contains a 
+definition for the method that is called on the reference. </p>
+<p>There are a couple of ways that downcasting could be used to solve the 
+problem in this case. </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 1</strong></h3>
+<p>I put this question in here just to see if you are still awake.</p>
+
+<p><strong>Can store reference as interface type </strong></p>
+<p>A reference to an object instantiated from a class can be assigned to any 
+reference variable whose declared type is the name of an interface implemented 
+by the class from which the object was instantiated, or implemented by any 
+superclass of that class. </p>
+<p><strong>Define two classes and an interface </strong></p>
+<p>This program defines a class named <strong>A</strong> that extends a class 
+named <strong>Base</strong>. The class named <strong>Base</strong> extends
+<strong>Object</strong> by default. </p>
+<p>The program also defines an interface named <strong>X</strong>. </p>
+<p><strong>Instantiate an object </strong></p>
+<p>The following statement instantiates an object of the class named <strong>A</strong>, 
+and attempts to assign that object&#39;s reference to a reference variable whose 
+type is the interface type named <strong>X</strong>. </p>
+<div class="a">
+				<pre>    X myVar2 = new A();</pre>
+</div>
+	<p>Interface <strong>X</strong> is defined but not implemented </p>
+<p>None of the classes named <strong>A</strong>, <strong>Base</strong>, and
+<strong>Object</strong> implement the interface named
+<strong>X</strong>. 
+Therefore, it is not allowable to assign a reference to an object of the class 
+named <strong>A</strong> to a reference variable whose declared type is <strong>
+X</strong>. Therefore, the program produces the following compiler error under JDK 
+1.3: </p>
+<div class="a">
+				<pre>Ap131.java:20: incompatible types
+found   : A
+required: X
+    X myVar2 = new A();
+</pre>
+</div>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

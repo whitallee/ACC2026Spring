@@ -1,0 +1,736 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0240</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0240: Arrays and Strings</h1>
+
+
+<h1>Table of Contents</h1>
+
+<ul>
+	<li><a href="#Preface">Preface</a> 
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#arrays">Arrays</a></li>
+	<li><a href="#arraysofobjects">Arrays of Objects</a></li>
+	<li><a href="#strings">Strings</a><ul>
+		<li><a href="#stringconcatenation">String Concatenation</a></li>
+		<li><a href="#arraysofstringreferences">Arrays of String References</a></li>
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the programs</a></li>
+
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+
+
+
+
+	<h1><a name="Preface">Preface</a></h1>
+	<p>This chapter takes a preliminary look at arrays and strings. More in-depth 
+	discussions will be provided in future chapters. For example, you will find 
+	a more detailed discussion of strings in the chapter titled <em>Jb0280: 
+	String and StringBuffer.</em></p>
+<p>You will find a more in-depth discussions of array objects in the following 
+chapters: </p>
+<ul>
+	<li>Java OOP: Array Objects, Part 1</li>
+	<li>Java OOP: Array Objects, Part 2</li>
+	<li>Java OOP: Array Objects, Part 3</li>
+</ul>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Formats for declaring a reference variable for an array object. </li>
+		<li><a href="#Figure_2">Figure 2</a>. Allocating memory for the array object.</li>
+		<li><a href="#Figure_3">Figure 3</a>. Declaration and instantiation can be separated.</li>
+		<li><a href="#Figure_4">Figure 4</a>. General syntax for combining declaration and instantiation.</li>
+		<li><a href="#Figure_5">Figure 5</a>. An example of array indexing syntax. </li>
+		<li><a href="#Figure_6">Figure 6</a>. The use of the length property in the conditional clause of a for loop.</li>
+		<li><a href="#Figure_7">Figure 7</a>. A string literal. </li>
+		<li><a href="#Figure_8">Figure 8</a>. String concatenation. </li>
+		<li><a href="#Figure_9">Figure 9</a>. Declaring and instantiating a String array. </li>
+		<li><a href="#Figure_10">Figure 10</a>. Allocating memory to contain the String objects.</li>
+
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The program named array01. </li>
+		<li><a href="#Listing_2">Listing 2</a>. The program named array02.</li>
+		<li><a href="#Listing_3">Listing 3</a>. The program named array03. </li>
+	</ul>
+
+
+
+
+
+<h1><a name="Introduction">Introduction</a></h1>
+<p>The first step in learning to use a new programming language 
+is usually to learn the foundation concepts such as variables, types, 
+expressions, flow-of-control, arrays, strings, etc. This chapter concentrates on 
+arrays and strings.</p>
+<p>Java provides a type for both arrays and strings from which 
+objects of the specific type can be instantiated. Once instantiated, the methods 
+belonging to those types can be called by way of the object. </p>
+
+
+
+
+
+<h1><a name="arrays"></a>Arrays</h1>
+
+
+<p><strong>Arrays and Strings</strong> </p>
+<p>Java has a true array type and a true <strong>String</strong> type 
+with protective features to prevent your program from writing outside the memory 
+bounds of the array object or the <strong>String</strong> object. Arrays and strings are true objects. </p>
+
+<p><strong>Declaring an array</strong></p>
+<p>Before continuing with this chapter, I recommend that you read Kjell 
+<a href="http://programmedlessons.org/Java9/chap60/ch60_01.html">CHAPTER 60 — Arrays</a> 
+through <a href="http://programmedlessons.org/Java9/chap67/ch67_01.html">CHAPTER 67 — Two-Dimensional Arrays</a>.</p>
+<p>You must declare an array before you can use it. <em>(More properly, you must 
+declare a reference variable to hold a reference to the array object.)</em> In declaring 
+the array, you must provide two important pieces of information: </p>
+
+<ul>
+<li>the name of a variable to hold a reference to the array object</li>
+<li>the type of data to be stored in the elements of the array object</li></ul>
+
+<p><strong>Different declaration formats</strong></p>
+<p>A reference variable capable of holding a reference to an array object can be 
+declared using either format shown in <a href="#Figure_1">Figure 1</a>. <em>(I 
+personally prefer the first option because I believe it is more indicative of 
+the purpose of the declaration. However, both options produce the same result -- 
+a reference variable capable of storing a reference to an array object.)</em></p>
+<!--``1Fig001-->
+<div class="a"><a name="Figure_1">Figure 1</a>. Formats for declaring a 
+				reference variable for an array object.
+<pre>
+int[] myArray;
+int myArray[];
+</pre>
+
+</div>
+<p><strong>Declaration does not allocate memory</strong></p>
+<p>As with other objects, the declaration of the reference variable alone does not 
+allocate memory to contain the array data. Rather it simply 
+allocates memory to contain a reference to the array. </p>
+<p><strong>Allocating memory for the array object</strong></p>
+<p>Memory to contain the array object must be allocated from dynamic memory using 
+statements such as those shown in <a href="#Figure_2">Figure 2</a>.</p>
+
+
+
+
+<!--``1Fig002-->
+<div class="a"><a name="Figure_2">Figure 2</a>. Allocating memory for the array object.
+<pre>
+int[] myArrayX = new int[15];
+int myArrayY[] = new int[25];
+
+int[] myArrayZ = {3,4,5};
+</pre>
+
+</div>
+<p>The statements in <a href="#Figure_2">Figure 2</a> simultaneously declare the 
+reference variable and cause 
+memory to be allocated to contain the array. The numbers in square brackets 
+specify the number of elements being allocated for the array.</p>
+<p>Also note that the last statement in <a href="#Figure_2">Figure 2</a> is 
+different from the first two statements. This syntax not only sets aside the 
+memory for the array object, the elements in the array are allocated and initialized by 
+evaluating the expressions shown in the coma-separated list inside the curly 
+brackets. (In this case, the expressions are simply numbers, but they could be 
+more complex expressions that evaluate to a single value of the required type.)</p>
+<p>On the other hand, the allocated array elements in the first two statements in <a href="#Figure_2">Figure 2</a> 
+are automatically initialized with the default value for the type.</p>
+<p><strong>Declaration and allocation can be separated</strong></p>
+<p>It is not necessary to combine these two 
+processes. You can execute one statement to declare the reference variable and another 
+statement to allocate the memory for the array object some time later in the 
+program as shown in <a href="#Figure_3">
+Figure 3</a>. </p>
+<!--``1Fig003-->
+<div class="a"><a name="Figure_3">Figure 3</a>. <strong>Declaration and 
+				instantiation 
+				can be separated.</strong>
+<pre>
+int[] myArray;
+. . .
+myArray = new int[25];
+</pre>
+
+</div><p>Causing memory to be set aside to contain the array object is commonly referred 
+to as instantiating the array object <em>(creating an instance of the array 
+object)</em>. </p>
+<p>If you prefer to declare the reference variable and instantiate the array 
+object at 
+different points in your program, you can use the syntax shown in
+<a href="#Figure_3">Figure 3</a>. This pattern 
+is very similar to the declaration and instantiation of all objects. </p>
+
+<p><strong>General syntax for combining declaration and 
+instantiation</strong></p>
+<p>The general syntax for declaring and instantiating an array object is shown in <a href="#Figure_4">Figure 4</a>. </p>
+
+
+
+
+<!--``1Fig004-->
+<div class="a"><a name="Figure_4">Figure 4</a>. General syntax for combining declaration and instantiation.
+<pre>
+typeOfElements[] nameOfRefVariable = 
+           new typeOfElements[sizeOfArray]
+</pre>
+
+</div>
+<p><strong>Accessing array elements</strong></p>
+<p>Having instantiated an array object, you can access the elements of 
+the array using indexing syntax that is similar to many other programming languages. 
+An example is shown in <a href="#Figure_5">Figure 5</a>.</p>
+<!--``1Fig005-->
+<div class="a"><a name="Figure_5">Figure 5</a>. An example of array 
+				indexing syntax.
+<pre>
+myArray[5] = 6;
+
+myVar = myArray[5];
+</pre>
+
+</div>
+<p><strong>The value of the first index</strong></p>
+<p>Array indices always begin with 0. </p>
+<p><strong>The length property of an array</strong></p>
+<p>The code fragment in <a href="#Figure_6">Figure 6</a> illustrates another interesting aspect of 
+arrays. <em>(Note the use of </em><strong><em>length</em></strong><em> in the 
+conditional clause of the <strong>for</strong> loop.)</em></p>
+
+
+
+
+<!--``1Fig006-->
+<div class="a"><a name="Figure_6">Figure 6</a>. The use of the length 
+				property in the conditional clause of a for loop.
+<pre>
+for(int cnt = 0; cnt &lt; myArray.length; cnt++) 
+  myArray[cnt] = cnt;
+</pre>
+
+</div>
+<p>All array objects have a <strong>length</strong> property that can be accessed 
+to determine the number of elements in the array. <em>(The number of elements 
+cannot change once the array object is instantiated.)</em></p>
+<p><strong>Types of data that you can store in an array object</strong></p>
+<p>Array elements can contain any Java data type including primitive values and 
+references to ordinary objects or references to other array objects. </p>
+<p><strong>Constructing multi-dimensional 
+arrays</strong></p>
+<p>All array objects contains a one-dimensional array structure. You can create 
+multi-dimensional arrays by causing the elements in one array object to contain 
+references to other array objects. In effect, you can create a tree structure of 
+array objects that behaves like a multi-dimensional array.</p>
+<p><strong>Odd-shaped multi-dimensional arrays</strong></p>
+<p>The program named <strong>array01</strong> shown in <a href="#Listing_1">Listing 1</a> illustrates an interesting aspect of Java arrays. Java can produce multi-dimensional arrays that can 
+be thought of as an array of arrays. However, the secondary arrays need 
+not all be of the same size. </p>
+<p>In the program shown in <a href="#Listing_1">Listing 1</a>, a two-dimensional array of integers is declared and 
+instantiated with the primary size <em>(size of the first dimension)</em> being three. 
+The sizes of the secondary dimensions <em>(sizes of each of the sub-arrays)</em> is 2, 3, 
+and 4 respectively. </p>
+<p><strong>Can declare the size of secondary 
+dimension later</strong></p>
+<p>When declaring a <em>"two-dimensional"</em> array, it is not necessary to 
+declare the size of the secondary dimension when the primary array is 
+instantiated. 
+Declaration of the size of each sub-array can be deferred until later as 
+illustrated in this program. </p>
+<p><strong>Accessing an array out-of-bounds </strong> </p>
+<p>This program also illustrates the result of attempting to 
+access an element that is out-of-bounds. Java protects you from such 
+programming errors. </p>
+
+
+<p><strong>ArrayIndexOutOfBoundsException</strong></p>
+<p>An exception occurs if you attempt to access out-of-bounds, as shown in the 
+program in in <a href="#Listing_1">Listing 1</a>. </p>
+<p>In this case, the exception was simply allowed to cause the program to 
+terminate. The exception could have been caught and processed by an exception 
+handler, a concept that will be explored in a future chapter.</p>
+<p><strong>The program named array01</strong></p>
+<p>The entire program is shown in <a href="#Listing_1">Listing 1</a>. The output from 
+the program is shown in the comments at the 
+top of the listing. </p>
+
+<div class="a"><a name="Listing_1">Listing 1</a>.  The program named 
+				array01.
+<pre>
+/*File array01.java Copyright, R.G.Baldwin
+Illustrates creation and manipulation of two-dimensional
+array with the sub arrays being of different lengths.
+
+Also illustrates detection of exception when an attempt is
+made to store a value out of the array bounds.
+
+This program produces the following output:
+
+00
+012
+0246
+Attempt to access array out of bounds
+java.lang.ArrayIndexOutOfBoundsException:
+     at array01.main(array01.java: 47)
+
+**********************************************************/
+class array01 { //define the controlling class
+  public static void main(String[] args){ //main method
+    //Declare a two-dimensional array with a size of 3 on
+    // the primary dimension but with different sizes on
+    // the secondary dimension.
+    //Secondary size not specified initially
+    int[][] myArray = new int[3][];
+    myArray[0] = new int[2];//secondary size is 2
+    myArray[1] = new int[3];//secondary size is 3
+    myArray[2] = new int[4];//secondary size is 4
+
+    //Fill the array with data
+    for(int i = 0; i &lt; 3; i++){
+      for(int j = 0; j &lt; myArray[i].length; j++){
+        myArray[i][j] = i * j;
+      }//end inner loop
+    }//end outer loop
+
+    //Display data in the array
+    for(int i = 0; i &lt; 3; i++){
+      for(int j = 0; j &lt; myArray[i].length; j++){
+        System.out.print(myArray[i][j]);
+      }//end inner loop
+      System.out.println();
+    }//end outer loop
+
+    //Attempt to access an out-of-bounds array element
+    System.out.println(
+                  &quot;Attempt to access array out of bounds&quot;);
+    myArray[4][0] = 7;
+    //The above statement produces an ArrayIndexOutOfBounds
+    // exception.
+
+  }//end main
+}//End array01 class.
+</pre>
+</div>
+
+<p><strong>Assigning one array to another array 
+-- be careful</strong></p>
+<p>Java allows you to assign one array to another. You must 
+be aware, however, that when you do this, you are simply making another copy 
+of the reference to the same data in memory. </p>
+<p>Then you simply have two references to the same data in memory, which 
+is often not a good idea. This is illustrated in the program named <strong>
+array02</strong> shown in <a href="#Listing_2">Listing 2</a>.</p>
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a"><a name="Listing_2">Listing 2</a>. <strong>The program named array02</strong>.
+
+
+<pre>
+/*File array02.java Copyright, R.G.Baldwin
+Illustrates that when you assign one array to another
+array, you end up with two references to the same array.
+
+The output from running this program is:
+
+firstArray contents
+0 1 2
+secondArray contents
+0 1 2
+Change a value in firstArray and display both again
+firstArray contents
+0 10 2
+secondArray contents
+0 10 2
+**********************************************************/
+class array02 { //define the controlling class
+  int[] firstArray;
+  int[] secondArray;
+
+  array02() {//constructor
+    firstArray = new int[3];
+    for(int cnt = 0; cnt &lt; 3; cnt++) firstArray[cnt] = cnt;
+
+    secondArray = new int[3];
+    secondArray = firstArray;
+  }//end constructor
+
+  public static void main(String[] args){//main method
+    array02 obj = new array02();
+    System.out.println( &quot;firstArray contents&quot; );
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      System.out.print(obj.firstArray[cnt] + &quot; &quot; );
+    System.out.println();
+
+    System.out.println( &quot;secondArray contents&quot; );
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      System.out.print(obj.secondArray[cnt] + &quot; &quot; );
+
+    System.out.println();
+    System.out.println(
+      &quot;Change value in firstArray and display both again&quot;);
+    obj.firstArray[1] = 10;
+
+    System.out.println( &quot;firstArray contents&quot; );
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      System.out.print(obj.firstArray[cnt] + &quot; &quot; );
+    System.out.println();
+
+    System.out.println( &quot;secondArray contents&quot; );
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      System.out.print(obj.secondArray[cnt] + &quot; &quot; );
+
+    System.out.println();
+  }//end main
+}//End array02 class. 
+
+</pre>
+</div>
+
+
+
+
+
+<h1><a name="arraysofobjects"></a>Arrays of 
+Objects</h1>
+<p><strong>An array of objects 
+really isn&#39;t an array of objects</strong></p>
+<p>There is another subtle issue that you need to come to grips 
+with before we leave our discussion of arrays. In particular, when you create an 
+array of objects, it really isn&#39;t an array of objects. </p>
+<p>Rather, it is an array of object references <em>(or null)</em>. When you 
+assign primitive values to the elements in an array object, the actual primitive 
+values are stored in the elements of the array.</p>
+<p>However, when you assign objects to the elements in an array , the actual objects aren&#39;t 
+actually stored in the array elements. Rather, the objects are stored 
+somewhere else in memory. The elements in the array contain references to 
+those objects. </p>
+
+<p><strong>All the elements in an array of 
+objects need not be of the same actual type</strong></p>
+<p>The fact that the array is simply an array of reference 
+variables has some interesting ramifications. For example, it isn't necessary that all the elements in the array be of the same type, provided the reference variables are of a type that will allow them to refer to all the different types of objects.</p>
+
+<p>For example, if you declare the array to contain references of type <strong>Object</strong>, 
+those references can refer to any type of object <em>(including array objects)</em> because a reference of type 
+<strong>Object</strong> 
+can be used to refer to any object. <em>(This is one of important concepts of 
+OOP, which will be discussed in detail in a later chapter.)</em></p>
+<p>You can do similar things using <em>interface</em> types. I will also discuss interface 
+types in a future chapter.</p>
+<p><strong>Often need to downcast to use an 
+Object reference</strong></p>
+<p>If you store all of your references as type <strong>Object</strong>, you will 
+often need to downcast the 
+references to the true type before you can use them to access the instance 
+variables and instance methods of the objects.</p>
+<p>Doing the downcast is no great challenge as long as you can decide what type to downcast 
+them to. Once again, this will be discussed in detail in a later chapter.</p>
+<p><strong>The Vector class</strong></p>
+<p>There is a class named <strong>Vector</strong> that takes 
+advantage of this capability. An object of type <strong>Vector</strong> is a 
+self-expanding array of reference variables of type <strong>Object</strong>. You can use 
+an object of type <strong>Vector</strong> to manage a group of objects of any type, either 
+all of the same type, or mixed. </p>
+<p><em>(Note that you cannot store primitive values in elements of a 
+non-primitive or reference type. If you need to do that, you will need to wrap 
+your primitive values in an object of a wrapper class as discussed in an earlier 
+chapter.)</em></p>
+<p><strong>A sample program using the Date 
+class</strong></p>
+<p>The sample program, named <strong>array03</strong> and shown in
+<a href="#Listing_3">Listing 3</a> isn&#39;t quite that complicated. This program 
+behaves as follows:</p>
+
+<ul>
+<li>Declare a reference variable to an array of type <strong>Date</strong>. <em>
+(The actual type of the variable is Date[].)</em></li>
+<li>Instantiate a three-element array of reference variables of type <strong>Date</strong>. </li>
+<li>Display the contents of the array elements and confirm that they are all 
+null as they should be. <em>(When created using this syntax, new array elements 
+contain the default value, which is null for reference types.)</em></li>
+<li>Instantiate three objects of type <strong>Date</strong> and store the references to 
+those objects in the three elements of the array. </li>
+<li>Access the references from the array and use them to display the contents of 
+the individual <strong>Date</strong> objects. </li></ul>
+
+<p>As you might expect from the name of the class, each object contains 
+information about the date. Each time you run this program, a different date and 
+time will be displayed. <em>(If you run it a very large number of times, you may 
+catch the time when the seconds indicator turns over to the next second and 
+different times are displayed.)</em></p>
+
+
+
+<div class="a"><a name="Listing_3">Listing 3</a>. <strong>The program named Array03</strong>.
+<pre>
+/*File array03.java Copyright, R.G.Baldwin
+
+Illustrates use of arrays with objects.
+
+Illustrates that &quot;an array of objects&quot; is not really an
+array of objects, but rather is an array of references
+to objects.  The objects are not stored in the array,
+but rather are stored somewhere else in memory and the
+references in the array elements refer to them.
+
+The output from running this program is:
+
+myArrayOfRefs contains
+null
+null
+null
+
+myArrayOfRefs contains
+Sat Dec 20 16:56:34 CST 1997
+Sat Dec 20 16:56:34 CST 1997
+Sat Dec 20 16:56:34 CST 1997
+**********************************************************/
+import java.util.*;
+
+class array03 { //define the controlling class
+  Date[] myArrayOfRefs; //Declare reference to the array
+
+  array03() {//constructor
+    //Instantiate the array of three reference variables
+    // of type Date.  They will be initialized to null.
+    myArrayOfRefs = new Date[3];
+
+    //Display the contents of the array.
+    System.out.println( &quot;myArrayOfRefs contains&quot; );    
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      System.out.println(myArrayOfRefs[cnt]);
+    System.out.println();    
+    
+    //Instantiate three objects and assign references to
+    // those three objects to the three reference 
+    // variables in the array.
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      myArrayOfRefs[cnt] = new Date();
+
+  }//end constructor
+  //-----------------------------------------------------//
+  
+  public static void main(String[] args){//main method
+    array03 obj = new array03();
+    System.out.println( &quot;myArrayOfRefs contains&quot; );
+    for(int cnt = 0; cnt &lt; 3; cnt++)
+      System.out.println(obj.myArrayOfRefs[cnt]);
+    System.out.println();
+  }//end main
+}//End array03 class.
+</pre>
+
+</div>
+
+
+
+
+
+
+<h1><a name="strings"></a>Strings</h1>
+<p><strong>What is a string?</strong></p>
+<p>A string is commonly considered to be a sequence of 
+characters stored in memory and accessible as a unit. </p>
+
+<p>Java implements strings using the <strong>String</strong> class 
+and the <strong>StringBuffer</strong> class.</p>
+<p><strong>What is a string literal?</strong></p>
+<p>Java considers a series of characters surrounded by quotation 
+marks as shown in <a href="#Figure_7">Figure 7</a> to be a string literal. </p>
+
+
+
+
+
+<!--``1Fig007-->
+<div class="a"><a name="Figure_7">Figure 7</a>. A string literal.
+<pre>
+&quot;This is a string literal in Java.&quot;
+</pre>
+
+</div>
+<p><strong>This is just an introduction to 
+strings</strong></p>
+<p>A major section of a future chapter will be devoted to the 
+topic of strings, so this discussion will be brief. </p>
+<p><strong>String objects cannot be modified</strong></p>
+<p><strong>String</strong> objects cannot be changed once they have been 
+created. <em>(They are said to be immutable.)</em> If you have that need, use the <strong>StringBuffer</strong> class instead. </p>
+<p><strong>StringBuffer</strong> objects can be used to create and manipulate character 
+data as the program executes. </p>
+
+
+
+
+
+<h2><a name="stringconcatenation"></a>
+String Concatenation</h2>
+
+
+<p>Java supports string concatenation using the overloaded + operator as shown 
+in <a href="#Figure_8">Figure 8</a>.</p>
+
+
+
+
+
+<!--``1Fig008-->
+<div class="a"><a name="Figure_8">Figure 8</a>. String concatenation.
+<pre>
+&quot;My variable has a value of &quot; + myVar
+   + &quot; at this point in the program.&quot;
+</pre>
+
+</div>
+<p><strong>Coercion of an operand to type 
+String</strong></p>
+<p>The overloaded + operator is used to concatenate strings. If either operand 
+is type <strong>String</strong>, the other operand is coerced into type <strong>
+String</strong> and the two strings are concatenated.</p>
+<p>Therefore, in addition to concatenating the strings, Java also converts 
+values of other types, such as <strong>myVar</strong> in <a href="#Figure_8">
+Figure 8</a>, to character-string format 
+in the process. </p>
+
+
+
+
+
+<h2><a name="arraysofstringreferences"></a>
+Arrays of String References</h2>
+<p><strong>Declaring and instantiating a 
+String array</strong></p>
+<p>The statement in <a href="#Figure_9">Figure 9</a> declares and instantiates an array of 
+references to five <strong>String</strong> objects. </p>
+
+
+
+
+
+<!--``1Fig009-->
+<div class="a"><a name="Figure_9">Figure 9</a>. Declaring and instantiating 
+				a String array.
+<pre>
+String[] myArrayOfStringReferences = new String[5];
+</pre>
+
+</div>
+<p><strong>No string data at this point</strong></p>
+<p>Note however, that this array doesn&#39;t contain the actual 
+<strong>String</strong> objects. Rather, it simply sets aside memory for storage of five references 
+of type <strong>String</strong>. <em>(The array elements are automatically 
+initialized to null.)</em> No memory has been set aside to store the characters that make up 
+the individual <strong>String</strong> objects. You must allocate the memory for the actual 
+<strong>String</strong> 
+objects separately using code similar to the code shown in <a href="#Figure_10">
+Figure 10</a>.</p>
+
+
+
+
+
+<!--``1Fig010-->
+<div class="a"><a name="Figure_10">Figure 10</a>. 
+Allocating memory to contain the String objects.
+<pre>
+myArrayOfStringReferences[0] = new String(
+    &quot;This is the first string.&quot;);
+myArrayOfStringReferences[1] = new String(
+    &quot;This is the second string.&quot;);
+</pre>
+
+</div>
+<p><strong>The new operator is not required for 
+String class</strong></p>
+<p>Although it was used in <a href="#Figure_10">
+Figure 10</a>, the <strong>new</strong> operator is not required to instantiate an object of 
+type <strong>String</strong>. I will discuss the ability of Java to 
+instantiate objects of type <strong>String</strong> without the requirement to 
+use the <strong>new</strong> operator in a future chapter. </p>
+<h1><a name="Run_the_program">Run the programs</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a>,
+<a href="#Listing_2">Listing 2</a>, and <a href="#Listing_3">Listing 3</a>. Compile the code and execute 
+it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do. </p>
+	
+
+
+
+
+
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">Housekeeping material 
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0240: Arrays and Strings</li>
+					<li>File: Jb0240.htm
+</li>
+					<li>Revised: 08/05/22</li>
+				</ul>
+</div>
+<p>-end- </p>
+
+
+</body>
+</html>

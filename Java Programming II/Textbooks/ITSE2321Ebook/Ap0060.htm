@@ -1,0 +1,1294 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0060</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0060: More on Arrays</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>,
+		
+		<a href="#question11">11</a>, <a href="#question12">12</a>,
+		<a href="#question13">13</a>, <a href="#question14">14</a>,
+		<a href="#question15">15</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. I&#39;m OK</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap064{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    double[] A = new double[2];
+    A[0] = 1.0;
+    A[1] = 2.0;
+    Object B = A;
+    
+    System.out.println(&quot;I&#39;m OK&quot;);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap065{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    double[] A = new double[2];
+    A[0] = 1.0;
+    A[1] = 2.0;
+    Object B = A;
+    
+    System.out.println(
+                    B[0] + &quot; &quot; + B[1]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap066{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    double[] A = new double[2];
+    A[0] = 1.0;
+    A[1] = 2.0;
+    Object B = A;
+    
+    double C = (double)B;
+    System.out.println(
+                    C[0] + &quot; &quot; + C[1]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap067{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    double[] A = new double[2];
+    A[0] = 1.0;
+    A[1] = 2.0;
+    Object B = A;
+    
+    double[] C = (double[])B;
+    System.out.println(
+                    C[0] + &quot; &quot; + C[1]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap068{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    double[] A = new double[2];
+    A[0] = 1.0;
+    A[1] = 2.0;
+    Object B = A;
+    
+    String[] C = (String[])B;
+    System.out.println(
+                    C[0] + &quot; &quot; + C[1]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap069{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Subclass[] A = new Subclass[2];
+    A[0] = new Subclass(1);
+    A[1] = new Subclass(2);
+    
+    System.out.println(
+                    A[0] + &quot; &quot; + A[1]);
+  }//end doArrays()
+}// end class
+
+class Superclass{
+  private int data;
+  public Superclass(int data){
+    this.data = data;
+  }//end constructor
+  
+  public int getData(){
+    return data;
+  }//end getData()
+    
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}//end class SuperClass
+
+class Subclass extends Superclass{
+  public Subclass(int data){
+    super(data);
+  }//end constructor
+}//end class Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap070{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Subclass[] A = new Subclass[2];
+    A[0] = new Subclass(1);
+    A[1] = new Subclass(2);
+    
+    Superclass[] B = A;
+    System.out.println(
+                    B[0] + &quot; &quot; + B[1]);
+  }//end doArrays()
+}// end class
+
+class Superclass{
+  private int data;
+  public Superclass(int data){
+    this.data = data;
+  }//end constructor
+  
+  public int getData(){
+    return data;
+  }//end getData()
+    
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}//end class SuperClass
+
+class Subclass extends Superclass{
+  public Subclass(int data){
+    super(data);
+  }//end constructor
+}//end class Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap071{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Superclass[] A = new Superclass[2];
+    A[0] = new Superclass(1);
+    A[1] = new Superclass(2);
+    
+    Subclass[] B = (Subclass[])A;
+    System.out.println(
+                    B[0] + &quot; &quot; + B[1]);
+  }//end doArrays()
+}// end class
+
+class Superclass{
+  private int data;
+  public Superclass(int data){
+    this.data = data;
+  }//end constructor
+  
+  public int getData(){
+    return data;
+  }//end getData()
+    
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}//end class SuperClass
+
+class Subclass extends Superclass{
+  public Subclass(int data){
+    super(data);
+  }//end constructor
+}//end class Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap072{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Subclass[] A = new Subclass[2];
+    A[0] = new Subclass(1);
+    A[1] = new Subclass(2);
+    
+    Superclass[] B = A;
+    Subclass[] C = (Subclass[])B;
+    System.out.println(
+                    C[0] + &quot; &quot; + C[1]);
+  }//end doArrays()
+}// end class
+
+class Superclass{
+  private int data;
+  public Superclass(int data){
+    this.data = data;
+  }//end constructor
+  
+  public int getData(){
+    return data;
+  }//end getData()
+    
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}//end class SuperClass
+
+class Subclass extends Superclass{
+  public Subclass(int data){
+    super(data);
+  }//end constructor
+}//end class Subclass
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap073{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    double[] A = new double[2];
+    A[0] = 1.0;
+    A[1] = 2.0;
+    Object B = A;
+    
+    System.out.println(
+              ((double[])B)[0] + &quot; &quot; + 
+              ((double[])B)[1]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+
+	
+	
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h2><a name="question11">Question 11</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_11">Listing 
+11</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+	
+	
+
+
+<div class="a"><a name="Listing_11">Listing 11</a>. Listing for Question 11. 
+<pre>public class Ap074{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int[] A = new int[2];
+    A[0] = 1;
+    A[1] = 2;
+    
+    double[] B = (double[])A;
+    
+    System.out.println(
+                    B[0] + &quot; &quot; + B[1]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer11">Answer and Explanation</a></p>
+
+<h2><a name="question12">Question 12</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_12">Listing 
+12</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_12">Listing 12</a>. Listing for Question 12. 
+<pre>public class Ap075{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int[] B = returnArray();
+    for(int i = 0; i &lt; B.length;i++){
+      System.out.print(B[i] + &quot; &quot;);
+    }//end for loop
+    System.out.println();
+  }//end doArrays()
+    
+  public int[] returnArray(){
+    int[] A = new int[2];
+    A[0] = 1;
+    A[1] = 2;
+    return A;
+  }//end returnArray()
+}// end class
+</pre>
+
+</div>
+
+<p><a href="#answer12">Answer and Explanation</a></p>
+
+<h2><a name="question13">Question 13</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_13">Listing 
+13</a>? </p>
+
+<div class="a">
+				<pre>A.  Compiler Error</pre>
+				<pre>B.  Runtime Error</pre>
+				<pre>C.  0 0 0
+    0 1 2</pre>
+				<pre>D.  None of the above</pre>
+</div>
+
+`
+<div class="a"><a name="Listing_13">Listing 13</a>. Listing for Question 13. 
+<pre>public class Ap076{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int[] A[];
+    A = new int[2][3]; 
+    
+    for(int i=0; i&lt;A.length;i++){
+      for(int j=0;j&lt;A[0].length;j++){
+        A[i][j] = i*j;
+      }//end inner loop
+    }//end outer loop
+
+    for(int i=0; i&lt;A.length;i++){
+      for(int j=0;j&lt;A[0].length;j++){
+        System.out.print(
+                        A[i][j] + &quot; &quot;);
+      }//end inner loop
+      System.out.println();
+    }//end outer loop
+
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+<p><a href="#answer13">Answer and Explanation</a></p>
+
+<h2><a name="question14">Question 14</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_14">Listing 
+14</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1 2</li>
+	<li>D. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_14">Listing 14</a>. Listing for Question 14. 
+<pre>public class Ap077{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Subclass[] A = new Subclass[2];
+    A[0] = new Subclass(1);
+    A[1] = new Subclass(2);
+    
+    Object X = A;
+    Superclass B = A;
+    Subclass[] C = (Subclass[])B;
+    Subclass[] Y = (Subclass[])X;
+    System.out.println(
+                    C[0] + &quot; &quot; + Y[1]);
+  }//end doArrays()
+}// end class
+
+class Superclass{
+  private int data;
+  public Superclass(int data){
+    this.data = data;
+  }//end constructor
+  
+  public int getData(){
+    return data;
+  }//end getData()
+    
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}//end class SuperClass
+
+class Subclass extends Superclass{
+  public Subclass(int data){
+    super(data);
+  }//end constructor
+}//end class Subclass
+</pre>
+
+</div>
+
+<p><a href="#answer14">Answer and Explanation</a></p>
+
+<h2><a name="question15">Question 15</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_15">Listing 
+15</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 0.0 false 0</li>
+	<li>D. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_15">Listing 15</a>. Listing for Question 15. 
+<pre>public class Ap078{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int[] A = new int[1];
+    double[] B = new double[1];
+    boolean[] C = new boolean[1];
+    int[] D = new int[0];
+    
+    System.out.println(A[0] + &quot; &quot; +
+                       B[0] + &quot; &quot; +
+                       C[0] + &quot; &quot; +
+                       D.length);
+  
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+<p><a href="#answer15">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10.</li>
+
+	<li><a href="#Listing_11">Listing 11</a>. Listing for Question 11. </li>
+	<li><a href="#Listing_12">Listing 12</a>. Listing for Question 12. </li>
+	<li><a href="#Listing_13">Listing 13</a>. Listing for Question 13. </li>
+	<li><a href="#Listing_14">Listing 14</a>. Listing for Question 14. </li>
+	<li><a href="#Listing_15">Listing 15</a>. Listing for Question 15. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0060: More on Arrays</li>
+				<li>File: Ap0060.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/03/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>C. 0 0.0 false 0 </p>
+<h3><strong>Explanation 15</strong></h3><p>
+<strong>You can initialize array elements
+</strong>
+</p>
+<p>You can create a new array object and initialize its elements using 
+statements similar to the following: </p>
+
+
+
+
+<div class="a">
+				<pre>int[] A = {22, 43, 69};
+X[] B = {new X(32), new X(21)};
+</pre>
+</div>
+
+<p><strong>What if you don&#39;t initialize array elements?</strong> </p>
+<p>If you create a new array object without initializing its elements, the value 
+of each element in the array is automatically initialized to a default value.
+</p>
+<p><strong>Illustrating array element default initialization </strong> </p>
+<p>This program illustrates default initialization of <strong>int</strong>,
+<strong>double</strong>, and <strong>boolean</strong> arrays. </p>
+<p>The default values are as follows: </p>
+<ul>
+	<li>zero for all numeric values</li>
+	<li>false for all <strong>boolean</strong> values</li>
+	<li>all zero bits for char values</li>
+	<li>null for object references</li>
+</ul><p>
+<strong>An array with no elements ...
+</strong>
+</p>
+<p>This program also illustrates that it is possible to have an array object in 
+Java that has no elements. In this case, the value of the <strong>length</strong> property for 
+the array object is 0. </p>
+<p><strong>Give me an example </strong> </p>
+<p>For example, when the user doesn&#39;t enter any arguments on the command line 
+for a Java application, the incoming <strong>String</strong> array parameter to 
+the <strong>main</strong> method has a length value of 0. </p>
+<p><strong>Another example </strong> </p>
+<p>It is also possible that methods that return a reference to an array object 
+may sometimes return a reference to an array whose length is 0. The method must 
+satisfy the return type requirement by returning a reference to an array object. 
+Sometimes, there is no data to be used to populate the array, so the method will 
+simply return a reference to an array object with a <strong>length</strong> property value of 0.
+</p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 14</strong></h3><p>
+<strong>Assigning array reference to type Object</strong>
+</p>
+<p>As you learned in an earlier chapter, you can assign an array object&#39;s 
+reference to an ordinary reference variable of the type <strong>Object</strong>. 
+It is not necessary to indicate that the reference variable is a reference to an 
+array by appending square brackets to the type name or the variable name. </p>
+<p><strong>Only works with type Object</strong> </p>
+<p>However, you cannot assign an array object&#39;s reference to an ordinary 
+reference variable of any other type. For any type other than <strong>Object</strong>, 
+the reference variable must be declared to hold a reference to an array object 
+by appending empty square brackets onto the type name or the variable name. </p>
+<p>The first statement in the following fragment compiles successfully. </p>
+
+
+
+
+<div class="a">
+				<pre>    Object X = A;
+    Superclass B = A;</pre>
+</div>
+
+<p>However, the second statement in the above fragment produces a compiler error 
+under JDK 1.3, which is partially reproduced below.</p>
+
+
+
+
+<div class="a">
+				<pre>Ap077.java:22: incompatible types
+found   : Subclass[]
+required: Superclass
+    Superclass B = A;
+</pre>
+</div>
+<p>Both <strong>Superclass</strong> and <strong>Object</strong> are superclasses of the array 
+type referred to by the reference variable named <strong>A</strong>. However, because of the 
+above rule, in order to cause this program to compile successfully, you would 
+need to modify it as shown below by adding the requisite empty square brackets 
+to the <strong>Superclass</strong> type name. </p>
+
+
+
+
+<div class="a">
+				<pre>    Object X = A;
+    Superclass[] B = A;</pre>
+</div>
+
+<p><a href="#question14">Back to Question 14</a> </p>
+
+<h2><a name="answer13">Answer 13</a></h2>
+
+<div class="a">
+				<pre>C.  0 0 0
+    0 1 2</pre>
+</div>
+
+
+<h3><strong>Explanation 13</strong></h3><p>
+<strong>Syntactical ugliness
+</strong>
+</p>
+<p>As I indicated in an earlier chapter, when declaring a reference variable that 
+will refer to an array object, you can place the empty square brackets next to 
+the name of the type or next to the name of the reference variable. In other 
+words, either of the following formats will work. </p>
+
+
+
+
+<div class="a">
+				<pre>    int[][] A;
+    int B[][];</pre>
+</div>
+
+<p>What I may not have told you at that time is that you can place some of the empty 
+square brackets in one location and the remainder in the other location. </p>
+<p><strong>Really ugly syntax </strong> </p>
+<p>This is indicated by the following fragment, which declares a reference 
+variable for a two-dimensional array of type <strong>int</strong>. Then it 
+creates the two-dimensional array object and assigns the array object&#39;s 
+reference to the reference variable. </p>
+
+
+
+
+<div class="a">
+				<pre>    int[] A[];
+    A = new int[2][3];</pre>
+</div>
+
+<p>While it doesn&#39;t matter which location you use for the square brackets in the 
+declaration, it does matter how many pairs of square brackets you place in the 
+two locations combined. The number of dimensions on the array <em>(if you want to 
+think of a Java array as having dimensions)</em> will equal the total number of pairs 
+of empty square brackets in the declaration of the reference variable. Thus, in this case, the array is a two-dimensional array 
+because there is one pair of square brackets next to the type and another pair 
+next to the variable name. </p>
+<p>This program goes on to use nested for loops to populate the array and then 
+to display the contents of the elements. </p>
+<p>I personally don&#39;t use this syntax, and I hope that you don&#39;t either. 
+However, even if you don&#39;t use it, you need to be able to recognize it when used 
+by others. </p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>C. 1 2 </p>
+<h3><strong>Explanation 12</strong></h3><p>
+<strong>The length property
+</strong>
+</p>
+<p>This program illustrates the use of the array property named <strong>length</strong>, whose 
+value always matches the number of elements in the array. </p>
+<p>As a Java programmer, you will frequently call methods that will return a 
+reference to an array object of a specified type, but of an unknown length. 
+<em>(See, for example, the method named <strong>getEventSetDescriptors</strong> that is declared in 
+the interface named <strong>BeanInfo</strong>.)</em> This program simulates that situation. </p>
+<p><strong>Returning a reference to an array </strong> </p>
+<p>The method named <strong>returnArray</strong> returns a reference to an array of type
+<strong>int</strong> having two elements. Although I fixed the size of the array 
+in this example, I could just as easily have used a random number to set a 
+different size for the array each time the method is called. Therefore, the 
+<strong>doArrays</strong> method making the call to the method named <strong>returnArray</strong> has no way 
+of knowing the size of the array referred to by the reference that it receives 
+as a return value. </p>
+<p><strong>All array objects have a length property</strong> </p>
+<p>This could be a problem, but Java provides the solution to the problem in the 
+<strong>length</strong> property belonging to all array objects. </p>
+<p>The <strong>for</strong> loop in the method named <strong>doArrays</strong> uses the 
+<strong>length</strong> property of the 
+array to determine how many elements it needs to display. This is a very common 
+scenario in Java. </p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 11</strong></h3><p>
+<strong>You cannot cast primitive array references</strong>
+</p>
+<p>You cannot cast an array reference from one primitive type to another 
+primitive type, even if the individual elements in the array are of a type that 
+can normally be converted to the new type. </p>
+<p>This program attempts to cast a reference to an array of type <strong>int[]</strong> 
+and assign it to a reference variable of type <strong>double</strong>[]. 
+Normally, a value of type <strong>int</strong> will be automatically converted 
+to type <strong>double</strong> whenever there is a need for such a conversion. 
+However, this attempted cast produces the following compiler error under JDK 
+1.3. </p>
+
+
+
+
+<div class="a">
+				<pre>Ap074.java:19: inconvertible types
+found   : int[]
+required: double[]
+    double[] B = (double[])A;
+</pre>
+</div>
+
+<p><strong>Why is this cast not allowed? </strong> </p>
+<p>I can&#39;t give you a firm reason why such a cast is not allowed, but I believe 
+that I have a good idea why. I speculate that this is due to the fact that the 
+actual primitive values are physically stored in the array object, and primitive 
+values of different types require different amounts of storage. For example, the 
+type <strong>int</strong> requires 32 bits of storage while the type <strong>
+double</strong> requires 64 bits of storage. </p>
+<p><strong>Would require reconstructing the array object </strong> </p>
+<p>Therefore, to convert an array object containing <strong>int</strong> values 
+to an array object containing <strong>double</strong> values would require 
+reconstructing the array object and allocating twice as much storage space for 
+each element in the array. </p>
+<p><strong>Restriction doesn&#39;t apply to arrays of references </strong> </p>
+<p>As you have seen from previous questions, such a casting restriction does not 
+apply to arrays containing references to objects. This may be because the amount 
+of storage required to store a reference to an object is the same, regardless of 
+the type of the object. Therefore, the allowable casts that you have seen in the 
+previous questions did not require any change to the size of the array. All that 
+changed was some supplemental information regarding the type of objects to which 
+the elements in the array refer. </p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>C. 1.0 2.0 </p>
+<h3><strong>Explanation 10</strong></h3><p>
+<strong>Assigning array reference to variable of type Object</strong>
+</p>
+<p>A reference to an array can be assigned to a non-array reference of the class 
+named <strong>Object</strong>, as in the following statement extracted from the 
+program, where A is a reference to an array object of type <strong>double</strong>.
+</p>
+
+
+
+
+<div class="a">
+				<pre>    Object B = A;</pre>
+</div>
+
+<p>Note that there are no square brackets anywhere in the above statement. Thus, 
+the reference to the array object is not being assigned to an array reference of 
+the type <strong>Object[]</strong>. Rather, it is being assigned to an ordinary 
+reference variable of the type <strong>Object</strong>. </p>
+<p><strong>Downcasting to an array type </strong> </p>
+<p>Once the array reference has been assigned to the ordinary reference variable 
+of the type <strong>Object</strong>, that reference variable can be downcast and 
+used to access the individual elements in the array as illustrated in the 
+following fragment. Note the empty square brackets in the syntax of the cast operator
+<strong>(double[])</strong>.</p>
+
+
+
+
+<div class="a">
+				<pre>    System.out.println(
+               ((double[])B)[0] + &quot; &quot; + 
+               ((double[])B)[1]);</pre>
+</div>
+
+<p><strong>Placement of parentheses is critical </strong> </p>
+<p>Note also that due to precedence issues, the placement of both sets of 
+parentheses is critical in the above code fragment. You must downcast the 
+reference variable before applying the index to that variable. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>C. 1 2 </p>
+<h3><strong>Explanation 9</strong></h3><p>
+<strong>General array casting rule</strong>
+</p>
+<p>The general rule for casting array references <em>(for arrays whose declared type 
+is the name of a class or an interface)</em> is: </p>
+
+	<p><em>A reference to an array object can be cast to another array type if the 
+	elements of the referenced array are of a type that can be cast to the type 
+	of the elements of the specified array type.</em></p>
+<p>
+<strong>Old rules apply here also</strong>
+</p>
+<p>Thus, the general rules covering conversion and casting up and down the 
+inheritance hierarchy and among classes that implement the same interfaces also 
+apply to the casting of references to array objects. </p>
+<p>A reference to an object can be cast down the inheritance hierarchy to the 
+actual class of the object. Therefore, an array reference can also be cast down 
+the inheritance hierarchy to the declared class for the array object. </p>
+<p>This program declares a reference to, creates, and populates an array of the 
+class type <strong>Subclass</strong>. This reference is assigned to an array reference of a type 
+that is a superclass of the actual class type of the array. Then the superclass 
+reference is downcast to the actual class type of the array and assigned to a 
+different reference variable. This third reference variable is used to 
+successfully access and display the contents of the elements in the array. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 8</strong></h3><p>
+<strong>Another ClassCastException</strong>
+</p>
+<p>While it is allowable to assign an array reference to an array reference 
+variable declared for a class that is further up the inheritance hierarchy <em>(as 
+illustrated earlier)</em>, it is not allowable to cast an array reference down the 
+inheritance hierarchy to a subclass of the original declared class for the 
+array. </p>
+<p>This program declares a reference for, creates, and populates a two-element 
+array for a class named <strong>Superclass</strong>. Then it downcasts that reference to a 
+subclass of the class named <strong>Superclass</strong>. The compiler is unable to determine that 
+this is a problem. However, the runtime system throws the following exception, 
+which terminates the program at runtime. </p>
+
+
+
+
+<div class="a">
+				<pre>java.lang.ClassCastException: [LSuperclass;
+ at Worker.doArrays(Ap071.java:19)
+ at Ap071.main(Ap071.java:9)
+</pre>
+</div>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>C. 1 2 </p>
+<h3><strong>Explanation 7</strong></h3><p>
+<strong>Assignment to superclass array reference variable</strong>
+</p>
+<p>This program illustrates that, if you have a reference to an array object 
+containing references to other objects, you can assign the array object&#39;s 
+reference to an array reference variable whose type is a superclass of the 
+declared class of the array object. <em>(As we will see later, this doesn&#39;t work for 
+array objects containing primitive values.) </em> </p>
+<p><strong>What can you do then? </strong> </p>
+<p>Having made the assignment to the superclass reference variable, whether or 
+not you can do anything useful with the elements in the array <em>(without 
+downcasting)</em> depends on many factors. </p>
+<p><strong>No downcast required in this case </strong> </p>
+<p>In this case, the ability to display the contents of the objects referred to 
+in the array was inherited from the class named <strong>Superclass</strong>. Therefore, it is 
+possible to access and display a <strong>String</strong> representation of the 
+objects without downcasting the array object reference from <strong>Superclass</strong> to the 
+actual type of the objects. </p>
+<p><strong>Probably need to downcast in most cases</strong> </p>
+<p>However, that will often not be the case. In most cases, when using a 
+reference of a superclass type, you will probably need to downcast in order to 
+make effective use of the elements in the array object. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. 1 2 </p>
+<h3><strong>Explanation 6</strong></h3><p>
+<strong>Straightforward array application</strong>
+</p>
+<p>This is a straightforward application of Java array technology for the 
+storage and retrieval of references to objects. </p>
+<p>The program declares a reference to, creates, and populates a two-element 
+array of a class named <strong>Subclass</strong>. The class named <strong>Subclass</strong> extends the class 
+named <strong>Superclass</strong>, which in turn, extends the class named <strong>Object</strong> 
+by default. </p>
+<p><strong>The super keyword </strong> </p>
+<p>The class named <strong>Subclass</strong> doesn&#39;t do anything particularly useful other than 
+to illustrate extending a class. </p>
+<p>However, it also provides a preview of the use of the <strong>super</strong> keyword for the 
+purpose of causing a constructor in a subclass to call a parameterized 
+constructor in its superclass. </p>
+<p><strong>Setting the stage for follow-on questions</strong> </p>
+<p>The main purpose for showing you this program is to set the stage for several 
+programs that will be using this class structure in follow-on questions. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 5</strong></h3><p>
+<strong>ClassCastException</strong>
+</p>
+<p>There are some situations involving casting where the compiler cannot 
+identify an erroneous condition that is later identified by the runtime system. 
+This is one of those cases. </p>
+<p>This program begins with an array of type <strong>double</strong>[]. The 
+reference to that array is converted to type <strong>Object</strong>. Then it is 
+cast to type <strong>String</strong>[]. All of these operations are allowed by 
+the compiler. </p>
+<p>However, at runtime, the runtime system expects to find references to objects 
+of type <strong>String</strong> in the elements of the array. What it finds 
+instead is values of type <strong>double</strong> stored in the elements of the 
+array. </p>
+<p>As a result, a <strong>ClassCastException</strong> is 
+thrown. Since it isn&#39;t caught and handled by the program, the program terminates 
+with the following error message showing on the screen.</p>
+
+
+
+
+<div class="a">
+				<pre>java.lang.ClassCastException: [D
+ at Worker.doArrays(Ap068.java:17)
+ at Ap068.main(Ap068.java:6)
+</pre>
+</div>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>C. 1.0 2.0 </p>
+<h3><strong>Explanation 4</strong></h3><p>
+<strong>Finally, we got it right
+</strong>
+</p>
+<p>Finally, we managed to get it all together. The program compiles and executes 
+correctly. This program illustrates the assignment of an array object&#39;s 
+reference to a reference variable of type <strong>Object</strong>, and the 
+casting of that reference of type <strong>Object</strong> back to the correct 
+array type in order to gain access to the elements in the array. </p>
+<p>But don&#39;t go away, there is a lot more that you need to know about arrays in 
+Java. We will look at some of those things in the questions that follow. </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 3</strong></h3><p>
+<strong>Must use the correct cast syntax
+</strong>
+</p>
+<p>While it is possible to store an array object&#39;s reference in a reference 
+variable of type <strong>Object</strong>, and later cast it back to an array 
+type to gain access to the elements in the array, you must use the correct 
+syntax in performing the cast. This is not the correct syntax for performing 
+that cast. It is missing the empty square brackets required to indicate a 
+reference to an array object. </p>
+<p>A portion of the compiler error produced by JDK 1.3 is shown below:</p>
+
+
+
+
+<div class="a">
+				<pre>Ap066.java:17: inconvertible types
+found   : java.lang.Object
+required: double
+    double C = (double)B;
+</pre>
+</div>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 2</strong></h3><p>
+<strong>Must cast back to an array type
+</strong>
+</p>
+<p>This program illustrates another very important point. Although you can 
+assign an array object&#39;s reference to a reference variable of type <strong>Object</strong>, you 
+cannot gain access to the elements in the array while treating it as type 
+<strong>Object</strong>. Instead, you must cast it back to an array type before you can gain 
+access to the elements in the array object. </p>
+<p>A portion of the compiler error produced by JDK 1.3 is shown below: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap065.java:18: array required, but java.lang.Object found
+B[0] + " " + B[1]);
+</pre>
+</div>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>C. I&#39;m OK </p>
+<h3><strong>Explanation 1</strong></h3><p>
+<strong>Assigning array reference to type Object</strong>
+</p>
+<p>This program illustrates a very important point. You can assign an array 
+object&#39;s reference to an ordinary reference variable of type <strong>Object</strong>. Note that I 
+didn&#39;t say <strong>Object[]</strong>. The empty square brackets are not required when the type is 
+<strong>Object</strong>. </p>
+<p><strong>Standard containers or collections</strong> </p>
+<p>Later on, when we study the various containers in the Java class libraries 
+<em>(see the Java Collections Framework)</em>, we will see that they store references to 
+all objects, including array objects, as type <strong>Object</strong>. Thus, if it were not 
+possible to store a reference to an array object in a reference variable of type 
+<strong>Object</strong>, it would not be possible to use the standard containers to store 
+references to array objects. </p>
+<p>Because it is possible to assign an array object&#39;s reference to a variable of 
+type <strong>Object</strong>, it is also possible to store array object references in containers 
+of type <strong>Object</strong>. </p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.06 [en] (Win95; U) [Netscape]">
+   <META NAME="AUTHOR" CONTENT="Richard G. Baldwin">
+   <TITLE>... in Java by Richard G Baldwin</TITLE>
+</HEAD>
+<BODY>
+<!--start-->
+<CENTER>
+<H3>
+<B><I>Richard G Baldwin (512) 223-4758, <A HREF="mailto:baldwin@austin.cc.tx.us">baldwin@austin.cc.tx.us</A>,
+<A HREF="http://www2.austin.cc.tx.us/baldwin/">http://www2.austin.cc.tx.us/baldwin/</A></I></B></H3></CENTER>
+
+<CENTER>
+<H2>
+<B><!--title-->Event Handling in JDK 1.1, Paint Events<!--endTitle--></B></H2></CENTER>
+Java Programming, Lecture Notes # 101, Revised 09/22/98.
+<P>
+<HR WIDTH="100%">
+<br/>This short chapter is being provided solely for completeness.
+This is what the JDK 1.1.6 documentation has to say about the <B>PaintEvent</B>
+class:
+<br/>
+<br/>
+<TABLE BORDER COLS=1 WIDTH="100%" BGCOLOR="#66FFFF" >
+<TR>
+<TD>"The component-level paint event.
+<br/>This event is a special type which is used to ensure that paint/update
+method calls are serialized along with the other events delivered from
+the event queue. This event is not designed to be used with the Event Listener
+model; programs should continue to override paint/update methods in order
+render themselves properly. "</TD>
+</TR>
+</TABLE>
+
+<P>My interpretation of this is that if we properly override the <B>paint()</B>
+method, and the <B>update()</B> method when needed, we don't need to worry
+about this event. It will take care of itself.
+<P>-end-
+<!--end-->
+</BODY>
+</HTML>

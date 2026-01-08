@@ -1,0 +1,946 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java094</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+.auto-style2 {
+	font-weight: bold;
+}
+.auto-style3 {
+	font-weight: normal;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java094 Using Abbreviated Inner Classes</h1>
+
+<h1>Table of contents</h1>
+<ul>
+<li><a href="#preface">Preface</a></li>
+
+<li><a href="#introduction">Introduction</a></li>
+
+<li><a href="#first the sample program">First Sample Program</a><ul>
+	<li><a href="#discussion of first sample program">Discussion of First Sample 
+	Program</a></li>
+	<li><a href="#program listing of first sample program">Program Listing of First 
+Sample Program</a></li>
+</ul>
+	</li>
+
+<li><a href="#second sample program">Second Sample Program</a><ul>
+	<li><a href="#discussion of second sample program">Discussion of Second 
+	Sample Program</a></li>
+	<li><a href="#program listing of second sample program">Program Listing of 
+Second Sample Program</a></li>
+</ul>
+	</li>
+
+<li><a href="#review">Review</a></li>
+</ul>
+<h1><a name="preface"></a>Preface</h1>
+<p>This chapter is one in a collection of chapters designed for teaching <em>
+ITSE2317 - Java Programming (Intermediate)</em> at Austin Community College in 
+Austin, TX.
+</p><p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written around 1997. However, despite many improvements in Java since 
+then, most of what was true then is still true in 2020.)</em></p>
+<h1><span class="auto-style3"><a name="introduction"></a></span>
+<span class="auto-style2">Introduction</span></h1>
+JDK 1.1 was formally released on February 18, 1997. This chapter was originally 
+written on February 27, 1997 using the software and documentation in JDK 1.1.
+
+<p>One of the new features in JDK 1.1 is the capability to create <i>inner 
+classes</i> and also to use an abbreviated syntax for the
+<i>definition of anonymous classes</i> and the <i>instantiation of anonymous 
+objects</i> from those classes.
+
+</p><p>The instantiation of <b>Listener </b>objects is a strong candidate for the 
+use of anonymous classes and objects as provided by the <i>inner class</i>
+capability.
+
+</p><p>The purpose of this chapter is simply to introduce you to the 
+concept so that you will know what you are seeing whenever you encounter 
+code using the abbreviated <i>inner class </i>syntax.
+
+</p><p>Two sample programs will be presented and discussed. The first will be 
+implemented using Inner Classes, but will not use the anonymous class, 
+anonymous object syntax.
+
+</p><p>Then the same program will be presented after having been modified to
+use the anonymous class, anonymous object syntax.
+
+</p><p>This will make it possible for you to compare the two and hopefully 
+gain a better understanding the abbreviated syntax version.
+
+</p><p>The topic of <i>inner classes</i> is a broad topic. The discussion of the 
+technical aspects of inner classes will be very brief. Also there are 
+many aspects of inner classes that won't be discussed even briefly.
+
+</p><p>You may need to refer to either the documentation package to fully understand the material 
+presented in this chapter.
+
+</p><p>According to the JDK 1.1 Documentation:</p>
+<blockquote>
+	"Inner classes allow classes to be defined in any scope. In previous 
+	releases, Java supported only top-level classes, which must be members of 
+	packages. In this release, the programmer can now define inner classes as 
+	members of other classes, locally within a block of statements, or 
+	(anonymously) within an expression."</blockquote>
+
+<h1><a name="first the sample program"></a>First 
+Sample Program</h1>
+As mentioned earlier, in order to avoid some of the cryptic aspects of anonymous 
+classes/objects, the first sample program makes use of inner classes in a 
+relatively straightforward manner. Classes are defined inside of classes and 
+those class definitions are used to instantiate the necessary objects.
+
+<p>This differs significantly from previous chapters on the Delegation Event 
+Model where the classes needed to instantiate <b>Listener </b>objects were 
+top-level classes <em>(direct subclasses of the class </em> <b><em>object</em></b><em> or subclasses of 
+</em> <b>
+<em>adapter</em></b><em> classes such as </em> <b><em>MouseAdapter</em></b><em>).
+
+</em>
+
+</p><p>In this program, the classes needed to instantiate <b>Listener </b>objects, 
+as well as some others are nested within other classes.</p>
+<h2><a name="discussion of first sample program"></a>
+Discussion of First Sample Program</h2><p>This program combines the use of inner classes with 
+event handling under the JDK 1.1 Delegation Event Handling model.
+
+</p><p>The controlling class is named Event23. An inner class 
+named <b>GUI </b>is defined inside the class named <b>Event23 </b>and an object 
+of that class is instantiated inside the <b>main()</b> method.
+
+</p><p>In addition, two "data processing" methods named
+<b>sing()</b> and <b>whistle()</b> are defined inside the controlling class. 
+They are defined in such a way as to be separated from the event handling 
+activity except that they are invoked by the event handler methods.
+
+</p><p>Three additional inner classes are defined 
+inside the inner class named <b>GUI</b>. They are named <b>SingActionListener</b>,
+<b>WhistleActionListener</b>, and <b>Terminator</b>. All three of these are <b>
+Listener </b>classes. The first two implement the <b>ActionListener
+</b>interface while the third extends the <b>WindowListener </b>adapter.
+
+</p><p>The first two override the <b>actionPerformed()</b>
+method of the <b>ActionListener </b>interface while the third overrides the <b>
+windowClosing()</b> method of the <b>WindowListener </b>interface.
+
+</p><p>The class named <b>GUI </b>extends <b>Frame</b>. Two <b>
+Button </b>objects labeled <i>Sing </i>and <i>Whistle </i>are instantiated in 
+the <b>GUI </b>constructor. They are referenced by variables named <b>singButton
+</b>and <b>whistleButton </b>respectively. Both buttons are added to the
+<b>Frame </b>object.
+
+</p><p>Although this sample program does not use anonymous 
+classes, it does use anonymous objects. Anonymous <b>Listener </b>objects 
+of the classes <b>SingActionListener </b>and <b>WhistleActionListener </b>are 
+instantiated and registered for event handling on the <b>Button
+</b>objects having similar names.
+
+</p><p>Another anonymous <b>Listener </b>object of the class <b>
+Terminator </b>is registered for event handling on the <b>Frame
+</b>object of class <b>GUI</b>.
+
+</p><p>When the program starts, a <b>Frame </b>object 
+containing the two buttons appears on the screen. When the user clicks on the 
+button labeled <i>Sing</i>, the event handler registered to listen for <b>Action </b>
+events on that button invokes the method named <b>sing()</b>
+which in turn displays the message
+
+</p><p><b>"I am singing, Tra la la"</b>
+
+</p><p>When the user clicks on the button labeled <i>Whistle</i>, 
+the event handler registered to listen for <b>Action </b>events on that button 
+invokes the method named <b>whistle()</b> which in turn displays the message
+
+</p><p><b>"I am whistling, Tweet, Tweet, Tweet"</b>
+
+</p><p>When the user clicks the "close" box on the <b>Frame</b>, 
+the event handler registered to listen for <b>windowClosing()</b> events on the <b>
+Frame </b>terminates the program and returns control to the operating system..
+
+</p><p>This program was most recently tested using JDK 12.0.1 under Windows 7.</p><h2><a name="program listing of first sample program"></a>
+Program Listing of First Sample Program</h2>
+<p>A listing of the program with additional comments follows:
+</p>
+
+<div class="a"><pre>/*File Event23.java Copyright, R.G.Baldwin
+Revised 9/17/97
+This program is designed to be compiled and run under
+JDK 1.1
+
+The program illustrates the use of Inner Classes with event
+handling under the JDK 1.1 Delegation Event Handling model.
+
+The controlling class is named Event23. An Inner Class
+named GUI is defined inside the class named Event23 and an
+object of that class is instantiated inside the main()
+method.
+
+In addition, two "data processing" methods named sing() and
+whistle() are defined inside the controlling class. They
+are defined in such a way as to be separated from the event
+handling activity except that they are invoked by the event
+handler methods.
+
+Three more Inner Classes are defined inside the Inner Class
+named GUI. They are named SingActionListener,
+WhistleActionListener, and Terminator. All three of these
+are Listener classes. The first two implement the
+ActionListener interface while the third extends the
+WindowListener adapter.
+
+The first two override the actionPerformed() method of the
+ActionListener interface while the third overrides the
+windowClosing() method of the WindowListener interface.
+
+The class named GUI extends Frame. Two Button objects
+labeled Sing and Whistle are instantiated in the GUI
+constructor. They are referenced by variables named
+singButton and whistleButton respectively. Both buttons
+are added to the Frame object.
+
+Anonymous Listener objects of the classes
+SingActionListener and WhistleActionListener are
+instantiated and registered for event handling on the two
+Button objects having similar names.
+
+An anonymous Listener object of the class Terminator is
+registered for event handling on the Frame object of class
+GUI.
+
+When the program starts, a Frame object containing the two
+buttons appears on the screen. When the user clicks on the
+button labeled Sing, the event handler registered to
+listen for Action events on that button invokes the method
+named sing() causing the message
+
+"I am singing, Tra la la"
+
+to be displayed on the screen.
+
+When the user clicks on the button labeled Whistle, the
+event handler registered to listen for Action events on
+that button invokes the method named whistle() causing the
+message
+
+"I am whistling, Tweet, Tweet, Tweet"
+
+to be displayed on the screen.
+
+When the user clicks the "close" box on the Frame, the
+event handler registered to listen for windowClosing()
+events on the Frame terminates the program.
+
+This version uses long form notation as opposed to the use
+of anonymous inner classes. See the program named Event22
+for a version that uses the more cryptic abbreviated
+notation attributable to the use of anonymous inner
+classes.
+
+These results were produced using JDK 12.0.1 running under
+Windows 7.
+*/
+//=========================================================
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event23 {
+ //The following two methods are invoked directly from
+ // code in methods defined in classes which are inner-
+ // classes of this class.
+ void sing() {System.out.println(
+ "I am singing, Tra la la");}
+ void whistle() {System.out.println(
+ "I am whistling, Tweet Tweet Tweet");}
+
+ //-------------------------------------------------------
+ static public void main(String[] args){
+ Event23 app = new Event23();
+ //Note the syntax in the following statement where the
+ // new operator is joined to the reference to the
+ // object of a class in which the GUI inner class is
+ // defined in order to instantiate an object of the
+ // GUI class.
+ GUI gui = app.new GUI();
+ }//end main()
+
+ //-------------------------------------------------------
+ //Note that the following GUI class is defined inside
+ // the Event23 class and thus is an inner-class of the
+ // Event23 class.
+ class GUI extends Frame{
+
+ //-----------------------------------------------------
+ //Note that the SingActionListener class is defined
+ // inside the GUI class which is defined inside the
+ // Event23 class.
+ class SingActionListener implements ActionListener{
+ //Implement the actionPerformed method which is
+ // declared in the ActionListener interface.
+ public void actionPerformed(ActionEvent e){
+ //Note that because this class is defined inside
+ // the GUI class which is defined inside the
+ // Event23 class, this method has direct
+ // access to the members of the Event23 class.
+ // Therefore, this method can directly access the
+ // method named sing() without having to access
+ // it via an object of type Event23.
+ sing();
+ }//end actionPerformed()
+ }//end SingActionListener class defined inside GUI
+
+ //-----------------------------------------------------
+ //Note that the WhistleActionListener class is defined
+ // inside the GUI class which is defined inside the
+ // Event23 class.
+ class WhistleActionListener implements ActionListener{
+ public void actionPerformed(ActionEvent e){
+ //As mentioned earlier, this inner-class of the
+ // has direct access to the members of the
+ // Event23 class without the requirement to
+ // access via an object of type Event23.
+ whistle();
+ }//end actionPerformed()
+ }//end WhistleActionListener class defined inside GUI
+
+ //-----------------------------------------------------
+ //Note that the Terminator class is defined inside the
+ // GUI class which is defined inside the Event23 class.
+ class Terminator extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ System.exit(0);
+ }//end windowClosing()
+ }//end class Terminator defined inside GUI class
+
+ //-----------------------------------------------------
+ public GUI(){//constructor for GUI class
+ setTitle("Copyright, R.G.Baldwin");
+
+ Button singButton;
+ add(singButton = new Button("Sing"),"North");
+ singButton.addActionListener(
+ new SingActionListener() );
+
+ Button whistleButton;
+ add(whistleButton = new Button("Whistle"),"South");
+ whistleButton.addActionListener(
+ new WhistleActionListener() );
+
+ //Register a Listener object for event handling on
+ // the Frame object of class GUI.
+ this.addWindowListener(new Terminator());
+
+ //Set frame size and make visible
+ setSize(300,100);
+ setVisible(true);
+ }//end GUI constructor
+ //-----------------------------------------------------
+ }//end class GUI which is defined inside Event23 class
+ //-------------------------------------------------------
+}//end class Event23
+//=========================================================</pre></div>
+
+<h1><a name="second sample program"></a>Second 
+Sample Program</h1>
+The second sample program is similar to the first, except that it makes 
+use of anonymous classes for instantiation of the <b>Listener
+</b>objects.
+<h2><a name="discussion of second sample program"></a>
+Discussion of Second Sample Program</h2>In 
+order to make small adapter classes (such as <b>Listener
+</b>classes) as concise as possible, Java 1.1 allows an abbreviated notation for 
+local objects.
+
+<p>A single expression combines</p><ul><li>
+	the definition of an anonymous class with</li>
+
+<li>the allocation of the instance.</li></ul>
+<p>Here is a code fragment from the second sample program which illustrates this 
+concept.</p>
+
+<div class="a"><pre>singButton.addActionListener(
+ <b>new ActionListener()</b>{
+ public void <b>actionPerformed(ActionEvent e)</b>{
+ <b>sing();//call</b> the sing() method
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener()</pre></div>In this case, the 
+code defines a new anonymous class that automatically implements the <b>
+ActionListener </b>interface <em>(without use of the keyword </em> <b><em>implements</em></b>) 
+and automatically instantiates an anonymous object of that new class.
+
+<p>In this case, the word <i>anonymous </i>indicates that 
+neither the class nor the object are named.
+
+</p><p>In previous chapters we have instantiated anonymous 
+objects by using the <b>new</b> operator and making a call to the constructor 
+for the object as part of a larger overall expression. However, we have not done 
+that using classes that had no name.
+
+</p><p>Another interesting aspect of this syntax is the 
+following code fragment which looks like a constructor call in a typical object 
+instantiation.</p>
+<div class="a"><pre><b>new ActionListener()</b>{...</pre></div>
+<p>However, <b>ActionListener </b>is not a class, it is an interface and since an 
+interface cannot contain any fully defined methods, it doesn't seem that it 
+could have a constructor (but it works anyway).
+
+</p>
+
+<p>Pay particular attention to the positions of the
+open and close parentheses which define the argument list for the
+<b>addActionListener()</b> method.
+
+</p><p>The definition of the anonymous class as well as 
+the instantiation of the anonymous object are both included in the 
+argument list of <b>addActionListener()</b>.
+
+</p><p>The addActionListener<b>()</b> method is used to 
+register this anonymous object to listen for <b>actionPerformed()</b>
+events on the <b>Button </b>object named <b>singButton</b>. Whenever an
+<b>Action </b>event occurs on that specific button, the overridden <b>
+actionPerformed()</b>
+method invokes the "data processing" method named <b>sing()</b>. Because this is 
+an inner-class of the outer-class in which the method <b>sing()</b>
+is defined, code in the inner-class has direct access to the method named
+<b>sing() </b>without the requirement to instantiate an object of the 
+outer-class.
+
+</p><p>When using the abbreviated syntax, a <b>new</b>
+operator expression can end with a class body. According to the JDK 1.1 
+documentation:</p>
+
+<blockquote>
+	"The effect of this is to 
+	take the class (or interface) named after the <b>new </b>token, and subclass 
+	it (or implement it) with the given body. The resulting anonymous 
+	inner-class has the same meaning as if the programmer had defined it 
+	locally, with a name, in the current block of statements."</blockquote>
+<p>It is important to note that an anonymous
+class can have initializers but it <strong>cannot have a constructor</strong>. The 
+argument list of the associated <b>new </b>expression is implicitly passed to a 
+constructor of the superclass.
+
+</p>
+
+<p>For the second sample program which follows, the 
+controlling class is named <b>Event22</b>. As before, an inner class named
+<b>GUI </b>is defined inside the class named <b>Event22 </b>and an object of 
+that class is instantiated inside the <b>main()</b> method.
+
+</p><p>Also as before, two "data processing" methods named <b>
+sing()</b> and <b>whistle()</b> are defined inside the controlling class. They 
+are defined in such a way as to be separated from the event handling activity 
+except that they are invoked by the event handler methods.
+
+</p><p>However, unlike the first sample program, 
+abbreviated notation is used to anonymously define the classes for and 
+instantiate three anonymous listener objects inside the inner class named <b>GUI</b>. 
+The first two implement the <b>ActionListener </b>interface while the third 
+extends the <b>WindowListener </b>adapter class.
+
+</p><p>As before, the first two override the <b>
+actionPerformed()
+</b>method of the <b>ActionListener </b>interface while the third overrides the <b>
+windowClosing()</b> method of the <b>WindowListener </b>interface.
+
+</p><p>The class named <b>GUI </b>extends <b>Frame</b>. Two <b>
+Button </b>objects labeled <i>Sing </i>and <i>Whistle </i>are instantiated in 
+the <b>GUI </b>constructor. They are referenced by variables named <b>singButton
+</b>and <b>whistleButton </b>respectively. Both buttons are added to the
+<b>Frame </b>object.
+
+</p><p>The first two anonymous listener objects mentioned 
+above are registered to listen for <b>actionPerformed()</b> events on the 
+two buttons. The third anonymous listener object is registered
+to listen for <b>windowClosing() </b>events on the <b>Frame </b>object.
+
+</p><p>When the program starts, a <b>Frame </b>object 
+containing the two buttons appears on the screen. When the user clicks
+on the button labeled <i>Sing</i>, the event handler registered to listen for <b>
+Action </b>events on that button invokes the method named <b>sing()</b>
+which displays the message:
+
+</p><p><b>"I am singing, Tra la la"</b>
+
+</p><p>When the user clicks on the button labeled <i>Whistle</i>, 
+the event handler registered to listen for <b>Action </b>events on that button 
+invokes the method named <b>whistle()</b> which displays the message:
+
+</p><p><b>"I am whistling, Tweet, Tweet, Tweet"</b>
+
+</p><p>When the user clicks the "close" box on the <b>Frame</b>, 
+the event handler registered to listen for <b>windowClosing()</b> events on the 
+<strong>Frame</strong> terminates the program.
+
+</p><p>These results were most recently produced using JDK 12.0.1 running under 
+Windows 7.</p>
+
+<h2><a name="program listing of second sample program"></a>
+Program Listing of Second Sample Program</h2>
+<p>A program listing with additional comments follows:</p>
+<div class="a"><pre>/*File Event22.java Copyright, R.G.Baldwin
+Revised 9/17/97
+This program is designed to be compiled and run under
+JDK 1.1
+
+The program illustrates the use of Inner Classes with event
+handling under the JDK 1.1 Delegation Event Handling model.
+
+The use of anonymous Inner Classes is also illustrated.
+See the program named Event23 for an example of Inner
+Classes that does not use anonymous Inner Classes.
+
+The controlling class is named Event22. An Inner Class
+named GUI is defined inside the class named Event22 and an
+object of that class is instantiated inside the main()
+method.
+
+In addition, two "data processing" methods named sing() and
+whistle() are defined inside the controlling class named
+Event22. They are defined in such a way as to be separated
+from the event handling activity except that they are
+invoked by the event handler methods.
+
+Abbreviated notation is used to anonymously define the
+classes for and instantiate three anonymous listener
+objects inside the Inner Class named GUI. The first two
+implement the ActionListener interface while the third
+extends the WindowListener adapter.
+
+The first two implement the actionPerformed() method of the
+ActionListener interface while the third overrides the
+windowClosing() method of the WindowListener interface.
+
+The class named GUI extends Frame. Two Button objects
+labeled Sing and Whistle are instantiated in the GUI
+constructor. They are referenced by variables named
+singButton and whistleButton respectively. Both buttons
+are added to the Frame object.
+
+The first two anonymous listener objects mentioned above
+are registered to listen for actionPerformed() events on
+the two buttons respectively. The third anonymous listener
+object is registered to listen for windowClosing() events
+on the Frame object.
+
+When the program starts, a Frame object containing the two
+buttons appears on the screen. When the user clicks on the
+button labeled Sing, the event handler registered to listen
+for Action events on that button invokes the method named
+sing() causing the message
+
+"I am singing, Tra la la"
+
+to be displayed on the screen.
+
+When the user clicks one the button labeled Whistle, the
+event handler registered to listen for Action events on
+that button invokes the method named whistle() causing the
+message
+
+"I am whistling, Tweet, Tweet, Tweet"
+
+to be displayed on the screen.
+
+When the user clicks the "close" box on the Frame, the
+event handler registered to listen for windowClosing()
+events on the Frame terminates the program.
+
+This version of the program uses abbreviated notation to
+define anonymous classes and instantiate anonymous listener
+objects. The abbreviated notation is fairly cryptic. See
+the program named Event23 for a version that does the same
+thing without using the abbreviated notation.
+
+These results were produced using JDK 1.1 running under
+Windows 95.
+*/
+//=========================================================
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event22 {
+ void sing() {System.out.println(
+ "I am singing, Tra la la");}
+ void whistle() {System.out.println(
+ "I am whistling, Tweet Tweet Tweet");}
+
+ //-------------------------------------------------------
+ static public void main(String[] args){
+ Event22 app = new Event22();
+ //Note the following syntax which instantiates an
+ // object of the class GUI which is an inner-class of
+ // the class Event22. The new operator is invoked on
+ // the object named app which is of class Event22.
+ GUI gui = app.new GUI();
+ }//end main()
+
+ //-------------------------------------------------------
+ //Note that the GUI class is defined inside the Event22
+ // class and thus becomes an inner-class of Event22.
+ class GUI extends Frame{
+
+ public GUI(){//constructor for GUI inner-class
+ this.setTitle("Copyright, R.G.Baldwin");
+ Button singButton;
+ this.add(singButton = new Button("Sing"),"North");
+ Button whistleButton;
+ this.add(whistleButton = new Button("Whistle"),
+ "South");
+
+ //---------------------------------------------------
+ //The code which follows instantiates three
+ // anonymous objects of types ActionListener and
+ // WindowAdapter, and registers them for handling
+ // events on the two corresponding Button objects and
+
+ // the Frame object. This code uses the abbreviated
+ // syntax which defines the listener classes
+ // anonymously (the listener classes do not have
+ // class names and the objects instantiated from
+ // those classes do not have names).
+
+ //Begin statement -----------------------------------
+ singButton.addActionListener(
+ //The following object is passed as a parameter
+ // to the addActionListener() method.
+ new //instantiate anonymous object of the class
+ ActionListener(){//anonymous class definition
+ //Implement the actionPerformed() method
+ // which is declared in the ActionListener
+ // interface.
+ public void actionPerformed(ActionEvent e){
+ //The methods in this inner-class have direct
+ // access to the members of the enclosing
+ // outer-class named Event22. Thus, the
+ // direct invocation of the sing() method
+ // is possible without the requirement to
+ // instantiate an object of type Event22.
+ sing();//call the sing() method
+ }//end actionPerformed()
+ }//end ActionListener class definition
+ );//end addActionListener() statement
+ //End statement -------------------------------------
+
+ //Begin statement -----------------------------------
+ whistleButton.addActionListener(
+ //See above discussion for explanation of this code
+ new ActionListener(){//anonymous class definition
+ public void actionPerformed(ActionEvent e){
+ //See note above regarding the method sing()
+ whistle();//call the whistle() method
+ }//end actionPerformed()
+ }//end ActionListener
+ );//end addActionListener()
+ //End statement -------------------------------------
+
+ //Begin statement -----------------------------------
+ this.addWindowListener(
+ //See above discussion for explanation of this code
+ new WindowAdapter(){//anonymous class definition
+ public void windowClosing(WindowEvent e){
+ System.exit(0);//terminate the program
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ //End statement -------------------------------------
+
+ //---------------------------------------------------
+ //Set frame size and make it visible.
+ this.setSize(300,100);
+ this.setVisible(true);
+ }//end GUI constructor
+ }//end class GUI
+}//end class Event22
+//=========================================================</pre></div>
+
+<h1><a name="review"></a>Review</h1>
+<p>Q - Without viewing the solution given below, write a Java application that 
+meets the following specifications:
+</p>
+
+<div class="a"><pre>The program must be written using the following skeleton
+and inserting any additional code that may be necessary.
+
+
+<b>import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg127 {
+//All new code must be inserted after this comment
+
+//Insert the necessary additional code here
+
+//All new code must be inserted before this comment
+}//end class SampProg127
+
+</b>
+
+When the program starts, a Frame object containing a button
+labeled Button and a Label object containing the string
+Initial Text in Label appears on the screen. Your name
+must appear in the title at the top of the frame. When the
+user clicks the button, the text in the label changes to
+Ouch.
+
+When the user clicks the "close" box on the Frame, the
+program terminates and control is properly returned to the
+operating system.</pre></div>
+<p>A - See 
+solution below:</p>
+
+<div class="a"><pre>/*File SampProg127.java Copyright, R.G.Baldwin
+Revised 9/17/97
+
+These results were produced using JDK 12.0.1 running under
+Windows 7.
+*/
+//=========================================================
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg127 {
+
+ //-------------------------------------------------------
+ static public void main(String[] args){
+ SampProg127 app = new SampProg127();
+ //Note the syntax in the following statement where the
+ // new operator is joined to the reference to the
+ // object of a class in which the GUI inner class is
+ // defined in order to instantiate an object of the
+ // GUI class.
+ GUI gui = app.new GUI();
+ }//end main()
+
+ //-------------------------------------------------------
+ //Note that the following GUI class is defined inside
+ // the SampProg127 class and thus is an inner-class of
+ // the SampProg127 class.
+ class GUI extends Frame{
+ //The object referenced by the following reference
+ // variable is accessed directly by code in an
+ // inner-class of the GUI class.
+ Label myLabel;
+
+ //-----------------------------------------------------
+ public GUI(){//constructor for GUI class
+ setTitle("Copyright, R.G.Baldwin");
+
+ Button myButton;
+ this.add(myButton = new Button("Button"),"North");
+ myButton.addActionListener(
+ new ButtonActionListener() );
+
+ this.add(myLabel = new Label(
+ "Initial Text in Label"),"South");
+
+ //Register a Listener object for event handling on
+ // the Frame object of class GUI.
+ this.addWindowListener(new Terminator());
+
+ //Set frame size and make visible
+ setSize(300,100);
+ setVisible(true);
+ }//end GUI constructor
+
+ //-----------------------------------------------------
+ //Note that the ButtonActionListener class is defined
+ // inside the GUI class which is defined inside the
+ // SampProg127 class.
+ class ButtonActionListener implements ActionListener{
+ //Implement the actionPerformed method which is
+ // declared in the ActionListener interface.
+ public void actionPerformed(ActionEvent e){
+ //Note that because this class is defined inside
+ // the GUI class which is defined inside the
+ // SampProg127 class, this method has direct
+ // access to the members of both the SampProg127
+ // class and the GUI class. Therefore, this method
+ // can directly access the reference variable named
+ // myLabel without having to access it via an
+ // object of type GUI.
+ myLabel.setText("Ouch");
+
+ }//end actionPerformed()
+ }//end ButtonActionListener class defined inside GUI
+
+ //-----------------------------------------------------
+ //Note that the Terminator class is defined inside the
+ // GUI class which is defined inside the SampProg127
+ // class.
+ class Terminator extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ System.exit(0);
+ }//end windowClosing()
+ }//end class Terminator defined inside GUI class
+ //-----------------------------------------------------
+ }//end class GUI defined inside SampProg127 class
+ //-------------------------------------------------------
+}//end class SampProg127
+//=========================================================</pre></div>
+
+
+<p>Q - Without viewing the solution given below, write a Java application that 
+meets the following specifications:
+</p>
+<div class="a"><pre>The program must be written using the following skeleton
+and inserting any additional code that may be necessary.
+
+
+<b>import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg128 extends Frame{
+//All new code must be inserted after this comment
+
+//Insert the necessary additional code here.
+
+<i>//Do not define any named classes other than the class
+// named SampProg128
+
+</i>//All new code must be inserted before this comment
+}//end class SampProg128
+
+</b>
+When the program starts, a Frame object containing a button
+labeled Button and a label containing the string
+Initial Text in Label appears on the screen. Your name
+must appear in the title at the top of the frame. When the
+user clicks the button, the text in the label changes to
+Ouch.
+
+When the user clicks the "close" box on the Frame, the
+program terminates and control is properly returned to the
+operating system.</pre></div>
+
+<p>A - See the 
+solution below:</p>
+
+<div class="a"><pre>/*File SampProg128.java from chapter 94
+Revised 02/21/98 to correct an earlier problem which
+caused the program to violate the specifications.
+
+Copyright, R.G.Baldwin
+This program is designed to be compiled and run under
+JDK 1.1
+
+These results were produced using JDK 1.1.3 running under
+Windows 95.
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg128 extends Frame {
+ Label myLabel;
+ //-----------------------------------------------------//
+ static public void main(String[] args){
+ SampProg128 app = new SampProg128();
+ }//end main()
+ //-----------------------------------------------------//
+
+ public SampProg128(){//constructor
+ this.setTitle("Copyright, R.G.Baldwin");
+ Button myButton;
+ this.add(myButton = new Button("Button"),"North");
+ this.add(myLabel = new Label(
+ "Initial Text in Label"),"South");
+ //---------------------------------------------------//
+
+ //The code which follows instantiates two
+ // anonymous objects of types ActionListener and
+ // WindowAdapter, and registers them for handling
+ // events on the corresponding Button object and
+ // the Frame object. This code uses the abbreviated
+ // syntax which defines the listener classes
+ // anonymously (the listener classes do not have
+ // class names and the objects instantiated from
+ // those classes do not have names).
+
+ //Begin statement -----------------------------------
+ myButton.addActionListener(
+ //The following object is passed as a parameter
+ // to the addActionListener() method.
+ new //instantiate anonymous object of the class
+ ActionListener(){//anonymous class definition
+ //Implement the actionPerformed() method
+ // which is declared in the ActionListener
+ // interface.
+ public void actionPerformed(ActionEvent e){
+ //The methods in this inner-class have direct
+ // access to the members of the enclosing
+ // outer-classes named SampProg128.
+ // Thus, direct access to the reference
+ // variable named myLabel
+ // is possible
+ myLabel.setText("Ouch");
+ }//end actionPerformed()
+ }//end ActionListener class definition
+ );//end addActionListener() statement
+ //End statement -------------------------------------
+
+ //Begin statement -----------------------------------
+ this.addWindowListener(
+ //See above discussion for explanation of this code
+ new WindowAdapter(){//anonymous class definition
+ public void windowClosing(WindowEvent e){
+ System.exit(0);//terminate the program
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ //End statement -------------------------------------
+
+ //---------------------------------------------------
+ //Set frame size and make it visible.
+ this.setSize(300,100);
+ this.setVisible(true);
+ }//end SampProg128 constructor
+}//end class SampProg128
+//=========================================================</pre></div>
+<p>-end-<!--end--></p></body></html>

@@ -1,0 +1,1504 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java082</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java082 Sharing a Listener Object Among Visual Components </h1>
+
+<h1 class="style1"><a name="Table_of_contents">Table of contents</a></h1>
+
+
+<ul><li><a href="#Table_of_contents">Table of contents</a>
+</li><li><a href="#Preface">Preface</a>
+<ul><li><a href="#Viewing_tip">Viewing tip</a>
+<ul><li><a href="#Figures">Figures</a>
+</li><li><a href="#Listings">Listings</a>
+</li></ul></li></ul></li><li><a href="#Introduction">Introduction</a>
+</li><li><a href="#First_sample_program">First sample program</a>
+<ul><li><a href="#Interesting_code_fragments">Interesting code fragments</a>
+<ul><li><a href="#The_Event_Source_Objects">The Event Source Objects</a>
+</li><li><a href="#Unique_names">Unique names</a>
+</li><li><a href="#Instantiate_and_register_mouse_listener_object">Instantiate and 
+register mouse listener object</a>
+</li><li><a href="#Instantiate_and_register_window_listener_object">Instantiate and register 
+window listener object</a>
+</li><li><a href="#The_MouseListener_object">The MouseListener object</a>
+</li><li><a href="#Identify_the_event_source">Identify the event source</a>
+</li><li><a href="#Cracking_the_MouseEvent_object">Cracking the MouseEvent object</a>
+</li><li><a href="#The_WindowListener_Object">The WindowListener Object</a>
+</li></ul></li><li><a href="#Complete_program_listing_for_Event10">Complete program listing for Event10</a>
+</li></ul></li><li><a href="#Another_sample_program">Second sample program</a>
+<ul><li><a href="#Changes_relative_to_Event10">Changes relative to Event10</a>
+</li><li><a href="#Complete_program_listing_for_Event11">Complete program listing for 
+Event11</a>
+</li></ul></li><li><a href="#Review">Review</a>
+<ul><li><a href="#Question_1">Question 1</a>
+</li><li><a href="#Question_2">Question 2</a>
+</li><li><a href="#Question_3">Question 3</a>
+</li><li><a href="#Question_4">Question 4</a>
+</li></ul></li><li><a href="#Miscellaneous">Miscellaneous</a>
+</li></ul>
+
+
+	<h1><a name="Preface">Preface</a></h1>
+	
+	<p>This chapter is one in a collection of chapters designed for teaching <em>
+	ITSE2317 - Java Programming (Intermediate)</em> at Austin Community College 
+	in Austin, TX.</p>
+<p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written around 1997. However, despite many improvements in Java since 
+then, most of what was true then is still true in 2020.)</em></p>
+	
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+
+
+
+<ul>
+<li><a href="#Figure_1">Figure 1.</a>
+ Screen output from Event10.
+</li>
+<li><a href="#Figure_2">Figure 2.</a>
+ Screen output from Event11.
+</li>
+<li><a href="#Figure_3">Figure 3.</a>
+ Screen output for Question 1.
+</li>
+<li><a href="#Figure_4">Figure 4.</a>
+ Screen output for Question 2.
+</li>
+</ul>
+
+
+	<h3><a name="Listings">Listings</a></h3>
+
+
+
+
+<ul>
+<li><a href="#Listing_1">Listing 1.</a>
+ An event source object.
+</li>
+<li><a href="#Listing_2">Listing 2.</a>
+ Give the source objects unique names.
+</li>
+<li><a href="#Listing_3">Listing 3.</a>
+ Instantiate and register mouse listener 
+object.
+</li>
+<li><a href="#Listing_4">Listing 4.</a>
+ Instantiate and register window listener object.
+</li>
+<li><a href="#Listing_5">Listing 5.</a>
+ Identify the event source.
+</li>
+<li><a href="#Listing_6">Listing 6.</a>
+ The program named Event10.
+</li>
+<li><a href="#Listing_7">Listing 7.</a>
+ The program named Event11.
+</li>
+<li><a href="#Listing_8">Listing 8.</a> Solution to Question 1.
+</li>
+<li><a href="#Listing_9">Listing 9.</a> Solution to Question 2.
+</li>
+<li><a href="#Listing_10">Listing 10.</a> Solution to Question 3.
+</li>
+<li><a href="#Listing_11">Listing 11.</a> Solution to Question 4.
+</li>
+</ul>
+
+
+<h1><a name="Introduction">Introduction</a></h1>
+<p>Earlier chapters discussed the sharing of a single event <em>source</em> 
+object among two or more <em>listener</em> objects for <em>low-level </em>
+events.</p>
+<p>This chapter discusses the sharing of a single listener object among two 
+or more visual components for <em>low-level events</em> generated by any of the 
+visual components. </p>
+<p>The event-handling method of the listener object </p>
+<ul>
+	<li>responds to each event,</li>
+	<li>determines which visual component generated the event, and</li>
+	<li>takes the appropriate action.</li>
+</ul>
+<p>The primary issue in this type of operation boils down to determining which 
+component generated the event. </p>
+<p>This can be accomplished by assigning a unique name to each visual component when 
+it is instantiated and using that name to distinguish among the visual 
+components when an event occurs. </p>
+<p>This approach is completely straightforward and intuitive. An improved 
+approach to accomplishing the same objective is illustrated in some sample 
+programs near the end of the chapter. While possibly less intuitive, the improved 
+approach is more object-oriented and probably easier to maintain. </p>
+	
+	<h1><a name="First_sample_program">First sample program</a></h1>
+	
+	<p>This program illustrates the sharing of a single listener object among 
+	two different visual components of the same type. </p>
+<p>The program detects mouse events occurring on either of two different <strong>Frame</strong> objects. It distinguishes between the two objects on the basis 
+of the component name, and displays the coordinates of a mouse click on 
+whichever object experienced the mouse click. </p>
+<p>This program was originally tested using JDK 1.1.3 under Win95. More recently 
+it was tested using JDK 12.0.1 and Windows 7.</p>
+<p>Note that when the program starts, the two visual components overlay one 
+another. It is necessary to physically move one of them in order to access the 
+other as shown in <a href="#Figure_1">Figure 1</a>. </p>
+
+<div class="a">
+	<p>
+<a name="Figure_1">Figure 1.</a> Screen output from Event10.</p>
+<p><img alt="Two Frame objects showing mousePressed coordinates." height="212" src="event10a.jpg" width="617"/></p>
+</div>
+
+
+
+
+
+<h2><a name="Interesting_code_fragments">Interesting code fragments</a></h2>
+
+<p>This program is really quite simple. The only new code involves cracking the 
+event object to obtain the name of the visual component that generated the
+<strong>mousePressed</strong> event. </p>
+<p>The <strong>main</strong> method instantiates an object of type <strong>GUI</strong>
+<em>(named gui)</em> which serves the purpose of providing the visual interface.
+</p>
+<p>The <strong>Frame </strong>class is <em>extended </em>into a new class named
+<strong>MyFrame </strong>to make it possible to override the <strong>paint</strong> 
+method of the class. This is necessary to display the coordinates of mouse 
+clicks on the interior of the frame using the graphics method named <strong>
+drawString</strong>. </p>
+<h3><a name="The_Event_Source_Objects">The Event Source Objects</a></h3>
+<p>The constructor of the <strong>GUI</strong> class instantiates two objects of 
+type <strong>MyFrame </strong>and makes them visible. This is accomplished using 
+code such as that shown in <a href="#Listing_1">Listing 1</a>.</p>
+
+<div class="a">
+	<p>
+<a name="Listing_1">Listing 1.</a> An event source object.
+</p>
+<pre>
+    MyFrame myFrame1 = new MyFrame("Frame1");
+    myFrame1.setVisible(true);
+</pre>
+</div>
+<p>The reference variables for the two objects are named <strong>myFrame1</strong> 
+and <strong>myFrame2</strong>.</p>
+<h3><a name="Unique_names">Unique names</a></h3>
+<p>When they are instantiated, unique names <em>(<strong>Frame1</strong> and 
+<strong>Frame2</strong>)</em> are given to the objects using code in the 
+constructor <em>(see <a href="#Listing_2">Listing 2</a>)</em> for the extended <strong>Frame </strong>objects <em>(the </em>
+<strong><em>MyFrame </em></strong><em>class extends the </em><strong><em>Frame
+</em></strong><em>class in order to override its </em><strong><em>paint</em></strong><em> 
+method).</em> </p>
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_2">Listing 2.</a> Give the source objects unique names.
+</p>
+<pre>
+  MyFrame(String name){//constructor
+    setTitle("Copyright, R.G.Baldwin");
+    setSize(300,200);
+    //Name used to distinguish between the two objects
+    setName(name);
+  }//end constructor
+</pre>
+</div>
+<p>The unique names are used later by the listener object to determine which 
+object generated a mouse event. </p>
+<h3><a name="Instantiate_and_register_mouse_listener_object">Instantiate and 
+register mouse listener object</a></h3>
+<p>The constructor in the <strong>GUI</strong> class also uses the code in 
+<a href="#Listing_3">Listing 3</a> to instantiate a single listener object which will process low-level 
+mouse events on either of the two visual objects. </p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_3">Listing 3.</a> Instantiate and register mouse listener 
+object.
+</p>
+<pre>
+    MouseProc mouseProcCmd = new MouseProc(myFrame1,myFrame2);
+    myFrame1.addMouseListener(mouseProcCmd);
+    myFrame2.addMouseListener(mouseProcCmd);
+</pre>
+</div>
+<p>The first statement in <a href="#Listing_3">Listing 3</a> instantiates the new listener object named <strong>mouseProcCmd</strong> passing references to the two visual components as 
+parameters. </p>
+<p>The next two statements add that listener object (<em>register</em> the 
+listener object) to a list of listener objects that are automatically notified 
+whenever mouse events occur on the visual objects referred to as <strong>
+myFrame1</strong> and <strong>myFrame2</strong>, respectively. </p>
+<p>You will recall that once the programmer causes the name of a listener object 
+to be added to the list, no further programming effort is required to cause the 
+notification to occur. </p>
+<p>The notifications are carried out by invoking specific overridden instance 
+methods of the listener object upon the occurrence of a specific types of mouse 
+events. </p>
+<p>The declarations for all of the methods that match up with all of the 
+possible mouse event types are defined by the <strong>MouseListener</strong> 
+interface that matches the <strong>MouseEvent</strong>  class. </p>
+<p>The class from which the listener object is instantiated 
+must define, either directly or indirectly, all the methods declared in the
+<strong>MouseListener</strong> interface. </p>
+<h3><a name="Instantiate_and_register_window_listener_object">Instantiate and register 
+window listener object</a></h3>
+<p>In addition to the <em>registration</em> of the <strong>MouseListener</strong> 
+object to receive mouse events, the program also instantiates and <em>registers</em> 
+a listener object that monitors for <strong>Window</strong>  events and 
+terminates the program whenever the user closes either of the two visual 
+objects. In this case, the code in the listener object makes no attempt to 
+distinguish between the two visual objects. The instantiation and registration 
+code is shown in <a href="#Listing_4">Listing 4</a>. </p>
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_4">Listing 4.</a> Instantiate and register window listener object.
+	</p>
+<pre>
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame1.addWindowListener(winProcCmd1);
+    myFrame2.addWindowListener(winProcCmd1);
+</pre>
+</div>
+<h3><a name="The_MouseListener_object">The MouseListener object</a></h3>
+<p>Most of the programming complexity is tied up in the <strong>mouseListener
+</strong>object, and even that isn't very complicated. </p>
+<p>The central issue for the code in the listener object is how 
+to determine which one of several visual components generated an event. </p>
+<p>This particular listener object only responds to <strong>
+mousePressed</strong> events, but the following information applies to all of 
+the different types of mouse events, and probably to most or all of the 
+low-level events as well. </p>
+<p>The <strong>MouseProc</strong> <em>(listener)</em> class in this program </p>
+<ul>
+	<li>extends the <strong>MouseAdapter</strong> class and</li>
+	<li>overrides the <strong>mousePressed</strong> method that is declared in 
+	the <strong>MouseListener </strong>interface.</li>
+</ul>
+<p>You will recall that the <strong>MouseAdapter</strong> class overrides all of 
+the methods of the <strong>MouseListener </strong>interface with empty methods, 
+thus freeing our code from the requirement to override all of those methods.</p>
+<p>When the <strong>mousePressed</strong> method is invoked, an object of type
+<strong>MouseEvent</strong> <em>(known locally as <strong>e</strong>)</em> is 
+passed in as a parameter. </p>
+<h3><a name="Identify_the_event_source">Identify the event source</a></h3>
+<p>The statement in <a href="#Listing_5">Listing 5</a> was used in the <strong>MouseListener </strong>object 
+to determine if the name of the object that generated the event is <strong>
+Frame1</strong>. </p>
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_5">Listing 5.</a> Identify the event source.
+</p>
+<pre>
+if( e.getComponent().getName().compareTo("Frame1") == 0 ){
+</pre>
+</div>
+<p>If it is determined that the name of the component that generated the event 
+is <strong>Frame1</strong>, code is executed to display the coordinates of the 
+mouse pointer on the visual object named <strong>Frame1</strong>. </p>
+<p>Otherwise, an <strong>else</strong> clause is used to display the coordinate 
+information on the visual object named <strong>Frame2</strong>. <em>(No provisions 
+were made for the event to have been generated by any visual objects other than 
+these two.) </em> </p>
+<p>The code to display the coordinate information is essentially the same as was 
+discussed in a similar program in an earlier chapter, so it won't be 
+discussed again here. </p>
+<h3><a name="Cracking_the_MouseEvent_object">Cracking the MouseEvent object</a></h3>
+<p>Now let's take a look at the details of cracking the <strong>MouseEvent</strong> object to 
+obtain the name of the visual component that generated the event. </p>
+<p>The <strong>getComponent</strong> method is a method of the <strong>
+java.awt.event.ComponentEvent</strong> class which, according to the JDK 1.1 
+documentation, <em>"Returns the component where this event originated." </em>It 
+is returned as an object of type <strong>Component </strong>which is acted upon 
+by the <strong>getName</strong> method in <a href="#Listing_5">Listing 5</a>. </p>
+<p>The <strong>getName</strong> method was added to the <strong>
+java.awt.Component</strong> class by JDK 1.1. This method <em>"Gets the name of 
+the component"</em> and returns it as a <strong>String </strong>object. The
+<strong>String </strong>object is acted upon by the <strong>compareTo</strong> 
+method in <a href="#Listing_5">Listing 5</a>. </p>
+<p>The <strong>compareTo</strong> method is a standard method of the <strong>
+String</strong> class, carried forward from JDK 1.0.2, that can be used to 
+compare two <strong>String </strong>objects. It is used to determine if the name 
+of the component matches the String "<em>Frame1"</em>. </p>
+<p>Note that it is also possible to perform tests directly on the <strong>
+MouseEvent </strong>object to match it to a component name. The procedure for 
+doing this will be included in a future chapter. </p>
+<p>By the way, in case you haven't noticed, the <strong>java.awt.event</strong> 
+package is different from the <strong>java.awt</strong> package. The <strong>
+java.awt.event</strong> package was added in JDK 1.1. It can be very confusing 
+if you drop into the <strong>java.awt</strong> package of the documentation when 
+you really need to be in <strong>java.awt.event</strong>. </p>
+<h3><a name="The_WindowListener_Object">The WindowListener Object</a></h3>
+<p>This program also contains a <strong>WindowListener </strong>object, which 
+terminates the program whenever the user closes either of the <strong>Frame
+</strong>objects. Except for the fact that this object is registered to receive
+<strong>Window </strong>events from either of the two <strong>Frame </strong>
+objects, it is no different from similar listeners used in an 
+earlier sample program, and therefore, won't be discussed further here. </p>
+<p>Note that an improved version of this program is presented at the end of this 
+chapter. The improved version does not require the establishment of 
+source object names, and does not require the passing of references to 
+the constructor for the <strong>WindowListener </strong>in order to distinguish 
+between the two sources. You should become familiar with the methodology 
+used in the improved version as well as the methodology used in the following 
+version. </p>
+<h2><a name="Complete_program_listing_for_Event10">Complete program listing for Event10</a></h2>
+<p>A complete listing of the program named <strong>Event10</strong> is provided 
+in <a href="#Listing_6">Listing 6</a>.</p>
+
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_6">Listing 6.</a> The program named Event10.</p>
+<pre>
+/*File Event10.java Copyright, R.G.Baldwin
+This program is designed to be compiled and run under 
+JDK 1.1
+
+The program illustrates the sharing of a single listener 
+object among two different visual components of the same 
+type.
+
+The program detects mouse events occurring on either of two
+different Frame objects.  It distinguishes between the two
+objects on the basis of the component name, and displays 
+the coordinates of a mouse click on whichever object 
+experienced the mouse click.
+
+This program was tested using JDK 1.1.3 under Win95.
+
+Note that when the program starts, the two visual 
+components overlay one another.  It is necessary to move 
+one of them in order to access the other.
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event10 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class Event10
+//=======================================================//
+
+//Subclass Frame in order to override the paint method.
+class MyFrame extends Frame{
+  int xCoor;
+  int yCoor;
+
+  MyFrame(String name){//constructor
+    setTitle("Copyright, R.G.Baldwin");
+    setSize(300,200);
+    //Name used to distinguish between the two objects
+    setName(name);
+  }//end constructor
+  
+  public void paint(Graphics g){
+    //display coordinate information on the visual object
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyFrame
+//=======================================================//
+
+//The following class is used to instantiate a graphical
+// user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create two visual objects of type MyFrame and make 
+    // them visible. Name them Frame1 and Frame2.
+    MyFrame myFrame1 = new MyFrame("Frame1");
+    myFrame1.setVisible(true);
+    
+    MyFrame myFrame2 = new MyFrame("Frame2");
+    myFrame2.setVisible(true);    
+    
+    //Instantiate and register Listener object which will
+    // terminate the program when the user closes either 
+    // window.
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame1.addWindowListener(winProcCmd1);
+    myFrame2.addWindowListener(winProcCmd1);    
+    
+    //Instantiate and register Listener object which will
+    // process mouse events on either MyFrame object.
+    MouseProc mouseProcCmd = 
+                         new MouseProc(myFrame1,myFrame2);
+    myFrame1.addMouseListener(mouseProcCmd);
+    myFrame2.addMouseListener(mouseProcCmd);    
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//This listener class monitors for mouse presses and 
+// displays the coordinates of the mouse pointer when the 
+// mouse is pressed.  The listener object distinguishes 
+// between two different visual objects on the basis of 
+// their component names and displays the coordinate 
+// information on the visual object which generated the 
+// mouse event.
+
+class MouseProc extends MouseAdapter{
+  //save references to the objects here
+  MyFrame refToFrame1,refToFrame2; 
+  
+  MouseProc(MyFrame inFrame1,MyFrame inFrame2){//construct
+    refToFrame1 = inFrame1;//save references to the frames
+    refToFrame2 = inFrame2;
+  }//end constructor
+
+  //Override the mousePressed() method to respond whenever
+  // the mouse is pressed on one of the frame objects.  
+  // Distinguish between the two frame objects using the 
+  // component name and display the coordinates of the 
+  // mouse on the correct object.
+  public void mousePressed(MouseEvent e){
+    if( e.getComponent().getName().compareTo("Frame1") == 0 ){
+      //Get X and Y coordinates of mouse pointer
+      // and store in the Frame object
+      refToFrame1.xCoor = e.getX();
+      refToFrame1.yCoor = e.getY();
+      //display coordinate information
+      refToFrame1.repaint();
+    }else{
+      //Get X and Y coordinates of mouse pointer
+      //and store in the Frame object
+      refToFrame2.xCoor = e.getX();
+      refToFrame2.yCoor = e.getY();
+      //display coordinate information    
+      refToFrame2.repaint();
+    }//end if-else
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+//The following listener is used to terminate the program
+// when the user closes either frame object. Note that 
+// class extends the adapter class
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//
+</pre>
+</div>
+<h1><a name="Another_sample_program">Second sample program</a></h1>
+
+
+
+
+
+<p>A single listener object can be registered to process events of a given class 
+generated by two or more different visual objects. </p>
+<p>Unique names can be assigned to the objects when they are instantiated. </p>
+<p>When an event occurs, the code in the listener object can obtain the name of 
+the visual object that generated the event and use it to distinguish among the 
+objects. </p>
+<p>The name of the object that generated the event can be determined using the 
+statement shown in <a href="#Listing_5">Listing 5</a> where </p>
+<ul>
+	<li><strong>e </strong>is the local name of the object passed into the 
+	low-level event-handling method, and</li>
+	<li><strong>"Frame1"</strong> is a string being tested against the component 
+	name of a visual object that may have generated the event.</li>
+</ul>
+
+
+
+
+
+
+<h2><a name="Changes_relative_to_Event10">Changes relative to Event10</a></h2>
+<p>Although the program named <strong>Event10</strong> discussed above used two 
+visual objects of the same type, there is no reason that the visual objects have 
+to be of the same type, as long as all of the visual objects that share the
+<strong>listener </strong>object are 
+capable of generating events of the event class for which the listener is 
+designed. </p>
+<p>This is illustrated by the program named <strong>Event11</strong> <em>(see 
+<a href="#Listing_7">Listing 7</a>)</em> 
+that modifies the program named <strong>Event10</strong> to use </p>
+<ul>
+	<li>a visual Frame object and</li>
+	<li>a visual Window object,</li>
+</ul>
+<p>instead of two <strong>Frame</strong> objects. </p>
+<p>The screen output is shown in <a href="#Figure_2">Figure 2</a>.</p>
+
+
+<div class="a">
+	<p>
+<a name="Figure_2">Figure 2.</a> Screen output from Event11.</p>
+<p><img alt="A Frame object, a Window object, and the command-line screen showing mousePressed events." height="425" src="event11a.jpg" width="656"/></p>
+	</div>
+
+
+
+
+<p><em>(Note that the </em> <strong><em>Window</em></strong><em> object, shown 
+as the white square in </em><a href="#Figure_2"><em>Figure 2</em></a><em>, doesn't have a banner that 
+allows it to be physically moved with the mouse. Therefore, I called the </em> <strong>
+<em>setBounds</em></strong><em> 
+method on both objects to separate them and to place them in a location on the screen 
+where I could display the white </em> <strong><em>Window</em></strong><em> object against the black background 
+of the command-line window.)</em></p>
+<p>The ability to display the coordinates of mouse clicks was also removed for 
+simplification of the program. Information about mouse clicks is displayed in 
+the command-line window as shown in <a href="#Figure_2">Figure 2</a>. The operation of the program is discussed in the 
+comments in <a href="#Listing_7">Listing 7</a>. </p>
+<p>Note that an improved version of this program is also presented at the end of this 
+chapter. The improved version does not require the establishment of source object names, and does not require the passing of references to 
+the constructor for the Window listener in order to distinguish between the two sources. You should become familiar with the methodology used in the 
+improved version as well as the methodology used in the version shown in 
+<a href="#Listing_7">Listing 7</a>.</p>
+
+
+
+
+
+
+<h2><a name="Complete_program_listing_for_Event11">Complete program listing for 
+Event11</a></h2>
+<p>A complete listing of the program named <strong>Event11</strong> is shown in 
+<a href="#Listing_7">Listing 7</a>.</p>
+
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_7">Listing 7.</a> The program named Event11.</p>
+<pre>
+/*File Event11.java Copyright, R.G.Baldwin
+This program is designed to be compiled and run under 
+JDK 1.1
+
+The program illustrates the sharing of a single listener 
+object between two different visual components of 
+different types.
+
+The program detects mouse events occurring on either a 
+visual Frame object or on a visual Window object.  It 
+distinguishes between the two objects on the basis of the
+component name, and displays a message indicating which
+object generated the event.
+
+Clicking inside the Frame object but outside the Window 
+object produces the following message:
+
+Got mousePressed event from Frame object
+
+Clicking inside the Window object produces the following 
+message:
+
+Got mousePressed event from Window object
+
+Closing the Frame object produces the following message 
+and terminates the program:
+
+Got windowClosing event from Frame object
+
+These results were produced using JDK 1.1.3, running under 
+Windows 95.
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event11 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class Event11
+//=======================================================//
+
+//The following class is used to instantiate a graphical 
+// user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create a visual Frame object and name it Frame
+    Frame myFrame = new Frame();
+    myFrame.setBounds(500,500,200,300);
+    myFrame.setTitle("Copyright, R.G.Baldwin");
+    myFrame.setName("Frame");
+    myFrame.setVisible(true);
+    
+    //Create a visual Window object inside the Frame 
+    // object and name it Window
+    Window myWindow = new Window(myFrame);
+    myWindow.setBounds(380,500,100,100);
+    myWindow.setName("Window");
+    myWindow.setVisible(true);    
+    
+    //Instantiate and register a Listener object which 
+    // will process mouse events on either the Frame 
+    // object or the Window object.
+    MouseProc mouseProcCmd = new MouseProc();
+    myFrame.addMouseListener(mouseProcCmd);
+    myWindow.addMouseListener(mouseProcCmd);    
+
+    //Instantiate and register a Listener object which 
+    // will display a message and terminate the program 
+    // when the user closes the Frame object
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame.addWindowListener(winProcCmd1);
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//This listener class monitors for mouse presses and 
+// displays a message when a mousePressed() event occurs on
+// either the Frame object or the Window object.  The 
+// message identifies which visual object generated
+// the event. The listener object distinguishes between
+// the two visual objects on the basis of their component
+// names.
+
+class MouseProc extends MouseAdapter{
+
+  //Override the mousePressed() method to respond whenever
+  // the mouse is pressed on one of the visual objects.  
+  public void mousePressed(MouseEvent e){
+    if( e.getComponent().getName().compareTo("Frame") 
+                                                   == 0 ){
+      System.out.println(
+              "Got mousePressed event from Frame object");
+    }//end if
+    if( e.getComponent().getName().compareTo("Window") 
+                                                   == 0 ){
+      System.out.println(
+             "Got mousePressed event from Window object");
+    }//end if    
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+//The following listener is used to display a message and
+// terminate the program when the user closes the Frame 
+// object.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.out.println(
+             "Got windowClosing event from Frame object");
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//
+</pre>
+</div>
+<h1><a name="Review">Review</a></h1>
+<h2><a name="Question_1">Question 1</a></h2>
+<p>Write a Java application that displays two <strong>Frame</strong> objects on 
+the screen. Each object has a width of 300 pixels and a height of 200 pixels.
+</p>
+<p>One object is located in the upper left-hand corner of the screen. The top 
+left-hand corner of the other object barely touches the bottom right-hand corner 
+of the first object as shown in <a href="#Figure_3">Figure 3</a>. </p>
+
+
+<div class="a">
+	<p>
+<a name="Figure_3">Figure 3.</a> Screen output for Question 1.
+</p>
+<p><img alt="See text description immediately above the image." height="405" src="sampprog120a.jpg" width="605"/></p>
+</div>
+
+
+
+
+<p>Make your name and the name of each object appear in the banner at the top of 
+each object. Do not assign names to the objects. </p>
+<p>Cause the two objects to share a single listener object to respond to mouse 
+events. </p>
+<p>Whenever the mouse is pressed internal to either object, the coordinates of 
+the mouse pointer are displayed near the pointer on that object with the 
+horizontal coordinate being displayed first followed by the vertical coordinate. 
+The two coordinate values are separated by a comma and a space. </p>
+<p>Also cause the two objects to share a single listener object that will 
+terminate the program whenever the user clicks the "close" button on either 
+object. </p>
+<p>Make certain that your application terminates and returns control to the 
+operating system when the user clicks on the "close" button in the upper 
+right-hand corner of the object. </p>
+<p>Solution - See the program in <a href="#Listing_8">Listing 8</a>.</p>
+
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_8">Listing 8.</a> Solution to Question 1.</p>
+<pre>
+/*File SampProg120.java from chapter 82
+Copyright, R.G.Baldwin
+
+Without viewing the solution that follows, write a Java
+application that displays two Frame objects on the screen.
+
+Each object has a width of 300 pixels and a height of 200
+pixels.
+
+One object is located in the upper left-hand corner of the
+screen.  The top left-hand corner of the other object barely
+touches the bottom right-hand corner of the first object.
+
+Make your name and the name of each object appear in the
+banner at the top of each object.
+
+Do not assign names to the objects.
+
+Cause the two objects to share a single Listener object
+to respond to mouse events.
+
+Whenever the mouse is pressed internal to either object,
+the coordinates of the mouse pointer are displayed near
+the pointer on that object with the horizontal coordinate
+being displayed first followed by the vertical coordinate.
+The two coordinate values are separated by a comma and a
+space.
+
+Also cause the two objects to share a single Listener
+object that will terminate the program whenever the user
+clicks the "close" button on either object.
+
+Make certain that your application terminates and returns
+control to the operating system when the user clicks on 
+the "close" button in the upper right-hand corner of the 
+object.
+
+*/
+//=========================================================
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg120 {
+  public static void main(String[] args){
+    GUI gui = new GUI();
+  }//end main
+}//end class SampProg120
+//---------------------------------------------------------
+
+//Subclass Frame in order to override the paint method.
+class MyFrame extends Frame{
+  int xCoor;
+  int yCoor;
+
+  MyFrame(){//constructor
+    setTitle("Baldwin " + this.getName());
+    setSize(300,200);
+  }//end constructor
+  
+  public void paint(Graphics g){//override paint() method
+    //display coordinate information on the object
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyFrame
+//---------------------------------------------------------
+
+class GUI {
+  public GUI(){//constructor
+    //Create two visual objects of type MyFrame, specify
+    // their locations, and make them visible.
+    MyFrame myFrame1 = new MyFrame();
+    myFrame1.setLocation(new Point(0,0));
+    myFrame1.setVisible(true);
+    
+    MyFrame myFrame2 = new MyFrame();
+    myFrame2.setLocation(new Point(300,200));    
+    myFrame2.setVisible(true); 
+    
+    //Instantiate and register Listener object which will 
+    // terminate the program when the user closes either 
+    // window.
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame1.addWindowListener(winProcCmd1);
+    myFrame2.addWindowListener(winProcCmd1);    
+    
+    //Instantiate and register Listener object which will 
+    // process mouse events on either MyFrame object.
+    MouseProc mouseProcCmd = 
+      new MouseProc(myFrame1,myFrame2);
+    myFrame1.addMouseListener(mouseProcCmd);
+    myFrame2.addMouseListener(mouseProcCmd);    
+  }//end constructor
+}//end class GUI definition
+//---------------------------------------------------------
+
+//This listener class monitors for mouse presses and 
+// displays the coordinates of the mouse pointer when the 
+// mouse is pressed.  The listener object distinguishes 
+// between two different visual objects on the basis of 
+// their component names and displays the coordinate 
+// information on the visual object which generated the 
+// mouse event.
+
+class MouseProc extends MouseAdapter{
+  //save references to the objects here
+  MyFrame refToFrame1,refToFrame2;
+  
+  MouseProc(MyFrame inFrame1,MyFrame inFrame2){//constructor
+    refToFrame1 = inFrame1;//save references to the frames
+    refToFrame2 = inFrame2;
+  }//end constructor
+
+  //Override the mousePressed() method to respond whenever 
+  // the mouse is pressed on one of the frame objects.  
+  // Distinguish between the two frame objects using the 
+  // component name and display the coordinates of the 
+  // mouse on the correct object.
+  public void mousePressed(MouseEvent e){
+     if( e.getComponent().getName().
+          compareTo(refToFrame1.getName()) == 0)
+    { 
+      refToFrame1.xCoor = e.getX();
+      refToFrame1.yCoor = e.getY();
+      //display coordinates on Frame1
+      refToFrame1.repaint();
+    }else{ 
+      refToFrame2.xCoor = e.getX();
+      refToFrame2.yCoor = e.getY();
+      //display coordinates on Frame2
+      refToFrame2.repaint();
+    }//end if-else
+  }//end mousePressed()
+}//end class MouseProc
+//---------------------------------------------------------
+
+//The following listener is used to terminate the program 
+// when the user closes either frame object.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//---------------------------------------------------------
+</pre>
+</div>
+<h2><a name="Question_2">Question 2</a></h2>
+
+
+
+
+
+<p>Write a Java application that displays two <strong>Frame</strong> objects on 
+the screen. Each object has a width of 300 pixels and a height of 200 pixels.
+</p>
+<p>One object is located in the upper left-hand corner of the screen. The top 
+left-hand corner of the other object barely touches the bottom right-hand corner 
+of the first object as shown in <a href="#Figure_4">Figure 4</a>.</p>
+
+
+
+
+
+<p>Place a red <strong>Panel</strong> object in the upper-left quadrant 
+of the second <strong>Frame</strong> object as shown in <a href="#Figure_4">Figure 4</a>. <em>(Note that 
+the red <strong>Panel</strong> is partially covered by the blue banner at the 
+top of the <strong>Frame</strong>.)</em></p>
+
+
+<div class="a">
+	<p>
+<a name="Figure_4">Figure 4.</a> Screen output for Question 2.</p>
+<p><img alt="See the description immediately above the image." height="411" src="sampprog121a.jpg" width="607"/></p>
+</div>
+
+
+
+
+<p>Make your name and the name of each <strong>Frame</strong> object appear in the banner at the 
+top of each <strong>Frame</strong> object. </p>
+<p>Cause the first <strong>Frame</strong> object and the <strong>Panel</strong> object to share a single listener 
+object to respond to mouse events. Do not allow the second <strong>Frame</strong> object 
+<em>(which 
+contains the </em><strong><em>Panel</em></strong><em> object)</em> to share the listener object for mouse events. </p>
+<p>Whenever the mouse is pressed internal to the first <strong>Frame</strong> object, or on the 
+red portion of the <strong>Panel</strong> object, the coordinates of the mouse pointer are 
+displayed near the pointer on that object with the horizontal coordinate being 
+displayed first followed by the vertical coordinate. The two coordinate values 
+are separated by a comma and a space. </p>
+<p>Whenever the mouse is pressed internal to the second <strong>Frame</strong> object, but not on 
+the red <strong>Panel</strong> object, coordinate values are not displayed. </p>
+<p>Also cause the two <strong>Frame</strong> objects to share a single listener object that will 
+terminate the program whenever the user clicks the "close" button on either 
+<strong>Frame</strong> object. </p>
+<p>Make certain that your application terminates and returns control to the 
+operating system when the user clicks on the "close" button in the upper 
+right-hand corner of either <strong>Frame</strong> object. </p>
+<p>Solution - See the program in <a href="#Listing_9">Listing 9</a>.</p>
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_9">Listing 9.</a> Solution to Question 2.</p>
+<pre>
+/*File SampProg121.java from chapter 82
+Copyright, R.G.Baldwin
+
+Without viewing the solution that follows, write a Java
+application that displays two Frame objects on the screen.
+Place a red Panel object in the upper-left quadrant of the
+second Frame object.
+
+Each Frame object has a width of 300 pixels and a height 
+of 200 pixels.
+
+One Frame object is located in the upper left-hand corner 
+of the screen.  The top left-hand corner of the second
+Frame object barely touches the bottom right-hand corner of
+the first Frame object.
+
+Make your name and the name of each Frame object appear in 
+the banner at the top of each Frame object.
+
+Cause the first Frame object and the Panel object to 
+share a single Listener object to respond to mouse events.
+Do not allow the second Frame object to share the Listener
+object for mouse events.
+
+Whenever the mouse is pressed internal to the first Frame
+object, or on the red portion of the Panel object, the 
+coordinates of the mouse pointer are displayed near
+the pointer on that object with the horizontal coordinate
+being displayed first followed by the vertical coordinate.
+The two coordinate values are separated by a comma and a
+space.
+
+Whenever the mouse is pressed internal to the second Frame
+object, but not on the red Panel object, coordinate values
+are not displayed.
+
+Also cause the two Frame objects to share a single Listener
+object that will terminate the program whenever the user
+clicks the "close" button on either Frame object.
+
+Make certain that your application terminates and returns
+control to the operating system when the user clicks on 
+the "close" button in the upper right-hand corner of either
+Frame object.
+
+*/
+//=========================================================
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg121 {
+  public static void main(String[] args){
+    GUI gui = new GUI();
+  }//end main
+}//end class SampProg121
+//---------------------------------------------------------
+
+//Subclass Frame in order to override the paint method.
+class MyFrame extends Frame{
+  int xCoor;
+  int yCoor;
+
+  MyFrame(){//constructor
+    setTitle("Baldwin " + this.getName());
+    setSize(300,200);
+  }//end constructor
+  
+  public void paint(Graphics g){//override paint() method
+    //display coordinate information on the object
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyFrame
+//---------------------------------------------------------
+
+//Subclass Panel in order to override the paint method.
+class MyPanel extends Panel{
+  int xCoor;
+  int yCoor;
+
+  MyPanel(){//constructor
+    setBounds(new Rectangle(0,0,150,100));  
+    setBackground(Color.red);
+  }//end constructor
+  
+  public void paint(Graphics g){//override paint() method
+    //display coordinate information on the object
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyPanel
+//---------------------------------------------------------
+
+class GUI {
+  public GUI(){//constructor
+    //Instantiate an object of type MyPanel
+    MyPanel myPanel = new MyPanel();    
+  
+    //Instantiate two objects of type MyFrame, specify
+    // their locations, and make them visible.  Place the
+    // MyPanel object in the second MyFrame object.
+    MyFrame myFrame1 = new MyFrame();
+    myFrame1.setLocation(new Point(0,0));
+    myFrame1.setVisible(true);
+    
+    MyFrame myFrame2 = new MyFrame();
+    myFrame2.setLayout(null);
+    myFrame2.setLocation(new Point(300,200));
+    myFrame2.add(myPanel);
+    myFrame2.setVisible(true);
+   
+    //Instantiate and register a Listener object which will 
+    // terminate the program when the user closes either 
+    // window.
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame1.addWindowListener(winProcCmd1);
+    myFrame2.addWindowListener(winProcCmd1);    
+    
+    //Instantiate and register a Listener object which will 
+    // process mouse events on either the MyFrame object
+    // or the myPanel object.
+    MouseProc mouseProcCmd = 
+      new MouseProc(myFrame1,myPanel);
+    myFrame1.addMouseListener(mouseProcCmd);
+    myPanel.addMouseListener(mouseProcCmd);    
+    
+  }//end constructor
+}//end class GUI definition
+//---------------------------------------------------------
+
+//This listener class monitors for mouse presses and 
+// displays the coordinates of the mouse pointer when the 
+// mouse is pressed.  The listener object distinguishes 
+// between two different visual objects on the basis of 
+// their component names and displays the coordinate 
+// information on the visual object which generated the 
+// mouse event.
+
+class MouseProc extends MouseAdapter{
+  //save references to the objects here
+  MyFrame refToFrame1;
+  MyPanel refToPanel;
+  
+  MouseProc(MyFrame inFrame1,MyPanel inPanel){//constructor
+    refToFrame1 = inFrame1;//save references to the frames
+    refToPanel = inPanel;
+  }//end constructor
+
+  //Override the mousePressed() method to respond whenever 
+  // the mouse is pressed on one of the frame objects.  
+  // Distinguish between the two frame objects using the 
+  // component name and display the coordinates of the 
+  // mouse on the correct object.
+  public void mousePressed(MouseEvent e){
+     if( e.getComponent().getName().
+          compareTo(refToFrame1.getName()) == 0)
+    { //display coordinates on the Frame object
+      refToFrame1.xCoor = e.getX();
+      refToFrame1.yCoor = e.getY();
+      refToFrame1.repaint();
+    }else{//display coordinates on the Panel object
+      refToPanel.xCoor = e.getX();
+      refToPanel.yCoor = e.getY();
+      refToPanel.repaint();
+    }//end if-else
+  }//end mousePressed()
+}//end class MouseProc
+//---------------------------------------------------------
+
+//The following listener is used to terminate the program 
+// when the user closes either frame object.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//---------------------------------------------------------
+</pre>
+</div>
+<h2><a name="Question_3">Question 3</a></h2>
+<p>Rewrite the program named <strong>Event10</strong> and eliminate the 
+requirement to pass parameters to the constructors for the event listener 
+objects. </p>
+<p>Solution - See the program in <a href="#Listing_10">Listing 10</a>.</p>
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_10">Listing 10.</a> Solution to Question 3.</p>
+<pre>
+/*File Event10A.java Copyright, R.G.Baldwin
+Rewrite the program named Event10 and eliminate the 
+requirement to pass parameters to the constructors for the
+event Listener objects.
+
+This program is designed to be compiled and run under 
+JDK 1.1
+
+The program illustrates the sharing of a single listener 
+object among two different visual components of the same 
+type.
+
+The program detects mouse events occurring on either of two
+different Frame objects.  It distinguishes between the two 
+objects and displays the coordinates of a mouse click on 
+whichever object experienced the mouse click.
+
+These results were produced using JDK 1.1.3 running under 
+Windows 95.
+
+Note that when the program starts, the two visual 
+components overlay one another.  It is necessary to move 
+one of them in order to access the other.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event10A {
+  public static void main(String[] args){
+    //instantiate a Graphical User Interface object
+    GUI gui = new GUI();
+  }//end main
+}//end class Event10A
+//=======================================================//
+
+//Subclass Frame in order to override the paint method.
+class MyFrame extends Frame{
+  int xCoor;
+  int yCoor;
+
+  MyFrame(){//constructor
+    setTitle("Copyright, R.G.Baldwin");
+    setSize(300,200);
+  }//end constructor
+  
+  public void paint(Graphics g){
+    //display coordinate information on the visual object
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyFrame
+//=======================================================//
+
+//The following class is used to instantiate a graphical 
+// user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create two visual objects of type MyFrame and make 
+    // them visible.
+    MyFrame myFrame1 = new MyFrame();
+    myFrame1.setVisible(true);
+    
+    MyFrame myFrame2 = new MyFrame();
+    myFrame2.setVisible(true);    
+    
+    //Instantiate and register Listener object which will 
+    // terminate the program when the user closes either 
+    // window.
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame1.addWindowListener(winProcCmd1);
+    myFrame2.addWindowListener(winProcCmd1);    
+    
+    //Instantiate and register Listener object which will 
+    // process mouse events on either MyFrame object.
+    MouseProc mouseProcCmd = new MouseProc();
+    myFrame1.addMouseListener(mouseProcCmd);
+    myFrame2.addMouseListener(mouseProcCmd);    
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//This listener class monitors for mouse presses and 
+// displays the coordinates of the mouse pointer when the 
+// mouse is pressed.  The listener object distinguishes 
+// between two different visual objects and displays the 
+// coordinate information on the visual object which 
+// generated the mouse event.
+
+class MouseProc extends MouseAdapter{
+  //Override the mousePressed() method to respond whenever 
+  // the mouse is pressed on one of the frame objects.  
+  public void mousePressed(MouseEvent e){
+    //Get X and Y coordinates of mouse pointer and store in
+    // the Frame object.  Distinguish between the two
+    // components on the basis of the source of the event.
+    // Note that the following two formulations for X and Y
+    // can be used to produce the same results in this
+    // situation.
+    ((MyFrame)e.getComponent()).xCoor = e.getX();
+    ((MyFrame)e.getSource()).yCoor = e.getY();
+    
+    //display coordinate information   
+    e.getComponent().repaint();
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+//The following listener is used to terminate the program 
+// when the user closes either frame object.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//
+
+</pre>
+</div>
+<h2><a name="Question_4">Question 4</a></h2>
+
+
+
+
+
+
+
+
+
+
+<p>Rewrite the program named <strong>Event11</strong> and eliminate the requirement to pass 
+parameters to the constructor for the listener objects. </p>
+<p>Solution - See the program in <a href="#Listing_11">Listing 11</a>.</p>
+
+
+
+
+
+
+
+
+
+
+<div class="a">
+	<p>
+<a name="Listing_11">Listing 11.</a> Solution to Question 4.</p>
+<pre>
+/*File Event11A.java Copyright, R.G.Baldwin
+Rewrite the program named Event11 and eliminate the 
+requirement to pass parameters to the constructor for the
+listener objects.
+
+This program is designed to be compiled and run under 
+JDK 1.1
+
+The program illustrates the sharing of a single listener 
+object between two different visual components of different
+types.
+
+The program detects mouse events occurring on either a 
+visual Frame object or on a visual Window object.  It 
+distinguishes between the two objects and displays a 
+message indicating which object generated the event.
+
+Clicking inside the Frame object but outside the Window 
+object produces the following message:
+
+Got mousePressed event from Frame object
+
+Clicking inside the Window object produces the following 
+message:
+
+Got mousePressed event from Window object
+
+Closing the Frame object produces the following message and
+terminates the program:
+
+Got windowClosing event from Frame object
+
+These results were produced using JDK 1.1.3 running under 
+Windows 95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event11A {
+  public static void main(String[] args){
+    //instantiate a Graphical User Interface object
+    GUI gui = new GUI();
+  }//end main
+}//end class Event11A
+//=======================================================//
+
+//The following class is used to instantiate a graphical 
+// user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create a visual Frame object
+    Frame myFrame = new Frame();
+    myFrame.setSize(200,300);
+    myFrame.setTitle("Copyright, R.G.Baldwin");
+    myFrame.setVisible(true);
+    
+    //Create a visual Window object inside the Frame object
+    Window myWindow = new Window(myFrame);
+    myWindow.setSize(100,100);
+    myWindow.setVisible(true);    
+    
+    //Instantiate and register a Listener object which will
+    // process mouse events on either the Frame object or 
+    // the Window object.
+    MouseProc mouseProcCmd = new MouseProc();
+    myFrame.addMouseListener(mouseProcCmd);
+    myWindow.addMouseListener(mouseProcCmd);    
+
+    //Instantiate and register a Listener object which will
+    // display a message and terminate the program when the
+    // user closes the Frame object
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame.addWindowListener(winProcCmd1);
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//This listener class monitors for mouse presses and 
+// displays a message when a mousePressed() event occurs on
+// either the Frame object or the Window object.  The 
+// message identifies which visual object generated the 
+// event. The listener object distinguishes between the two
+// visual objects.
+
+class MouseProc extends MouseAdapter{
+
+  //Override the mousePressed() method to respond whenever
+  // the mouse is pressed on one of the visual objects.  
+  public void mousePressed(MouseEvent e){
+    System.out.print("Got mousePressed event from ");
+    if(e.getSource().toString().indexOf("Frame") &gt;= 0)
+      System.out.println("Frame object");
+    else
+      System.out.println("Window object");
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+//The following listener is used to display a message and 
+// terminate the program when the user closes the Frame 
+// object.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.out.println(
+              "Got windowClosing event from Frame object");
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//
+</pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong> </p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java082 Sharing a Listener Object Among 
+					Visual Components </li>
+					<li>File: Java082.htm</li>
+					<li>Originally published: 1997</li>
+					<li>Revised: 04/19/22</li>
+
+				</ul>
+
+				</div>
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

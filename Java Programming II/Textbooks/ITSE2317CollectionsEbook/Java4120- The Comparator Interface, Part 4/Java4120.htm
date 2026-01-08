@@ -1,0 +1,766 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4120</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4120: The Comparator Interface, Part 4</h1>
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> 
+	<ul>
+		<li><a href="#An_array_is_a_container">An array is a container</a></li>
+		<li><a href="#An_opportune_time">An opportune time</a></li>
+	</ul>
+	</li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+<li><a href="#Beginning_with_a_quiz_">Beginning with a quiz</a> 
+<ul>
+	<li><a href="#Similar_to_previous_programs">Similar to previous programs</a></li>
+	<li><a href="#A_new_Vector_object_">A new Vector object</a></li>
+	<li><a href="#A_Vector_is_a_List_">A Vector is a List</a> </li>
+	<li><a href="#The_fillIt_method_">The fillIt method</a></li>
+	<li><a href="#Iteration_on_a_Vector_">Iteration on a Vector</a></li>
+	<li><a href="#The_output_">The output
+</a>
+</li>
+</ul>
+</li>
+<li><a href="#The_toArray_method">The toArray method</a><ul>
+	<li><a href="#The_contract_">The contract</a></li>
+	<li><a href="#Elements_are_returned_in_ascending_index_order">Elements are returned in ascending index order</a></li>
+	<li><a href="#A_safe_array_">A "safe" array</a></li>
+	<li><a href="#Displaying_the_contents_of_the_array_">Display the contents of the array</a></li>
+</ul>
+</li>
+<li><a href="#Sorting_the_array_into_natural_order">Sorting the array into natural order</a><ul>
+	<li><a href="#The_Comparable_interface_and_polymorphic_behavior_">The Comparable interface and polymorphic behavior</a></li>
+	<li><a href="#Display_the_sorted_array_data_">Display the sorted array data</a></li>
+	<li><a href="#The_natural_order_for_String_objects">The natural order for String objects</a></li>
+</ul>
+</li>
+<li><a href="#Sort_the_array_with_a_Comparator_">Sort the array with a Comparator</a><ul>
+	<li><a href="#What_does_Oracle_have_to_say_about_this_">What does Oracle have to say about this?</a></li>
+	<li><a href="#TheComparator_class_">The class named TheComparator</a></li>
+	<li><a href="#Display_the_array_contents_again">Display the array contents again</a></li>
+	<li><a href="#Could_have_sorted_differently_">Could have sorted differently</a></li>
+</ul>
+</li>
+<li><a href="#Display_the_collection_data_again">Display the collection data again</a></li>
+<li><a href="#The_bottom_line">The bottom line</a></li>
+
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>This chapter shows you how to extract the contents of a collection into an 
+array, and how to use a <strong>Comparator</strong> object to sort the contents 
+of the array into reverse natural order. The chapter also shows you how to sort 
+the contents of the array into natural order without the use of a <strong>
+Comparator</strong> object.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. The program named Comparator 05. </li>
+	<li><a href="#Listing_2">Listing 2</a>. A new Vector object. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Call the fillIt method. </li>
+	<li><a href="#Listing_4">Listing 4</a>. The fillIt method. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Iteration on a Vector. </li>
+	<li><a href="#Listing_6">Listing 6</a>. Call the toArray method. </li>
+	<li><a href="#Listing_7">Listing 7</a>. Display the contents of the array. </li>
+	<li><a href="#Listing_8">Listing 8</a>. Sorting the array into natural order. </li>
+	<li><a href="#Listing_9">Listing 9</a>. Display the sorted array data. </li>
+	<li><a href="#Listing_10">Listing 10</a>. Sort the array with a Comparator. </li>
+	<li><a href="#Listing_11">Listing 11</a>. The class named TheComparator. </li>
+	<li><a href="#Listing_12">Listing 12</a>. Display the contents again.</li>
+	<li><a href="#Listing_13">Listing 13</a>. Display the collection data again.</li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>The primary purpose of recent chapters in this series was to teach you about the 
+interactions between the <b>Comparator</b> interface and the Collections 
+Framework. </p>
+<p>This chapter departs somewhat from that primary purpose and teaches 
+you how to use a <b>Comparator</b> object to sort the contents of an array 
+containing references to objects. Technically speaking, an array is not part of 
+the core Collections Framework. However, it is definitely a first cousin to the 
+Framework. </p>
+<h2><a name="An_array_is_a_container">An array is a container</a> </h2>
+<p>As you should already know, an array is a container that can be used to 
+store a collection of primitive values or a collection of references to objects. </p>
+<p>The <b>Collection</b> interface declares a method named <b>toArray</b>, which 
+can be called on a <b>Collection</b> object to <i>&quot;return an array containing 
+all of the elements in this collection whose runtime type is that of the 
+specified array&quot;</i>. </p>
+<h2><a name="An_opportune_time">An opportune time</a></h2>
+<p>Since you are studying this series of chapters to learn about the uses of 
+the <b>Comparator</b> interface, this seems like an opportune time to teach you 
+how to get an array from a collection, and how to use the <b>Comparator</b> 
+interface to sort the contents of the array. <i>(While I&#39;m at it, I will also 
+teach you how to sort the elements in an array of object references into natural 
+order without the use of a Comparator object.)</i> </p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Beginning_with_a_quiz_">Beginning with a quiz </a> </h2>
+<p>See if you can write down the output 
+produced by the program shown in <a href="#Listing_1">Listing 1</a>. </p>
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. The program named Comparator 05.</p>
+<pre>//File Comparator05.java
+//Copyright, R.G.Baldwin
+import java.util.*;
+import java.io.Serializable;
+
+public class Comparator05{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparator05
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+    Object[] array;
+
+    ref = new Vector();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    System.out.println(&quot;Collection data&quot;);
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+    System.out.println();
+
+    array = ref.toArray();
+    System.out.println(&quot;Raw array data&quot;);
+    display(array);
+
+    //Sort the array into natural order
+    // and display it.
+    Arrays.sort(array);
+    System.out.println(&quot;Natural order sorted &quot; +
+                                  &quot;array data&quot;);
+    display(array);
+
+    //Sort the array into custom order
+    // and display it.
+    Arrays.sort(array, new TheComparator());
+    System.out.println(&quot;Custom order sorted &quot; +
+                                 &quot;array data&quot;);
+    display(array);
+
+    iter = ref.iterator();
+    System.out.println(&quot;Collection data&quot;);
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+
+  static void display(Object[] array){
+    for(int i = 0; i &lt; array.length;i++){
+      System.out.print(array[i] + &quot; &quot;);
+    }//end for loop
+    System.out.println();
+  }//end display()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+}//end class Populator
+
+class TheComparator implements Comparator, Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    int result = ((String)o1).compareTo(((String)o2));
+    return result*(-1);
+  }//end compare()
+}//end class TheComparator
+</pre>
+
+</div>
+
+
+
+
+<p>If you wrote down the following for the program output, you already 
+understand most of the material covered in this chapter and you can probably skip 
+this chapter and move on to the next chapter.</p>
+
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				<pre>Collection data
+Joe Bill Tom JOE BILL TOM 
+Raw array data
+Joe Bill Tom JOE BILL TOM 
+Natural order sorted array data
+BILL Bill JOE Joe TOM Tom 
+Custom order sorted array data
+Tom TOM Joe JOE Bill BILL 
+Collection data
+Joe Bill Tom JOE BILL TOM</pre>
+</div>
+<p>If you didn&#39;t write down the correct output for the program in <a href="#Listing_1">Listing 1</a>, you 
+should probably continue with your study of this chapter. </p>
+<h3><a name="Similar_to_previous_programs">Similar to previous programs</a> 
+</h3>
+<p>Although this program is somewhat more complex, the overall structure of this 
+program is similar to programs that I have discussed in previous chapters. 
+Therefore, I will concentrate on those aspects of this program that 
+differentiate it from the programs in previous chapters. </p>
+<h3><a name="A_new_Vector_object_">A new Vector object </a> </h3>
+<p>The code in <a href="#Listing_2">Listing 2</a> instantiates a new object of the <b>Vector</b> class 
+and stores a reference to that object in the variable named <b>ref</b>.
+</p>
+
+<!--``1List02-->
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. A new Vector 
+				object.
+
+				</p>
+
+				<pre>    ref = new Vector();
+</pre>
+</div>
+<!--``2-->
+<p>The <b>Vector</b> class was part of Java long before the Collections 
+Framework was released. However, with the release of the Collections Framework, 
+the <b>Vector</b> class was upgraded to implement the <b>Collection </b>
+interface and the <b>List</b> interface. </p>
+<h3><a name="A_Vector_is_a_List_">A Vector is a List </a> </h3>
+<p>Therefore, a <b>Vector</b> is a <b>List</b>, and adheres to the various 
+contracts of the <b>List</b> interface. For example, since it is not a <b>Set</b>, 
+it doesn&#39;t prohibit duplicate elements. Because it is a <b>List</b>, it is an <i>
+ordered</i> collection. The position of each element in the collection is 
+determined by a numeric index associated with the element and is independent of 
+the value of the element. </p>
+<h3><a name="The_fillIt_method_">The fillIt method </a> </h3>
+<p>As has been the case in several of the programs in previous chapters, the code 
+in <a href="#Listing_3">Listing 3</a> passes the <b>Vector</b> object&#39;s reference to a method named <b>
+fillIt</b> where the <b>Vector</b> is populated with the names of several 
+people. </p>
+
+<!--``1List03-->
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. Call the 
+				fillIt method.</p>
+<pre>    Populator.fillIt(ref);
+</pre>
+</div>
+<!--``2-->
+<p>The code for the <b>fillIt</b> method is shown in <a href="#Listing_4">Listing 4</a>. As you can see, 
+the names were added to the collection in no particular order relative to their 
+values. <i>(The add method for the Vector class simply adds each new element to 
+the end of the list.)</i> </p>
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. The fillIt 
+				method.</p>
+<pre>class Populator{
+  public static void fillIt(
+                       Collection ref){
+    ref.add(&quot;Joe&quot;);
+    ref.add(&quot;Bill&quot;);
+    ref.add(&quot;Tom&quot;);
+    ref.add(&quot;JOE&quot;);
+    ref.add(&quot;BILL&quot;);
+    ref.add(&quot;TOM&quot;);
+  }//end fillIt()
+}//end class Populator
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Iteration_on_a_Vector_">Iteration on a Vector </a> </h3>
+<p>When an iterator is used to traverse the elements in a <b>Vector</b> 
+collection, the elements are delivered by the iterator in ascending index order, 
+beginning with the element stored at index 0. </p>
+<p>The code in <a href="#Listing_5">Listing 5</a> gets and uses an iterator to 
+display the contents of the populated collection. </p>
+
+<!--``1List05-->
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. Iteration on a 
+				Vector.
+
+				</p>
+
+				<pre>    iter = ref.iterator();
+    System.out.println(&quot;Collection data&quot;);
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+<h3><a name="The_output_">The output </a> </h3>
+<p>The code in <a href="#Listing_5">Listing 5</a> produces the following output: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				<pre>Collection data
+Joe Bill Tom JOE BILL TOM</pre>
+</div>
+<p>As you can see, this is the same order in which the names were added to the 
+collection by the <b>fillIt</b> method in <a href="#Listing_4">Listing 4</a>. </p>
+<h2><a name="The_toArray_method">The toArray method</a> </h2>
+<p>The code in <a href="#Listing_6">Listing 6</a> is new to this chapter. This code 
+calls the <strong>toArray</strong> method on the <strong>Vector</strong> object 
+to extract the contents 
+of the collection and store the elements in an array object of type <b>Object</b>. </p>
+
+<!--``1List06-->
+	<div class="a">
+		<p>
+<a name="Listing_6">Listing 6</a>. Call the 
+				toArray method.</p>
+<pre>    array = ref.toArray();
+</pre>
+</div>
+<!--``2-->
+	<p><em>(Recall that the variable named </em><strong><em>array</em></strong><em> 
+	was declared as a reference to an array object of type </em><strong><em>
+	Object</em></strong><em> in </em><a href="#Listing_1"><em>Listing 1</em></a><em>.)</em></p>
+
+<h3>
+
+<a name="The_contract_">The contract </a> 
+</h3>
+<p>According to the documentation for the <b>Vector</b> class, this version of 
+the <b>toArray</b> method: </p>
+<blockquote>
+	<i>&quot;Returns an array containing all of the elements in this Vector in the 
+	correct order.&quot;</i></blockquote>
+<p>The documentation for the <b>toArray</b> method of the <b>Collection</b> 
+interface is a little more verbose, reading partially as follows: </p>
+<blockquote>
+	<i>&quot;Returns an array containing all of the elements in this collection. If 
+	the collection makes any guarantees as to what order its elements are 
+	returned by its iterator, this method must return the elements in the same 
+	order.</i></blockquote>
+<h3><a name="Elements_are_returned_in_ascending_index_order">Elements are returned in ascending index order</a> 
+</h3>
+<p>By default, the iterator for a <b>Vector</b> returns its elements in ascending index 
+order. Therefore, the <b>toArray</b> method for a <b>Vector</b> object must 
+return the elements in the same order. </p>
+<h3><a name="A_safe_array_">A &quot;safe&quot; array </a> </h3>
+<p>Also, according to Oracle: </p>
+<blockquote>
+	<i>&quot;The returned array will be &quot;safe&quot; in that no references to it are 
+	maintained by this collection. ... The caller is thus free to modify the 
+	returned array.&quot;</i></blockquote>
+<p>In the code in <a href="#Listing_6">Listing 6</a> above, the returned reference to an array object is 
+assigned to a reference variable that previously contained null. Following the 
+execution of the <b>toArray</b> method, that reference variable refers to an 
+array object of type <b>Object</b> containing the same elements as the <b>Vector</b> 
+collection, in ascending index order. </p>
+<blockquote><i>(Regarding the concept of a &quot;safe&quot; array, it is easy to demonstrate that 
+the elements in the array refer to the same objects referred to by the elements 
+in the Vector. Thus, using the references stored in the array to modify the 
+objects to which they refer also modifies the objects referred to by the 
+elements stored in the Vector. In other words, the elements in the array are 
+copies of the elements in the Vector. The elements in the array refer to the 
+original objects, and do not refer to copies (or clones) of those objects. As usual when 
+dealing with multiple references to objects, care should be taken to avoid 
+inadvertently corrupting those objects.)</i> </blockquote>
+<h3><a name="Displaying_the_contents_of_the_array_">Display the contents of the array
+</a> </h3>
+<p>The code in <a href="#Listing_7">Listing 7</a> passes the array object&#39;s reference to a method named
+<b>display</b> that displays the contents of the array in ascending index order. </p>
+<!--``1List07-->
+	<div class="a">
+		<p>
+<a name="Listing_7">Listing 7</a>. Display the 
+				contents of the array.</p>
+<pre>    System.out.println(&quot;Raw array data&quot;);
+    display(array);
+</pre>
+</div>
+<!--``2-->
+<p>The output produced by the code in <a href="#Listing_7">Listing 7</a> is as shown below: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				<pre>Raw array data
+Joe Bill Tom JOE BILL TOM</pre>
+</div>
+<p>As you can see, this is the same data, in the same order, as the contents of 
+the collection displayed earlier. </p>
+<blockquote><i>(The method named <strong>display</strong> is a simple 
+utility method that I won&#39;t discuss here because of its simplicity. You can 
+view the display method in its entirety in <a href="#Listing_1">Listing 1</a>.)</i> 
+</blockquote>
+<h2><a name="Sorting_the_array_into_natural_order">Sorting the array into <i>natural order</i></a> 
+</h2>
+<p>The code in <a href="#Listing_8">Listing 8</a> is also new to this chapter. This code uses one of the 
+overloaded <b>sort</b> methods of the <b>Arrays</b> class to sort the contents 
+of the array into <i>natural order</i>. </p>
+<!--``1List08-->
+	<div class="a">
+		<p>
+<a name="Listing_8">Listing 8</a>. Sorting the 
+				array into natural order.
+
+				</p>
+
+				<pre>    Arrays.sort(array);
+</pre>
+</div>
+<!--``2-->
+<p>Here is part of what Oracle has to say about the <b>Arrays</b> class: </p>
+<blockquote>
+	<i>&quot;This class contains various methods for manipulating arrays (such as 
+	sorting and searching).&quot;</i></blockquote>
+<p>The class contains many overloaded versions of the <b>sort</b> method. Here 
+is part of what Oracle has to say about the version of the <b>sort</b> method 
+used in <a href="#Listing_8">Listing 8</a> above: </p>
+<blockquote>
+	<i>&quot;Sorts the specified array of objects into ascending order, according to 
+	the natural ordering of its elements. All elements in the array must 
+	implement the Comparable interface.&quot;</i></blockquote>
+<h3><a name="The_Comparable_interface_and_polymorphic_behavior_">The Comparable interface and polymorphic behavior
+</a> </h3>
+<p>Although the declared type of the array is <b>Object</b>, the array actually 
+contains references to <b>String</b> objects. </p>
+<p>The <b>String</b> class implements the <b>Comparable</b> interface. 
+It is not necessary to cast the array to type <b>String</b> before 
+passing it to the <b>Sort</b> method. <em>(The <strong>Sort</strong> method 
+declares the incoming parameter as type <strong>Object</strong>.)</em></p>
+<p>The <b>sort</b> method treats the array elements as type <b>Comparable</b> and 
+uses the <b>compareTo</b> method declared in that interface to perform any 
+necessary comparisons required to carry out the sorting operation. </p>
+<p>This is another example of the usefulness of polymorphism as implemented 
+through the use of the Java interface. <i>(The <strong>Comparable</strong> interface and the 
+<strong>compareTo</strong> method declared in that interface were discussed in detail in an 
+earlier chapter.)</i> </p>
+<h3><a name="Display_the_sorted_array_data_">Display the sorted array data </a> 
+</h3>
+<p>The code in <a href="#Listing_9">Listing 9</a> displays the contents of the array after those contents 
+are sorted into <i>natural order<b> </b></i>by the <b>sort</b> method in 
+<a href="#Listing_8">Listing 
+8</a> above. </p>
+<!--``1List09-->
+	<div class="a">
+		<p>
+<a name="Listing_9">Listing 9</a>. Display the 
+				sorted array data.</p>
+<pre>    System.out.println(&quot;Natural order sorted &quot; +
+                                  &quot;array data&quot;);
+    display(array);
+</pre>
+</div>
+<!--``2-->
+<p>The output produced by <a href="#Listing_9">Listing 9</a> above is: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				<pre>Natural order sorted array data
+BILL Bill JOE Joe TOM Tom</pre>
+</div>
+<h3><a name="The_natural_order_for_String_objects">The <i>natural order</i> for String objects</a> 
+</h3>
+<p>I discussed the concept of <i>natural ordering</i> in a previous chapter with 
+particular emphasis of the <i>natural order</i> for strings. You will recognize 
+that the strings shown in the above output have been sorted into <i>natural 
+order</i> according to the definition of the <b>compareTo</b> method of the <b>
+String</b> class. </p>
+<h2><a name="Sort_the_array_with_a_Comparator_">Sort the array with a Comparator
+</a> </h2>
+<p>The code in <a href="#Listing_10">Listing 10</a> is also new to this chapter. This code uses a different 
+version of the overloaded <b>sort</b> method of the <b>Arrays</b> class to sort 
+the array using the rules defined in the <b>compare</b> method of a <b>
+Comparator</b> object <i>(passed as a parameter to the sort method).</i>
+</p>
+<!--``1List10-->
+	<div class="a">
+		<p>
+<a name="Listing_10">Listing 10</a>. Sort the 
+				array with a Comparator.
+
+				</p>
+
+				<pre>    Arrays.sort(array, new TheComparator());
+</pre>
+</div>
+<!--``2-->
+
+<h3><a name="What_does_Oracle_have_to_say_about_this_">What does Oracle have to say about this? 
+</a> </h3>
+<p>Here is part of what Oracle has to say about this version of the <b>sort</b> 
+method of the <b>Arrays</b> class: </p>
+<blockquote>
+	<i>&quot;Sorts the specified array of objects according to the order induced by 
+	the specified comparator. All elements in the array must be mutually 
+	comparable by the specified comparator (that is, c.compare(e1, e2) must not 
+	throw a ClassCastException for any elements e1 and e2 in the array).&quot;</i></blockquote>
+<h3><a name="TheComparator_class_">The class named TheComparator</a></h3>
+<p><a href="#Listing_11">Listing 11</a> shows the class from which the <b>Comparator</b> object was 
+instantiated. </p>
+<p>This is essentially the same class that was used to instantiate a <b>
+Comparator</b> object in an earlier chapter. I discussed the <strong>compare</strong> method in 
+detail in that chapter and won&#39;t repeat that discussion here. </p>
+<!--``1List11-->
+	<div class="a">
+		<p>
+<a name="Listing_11">Listing 11</a>. The class 
+				named TheComparator.
+
+				</p>
+
+				<pre>class TheComparator implements Comparator, Serializable{
+
+  public int compare(Object o1,Object o2){
+    if(!(o1 instanceof String))
+        throw new ClassCastException();
+    if(!(o2 instanceof String))
+        throw new ClassCastException();
+
+    int result = ((String)o1).compareTo(((String)o2));
+    return result*(-1);
+  }//end compare()
+}//end class TheComparator
+</pre>
+</div>
+<!--``2-->
+<p>Suffice it to say at this point that this <b>Comparator</b> object causes the 
+elements in the array to be sorted into <i>reverse natural order</i>. That term 
+was also explained in the previous chapter, so I won&#39;t discuss it further here.
+</p>
+<h3><a name="Display_the_array_contents_again">Display the array contents again</a> 
+</h3>
+<p>The code in <a href="#Listing_12">Listing 12</a> was used to display the 
+newly-sorted contents of the array. </p>
+
+<!--``1List12-->
+	<div class="a">
+		<p>
+<a name="Listing_12">Listing 12</a>. Display the contents 
+				again.</p>
+<pre>    System.out.println(&quot;Custom order sorted &quot; +
+                                 &quot;array data&quot;);
+    display(array);
+</pre>
+</div>
+<!--``2-->
+<p>The output produced by this code is: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				<pre>Custom order sorted array data
+Tom TOM Joe JOE Bill BILL </pre>
+</div>
+<p>You will recognize this as <i>reverse natural order</i> for the elements 
+contained in the array. </p>
+<h3><a name="Could_have_sorted_differently_">Could have sorted differently </a> 
+</h3>
+<p>It is important to note that I could have caused the sorting order to be 
+different from <i>reverse natural order</i> simply by defining the rules used 
+for comparison in the <b>compare</b> method shown in <a href="#Listing_11">Listing 11</a> above. This 
+makes it possible for you to sort array data into any order that you choose as 
+long as you can write the sorting rules into the <b>compare</b> method of a 
+class that implements the <b>Comparator</b> interface. </p>
+<h2><a name="Display_the_collection_data_again">Display the collection data again</a> 
+</h2>
+<p>Finally, in order to show that none of this has disturbed the contents of the 
+original collection, the code in <a href="#Listing_13">Listing 13</a> gets and uses an iterator to display 
+the contents of the <b>Vector</b> collection. </p>
+
+<!--``1List13-->
+	<div class="a">
+		<p>
+<a name="Listing_13">Listing 13</a>. Display the collection 
+				data again.
+				</p>
+				<pre>    iter = ref.iterator();
+    System.out.println(&quot;Collection data&quot;);
+    while(iter.hasNext()){
+      System.out.print(iter.next() + &quot; &quot;);
+    }//end while loop
+</pre>
+</div>
+<!--``2-->
+<p>The output produced by the code in <a href="#Listing_13">Listing 13</a> is: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+				<pre>Collection data
+Joe Bill Tom JOE BILL TOM</pre>
+</div>
+<p>If you compare this with the output produced by the code at the beginning of 
+the program, you will see that the iterator still returns the elements in the <b>
+Vector</b> in the same order that they were added. Thus, modifications to the 
+array did not disturb the contents of the <b>Vector</b> collection. </p>
+<h2><a name="The_bottom_line">The bottom line</a> </h2>
+<p>The <b>toArray</b> method of the <b>Collection</b> interface makes it 
+possible to extract a copy of the elements in a collection into an array and to 
+manipulate those elements in whatever way you wish. As mentioned earlier, 
+however, care should be exercised to make certain that the copies of the 
+references to the original objects are not used to corrupt the objects. </p>
+<p>The various versions of the <b>sort</b> method in the <b>Arrays</b> class 
+make it possible to sort the contents of arrays in a variety of different ways.
+</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a>. 
+Paste the code into your Java editor. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter, I taught you how to extract the contents of a collection 
+into an array and how to use a <b>Comparator</b> to sort the contents of the 
+array into <i>reverse natural order</i>. </p>
+<p>Although I elected to use <i>reverse natural order</i> for purposes of 
+illustration, I could have sorted the array into some other order simply by 
+defining the comparison rules in the <b>compare</b> method of the <b>Comparator</b> 
+class differently. </p>
+<p>In order to further expand your knowledge of array sorting, I also sorted the 
+array into <i>natural order</i> without the use of a <b>Comparator</b><i>.</i>
+</p>
+<p>Sorting the contents of the array did not disturb the contents of the <b>
+Vector</b> collection from which the contents of the array were derived. </p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter, I will show you how to use the <b>sort</b> method of the
+<b>Collections</b> class along with a <b>Comparator</b> object to sort the 
+contents of a <b>List</b>. </p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4120: The Comparator Interface, Part 4</li>
+					<li>File: Java4120.htm
+</li>
+					<li>Published: 05/07/13</li>
+					<li>Revised: 04/21/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

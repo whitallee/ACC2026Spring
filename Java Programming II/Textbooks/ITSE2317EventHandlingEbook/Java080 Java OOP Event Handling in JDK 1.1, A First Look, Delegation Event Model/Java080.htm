@@ -1,0 +1,1487 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java080</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+.auto-style2 {
+	text-align: left;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java080 Delegation Event Model, A First Look</h1>
+
+<h1 class="style1"><a name="Table_of_Contents">Table of Contents</a></h1>
+<ul><li><a href="#Table_of_Contents">Table of Contents</a>
+</li><li><a href="#Preface">Preface</a>
+<ul><li><a href="#Viewing_tip">Viewing tip</a>
+<ul><li><a href="#Figures">Figures</a>
+</li><li><a href="#Listings">Listings</a>
+</li></ul></li></ul></li><li><a href="#Introduction">Introduction</a>
+</li><li><a href="#designGoals">Design Goals</a>
+</li><li><a href="#Simplified_Overview_of_the_New_Delegation_Model">Simplified Overview of the New Delegation Model</a>
+<ul><li><a href="#Sample_Program">Sample Program</a>
+</li><li><a href="#Interesting_Code_Fragments">Interesting Code Fragments</a>
+</li><li><a href="#Program_Listing_for_Event08">Program Listing for Event08</a>
+</li></ul></li><li><a href="#More_Detailed_Overview_of_the_Delegation_Model">More Detailed 
+	Overview of the Delegation Model</a>
+<ul><li><a href="#Event_Hierarchy">Event Hierarchy</a>
+</li><li><a href="#LowLevel_vs_Semantic_Events">Low-level vs. Semantic Events</a>
+</li><li><a href="#Event_Listeners">Event Listeners</a>
+</li><li><a href="#Event_Sources">Event Sources</a>
+</li><li><a href="#adapters">Adapters</a>
+</li></ul></li><li><a href="#Another_Sample_Program">Another Sample Program</a>
+<ul><li><a href="#Event09_Interesting_Code_Fragments">Event09 Interesting Code Fragments</a>
+</li><li><a href="#Event09_Program_Listing">Event09 Program Listing</a>
+</li></ul></li><li><a href="#Summary">Summary</a>
+<ul><li><a href="#Step_1">Step 1</a>
+</li><li><a href="#Step_2">Step 2</a>
+</li><li><a href="#Step_3">Step 3</a>
+</li></ul></li><li><a href="#Run_the_program">Run the program</a>
+</li><li><a href="#Miscellaneous">Miscellaneous</a>
+</li></ul>
+
+
+	<center>
+	<h1><a name="Preface">Preface</a></h1>
+	</center>
+	<p>This chapter is one of a series of chapters designed to teach you about Object-Oriented Programming (OOP) using Java. </p>
+<p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written in 1997. However, despite many improvements in Java since 
+1997, most of what was true in 1997 is still true in 2020.)</em></p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the figures 
+and listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Program output. </li>
+		<li><a href="#Figure_2">Figure 2</a>. Screen output from Event09. </li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The main method for Event08.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Beginning of the constructor.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Instantiate two Listener 
+		objects.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Register the listener objects.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Make the Frame visible.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Beginning of the class named 
+		WProc1.</li>
+		<li><a href="#Listing_7">Listing 7</a>. The windowClosing event handler.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Definition for the class named 
+		WProc2.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Complete listing for Event08.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Beginning of the class named 
+		Event09.</li>
+		<li><a href="#Listing_11">Listing 11</a>. The class named MyFrame.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Beginning of the class named 
+		GUI.</li>
+		<li><a href="#Listing_13">Listing 13</a>. Register two listener objects.</li>
+		<li><a href="#Listing_14">Listing 14</a>. The class named MouseProc.</li>
+		<li><a href="#Listing_15">Listing 15</a>. The class named WProc1.</li>
+		<li><a href="#Listing_16">Listing 16</a>. Complete listing of Event09.</li>
+	</ul>
+	<h1><a name="Introduction">Introduction</a></h1>
+<p>This chapter provides a description of the Delegation Event Model as 
+defined in JDK 1.1 along with sample 
+programs that illustrate some aspects of the model. I describe how the event model 
+maps to the AWT API. </p>
+<p>Much of this information was taken from the documentation 
+released with the various versions of JDK 1.1, and is the intellectual property 
+of Sun Microsystems. The material is being reproduced here for the sole purpose of assisting 
+students in learning how to use the event model.</p>
+<h1 class="style2"><a name="designGoals">Design Goals</a></h1>
+<p>According to Sun, the primary design goals of the JDK 1.1 event model in the AWT are 
+the following: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Design goals:</strong>
+				</p>
+				<ul>
+					<li>Simple and easy to learn</li>
+					<li>Support a clean separation between application and GUI 
+					code</li>
+					<li>Facilitate the creation of robust event handling code 
+					which is less error-prone (strong compile-time checking)</li>
+					<li>Flexible enough to enable varied application models for 
+					event flow and propagation</li>
+					<li>For visual tool builders, enable run-time discovery of 
+					both events that a component generates as well as the events 
+					it may observe</li>
+					<li>Support backward binary compatibility with the old model</li>
+				</ul>
+</div>
+	<p>It will be up to you to decide if they have met their goals. </p>
+	
+	<h1><a name="Simplified_Overview_of_the_New_Delegation_Model">Simplified Overview of the New Delegation Model</a></h1>
+<p>First, I will provide a simplified overview of the model including a sample 
+program. Following that, I will embark on a detailed discussion of the model. 
+Hopefully the simplified discussion and the sample program will help you to 
+understand the material in the detailed discussion. </p>
+<p>Also, the earlier chapter on 
+callbacks should have given you considerable 
+background to help you understand this material. If you are not familiar with 
+the callback material, you should go back and review that material. </p>
+<p><strong>Event sources and listeners</strong></p>
+<p>Events are now organized into a hierarchy of event classes. The model makes use of <b>event sources</b> and <b>event listeners</b>.
+</p>
+<p>An event <strong>source</strong> is an object that has the ability</p>
+<ul>
+	<li>to determine when an 
+interesting event has occurred, and </li>
+	<li>to notify listener objects of the 
+occurrence of the event. </li>
+</ul>
+<p>Although you as the programmer establish the framework 
+for such notification, the actual notification takes place automatically behind 
+the scenes. </p>
+<p>A <strong>listener</strong> object is an instance of a class <em>(or instance of a subclass of a 
+class)</em> that </p>
+<ul>
+	<li>implements a specific listener interface. </li>
+</ul>
+<p>A number of 
+listener interfaces are defined where each interface declares the methods 
+appropriate for a specific class of events. Thus, there is natural pairing of 
+classes of events and interface definitions. </p>
+<p>For example, there is a class of mouse events that includes most of the 
+events normally associated with mouse action. There is a matching interface 
+definition, which is used to define a listener class for those events <em>(actually 
+this is the one case where two interfaces are defined to match up with a single 
+event class)</em>. </p>
+<p><strong>Registration</strong></p>
+<p>A listener object can be <em>registered</em> on a source object to be notified of the 
+occurrence of all events of the specific class for which the listener object is 
+designed. </p>
+<p>Once a listener object is registered to be notified of those events, the 
+occurrence of an event defined by the specified class will automatically call 
+the matching method in the listener object. The code in the body of the method 
+is designed by the programmer to perform the desired action when the event 
+occurs. </p>
+<p><strong>Multiple notification methods</strong></p>
+<p>Some event classes <em>(such as the mouse events, for example)</em> involve a number 
+of different possible event types <em>(notification methods)</em>. A listener class 
+that implements the 
+matching interface for that event class must implement or define <em>(provide a body 
+for)</em> all the methods declared in the interface. </p>
+<p><strong>Adapter classes</strong></p>
+<p>An intermediate set of classes, known as <i>Adapter </i>classes, is 
+provided to prevent this from becoming burdensome. These Adapter classes implement the listener interfaces, and define the 
+matching interface methods with empty methods. </p>
+<p>A listener class can then be defined that <i>extends </i>the Adapter class instead of <i>implementing </i>
+the corresponding listener interface. With this approach, the listener class need only override those 
+methods of interest since the requirement to define all of the interface 
+methods has already been satisfied by the Adapter class. </p>
+<p><strong>An example</strong></p>
+<p>For example, in the sample program that follows, two different listener 
+objects instantiated from two different listener classes are registered to 
+receive all events involving the manipulation of a <strong>Frame</strong> object 
+<em>(opening, 
+closing, minimizing, etc.)</em>. </p>
+<blockquote><em>(Author's note: You will learn about the use of more modern 
+JFrame objects in a future chapter titled Java081 Swing and the Delegation Event Model.)</em></blockquote>
+<p>One of the listener classes <i>implements </i>the <b>WindowListener </b>
+interface and hence must define all six methods of that interface. </p>
+<p>The other listener class <i>extends </i>the <b>WindowAdapter </b>class, which 
+in turn <i>implements </i>the <b>WindowListener </b>interface. The <b>
+WindowAdapter </b>class defines all six methods as empty methods. Thus, this 
+listener class can get by with overriding only two of the six methods of 
+the interface.</p>
+	<h2 class="style2"><a name="Sample_Program">Sample Program</a></h2>
+<p>This program named <a href="#Listing_9">Event08</a> was designed for simplicity. In this program, the code in each 
+of the methods is simple. In all cases but one, the code simply displays a 
+message indicating that the method has been called. Obviously, in order for a 
+program to be of much value, the body of code in the methods would have to be 
+much more substantive, or at least would have to call other methods that are 
+more substantive. </p>
+<p>This program illustrates the use of <i>Event Sources</i>,<i> Event Listeners</i>, 
+and <i>Adapters </i>in the <i>Delegation Event Model</i>. </p>
+<p><strong>Description</strong></p>
+<p>Briefly, <a href="#Listing_9">this program</a> instantiates an object that creates a user interface 
+consisting of a simple <b>Frame </b>object. This object is an <i>Event 
+Source</i> that notifies two different <i>Event Listener</i> objects of <b>
+Window </b>events. </p>
+<p>One of the <b>Listener </b>objects <i>implements </i>the <b>WindowListener
+</b>interface and defines all of the methods declared in that interface. The 
+other <b>Listener </b>object <i>extends </i>the <b>Adapter </b>class named <b>
+WindowAdapter</b>. </p>
+<p>As explained earlier, the purpose of <b>Adapter </b>classes <em>(as used in 
+this context)</em> is to implement the <b>Listener </b>interfaces and to define all of the 
+methods with empty methods.</p>
+<p>Classes that <i>extend </i>the <b>Adapter </b>classes can then selectively 
+override only those methods of interest. This <strong>Listener</strong> object 
+overrides only two of the methods.</p>
+<p>This program was originally tested using JDK 1.1.3 under Win95. More recently 
+it was tested using JDK 12.0.1 under Windows 7.</p>
+<p>The output produced by running the program is presented later in this chapter.</p>
+<h2><a name="Interesting_Code_Fragments">Interesting Code Fragments</a></h2>
+<p><a href="#Listing_1">Listing 1</a> shows the <b>main</b> method of the 
+controlling class that instantiates a Graphical User Interface (GUI) object. 
+There are more compact <em>(and more cryptic)</em> ways to accomplish this 
+objective, but for the time being, in order to achieve clarity, I will use this 
+approach. </p>
+<div class="a">
+	<p><a name="Listing_1">Listing 1</a> - The main method for 
+				Event08.
+
+				</p>
+
+				<pre>public class Event08 {//controlling class
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUInterface object
+  }//end main
+}//end class Event08</pre>
+</div>
+	<p>The <b>GUI </b>class is rather long, so I will break it up and discuss it in 
+parts.</p>
+<p>This class is used</p>
+<ul>
+	<li>to instantiate and display a user interface object,</li>
+	<li>to instantiate two <strong>Listener</strong> objects, and</li>
+	<li>to register those two objects for notification whenever a <strong>Window</strong> event 
+	occurs.</li>
+</ul>
+<p>The class begins by defining its own constructor. The first interesting code 
+in the constructor is the code to instantiate an object of type <b>Frame</b>, 
+set its size, and give it a title, as shown in <a href="#Listing_2">Listing 2</a>.</p>
+<div class="a">
+	<p><a name="Listing_2">Listing 2</a> - Beginning of the 
+				constructor.
+
+				</p>
+
+				<pre>class GUI{
+  public GUI(){//constructor
+    //Create a new Frame object
+    Frame displayWindow = new Frame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");</pre>
+</div>
+	<p><strong>What is a Frame?</strong></p>
+<p>The JDK documentation describes a <strong>Frame</strong> as follows:</p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Description of a Frame:</strong> 
+				
+				</p>
+				
+				<p>A <b>Frame </b>is a 
+				top-level window with a title and a border. The default layout 
+				for a frame is <b>BorderLayout</b>.<em> (You will learn more about 
+				layout managers later.) </em></p>
+				<p>Frames are capable of generating the following types of 
+				window events:</p>
+				<ul>
+					<li>WindowOpened</li>
+					<li>WindowClosing</li>
+					<li>WindowClosed</li>
+					<li>WindowIconified</li>
+					<li>WindowDeiconified</li>
+					<li>WindowActivated</li>
+					<li>WindowDeactivated.</li>
+				</ul>
+
+</div>
+	<p>Stated differently, a <b>Frame</b> object is the type of <b>GUI </b>object 
+that we might refer to as a window or a form in a typical <b>GUI </b>
+environment.</p>
+<p><strong>Instantiate two Listener objects</strong></p>
+<p><a href="#Listing_3">Listing 3</a> instantiates two <b>Listener </b>objects that will process <b>
+Window </b>events. </p>
+<p>The class definitions, named <b>Wproc1 </b>and <b>Wproc2</b>, for these two 
+classes will follow the discussion of the <b>GUI </b>class. </p>
+<p><em>(Note that I am passing a reference to the </em> <b><em>Frame </em> </b>
+<em>object to the 
+constructor for one of these classes. There is a better (and more cryptic) way 
+to achieve the same objective without the need to pass the reference. Again, 
+since this program was designed for clarity, I am doing it the obvious way.)</em></p>
+<div class="a">
+	<p><a name="Listing_3">Listing 3</a> - Instantiate two Listener objects.
+
+				</p>
+
+				<pre>
+    WProc1 winProcCmd1 = new WProc1(displayWindow);
+    WProc2 winProcCmd2 = new WProc2();</pre>
+</div>
+	<p><strong>Register the listener objects</strong></p>
+<p>The code in <a href="#Listing_4">Listing 4</a> is extremely important. This is the code by which we 
+register the listener objects for notification of <b>Window </b>events where the
+<b>Frame</b> object named <b>displayWindow</b> is the source of the events.</p>
+<p>Pay close attention to the syntax of these two statements, because you will 
+be using this syntax often. In subsequent chapters, we will dig deeper into the
+<i>Delegation Event Model</i> and I will teach you what is going on behind the scenes 
+when you execute statements of this sort. </p>
+<div class="a">
+	<p><a name="Listing_4">Listing 4</a> - Register the listener objects. </p>
+
+				<pre>    displayWindow.addWindowListener(winProcCmd1);
+    displayWindow.addWindowListener(winProcCmd2);</pre>
+</div>
+	<p><strong>Interpretation</strong></p>
+<p>The interpretation of the code in <a href="#Listing_4">Listing 4</a> is that the two listener objects 
+named <b>winProcCmd1 </b>and <b>winProcCmd2 </b>are added to a list of listener 
+objects that are to be automatically notified </p>
+<ul>
+	<li>whenever an event of the <b>WindowEvent </b>class occurs </li>
+	<li>with respect to the <b>Frame </b>object named <b>displayWindow</b>.</li>
+</ul>
+<p>These listener objects are notified by calling the methods in the objects 
+that match the specific type of the event <em>(open window, close window, closing 
+window, minimize window, etc.)</em>. </p>
+<p><strong>Make the Frame visible</strong></p>
+<p>We wrap up the definition of our <b>GUI </b>class with the statement shown in
+<a href="#Listing_5">Listing 5</a> that 
+causes the <b>Frame </b>object to become visible on the screen. Note that this 
+statement also causes the <b>windowActivated </b>and <b>windowOpened </b>events 
+to be generated. <em>(Current jargon would say that those events are &quot;fired&quot;.)</em></p>
+<div class="a">
+	<p><a name="Listing_5">Listing 5</a> - Make the Frame visible.
+				</p>
+				<pre>    displayWindow.setVisible(true);
+  }//end constructor
+}//end GUI class definition</pre>
+</div>
+	<p><strong>Code for the Listener objects</strong></p>
+<p>At this point, we have examined the code that will create a <b>Frame </b>
+object and display it on the screen. We have also examined the code that <i>
+registers </i>two <b>Listener </b>objects on the <b>Frame </b>object. However, 
+at this point, the program cannot be compiled because the classes from which the 
+two <b>Listener </b>objects are to be instantiated have not yet been defined. 
+That will be our next assignment.</p>
+<p><strong>Beginning of the class named WProc1</strong></p>
+<p><a href="#Listing_6">Listing 6</a> begins the definition of the classes that can be used to 
+instantiate <b>Listener </b>objects. </p>
+<p>The first class definition that we will look at <i>implements </i>the <b>
+WindowListener </b>interface. This requires that all the methods declared in the 
+interface be defined in this class. This class defines all of the methods. Each 
+of the methods displays a descriptive message whenever it is called. </p>
+<p>I will begin the discussion with the constructor as shown in
+<a href="#Listing_6">Listing 6</a>.
+</p>
+<div class="a">
+	<p><a name="Listing_6">Listing 6</a> - Beginning of the class named WProc1.
+				</p>
+				<pre>class WProc1 implements WindowListener{
+  Frame displayWindowRef;
+
+  WProc1(Frame windowIn){//constructor
+    this.displayWindowRef = windowIn;
+  }//end constructor</pre>
+</div>
+	<p><em>(Note that the constructor for this class requires a reference to the
+	</em> <b><em>Source </em> </b><em>object to be passed as 
+a parameter. As mentioned earlier, this is not the preferred way to accomplish 
+our objective, but it is the most straightforward and easy to understand. That 
+is why I elected to use it here. The code in the constructor saves a reference 
+to the </em> <b><em>Source</em></b><em> object in an instance variable named 
+	</em> <b><em>displayWindowRef</em></b><em>.)</em></p>
+	<p><strong>Implementing the WindowListener interface</strong></p>
+<p>It is important to note that this class <i>implements </i>the <b>
+WindowListener </b>interface. This means that it must define all of the methods 
+that are declared in that interface.</p>
+<p class="auto-style2">If you examine the complete program listing (<a href="#Listing_9">Listing 
+9</a>), you will 
+see that there is one method definition in this class definition for each of the 
+methods that are declared in the <b>WindowListener </b>interface. </p>
+<p>The definition of all the interface methods are very similar, so I am not 
+going to show all of them here. However, I will show the one that requires the reference to 
+the source object that was discussed above, which is the most complicated one of 
+the set. </p>
+<p><strong>The windowClosing event handler</strong></p>
+<p>The methods that are declared in the listener interfaces are often referred 
+to as <em>event handler</em> methods or <em>event handlers</em> for short. The <b>windowClosing</b> event handler method is shown in
+<a href="#Listing_7">Listing 7</a>. As 
+you can see, this method starts out by displaying a message. Then it 
+calls the <b>dispose</b> method on the <b>Frame </b>object. That is the 
+reason that a reference to the <b>Frame </b>object was required to be passed in 
+as a parameter. </p>
+<p>Calling the <b>dispose</b> method causes a <b>WindowClosed</b> event to be 
+fired. <em>(As far as I know, that is the only way to cause a WindowClosed event 
+to be fired.)</em></p>
+<div class="a">
+	<p><a name="Listing_7">Listing 7</a> - The windowClosing event handler.</p>
+<pre>  public void windowClosing(WindowEvent e){
+    System.out.println("WProc1 windowClosing test msg");
+    displayWindowRef.dispose();//generate WindowClosed
+  }//end windowClosing()</pre>
+</div>
+	<p><strong>The class named WProc2</strong></p>
+<p>The class definition shown in <a href="#Listing_8">Listing 8</a> does not <i>implement </i>the <b>WindowListener </b>
+interface. Instead, it <i>extends </i>the <b>WindowAdapter </b>class. 
+Therefore, it can selectively override only those methods that are of interest.</p>
+<p>In this case, only two of the methods of the <b>WindowListener </b>interface 
+are overridden. These overridden methods display a message whenever they are 
+called. </p>
+<div class="a">
+	<p><a name="Listing_8">Listing 8</a> - Definition for the class 
+				named WProc2.
+				</p>
+				<pre>class WProc2 extends WindowAdapter{
+
+  public void windowIconified(WindowEvent e){
+    System.out.println(
+              "******** WProc2 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+            "******** WProc2 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+}//end class WProc2</pre>
+</div>
+	<p><strong>Program output</strong></p>
+<p><a href="#Figure_1">Figure 1</a> shows a sample output from this program. The small <strong>Frame</strong> 
+in the upper-left corner is the graphic <strong>Frame</strong> object. A 
+command-line screen with text output is shown immediately below the Frame.</p>
+<div class="a">
+<p><strong><a name="Figure_1">Figure 1</a> - Program output.
+</strong></p>
+<p><img alt="GUI Frame obj and command-line text output for various window events." src="event08a.jpg" width="676" height="545"/></p>
+</div>
+	<p><strong>The text output</strong></p>
+<p>The output from running this program for a variety of user actions is shown 
+below. You should be able to correlate the messages shown in the output with the 
+event handler methods discussed above and the user actions that caused those 
+event handlers to be called. </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Text output from Event08</strong>
+				</p>
+				<pre>This program was tested using JDK 1.1.3 under Win95.
+
+When executed, this application places a simple empty
+Frame object on the screen.
+
+Starting the program produces the following output:
+WProc1 windowActivated test msg
+Wproc1 windowOpened test msg
+
+Pressing the minimize button on the Frame produces the
+following output:
+
+WProc1 windowIconified test msg
+******** WProc2 windowIconified test msg
+WProc1 windowDeactivated test msg
+
+Restoring the Frame after minimization produces the
+following output:
+
+WProc1 windowActivated test msg
+WProc1 windowDeiconified test msg
+******** WProc2 windowDeiconified test msg
+WProc1 windowActivated test msg
+
+Closing the Frame by pressing the X-icon in the upper
+right of the Frame produces the following output.
+
+WProc1 windowClosing test msg
+WProc1 windowDeactivated test msg
+WProc1 windowClosed test msg</pre>
+</div>
+	<h2><a name="Program_Listing_for_Event08">Program Listing for Event08</a></h2>
+	
+	<p>A complete listing of the program is provided in <a href="#Listing_9">
+	Listing 9</a>. You can view the code that was not shown above in this 
+	listing.</p>
+<div class="a">
+<p><a name="Listing_9">Listing 9</a> - Complete listing for 
+				Event08.</p>
+
+				<pre>/*File Event08.java Copyright, R.G.Baldwin
+Rev 01/10/98
+
+Illustrates the use of Event Sources, Event Listeners, and
+Adapters in the Delegation Event Model.
+
+Briefly, this application instantiates an object that
+creates a user interface consisting of a simple Frame
+object.  This object is an Event Source that notifies two
+different Event Listener objects of Window events.
+
+One of the Listener objects implements the WindowListener
+interface and overrides all of the methods declared in
+that interface.
+
+The other Listener object extends the Adapter class named
+WindowAdapter.  The purpose of Adapter classes is to
+implement the  Listener interfaces and to define all of
+the methods with empty methods.  Classes that extend the
+Adapter classes can then selectively override only those
+methods of interest.  This Listener object overrides only
+two of the methods.
+
+Note that this application does not terminate and return
+control to the operating system.  You must forcefully
+terminate it.
+
+This program was tested using JDK 1.1.3 under Win95.
+
+When executed, this application places a simple empty
+Frame object on the screen.
+
+Starting the program produces the following output:
+WProc1 windowActivated test msg
+Wproc1 windowOpened test msg
+
+Pressing the minimize button on the Frame produces the
+following output:
+
+WProc1 windowIconified test msg
+******** WProc2 windowIconified test msg
+WProc1 windowDeactivated test msg
+
+Restoring the Frame after minimization produces the
+following output:
+
+WProc1 windowActivated test msg
+WProc1 windowDeiconified test msg
+******** WProc2 windowDeiconified test msg
+WProc1 windowActivated test msg
+
+Closing the Frame by pressing the X-icon in the upper
+right of the Frame produces the following output.
+
+WProc1 windowClosing test msg
+WProc1 windowDeactivated test msg
+WProc1 windowClosed test msg
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event08 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUInterface object
+  }//end main
+}//end class Event08
+//=======================================================//
+
+//The following class is used to instantiate a user
+// interface object, to instantiate two Listener objects,
+// and to register those two objects for notification
+// whenever a Window event occurs.
+class GUI{
+  public GUI(){//constructor
+    //Create a new Frame object
+    Frame displayWindow = new Frame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");
+
+    //Instantiate two Listener objects that will process
+    // Window events
+    WProc1 winProcCmd1 = new WProc1(displayWindow);
+    WProc2 winProcCmd2 = new WProc2();
+
+    //Register the Listener objects for notification of
+    // Window events. This object is the Event Source.
+    displayWindow.addWindowListener(winProcCmd1);
+    displayWindow.addWindowListener(winProcCmd2);
+
+    //windowActivated and windowOpened test messages
+    // are produced here
+    displayWindow.setVisible(true);
+
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//The following two classes can be used to instantiate
+// Listener objects. Note that this class implements the
+// WindowListener interface.  This requires that all the
+// methods declared in the interface be overridden in this
+// class. This class overrides all of the methods  and
+// displays a descriptive message whenever one of the
+// methods is called.
+class WProc1 implements WindowListener{
+  //used to save a reference to the Frame object
+  Frame displayWindowRef;
+
+  WProc1(Frame windowIn){//constructor
+    // save ref to Frame object
+    this.displayWindowRef = windowIn;
+  }//end constructor
+
+  public void windowClosed(WindowEvent e){
+    System.out.println("WProc1 windowClosed test msg");
+  }//end windowClosed()
+
+  public void windowIconified(WindowEvent e){
+    System.out.println("WProc1 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowOpened(WindowEvent e){
+    System.out.println("WProc1 windowOpened test msg");
+  }//end windowOpened()
+
+  public void windowClosing(WindowEvent e){
+    System.out.println("WProc1 windowClosing test msg");
+    displayWindowRef.dispose();//generate WindowClosed
+  }//end windowClosing()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+                      "WProc1 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+  public void windowActivated(WindowEvent e){
+    System.out.println("WProc1 windowActivated test msg");
+  }//end windowActivated()
+
+  public void windowDeactivated(WindowEvent e){
+    System.out.println(
+                     "WProc1 windowDeactivated test msg");
+  }//end windowDeactivated()
+}//end class WProc1
+//=======================================================//
+
+//This and the previous class can be used to instantiate
+// Listener objects. Note that this class extends an
+// Adapter class that can be used to avoid the
+// requirement to define all of the methods of the
+// actual Listener class named WindowListener. This class
+// overrides only two of the methods declared in the
+// interface.  It displays a message whenever one of the
+// methods is called.
+class WProc2 extends WindowAdapter{
+
+  public void windowIconified(WindowEvent e){
+    System.out.println(
+              "******** WProc2 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+            "******** WProc2 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+}//end class WProc2</pre>
+</div>
+	<h1><a name="More_Detailed_Overview_of_the_Delegation_Model">More Detailed 
+	Overview of the Delegation Model</a></h1>
+<p>JDK 1.1 encapsulates events in a class hierarchy with the root class named <b>
+java.util.EventObject</b>. </p>
+<p>The propagation of an event from a <b>Source </b>object to a <b>Listener </b>
+object involves calling a method on the <b>Listener </b>object and passing an 
+object that contains encapsulated information about the event. Note that each 
+event class may include more than one actual type of event <em>(as determined by 
+the methods declared in the listener interface)</em>. </p>
+<p><strong>An event listener</strong></p>
+<p>A <b>Listener </b>object is an instance of a class that <i>implements </i>a 
+specific <b>EventListener </b>interface extended from the generic <b>
+java.util.EventListener</b>. </p>
+<p>An <b>EventListener </b>interface declares one or more methods that must be 
+defined in the <b>Listener </b>class. Those methods are called by the event source in 
+response to each specific event type handled by the interface. </p>
+<p>The calling of these methods is the mechanism by which the <b>Source </b>
+notifies the <b>Listener </b>of the occurrence of an event of a specific type.
+</p>
+<p><strong>An event source</strong></p>
+<p>An <b>Event Source</b> is an object that &quot;originates&quot; or &quot;fires&quot; events by 
+calling the methods of one or more <b>Listener </b>objects. The <b>Source </b>
+maintains a list containing a reference to all of the <b>Listener </b>objects 
+that have <i>registered</i> to be notified of events of that class. </p>
+<p><strong>Registration of event listener objects</strong></p>
+<p>The programmer causes <strong>Listener</strong> objects to be added to this 
+list using <b>add<em>(EventType)</em>Listener</b> 
+method calls. </p>
+<p>Placing references to <b>Listener </b>objects on the list is often referred 
+to as <i>registering</i> specific <b>Listeners </b>to receive notification of 
+specific events. </p>
+<p><strong>Notifying listener objects</strong></p>
+<p>Once the list is populated <em>(</em><b><em>Listener </em></b><em>objects are 
+registered)</em>, the <b>Source </b>object uses that list to notify each <b>
+Listener </b>of the occurrence of an event of the specified type without further 
+effort on the part of the programmer. </p>
+<p><strong>Event sources and listeners</strong></p>
+<p>The <b>Event Source </b>is often a <b>GUI </b>component and the <b>Listener
+</b>is commonly an object of a class that implements the appropriate listener 
+interface, but this is not a requirement. For example you will learn later how to 
+cause a program to generate events without any physical involvement on the part 
+of a user and a <b>GUI </b>component. </p>
+<p>The <b>Listener </b>object could also be another AWT component that 
+implements one or more <b>Listener </b>interfaces for the purpose of hooking <b>
+GUI </b>objects up to each other.</p>
+<h2><a name="Event_Hierarchy">Event Hierarchy</a></h2>
+<p>As mentioned earlier, each specific event type is a member of a class of 
+event types and these classes form a hierarchy of event classes. </p>
+<p>Since a single event class may be used to represent more than one event type
+<em>(i.e. </em><b><em>MouseEvent </em></b><em>represents mouse up, mouse down, 
+mouse drag, mouse move, etc.)</em>, some event classes may also contain an &quot;id&quot;
+<em>(unique within that class)</em> that maps to its specific event types. </p>
+<p><strong>Setter and getter methods</strong></p>
+<p>There are no public fields in the event classes. Rather the data in the event 
+is encapsulated and available only through the use of appropriate <em>setter</em> 
+and <em>getter</em> methods. </p>
+<p>The <i>setter </i>methods only exist for attributes on an event that can be 
+modified by a listener. If you continue with your studies in Java, you will 
+learn that the <em>setter</em> and <em>getter</em> methods match a <i>design 
+pattern</i> 
+for <strong>Java Beans</strong>. </p>
+<p>A concrete set of event classes is defined by the AWT. In addition, 
+programmers may define their own event types by subclassing either <b>
+java.util.EventObject</b> or one of the AWT event classes.</p>
+<h2><a name="LowLevel_vs_Semantic_Events">Low-level vs. Semantic Events</a></h2>
+<p>The AWT provides two conceptual types of events: </p>
+<ul>
+	<li>low-level events</li>
+	<li>semantic events</li>
+</ul>
+	<p><strong>Low-level events</strong></p>
+<p>A <i>low-level</i> event is one that represents a low-level input or 
+	window-system occurrence on a visual component on the screen. As of February 
+	1997, JDK 1.1 defined the following low-level event classes: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Low-level event classes</strong>
+	</p>
+	<ul>
+		<li>java.util.EventObject<ul>
+			<li>java.awt.AWTEvent<ul>
+				<li>java.awt.event.ComponentEvent (component resized, moved,etc.)<ul>
+					<li>java.awt.event.FocusEvent (component got focus, lost focus)</li>
+					<li>java.awt.event.InputEvent<ul>
+						<li>java.awt.event.KeyEvent (component got key-press, key-release,etc.)</li>
+						<li>java.awt.event.MouseEvent (component got mouse-down, mouse-move,etc.)</li>
+					</ul>
+					</li>
+					<li>java.awt.event.ContainerEvent</li>
+					<li>java.awt.event.WindowEvent</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+
+</div>
+	<p>As indicated earlier, some of the event classes encompass several different 
+event types. Generally, there are corresponding <b>Listener </b>interfaces for 
+each of the event classes, and corresponding interface methods for each of the 
+different event types in each event class.</p>
+<p><strong>Semantic events</strong></p>
+<p><i>Semantic </i>events are defined at a higher-level to encapsulate the 
+semantics of a user interface component&#39;s model. As of February 1997, the 
+semantic event classes defined by the JDK 1.1 version of the AWT were as 
+follows: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Semantic event classes</strong>
+	</p>
+	<ul>
+		<li>java.util.EventObject<ul>
+			<li>java.awt.AWTEvent<ul>
+				<li>java.awt.event.ActionEvent (&quot;do a command&quot;)</li>
+				<li>java.awt.event.AdjustmentEvent (&quot;value was adjusted&quot;)</li>
+				<li>java.awt.event.ItemEvent (&quot;item state has changed&quot;)</li>
+				<li>java.awt.event.TextEvent (&quot;the value of the text object changed&quot;)</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+
+</div>
+	<p><strong>A more general event type</strong></p>
+<p>The <i>semantic </i>events are not tied to specific screen-based component 
+classes, but may apply across a set of components that implement a similar 
+semantic model. For example, a <b>Button </b>object will fire an <i>&quot;action&quot;</i> 
+event when it is pressed and a <b>List </b>object will fire an <i>&quot;action&quot;</i> 
+event when an item is double-clicked.</p>
+<p><strong>Not tied to user actions</strong></p>
+<p>Even though the above discussion seems to tie these event classes to user 
+actions on screen components <em>(because that is the norm)</em>, you need to remember 
+that there is nothing to prevent you from having your code generate events of 
+these types completely independent of such user actions. For example, you can 
+easily cause an <b>ActionEvent </b>to be generated and attributed to some 
+component whenever a software timer expires. We will learn how to do this sort 
+of thing in subsequent chapters.</p>
+<h2><a name="Event_Listeners">Event Listeners</a></h2>
+	<p>An <b>EventListener </b>interface will typically have a separate method 
+	for each distinct event type that the event class represents. For example, 
+	the <b>FocusEventListener </b>interface defines two methods, <b>focusGained</b> 
+	and <b>focusLost</b>, one for each event type that the <b>FocusEvent </b>
+	class represents. </p>
+<p><strong>Low-level listener interfaces</strong></p>
+<p>As of February 1997, the low-level listener interfaces defined by the JDK 1.1 
+version of the AWT were as follows: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Low-level listener interfaces</strong></p>
+<ul>
+		<li>java.util.EventListener<ul>
+			<li>java.awt.event.ComponentListener</li>
+			<li>java.awt.event.ContainerListener</li>
+			<li>java.awt.event.FocusListener</li>
+			<li>java.awt.event.KeyListener</li>
+			<li>java.awt.event.MouseListener</li>
+			<li>java.awt.event.MouseMotionListener</li>
+			<li>java.awt.event.WindowListener</li>
+		</ul>
+		</li>
+	</ul>
+
+</div>
+	<p>If you match this up with the previous list of <i>low-level </i>event 
+classes, you will see that there is a listener interface defined for each of the 
+&quot;leaf&quot; classes in the hierarchy of event classes. <em>(In fact, there are two 
+different listener interfaces defined for the </em> <b><em>MouseEvent</em></b><em> class. This will 
+be discussed further at the appropriate point in time.)</em></p>
+<p><strong>Semantic listener interfaces</strong></p>
+<p>As of February 1997, the semantic listener interfaces defined by the AWT were as follows: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Semantic event listener interfaces</strong>
+	</p>
+	<ul>
+		<li>java.util.EventListener<ul>
+			<li>java.awt.event.ActionListener</li>
+			<li>java.awt.event.AdjustmentListener</li>
+			<li>java.awt.event.ItemListener</li>
+			<li>java.awt.event.TextListener</li>
+		</ul>
+		</li>
+	</ul>
+
+</div>
+	<p>There is a one-to-one correspondence between <i>semantic </i>listener 
+interfaces and <i>semantic </i>event classes.</p>
+<h2><a name="Event_Sources">Event Sources</a></h2>
+<p>All AWT event sources support a <i>multicast </i>model for listeners. This 
+means that multiple listeners can be added and removed from a single source. In 
+other words, notification of the occurrence of the same event can be sent to one 
+or more listener objects. </p>
+<p>According to JDK 1.1 documentation, </p>
+	<p><em>&quot;The API makes no guarantees about the order in which the events are 
+	delivered to a set of registered listeners for a given event on a given 
+	source. Additionally, any event which allows its properties to be modified 
+	(via setXXX() methods) will be explicitly copied such that each listener 
+	receives a replica of the original event. If the order in which events are 
+	delivered to listeners is a factor for your program, you should chain the 
+	listeners off a single listener which is registered on the source (the fact 
+	that the event data is encapsulated in a single object makes propagating the 
+	event extremely simple).&quot;</em></p>
+	
+	<p><strong>Low-level event sources</strong></p>
+<p>As before, a distinction is drawn between <i>low-level</i> and <i>
+	semantic </i>events. The source for <i>low-level</i> events will often be 
+	one of the visual component classes <em>(</em><b><em>Button</em></b><em>,
+	</em><b><em>Scrollbar</em></b><em>, etc.)</em> because the event is bound to 
+	the actual component on the screen <em>(but counterfeit events can be 
+	generated)</em>. </p>
+<p>As of February 1997, JDK 1.1 defined low-level listeners on the following 
+components. </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Low-level listener components</strong>
+	</p>
+	<ul>
+		<li>java.awt.Component<ul>
+			<li>addComponentListener(ComponentListener l)</li>
+			<li>addFocusListener(FocusListener l)</li>
+			<li>addKeyListener(KeyListener l)</li>
+			<li>addMouseListener(MouseListener l)</li>
+			<li>addMouseMotionListener(MouseMotionListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.Container<ul>
+			<li>addContainerListener(ContainerListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.Dialog<ul>
+			<li>addWindowListener(WindowListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.Frame<ul>
+			<li>addWindowListener(WindowListener l)</li>
+		</ul>
+		</li>
+	</ul>
+
+</div>
+	<p><strong>Must take inheritance into account</strong></p>
+<p>To determine all of the specific event types 
+that can be communicated from a source object to a listener object, you must 
+take inheritance into account. </p>
+<p>For example, as you will see in a sample program 
+later in this chapter, a source object can detect <b>mouse events</b> on a <b>
+Frame </b>object and notify a <b>MouseListener </b>object of the occurrence of 
+those events even though the above list does not show a <b>MouseListener </b>on 
+a <b>Frame</b>. This is possible because a <b>Frame </b>object indirectly 
+extends the <b>Component </b>class, and <b>MouseListener </b>is defined for the
+<b>Component </b>class.</p>
+<p><strong>Semantic event sources</strong></p>
+<p>As of February 1997, JDK 1.1 defined the following semantic listeners for AWT 
+components: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Semantic listener components</strong></p>
+<ul>
+		<li>java.awt.Button
+
+		<ul>
+			<li><i>addActionListener(ActionListener l)</i></li>
+		</ul>
+		</li>
+		<li>java.awt.Choice (implements java.awt.ItemSelectable)
+		<ul>
+			<li>addItemListener(ItemListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.Checkbox (implements java.awt.ItemSelectable)
+		<ul>
+			<li>addItemListener(ItemListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.CheckboxMenuItem (implements java.awt.ItemSelectable)
+		<ul>
+			<li>addItemListener(ItemListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.List (implements java.awt.ItemSelectable)
+		<ul>
+			<li><i>addActionListener(ActionListener l)</i></li>
+			<li>addItemListener(ItemListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.MenuItem
+
+		<ul>
+			<li><i>addActionListener(ActionListener l)</i></li>
+		</ul>
+		</li>
+		<li>java.awt.Scrollbar (implements java.awt.Adjustable)
+		<ul>
+			<li>addAdjustmentListener(AdjustmentListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.TextArea
+
+		<ul>
+			<li>addTextListener(TextListener l)</li>
+		</ul>
+		</li>
+		<li>java.awt.TextField
+
+		<ul>
+			<li><i>addActionListener(ActionListener l)</i></li>
+			<li>addTextListener(TextListener l)</li>
+		</ul>
+		</li>
+	</ul>
+
+</div>
+	<p><strong>The nature of semantic events</strong></p>
+<p>The nature of <i>semantic</i> event types can be inferred by noticing that 
+in some cases, different types of components support the same type of <i>
+semantic</i> event. For example, four different types of components are 
+identified in the above list that can register and service <i>action events</i>.</p>
+<p>A single <b>ActionEvent</b> listener object could be registered to be 
+notified of <i>action events</i> on one or more components of all of these 
+types. Of course, it would then be necessary for the code in that event handler 
+to determine which source was responsible for generating the event if such 
+identification is important.</p>
+<p>An important difference between <i>low level</i> events and <i>semantic</i> 
+events has to do with where the classes that define those events plug into the 
+class hierarchy. <i>Low level</i> events plug in further down the class 
+hierarchy and inherit more methods that can be used to process the event object 
+than is the case with <i>semantic</i> events.</p>
+<h2><a name="adapters">Adapters</a></h2>
+	<p>Many <b>EventListener </b>interfaces are designed to listen to multiple 
+	event classes. For example, the <b>MouseListener </b>listens to <i>
+	mouse-down, mouse-up, mouse-enter</i>, etc. The <b>MouseListener </b>
+	interface declares a method for each of these subtypes. </p>
+<p>When you implement an interface, you are required to define all of the 
+methods that are declared in the interface, even if you define them with empty 
+methods. In some cases, the requirement to define all the methods declared in an 
+interface can be burdensome. </p>
+<p>For this reason (and possibly for some other reasons as well), the AWT 
+provides a set of abstract <i>adapter</i> classes that match up with the defined 
+interfaces. Each adapter class implements one interface and defines all of the 
+methods declared by that interface as empty methods, thus satisfying the 
+requirement to define all of the methods. </p>
+<p>You can then define your listener classes by <i>extending </i>the adapter 
+classes instead of <i>implementing </i>the listener interfaces.. This allows you 
+the freedom to override only those methods of the interface that interest you.
+</p>
+<p>Again, recall that the methods declared within an interface correspond to the 
+individual event types contained within a corresponding event class, and the <b>
+Source </b>object notifies your <b>Listener </b>object of the occurrence of an 
+event of a specific type by calling your interface method. </p>
+<p>As of February 1997, the Adapter classes provided by the JDK 1.1 version of 
+the AWT were as follows: </p>
+
+
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Adapter classes</strong></p>
+<ul>
+		<li>java.awt.event.ComponentAdapter</li>
+		<li>java.awt.event.FocusAdapter</li>
+		<li>java.awt.event.KeyAdapter</li>
+		<li>java.awt.event.MouseAdapter</li>
+		<li>java.awt.event.MouseMotionAdapter</li>
+		<li>java.awt.event.WindowAdapter</li>
+	</ul>
+
+</div>
+	
+	<h1><a name="Another_Sample_Program">Another Sample Program</a></h1>
+<p>The previous program implemented an <b>Event Source</b> object that notified 
+two different <b>Listener </b>objects of the occurrence of an event in the <b>
+Window </b>class. </p>
+<p>The following program implements an <b>Event Source</b> object that notifies 
+one <b>Listener </b>object of the occurrence of an event in the <b>Window </b>
+class and notifies another <b>Listener </b>object of the occurrence of an event 
+in the <b>Mouse </b>class. </p>
+<p>This program implements a <b>MouseListener </b>
+interface on a <b>Frame </b>object, which is possible because the <b>Frame </b>
+class indirectly extends the <b>Component </b>class, and <b>addMouseListener </b>
+is defined on the <b>Component </b>class. Thus, <b>addMouseListener </b>
+is inherited into the <strong>Frame</strong> class.</p>
+<p>A complete listing of this program is shown in <a href="#Listing_16">Listing 
+16</a>.</p>
+<p><strong>Program output</strong></p>
+<p>If you compile and execute this program, whenever you click the mouse inside 
+the <b>Frame</b>, you should see the coordinates of the mouse pointer displayed 
+above the mouse pointer as shown in <a href="#Figure_2">Figure 2</a> below.</p>
+<p><em>(The 0,0 coordinate is the outer edge of the upper-left corner, which is 
+beyond the reach of the mouse pointer.)</em></p>
+<div class="a">
+<p><a name="Figure_2">Figure 2</a> - Screen output from Event09.</p>
+<p><img alt="GUI Frame obj showing coordinates of mousePressed event." height="301" src="event09a.jpg" width="301"/></p>
+</div>
+
+<h2><a name="Event09_Interesting_Code_Fragments">Event09 Interesting Code Fragments</a></h2>
+<p>The first interesting code fragment is the definition of the controlling 
+class. The <b>main</b> method for this class instantiates a <strong>GUI</strong> object where 
+all the real work is done. <a href="#Listing_10">Listing 10</a> shows the 
+class named <strong>Event09</strong> including the <strong>main</strong> 
+method.</p>
+
+<div class="a">
+	<p><a name="Listing_10">Listing 10</a> - Beginning of the class 
+				named Event09.</p>
+<pre>public class Event09 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class Event09</pre>
+</div>
+	<p><strong>The paint and repaint methods</strong></p>
+<p>In this program, we are going to override the <b>paint</b> method to make it 
+possible for us to draw coordinate information on the screen. </p>
+<p>In order to override the <b>paint</b> method, we need to extend the <b>
+Frame </b>class. By doing so, we can define our own version of the <b>Frame </b>class where we 
+have the ability to override the <b>paint</b> method. <a href="#Listing_11">Listing 11</a> <i>extends </i><b>Frame </b>into <b>MyFrame </b>and overrides the <b>
+paint</b> method. </p>
+
+	
+<div class="a">
+	<p><a name="Listing_11">Listing 11</a> - The class named 
+				MyFrame.</p>
+<pre>class MyFrame extends Frame{
+  int clickX;
+  int clickY;
+
+  public void paint(Graphics g){
+    g.drawString(
+             "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint()
+}//end class MyFrame</pre>
+</div>
+	<p><strong>Storing and using coordinate information</strong></p>
+<p>For future reference, note that this class contains a couple of instance 
+variables that will be used to store X and Y coordinate information.</p>
+<p>The overridden version of the <b>paint</b> method causes the coordinate 
+values stored in <b>clickX</b> and <b>clickY</b> to be displayed in the client 
+area of the <b>Frame</b> object at the location specified by the values of those 
+two instance variables. </p>
+<p><strong>The drawString method</strong></p>
+<p>The <b>drawString</b> method requires three parameters. The first parameter is the string to draw on the 
+screen. The next two parameters are the coordinate values in pixels where the 
+string is to be drawn. </p>
+<p>As is normally the case, coordinate values are specified relative to the 
+upper left corner of the object being drawn on. The above overridden 
+version of the <b>drawString</b> method converts the coordinate values to a 
+<strong>String</strong>, and draws that string at the location specified by the coordinate 
+values. </p>
+<p><strong>The class named GUI</strong></p>
+<p>As before, the <b>GUI </b>class is rather long. Therefore, I will break it up 
+and discuss it in fragments. </p>
+<p>The first fragment that I will discuss is the constructor that begins in
+<a href="#Listing_12">Listing 12</a>. The important 
+thing to note here is that we are not instantiating an object of type <b>Frame</b>. 
+Instead, we are instantiating an object of type <b>MyFrame </b>that is our 
+extended version of <b>Frame</b>. </p>
+<p>Other than that, you should be familiar with the code in
+<a href="#Listing_12">Listing 12</a> by now.</p>
+
+	
+<div class="a">
+	<p><a name="Listing_12">Listing 12</a> - Beginning of the class 
+				named GUI.
+				</p>
+				<pre>class GUI {
+  public GUI(){//constructor
+    //Create a new Frame object, set size, title, etc.
+    MyFrame displayWindow = new MyFrame();
+    displayWindow.setSize(300,300);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");
+    displayWindow.setVisible(true);</pre>
+</div>
+	<p><strong>Register two listener objects</strong></p>
+<p><a href="#Listing_13">Listing 13</a> uses standard syntax to instantiate and register two 
+different <b>Listener </b>objects on the <b>MyFrame </b>object. The first is a
+<b>WindowListener </b>object that will terminate the program when the user 
+closes the <b>MyFrame </b>object.</p>
+<p>The second is a <b>MouseListener </b>object that will process <i>mouse events</i> 
+on the <b>MyFrame </b>object. </p>
+<p>It is typical to register listener objects as <em>anonymous objects</em> in those 
+cases where a specific reference to the listener object is not otherwise needed.
+<em>(Don&#39;t confuse anonymous objects with anonymous classes, which is the topic 
+of a future chapter.)</em></p>
+
+	
+<div class="a">
+	<p><a name="Listing_13">Listing 13</a> - Register two listener objects.
+				</p>
+				<pre>    displayWindow.addWindowListener(new WProc1());
+    displayWindow.addMouseListener(
+                             new MouseProc(displayWindow));
+  }//end constructor
+}//end class GUI definition</pre>
+</div>
+	<p><a href="#Listing_13">Listing 13</a> ends the definition of the <b>GUI </b>class. That 
+brings us to the definition of <b>Listener </b>classes for the <b>WindowListener
+</b>and the <b>MouseListener</b> interfaces.</p>
+<p><strong>The MouseListener class</strong></p>
+<p>I will begin with the <b>MouseListener </b>class named <a href="#Listing_14">MouseProc</a>. 
+This class <i>
+extends </i>the <b>MouseAdapter </b>class and does not directly <i>implement</i> 
+the <i>MouseListener </i>interface. This saves us the trouble of having to 
+create empty methods for event types that we are not interested in. </p>
+<p>Objects of this class that are registered on the <b>Source</b> will be 
+notified whenever a <b>mousePressed()</b> event occurs on the <b>Source. </b>
+This will cause the <b>mousePressed</b> method to be called. The <b>mousePressed</b> 
+method will display the coordinates of the mouse pointer when the mouse is 
+pressed on the source object.</p>
+<p><strong>The mousePressed method</strong></p>
+<p>When the <b>mousePressed</b> method is called, it receives a reference to an object of 
+type <b>MouseEvent</b> as a parameter. Different types of events encapsulate 
+different types of information in the object that is passed as a parameter to 
+the event handler method. This 
+particular object contains a variety of information, including the coordinates 
+of the mouse pointer when the event occurred. </p>
+<p><strong>Extract and save mouse pointer coordinates</strong></p>
+<p>The code in the overridden <b>mousePressed()</b> method extracts that 
+coordinate information from the object and stores it in the instance variables 
+named <b>clickX</b> and <b>clickY</b> of the <b>Source </b>object. </p>
+<p>Then it calls the <b>repaint</b> method on the source object, causing the 
+source object to be repainted on the screen. This in turn causes the overridden <b>
+paint</b> method discussed earlier to be called, which displays the new 
+coordinate information on the screen in the proper location. </p>
+<p><strong>The class named MouseProc</strong></p>
+	<p><a href="#Listing_14">Listing 14</a> contain the definition of the 
+	<strong>MouseProc</strong> class, including the overridden <strong>mousePressed</strong> method 
+	discussed above.</p>
+
+	
+<div class="a">
+	<p><a name="Listing_14">Listing 14</a> - The class named MouseProc. </p>
+				<pre>class MouseProc extends MouseAdapter{
+  MyFrame refToWin; //save a reference to the source here
+
+  MouseProc(MyFrame inWin){//constructor
+    refToWin = inWin;//save ref to window
+  }//end constructor
+
+  public void mousePressed(MouseEvent e){
+    refToWin.clickX = e.getX();
+    refToWin.clickY = e.getY();
+
+    refToWin.repaint();
+  }//end mousePressed()
+}//end class MouseProc</pre>
+</div>
+	<p><strong>The class named WProc1</strong></p>
+<p>Finally, we come to the class that is used to instantiate a listener object 
+that terminates the program when the user closes the <b>MyFrame </b>object <em>
+(see <a href="#Listing_15">Listing 15</a>)</em>. You 
+will be seeing this class over and over as you review the sample programs in 
+upcoming chapters. </p>
+
+	
+<div class="a">
+	<p><a name="Listing_15">Listing 15</a> - The class named WProc1.
+				</p>
+				<pre>class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1</pre>
+</div>
+	<p>The <strong>WProc1</strong> class extends the <strong>WindowAdapter</strong> 
+	class and overrides the method named <strong>windowClosing</strong>.</p>
+<p>The <strong>windowClosing</strong> method is called when the user clicks the 
+red X in the upper right corner of <a href="#Figure_2">Figure 2</a>.That causes 
+the static <strong>exit</strong> method of the <strong>System</strong> class to 
+be called, which in turn causes the program to terminate.</p>
+<h2><a name="Event09_Program_Listing">Event09 Program Listing</a></h2>
+<p>A complete listing of the program named <strong>Event09</strong> is provided 
+in <a href="#Listing_16">Listing 16</a>.</p>
+
+<div class="a">
+<p><a name="Listing_16">Listing 16</a> - Complete listing of 
+				Event09.</p>
+
+				<pre>/*File Event09.java Copyright, R.G.Baldwin
+This program is designed to be compiled under JDK 1.1
+
+Illustrates the use of Event Sources, Event Listeners, and
+Adapters in the Delegation Event Model.
+
+This program instantiates a Listener object to process
+mouse events. When a mouse press occurs in a Frame object,
+the program gets the coordinates and then displays those
+coordinates near the point of the mouse press.
+
+This program was tested using JDK 1.1.3 under Win95.
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event09 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class Event09
+//=======================================================//
+
+//Subclass Frame in order to override the paint method.
+class MyFrame extends Frame{
+  int clickX;
+  int clickY;
+
+  public void paint(Graphics g){
+    g.drawString(
+             "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint()
+}//end class MyFrame
+//=======================================================//
+
+//The following class is used to instantiate a
+// graphical user interface object.
+class GUI {
+  public GUI(){//constructor
+    //Create a new Frame object, set size, title, etc.
+    MyFrame displayWindow = new MyFrame();
+    displayWindow.setSize(300,300);
+    displayWindow.setTitle("Copyright, R.G.Baldwin");
+    displayWindow.setVisible(true);
+
+    //Instantiate and register an anonymous Listener
+    // object that will terminate the program when the
+    // user closes the Frame.
+    displayWindow.addWindowListener(new WProc1());
+
+    //Instantiate and register an anonymous Listener
+    // object that will process mouse events to determine
+    // and display the coordinates when the user presses
+    // the mouse button in the client area of the Frame.
+    displayWindow.addMouseListener(
+                             new MouseProc(displayWindow));
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//This listener class monitors for mouse presses and
+// displays the coordinates of the mouse pointer when the
+// mouse is pressed on the source object. Note that this
+// class extends is an adapter class.
+class MouseProc extends MouseAdapter{
+  MyFrame refToWin; //save a reference to the source here
+
+  MouseProc(MyFrame inWin){//constructor
+    refToWin = inWin;//save ref to window
+  }//end constructor
+
+  //Override the mousePressed method to determine and
+  // display the coordinates when the mouse is pressed.
+  public void mousePressed(MouseEvent e){
+    //Get X and Y coordinates of mouse pointer and store
+    // in an instance variable of the Frame object
+    refToWin.clickX = e.getX();
+    refToWin.clickY = e.getY();
+
+    //Force the Frame object to be repainted in order to
+    // display the coordinate information.
+    refToWin.repaint();
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+//The following listener is used to terminate the program
+// when the user closes the frame.  Note that this class
+// extends an adapter class.
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//</pre>
+</div>
+	<h1><a name="Summary">Summary</a></h1>
+<p>In the simplest case, you can handle events as defined in JDK 1.1 with the following steps.</p>
+<h2><a name="Step_1">Step 1</a></h2>
+<p>Define a <b>Listener </b>class for a specific class of events by either <i>
+implementing </i>the listener interface that matches that class of events, or <i>
+extending </i>the corresponding adapter class.</p>
+<h2><a name="Step_2">Step 2</a></h2>
+<p>Define or override the interface methods in the <b>Listener </b>class, for 
+each specific event type in the event class, to implement the desired behavior 
+of the program upon occurrence of an event. </p>
+<p>If you <i>implement </i>the listener interface, you must define all interface 
+methods. If instead you <i>extend </i>the corresponding adapter class, you can 
+override only those methods that tie to event types of interest.</p>
+<h2><a name="Step_3">Step 3</a></h2>
+<p>Write code that instantiates objects of the <b>Source </b>class and the
+<b>Listener </b>class and <i>registers </i>the listener object on the source 
+object for notification of events generated by the source 
+object.</p>
+<p>You can use code such as the following for registration:</p>
+<p>displayWindow.<b>addMouseListener</b>(mouseProcCmd);</p>
+<p>In this code fragment,</p>
+<ul>
+	<li><b>displayWindow</b> is a reference to the object that fires the event,</li>
+	<li><b>mouseProcCmd</b> is the name of a reference to the listener object, and</li>
+	<li><b>addMouseListener </b>is the method that registers the listener object 
+	to receive mouse events from the object referred to by <b>displayWindow</b>.</li>
+</ul>
+<p>This statement will cause the object named <b>mouseProcCmd</b> to be notified of 
+all events generated by <b>displayWindow</b> which are part of the class of <i>
+mouse</i> events.</p>
+<p>The notification takes the form of calling a method in the <b>mouseProcCmd</b> 
+object where there must be a corresponding method for each specific event type 
+in the class of <i>mouse</i> events. <em>(Some of those methods can be empty 
+shells if you have no interest in some of the event types).</em></p>
+<p><strong>Comments</strong></p>
+<p>As mentioned earlier, this is the procedure for the simplest cases. It is 
+possible to make the situation more complicated. For example, a single <b>Source </b>object 
+can be required to notify two or more different <b>Listener </b>
+objects of the occurrence of an event of the same class on a single screen 
+object. </p>
+<p>The <b>Source </b>object can also be required to notify two 
+or more different <b>Listener </b>objects of the occurrence of events of two different 
+classes on a single screen object. </p>
+<p>A single <b>Listener </b>object can be registered 
+to receive notification of the occurrence of events of a given class on more 
+than one source object. In that case, it is normally necessary for the code in 
+the <b>Listener </b>object to crack open the event object to determine which 
+screen object was responsible for the event <em>(if it matters)</em>. </p>
+<p>Also, the JDK 1.1 documentation indicates that it is possible to have 
+event-style communication between objects that are not screen objects. 
+Subsequent chapters will investigate a number of these possibilities.</p>
+<center>
+<h1><a name="Run_the_program">Run the program</a></h1>
+</center>
+<p>I encourage you to copy the code from <a href="#Listing_9">Listing 9</a> and
+<a href="#Listing_16">Listing 16</a>. Compile the code and execute it. 
+Experiment with the code, making changes, and observing the results of your 
+changes. Make certain that you can explain why your changes behave as they do.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+				</p>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java080 Delegation Event Model, A First 
+					Look</li>
+					<li>File: Java080.htm
+</li>
+					<li>Published: 1997</li>
+					<li>Revised: 05/04/20</li>
+				</ul>
+</div>
+
+	<p>-end- </p>
+
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0170</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0170: A little more information about classes</h1>
+ 
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a> 
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#Defining_a_class_in_Java">Defining a class in Java</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>This chapter is part of an Ebook designed to help you 
+	learn to program computers. This chapter sheds a little more light on the Java construct called a <em>
+class</em>. Before continuing with this chapter, I recommend that you study 
+	Kjell <a href="http://programmedlessons.org/Java9/chap40/ch40_01.html">CHAPTER 40 — Objects</a> through 
+	<a href="http://programmedlessons.org/Java9/chap54/ch54_01.html">CHAPTER 54 — Static Methods</a>.</p>
+	<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. General syntax for defining a Java class. </li>
+	</ul>
+	<h1><a name="Introduction">Introduction</a></h1>
+<h2>New types</h2>
+<p>Java makes extensive use of classes. <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap40/ch40_07.html#class,_definition">Class</a>.)</em> When a class is defined in Java, a new
+<em>type</em> comes into being. <em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap08/ch08_05.html">Objects</a>.)</em> The new type definition 
+can then be used to instantiate <em>(create instances of)</em> one or more 
+objects of that new type. </p>
+<h2>A blueprint</h2>
+<p>The class definition provides a <em>blueprint </em>that describes the <em>
+data </em>contained within, and the <em>
+behavior </em>of objects instantiated according to the new type. <em>(See 
+Kjell <a href="http://programmedlessons.org/Java9/chap40/ch40_07.html">Class</a>.)</em></p>
+<h2>The data</h2>
+<p>The data is contained in variables defined within the class <em>(often called 
+member variables,</em> <em>data members, attributes, fields, properties, 
+etc.</em>). <em>(See Kjell 
+<a href="http://programmedlessons.org/Java9/chap40/ch40_10.html#members_of_a_object">Invoking an Object's Method</a>.)</em></p>
+<h2>The behavior</h2>
+<p>The behavior is controlled by methods defined within the class. </p>
+<h2>State and behavior</h2>
+<p>An object is said to have <em>state</em> and <em>behavior</em>. At any 
+instant in time, the <em>state</em> of an object is determined by the values 
+stored in its <em>variables</em> and its behavior is determined by its <em>
+methods</em>. </p>
+<h2>Class vs. instance</h2>
+<p>It is possible to define:</p>
+<ul>
+	<li>instance variables <em>(see Kjell
+	<a href="http://programmedlessons.org/Java9/chap47/ch47_06.html#instance_variable">Filling in the Definition</a>)</em> and instance methods 
+	<em>(see Kjell 
+	<a href="http://programmedlessons.org/Java9/chap51/ch51_07.html">One-way Glass</a>)</em></li>
+	<li>static or <em>class</em> variables and static or <em>class</em>  methods
+	<em>(see Kjell
+	<a href="http://programmedlessons.org/Java9/chap40/ch40_12.html">Static</a>)</em></li>
+</ul>
+<p>Instance variables and instance methods can only be accessed through an 
+object instantiated from the class. They belong to the individual objects, <em>
+(which is why they are called instance variables and instance methods)</em>.</p>
+<p><em>Class</em> (static) variables and <em>class</em> (static) methods can be accessed without 
+first instantiating an object. They are shared among all of the objects 
+instantiated from the class and are even accessible in the total absence of an 
+object of the class.</p>
+<p>The class name alone is sufficient for accessing <em>class</em> variables and
+<em>class</em> methods by joining the name of the class to the name of the 
+variable or method using a period.</p>
+<h1><a name="Defining_a_class_in_Java">Defining a class in Java</a></h1>
+<p>The general syntax for defining a class in Java is shown in
+<a href="#Listing_1">Listing 1</a>. <em>(Also see Kjell 
+<a href="http://programmedlessons.org/Java9/chap46/ch46_06.html#class_definition,_syntax">Syntax of a Class Definition.</a>)</em></p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. General syntax for 
+				defining a Java class.
+
+<pre>
+class MyClassName{
+  . . .
+} //End of class definition.
+</pre>
+
+</div>
+<!--``2-->
+	<p>This syntax defines a class and creates a new type named <strong>
+	MyClassName</strong>. </p>
+<p>The definitions of variables, methods, constructors, and a variety of other 
+members are inserted between the opening and closing curly brackets <em>(braces)</em>.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	<p>Housekeeping material</p>
+ 
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0170: A little more information 
+					about classes.</li>
+					<li>File: Jb0170.htm
+</li>
+					<li>Revised: 08/06/22</li>
+				</ul>
+</div>
+
+<p>end- </p>
+
+
+</body>
+</html>

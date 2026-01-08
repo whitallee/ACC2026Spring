@@ -1,0 +1,663 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0280</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0280: String and StringBuffer</h1> 
+
+
+<h1>Table of Contents</h1> 
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#YouCant">You can't modify a String object, but you can replace it</a></li>
+	<li><a href="#WhyAreThereTwoStringClasses">Why are there two string classes?</a></li>
+	<li><a href="#CreatingStringsandStringBuffers">Creating String and StringBuffer objects</a><ul>
+		<li><a href="#FirstSampleProgram">The sample program named String02</a></li>
+		<li><a href="#AlternativeString">Alternative String instantiation constructs</a></li>
+		<li><a href="#InstantiatingStringBufferObjects">Instantiating StringBuffer objects</a></li>
+		<li><a href="#DeclarationMemory">Declaration, memory allocation, and initialization
+		</a></li>
+		<li><a href="#InstantiatinganEmpty">Instantiating an empty StringBuffer object</a></li>
+	</ul>
+	</li>
+	<li><a href="#AccessorMethods">Accessor methods</a><ul>
+		<li><a href="#Constructorsand">Constructors and methods of the String class</a></li>
+		<li><a href="#StringEncapsulatesData">String objects encapsulate data</a></li>
+		<li><a href="#CreatingStringObjectswithout">Creating String objects without calling the constructor</a></li>
+	</ul>
+	</li>
+	<li><a href="#MemoryManagement">Memory management by the StringBuffer class</a></li>
+	<li><a href="#ThetoStringMethod">The toString method</a></li>
+	<li><a href="#StringsandtheJavaCompiler">Strings and the Java compiler</a></li>
+	<li><a href="#ConcatenationandtheOperator">Concatenation and the + operator</a></li>
+	<li><a href="#Run_the_program">Run the programs</a></li>
+
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+<p>This chapter discusses the <strong>String</strong> and <strong>StringBuffer</strong> 
+classes in detail. This is the first deep dive into OOP in this Ebook, and it 
+may contain concepts and terminology that you are not familiar with. Give 
+it a shot and try to understand as much as you can. Those concepts and that 
+terminology will become more clear as you pursue the second major part of this 
+Ebook that concentrates on OOP.</p>
+<p>Before continuing with this chapter, I recommend that you study Kjell 
+<a href="http://programmedlessons.org/Java9/chap44/ch44_01.html">CHAPTER 44 — Strings and Object References</a>, 
+<a href="http://programmedlessons.org/Java9/chap45/ch45_01.html">CHAPTER 45 — More about Strings</a>, 
+and <a href="http://programmedlessons.org/Java9/chap68/ch68_01.html">CHAPTER 68 — StringBuffer</a>.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. File String01.java</li>
+		<li><a href="#Listing_2">Listing 2</a>. File String02.java.</li>
+	</ul>
+<h1 ><a name="Introduction"></a>Introduction</h1>
+<p>A string in Java is an object. Java provides two different string classes from which objects 
+that encapsulate string data can be 
+instantiated: </p>
+
+<ul>
+<li><strong>String</strong> </li>
+<li><strong>StringBuffer</strong> </li></ul>
+
+<p>The <strong>String</strong> class is used for strings that are not allowed to change 
+once an object has been instantiated <em>(an immutable object)</em>. 
+The <strong>StringBuffer</strong> class is used for strings that may be modified by the 
+program. </p>
+<h1 ><a name="YouCant"></a>You can&#39;t modify 
+a String object, but you can replace it</h1>
+<p>While the contents of a <strong>String</strong> object 
+cannot be modified, a reference to a <strong>String</strong> object can be 
+caused to point to a different <strong>String</strong> object as illustrated in 
+the sample program shown in <a href="#Listing_1">Listing 1</a>. Sometimes this makes it appear that the 
+original <strong>String</strong> object is being modified. </p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. File String01.java.
+<pre>
+/*File String01.java Copyright, R.G.Baldwin
+This application illustrates the fact that while a String 
+object cannot be modified, the reference variable can be 
+modified to point to a new String object which can have 
+the appearance of modifying the original String object.
+
+The program was tested using JDK 1.1.3 under Win95.
+
+The output from this program is
+
+Display original string values
+THIS STRING IS NAMED str1
+This string is named str2
+Replace str1 with another string
+Display new string named str1
+THIS STRING IS NAMED str1 This string is named str2
+Terminating program
+
+**********************************************************/
+
+class String01{
+  String str1 = &quot;THIS STRING IS NAMED str1&quot;;
+  String str2 = &quot;This string is named str2&quot;;
+  
+  public static void main(String[] args){
+    String01 thisObj = new String01();
+    System.out.println(&quot;Display original string values&quot;);
+    System.out.println(thisObj.str1);
+    System.out.println(thisObj.str2);
+    System.out.println(&quot;Replace str1 with another string&quot;);
+    thisObj.str1 = thisObj.str1 + &quot; &quot; + thisObj.str2;
+    System.out.println(&quot;Display new string named str1&quot;);
+    System.out.println(thisObj.str1);
+    System.out.println(&quot;Terminating program&quot;);
+  }//end main()
+}//end class String01
+</pre>
+
+</div>
+<!--``2-->
+
+<p>It is important to note that the following statement does not modify 
+the original object pointed to by the reference variable named <strong>str1</strong>. </p>
+
+
+
+<div class="a">
+				<pre>
+thisObj.str1 = thisObj.str1 + &quot; &quot; + thisObj.str2;</pre>
+</div>
+
+<p>Rather, this statement creates a new object, which is concatenation of 
+two existing objects and causes the reference variable named <strong>str1</strong> to 
+point to the new object instead of the original object. </p>
+<p>The original object then becomes eligible for garbage collection <em>(unless 
+there is another reference to the object hanging around somewhere)</em>. </p>
+<p>Many aspects of string manipulation can be accomplished in this manner, 
+particularly when the methods of the <strong>String</strong> class are brought into 
+play. </p>
+<h1 ><a name="WhyAreThereTwoStringClasses"></a>
+Why are there two string classes?</h1>
+<p>According to <em>The Java Tutorial</em> by Campione and Walrath:</p>
+
+
+
+<div class="a">
+				<p>&quot;Because they are constants, Strings are typically cheaper than 
+StringBuffers and they can be shared. So it&#39;s important to use Strings 
+when they&#39;re appropriate.&quot;</p>
+</div>
+
+
+<h1 ><a name="CreatingStringsandStringBuffers"></a>
+Creating String and StringBuffer objects</h1>
+<p>The <strong>String</strong> and <strong>StringBuffer</strong> classes have 
+numerous overloaded constructors and many different methods. I will attempt to provide a 
+sampling of constructors and methods that will prepare you to explore other 
+constructors and methods on your own. </p>
+<p>The next sample program touches on some of the possibilities provided by the 
+wealth of constructors and methods in the <strong>String</strong> and <strong>StringBuffer</strong> 
+classes. </p>
+<p>At this point, I will refer you to the Java 
+documentation. <em>(See the chapter titled Jb0110: Programming Fundamentals, Getting Started.)</em> Among other things, the documentation provides a list of the 
+overloaded constructors and methods for the <strong>String</strong> and <strong>
+StringBuffer</strong> classes.</p>
+
+<p>As of Java version 7, there are four overloaded constructors in the 
+<strong>StringBuffer</strong> class and about thirteen different overloaded versions of the 
+<strong>append</strong> 
+method. There are many additional methods in the 
+<strong>StringBuffer</strong> class including about twelve overloaded versions of the 
+<strong>insert</strong> method. </p>
+<p>As you can see, there are lots of constructors and lots of methods from which 
+to choose. One of your challenges as a Java programmer will be to find the right 
+methods of the right classes to accomplish what you want your program 
+to accomplish. </p>
+<h2 ><a name="FirstSampleProgram"></a>The sample program named String02</h2>
+<p>The sample program shown in <a href="#Listing_2">Listing 2</a> illustrates a variety of ways to create 
+and initialize <strong>String</strong> and <strong>StringBuffer</strong> 
+objects. </p>
+
+
+
+<div class="a">
+<a name="Listing_2">Listing 2</a>. <strong>File String02.java.</strong>
+
+<pre>
+/*File String02.java Copyright, R.G.Baldwin
+Illustrates different ways to create String objects and 
+StringBuffer objects.
+
+The program was tested using JDK 1.1.3 under Win95.
+
+The output from this program is as follows.  In some cases,
+manual line breaks were inserted to make the material fin
+this presentation format.
+
+Create a String the long way and display it
+String named str2
+
+Create a String the short way and display it
+String named str1
+
+Create, initialize, and display a StringBuffer using new
+StringBuffer named str3
+
+Try to create/initialize StringBuffer without 
+using new - not allowed
+
+Create an empty StringBuffer of default length
+Now put some data in it and display it
+StringBuffer named str5
+
+Create an empty StringBuffer and specify length 
+when it is created
+Now put some data in it and display it
+StringBuffer named str6
+
+Try to create and append to StringBuffer without 
+using new -- not allowed
+
+**********************************************************/
+
+class String02{
+  void d(String displayString){//method to display strings
+    System.out.println(displayString);
+  }//end method d()
+
+  public static void main(String[] args){
+    String02 o = new String02();//obj of controlling class
+    
+    o.d(&quot;Create a String the long way and display it&quot;);
+    String str1 = new String(&quot;String named str2&quot;);
+    o.d(str1 + &quot;\n&quot;);
+    
+    o.d(&quot;Create a String the short way and display it&quot;);
+    String str2 = &quot;String named str1&quot;;
+    o.d(str2 + &quot;\n&quot;);
+  
+    o.d(&quot;Create, initialize, and display a StringBuffer &quot; +
+                                              &quot;using new&quot;);
+    StringBuffer str3 = new StringBuffer(
+                                &quot;StringBuffer named str3&quot;);
+    o.d(str3.toString()+&quot;\n&quot;);
+
+    o.d(&quot;Try to create/initialize StringBuffer without &quot; +
+                              &quot;using new - not allowed\n&quot;);
+    //StringBuffer str4 = &quot;StringBuffer named str4&quot;;x    
+    
+    o.d(&quot;Create an empty StringBuffer of default length&quot;);
+    StringBuffer str5 = new StringBuffer();
+    
+    o.d(&quot;Now put some data in it and display it&quot;);
+    //modify length as needed
+    str5.append(&quot;StringBuffer named str5&quot;);
+    o.d(str5.toString() + &quot;\n&quot;);
+    
+    o.d(&quot;Create an empty StringBuffer and specify &quot; +
+                             &quot;length when it is created&quot;);
+    StringBuffer str6 = new StringBuffer(
+                      &quot;StringBuffer named str6&quot;.length());
+    o.d(&quot;Now put some data in it and display it&quot;);    
+    str6.append(&quot;StringBuffer named str6&quot;);
+    o.d(str6.toString() + &quot;\n&quot;);
+    
+    o.d(&quot;Try to create and append to StringBuffer &quot; +
+                      &quot;without using new -- not allowed&quot;);
+    //StringBuffer str7;
+    //str7.append(&quot;StringBuffer named str7&quot;);
+  }//end main()  
+}//end class String02
+</pre>
+
+</div>
+
+
+
+<h2 ><a name="AlternativeString"></a>
+Alternative String instantiation constructs</h2>
+<p>The first thing to notice is that a <strong>String</strong> object can be created 
+using either of the following constructs: </p>
+
+
+
+<div class="a"><a name="AlternativeString0"></a>
+				<strong>Alternative String instantiation constructs</strong>
+				<pre>
+    String str1 = new String(&quot;String named str2&quot;);
+   
+    String str2 = &quot;String named str1&quot;;</pre>
+</div>
+
+<p>The first approach uses the <strong>new</strong> operator to instantiate an object 
+while the shorter version doesn&#39;t use the new operator. </p>
+<p>Later I will discuss the fact that </p>
+<ul>
+	<li>the second approach is not simply a 
+shorthand version of the first construct, but that </li>
+	<li>they involve two 
+different compilation scenarios with the second construct being more efficient 
+than the first. </li>
+</ul>
+<h2 ><a name="InstantiatingStringBufferObjects"></a>
+Instantiating StringBuffer objects</h2>
+<p>The next thing to notice is that a similar alternative strategy does 
+not hold for the <strong>StringBuffer</strong> class. </p>
+<p>For example, it is not possible to create a <strong>StringBuffer</strong> object 
+without use of the <strong>new</strong> operator. <em>(It is possible to create a reference to 
+a </em> <strong><em>StringBuffer</em></strong><em> object but it is later necessary to use the 
+<strong>new</strong> 
+operator to actually instantiate an object.)</em></p>
+<p>Note the following code fragments that illustrate allowable and non-allowable instantiation 
+scenarios for <strong>StringBuffer</strong> objects. </p>
+
+
+
+<div class="a"><strong>Instantiating StringBuffer objects</strong>
+				<pre>
+//allowed
+StringBuffer str3 = new StringBuffer(
+                      &quot;StringBuffer named str3&quot;);
+
+//not allowed     
+//StringBuffer str4 = &quot;StringBuffer named str4&quot;;
+
+
+o.d(&quot;Try to create and append to StringBuffer &quot; +
+             &quot;without using new -- not allowed&quot;);
+//StringBuffer str7;
+//str7.append(&quot;StringBuffer named str7&quot;);</pre>
+</div>
+
+<h2 ><a name="DeclarationMemory"></a>
+Declaration, memory allocation, and initialization</h2>
+<p>To review what you learned in an earlier chapter, three steps are 
+normally involved in creating an object <em>(but the third step may be omitted)</em>. </p>
+
+<ul>
+<li>declaration </li>
+<li>memory allocation </li>
+<li>initialization </li></ul>
+
+<p>The following code fragment performs all three steps: </p>
+
+
+
+<div class="a"><strong>
+				<a name="Declaration_memory_allocation_and_initialization">Declaration, memory allocation, and initialization</a></strong>
+				<pre>
+StringBuffer str3 = 
+  new StringBuffer(&quot;StringBuffer named str3&quot;);</pre>
+</div>
+<p>The code </p>
+<pre>StringBuffer str3 </pre>
+<p>declares the type and name 
+of a reference variable of the correct type for the benefit of the compiler. </p>
+<p>The <strong>new</strong> operator allocates memory for the new object. </p>
+<p>The constructor call </p>
+<pre>StringBuffer("StringBuffer named str3") </pre>
+<p>constructs and 
+initializes the object. </p>
+
+<h2 ><a name="InstantiatinganEmpty"></a>
+Instantiating an empty StringBuffer object</h2>
+<p>The instantiation of the <strong>StringBuffer</strong> object shown 
+<a href="#Declaration_memory_allocation_and_initialization">above</a> uses a version of 
+the constructor that accepts a <strong>String</strong> object and initializes the 
+<strong>StringBuffer</strong> object when it is 
+created. </p>
+<p>The following code fragment instantiates an empty <strong>StringBuffer</strong> object 
+of a default capacity and then uses a version of the <strong>append</strong> method 
+to put some data into the object. <em>(Note that the data is actually a <strong>
+String</strong> object -- a sequence of characters surrounded by quotation 
+marks.)</em></p>
+
+
+
+<div class="a"><strong>Instantiating an empty StringBuffer object</strong>
+				<pre>
+//default initial length
+StringBuffer str5 = new StringBuffer();
+
+//modify length as needed
+str5.append(&quot;StringBuffer named str5&quot;);</pre>
+</div>
+
+<p>It is also possible to specify the capacity when you instantiate a 
+<strong>StringBuffer</strong> object. </p>
+<p>Some authors suggest that if you know the final length of such an object, it 
+is more efficient to specify that length when the object is instantiated than to 
+start with the default length and then require the system to increase the length 
+&quot;on the fly&quot; as you manipulate the object. </p>
+<p>This is illustrated in the following code fragment. This fragment also illustrates the 
+use of the <strong>length</strong> method of the <strong>String</strong> class just to make things 
+interesting. <em>(A simple integer value for the capacity of the </em> <strong><em>StringBuffer</em></strong><em> 
+object would have worked just as well.) </em> </p>
+
+
+
+<div class="a"><strong>Instantiating a StringBuffer object of a non-default length</strong>
+				<pre>
+    StringBuffer str6 = new StringBuffer(
+                &quot;StringBuffer named str6&quot;.length());
+    str6.append(&quot;StringBuffer named str6&quot;);</pre>
+</div>
+
+
+<h1 ><a name="AccessorMethods"></a>Accessor 
+methods</h1>
+<p>The following quotation is taken directly from <em>The Java Tutorial</em> by Campione and Walrath. </p>
+
+
+
+<div class="a">
+				<p>&quot;An object&#39;s instance variables are encapsulated within 
+the object, hidden inside, safe from inspection or manipulation by other 
+objects. With certain well-defined exceptions, the object&#39;s methods are the 
+only means by which other objects can inspect or alter an object&#39;s instance 
+variables. Encapsulation of an object&#39;s data protects the object from corruption 
+by other objects and conceals an object&#39;s implementation details from outsiders. 
+This encapsulation of data behind an object&#39;s methods is one of 
+the cornerstones of object-oriented programming.&quot;</p>
+</div>
+
+<p>The above statement lays out an important consideration in good 
+object-oriented programming. </p>
+<p>The methods used to obtain information about an object are often referred to 
+as <em>accessor methods</em>. There are also known as <em>getter</em> methods, 
+as in <em>to get</em> something.</p>
+<h2 ><a name="Constructorsand"></a>
+Constructors and methods of the String class</h2>
+<p>I told you in an <a href="#CreatingStringsandStringBuffers">earlier section</a> that the <strong>StringBuffer</strong> class 
+provides a large number of overloaded constructors and methods. The same holds 
+true for the <strong>String</strong> class.</p>
+<p>Once again, I will refer you to the Java 
+documentation. Among other things, the documentation provides a list of the 
+overloaded constructors and methods for the <strong>String</strong> class </p>
+
+<h2 ><a name="StringEncapsulatesData"></a>
+String objects encapsulate data</h2>
+<p>The characters in a <strong>String</strong> object are not directly available to 
+other objects. However, as you can see from the documentation, there are a large number of methods 
+that can be 
+used to access and manipulate those characters. For example, in an 
+earlier sample program <em>(</em><a href="#Listing_2"><em>Listing 2</em></a><em>)</em>, 
+I used the <strong>length</strong> method to access the 
+number of characters stored in a <strong>String</strong> object as shown in the 
+following code fragment. </p>
+<blockquote><em>(Note here that I am speaking of a <strong>method</strong> named 
+length, which is different from the length <strong>property</strong> of an array 
+object that you learned about earlier. Recall that there are no parenthesis 
+required when you access the length property of an array object.)</em></blockquote>
+
+
+
+<div class="a">
+				<pre>
+StringBuffer str6 = new StringBuffer(
+                    &quot;StringBuffer named str6&quot;.length());</pre>
+</div>
+
+<p>In this case, I applied the <strong>length</strong> method to a literal string, but 
+it can be applied to any valid representation of an object of type 
+<strong>String</strong>. </p>
+<p>I then passed the value returned by the <strong>length</strong> method to the 
+constructor for a <strong>StringBuffer</strong> object. </p>
+<p>As you can determine by examining the argument lists for the various methods of 
+the <strong>String</strong> class, </p>
+
+<ul>
+<li>some methods return data stored in the string while </li>
+<li>other methods return information about that data. </li></ul>
+
+<p>For example, the <strong>length</strong> method returns information about the data 
+stored in the <strong>String</strong> object. </p>
+<p>Methods such as <strong>charAt</strong> and <strong>substring</strong> return portions of 
+the actual data. </p>
+<p>Methods such <strong>toUpperCase</strong> can be thought of as returning the data, 
+but returning it in a different format. </p>
+
+<h2 ><a name="CreatingStringObjectswithout"></a>
+Creating String objects without calling the constructor</h2>
+<p>Methods in other classes and objects may create <strong>String</strong> objects without an explicit call to 
+the constructor by the programmer. For example the <strong>toString</strong> 
+method of the <strong>Float</strong> class receives a <strong>float</strong> 
+value as an incoming parameter and returns a reference to a <strong>String</strong> 
+object that represents the value of the <strong>float</strong> argument. </p>
+
+<h1 ><a name="MemoryManagement"></a>Memory 
+management by the StringBuffer class</h1>
+<p>If the additional characters cause the size of the <strong>StringBuffer</strong> 
+to grow beyond its current capacity when characters are added, additional memory is automatically allocated. </p>
+<p>However, memory allocation is a relatively expensive operation and you can 
+make your code more efficient by initializing <strong>StringBuffer</strong> 
+capacity to a reasonable first guess. This will minimize the number of times 
+memory must be allocated for it. </p>
+<p>When using the <strong>insert</strong> methods of the <strong>StringBuffer</strong> 
+class, you specify the index 
+<em>before which</em> you want the data inserted. </p>
+
+<h1 ><a name="ThetoStringMethod"></a>The 
+toString method</h1>
+<p>Frequently you will need to convert an object of some other type to an object 
+of the <strong>String</strong> 
+class. For example, this can happen when you need to pass it to a method that accepts only <strong>String</strong> 
+values.</p>
+<p>All classes inherit the <strong>toString</strong> method from the <strong>Object</strong> 
+class. Many of the classes <em>override</em> this method 
+to provide an implementation that is meaningful for objects of that class. </p>
+<p>In addition, you may sometimes need to <em>override</em> the <strong>toString</strong> method 
+for classes that you define to provide a meaningful <strong>toString</strong> behavior for 
+objects of that class. </p>
+<p>I explain the concept of overriding the <strong>toString</strong> method in detail in the chapter titled
+<em>Java OOP: Polymorphism and the Object Class.</em></p>
+
+<h1 ><a name="StringsandtheJavaCompiler"></a>
+Strings and the Java compiler</h1>
+<p>In Java, you specify literal strings between double quotes as in:</p>
+
+
+
+<div class="a"><strong>Literal strings</strong>
+				<pre>
+&quot;I am a literal string of the String type.&quot;</pre>
+</div>
+
+<p>You can use literal strings anywhere you would use a <strong>String</strong> object. </p>
+<p>You can also apply <strong>String</strong> methods directly to a literal string as in 
+an <a href="#Listing_2">earlier program</a> that calls the <strong>length</strong> 
+method on a literal string as shown below. </p>
+
+
+
+<div class="a"><strong>Using String methods with literal strings</strong>
+				<pre>
+StringBuffer str6 = new StringBuffer(
+	       "StringBuffer named str6&quot;.length());</pre>
+</div>
+	<p>Because the compiler automatically creates a new 
+<strong>String</strong> object for every literal string, you can use a literal string to 
+initialize a <strong>String</strong> object <em>(without use of the new operator)</em> as in 
+the following code fragment from a <a href="#Listing_1">previous program</a>:
+</p>
+
+
+
+<div class="a">
+				<pre>
+String str1 = &quot;THIS STRING IS NAMED str1&quot;;</pre>
+</div>
+	<p>The above construct is equivalent to, but more efficient than the following, 
+which, according to <em>The Java Tutorial</em> by Campione and Walrath, ends up 
+creating two <strong>String</strong> objects instead of one: </p>
+
+
+
+<div class="a">
+				<pre>
+String str1 = new String(&quot;THIS STRING IS NAMED str1&quot;);</pre>
+</div>
+
+<p>In this case, the compiler creates the first <strong>String</strong> object when it encounters the 
+literal string, and the second one when it encounters <strong>new String()</strong>. </p>
+
+<h1 ><a name="ConcatenationandtheOperator"></a>
+Concatenation and the + operator</h1>
+<p>The plus (+) operator is overloaded so that in addition to performing the normal arithmetic 
+operations, it can also be used to concatenate strings.</p>
+<p>This will come as no surprise to you because we have been using code such as 
+the following since the beginning of this Ebook.</p>
+
+
+
+<div class="a">
+	<pre>
+String cat = &quot;cat&quot;; </pre>
+	<pre>
+System.out.println(&quot;con&quot; + cat + &quot;enation&quot;);</pre>
+</div>
+
+<p>According to Campione and Walrath, Java uses <strong>StringBuffer</strong> objects 
+behind the scenes to implement concatenation. They indicate that the above code 
+fragment compiles to: </p>
+
+
+
+<div class="a">
+				<pre>
+String cat = &quot;cat&quot;; 
+System.out.println(new StringBuffer().append(&quot;con&quot;).
+                      append(cat).append(&quot;enation&quot;));</pre>
+</div>
+
+<p>Fortunately, that takes place behind the scenes and we don&#39;t have to deal 
+directly with the syntax.</p>
+<h1><a name="Run_the_program">Run the programs</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a> and
+<a href="#Listing_2">Listing 2</a>. Compile the code and execute 
+it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a">
+	Housekeeping material 
+
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0280: String and StringBuffer</li>
+					<li>File: Jb0280.htm
+</li>
+					<li>Revised: 08/06/22</li>
+				</ul>
+</div>
+
+<p>-end- </p>
+
+
+</body>
+</html>

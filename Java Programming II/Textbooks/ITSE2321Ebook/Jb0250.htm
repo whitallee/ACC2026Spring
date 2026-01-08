@@ -1,0 +1,166 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0250</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0250: Brief Introduction to Exceptions</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a> 
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Discussion">Discussion</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1><a name="Preface">Preface</a></h1>
+	<p>This chapter provides a very brief treatment of exception handling. The 
+	topic is discussed in detail in the later chapter titled <em>Java OOP: Exception Handling</em>. 
+	The topic is included in this <em>Programming Fundamentals</em> section simply to 
+	introduce you to the concept.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following link to easily find and view the listing while you are reading about 
+	it.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The program named simple1. </li>
+	</ul>
+<h1><a name="Discussion">Discussion</a></h1>
+<p><strong>What is an exception?</strong></p>
+<p>According to
+<a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/">The Java 
+Tutorials</a>, <em>&quot;An exception is an event that occurs during the execution of 
+a program that disrupts the normal flow of instructions.&quot;</em></p>
+<p>A very common example of an exception given in textbooks is code that 
+attempts to divide by zero <em>(this is easy to demonstrate)</em>. </p>
+<p><strong>Throwing an exception</strong></p>
+<p>Common terminology states that when this happens, the system <em>throws an 
+exception</em>. If a thrown exception is not <em>caught</em>, a runtime error may occur.
+</p>
+<p><strong>Purpose of exception handling</strong></p>
+<p>The purpose of exception handling is to make it possible for the program to 
+either attempt to recover from the problem, or at worst shut down the program in 
+a graceful manner, whenever an exception occurs.</p>
+<p><strong>Java supports exception handling</strong></p>
+<p>Java, C++, and some other programming languages support exception handling in 
+similar ways.</p>
+<p>In Java, the exception 
+can be thrown either by the system or by code created by the programmer. There 
+is a fairly long list of exceptions that will be thrown automatically by the 
+Java runtime system.</p>
+<p><strong>Checked exceptions cannot be ignored</strong></p>
+<p>Included in that long list of automatic exceptions is a subset known as &quot;checked&quot; exceptions. 
+Checked exceptions cannot be ignored by the programmer. A method must either 
+specify <em>(declare)</em> or catch all &quot;checked&quot; exceptions that can be thrown in order for the 
+program to compile. </p>
+<p><strong>An example of specifying an exception</strong></p>
+<p>I explain the difference between specifying and catching an exception in 
+	the future chapter titled <em>Java OOP: Exception Handling</em>. For now, suffice it to say that the code that begins with the 
+word &quot;throws&quot; in <a href="#Listing_1">Listing 1</a> specifies <em>(declares)</em> an exception that 
+can be thrown by the code inside the <strong>main</strong> method. </p>
+<p>If this specification is not made, the program will not compile. </p>
+<!--``1List01-->
+<div class="a"><a name="Listing_1">Listing 1</a>. The program named 
+				simple1.
+<pre>
+/*File simple1.java Copyright, R.G.Baldwin
+**********************************************************/
+class simple1 { //define the controlling class
+  public static void main(String[] args) 
+                               throws java.io.IOException {
+    int ch1, ch2 = &#39;0&#39;;
+
+    System.out.println(
+      &quot;Enter some text, terminate with #&quot;);
+
+    //Get and save individual bytes
+    while( (ch1 = System.in.read() ) != &#39;#&#39;) ch2 = ch1;
+
+    //Display the character immediately before the #
+    System.out.println(&quot;The char before the # was &quot;
+      + (char)ch2);
+  }//end main
+}//End simple1 class.
+</pre>
+</div>
+<!--``2-->
+	<p>The program in <a href="#Listing_1">Listing 1</a> does not throw any 
+	exceptions directly nor does it attempt to catch any exceptions. However, it can throw exceptions indirectly through its 
+	call to <strong>System.in.read</strong>. </p>
+<p>Because <strong>IOException</strong> is a checked exception, the <strong>main</strong> 
+method must either specify it or catch it . Otherwise the program won&#39;t compile. 
+In this case, the <strong>main</strong> method specifies the exception as 
+opposed to catching it.</p>
+<p><strong>Very brief treatment</strong></p>
+<p>As mentioned earlier, this is a very brief treatment of a fairly complex 
+topic that is discussed in much more detail in the chapter titled
+<em>Java OOP: Exception Handling.</em> The 
+topic was included at this point simply to introduce you to the concept of 
+exceptions.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>II encourage you to copy the code from <a href="#Listing_1">Listing 1</a>. Compile the code and execute 
+it. Experiment with the code, 
+making changes, and observing the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+	<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+<div class="a">
+	<p>Housekeeping material 
+</p>
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Jb0250: Brief Introduction to 
+					Exceptions</li>
+					<li>File: Jb0250.htm</li>
+					<li>Revised: 08/05/22</li>
+				</ul>
+</div>
+
+
+</body>
+</html>

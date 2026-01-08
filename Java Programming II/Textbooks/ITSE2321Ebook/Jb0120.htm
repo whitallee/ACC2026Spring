@@ -1,0 +1,344 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Jb0120.htm</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Jb0120: A Gentle Introduction to Java Programming</h1>
+
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Discussion">Discussion and sample code</a></li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1 class="auto-style2"> <a name="Preface"></a>Preface</h1>
+<h2> <a name="General">General</a></h2>
+
+
+
+
+
+<p>This chapter is part of an Ebook designed to help you learn 
+to program computers. </p>
+<p>It provides a gentle introduction to Java programming.</p>
+<h2><a name="Prerequisites">Prerequisites</a></h2>
+<ul>
+	<li>An understanding of algebra.</li>
+	<li>An understanding of all of the material covered in the earlier chapters 
+	in this Ebook.</li>
+</ul>
+<h2> <a name="Viewing_tip">Viewing tip</a></h2>
+<p> I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+<h3> <a name="Figures">Figures</a></h3>
+<ul>
+	<li><a href="#Figure_1">Figure 1</a>. A checkout counter algorithm.</li>
+</ul>
+<h3> <a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Program named Memory01.</li>
+	<li><a href="#Listing_2">Listing 2</a>. Batch file for Memory01.</li>
+</ul>
+<h1 class="auto-style2"> <a name="Discussion">Discussion and sample code</a></h1>
+<h2><a name="Introduction">Introduction</a></h2>
+<p>All data is stored in a computer in numeric form. Computer programs do what they do by executing a series of calculations on numeric data. It is the order and 
+the pattern of those calculations that distinguishes one computer program from another.
+
+</p>
+<h3>Avoiding the detailed work </h3>
+<p>Fortunately, when we program using a high-level programming language such as Java, much of the 
+detailed work is done for us behind the scenes.</p>
+<h3>Musicians or conductors</h3>
+<p>As programmers, we are more like conductors than musicians. The various parts of the computer represent the musicians. We tell them what to play, and when to play it, and if we do our job well, we produce a solution to a problem. </p>
+<h2><a name="Compartments">Compartments</a></h2>
+<p>As the computer program performs its calculations in the correct order, it is often necessary for it to store intermediate results someplace, and then come back and get them to use them in subsequent calculations later. The intermediate results are stored in memory, often referred to as RAM or 
+<em>Random Access Memory</em>.</p>
+<h3>A mechanical analogy</h3>
+<p>We can think of random access memory as being analogous to a metal rack containing a large number of compartments. The compartments are all the same size and are arranged in a 
+column.
+
+Each compartment has a numeric address printed above it. No two compartments have the same numeric address. Each compartment also has a little slot into which you can insert a name or a label for the compartment. No two compartments can have the same name.</p>
+<h3>Joe, the computer program</h3>
+<p>Think of yourself as a computer program. You have the ability to write values on little slips of paper and to put them into the compartments. You also have the ability to read the values written on the little slips of paper and to use those values for some purpose. However, there are two rules that you must observe:</p>
+<ul>
+	<li>You may not remove a slip of paper from a compartment without replacing it by another slip of paper on which you have written a value.</li>
+	<li>You may not put a slip of paper in a compartment without removing the one already there, 
+	if any.
+	</li>
+</ul>
+<h2><a name="Checkout_counter_example">Checkout counter example</a></h2>
+<p>In understanding how you might behave as a human computer program, consider yourself to have a job working at the checkout counter of a small grocery store in the 1930s.</p>
+<p>You have two tools to work with:
+
+    </p>
+<ul>
+	<li>A mechanical adding machine
+    </li>
+	<li>The rack of compartments described above</li>
+</ul>
+<h3>Initialization</h3>
+<p>Each morning, the owner of the grocery store tells you to insert a name in the slot above each compartment and to place a little slip of paper 
+with a number written on it inside each compartment. 
+<em>(In programming jargon, we would refer to this as initialization.)</em> </p>
+<p>Each of the names on the compartments represents a type of grocery such as</p>
+<ul>
+	<li>Beans</li>
+	<li>Apples</li>
+	<li>Pears</li>
+</ul>
+<p>No two compartments can have the same name.</p>
+<p>No compartment is allowed to have more than one slip of paper inside it.</p>
+<h3>The price of a can of beans</h3>
+<p>When you place a new slip of paper in a compartment, you must be careful to remove and destroy the one that was already there.</p>
+<p>Each slip of paper that you insert into a compartment contains the price for the type of grocery identified by the label on the compartment.</p>
+<p>For example, the slip of paper in the compartment labeled <strong>Beans</strong> may contain the value 15, meaning that 
+each can of beans costs 15 cents.</p>
+<h3>The checkout procedure</h3>
+<p>As each customer comes to your checkout counter during the remainder of the day, you execute the following procedure:</p>
+<ul>
+	<li>Examine each grocery item to determine its type.</li>
+	<li>Read the price stored in the compartment corresponding to that type of grocery.</li>
+	<li>Add that price to that customer's bill using your mechanical adding machine.</li>
+</ul>
+<p>In programming jargon, we would say that as you process each grocery item for 
+the same customer, you are <em>looping</em>. We would also say that you are executing a 
+procedure or an <em>algorithm</em>.</p>
+<p>When you have processed all of the grocery items for a particular customer, you 
+would</p>
+<ul>
+	<li>Press the TOTAL key on the adding machine,</li>
+	<li>Turn the crank, and</li>
+	<li>Present the customer with the bill.</li>
+</ul>
+<h3>A schematic representation of the procedure</h3>
+<p>We might represent the procedure in schematic form 
+as shown in <a href="#Figure_1">Figure 1</a>.</p>
+
+
+
+<div class="a">
+	<p><a name="Figure_1">Figure 1</a>. A checkout counter algorithm.</p>
+<pre>
+For each customer, do the following:
+
+  For each item, do the following:
+    a. Identify the type of grocery item
+    b. Get the price from the corresponding compartment
+    c. Add the price to accumulated total
+  End loop on grocery items
+
+  Present customer with a bill
+
+End loop on a specific customer</pre></div>
+
+
+
+	
+<h3>Common programming activities</h3>
+<p>This procedure illustrates the three activities commonly believed to be the fundamental activities of any computer program:</p>
+<ul>
+	<li>sequence
+    </li>
+	<li>selection
+    </li>
+	<li>loop </li>
+</ul>
+<h3>Sequence</h3>
+<p>A sequence of operations is illustrated by the three items labeled a, b, and 
+c in  <a href="#Figure_1">Figure 1</a> because they are executed in sequential order. </p>
+<h3>Selection</h3>
+<p>The process of identifying the type of grocery item is often referred to as 
+<em>selection</em>. A selection operation is the process of selecting among two or more choices.</p>
+<h3>Loop</h3>
+<p>The process of repetitively examining each grocery item and processing it is commonly referred to as a 
+<em>loop</em>. 
+In the early days of programming, for a programming language named FORTRAN, this was referred to as a
+<strong><em>do loop</em></strong>.
+
+</p>
+<h3>An algorithm</h3>
+<p>The entire procedure is often referred to as an <em>algorithm</em>. According 
+to <a href="http://programmedlessons.org/Java9/chap61/ch61_08.html#algorithm">Kjell</a></p>
+<blockquote>A systematic procedure used to compute something is called an algorithm. 
+... An algorithm is a description of how to do something. It is not tied to any particular language. 
+... An algorithm can be implemented in any computer programming language.</blockquote>
+<h3>Modifying stored data</h3>
+<p>Sometimes during the day, the owner of the grocery store may come to you and 
+says that he is going to increase the price of a can of Beans from 15 cents to 25 cents 
+and asks you to take care of the change in price.</p>
+<p>You write 25 on a slip of paper and put it in the compartment labeled Beans, being careful to remove and destroy the slip of paper that was previously in that compartment. For the rest of the day, the new price for 
+Beans will be used in your calculations unless the owner 
+asks you to change it again.</p>
+<h3>Not a bad analogy</h3>
+<p>This is a pretty good analogy to how random access memory is actually used by a computer program.</p>
+<h3>Names versus addresses</h3>
+<p>As a programmer using a high-level language such as Java, you usually don't have to be concerned about the numeric addresses of the compartments. You are able to think about them and refer to them in terms of their names. 
+<em>(Names are easier to remember than numeric addresses).</em> However, deep inside the computer, these names are cross-referenced to addresses and at the lowest level, the program works with memory addresses instead of names. </p>
+<h3>Execute an algorithm</h3>
+<p>A computer program always executes some sort of procedure, which is often 
+called an <em>algorithm</em>. The algorithm may be very simple as described in the checkout counter example described above, or it may be very complex as would be the case for a spreadsheet program. As the program executes its 
+algorithm, it uses the random access memory to store and retrieve the data that is needed to execute the 
+algorithm. </p>
+<h3>Why is it called RAM?</h3>
+<p>The reason this kind of memory is called <em>RAM</em> or <em>random access memory</em> is that it can be accessed in any order. 
+<em>(Also see Kjell
+<a href="http://programmedlessons.org/Java9/chap01/ch01_06.html#RAM">Main Memory</a>)</em></p>
+<h3>Sequential memory</h3>
+<p>Some types of memory, such as a magnetic tape, must be accessed in sequential order. This means that to get a piece of data 
+<em>(the price of beans, for example)</em> from deep inside the memory, it is necessary to start at the beginning and examine every piece of data until the correct one is found. </p>
+<h3>Combination random/sequential</h3>
+<p>Other types of memory, such as disks, provide a combination of sequential and random access. For example, the data on a disk is stored in tracks that form concentric circles on the disk. The tracks can be accessed in random order, but the data within a track must be accessed sequentially starting at a specific point on the track.</p>
+<p>Sequential memory isn't very good for use by most computer programs because access to each particular piece of data is quite slow. </p>
+<h2><a name="Sample_program">Sample program</a></h2>
+<p><a href="#Listing_1">Listing 1</a> shows a sample Java program that illustrates the use of memory 
+for the storage and retrieval of data. </p>
+
+<div class="a">
+<a name="Listing_1">Listing 1</a>. Program named Memory01.
+
+<pre>
+//File Memory01.java
+class Memory01 { 
+  public static void main(String[] args){
+    int beans;
+    beans = 25; 
+    System.out.println(beans); 
+  }//end main 
+}//End Memory01 class</pre>
+</div>
+
+<p><a href="#Listing_2">Listing 2</a> shows a batch file that you can use to compile and run this 
+program.</p>
+<div class="a">
+<a name="Listing_2">Listing 2</a>. Batch file for Memory01.
+<pre>
+echo off
+cls
+
+del *.class
+
+javac -cp .; Memory01.java
+java -cp .; Memory01
+
+pause</pre>
+</div>
+
+<p>Using the procedure that you learned in the <em>
+Getting Started</em> chapter, you 
+should be able to compile and execute this program. When you do, the program should 
+display 25 on your computer screen. </p>
+<h3>Variables</h3>
+<p>You will learn in a future chapter that the term <em>variable</em> is synonymous with the term 
+<em>compartment</em> that I have used for illustration purposes in this chapter. 
+<em>(Also see Kjell
+<a href="http://programmedlessons.org/Java9/chap09/ch09_02.html#variable,_definition_of">
+Variables</a>)</em></p>
+<h3>The important lines of code</h3>
+<p>The use of memory is illustrated by the three lines of code in <a href="#Listing_1">Listing 1</a> 
+that begin with <strong>int</strong>, <strong>beans</strong>, and <strong>System</strong>.  
+We will ignore the other lines in the program in this chapter and learn about 
+them in future chapters.</p>
+<h3>Declaring a variable </h3>
+<p>A memory compartment <em>(or variable)</em> is set aside and given the name 
+<strong>beans</strong> by the line that begins with <strong>int</strong> in <a href="#Listing_1">Listing 1</a>. 
+<em>(Also see Kjell
+<a href="http://programmedlessons.org/Java9/chap09/ch09_05.html#variable,_declaration">
+Syntax of Variable Declaration</a>.)</em></p>
+<p>In programmer jargon, this is referred to as <em>declaring a variable</em>.  The process of declaring a variable </p>
+<ul>
+	<li>causes memory to be set aside to contain a value, and </li>
+	<li>causes that chunk of memory to be given a name.</li>
+</ul>
+<p>That name can be used later to refer to the value stored in that chunk of memory 
+or variable.</p>
+<p>This declaration in <a href="#Listing_1">Listing 1</a> specifies that any value stored in the variable must be of 
+<em>type</em>
+<strong>int</strong>.  Basically, this means that the value must be an integer. 
+Beyond that, don't worry about what the <em>type</em> means at this point.  I will 
+explain the concept of type in detail in a 
+future chapter.</p>
+<h3>Storing a value in the variable</h3>
+<p>A value of 25 is stored in the variable named <strong>beans</strong> by the 
+line in <a href="#Listing_1">Listing 1</a> 
+that begins with the word <strong>beans</strong>.</p>
+<p>In programmer jargon, this is referred to as <em>assigning a value to a variable</em>.  
+<em>(See Kjell
+<a href="http://programmedlessons.org/Java9/chap09/ch09_11.html#assignment_statement">
+Assignment Statement Syntax</a>.)</em></p>
+<p>From this point forward, when the code in the program refers to this variable by its name, <strong>beans</strong>, the reference to the variable will be interpreted to mean the value stored there. </p>
+<h3>Retrieving a value from the variable</h3>
+<p>The line in <a href="#Listing_1">Listing 1</a> that begins with the word 
+<strong>System</strong> reads the value stored in the variable named <strong>beans</strong> by referring to the variable by 
+its name.</p>
+<p>This line also causes that value to be displayed on your computer screen.  However, at this point, you 
+needn&#39;t worry about what causes it to be displayed.  You will learn those details in a 
+future chapter.  Just remember that the reference to the variable by its name,
+<strong>beans</strong>, reads the value stored in the variable. </p>
+<h3>The remaining details</h3>
+<p>Don't be concerned at this point about the other details in the program.  They are there to make it possible for you to compile and execute the program.  You will learn about them in future 
+chapters.</p>
+<h1 class="auto-style2"><a name="Run_the_program">Run the program</a></h1>
+	<p>I encourage you to run the program that I presented in this chapter 
+	to confirm that you get the same results. Experiment with 
+the code, making changes, and observing the results of your changes. Make 
+certain that you can explain why your changes behave as they do. </p>
+
+
+<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><p>Housekeeping material</p>
+ 
+	
+<ul>
+<li>Author: Prof. Richard G. Baldwin</li>
+	<li>Chapter name: Jb0120: A Gentle Introduction to Java Programming</li>
+<li>File: Jb0120.htm
+</li>
+	<li>Revised: 06/06/22</li>
+</ul>
+</div>
+
+<p>-end- </p>
+
+</body>
+</html>

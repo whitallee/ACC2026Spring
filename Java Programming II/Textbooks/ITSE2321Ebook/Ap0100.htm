@@ -1,0 +1,1167 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0100</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0100: The this keyword, static final variables, and initialization of instance variables</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 33</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap110{
+  public static void main(
+                        String args[]){
+                new Worker().doThis();
+  }//end main()
+}//end class Ap110
+
+class Worker{
+  private int data = 33;
+  
+  public void doThis(){
+    new Helper().helpMe(this);
+  }//end area()
+    
+  public String getData(){
+    return data;
+  }//end getData()
+}// end class Worker
+
+class Helper{
+  public void helpMe(Worker param){
+    System.out.println(
+                      param.getData());
+  }//end helpMe()
+}//end class Helper
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 33</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+				<pre>public class Ap111{
+  public static void main(
+                        String args[]){
+        new Worker().doThis();
+  }//end main()
+}//end class Ap111
+
+class Worker{
+  private int data = 33;
+  
+  public void doThis(){
+    new Helper().helpMe(this);
+  }//end area()
+    
+  public String getData(){
+    return &quot;&quot; + data;
+  }//end getData()
+}// end class Worker
+
+class Helper{
+  public void helpMe(Worker param){
+    System.out.println(
+                      param.getData());
+  }//end helpMe()
+}//end class Helper
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 11</li>
+	<li>D. 22</li>
+	<li>E. 33</li>
+	<li>F. 44</li>
+	<li>G. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+				<pre>public class Ap112{
+  public static void main(
+                        String args[]){
+    Worker obj1 = new Worker(11);
+    Worker obj2 = new Worker(22);
+    Worker obj3 = new Worker(33);
+    Worker obj4 = new Worker(44);
+    obj2.doThis();
+  }//end main()
+}//end class Ap112
+
+class Worker{
+  private int data;
+  
+  public Worker(int data){
+    this.data = data;
+  }//end constructor
+  
+  public void doThis(){
+    System.out.println(this);
+  }//end area()
+    
+  public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>?</p>
+<p>Note that 6.283185307179586 is a correct numeric value. </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 6.283185307179586</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+				<pre>public class Ap113{
+  public static void main(
+                        String args[]){
+    System.out.println(
+                   new Worker().twoPI);
+  }//end main()
+}//end class Ap113
+
+class Worker{
+  public static final double twoPI;
+  
+  public Worker(){
+    twoPI = 2 * Math.PI;
+  }//end constructor
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>? </p>
+<p>Note that 6.283185307179586 is a correct numeric value. </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 6.283185307179586</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+				<pre>public class Ap114{
+  public static void main(
+                        String args[]){
+    System.out.println(
+                   new Worker().twoPI);
+  }//end main()
+}//end class Ap114
+
+class Worker{
+  public static final double twoPI 
+                         = 2 * Math.PI;
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>? </p>
+<p>Note that 6.283185307179586 is a correct numeric value. </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 6.283185307179586</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+				<pre>public class Ap115{
+  public static void main(
+                        String args[]){
+    System.out.println(Worker.twoPI);
+  }//end main()
+}//end class Ap115
+
+class Worker{
+  public static final double twoPI 
+                         = 2 * Math.PI;
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>? </p>
+<p>Note that 6.283185307179586 is a correct numeric value. </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. C. 6.283185307179586</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+				<pre>public class Ap116{
+  public static void main(
+                        String args[]){
+    System.out.println(Worker.twoPI);
+  }//end main()
+}//end class Ap116
+
+class Worker{
+  public static final double twoPI 
+                            = 2 * myPI;
+  public static final double myPI
+                             = Math.PI;
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 0.0 false</li>
+	<li>D. null null null</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+				<pre>public class Ap117{
+  public static void main(
+                        String args[]){
+    new Worker().display();
+  }//end main()
+}//end class Ap117
+
+class Worker{
+  private int myInt;
+  private double myDouble;
+  private boolean myBoolean;
+  
+  public void display(){
+    System.out.print(myInt);
+    System.out.print(&quot;  &quot; + myDouble);
+    System.out.println(
+                     &quot;  &quot; + myBoolean);
+  }//end display()
+  
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 false 5 true</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+				<pre>public class Ap118{
+  public static void main(
+                        String args[]){
+    new Worker().display();
+    new Worker(5,true).display();
+    System.out.println();
+  }//end main()
+}//end class Ap118
+
+class Worker{
+  private int myInt;
+  private boolean myBoolean;
+
+  public Worker(int x, boolean y){
+    myInt = x;
+    myBoolean = y;
+  }//end parameterized constructor
+  
+  public void display(){
+    System.out.print(myInt);
+    System.out.print(
+                &quot; &quot; + myBoolean + &quot; &quot;);
+  }//end display()
+  
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 20 222.0 false --- 5 222.0 true</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+				<pre>public class Ap119{
+  public static void main(
+                        String args[]){
+    new Worker().display();
+    System.out.print(&quot;--- &quot;);
+    new Worker(5,true).display();
+    System.out.println();
+  }//end main()
+}//end class Ap119
+
+class Worker{
+  private int myInt = 100;
+  private double myDouble = 222.0;
+  private boolean myBoolean;
+  
+  public Worker(){
+    myInt = 20;
+  }//end noarg constructor
+  
+  public Worker(int x, boolean y){
+    myInt = x;
+    myBoolean = y;
+  }//end parameterized constructor
+  
+  public void display(){
+    System.out.print(myInt + &quot; &quot;);
+    System.out.print(myDouble + &quot; &quot;);
+    System.out.print(myBoolean + &quot; &quot;);
+  }//end display()
+  
+}// end class Worker
+</pre>
+
+</div>
+
+
+	
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10.</li>
+
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0100: The this keyword, 
+				static final variables, and initialization of instance variables</li>
+				<li>File: Ap0100.htm </li>
+				<li>Originally published: 2004</li>
+				<li>Published at cnx.org: 12/08/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>C. 20 222.0 false --- 5 222.0 true </p>
+<h3><strong>Explanation 10</strong></h3>
+<p><strong>Four ways to initialize instance variables </strong></p>
+<p>There are at least four ways to establish initial values for instance 
+variables <em>(you may be able to think of others)</em>: </p>
+<ol>
+	<li>Allow them to take on their default values.</li>
+	<li>Establish their values using initialization expressions.</li>
+	<li>Establish their values using hard-coded values within a constructor.</li>
+	<li>Establish their values using parameter values passed to parameterized 
+	constructors.</li>
+</ol>
+<p><strong>Using the first two ways </strong></p>
+<p>The following fragment illustrates the first two of those four ways.</p>
+<div class="a">
+				<pre>class Worker{
+  private int myInt = 100;
+  private double myDouble = 222.0;
+  private boolean myBoolean;
+
+  //...</pre>
+</div>
+	
+<p>In the above fragment, the instance variables named <strong>myInt</strong> and <strong>myDouble</strong> 
+receive their initial values from initialization expressions. In these two 
+cases, the initialization expressions are very simple. They are simply literal 
+expressions. However, they could be much more complex if needed. </p>
+<p>The variable named <strong>myBoolean</strong> in the above fragment is allowed to take on its 
+default value of false. </p>
+<p><strong>Replacing the default </strong> <em><strong>noarg</strong></em><strong> constructor 
+</strong> </p>
+<p>The next fragment shows one of the two overloaded constructors in the class 
+named <strong>Worker</strong>. This constructor is a replacement for the default
+<em>noarg</em> constructor.</p>
+<div class="a">
+				<pre>class Worker{
+  private int myInt = 100;
+  private double myDouble = 222.0;
+  private boolean myBoolean;
+  
+  public Worker(){
+    myInt = 20;
+  }//end noarg constructor
+  
+  //...</pre>
+</div>
+	
+<p><strong>Using hard-coded values for initialization </strong> </p>
+<p>This fragment illustrates the third of the four ways listed earlier to 
+establish the initial value of the instance variables of an object of the class 
+named <strong>Worker</strong>. In particular, this fragment assigns the 
+hard-coded value 20 to the instance variable named <strong>myInt</strong>, thus overwriting the 
+value of 100 previously established for that variable by an initialization 
+expression. </p>
+<p><em>(All objects instantiated from the </em> <strong><em>Worker</em></strong><em> class using this
+noarg constructor would have the same initial value for the variable 
+named </em> <strong><em>myInt</em></strong><em>.)</em></p>
+<p>Note, that this constructor does not disturb the initial values of the other two 
+instance variables that were earlier established by an initialization 
+expression, or by taking on the default value. Thus, the initial values of these 
+two instance variables remain as they were immediately following the declaration 
+of the variables.</p>
+<p><strong>Initial values using this </strong> <em><strong>noarg</strong></em><strong> constructor 
+</strong> </p>
+<p>When an object of the <strong>Worker</strong> class is instantiated using 
+this constructor and the values of the three instance variables are displayed, 
+the results are as shown below: </p>
+<p><strong>20 222.0 false </strong> </p>
+<p>The value of <strong>myInt</strong> is 20 as established by the constructor. The value of 
+<strong>myDouble</strong> is 222.0 as established by the initialization expression, and the value 
+of <strong>myBoolean</strong> is false as established by default. </p>
+<p><strong>Using constructor parameters for initialization</strong> </p>
+<p>The next fragment shows the last of the four ways listed earlier for 
+establishing the initial value of an instance variable.</p>
+<div class="a">
+				<pre>public class Ap119{
+  public static void main(
+                        String args[]){
+    //...
+    new Worker(5,true).display();
+    //...
+  }//end main()
+}//end class Ap119
+
+class Worker{
+  private int myInt = 100;
+  private double myDouble = 222.0;
+  private boolean myBoolean;
+  //...
+  
+  public Worker(int x, boolean y){
+    myInt = x;
+    myBoolean = y;
+  }//end parameterized constructor
+  
+  //...</pre>
+</div>
+
+<p><strong>A parameterized constructor </strong> </p>
+<p>The above fragment shows the second of two overloaded constructors for the 
+class named <strong>Worker</strong>. This constructor uses two incoming 
+parameter values to establish the values of two of the instance variables, 
+overwriting whatever values may earlier have been established for those 
+variables. </p>
+<p>The above fragment uses this constructor to instantiate an object of the
+<strong>Worker</strong> class, assigning incoming parameter values of 5 and <em>true</em> 
+to the instance variables named <strong>myInt</strong> and <strong>myBoolean</strong> respectively. This 
+overwrites the value previously placed in the variable named <strong>myInt</strong> by the 
+initialization expression. It also overwrites the default value previously 
+placed in the instance variable named <strong>myBoolean</strong>. </p>
+<p><em>(Note that this constructor doesn&#39;t disturb the value for the instance 
+variable named </em> <strong><em>myDouble</em></strong><em> that was previously established through the use of an 
+initialization expression.)</em></p>
+<p><strong>Initial values using parameterized constructor </strong> </p>
+<p>After instantiating the new object, this fragment causes the values of all 
+three instance variables to be displayed. The result is: </p>
+<p><strong>5 222.0 true </strong> </p>
+<p>As you can see, the values contained in the instance variables named <strong>myInt</strong> 
+and <strong>myBoolean</strong> are the values of 5 and true placed there by the constructor, 
+based on incoming parameter values. The value in the instance variable named 
+<strong>myDouble</strong> is the value placed there by the initialization expression when the 
+variable was declared. </p>
+<p><strong>Default initialization </strong> </p>
+<p>If you don&#39;t take any steps to initialize instance variables, they will be 
+automatically initialized. Numeric instance variables will be initialized with 
+zero value for the type of variable involved. Instance variables of type <strong>boolean</strong> 
+will be initialized to false. Instance variables of type <strong>char</strong> will be 
+initialized to a Unicode value with all 16 bits set to zero. Reference variables 
+will be initialized to null. </p>
+<p><strong>Initialization expression </strong> </p>
+<p>If you provide an initialization expression for an instance variable, the 
+value of the expression will overwrite the default value, and the value of the 
+initialization expression will become the initial value for the instance 
+variable. </p>
+<p><strong>Assignment in constructor code </strong> </p>
+<p>If you use an assignment statement in a constructor to assign a value to an 
+instance variable, that value will overwrite the value previously placed in the 
+instance variable either by default, or by use of an initialization expression.
+The constructor has the &quot;last word&quot; on the matter of initialization of instance 
+variables.</p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 9</strong></h3>
+<p><strong>The default constructor </strong> </p>
+<p>When you define a class, you are not required to define a constructor for the 
+class. If you do not define a constructor for the class, a default constructor 
+that takes no arguments will be provided on your behalf. You can instantiate new 
+objects of the class by applying the new operator to the default constructor as 
+shown in the following code fragment from <a href="#question08">Question 8</a>.</p>
+<div class="a">
+				<pre>   new Worker().display();</pre>
+</div>
+
+<p><strong>Behavior of the default constructor </strong> </p>
+<p>As illustrated in <a href="#question08">Question 8</a>, when you don&#39;t provide a constructor that 
+purposely initializes the values of instance variables, or initialize them in 
+some other manner, they will automatically 
+be initialized to the default values described in <a href="#question08">Question 8</a>. </p>
+<p><strong>Defining overloaded constructors </strong> </p>
+<p>You can also define one or more overloaded constructors having different 
+formal argument lists. The typical intended purpose of such constructors is to 
+use incoming parameter values to initialize the values of instance variables in 
+the new object. </p>
+<p><strong>A parameterized constructor </strong> </p>
+<p>This is illustrated in the following code fragment. This fragment receives 
+two incoming parameters and uses the values of those two parameters to 
+initialize the values of two instance variables belonging to the new object.</p>
+<div class="a">
+				<pre>class Worker{
+  private int myInt;
+  private boolean myBoolean;
+
+  public Worker(int x, boolean y){
+    myInt = x;
+    myBoolean = y;
+  }//end parameterized constructor
+  
+  //display() omitted for brevity
+  
+}// end class Worker</pre>
+</div>
+
+<p><strong>If you define any constructors ... </strong> </p>
+<p>However, there is a pitfall that you must never forget. </p>
+<p>If you define any constructors in your new class, you must define all 
+constructors that will ever be required for your new class.</p>
+<p>If you define any constructors, the default constructor will no longer be 
+provided automatically. Therefore, if a constructor that takes no arguments will 
+ever be needed for your new class, and you define one or more parameterized 
+constructors, you must define the <em>noarg</em> constructor when you define 
+your class. </p>
+<p><strong>A parameterized constructor for Worker</strong> </p>
+<p>The class named <strong>Worker</strong> in this program defines a constructor 
+that receives two incoming parameters, one of type <b>int</b> and the other of 
+type <strong>boolean</strong>. It uses those two incoming parameters to initialize two instance 
+variables of the new object. </p>
+<p><strong>Oops! </strong> </p>
+<p>However, it does not define a constructor with no arguments in the formal 
+argument list <em>(commonly called a noarg constructor)</em>. </p>
+<p><strong>Calling the missing </strong> <em><strong>noarg</strong></em><strong> constructor 
+</strong> </p>
+<p>The following code in the <strong>main</strong> method of the controlling class attempts to 
+instantiate two objects of the <strong>Worker</strong> class. The first call of 
+the constructor passes no parameters to the constructor. Thus, it requires a <em>
+noarg</em> constructor in order to instantiate the object.</p>
+<div class="a">
+				<pre>public class Ap118{
+  public static void main(
+                        String args[]){
+    new Worker().display();
+    new Worker(5,true).display();
+    System.out.println();
+  }//end main()
+}//end class Ap118</pre>
+</div>
+
+<p><strong>A compiler error </strong> </p>
+<p>Since there is no constructor defined in the <strong>Worker</strong> class 
+with an empty formal argument list <em>(and the default version is not provided)</em>, 
+the program produces the following compiler error.</p>
+<div class="a">
+				<pre>Ap118.java:11: cannot resolve symbol
+symbol  : constructor Worker 
+()
+location: class Worker
+    new Worker().display();
+</pre>
+</div>
+
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>C. 0 0.0 false </p>
+<h3><strong>Explanation 8</strong></h3>
+<p><strong>All instance variables are initialized to default values </strong>
+</p>
+<p>All instance variables are automatically initialized to default values if the 
+author of the class doesn&#39;t take explicit steps to cause them to initialized to 
+other values.</p>
+<p><strong>The default values </strong></p>
+<p>Numeric variables are automatically initialized to zero, while <strong>
+boolean</strong> variables are automatically initialized to false. Instance 
+variables of type <strong>char</strong> are initialized to a Unicode value with 
+all 16 bits set to zero. Reference variables are initialized to null. </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>Pushing the compiler beyond its limits </strong> </p>
+<p>Compared to many programming environments, the Java compiler is very 
+forgiving. However, there is a limit to how far even the Java compiler is 
+willing to go to keep us out of trouble. </p>
+<p><b>Initializing the value of a static variable </b> </p>
+<p>We can initialize the value of a <b>static</b> variable using an 
+initialization expression as follows:</p>
+<div class="a">
+				<pre>public static final MY_CONSTANT
+       = initialization expression;
+</pre>
+</div>
+
+<p><strong>Important point </strong> </p>
+<p>It is necessary for the compiler to be able to evaluate the initialization 
+expression when it is encountered. </p>
+<p><strong>Illegal forward reference </strong> </p>
+<p>This program attempts to use an initialization expression that makes use of 
+the value of another <b>static</b> variable <em>(myPI)</em> that has not yet been established at 
+that point in the compilation process. As a result, the program produces the 
+following compiler error under JDK 1.3.</p>
+<div class="a">
+				<pre>Ap116.java:18: illegal forward reference
+     = 2 * myPI;
+           ^
+</pre>
+</div>
+
+<p><strong>Reverse the order of the variable declarations </strong> </p>
+<p>The problem can be resolved by reversing the order of the two <b>static</b> 
+variable declarations in the following revised 
+version of the program.</p>
+<div class="a">
+				<pre>public class Ap116{
+  public static void main(
+                        String args[]){
+    System.out.println(Worker.twoPI);
+  }//end main()
+}//end class Ap116
+
+class Worker{
+  public static final double myPI
+                             = Math.PI;
+  public static final double twoPI 
+                            = 2 * myPI;
+
+}// end class Worker</pre>
+</div>
+
+<p>This revised version of the program compiles and executes successfully. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. 6.283185307179586 </p>
+<h3><strong>Explanation 6</strong></h3>
+<p><strong>Access via an object </strong></p>
+<p><a href="#question05">Question 5</a> illustrated the fact that a <b>public</b> <b>static</b> <b>final</b> 
+member variable of a class can be accessed via a reference to an object 
+instantiated from the class. </p>
+<p><b>Not the only way to access a <em>static</em> variable </b></p>
+<p>However, that is not the only way in which <b>static</b> member variables can 
+be accessed. More importantly, <strong>public static</strong> member variables 
+of a class can be accessed simply by referring to the name of the class and the 
+name of the member variable joined by a period. </p>
+<p><em>(Depending on other factors, it may not be necessary for the </em><b><em>
+static</em></b><em> variable to also be declared </em><b><em>public</em></b><em>, 
+but that is the most general approach.)</em></p>
+<p><b>A <em>public</em></b> <b><em>static</em></b> <b><em>final</em> member 
+variable </b></p>
+<p>In this program, the <strong>Worker</strong> class declares and initializes a
+<b>public</b> <b>static</b> <b>final</b> member variable named <strong>twoPI</strong> 
+as shown in the following fragment.</p>
+<div class="a">
+				<pre>class Worker{
+  public static final double twoPI 
+                         = 2 * Math.PI;
+}// end class Worker</pre>
+</div>
+
+<p><b>Accessing the <em>static</em> variable </b></p>
+<p>The single statement in the <strong>main</strong> method of the controlling 
+class accesses and displays the value of the <b>public</b> <b>static</b> <b>
+final</b> member variable named <strong>twoPI</strong> as shown in the following 
+fragment.</p>
+<div class="a">
+				<pre>public class Ap115{
+  public static void main(
+                        String args[]){
+    System.out.println(Worker.twoPI);
+  }//end main()
+}//end class Ap115</pre>
+</div>
+
+<p><b>Objects share one copy of <em>static</em> variables</b> </p>
+<p>Basically, when a member variable is declared <b>static</b>, no matter how 
+many objects are instantiated from a class <em>(including no objects at all)</em>, 
+they all share a single copy of the variable. </p>
+<p><strong>Sharing can be dangerous </strong></p>
+<p>This sharing of a common variable leads to the same kind of problems that 
+have plagued programs that use <strong><em>global</em></strong> variables for 
+years. If the code in any object changes the value of the <b>static</b> variable, it is changed insofar as 
+all objects are concerned. </p>
+<p><b>Should you use non-final</b> <b><em>static</em> variables? </b></p>
+<p>Most authors will probably agree that in most cases, you probably should not 
+use <b>static</b> variables unless you also make them <b>final</b>. </p>
+<p><em>(There are some cases, such as counting the number of objects 
+instantiated from a class, where a non-final </em><b><em>static</em></b><em> 
+variable may be appropriate. However, the appropriate uses of non-final </em><b>
+<em>static</em></b><em> variables are few and far between.)</em></p>
+<p><b>Should you also make <em>static</em> variables <em>public</em>? </b></p>
+<p>If you make your variables <b>static</b> and <b>final</b>, you will often 
+also want to make them <b>public</b> so that they are easy to access. There are 
+numerous examples in the standard Java class libraries where variables are 
+declared as <b>public</b>, <b>static</b>, and <b>final</b>. This is the 
+mechanism by which the class libraries create constants and make them available 
+for easy access on a widespread basis. </p>
+<p><strong>The Color class </strong></p>
+<p>For example, the <strong>Color</strong> class defines a number of <b>public</b> <b>static</b>
+<b>final</b> variables containing the information that represents generic colors 
+such as ORANGE, PINK, and MAGENTA. <em>(By convention, constants in Java are 
+written with all upper-case characters, but that is not a technical 
+requirement.)</em></p>
+<p>If you need generic colors and not custom colors, you can easily access and 
+use these color values without the requirement to mix red, green, and blue to 
+produce the desired color values. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>C. 6.283185307179586 </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><b>A <em>public</em></b> <b><em>static</em></b> <b><em>final</em> variable
+</b></p>
+<p>This program declares a <b>public</b> <b>static</b> <b>final</b> member 
+variable named <strong>twoPI</strong> in the class named <strong>Worker</strong>, and properly 
+initializes it when it is declared as shown in the following code fragment.
+</p>
+<div class="a">
+				<pre>class Worker{  public static final double twoPI 
+                         = 2 * Math.PI;
+}/}// end class Worker</pre>
+</div>
+
+<p>From that point forward in the program, this 
+member variable named <strong>twoPI</strong> behaves like a constant, meaning that any code that attempts to 
+change its value will cause a compiler error <em>(as in the program in <a href="#question04">Question 4</a>)</em>.. </p>
+<p><b>Accessing the static variable </b> </p>
+<p>The following single statement that appears in the <strong>main</strong> method of the 
+controlling class instantiates a new object of the <strong>Worker</strong> class, accesses, and 
+displays the <strong>public static final</strong> member variable named 
+<strong>twoPI</strong>. </p>
+<div class="a">
+				<pre> public static void main(
+                        String args[]){
+    System.out.println(
+                   new Worker().twoPI);
+  }  }//end main()</pre>
+</div>
+
+<p><em>(Note for future discussion that the variable named </em> <strong><em>twoPI</em></strong><em> is accessed via a 
+reference to an object instantiated from the class named </em> <strong><em>Worker</em></strong><em>.)</em></p>
+<p>This causes the <b>double</b> value 6.283185307179586 to be displayed on the 
+standard output device.</p>
+
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 4</strong></h3>
+<p>A <b>final</b> variable </p>
+<p>When a member variable of a class <em>(not a local variable)</em> is declared <b>final</b>, 
+its value must be established when the variable is declared. This program 
+attempts to assign a value to a <b>final</b> member variable after it has been 
+declared, producing the following compiler error under JDK 1.3.</p>
+<div class="a">
+				<pre>Ap113.java:20: cannot assign a value to
+final variable twoPI
+    twoPI = 2 * Math.PI;
+</pre>
+</div>
+
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>D. 22 </p>
+<h3><strong>Explanation 3</strong></h3>
+<p><b>Two uses of the <em>this</em> keyword </b></p>
+<p>This program illustrates two different uses of the <b>this</b> keyword. </p>
+<p><strong>Disambiguating a reference to a variable </strong></p>
+<p>Consider first the use of <b>this</b> that is shown in the following code 
+fragment.</p>
+<div class="a">
+				<pre>class Worker{
+  private int data;
+  
+  public Worker(int data){
+    this.data = data;
+  }//end constructor</pre>
+</div>
+
+<p><strong>Very common usage </strong></p>
+<p>The code in the above fragment is commonly used by many Java programmers.
+All aspiring Java programmers need to know how to read such 
+code, even if they elect not to use it. In addition, understanding this code 
+should enhance your overall understanding of the use and nature of the <b>this</b> 
+keyword. </p>
+<p><strong>A parameterized constructor </strong></p>
+<p>The above fragment shows a parameterized constructor for the class named
+<strong>Worker</strong>. This constructor illustrates a situation where there is 
+a local parameter named <strong>data</strong> that has the same name as an instance variable 
+belonging to the object. </p>
+<p><strong>Casting a shadow </strong> </p>
+<p>The existence of the local parameter named <strong>data</strong> casts a shadow on the 
+instance variable having the same name, making it inaccessible by using its name 
+alone. </p>
+<p><em>(A local variable having the same name as an instance variable casts a 
+similar shadow on the instance variable.)</em></p>
+<p>In this shadowing circumstance, when the code in the constructor refers 
+simply to the name <strong>data</strong>, it is referring to the local parameter having that 
+name. In order for the code in the constructor to refer to the instance variable 
+having the name data, it must refer to it as <b>this.data</b>. </p>
+<p><strong>In other words ... </strong> </p>
+<p>In other words, <b>this.data</b> is a reference to an instance variable named 
+<strong>data</strong> belonging to the object being constructed by the constructor
+<em>(this object)</em>. </p>
+<p><strong>Not always necessary </strong> </p>
+<p>You could always use this syntax to refer to an instance variable of the 
+object being constructed if you wanted to. However, the use of this syntax is 
+necessary only when a local parameter or variable has the same name as the 
+instance variable and casts a shadow on the instance variable. When this is not 
+the case, you can refer to the instance variable simply by referring to its name 
+without the keyword <b>this</b>. </p>
+<p><strong>Finally, the main point ... </strong> </p>
+<p>Now consider the main point of this program. The following fragment shows the
+<b>main</b> method of the controlling class for the application.</p>
+<div class="a">
+				<pre>public class Ap112{
+  public static void main(
+                        String args[]){
+    Worker obj1 = new Worker(11);
+    Worker obj2 = new Worker(22);
+    Worker obj3 = new Worker(33);
+    Worker obj4 = new Worker(44);
+    obj2.doThis();
+  }//end main()
+}//end class Ap112</pre>
+</div>
+
+<p><strong>Four different objects of type Worker</strong> </p>
+<p>The code in the above fragment instantiates four different objects from the 
+class named <strong>Worker</strong>, passing a different value to the constructor for each 
+object. Thus, individual instance variable in each of the four objects contain 
+the <b>int</b> values 11, 22, 33, and 44 respectively. </p>
+<p><strong>Call an instance method on one object </strong> </p>
+<p>Then the code in the <b>main</b> method calls the instance method named
+<strong>doThis</strong> on only one of the objects, which is the one referred to 
+by the reference variable named <strong>obj2</strong>. </p>
+<p>An overridden <strong>toString</strong> method of the <strong>Worker</strong> class is 
+eventually called to return a <strong>String</strong> representation of the value stored in the 
+instance variable named <strong>data</strong> for the purpose of displaying that value on the 
+standard output device. </p>
+<p><strong>Overridden toString method </strong> </p>
+<p>The next fragment shows the overridden <strong>toString</strong> method for 
+the <strong>Worker</strong> class. As you can see, this overridden method constructs and returns 
+a reference to a <strong>String</strong> representation of the <b>int</b> value stored in the 
+instance variable named <strong>data</strong>. Thus, depending on which object the <strong>
+toString</strong> method is called on, different string values will be returned 
+by the overridden method.</p>
+<div class="a">
+				<pre> public String toString(){
+    return &quot;&quot; + data;
+  }//end toString()
+}// end class Worker</pre>
+</div>
+
+<p><strong>Passing reference to this object to println method </strong> </p>
+<p>The next fragment shows the <strong>doThis</strong> instance method belonging 
+to each object instantiated from the <strong>Worker</strong> class. When this method is called on 
+a specific object instantiated from the <strong>Worker</strong> class, it uses the <b>this</b> 
+keyword to pass that specific object&#39;s reference to the <strong>println</strong> 
+method. The <strong>println</strong> method uses that reference to call the <b>
+toString</b> method on that specific object. This, in turn causes a <strong>
+String</strong> representation of the value of the instance variable named 
+<strong>data</strong> belonging to 
+that specific object to be displayed.</p>
+<div class="a">
+				<pre> public void doThis(){
+    System.out.println(this);
+  }//end area()</pre>
+</div>
+
+<p><strong>The bottom line </strong> </p>
+<p>In this program, the instance variable in the object referred to by <strong>obj2</strong> 
+contains the value 22. The instance variables in the other three objects 
+instantiated from the same class contain different values. </p>
+<p>The bottom line is that the following statement in the <b>main</b> method 
+causes the value 22 to be displayed on the standard output device. Along the 
+way, the <b>this</b> keyword is used to cause the <b>println</b> method to get 
+and display the value stored in a specific object, and to ignore three other 
+objects that were instantiated from the same class.</p>
+<div class="a">
+				<pre>   obj2.doThis();</pre>
+</div>
+
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>C. 33 </p>
+<h3><strong>Explanation 2</strong></h3>
+<p>The <b>this</b> keyword </p>
+<p>The key to an understanding of this program lies in an understanding of the 
+single statement that appears in the method named <strong>doThis</strong>, as 
+shown in the following fragment.</p>
+<div class="a">
+				<pre>  public void doThis(){
+    new Helper().helpMe(this);
+  }//end area()</pre>
+</div>
+
+<p>The keyword named <b>this</b> has several uses in Java, some of which are 
+explicit, and some of which take place behind the scenes. </p>
+<p><b>What do you need to know about the this keyword? </b></p>
+<p>One of the uses of the keyword <b>this</b>  is passing the implicit 
+parameter in its entirety to another method.</p>
+<p>That is exactly what this program does. But what is the implicit parameter 
+named <b>this</b>  anyway? </p>
+<p><strong>Every object holds a reference to itself </strong></p>
+<p>This implicit reference can be accessed using the keyword <b>this</b>  in a 
+non-static <em>(instance) </em>method belonging to the object. <em>(The implicit 
+reference named </em><b><em>this</em></b><em> cannot be accessed from within a
+</em><b><em>static</em></b><em> method for reasons that won&#39;t be discussed 
+here.) </em></p>
+<p><strong>Calling an instance method </strong></p>
+<p>An instance method can only be called by referring to a specific object and 
+joining that object&#39;s reference to the name of the instance method using a 
+period as the joining operator. This is illustrated in the following statement, 
+which calls the method named <strong>doThis</strong> on a reference to an object 
+of the class named <strong>Worker</strong>.</p>
+<div class="a">
+				<pre>   new Worker().doThis();</pre>
+</div>
+
+<p><strong>An anonymous object </strong></p>
+<p>The above statement creates an anonymous object of the class named <strong>
+Worker</strong>. <em>(An anonymous object is an object whose reference is not 
+assigned to a named reference variable.) </em></p>
+<p>The code to the left of the period returns a reference to the new object. 
+Then the code calls the instance method named <strong>doThis</strong> on the 
+reference to the object. </p>
+<p><strong>Which object is <em>this</em> object?</strong> </p>
+<p>When the code in the instance method named <strong>doThis</strong> refers to 
+the keyword <b>this</b>, it is a reference to the specific object on which the 
+<strong>doThis</strong> method was called. The statement in the following fragment passes a reference to 
+that specific instance of the <strong>Worker</strong> class to a method named <strong>helpMe</strong> 
+in a new object of the <strong>Helper</strong> class.</p>
+<div class="a">
+				<pre> public void doThis(){
+    new Helper().helpMe(this);
+  }//end area()</pre>
+</div>
+
+<p><strong>A little help here please </strong> </p>
+<p>The <strong>helpMe</strong> method is shown in the following fragment.</p>
+<div class="a">
+				<pre>class Helper{
+  public void helpMe(Worker param){
+    System.out.println(
+                      param.getData());
+  }//end helpMe()
+}//end class Helper</pre>
+</div>
+
+<p><strong>Using the incoming reference </strong> </p>
+<p>The code in the <strong>helpMe</strong> method uses the incoming reference to 
+the object of the <strong>Worker</strong> class to call the <strong>getData</strong> method on 
+that object. </p>
+<p>Thus code in the <strong>helpMe</strong> method is able to call a method in 
+the object containing the method that called the <strong>helpMe</strong> method 
+in the first place. </p>
+<p><strong>A callback scenario </strong> </p>
+<p>When a method in one object calls a method in another object, passing <b>this</b> 
+as a parameter, that makes it possible for the method receiving the parameter to 
+make a callback to the object containing the method that passed <b>this</b> as a 
+parameter. </p>
+<p>The <strong>getData</strong> method returns a <b>String</b> representation of 
+the <b>int</b> instance variable named <strong>data </strong>with a value of 33 
+that is contained in the object of 
+the <strong>Worker</strong> class. </p>
+<p><strong>Display the value </strong> </p>
+<p>The code in the <strong>helpMe</strong> method causes that string to be 
+displayed on the computer screen. </p>
+<p><strong>And the main point is ... </strong> </p>
+<p>Any number of objects can be instantiated from a given class. A given 
+instance method can be called on any of those objects. When the code in such an 
+instance method refers to <b>this</b>, it is referring to the specific object on 
+which it was called, and is not referring to any of the many other objects that 
+may have been instantiated from the same class. </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 1</strong></h3>
+<p><strong>A wakeup call </strong> </p>
+<p>The purpose of this question is simply to give you a wakeup call. The 
+declaration for the method named <strong>getData</strong> indicates that the 
+method returns a reference to an object of the class <b>String</b>. However, the 
+code in the method attempts to return an <b>int</b>. The program produces the 
+following compiler error under JDK 1.3. </p>
+
+<div class="a">
+				<pre>found   : int
+required: java.lang.String
+    return data;
+</pre>
+</div>
+	<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+ 
+
+
+</body>
+</html>

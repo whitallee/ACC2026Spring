@@ -1,0 +1,500 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1606</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1606: Inheritance, Part 2</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Figures">Figures</a></li>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the Figures 
+and Listings while you are reading about them.</p>
+	<h3><a name="Figures">Figures</a></h3>
+	<ul>
+		<li><a href="#Figure_1">Figure 1</a>. Program output. </li>
+	</ul>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. The class named Radio.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Beginning of the Combo class. </li>
+		<li><a href="#Listing_3">Listing 3</a>. The overridden playStation method. </li>
+		<li><a href="#Listing_4">Listing 4</a>. The driver class. </li>
+		<li><a href="#Listing_5">Listing 5</a>. The program named Radio03.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter builds on an earlier chapter. It is recommended that you study that chapter before embarking on this chapter.</p>
+<p>The program discussed in this chapter extends a <strong>Radio</strong> class to produce a new class that simulates an upgraded car radio containing a tape player.</p>
+<p>Method overriding is used to modify the behavior of a method of the <strong>Radio</strong> class named 
+<strong>playStation</strong>, to cause that method to behave appropriately when a tape has been inserted into the tape player. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>Inheriting methods and variables</strong></p>
+<p>When you define a class that extends another class, an object instantiated from your new class will contain all of the methods and all of the variables defined in your new class. The object will also contain all of the methods and all of the variables defined in 
+the class that you extended, plus all of the methods and all of the variables 
+defined in the superclasses of that class.</p>
+<p><strong>The behavior of the methods</strong></p>
+<p>The behavior of the methods defined in a superclass and inherited into your new class may, or may not, be appropriate for an object instantiated from your new class. If those methods are appropriate, you can simply leave them alone.</p>
+<p><strong>Overriding to change behavior</strong></p>
+<p>If the behavior of one or more methods defined in a superclass and inherited into your new class is not appropriate for an object of your new class, you can change that behavior by 
+<em><strong>overriding</strong></em> the method in your new class. </p>
+	<p><strong>How do you override a method?</strong></p>
+<p>To override a method in your new class, simply reproduce the name, argument list, and return type of the original method in a new method definition in your new class. Then provide a body for the new method. Write code in that body to cause the behavior of the overridden method to be appropriate for an object of your new class.</p>
+<p>Here is a more precise description of method overriding taken from the excellent book entitled 
+<em>The Complete Java 2 Certification Study Guide</em>, by Roberts, Heller, and Ernest:</p>
+<p><em>"A valid override has identical argument types and order, identical return type, and is not less accessible than the original method. The overriding method must not throw any checked exceptions that were not declared for the original method."</em></p>
+<p>Any method that is not declared <strong>final</strong> can be overridden in a subclass. 
+A method that is declared <strong>final</strong> in the class where it is 
+defined cannot be overridden in a subclass.</p>
+	<p><strong>Overriding versus overloading</strong></p>
+<p>Don't confuse method <em>overriding</em> with method <em>overloading</em>. Here is what Roberts, Heller, and Ernest have to say about overloading methods:</p>
+<p><em>"A valid overload differs in the number or type of its arguments. Differences in argument names are not significant. A different return type is permitted, but is not sufficient by itself to distinguish an overloading method."</em></p>
+
+<p>Method <em>overloading</em> will be discussed in the next chapter following 
+the review chapter. </p>
+<p><strong>Car radios with built-in tape players</strong></p>
+<p>This chapter presents a sample program that duplicates the functionality of the program named 
+<strong>Radio02</strong> discussed in an earlier chapter. A class named <strong>Radio</strong> is used to define the specifics of objects intended to simulate car radios.</p>
+<p>A class named <strong>Combo</strong> extends the <strong>Radio</strong> class to define the specifics of objects intended to simulate improved car radios having built-in tape players. </p>
+	<p><strong>Modification of the superclass</strong></p>
+<p>In the program named <strong>Radio02</strong> in an earlier chapter, it was necessary to modify the superclass before extending it to provide the desired functionality. 
+<em>(The requirement to modify the superclass before extending it seriously detracts from the benefits of inheritance.)</em></p>
+<p><strong>No superclass modification in this chapter</strong></p>
+<p>The sample program <em>(named <strong>Radio03</strong>)</em> in this chapter uses method overriding to provide the same functionality as the 
+earlier program named 
+<strong>Radio02</strong>, without any requirement to modify the superclass before extending it. 
+<em>(Thus this program is more representative of the benefits available through inheritance than was the program in the 
+earlier chapter.)</em> </p>
+	<p><strong>Overridden playStation method</strong></p>
+<p>In particular, a method named <strong>playStation</strong>, defined in the superclass named 
+<strong>Radio</strong>, is overridden in the subclass named <strong>Combo</strong>.</p>
+<p>The original version of <strong>playStation</strong> in the superclass supports only radio operations. The overridden version of 
+<strong>playStation</strong> defined in the subclass supports both radio operations and tape operations.</p>
+<p><em>(The behavior of the version of <strong>playStation</strong> defined in the 
+<strong>Radio</strong> class is not appropriate for an object of the <strong>Combo</strong> class. Therefore, the method was overridden in the 
+<strong>Combo</strong> class to cause its behavior to be appropriate for objects instantiated from the 
+<strong>Combo</strong> class.)</em></p>
+<p>A complete listing of the program is shown in <a href="#Listing_5">Listing 5</a> near the end of this chapter. </p>
+	<p><strong>The class named Radio</strong></p>
+<p>As usual, I will discuss the program in fragments.</p>
+<p><a href="#Listing_1">Listing 1</a> shows the superclass named <strong>Radio</strong>. This code is shown here for easy referral. It is identical to the code for the same class used in the program named 
+<strong>Radio01</strong> discussed in an earlier chapter. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. The class named Radio.
+
+				<pre>class Radio{
+  protected double[] stationNumber = 
+                         new double[5];
+                            
+  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+  }//end method setStationNumber
+
+  public void playStation(int index){
+    System.out.println(
+            &quot;Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+  }//end method playStation
+  
+}//end class Radio</pre>
+</div>
+	<p><strong>Will override playStation</strong></p>
+<p>The class named <strong>Combo</strong> <em>(discussed below)</em> will extend 
+the class named <strong>Radio</strong>. The method named <strong>playStation</strong>, shown in <a href="#Listing_1">Listing 1</a>, will be overridden in the class named 
+<strong>Combo</strong>.</p>
+<p>If you examine the code for the <strong>playStation</strong> method in <a href="#Listing_1">Listing 1</a>, you will see that it assumes radio operations only and doesn't support tape operations. That is the reason that it needs to be overridden. 
+<em>(For example, it doesn't know that it should refuse to play a radio station when a tape is being played.)</em></p>
+<p><strong>The Combo class</strong></p>
+<p><a href="#Listing_2">Listing 2</a> shows the beginning of the class definition for the class named 
+<strong>Combo</strong>. The <strong>Combo</strong> class extends the class named 
+<strong>Radio</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Beginning of the Combo class.
+
+				<pre>class Combo extends Radio{
+  
+  private boolean tapeIn = false;
+  //---------------------------------//
+  
+  public Combo(){//constructor
+    System.out.println(
+           &quot;Combo object constructed&quot;);
+  }//end constructor
+  //---------------------------------//</pre>
+</div>
+	<p><strong>The tapeIn variable</strong></p>
+<p>The most important thing about the code in <a href="#Listing_2">Listing 2</a> is the declaration of the instance variable named
+<strong>tapeIn</strong>.</p>
+<p><em>(In the program named Radio02 in the earlier chapter, this variable was declared in the class named 
+<strong>Radio</strong> and inherited into the class named <strong>Combo</strong>. That was one of the undesirable changes required for the class named 
+<strong>Radio</strong> in that chapter.)</em></p>
+<p>In this version of the program, the variable named <strong>tapeIn</strong> is declared in the subclass instead of in the superclass. Thus, it is not necessary to modify the superclass before extending it.</p>
+<p><strong>The constructor</strong></p>
+<p>The constructor in <a href="#Listing_2">Listing 2</a> is the same as in the 
+earlier program named 
+<strong>Radio02</strong>, so I won't discuss it further. </p>
+<p><strong>The overridden playStation method</strong></p>
+<p>The overridden version of the method named <strong>playStation</strong> is shown in 
+<a href="#Listing_3">Listing 3</a>.
+
+As you can see, this version of the method duplicates the signature of the 
+<strong>playStation</strong> method in the superclass named <strong>Radio</strong>, but provides a different body. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. The overridden playStation method.
+
+				<pre>  public void playStation(int index){
+    System.out.println(&quot;Play Radio&quot;);
+    if(!tapeIn){//tapeIn is false
+      System.out.println(
+          &quot;  Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+    }else{//tapeIn is true
+      System.out.println(
+            &quot;  Remove the tape first&quot;);
+    }//end if/else
+  }//end method playStation</pre>
+</div>
+	<p><strong>Aware of the tape system</strong></p>
+<p>This overridden version of the <strong>playStation</strong> method in 
+<a href="#Listing_3">Listing 3</a> is aware of the existence of the tape system and behaves accordingly.</p>
+<p>Depending on the value of the variable named <strong>tapeIn</strong>, this method will either</p>
+<ul>
+	<li>tune and play a radio station, or </li>
+	<li>display a message instructing the user to remove the tape.</li>
+</ul>
+<p><strong>Which version of playStation is executed?</strong></p>
+<p>When the <strong>playStation</strong> method is called on an object of the 
+<strong>Combo</strong> class, the overridden version of the method <em>(and not the original version defined in the superclass named 
+<strong>Radio</strong>)</em> is the version that is actually executed.</p>
+<p>Although not particularly obvious in this example, this is one of the important characteristics of 
+<em>runtime polymorphism</em>. When a method is called on a reference to an object, it is the type of the object 
+<em>(and not the type of the variable containing the reference to the object)</em> that is used to determine which version of the method is actually 
+executed.</p>
+<p><strong>Three other instance methods</strong></p>
+<p>The subclass named <strong>Combo</strong> defines three other instance methods:</p>
+<ul>
+	<li>insertTape</li>
+	<li>removeTape</li>
+	<li>playTape</li>
+</ul>
+<p>The code in these three methods is identical to the code in the methods having the same names in the program named 
+<strong>Radio02</strong> in the earlier chapter. I discussed that code in the 
+earlier chapter and won't repeat that discussion here. You can view those methods in the complete listing of the program shown in 
+<a href="#Listing_5">Listing 5</a> near the end of this chapter.</p>
+<p><strong>The driver class</strong></p>
+<p><a href="#Listing_4">Listing 4</a> shows the code for the driver class named Radio03. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. The driver class.
+
+				<pre>public class Radio03{
+  //This class simulates the 
+  // manufacturer and the human user
+  public static void main(
+                        String[] args){
+    Combo myObjRef = new Combo();
+    myObjRef.setStationNumber(3,93.5);
+    myObjRef.playStation(3);
+    myObjRef.insertTape();
+    myObjRef.playStation(3);
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+    myObjRef.playTape();
+    myObjRef.insertTape();
+    myObjRef.playTape();
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+  }//end main
+}//end class Radio03</pre>
+</div>
+	<p>The code in <a href="#Listing_4">Listing 4</a> is also identical to the code in the program named 
+	<strong>Radio02</strong> discussed in the earlier chapter. Therefore, I won't discuss it in detail here.</p>
+<p><strong>A new object of the Combo class</strong></p>
+<p>I present this code here solely to emphasize that this code instantiates a new object of the 
+<strong>Combo</strong> class. This assures that the overridden version of the method named 
+<strong>playStation</strong> will be executed by the statements in <a href="#Listing_4">Listing 4</a> that 
+call the <strong>playStation</strong> method.</p>
+<p><em>(Although it is not the case in </em><a href="#Listing_4"><em>Listing 4</em></a><em>, even if the reference to the object of type 
+<strong>Combo</strong> had been stored in a reference variable of type <strong>Radio</strong>, instead of a reference variable of type 
+<strong>Combo</strong>, calling the <strong>playStation</strong> method on that reference would have caused the overridden version of the method to have been executed. That is the essence of runtime polymorphism based on overridden methods in Java.)</em></p>
+<p><strong>Program output</strong></p>
+<p>This program produces the output shown in <a href="#Figure_1">Figure 1</a> on 
+the computer screen.</p>
+<div class="a"><a name="Figure_1">Figure 1</a>. Program output.
+
+
+							<pre>Combo object constructed
+Play Radio
+  Playing the station at 93.5 Mhz
+Insert Tape
+  Tape is in
+  Radio is off
+Play Radio
+  Remove the tape first
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz
+Play Tape
+  Insert the tape first
+Insert Tape
+  Tape is in
+  Radio is off
+Play Tape
+  Tape is playing
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz</pre>
+
+</div>
+	<p>I will leave it as an exercise for the student to compare this output with the messages sent to the object by the code in 
+	<a href="#Listing_4">Listing 4</a>. </p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>An object instantiated from a class that extends another class will contain all of the methods and all of the variables defined in the subclass, plus all of the methods and all of the variables inherited into the subclass.</p>
+<p>The behavior of methods inherited into the subclass may not be appropriate for an object instantiated from the subclass. You can change that behavior by overriding the method in the definition of the subclass.</p>
+<p>To override a method in the subclass, reproduce the name, argument list, and return type of the original method in a new method definition in the subclass. Make sure that the overridden method is not less accessible than the original method. Also, make sure that it doesn't throw any checked exceptions that were not declared for the original method.</p>
+<p>Provide a body for the overridden method, causing the behavior of the overridden method to be appropriate for an object of the subclass.
+
+Any method that is not declared <strong>final</strong> can be overridden in a subclass.
+
+The program discussed in this chapter extends a <strong>Radio</strong> class to produce a subclass that simulates an upgraded car radio containing a tape player.</p>
+<p>Method overriding is used to modify the behavior of an inherited method named 
+<strong>playStation</strong> to cause that method to behave appropriately when a tape has been inserted into the radio.</p>
+<p>Method <em>overriding</em> is different from method <em>overloading</em>. Method <em>overloading</em> 
+will be discussed in the next chapter following the review chapter. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter (following the review chapter) I will explain the use of overloaded methods for the purpose of achieving compile-time polymorphism.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1606: Inheritance, Part 2</li>
+					<li>File: Java1606.htm
+</li>
+					<li>Published: 01/28/02</li>
+					<li>Revised: 03/06/20</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_5">Listing 5</a> below. </p>
+
+
+
+<div class="a">
+<a name="Listing_5">Listing 5</a>. <strong>The program named Radio03.</strong>
+
+<pre>Copyright, R.G.Baldwin
+Simulates the manufacture and use of a 
+combination car radio and tape player.
+Uses method overriding to avoid 
+modifying the class named Radio.
+
+This program produces the following
+output on the computer screen:
+  
+Combo object constructed
+Play Radio
+  Playing the station at 93.5 Mhz
+Insert Tape
+  Tape is in
+  Radio is off
+Play Radio
+  Remove the tape first
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz
+Play Tape
+  Insert the tape first
+Insert Tape
+  Tape is in
+  Radio is off
+Play Tape
+  Tape is playing
+Remove Tape
+  Tape is out
+  Radio is on
+Play Radio
+  Playing the station at 93.5 Mhz
+**************************************/
+
+public class Radio03{
+  //This class simulates the 
+  // manufacturer and the human user
+  public static void main(
+                        String[] args){
+    Combo myObjRef = new Combo();
+    myObjRef.setStationNumber(3,93.5);
+    myObjRef.playStation(3);
+    myObjRef.insertTape();
+    myObjRef.playStation(3);
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+    myObjRef.playTape();
+    myObjRef.insertTape();
+    myObjRef.playTape();
+    myObjRef.removeTape();
+    myObjRef.playStation(3);
+  }//end main
+}//end class Radio03
+//===================================//
+
+class Radio{
+  //This class simulates the plans from
+  // which the radio object is created.
+  // This code is the same as in the
+  // program named Radio01.
+  protected double[] stationNumber = 
+                         new double[5];
+                            
+  public void setStationNumber(
+                int index,double freq){
+    stationNumber[index] = freq;
+  }//end method setStationNumber
+  
+  //This version of playStation doesn&#39;t
+  // accommodate tape operations.
+  public void playStation(int index){
+    System.out.println(
+            &quot;Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+  }//end method playStation
+  
+}//end class Radio
+//===================================//
+
+class Combo extends Radio{
+  
+  private boolean tapeIn = false;
+  //---------------------------------//
+  
+  public Combo(){//constructor
+    System.out.println(
+           &quot;Combo object constructed&quot;);
+  }//end constructor
+  //---------------------------------//
+  
+  //Overridden playStation method. This
+  // overridden version accommodates
+  // tape operations.
+  public void playStation(int index){
+    System.out.println(&quot;Play Radio&quot;);
+    if(!tapeIn){
+      System.out.println(
+          &quot;  Playing the station at &quot; 
+               + stationNumber[index]
+               + &quot; Mhz&quot;);
+    }else{
+      System.out.println(
+            &quot;  Remove the tape first&quot;);
+    }//end if/else
+  }//end method playStation
+  //---------------------------------//
+  
+  public void insertTape(){
+    System.out.println(&quot;Insert Tape&quot;);
+    tapeIn = true;
+    System.out.println(
+                       &quot;  Tape is in&quot;);
+    System.out.println(
+                     &quot;  Radio is off&quot;);
+  }//end insertTape method
+  //---------------------------------//
+  
+  public void removeTape(){
+    System.out.println(&quot;Remove Tape&quot;);
+    tapeIn = false;
+    System.out.println(
+                      &quot;  Tape is out&quot;);
+    System.out.println(
+                      &quot;  Radio is on&quot;);
+  }//end removeTape method
+  //---------------------------------//
+  
+  public void playTape(){
+    System.out.println(&quot;Play Tape&quot;);
+    if(!tapeIn){
+      System.out.println(
+            &quot;  Insert the tape first&quot;);
+    }else{
+      System.out.println(
+                  &quot;  Tape is playing&quot;);
+    }//end if/else
+  }//end playTape
+}//end class combo</pre>
+
+</div>
+
+
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

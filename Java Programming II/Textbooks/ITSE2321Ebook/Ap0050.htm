@@ -1,0 +1,1559 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0050</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0050: Escape Character Sequences and Arrays</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>,
+		
+		<a href="#question11">11</a>, <a href="#question12">12</a>,
+		<a href="#question13">13</a>, <a href="#question14">14</a>,
+		<a href="#question15">15</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+
+<div class="a">
+		<pre>A. Compiler Error
+B. Runtime Error
+C. \&quot;Backslash\&quot;-&gt;\\\nUnderstand
+D. &quot;Backslash&quot;-&gt;\ 
+   Understand
+</pre>
+</div>
+`
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap049{
+  public static void main(
+                        String args[]){
+    new Worker().doEscape();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doEscape(){
+    System.out.println(
+      &quot;\&quot;Backslash\&quot;-&gt;\\\nUnderstand&quot;);
+  }//end doEscape()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. St@273d3c St@256a7c St@720eeb</li>
+	<li>D. Tom Dick Harry</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap050{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    St[] myArray = {new St(&quot;Tom&quot;),
+                    new St(&quot;Dick&quot;),
+                    new St (&quot;Harry&quot;)};
+  for(int cnt = 0; 
+           cnt &lt; myArray.length;cnt++){
+    System.out.print(
+                   myArray[cnt] + &quot; &quot;);
+    
+  }//end for loop
+  System.out.println(&quot;&quot;);
+  }//end doArrays()
+}// end class
+
+class St{
+  private String name;
+  
+  public St(String name){
+    this.name = name;
+  }//end constructor
+  
+  public String toString(){
+    return name;
+  }//end toString()
+}//end class
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>?</p>
+<div class="a">
+		<pre>A.  Compiler Error</pre>
+		<pre>B.  Runtime Error</pre>
+		<pre>C.  0 0 0 0 0
+    0 1 2 3 4
+    0 2 4 6 8</pre>
+		<pre>D.  None of the above</pre>
+</div>
+`
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap051{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int myArray[3][5];
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      for(int j=0;
+              j&lt;myArray[0].length;j++){
+        myArray[i][j] = i*j;
+      }//end inner for loop
+    }//end outer for loop
+ 
+    for(int i=0;i&lt;myArray.length;i++){
+      for(int j=0;
+              j&lt;myArray[0].length;j++){
+        System.out.print(
+                  myArray[i][j] + &quot; &quot;);
+      }//end inner for loop
+      System.out.println(&quot;&quot;);
+    }//end outer for loop   
+    
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>?</p>
+
+<div class="a">
+		<pre>A.  Compiler Error</pre>
+		<pre>B.  Runtime Error</pre>
+		<pre>C.  1 1 1 1 1
+    1 2 3 4 5
+    1 3 5 7 9</pre>
+		<pre>D.  None of the above</pre>
+
+</div>
+`
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap052{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int myArray[][];
+    myArray = new int[3][5];
+    
+    for(int i=0;i&lt;myArray.length;i++){
+      for(int j=0;
+              j&lt;myArray[0].length;j++){
+        myArray[i][j] = i*j + 1;
+      }//end inner for loop
+    }//end outer for loop
+ 
+    for(int i=0;i&lt;myArray.length;i++){
+      for(int j=0;
+              j&lt;myArray[0].length;j++){
+        System.out.print(
+                  myArray[i][j] + &quot; &quot;);
+      }//end inner for loop
+      System.out.println(&quot;&quot;);
+    }//end outer for loop   
+    
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_5">Listing 5</a>?</p>
+
+<div class="a">
+		<pre>A.  Compiler Error</pre>
+		<pre>B.  Runtime Error</pre>
+		<pre>C.  -1 -1 -1 -1 -1
+    -1 -2 -3 -4 -5
+    -1 -3 -5 -7 -9</pre>
+		<pre>D.  None of the above</pre>
+</div>
+`
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap053{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int myArray[][];
+    myArray = new int[3][5];
+    
+    for(int i = 0;i &lt; 3;i++){
+      for(int j = 0;j &lt; 5;j++){
+        myArray[i][j] = (i*j+1)*(-1);
+      }//end inner for loop
+    }//end outer for loop
+ 
+    for(int i = 0;i &lt; 3;i++){
+      for(int j = 0;j &lt; 6;j++){
+        System.out.print(
+                  myArray[i][j] + &quot; &quot;);
+      }//end inner for loop
+      System.out.println(&quot;&quot;);
+    }//end outer for loop   
+    
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_6">Listing 6</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 3</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap054{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int[] A = new int[2];   
+    A[0] = 1;
+    A[1] = 2;
+    System.out.println(A[0] + A[1]);
+
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_7">Listing 7</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>import java.awt.Label;
+public class Ap055{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Label[] A = new Label[2];   
+    A[0] = new Label("O");
+    A[1] = new Label("K");
+    System.out.println(A[0] + A[1]);
+  }//end doArrays()
+}// end class</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by program shown in <a href="#Listing_8">Listing 8</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>
+import java.awt.Label;
+public class Ap056{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Label[] A = new Label[2];   
+    A[0] = new Label("O");
+    A[1] = new Label("K");
+    System.out.println(A[0].getText() + A[1].getText());
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_9">Listing 9</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap057{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Integer[] A = new Integer[2];   
+    A[0] = new Integer(1);
+    System.out.println(
+                      A[1].intValue());
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by program shown in 
+<a href="#Listing_10">Listing 10</a>?</p>
+
+
+<div class="a">
+		<pre>A.  Compiler Error</pre>
+		<pre>B.  Runtime Error</pre>
+		<pre>C.  0
+    0 1
+    0 2 4</pre>
+		<pre>D.  None of the above</pre>
+</div>
+`
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap058{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    int A[][] = new int[3][];
+    A[0] = new int[1];
+    A[1] = new int[2];
+    A[2] = new int[3];
+    
+    for(int i = 0;i &lt; A.length;i++){
+      for(int j=0;j &lt; A[i].length;j++){
+        A[i][j] = i*j;
+      }//end inner for loop
+    }//end outer for loop
+
+    for(int i=0;i&lt;A.length;i++){
+      for(int j=0;j &lt; A[i].length;j++){
+        System.out.print(
+                        A[i][j] + &quot; &quot;);
+      }//end inner for loop
+      System.out.println(&quot;&quot;);
+    }//end outer for loop
+
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+
+	
+	
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h2><a name="question11">Question 11</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_11">Listing 
+11</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Zero One Two</li>
+	<li>D. None of the above</li>
+</ul>
+
+	
+	
+
+
+<div class="a"><a name="Listing_11">Listing 11</a>. Listing for Question 11. 
+<pre>public class Ap059{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Object[] A = new Object[3];
+    //Note that there is a simpler and
+    // better way to do the following
+    // but it won&#39;t illustrate my point
+    // as well as doing it this way.
+    A[0] = new String(&quot;Zero&quot;);
+    A[1] = new String(&quot;One&quot;);
+    A[2] = new String(&quot;Two&quot;);
+    
+    System.out.println(A[0] + &quot; &quot; +
+                       A[1] + &quot; &quot; +
+                       A[2]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+	<p><a href="#answer11">Answer and Explanation</a></p>
+
+<h2><a name="question12">Question 12</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_12">Listing 12</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Zero 1 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+
+<div class="a"><a name="Listing_12">Listing 12</a>. Listing for Question 12. 
+<pre>public class Ap060{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Object[] A = new Object[3];
+    //Note that there is a simpler and
+    // better way to do the following
+    // but it won&#39;t illustrate my point
+    // as well as doing it this way.
+    A[0] = new String(&quot;Zero&quot;);
+    A[1] = new Integer(1);
+    A[2] = new Double(2.0);
+    
+    System.out.println(A[0] + &quot;  &quot; +
+                       A[1] + &quot;  &quot; +
+                       A[2]);
+  }//end doArrays()
+}// end class
+</pre>
+
+</div>
+
+<p><a href="#answer12">Answer and Explanation</a></p>
+
+<h2><a name="question13">Question 13</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_13">Listing 13</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Zero 1 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+
+<div class="a"><a name="Listing_13">Listing 13</a>. Listing for Question 13. 
+<pre>public class Ap061{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Object[] A = new Object[3];
+    //Note that there is a simpler and
+    // better way to do the following
+    // but it won&#39;t illustrate my point
+    // as well as doing it this way.
+    A[0] = new String(&quot;Zero&quot;);
+    A[1] = new Integer(1);
+    A[2] = new MyClass(2.0);
+    
+    System.out.println(A[0] + &quot;  &quot; +
+                       A[1] + &quot;  &quot; +
+                       A[2]);
+  }//end doArrays()
+}// end class
+
+class MyClass{
+  private double data;
+  
+  public MyClass(double data){
+    this.data = data;
+  }//end constructor
+}// end MyClass
+</pre>
+
+</div>
+
+<p><a href="#answer13">Answer and Explanation</a></p>
+
+<h2><a name="question14">Question 14</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_14">Listing 14</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+
+<div class="a"><a name="Listing_14">Listing 14</a>. Listing for Question 14. 
+<pre>public class Ap062{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Object[] A = new Object[2];
+    A[0] = new MyClass(1.0);
+    A[1] = new MyClass(2.0);
+    
+    System.out.println(
+      A[0].getData() + &quot;  &quot; +
+      A[1].getData());
+  }//end doArrays()
+}// end class
+
+class MyClass{
+  private double data;
+  
+  public MyClass(double data){
+    this.data = data;
+  }//end constructor
+  
+  public double getData(){
+    return data;
+  }//end getData()
+}// end MyClass
+</pre>
+
+</div>
+
+<p><a href="#answer14">Answer and Explanation</a></p>
+
+<h2><a name="question15">Question 15</a></h2>
+<p>What output is produced by program shown in <a href="#Listing_15">Listing 15</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 1.0 2.0</li>
+	<li>D. None of the above.</li>
+</ul>
+
+
+<div class="a"><a name="Listing_15">Listing 15</a>. Listing for Question 15. 
+<pre>public class Ap063{
+  public static void main(
+                        String args[]){
+    new Worker().doArrays();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doArrays(){
+    Object[] A = new Object[2];
+    A[0] = new MyClass(1.0);
+    A[1] = new MyClass(2.0);
+    
+    System.out.println(
+      ((MyClass)A[0]).getData() + &quot;  &quot;
+      + ((MyClass)A[1]).getData());
+  }//end doArrays()
+}// end class
+
+class MyClass{
+  private double data;
+  
+  public MyClass(double data){
+    this.data = data;
+  }//end constructor
+  
+  public double getData(){
+    return data;
+  }//end getData()
+}// end MyClass
+</pre>
+
+</div>
+
+<p><a href="#answer15">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10.</li>
+
+	<li><a href="#Listing_11">Listing 11</a>. Listing for Question 11. </li>
+	<li><a href="#Listing_12">Listing 12</a>. Listing for Question 12. </li>
+	<li><a href="#Listing_13">Listing 13</a>. Listing for Question 13. </li>
+	<li><a href="#Listing_14">Listing 14</a>. Listing for Question 14. </li>
+	<li><a href="#Listing_15">Listing 15</a>. Listing for Question 15. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0050: Escape Character 
+				Sequences and Arrays</li>
+				<li>File: Ap0050.htm </li>
+				<li>Originally published: 2002</li>
+				<li>Published at cnx.org: 12/03/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>C. 1.0 2.0 </p>
+<h3><strong>Explanation 15</strong></h3><p>
+This is an upgrade of the program from <a href="#question14">Question 14</a>. This program applies the 
+proper downcast operator to the references extracted from the array of type 
+<strong>Object</strong> before attempting to call the method named <strong>getData</strong> on those references. 
+<em>(For more information, see the discussion of </em><a href="#question14"><em>Question 14</em></a><em>.)
+</em>
+</p>
+<p>As a result of applying a proper downcast, the program compiles and runs 
+successfully. </p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 14</strong></h3><p>
+<strong>Storing references in a generic array of type Object
+</strong>
+</p>
+<p>This program stores references to two objects instantiated from a new class 
+named <strong>MyClass</strong> in the elements of an array object of declared type 
+<strong>Object</strong>. That 
+is OK. </p>
+<p><strong>Calling a method on the references</strong> </p>
+<p>Then the program extracts the references to the two objects and attempts to 
+call the method named <strong>getData</strong> on each of the references. That is not OK. </p>
+<p><strong>Downcast is required </strong> </p>
+<p>Because the method named <strong>getData</strong> is not defined in the class named 
+<strong>Object</strong>, in 
+order to call this method on references extracted from an array of type <strong>Object</strong>, 
+it is necessary to downcast the references to the class in which the method is 
+defined. In this case, the method is defined in the new class named <strong>MyClass</strong>
+<em>(but 
+it could be defined in an intermediate class in the class hierarchy if the new 
+class extended some class further down the hierarchy)</em>. </p>
+<p>Here is a partial listing of the compiler error produced by this program: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap062.java:15: error: cannot find symbol
+      A[0].getData() + "  " +
+          ^
+  symbol:   method getData()
+  location: class Object
+</pre>
+</div>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>D. None of the above. </p>
+<h3><strong>Explanation 13</strong></h3><p>
+The array object of type <strong>Object</strong> in this program is capable of storing a 
+reference to a new object instantiated from the new class named <strong>MyClass</strong>. 
+However, because the new class does not override the <strong>toString</strong> 
+method, when a string representation of the new object is displayed, the string 
+representation is created using the version of the <strong>toString</strong> 
+method that is inherited from the <strong>Object</strong> class. That causes this program to 
+produce an output similar to the following:
+</p>
+
+<p><strong>Zero 1 MyClass@273d3c</strong></p>
+
+<p><a href="#question13">Back to Question 13</a> </p>
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>C. Zero 1 2.0 </p>
+<h3><strong>Explanation 12</strong></h3><p>
+<strong>A type-generic array object</strong>
+</p>
+<p>As explained in <a href="#question11">Question 11</a>, an array object of the type 
+<strong>Object</strong> is a generic 
+array that can be used to store references to objects instantiated from any 
+class. </p>
+<p><strong>Storing mixed reference types</strong> </p>
+<p>This program instantiates objects from the classes <strong>String</strong>,
+<strong>Integer</strong>, and <strong>Double</strong>, and stores those objects' 
+references in 
+the elements of an array of type <strong>Object</strong>. Then the program accesses the 
+references and uses them to display string representations of each of the 
+objects. </p>
+<p><strong>Polymorphic behavior applies </strong> </p>
+<p>Once again, polymorphic behavior involving overridden versions of the <strong>
+toString</strong> method were involved and it was not necessary to downcast the 
+references to their true type to display string representations of the objects.
+</p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>C. Zero One Two </p>
+<h3><strong>Explanation 11</strong></h3><p>
+<strong>Storing references to subclass types </strong>
+</p>
+<p>When you create an array object for a type defined by a class definition, the 
+elements of the array can be used to store references to objects of that class 
+or any subclass of that class. </p>
+<p><strong>A type-generic array object </strong> </p>
+<p>All classes in Java are subclasses of the class named <strong>Object</strong>. This program 
+creates an array object with the declared type being type 
+<strong>Object</strong>. An array of 
+type <strong>Object</strong> can be used to store references to objects instantiated from any 
+class. </p>
+<p>After creating the array object, this program instantiates three objects of 
+the class <strong>String</strong> and stores those object&#39;s references in the 
+elements of the array. <em>(As I pointed out in the comments, there is a simpler and 
+better way to instantiate </em> <strong><em>String</em></strong><em> objects, but it wouldn&#39;t 
+illustrate my point as well as doing the way that I did.)</em> </p>
+<p><strong>Sometimes you need to downcast</strong> </p>
+<p>Although an array of type <strong>Object</strong> can be used to store references to objects 
+of any type <em>(including mixed types and references to other array objects)</em>, you will sometimes need to downcast those 
+references back to their true type once you extract them from the array and 
+attempt to use them for some purpose. </p>
+<p><strong>Polymorphic behavior applies here</strong> </p>
+<p>For this case, however, because the <strong>toString</strong> method is defined in the 
+<strong>Object</strong> class and overridden in the <strong>String</strong> class, polymorphic 
+behavior applies and it is not necessary to downcast the references to type
+<strong>String</strong> in order to be able to convert them to strings and 
+display them. </p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+<h2><a name="answer10">Answer 10</a></h2>
+
+
+<div class="a">
+		<pre>C.  0
+    0 1
+    0 2 4</pre>
+</div>
+
+<h3><strong>Explanation 10</strong></h3>
+
+<p><strong>Defer size specification for secondary arrays</strong> </p>
+<p>It is not necessary to specify the sizes of the secondary arrays when you 
+create a multi-dimensional array in Java. Rather, since the elements in the 
+primary array simply contain references to other array objects <em>(or null by 
+default)</em>, you can defer the creation of those secondary array objects until 
+later. </p>
+<p><strong>Independent array objects</strong> </p>
+<p>When you do finally create the secondary arrays, they are essentially 
+independent array objects <em>(except for the requirement for type commonality among 
+them)</em>. </p>
+<p><strong>Ragged arrays</strong> </p>
+<p>Each individual secondary array can be of any size, and this leads to the 
+concept of a <em>ragged array</em>. <em>(On a two-dimensional basis, a ragged array might be 
+thought of as a two-dimensional array where each row can have a different number 
+of columns.) </em> </p>
+<p>This program creates, populates, and displays the contents of such a 
+two-dimensional ragged array. Although this program creates a two-dimensional 
+array that is triangular in shape, even that is not a requirement. The number of 
+elements in each of the secondary arrays need have no relationship to the number 
+of elements in any of the other secondary arrays. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 9</strong></h3><p>
+<strong>NullPointerException</strong>
+</p>
+<p>The following code fragment shows that this program attempts to perform an 
+illegal operation on the value accessed from the array object at index 1.</p>
+
+
+
+
+<div class="a">
+				<pre>    Integer[] A = new Integer[2];   
+    A[0] = new Integer(1);
+    System.out.println(
+                      A[1].intValue());</pre>
+</div>
+
+<p>You can&#39;t call methods on null references </p>
+<p>The reference value that was returned by accessing <strong>A[1]</strong> is the default value of null. This is the value that was deposited in the 
+element when the array object was created <em>(no other value was ever stored 
+there)</em>. When an attempt was made to call the <strong>intValue</strong> method on that reference 
+value, the following runtime error occurred</p>
+
+
+
+
+<div class="a">
+				<pre>java.lang.NullPointerException
+ at Worker.doArrays(Ap057.java:14)
+ at Ap057.main(Ap057.java:6)
+</pre>
+</div>
+
+<p>This is a common programming error, and most Java programmers have seen an 
+error message involving a <strong>NullPointerException</strong> several <strong>(perhaps many)</strong> times 
+during their programming careers. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>C. OK</p>
+<h3><strong>Explanation 8</strong></h3><p>
+<strong>Success at last
+</strong>
+</p>
+<p>This program finally gets it all together and works properly. In particular, 
+after accessing the reference values stored in each of the elements, the program 
+does something legal with those values. </p>
+<p><strong>Call methods on the object&#39;s references </strong> </p>
+<p>In this case, the code calls one of the public methods belonging to the 
+objects referred to by the reference values stored in the array elements.</p>
+
+
+
+
+<div class="a">
+				<pre>System.out.println(A[0].getText() + A[1].getText());</pre>
+</div>
+	
+<p>The <strong>getText</strong> method that is called, returns the contents of 
+the <strong>Label</strong> object as type <strong>String</strong>. This makes it possible to perform 
+<strong>String</strong> concatenation on the values returned 
+by the method, so the program compiles and executes properly. </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>A. Compiler Error</p>
+<h3><strong>Explanation 7</strong></h3><p>
+Java arrays may seem different to you
+</p>
+<p>For all types other than the primitive types, you may find the use of arrays 
+in Java to be considerably different from what you are accustomed to in other 
+programming languages. There are a few things that you should remember. </p>
+<p><strong>Array elements may contain default values </strong> </p>
+<p>If the declared type of an array is one of the primitive types, the elements 
+of the array contain values of the declared type. If you have not initialized 
+those elements or have not assigned specific values to the elements, they will 
+contain default values. </p>
+<p><strong>The default values</strong></p>
+<p>You need to know that: </p>
+<ul>
+	<li>The default for numeric primitive types is the zero value for that type</li>
+	<li>The default for the <strong>boolean</strong> type is false</li>
+	<li>The default for the <strong>char</strong> type is a 16-bit unsigned integer, all of whose 
+	bits have a zero value <em>(sometimes called a null character)</em></li>
+	<li>The default value for reference types is <em>null</em>, not to be 
+	confused with the <em>null character</em> above. <em>(An array element that contains null doesn&#39;t refer to an 
+	object.)</em></li>
+</ul><p>
+<strong>Arrays of references</strong>
+</p>
+<p>If the declared type for the array is not one of the primitive types, the 
+elements in the array are actually reference variables. Objects are never 
+stored directly in a Java array. Only references to objects are stored in a Java 
+array. </p>
+<p><strong>If the array type is the name of a class ... </strong> </p>
+<p>If the declared type is the name of a class, references to objects of that 
+class or any subclass of that class can be stored in the elements of the array.
+</p>
+<p><strong>If the array type is the name of an interface ... </strong> </p>
+<p>If the declared type is the name of an interface, references to objects of 
+any class that implements the interface, or references to objects of any 
+subclass of a class that implements the interface can be stored in the elements 
+of the array. </p>
+<p><strong>Why did this program fail to compile?</strong> </p>
+<p>Now back to the program at hand. Why did this program fail to compile? To 
+begin with, this array was not designed to store any of the primitive types. 
+Rather, this array was designed to store references to objects instantiated from 
+the class named <strong>Label</strong>, as indicated in the following fragment.</p>
+
+
+
+
+<div class="a">
+				<pre>    Label[] A = new Label[2];</pre>
+</div>
+
+<p><strong>Elements initialized to null </strong> </p>
+<p>This is a two-element array. When first created, it contains two elements, 
+each having a default value of <em>null</em>. What this really means is that the 
+reference values stored in each of the two elements don&#39;t initially refer to 
+any object. </p>
+<p><strong>Populate the array elements </strong> </p>
+<p>The next fragment creates two instances <em>(objects)</em> of the <strong>Label</strong> 
+class and assigns those object&#39;s references to the two elements in the array 
+object. This is perfectly valid.</p>
+
+
+
+
+<div class="a">
+				<pre>    A[0] = new Label(&quot;O&quot;);
+    A[1] = new Label(&quot;K&quot;);</pre>
+</div>
+
+<p><strong>You cannot add reference values</strong> </p>
+<p>The problem arises in the next fragment. Rather than dealing with the 
+object&#39;s references in an appropriate manner, this fragment attempts to 
+access the text values of the two reference variables and concatenate those values.</p>
+
+
+
+
+<div class="a">
+				<pre>    System.out.println(A[0] + A[1]);</pre>
+</div>
+	<p>The compiler produces the following error message: </p>
+
+
+
+
+<div class="a">
+				<pre>
+Ap055.java:14: error: bad operand types for binary operator '+'
+    System.out.println(A[0] + A[1]);
+                            ^
+  first type:  Label
+  second type: Label
+1 error</pre>
+</div>
+
+<p>This error message is simply telling us that it is not legal to add the 
+values of reference variables. </p>
+<p><strong>Not peculiar to arrays</strong> </p>
+<p>This problem is not peculiar to arrays. You would get a similar error if you 
+attempted to add two reference variables even when they aren&#39;t stored in an 
+array. In this case, the code to access the values of the elements is good. The 
+problem arises when we attempt to do something illegal with those values after 
+we access them. </p>
+<p><strong>Usually two steps are required</strong> </p>
+<p>Therefore, except in some special cases such as certain operations involving 
+the wrapper classes, to use Java arrays with types other than the primitive types, when 
+you access the value stored in an element of the array <em>(a reference variable)</em> 
+you must perform only those operations on that reference variable that are legal 
+for an object of that type. That usually involves two steps. The first step 
+accesses the reference to an object. The second step performs some operation on 
+the object. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. 3 </p>
+<h3><strong>Explanation 6</strong></h3>
+<p>Once you create an array object for a primitive type in Java, you can treat 
+the elements of the array pretty much as you would treat the elements of an 
+array in other programming languages. In particular, a statement such the 
+following can be used to assign a value to an indexed element in an array 
+referred to by a reference variable named <strong>A</strong>.</p>
+
+
+
+
+<div class="a">
+				<pre>A[1] = 2;</pre>
+</div>
+
+<p>Similarly, when you reference an indexed element in an expression such as the 
+following, the value stored in the element is used to evaluate the expression.</p>
+
+
+
+
+<div class="a">
+				<pre>System.out.println(A[0] + A[1]);</pre>
+</div>
+
+<p>For all Java arrays, you must remember to create the new array object and to store the array object&#39;s reference in a reference variable of the correct 
+type. Then you can use the reference variable to gain access to the elements in 
+the array. </p>
+
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>B. Runtime Error</p>
+<h3><strong>Explanation 5</strong></h3><p>
+<strong>Good fences make good neighbors
+</strong>
+</p>
+<p>One of the great things about an array object in Java is that it knows how to 
+protect its boundaries. </p>
+<p>Unlike some other currently popular programming languages, if your program 
+code attempts to access a Java array element outside its boundaries, an 
+exception will be thrown. If your program doesn&#39;t catch and handle the 
+exception, the program will be terminated. </p>
+<p><strong>Abnormal termination</strong> </p>
+<p>While experiencing abnormal program termination isn&#39;t all that great, it is 
+better than the alternative of using arrays whose boundaries aren&#39;t protected. 
+Programming languages that don&#39;t protect the array boundaries simply overwrite 
+other data in memory whenever the array boundaries are exceeded. </p>
+<p><strong>Attempt to access out of bounds element </strong> </p>
+<p>The code in the <strong>for</strong> loop in the following fragment attempts 
+to access the array element at the index value 5. That index value is out of 
+bounds of the array.</p>
+
+
+
+
+<div class="a">
+				<pre>      for(int j = 0;j &lt; 6;j++){
+        System.out.print(
+                  myArray[i][j] + &quot; &quot;);
+      }//end inner for loop</pre>
+</div>
+	<p>Because that index value is outside the boundaries of the array, an 
+	<strong>ArrayIndexOutOfBoundsException</strong> is thrown. The exception isn&#39;t caught and handled 
+by program code, so the program terminates abnormally at runtime.</p>
+
+<p>This program also illustrates that it is usually better to use the <strong>length</strong> 
+property of an array to control iterative loops than to use hard-coded limit 
+values, which may be coded erroneously. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+
+<div class="a">
+		<pre>C.  1 1 1 1 1
+    1 2 3 4 5
+    1 3 5 7 9</pre>
+
+</div>
+
+<h3><strong>Explanation 4</strong></h3><p>
+<strong>A two-dimensional array</strong>
+</p>
+<p>This program illustrates how to create, populate, and process a 
+two-dimensional array with three rows and five columns. </p>
+
+	<p><em>(As mentioned earlier, a Java programmer who understands the fine points 
+	of the language probably wouldn&#39;t call this a two-dimensional array. Rather, 
+	this is a one-dimensional array containing three elements. Each of those 
+	elements is a reference to a one-dimensional array containing five elements. 
+	That is the more general way to think of Java arrays.)</em></p>
+
+
+<p>The following code fragment creates the array, using one of the acceptable 
+formats discussed in <a href="#question03">Question 3</a>.</p>
+
+
+
+
+<div class="a">
+				<pre>    int myArray[][];
+    myArray = new int[3][5];</pre>
+</div>
+
+<p><strong>Populating the array </strong> </p>
+<p>The next code fragment uses a pair of nested <strong>for</strong> loops to populate the 
+elements in the array with values of type <strong>int</strong>. 
+</p>
+
+
+
+
+
+
+
+
+<div class="a">
+				<pre>    for(int i=0;i&lt;myArray.length;i++){
+      for(int j=0;
+              j&lt;myArray[0].length;j++){
+        myArray[i][j] = i*j + 1;
+      }//end inner for loop
+    }//end outer for loop</pre>
+</div>
+	
+	
+<p>This is where 
+the analogy of a two-dimensional array falls apart. It is much easier at this 
+point to think in terms of a three-element primary array, each of whose elements 
+contains a reference to a secondary array containing five elements. <em>(Note that 
+in Java, the secondary arrays don&#39;t all have to be of the same size. Hence, it 
+is possible to create odd-shaped multi-dimensional arrays in Java.)</em></p>
+
+<p><strong>Using the length property</strong> </p>
+<p>Pay special attention to the two chunks of code that use the length properties of the arrays to determine the number of 
+iterations for each of the <strong>for</strong> loops. </p>
+<p>The first chunk determines the number of elements in the primary 
+array. In this case, the length property contains the value 3. </p>
+<p>The second chunk determines the number of elements in the secondary 
+array that is referred to by the contents of the element at index 0 in the 
+primary array. <em>(Think carefully about what I just said.)</em></p>
+<p>In this case, the length property of the secondary array contains 
+the value 5. </p>
+<p><strong>Putting data into the secondary array elements </strong> </p>
+<p>The code interior to the inner loop simply calculates some numeric values and 
+stores those values in the elements of the three secondary array objects. </p>
+<p><strong>Let&#39;s look at a picture</strong> </p>
+<p>Here is a picture that attempts to illustrate what is really going on here. I 
+don&#39;t know if it will make sense to you or not, but hopefully, it won&#39;t make the 
+situation any more confusing than it might already be. </p>
+
+
+
+
+<div class="a">
+<pre>[-&gt;]  [1][1][1][1][1]</pre>
+<pre>[-&gt;]  [1][2][3][4][5]</pre>
+<pre>[-&gt;]  [1][3][5][7][9]</pre>
+</div>
+
+<p><strong>The primary array </strong> </p>
+<p>The three large boxes on the left represent the individual elements of the 
+three-element primary array. The length property for this array has a value of 
+3. The arrows in the boxes indicate that the content of each of these three 
+elements is a reference to one of the five-element arrays on the right. </p>
+<p><strong>The secondary arrays </strong> </p>
+<p>Each of the three rows of five boxes on the right represents a separate 
+five-element array object. Each element in each of those array objects contains 
+the <strong>int</strong> value shown. The length property for each of those 
+arrays has a value of 5. </p>
+<p><strong>Access and display the array data</strong> </p>
+<p>The code in the following fragment is another pair of nested <strong>for</strong> loops. 
+</p>
+
+
+
+
+<div class="a">
+				<pre>    for(int i=0;i&lt;myArray.length;i++){
+      for(int j=0;
+              j&lt;myArray[0].length;j++){
+        System.out.print(
+                  myArray[i][j] + &quot; &quot;);
+      }//end inner for loop
+      System.out.println(&quot;&quot;);
+    }//end outer for loop</pre>
+</div>
+	<p>In this 
+case, the code in the inner loop accesses the contents of the individual 
+elements in the three five-element arrays and displays those contents. If you 
+understand the earlier code in this program, you shouldn&#39;t have any difficulty 
+understanding the code in this fragment.</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 3</strong></h3><p>
+<strong>An incorrect statement </strong>
+</p>
+<p>The following statement is not the proper way to create an array object in 
+Java. 
+</p>
+
+
+
+
+<div class="a">
+				<pre>     int myArray[3][5];</pre>
+</div>
+	<p>This statement caused the program to fail to compile, producing several 
+error messages.</p>
+<p><strong>What is the correct syntax?</strong> </p>
+<p>There are several different formats that can be used to create an array 
+object in Java. One of the acceptable ways was illustrated by the code used in 
+<a href="#question02">Question 2</a>. Three more acceptable formats are shown below.</p>
+
+
+
+
+<div class="a">
+				<pre>    int[][] myArrayA = new int[3][5];
+
+    int myArrayB[][] = new int[3][5];
+
+    int myArrayC[][];
+    myArrayC = new int[3][5];</pre>
+</div>
+
+<p><strong>Two steps are required </strong> </p>
+<p>The key thing to remember is that an array is an object in Java. Just like 
+all other <em>(non-anonymous)</em> objects in Java, there are two steps involved in 
+creating and preparing an object for use. </p>
+<p><strong>Declare a reference variable </strong> </p>
+<p>The first step is to declare a reference variable capable of holding a 
+reference to the object. </p>
+<p><strong>The second step</strong> </p>
+<p>The second step is to create the object and to assign the object&#39;s reference 
+to the reference variable. From that point on, the reference variable can be 
+used to gain access to the object. </p>
+<p><strong>Two steps can often be combined </strong> </p>
+<p>Although there are two steps involved, they can often be combined into a 
+single statement, as indicated by the first two acceptable formats shown above.
+</p>
+<p>In both of these formats, the code on the left of the assignment operator 
+declares a reference variable. The code on the right of the assignment operator 
+creates a new array object and returns the array object&#39;s reference. The 
+reference is assigned to the new reference variable declared on the left. </p>
+<p><strong>A two-dimensional array object </strong> </p>
+<p>In the code fragments shown above, the array object is a two-dimensional array object that 
+can be thought of as consisting of three rows and five columns. </p>
+
+	<p><em>(Actually, multi-dimensional array objects in Java can be much more complex 
+	than this. In 
+	fact, although I have referred to this as a two-dimensional array object, 
+	there is no such thing as a multi-dimensional array object in Java. The concept of a 
+	multi-dimensional array in Java is achieved by creating a tree structure of single-dimensional 
+	array objects that contain references to other single-dimensional array 
+	objects.)</em></p>
+<p>
+<strong>The square brackets in the declaration
+</strong>
+</p>
+<p>What about the placement and the number of matching pairs of empty square 
+brackets? As indicated in the first two acceptable formats shown above, the 
+empty square brackets can be next to the name of the type or next to the name of 
+the reference variable. The end result is the same, so you can use whichever 
+format you prefer. </p>
+<p><strong>How many pairs of square brackets are required? </strong> </p>
+<p>Also, as implied by the acceptable formats shown above, the number of 
+matching pairs of empty square brackets must match the number of so-called 
+<em>dimensions</em> of the array. <em>(This tells the compiler to create a reference variable 
+capable of holding a reference to a one-dimensional array object, whose elements 
+are capable of holding references to other array objects.) </em> </p>
+<p><strong>Making the two steps obvious</strong> </p>
+<p>A third acceptable format, also shown above, separates the process into two 
+steps. </p>
+<p>One statement in the third format declares a reference variable capable of 
+holding a reference to a two-dimensional array object containing data of type
+<strong>int</strong>. When that statement finishes executing, the reference 
+variable exists, but it doesn&#39;t refer to an actual array object. The next 
+statement creates an array object and assigns that object&#39;s reference to the 
+reference variable. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>D. Tom Dick Harry </p>
+<h3><strong>Explanation 2</strong></h3><p>
+<strong>An array is an object in Java</strong>
+</p>
+<p>An array is a special kind of object in Java. Stated differently, all array 
+structures are encapsulated in objects in Java. Further. all array structures 
+are one-dimensional. I often refer to this special kind of object as an <em>
+array object</em>.</p>
+<p>An array object always has a 
+property named <strong>length</strong>. The value of the <strong>length</strong> property is always equal to the 
+number of elements in the array. Thus, a program can always determine the size 
+of an array be examining its <strong>length</strong> property. </p>
+<p><strong>Instantiating an array object </strong> </p>
+<p>An array object can be instantiated in at least two different ways: </p>
+<ol>
+	<li>By using the <strong>new</strong> operator in conjunction with the type of data to be 
+	stored in the array.</li>
+	<li>By specifying an initial value for every element in the array, in which 
+	case the <strong>new</strong> operator is not used.</li>
+</ol><p>
+This program uses the second of the two ways listed above.
+</p>
+<p><strong>Declaring a reference variable for an array object </strong> </p>
+<p>The following code fragment was extracted from the method named doArrays(). 
+</p>
+
+
+
+
+<div class="a"><pre>    St[] myArray = {new St(&quot;Tom&quot;),
+                    new St(&quot;Dick&quot;),
+                    new St (&quot;Harry&quot;)};</pre>
+</div>
+	<p>The code to the left of the assignment operator declares a reference variable 
+named <strong>myArray</strong>. This reference variable is capable of holding a reference to an 
+array object that contains an unspecified number of references to objects 
+instantiated from the class named <strong>St</strong> <em>(or any subclass of the class named St)</em>.</p>
+<p><strong>Note the square brackets</strong> </p>
+<p>You should note the square brackets in the declaration of the reference 
+variable in the above code <em>(the declaration of a reference variable to hold a 
+reference to an ordinary object doesn&#39;t include square brackets)</em>. </p>
+<p><strong>Create the array object</strong> </p>
+<p>The code to the right of the assignment operator in the above fragment causes 
+the new array object to come into being. Note that the <strong>new</strong> operator is not used 
+to create the array object in this case. <em>(This is one of the few cases in Java, 
+along with a literal </em> <strong><em>String</em></strong><em> object, where it is possible to 
+create a new object without using either the <strong>new</strong> operator or the
+<strong>newInstance</strong> 
+method of the class whose name is <strong>Class</strong>.) </em> </p>
+<p><strong>Populate the array object</strong> </p>
+<p>This syntax not only creates the new array object, it also populates it. The 
+new array object created by the above code contains three elements, because 
+three initial values were provided. The initial values are separated by commas 
+in the initialization syntax. </p>
+<p><strong>Also instantiates three objects of the St class</strong> </p>
+<p>The code in the above fragment also instantiates three objects of the class 
+named <strong>St</strong>. Once the array object has come into being, each of the three elements 
+in the array contains a reference to a new object of the class <strong>St</strong>. Each of those 
+objects is initialized to contain the name of a student by using a parameterized 
+constructor that is defined in the class. </p>
+<p><strong>The length property value is 3</strong> </p>
+<p>Following execution of the above code, the <strong>length</strong> property of the array 
+object will contain a value of 3, because the array contains three elements, one 
+for each initial value that was provided. </p>
+<p><strong>Using the length property</strong> </p>
+<p>The code in the following fragment uses the <strong>length</strong> property of the array 
+object in the conditional clause of a <strong>for</strong> loop to display a <strong>String</strong> 
+representation of each of the objects.</p>
+
+
+
+
+<div class="a"><pre>  for(int cnt = 0; 
+      cnt &lt; myArray.length;
+      cnt++){
+    System.out.print(
+                   myArray[cnt] + &quot; &quot;);</pre>
+</div>
+
+<p><strong>Overridden toString method </strong> </p>
+<p>The class named <strong>St</strong>, from which each of the objects was instantiated, defines 
+an overridden <strong>toString</strong> method that causes the string representation of an 
+object of that class to consist of the <strong>String</strong> stored in an 
+instance variable of the object. </p>
+<p>Thus, the <strong>for</strong> loop shown above displays the student names that were 
+originally encapsulated in the objects when they were instantiated. </p>
+<p><strong>The class named St</strong> </p>
+<p>The code in the following fragment shows the beginning of the class named 
+<strong>St</strong> 
+including one instance variable and a parameterized constructor.</p>
+
+
+
+
+<div class="a">
+				<pre>class St{
+  private String name;
+  
+  public St(String name){
+    this.name = name;
+  }//end constructor</pre>
+</div>
+
+<p><strong>A very common syntax</strong> </p>
+<p>This constructor makes use of a very common syntax involving the reference 
+named <strong>this</strong>. Basically, this 
+syntax says to get the value of the incoming parameter whose name is <strong>name</strong> and to 
+assign that value to the instance variable belonging to <em>this object</em> whose name 
+is also <strong>name</strong>.</p>
+<p><strong>Initializing the object of type St</strong> </p>
+<p>Each time a new object of the <strong>St</strong> class is instantiated, that object contains 
+an instance variable of type <strong>String</strong> whose value matches the
+<strong>String</strong> value passed as a parameter to the constructor. </p>
+<p><strong>Overridden toString method </strong> </p>
+<p>The overridden <strong>toString</strong> method for the class named <strong>St</strong> is shown in the 
+following code fragment. 
+</p>
+
+
+
+
+<div class="a">
+				<pre>  public String toString(){
+    return name;
+  }//end toString()</pre>
+</div>
+	<p>This version causes the value in the <strong>String</strong> 
+object, referred to by the instance variable named <strong>name</strong>, to be returned when it 
+is necessary to produce a <strong>String</strong> representation of the object.
+</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>The answer is item D, which reads as follows:</p>
+
+<div class="a">
+		<pre>&quot;Backslash&quot;-&gt;\ 
+Understand
+</pre>
+</div>
+
+<h3><strong>Explanation 1</strong></h3><p>
+<strong>Don&#39;t confuse the compiler</strong>
+</p>
+<p>If you include certain characters inside a literal <strong>String</strong>, 
+you will confuse the compiler. For example, if you simply include a quotation 
+mark (&quot;) inside a literal  <strong>String</strong>, the compiler will interpret that as the end of 
+the string. From that point on, everything will be out of synchronization. 
+Therefore, in order to include a quotation mark inside a literal string, you 
+must precede it with a backslash character like this: </p>
+<p><strong>\&quot;</strong></p>
+
+<p><strong>Multiple lines</strong> </p>
+<p>If you want your string to comprise two or more physical lines, you can 
+include a newline code inside a  <strong>String</strong> by including the following in the string:
+</p>
+<p> <strong>\n</strong></p>
+
+<p><strong>Escape character sequences</strong> </p>
+<p>These character sequences are often referred to as <em>escape character 
+sequences</em>. Since the backslash is used as the first character in such a 
+sequence, if you want to include a backslash in a literal string, you must do it 
+like this: </p>
+<p><strong>\\</strong></p>
+
+<p>There are some other escape sequences used in Java as well. You would do well 
+to learn how to use them before going to an interview for a job as a Java 
+programmer.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

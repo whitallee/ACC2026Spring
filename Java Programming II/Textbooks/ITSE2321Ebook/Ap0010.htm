@@ -1,0 +1,1104 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0010</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0010: Primitive types</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Programming_challenge">Programming challenge questions</a><ul>
+		<li><a href="#question11">11</a>, <a href="#question12">12</a>,
+		<a href="#question13">13</a>, <a href="#question14">14</a>,
+		<a href="#question15">15</a>, <a href="#question16">16</a>,
+		<a href="#question17">17</a>, <a href="#question18">18</a></li>
+		
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p><strong>Questions and answers</strong></p>
+<p>The test consists of a series of <a href="#Questions">questions</a> with 
+<a href="#Answers">answers</a> and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p><strong>Programming challenge questions</strong></p>
+<p>The chapter also contains a section titled <a href="#Programming_challenge">
+Programming challenge questions</a>. This section provides specifications for one or 
+more programs that you should be able to write once you understand the answers 
+to all of the questions. <em>(Note that it is not always possible to confine the 
+programming knowledge requirement to this and earlier chapters. Therefore, you 
+may occasionally need to refer ahead to future chapters in order to write the 
+programs.)</em></p>
+<p>Unlike the other questions, solutions are not provided for the <em>
+Programming challenge questions</em>. However, in most cases, the specifications 
+will describe the output that your program should produce.</p>
+<p><strong>Listings</strong></p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them.</p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>What output is produced by the program in <a href="#Listing_1">Listing 1</a>?</p>
+<ul>
+	<li>A. Compiler error</li>
+	<li>B. Runtime error</li>
+	<li>C. Hello World</li>
+	<li>D. Goodbye Cruel World</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Question 1.
+
+<pre>public class Ap001{
+  public static void main(String args[]){
+    new Worker().hello();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void hello(){
+    System.out.println(&quot;Hello World&quot;);
+  }//end hello()
+}//end class definition</pre>
+
+</div>
+
+<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a><strong>. </strong></h2>
+<p>What is the largest (algebraic) value of type int? </p>
+<ul>
+	<li>A. 32767</li>
+	<li>B. 2147483647</li>
+	<li>C. -2147483647</li>
+	<li>D. -32768</li>
+</ul>
+<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a><strong>. </strong> </h2>
+<p>What is the smallest (algebraic) value of type int? </p>
+<ul>
+	<li>A. -2147483648</li>
+	<li>B. -2147483647</li>
+	<li>C. 32767</li>
+	<li>D. -32768</li>
+</ul>
+<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a><strong>. </strong></h2>
+<p>What two values are displayed by the program in <a href="#Listing_2">Listing 2</a>? </p>
+<ul>
+	<li>A. -2147483648</li>
+	<li>B. 1.7976931348623157E308</li>
+	<li>C. -2147483647</li>
+	<li>D. 4.9E-324</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Question 4.
+
+<pre>public class Ap003{
+  public static void main(
+                        String args[]){
+    new Worker().printDouble();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void printDouble(){
+    System.out.println(
+                     Double.MAX_VALUE);
+    System.out.println(
+                     Double.MIN_VALUE);
+  }//end printDouble()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a><strong>. </strong></h2>
+<p>What output is produced by the program in <a href="#Listing_3">Listing 3</a>?
+</p>
+<ul>
+	<li>A. true</li>
+	<li>B. false</li>
+	<li>C. 1</li>
+	<li>D. 0</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Question 5.
+
+<pre>public class Ap004{
+  public static void main(
+                        String args[]){
+    new Worker().printBoolean();
+  }//end main()
+}//end class definition
+
+class Worker{
+  private boolean myVar;
+  public void printBoolean(){
+    System.out.println(myVar);
+  }//end printBoolean()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a><strong>. </strong></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. false</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Question 6.
+<pre>public class Ap005{
+  public static void main(
+                        String args[]){
+    new Worker().printBoolean();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void printBoolean(){
+    boolean myVar;
+    System.out.println(myVar);
+  }//end printBoolean()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a><strong>. </strong></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 5</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. false</li>
+</ul>
+<div class="a"><a name="Listing_5">Listing 5</a>. Question 7.
+<pre>public class Ap006{
+  public static void main(
+                        String args[]){
+    new Worker().printBoolean();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void printBoolean(){
+    boolean myVar = true;
+    myVar = false;
+    System.out.println(myVar);
+  }//end printBoolean()
+}//end class definition
+</pre>
+
+</div>
+
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a><strong>. </strong> </h2>
+<p>The plus (+) character can be used to perform numeric addition in Java. What 
+output is produced by the program shown in <a href="#Listing_6">Listing 6</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. 2</li>
+	<li>E. 1</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Question 8.
+<pre>public class Ap007{
+  public static void main(
+                        String args[]){
+    new Worker().printBoolean();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void printBoolean(){
+    boolean myVar = true;
+    System.out.println(1 + myVar);
+  }//end printBoolean()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a><strong>. </strong></h2>
+<p>The plus (+) character can be used to perform numeric addition in Java. What 
+output is produced by the program shown in <a href="#Listing_7">Listing 7</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 6</li>
+	<li>D. 6.0</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Question 9.
+<pre>public class Ap008{
+  public static void main(
+                        String args[]){
+    new Worker().printMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void printMixed(){
+    double x = 3;
+    int y = 3;
+    System.out.println(x+y);
+  }//end printMixed()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer09">Answer and Explanation</a> </p>
+<h2><a name="question10">Question 10</a><strong>. </strong></h2>
+<p>The slash (/) character can be used to perform numeric division in Java. What 
+output is produced by the program shown in <a href="#Listing_8">Listing 8</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0.33333334</li>
+	<li>D. 0.3333333333333333</li>
+</ul>
+<div class="a"><a name="Listing_8">Listing 8</a>. Question 10.
+<pre>public class Ap009{
+  public static void main(
+                        String args[]){
+    new Worker().printMixed();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void printMixed(){
+    System.out.println(1.0/3);
+  }//end printMixed()
+}//end class definition
+</pre>
+
+</div>
+
+
+
+	<p><a href="#answer10">Answer and Explanation</a></p>
+<h1><a name="Programming_challenge">Programming challenge questions</a></h1>
+
+
+
+
+
+<h2><a name="question11">Question 11</a></h2>
+<p>Write the program described in <a href="#Listing_9">Listing 9</a>.</p>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Question 11.
+<pre>
+/*File Ap0010a1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+This program refuses to compile without errors.
+
+Make the necessary corrections to cause the program to
+compile and run successfully to produce the output shown
+below:
+
+ITSE
+2321
+**********************************************************/
+public class Ap0010a1{
+  public static void main(String args[]){
+    System.out.println("ITSE");
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+Class Worker{
+  public void doIt(){
+    System.out.println("2321");
+  }//end doIt()
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+	
+
+
+<h2><a name="question12">Question 12</a></h2>
+<p>Write the program described in <a href="#Listing_10">Listing 10</a>.</p>
+
+	
+
+
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Question 12. 
+<pre>
+/*File Ap0010b1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Receives and displays an incoming parameter of type int. 
+
+The result should be similar to the following but the
+values should be different each time the program is
+run.
+
+484495695
+484495695
+**********************************************************/
+//Student is not expected to understand import directives
+// at this point.
+import java.util.Random;
+import java.util.Date;
+
+public class Ap0010b1{
+  public static void main(String args[]){
+    //Create a random number for testing. Student is not
+    // expected to understand how this works at this point.
+    Random random = new Random(new Date().getTime());
+    int intVar = random.nextInt();
+    
+    //Student should understand the following
+    int var = intVar;
+    System.out.println(var);
+    new Worker().doIt(var);
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+	
+<h2><a name="question13">Question 13</a></h2>
+<p>Write the program described in <a href="#Listing_11">Listing 11</a>.</p>
+
+
+<div class="a"><a name="Listing_11">Listing 11</a>. Question 13. 
+<pre>
+/*File Ap0010c1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that returns the largest value of type 
+int as type float. 
+
+The result should be 2.14748365E9
+**********************************************************/
+public class Ap0010c1{
+  public static void main(String args[]){
+    float val = new Worker().doIt();
+    System.out.println(val);
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Insert the method named doIt between these lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question14">Question 14</a></h2>
+<p>Write the program described in <a href="#Listing_12">Listing 12</a>.</p>
+
+
+<div class="a"><a name="Listing_12">Listing 12</a>. Question 14. 
+<pre>
+/*File Ap0010d1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code fragment shown below, write a
+method named doIt that:
+1. Receives an incoming parameter of type double.
+2. Converts that value to type int.
+3. Returns the int
+
+The result should be similar to the following but the
+values should be different each time the program is
+run.
+
+6.672032181818181E8
+667203218
+**********************************************************/
+//Student is not expected to understand import directives
+// at this point.
+import java.util.Random;
+import java.util.Date;
+
+public class Ap0010d1{
+  public static void main(String args[]){
+    //Create a random number for testing. Student is not
+    // expected to understand how this works at this point.
+    Random random = new Random(new Date().getTime());
+    int intVar = random.nextInt();
+    
+    //Student should understand the following
+    double var = intVar/1.1;
+    System.out.println(var);
+    System.out.println(new Worker().doIt(var));
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  //-----------------------------------------------------//
+  //Student: insert the method named doIt between these
+  // lines.
+  //-----------------------------------------------------//
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question15">Question 15</a></h2>
+<p>Write the program described in <a href="#Listing_13">Listing 13.</a></p>
+
+
+<div class="a"><a name="Listing_13">Listing 13</a>. Question 15. 
+<pre>
+/*File Ap0010e1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+This program refuses to compile without errors.
+
+Make the necessary corrections to cause the program to
+compile and run successfully to produce an output similar
+to that shown below. Note that the values should be
+different each time the program is
+run.
+
+-1.30240579E8
+-1.30240579E8
+**********************************************************/
+//Student is not expected to understand import directives
+// at this point.
+import java.util.Random;
+import java.util.Date;
+
+public class Ap0010e1{
+  public static void main(String args[]){
+    //Create a random number for testing. Student is not
+    // expected to understand how this works at this point.
+    Random random = new Random(new Date().getTime());
+    double doubleVar = random.nextInt()/1.0;
+
+    //Student should understand the following
+    double var = doubleVar;
+    System.out.println(doubleVar);
+    new Worker().doIt(doubleVar);
+  }//end main()
+}//end class definition
+//=======================================================//
+
+class Worker{
+  public void doIt(double val){
+    int var = val;
+    System.out.println(var);
+  }//end doIt()
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question16">Question 16</a></h2>
+<p>Write the program described in <a href="#Listing_14">Listing 14</a>.</p>
+
+
+<div class="a"><a name="Listing_14">Listing 14</a>. Question 16. 
+<pre>
+/*File Ap0010f1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code shown below, modify the
+code in the method named doIt so that the program 
+displays
+
+3.3333333333333335 instead of 3
+
+Then modify the method again so that the program displays
+
+3.3333333 instead of 3
+**********************************************************/
+public class Ap0010f1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition 
+//=======================================================//
+
+class Worker{
+  public void doIt(){
+    System.out.println(10/3);
+  }//end doIt()
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question17">Question 17</a></h2>
+<p>Write the program described in <a href="#Listing_15">Listing 15</a>.</p>
+
+<div class="a"><a name="Listing_15">Listing 15</a>. Question 17. 
+<pre>
+/*File Ap0010g1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+Beginning with the code shown below, modify the
+code in the method named doIt so that the program
+displays
+
+2048 instead of 2730
+
+Did you notice anything particularly interesting about the
+values involved?
+**********************************************************/
+public class Ap0010g1{
+  public static void main(String args[]){
+    new Worker().doIt(16384);
+  }//end main()
+}//end class definition
+//=======================================================//
+
+class Worker{
+  public void doIt(int val){
+    System.out.println(val/6);
+  }//end doIt()
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+<h2><a name="question18">Question 18</a></h2>
+<p>Write the program described in <a href="#Listing_16">Listing 16</a>.</p>
+
+<div class="a"><a name="Listing_16">Listing 16</a>. Question 18. 
+<pre>
+/*File Ap0010h1.java Copyright, R.G.Baldwin
+
+Instructions to student:
+This program refuses to compile without errors.
+
+Make the necessary corrections to cause the program to
+compile and run successfully to produce the output shown
+below:
+
+false
+**********************************************************/
+
+public class Ap0010h1{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class definition
+//=======================================================//
+
+class Worker{
+  public void doIt(){
+    boolean var;
+    System.out.println(var);
+  }//end doIt()
+}//end class definition
+//=======================================================//
+</pre>
+
+</div>
+
+
+	
+
+
+	<h1><a name="Listings">Listings</a></h1>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Question 1. </li>
+	<li><a href="#Listing_2">Listing 2</a>. Question 4. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Question 5. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Question 6. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Question 7.</li>
+	<li><a href="#Listing_6">Listing 6</a>. Question 8.</li>
+	<li><a href="#Listing_7">Listing 7</a>. Question 9.</li>
+	<li><a href="#Listing_8">Listing 8</a>. Question 10.</li>
+	<li><a href="#Listing_9">Listing 9</a>. Question 11.</li>
+	<li><a href="#Listing_10">Listing 10</a>. Question 12.</li>
+	<li><a href="#Listing_11">Listing 11</a>. Question 13.</li>
+	
+	<li><a href="#Listing_12">Listing 12</a>. Question 14.</li>
+	<li><a href="#Listing_13">Listing 13</a>. Question 15.</li>
+	<li><a href="#Listing_14">Listing 14</a>. Question 16.</li>
+	<li><a href="#Listing_15">Listing 15</a>. Question 17.</li>
+	<li><a href="#Listing_16">Listing 16</a>. Question 18.</li>
+	<li><a href="#Listing_17">Listing 17</a>. Answer 1.</li>
+
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Chapter name: Ap0010: Primitive types</li>
+				<li>File: Ap0010.htm </li>
+				<li>Originally published: December 17, 2001 </li>
+				<li>Published at cnx.org: 12/01/12</li>
+				<li>Revised: 03/18/20</li>
+				</ul>
+				</div>
+				<h1><a name="Answers">Answers</a></h1>
+<h2><a name="answer10">Answer 10</a><strong>. </strong></h2>
+<p>D. 0.3333333333333333 </p>
+<h3>Explanation 10</h3><p>
+<strong>Divide floating type by integer type
+</strong>
+</p>
+<p>This program divides the literal floating value of 1.0 by the literal integer 
+value of 3 <em>(no decimal point is specified in the integer literal value)</em>. </p>
+<p><strong>Automatic conversion from narrow to wider type </strong> </p>
+<p>To begin with, whenever division is performed between a floating type and an 
+integer type, the integer type is automatically converted <em>(sometimes called 
+promoted)</em> to a floating type and floating arithmetic is performed. </p>
+<p><strong>What is the actual floating type, float or double? </strong> </p>
+<p>The real question here is, what is the type of the literal shown by 1.0 <em>(with 
+a decimal point separating the 1 and the 0)</em>. Is it a <strong>double</strong> or a 
+<strong>float</strong>?
+</p>
+<p><strong>Type double is the default </strong> </p>
+<p>By default, a literal floating value is treated as a <strong>double</strong>. </p>
+<p><strong>The result is type double</strong> </p>
+<p>Consequently, this program divides a <strong>double</strong> type by an integer type, 
+producing a result of type <strong>double</strong>. This is somewhat evident in the output, 
+which shows about 17 digits plus a decimal point in the result. <em>(Recall that the 
+maximum value for a float shown earlier had only about eight digits plus the 
+decimal point and the exponent.) </em> </p>
+<p><strong>How can you create literals of type float?</strong> </p>
+<p>What if you don&#39;t want your literal floating value to be treated as a 
+<strong>double</strong>, 
+but would prefer that it be treated as a <strong>float</strong> instead. </p>
+<p>You can usually force this to be the case by adding a suffix of either F or f 
+to the end of the literal value <em>(as in 1.0F)</em>. If you were to modify this 
+program to cause it to divide 1.0F by 3, the output would be 0.33333334 with 
+only nine digits in the result. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+<h2><a name="answer09">Answer 9</a><strong>. </strong> </h2>
+<p>D. 6.0 </p>
+<h3>Explanation 9</h3><p>
+<strong>Declare and initialize two local variables</strong>
+</p>
+<p>This program declares and initializes two local variables, one of type 
+<strong>double</strong> 
+and the other of type <strong>int</strong>. Each variable is initialized with the integer 
+value 3. </p>
+<p><strong>Automatic conversion to floating type double </strong> </p>
+<p>However, before the value of 3 is stored in the <strong>double</strong> variable, it is 
+automatically converted to type <strong>double</strong>. </p>
+<p><strong>Automatic conversion in mixed-type arithmetic </strong> </p>
+<p>Numeric addition is performed on the two variables. Whenever addition 
+is performed between a floating type and an integer type, the integer type is 
+automatically converted to a floating type and floating arithmetic is performed.
+</p>
+<p><strong>A floating result </strong> </p>
+<p>This produces a floating result. When this floating result is passed to 
+the <strong>println</strong> method for display, a decimal point and a zero are displayed to 
+indicate a floating type, even though in this case, the fractional part of the 
+result is zero. </p>
+
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a><strong>. </strong> </h2>
+<p>A. Compiler Error </p>
+<h3>Explanation 8</h3><p>
+<strong>Initialize boolean variable to true
+</strong>
+</p>
+<p>This program declares and initializes a <strong>boolean</strong> variable with the value 
+<em>true</em>. 
+Then it attempts to add the literal value 1 to the value stored in the <strong>boolean</strong> 
+variable named <strong>myVar</strong>. </p>
+<p><strong>Arithmetic with boolean values is not allowed </strong> </p>
+<p>As mentioned earlier, unlike C++, <strong>boolean</strong> types in Java cannot participate in 
+arithmetic expressions. </p>
+<p>Therefore, this program will not compile. The compiler error produced 
+by this program under JDK 1.3 reads partially as follows: </p>
+
+
+
+
+<div class="a"><pre>Ap007.java:13: operator + cannot be applied to int,boolean 
+    System.out.println(1 + myVar);</pre>
+</div>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a><strong>. </strong> </h2>
+<p>D. false </p>
+<h3>Explanation 7</h3><p>
+<strong>Format for variable initialization
+</strong>
+</p>
+<p>This program declares a local <strong>boolean</strong> variable and initializes it to the 
+value <em>true</em>. All variables, local or otherwise, can be initialized in this 
+manner provided that the expression on the right of the equal sign evaluates to 
+a value that is assignment compatible with the type of the variable. <em>(I will have 
+more to say about assignment compatibility in a future chapter)</em>. </p>
+<p><strong>Value is changed before display</strong> </p>
+<p>However, before calling the <strong>println</strong> method to display the initial value of 
+the variable, the program uses the assignment operator (=) to assign the value 
+<em>false</em> to the variable. Thus, when it is displayed, the value is 
+<em>false</em>. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a><strong>. </strong></h2>
+<p>A. Compiler Error </p>
+<h3>Explanation 6</h3><p>
+<strong>A local boolean variable</strong>
+</p>
+<p>In this program, the primitive variable named <strong>myVar</strong> is a local variable 
+belonging to the method named <strong>printBoolean</strong>. </p>
+<p><strong>Local variables are not automatically initialized </strong> </p>
+<p>Unlike instance variables, if you fail to initialize a local variable, the 
+variable is not automatically initialized. </p>
+<p><strong>Cannot access value from uninitialized local variable </strong> </p>
+<p>If you attempt to access and use the value from an uninitialized local 
+variable before you assign a value to it, you will get a compiler error. 
+The compiler error produced by this program under JDK 1.3 reads partially as 
+follows: </p>
+
+
+
+
+<div class="a"><pre>Ap005.java:13: variable myVar might not have been initialized 
+    System.out.println(myVar);</pre>
+</div>
+<p><strong>Must initialize or assign value to all local variables</strong> </p>
+<p>Thus, the programmer is responsible for either initializing all local 
+variables, or assigning a value to them before attempting to access their value 
+with code later in the program. The good news is that the system won&#39;t allow you 
+to compute with garbage left over in memory occupied by variables, either local 
+variables or member variables.</p>
+
+
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a><strong>. </strong></h2>
+<p>B. false </p>
+<h3>Explanation 5</h3>
+<p><strong>The boolean type</strong></p>
+<p>In this program, the primitive variable named <strong>myVar</strong> is an instance variable 
+of the type <strong>boolean</strong>. </p>
+<p><strong>What is an instance variable? </strong> </p>
+<p>An instance variable is a variable that is declared inside a class, outside 
+of all methods and constructors of the class, and is not declared static. 
+Every object instantiated from the class has one. That is why it is called 
+an instance variable. </p>
+<p><strong>Cannot use uninitialized variables in Java</strong> </p>
+<p>One of the great things about Java is that it is not possible to make the 
+mistake of using variables that have not been initialized. </p>
+<p><strong>Can initialize when declared </strong> </p>
+<p>All Java variables can be initialized when they are declared. </p>
+<p><strong>Member variables are automatically initialized</strong> </p>
+<p>If the programmer doesn&#39;t initialize the variables declared inside the class 
+but outside of a method <em>(often referred to as member variables as opposed to 
+local variables)</em>, they are automatically initialized to a default value. 
+The default value for a <strong>boolean</strong> variable is false. </p>
+<p><strong>Did you know the boolean default value? </strong> </p>
+<p>I wouldn&#39;t be overly concerned if you had selected the answer A. true, 
+because I wouldn&#39;t necessarily expect you to memorize the default initialization 
+value. </p>
+<p><strong>Great cause for concern </strong> </p>
+<p>However, I would be very concerned if you selected either C. 1 or D. 0. </p>
+<p><strong>Java has a true boolean type </strong> </p>
+<p>Unlike C++, Java does not represent true and false by the numeric values of 1 
+and 0. <em>(At least the numeric values that represent true and false are not readily 
+accessible by the programmer.)</em></p>
+<p>Thus, you cannot include boolean types in arithmetic expressions, as is the 
+case in C++. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a><strong>. </strong> </h2>
+<ul>
+	<li>B. 1.7976931348623157E308 
+
+</li>
+	<li>D. 4.9E-324 </li>
+</ul>
+<h3>Explanation 4</h3><p>
+<strong>Floating type versus integer type</strong>
+</p>
+<p>If you missed this one, shame on you! </p>
+<p>I didn&#39;t expect you to memorize the maximum and minimum values represented by 
+the floating type double, but I did expect you to be able to distinguish between 
+the display of a floating value and the display of an integer value. </p>
+<p><strong>Both values are positive </strong> </p>
+<p>Note that both of the values given above are positive values. </p>
+<p>Unlike the integer types discussed earlier, the constants named <strong>MAX_VALUE</strong> and 
+<strong>MIN_VALUE</strong> don&#39;t represent the ends of a signed number range for type 
+<strong>double</strong>. 
+Rather, they represent the largest and smallest <em>(non-zero)</em> values that can be 
+expressed by the type. </p>
+<p><strong>An indication of granularity </strong> </p>
+<p><strong>MIN_VALUE</strong> is an indication of the degree of granularity of values expressed 
+as type <strong>double</strong>. Any <strong>double</strong> value can be treated as either positive or 
+negative. </p>
+<p><strong>Two floating types are available </strong> </p>
+<p>Java provides two floating types: <strong>float</strong> and <strong>double</strong>. The 
+<strong>double</strong> 
+type provides the greater range, or to use another popular terminology, it is 
+the <em>wider</em> of the two. </p>
+<p><strong>What is the value range for a float?</strong> </p>
+<p>In case you are interested, using the same syntax as above, the value range 
+for type float is from 1.4E-45 to 3.4028235E38 </p>
+<p><strong>Double is often the default type</strong> </p>
+<p>There is another thing that is significant about type <strong>double</strong>. In many 
+cases where a value is automatically converted to a floating type, it is 
+converted to type double rather than to type float. This will come up in 
+future chapters. </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a><strong>. </strong> </h2>
+<p>A. -2147483648 </p>
+<h3>Explanation 3</h3>
+<p><strong>Could easily have guessed </strong></p>
+<p>As a practical matter, you had one chance in two of guessing the correct 
+answer to this question, already having been given the value of the largest 
+algebraic value for type int. </p>
+<p><strong>And the winner is ... </strong></p>
+<p>Did you answer B. -2147483647? -- WRONG</p>
+<p>If so, you may be wondering why the most negative value isn&#39;t equal to the 
+negative version of the most positive value? </p>
+<p><strong>A twos-complement characteristic</strong> </p>
+<p>Without going into the details of why, it is a well-known characteristic of 
+binary twos-complement notation that the value range extends one unit further in 
+the negative direction than in the positive direction. </p>
+<p><strong>What about the other two values? </strong></p>
+<p>Do the values of -32768 and 32767 in the set of multiple-choice answers 
+to this question represent anything in particular? </p>
+<p>Yes, they represent the extreme ends of the value range for a 16-bit binary 
+number in twos-complement notation. </p>
+<p><strong>Does Java have a 16-bit integer type? </strong></p>
+<p>Just in case you are interested, the <strong>short</strong> type in Java is 
+represented in 16-bit binary twos-complement signed notation, so this is the 
+value range for type short. </p>
+<p><strong>What about type byte? </strong></p>
+<p>Similarly, a value of type <strong>byte</strong> is represented in 8-bit 
+binary twos-complement signed notation, with a value range extending from -128 
+to 127. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a><strong>. </strong></h2>
+<p>B. 2147483647 </p>
+<h3>Explanation 2</h3>
+<p><strong>First question on types</strong></p>
+<p>This is the first question on Java types in this group of 
+self-assessment 
+chapters. </p>
+<p><strong>32-bit signed twos-complement integers </strong></p>
+<p>In Java, values of type <strong>int</strong> 
+are stored as 32-bit signed integers in twos-complement notation. </p>
+<p><strong>Can you calculate the values?</strong> </p>
+<p>There are no unsigned integer types in Java, as there are in C++. If 
+you are handy with binary notation, you could calculate the largest positive 
+value that can be stored in 32 bits in twos-complement notation. </p>
+<p><strong>See documentation for the Integer class</strong> </p>
+<p>Otherwise, you can visit the 
+documentation for the <strong>Integer</strong> 
+class, which provides a symbolic constant <em>(public static final variable)</em> 
+named <strong>MAX_VALUE</strong>. The description of MAX_VALUE reads as 
+follows: </p>
+
+	<p><em>&quot;The largest value of type int. The constant value of this field is 
+	2147483647.&quot;
+</em></p>
+
+
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a><strong>. </strong> </h2>
+<p>C. Hello World </p>
+<h3>Explanation 1</h3>
+<p>
+The answer to this first question is intended to be easy. The purpose of the 
+first question is to introduce you to the syntax that will frequently be used 
+for program code in this group of self-assessment chapters.
+</p>
+<p><strong>The controlling class and the main method</strong> </p>
+<p>In this example, the class named <strong>Ap001</strong> is the <em>controlling class</em>. It 
+contains a method named <strong>main</strong>, with a signature that matches the required signature 
+for the <strong>main</strong> method. When the user executes this program, the Java 
+virtual machine automatically calls the method named <strong>main</strong> in the controlling 
+class. </p>
+<p><strong>Create an instance of Worker </strong> </p>
+<p>The <strong>main</strong> method uses the <strong>new</strong> operator along with the default constructor 
+for the class named <strong>Worker</strong> to create a new instance of the class named 
+<strong>Worker</strong> <em>(an object of the Worker class)</em>. This is often referred to as 
+instantiating an object. </p>
+<p><strong>A reference to an anonymous object </strong> </p>
+<p>The combination of the <strong>new</strong> operator and the default constructor for the 
+<strong>Worker</strong> class returns a reference to the new object. In this case, the 
+object is instantiated as an <em>anonymous object</em>, meaning that the 
+object&#39;s reference is not saved in a named reference variable. <em>(Instantiation of a 
+non-anonymous object will be illustrated later.) </em> </p>
+<p><strong>Call hello method on Worker object </strong> </p>
+<p>The main method contains a single executable statement.</p>
+<p>As soon as the reference to the new object is returned, the single statement 
+in the <strong>main</strong> method calls the <strong>hello</strong> method on that reference. </p>
+<p><strong>Output to standard output device</strong> </p>
+<p>This causes the <strong>hello</strong> method belonging to the new object <em>(of the class 
+named <strong>Worker</strong>)</em> to execute. The code in the <strong>hello</strong> method calls the 
+<strong>println</strong> method on the <strong>static</strong> variable of the 
+<strong>System</strong> class named <strong>out</strong>. </p>
+<p><strong>Lots of OOP embodied in the hello method </strong> </p>
+<p>I often tell my students that I can tell a lot about whether a student really 
+understands object-oriented programming in Java by asking them to explain 
+everything that they know about the following statement: </p>
+<p><strong>System.out.println(&quot;Hello World&quot;);</strong> </p>
+<p>I would expect the answer to consume about ten to fifteen minutes if the 
+student really understands Java OOP. </p>
+<p><strong>The one-minute version </strong> </p>
+<p>When the virtual machine starts a Java application running, it automatically 
+instantiates an I/O stream object linked to the standard output device <em>(normally 
+the screen)</em> and stores a reference to that object in the <strong>static</strong> variable named 
+<strong>out</strong> belonging to the class named <strong>System</strong>. </p>
+<p><strong>Call the println instance method on out </strong> </p>
+<p>Calling the <strong>println</strong> method on that reference, and passing a literal string 
+<em>(&quot;Hello World&quot;)</em> to that method causes the contents of the literal 
+<strong>String</strong> object 
+to be displayed on the standard output device. </p>
+<p><strong>Display Hello World on the screen </strong> </p>
+<p>In this case, this causes the words <em>Hello World</em> to be displayed on the 
+standard output device. This is the answer to the original question. </p>
+<p><strong>Time for main method to terminate </strong> </p>
+<p>When the <strong>hello</strong> method returns, the <strong>main</strong> method has nothing further to do, 
+so it terminates. When the <strong>main</strong> method terminates in a Java application, 
+the application terminates and returns control to the operating system. 
+This causes the system prompt to reappear. </p>
+<p><strong>A less-cryptic form </strong> </p>
+<p>A less cryptic form of this program is shown in <a href="#Listing_17">Listing 
+17</a>.</p>
+
+<div class="a"><a name="Listing_17">Listing 17</a>. Answer 1.
+
+<pre>public class Ap002{
+  public static void main(String args[]){
+    Worker refVar = new Worker();
+    refVar.hello();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void hello(){
+    System.out.println(&quot;Hello World&quot;);
+  }//end hello()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><strong>Decompose single statement into two statements </strong></p>
+<p>In this version, the single statement in the earlier version of the <strong>
+main</strong> method is replaced by two statements. </p>
+<p><strong>A non-anonymous object</strong> </p>
+<p>In the class named <strong>Ap002</strong> shown in <a href="#Listing_2">Listing 2</a>, the 
+object of the class named <strong>Worker</strong> is not 
+instantiated anonymously. Rather, a new object of the <strong>Worker</strong> 
+class is instantiated and the object&#39;s reference is stored in <em>(assigned 
+to)</em> the named reference variable named <strong>refVar</strong>. </p>
+<p><strong>Call hello method on named reference </strong></p>
+<p>Then the <strong>hello</strong> method is called on that reference in a 
+separate statement. </p>
+<p><strong>Produces the same result as before </strong></p>
+<p>The final result is exactly the same as before. The only difference is 
+that a little more typing is required to create the source code for the second 
+version. </p>
+<p><strong>Will often use anonymous objects </strong></p>
+<p>In order to minimize the amount of typing required, I will probably use the 
+anonymous form of instantiation whenever appropriate in these chapters. </p>
+<p><strong>Now that you understand the framework ...</strong> </p>
+<p>Now that you understand the framework for the program code, I can present 
+more specific questions. Also, the explanations will usually be shorter.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

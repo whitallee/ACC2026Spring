@@ -1,0 +1,788 @@
+<!DOCTYPE doctype PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+                
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+                
+  <meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+  <title>... JAVA and DSP by Richard G Baldwin</title>
+</head>
+<body link="#0000ff" vlink="#666666" alink="#ff0000" lang="EN-US">
+ 
+<h2>The KeyEventDispatcher</h2>
+    <i>Baldwin explains how to use KeyEventDispatcher objects to cause a 
+KeyEvent fired by one component to be dispatched to a different component for 
+processing.</i><p><b>Published:</b> December 21, 2004 <br/>
+   <b>By <a href="#About_the_author">Richard G. Baldwin</a></b> </p>
+     
+<p>Java Programming, Notes # 1855</p>
+     
+<ul>
+  <li><a href="#Preface">Preface</a></li>
+  <li><a href="#Preview">Preview</a></li>
+  <li><a href="#Discussion_and_Sample_Code">Discussion and Sample Code</a><li><a href="#Run_the_Programs">Run the Program</a></li>
+  <li><a href="#Summary">Summary</a></li>
+	<li><a href="#Whats Next">What's Next</a></li>
+  <li><a href="#Complete_Program_Listings">Complete Program Listing</a> </li>
+</ul>
+        
+<hr size="3" width="100%" align="center">    
+<center>    
+<h2> <a name="Preface">Preface</a></h2>
+   </center>
+<p><font color="#FF0000"><b>The focus subsystem</b></font></p>
+<p>This chapter is part of a series of chapters designed to 
+teach you how to use several important features the new features of the focus 
+subsystem.</p>
+<p>The first chapter in the series was entitled 
+<a href="http://www.developer.com/java/other/article.php/2198221">Focus 
+Traversal Policies in Java Version 1.4</a>. The previous chapter was 
+entitled <a href="http://www.developer.com/java/other/article.php/3432871">The 
+Opposite Focus Component</a>.</p>
+<p><font color="#ff0000"><b>Previous topics</b></font></p>
+<p>Previous chapters in this series have dealt with several aspects of the new focus subsystem, 
+including:</p>
+<ul>
+	<li>Defining new focus traversal keys</li>
+	<li>How to control focusability at runtime.</li>
+	<li>The ability to query for the currently focused Component.</li>
+	<li>The default Focus Traversal Policy.</li>
+	<li>How to establish a focus traversal policy and modify it at runtime.</li>
+	<li>How to control the focus programmatically.</li>
+	<li>Opposite components.</li>
+</ul>
+<p>This chapter will show you how to use the <b>KeyEventDispatcher</b> interface.</p>
+<p><font color="#FF0000"><b>What do we mean by focus?</b></font></p>
+<p>One of the ways to describe <i>focus</i> is as follows. Among all of 
+the applications showing on the desktop at any point in time, only one will 
+respond to the keyboard. We will refer to that application as the <i>
+active </i>application.</p>
+<p>If the <i>active</i> application is a Java application, only one component 
+within that application's graphical user interface <i>(GUI)</i> will respond to 
+the keyboard. That is the component that has the <i>focus</i> at that 
+point in time.</p>
+<p>A Java component that has the focus also has the ability to fire <b>KeyEvents</b> when it responds to the keyboard.</p>
+  <p><font color="#FF0000"><b>What does Sun have to say?</b></font></p>
+<p>Before getting into the technical details, I will provide some quotations 
+from Sun that describe a <b>KeyEventDispatcher</b>. In discussing the changes to the 
+focus subsystem, Sun has this to say:</p>
+<p><i>&quot;While the user's <b>KeyEvents</b> should generally be delivered to the 
+focus owner, there are rare cases where this is not desirable. ...</i></p>
+<p><i>A <b>KeyEventDispatcher</b> is a lightweight interface that allows client 
+code to <b>pre-listen</b> to all <b>KeyEvents</b> in a particular context.</i></p>
+<p><i>Instances of classes that implement the interface and are registered with 
+the current <b>KeyboardFocusManager</b> will receive <b>KeyEvents</b> before 
+they are dispatched to the focus owner, allowing the <b>KeyEventDispatcher</b> 
+to retarget the event, consume it, dispatch it itself, or make other changes.
+</i></p>
+<p><i>... if a <b>KeyEventDispatcher</b> reports that it dispatched the <b>
+KeyEvent</b>, regardless of whether it actually did so, the <b>
+KeyboardFocusManager</b> will take no further action with regard to the <b>
+KeyEvent</b>.&quot;</i></p>
+<p><b><font color="#ff0000">Viewing tip</font></b> </p>
+ 
+<p>You may find it useful to open another copy of this chapter in a separate
+ browser window. That will make it easier for you to scroll back and
+ forth among the different figures and listings while you are reading about
+ them. </p>
+ 
+<p><b><font color="#ff0000">Supplementary material</font></b> </p>
+ 
+<p>I recommend that you also study the other chapters in my extensive collection
+ of vwxyzabcde Java tutorials. You will find those chapters published at
+<a href="http://softwaredev.earthweb.com/java">Gamelan.com</a>. However, 
+as of the date of this writing, Gamelan doesn't maintain a consolidated index 
+of my Java tutorial chapters, and sometimes they are difficult to locate there. 
+You will find a consolidated index at <a
+ href="http://www.dickbaldwin.com">www.DickBaldwin.com</a><font
+ color="#000000">.</font></p>
+<h2 align="center"><a name="Preview">Preview</a></h2>
+<p>In this chapter, I will show you how to use <b>KeyEventDispatcher</b> objects 
+to cause a <b>KeyEvent</b> fired by one component to be dispatched to a 
+different component for processing.</p>
+<p>Using a sample program, characters typed into one text field in a GUI will 
+appear in another text field belonging to the same GUI. Those characters 
+will not appear in the text field into which they are typed.</p>
+<h2 align="center"><a name="Discussion_and_Sample_Code">Discussion and Sample 
+Code</a></h2>
+<p><font color="#ff0000"><b>Description of the program</b></font></p>
+<p>This chapter presents and explains a sample program named <b>KeyEventDispatch01</b>.</p>
+<p>This program illustrates the use of a <b>KeyEventDispatcher</b> as an 
+alternative to the default dispatching of key events.</p>
+<p><font color="#FF0000"><b>The program GUI</b></font></p>
+<p>The program causes a single <b>JFrame</b> object to appear on the screen as 
+shown in Figure 1.</p>
+<div align="center">
+<div class="a">                    
+<pre><img border="0" src="java1855a.gif" width="391" height="101">
+
+<b>Figure 1 Program GUI.</b>
+</pre>
+</div>
+</div>
+</p>
+<p>The <b>JFrame</b> object contains three <b>JTextField</b> objects. The initial text in 
+the three <b>JTextField</b> objects is respectively: 
+ 
+</p>
+<ul>
+	<li>Field A 
+	</li>
+	<li>Field B 
+	</li>
+	<li>Field C </li>
+</ul>
+<p><font color="#FF0000"><b>Two KeyEventDispatcher objects</b></font></p>
+<p>Two different <b>KeyEventDispatcher</b> objects are 
+registered on the current <b>KeyboardFocusManager</b> 
+in the following order <i>(this is one case in Java where the order of 
+registration is important):</i></p>
+<ul>
+	<li>AlternateDispatcherA </li>
+	<li>AlternateDispatcherB </li>
+</ul>
+<p><font color="#FF0000"><b>When a KeyEvent occurs ...</b></font></p>
+<p>When a <b>KeyEvent</b> occurs, the current <b>KeyboardFocusManager</b> delivers that event to 
+the <b>AlternateDispatcherA</b> object for dispatching. </p>
+<blockquote>
+	<p><i>(Events are delivered to multiple registered <b>KeyEventDispatcher</b> objects in the 
+order in which they are registered.)</i></p>
+</blockquote>
+<p><font color="#FF0000"><b>If the focus owner is <i>Field A ...</i></b></font></p>
+<p>If the 
+owner of the focus at that point in time <i>(the source of the event)</i> is 
+<i>Field A,</i> the <b>AlternateDispatcherA</b> object 
+<i>re-dispatches</i> that event to <i>Field C</i> and returns 
+<b>true</b>. This causes keystrokes entered into <i>Field A</i> to appear in <i>Field C</i> instead 
+of appearing in <i>Field A.</i> </p>
+<p>Returning 
+<b>true</b> prevents any further dispatching of the 
+event by the <b>KeyboardFocusManager</b>. 
+ 
+</p>
+<p><font color="#FF0000"><b>If the source of the event is not <i>Field A ...</i></b></font></p>
+<p>If the source of the event is not <i>Field A,</i> the <b>AlternateDispatcherA</b> object 
+returns <b>false</b>. This causes the current <b>KeyboardFocusManager</b> to deliver the event to 
+<b>AlternateDispatcherB</b> for dispatching. </p>
+<p><font color="#FF0000"><b>If the source of the event is <i>Field B ...</i></b></font></p>
+<p>If the 
+owner of the focus at that point in time is 
+<i>Field B, </i>the <b>AlternateDispatcherB</b> object 
+<i>re-dispatches </i>that event to <i>Field C</i> and returns 
+<b>true</b>. This causes keystrokes entered into 
+<i>Field B</i> to appear in <i>Field C</i> instead of appearing in <i>Field B.</i> </p>
+<p>Returning 
+<b>true</b> prevents any further dispatching of the 
+event. 
+ 
+</p>
+<p><font color="#FF0000"><b>If the source of the event is not <i>Field B ...</i></b></font></p>
+<p>If the owner of the focus at that point in time 
+is not <i>Field B,</i> the <b>AlternateDispatcherB</b> object 
+returns <b>false</b>.</p>
+<p>This causes the current <b>KeyboardFocusManager</b> to dispatch the event to 
+the component that owns the focus, which is what normally happens in the absence 
+of registered <b>KeyEventDispatcher</b> objects.</p>
+<p><font color="#FF0000"><b>Must be <i>Field C</i> </b></font> </p>
+<p>In this 
+program, that would have to be <i>Field C</i> 
+because it has already been determined that 
+neither <i>Field A</i> nor <i>Field B</i> owns the focus. 
+ 
+This causes keystrokes entered into <i>Field C</i> to 
+appear in <i>Field C</i> as normal.</p>
+<p><font color="#FF0000"><b>All keystrokes appear in <i>Field C</i></b></font></p>
+<p>Thus, all keystrokes entered into any of the 
+three fields in the GUI in Figure 1 will appear in <i>Field C.</i> 
+ 
+</p>
+<p>This program was tested using J2SE 1.4.2 under WinXP.</p>
+<p><font color="#FF0000"><b>The state of the GUI</b></font></p>
+<p>Figure 1 shows the state of the GUI after the characters a, b, and c, were entered respectively into fields A, B, and C, in that order. Note 
+that all three characters, abc, appear in <i>Field C.</i></p>
+<p><font color="#FF0000"><b>Will discuss in fragments</b></font></p>
+<p>I will discuss this program in fragments. A complete listing of the 
+program is provided in Listing 10 near the end of the chapter.</p>
+<p>Listing 1 shows the class named <b>KeyEventDispatch01</b>, including 
+the <b>main</b> method.</p>
+<div class="a">                     
+<pre>
+class KeyEventDispatch01{
+  public static void <b>main</b>(String[] args){
+    new GUI();
+  }//end main
+}//end class KeyEventDispatch01
+
+<b>Listing 1</b>
+</pre>
+</div></p>
+<p>In this case, the <b>main</b> method simply instantiates an object of the <b>
+GUI</b> class. The object of the <b>GUI</b> class appears in Figure 1.</p>
+<p><font color="#FF0000"><b>The GUI class</b></font></p>
+<p>Listing 2 shows the beginning of the <b>GUI</b> class, which extends the <b>
+JFrame</b> class. Thus, a <b>GUI</b> object is also a <b>JFrame</b> 
+object.</p>
+<div class="a">                     
+<pre>
+class <b>GUI</b> extends <b>JFrame</b>{
+  JTextField fieldA =
+                    new JTextField("Field A",12);
+  JTextField fieldB =
+                    new JTextField("Field B",12);
+  JTextField fieldC =
+                    new JTextField("Field C",12);
+
+  KeyboardFocusManager manager;
+
+<b>Listing 2</b>
+</pre>
+</div></p>
+<p>Listing 2 declares and initializes the three <b>JTextField</b> objects shown 
+in Figure 1.</p>
+<p>Listing 2 also declares a reference variable named <b>manager</b> that will 
+be used to hold a reference to the current <b>KeyboardFocusManager</b> object.</p>
+<p><font color="#FF0000"><b>The constructor</b></font></p>
+<p>The constructor for the <b>GUI</b> class begins in Listing 3.</p>
+<div class="a">                     
+<pre>
+  GUI(){//constructor
+    getContentPane().setLayout(new FlowLayout());
+    getContentPane().add(fieldA);
+    getContentPane().add(fieldB);
+    getContentPane().add(fieldC);
+
+    setSize(390,100);
+    setTitle("Copyright, R.G. Baldwin");
+    setDefaultCloseOperation(
+                           JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+
+<b>Listing 3</b>
+</pre>
+</div></p>
+<p>The code in Listing 3 is completely straightforward. Code like this has 
+been included in hundreds of previous tutorials to create a graphical user 
+interface and to cause it to appear on the screen.</p>
+<p><font color="#FF0000"><b>The current KeyboardFocusManager</b></font></p>
+<p>Continuing with the constructor, the statement in Listing 4 is new to this chapter.</p>
+<div class="a">                     
+<pre>
+    manager = KeyboardFocusManager.
+                getCurrentKeyboardFocusManager();
+
+<b>Listing 4</b>
+</pre>
+</div></p>
+<p>Listing 4 invokes the static <b>getCurrentKeyboardFocusManager</b> method of 
+the <b>KeyboardFocusManager</b> class to gain 
+access to the current <b>KeyboardFocusManager</b> object.</p>
+<p>The object's 
+reference is saved in the variable named <b>manager</b> that was declared in 
+Listing 2.</p>
+<p><font color="#FF0000"><b>What is a KeyboardFocusManager object</b></font></p>
+<p>According to Sun,</p>
+<p><i>&quot;The <b>KeyboardFocusManager</b> is responsible for managing the active 
+and focused <b>Windows</b>, and the current focus owner. </i></p>
+<p><i>The focus owner is defined as the <b>Component</b> in an application that 
+will typically receive all <b>KeyEvents</b> generated by the user. </i></p>
+<p><i>The focused <b>Window</b> is the <b>Window</b> that is, or contains, the 
+focus owner. Only a <b>Frame</b> or a <b>Dialog</b> can be the active <b>Window</b>.</i></p>
+<blockquote>
+	<p><i>(Note that <b>JFrame</b> extends <b>Frame</b>, and <b>JDialog</b> 
+	extends <b>Dialog </b>- Baldwin.)</i></p>
+</blockquote>
+<p><i>The native windowing system may denote the active <b>Window</b> or its 
+children with special decorations, such as a highlighted title bar. The active
+<b>Window</b> is always either the focused <b>Window</b>, or the first <b>Frame</b> 
+or <b>Dialog</b> that is an owner of the focused Window. </i></p>
+<p><i>The <b>KeyboardFocusManager</b> is both a centralized location for client 
+code to query for the focus owner and initiate focus changes, and an event 
+dispatcher for all <b>FocusEvents</b>, <b>WindowEvents</b> related to focus, and
+<b>KeyEvents</b>.</i>&quot;</p>
+<p><font color="#FF0000"><b>Many methods are available</b></font></p>
+<p>A <b>KeyboardFocusManager</b> object provides more than fifty different 
+methods that can be used by client code for <i>&quot;managing the active and focused <b>
+Windows</b>, and the current focus owner.&quot;</i> <i> </i></p>
+<p>I will be using several of those methods in this chapter. The first 
+such method that I will use is the static <b>getCurrentKeyboardFocusManager</b> 
+method shown in Listing 4. As explained earlier, this method returns a 
+reference to the current <b>KeyboardFocusManager</b> object.</p>
+<p>In addition, I will also be using the following methods in subsequent code:</p>
+<ul>
+	<li>addKeyEventDispatcher</li>
+	<li>redispatchEvent</li>
+</ul>
+<p><font color="#FF0000"><b>Registering KeyEventDispatcher objects</b></font></p>
+<p>This program defines two different classes that implement the <b>
+KeyEventDispatcher</b> interface:</p>
+<ul>
+	<li>AlternateDispatcherA</li>
+	<li>AlternateDispatcherB</li>
+</ul>
+<p>Continuing with the constructor, the code in Listing 5 registers one object of each of those 
+two classes on the <b>
+KeyboardFocusManager</b>. Registration makes it possible to <i>&quot;pre-listen to all <b>KeyEvents</b>&quot;</i> and to 
+take appropriate action when a <b>KeyEvent</b> occurs.</p>
+<div class="a">                     
+<pre>
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherA(
+                         fieldA,fieldC,manager));
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherB(
+                         fieldB,fieldC,manager));
+
+  }//end constructor
+}//end class GUI
+
+<b>Listing 5</b>
+</pre>
+</div></p>
+<p>I will explain what I mean by <i>appropriate action</i> later.</p>
+<p><font color="#FF0000"><b>End of the GUI class</b></font></p>
+<p>Listing 5 also signals the end of the constructor and the end of the <b>GUI</b> 
+class.</p>
+<p><font color="#FF0000"><b>The AlternateDispatcherA class</b></font></p>
+<p>One of the classes that implement the <b>KeyEventDispatcher</b> interface is 
+named <b>AlternateDispatcherA</b>.</p>
+<p>Listing 6 shows the beginning of the class named <b>AlternateDispatcherA</b>. </p>
+<div class="a">                     
+<pre>
+class AlternateDispatcherA
+                   implements KeyEventDispatcher{
+  JTextField fieldA;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+<b>Listing 6</b>
+</pre>
+</div></p>
+<blockquote>
+	<p><i>(An object instantiated from the <b>AlternateDispatcherA</b> class is registered on the
+	<b>KeyboardFocusManager</b> in 
+Listing 5.)</i></p>
+</blockquote>
+<p>Listing 6 declares three instance variables that will be populated by the 
+constructor.</p>
+<p>References to the three text fields shown in Figure 1, as well as a 
+reference to the <b>KeyboardFocusManager</b> are required to make it possible 
+for an object of this class to provide the <i>appropriate action</i> mentioned 
+earlier.</p>
+<p><font color="#FF0000"><b>The constructor</b></font></p>
+<p>Listing 7 shows the constructor for the <b>AlternateDispatcherA</b> class. </p>
+<div class="a">                     
+<pre>
+  AlternateDispatcherA(
+                   JTextField fieldA,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldA = fieldA;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+<b>Listing 7</b>
+</pre>
+</div></p>
+<p>The code in the constructor receives the incoming references and saves them 
+in the instance variables declared in Listing 6.</p>
+<p><font color="#FF0000"><b>The dispatchKeyEvent method</b></font></p>
+<p>The <b>KeyEventDispatcher</b> interface declares a single method named <b>
+dispatchKeyEvent</b>. All classes that implement the interface must 
+provide a concrete definition of this method. This is the method whose 
+behavior performs the <i>appropriate action</i> mentioned earlier.</p>
+<p><font color="#FF0000"><b>What does Sun have to say?</b></font></p>
+<p>Here is part of what Sun has to say about the <b>dispatchKeyEvent</b> method.</p>
+<p><i>&quot;This method is called by the current <b>KeyboardFocusManager</b> 
+requesting that this <b>KeyEventDispatcher</b> dispatch the specified event on 
+its behalf. This <b>KeyEventDispatcher</b> is free to retarget the event, 
+consume it, dispatch it itself, or make other changes. </i></p>
+<p><i>This capability is typically used to deliver <b>KeyEvents</b> to <b>
+Components</b> other than the focus owner.</i></p>
+<blockquote>
+	<p><i>(That is what is done in this sample program - Baldwin.) </i></p>
+</blockquote>
+<p><i>... Note that if a <b>KeyEventDispatcher</b> dispatches the <b>KeyEvent</b> 
+itself, it must use <b>redispatchEvent</b> to prevent the current <b>
+KeyboardFocusManager</b> from recursively requesting that this <b>
+KeyEventDispatcher</b> dispatch the event again. </i></p>
+<p><i>If an implementation of this method returns <b>false</b>, then the <b>
+KeyEvent</b> is passed to the next <b>KeyEventDispatcher</b> in the chain, 
+ending with the current <b>KeyboardFocusManager</b>. </i></p>
+<p><i>If an implementation returns <b>true</b>, the <b>KeyEvent</b> is assumed 
+to have been dispatched (although this need not be the case), and the current <b>
+KeyboardFocusManager</b> will take no further action with regard to the <b>
+KeyEvent</b>.&quot;</i></p>
+<p><font color="#FF0000"><b>Definition of the dispatchKeyEvent method</b></font></p>
+<p>Listing 8 shows the definition of the <b>dispatchKeyEvent</b> method in the
+<b>AlternateDispatcherA</b> class.</p>
+<div class="a">                     
+<pre>
+  public boolean <b>dispatchKeyEvent</b>(KeyEvent e){
+    if(e.getSource() == fieldA){
+      manager.<b>redispatchEvent</b>(fieldC,e);
+      return true;
+    }else{
+      return false;
+    }//end else
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherA
+
+<b>Listing 8</b>
+</pre>
+</div></p>
+<blockquote>
+	<p><i>(Note that the dispatchKeyEvent method receives a reference to the <b>
+	KeyEvent</b> object.</i><b><i>)</i></b></p>
+</blockquote>
+<p><font color="#FF0000"><b>Is <i>Field A</i> the source of the event?</b></font></p>
+<p>The code in Listing 8 begins by testing to see if the source of the <b>KeyEvent</b> is 
+the <b>JTextField</b> object referred to by <b>fieldA</b>.</p>
+<blockquote>
+	<p><i>(This is the text field identified as Field A in Figure 1.)</i></p>
+</blockquote>
+<p>If so, the code in Listing 8 invokes the <b>redispatchEvent</b> method to 
+<i>re-dispatch</i> the event to the <b>JTextField</b> object referred to by <b>fieldC</b>. </p>
+<blockquote>
+	<p><i>(This is the text field identified as Field C in Figure 1.)</i></p>
+</blockquote>
+<p>This causes <i>Field C</i> to respond to the event instead of <i>Field A</i>.</p>
+<p>The normal response of a 
+text field to a <b>KeyEvent</b> is to display the character associated with the key that was 
+pressed to 
+cause the <b>KeyEvent</b> to be fired.</p>
+<p>As a result, characters typed into <i>Field A</i> in Figure 1 appear in <i>Field C</i> instead of 
+<i>Field A.</i></p>
+<p><font color="#FF0000"><b>The redispatchEvent method</b></font></p>
+<p>What does it mean to <i>dispatch</i> an event to a component? One way 
+to think of this is to deliver the event object to the component and to ask the 
+component to deal with it in whatever way is appropriate for that component.
+</p>
+<p>For example, when a <b>KeyEvent</b> of a particular type is dispatched to a 
+text field, the appropriate behavior is for the text field to extract the 
+character from the event object and to display that character in the text field. 
+That character is also combined with other characters and saved in such a way 
+that it is possible later to get the character content of the text field by 
+invoking a method on the text field.</p>
+<blockquote>
+	<p><i>(Experimentation indicates that this happens for a <b>KeyEvent</b> of 
+	type <b>keyPressed</b>, as opposed to type <b>keyReleased</b> or type <b>
+	keyTyped</b>.)</i></p>
+</blockquote>
+<p>Figure 2 contains some of what Sun has to say about the <b>redispatchEvent</b> 
+method of the <b>KeyboardFocusManager</b> class.</p>
+<div align="left">
+<div class="a">public final void redispatchEvent(<br/>
+			 <b>Component</b>target, <b>
+			AWTEvent</b>e)<p>Re-dispatches an <b>AWTEvent</b> in such a way that 
+			the AWT event dispatcher will not recursively request that the <b>
+			KeyboardFocusManager</b>, or any installed <b>KeyEventDispatchers</b>, 
+			dispatch the event again. </p>
+			<p>Client implementations of <b>dispatchEvent</b> and client-defined
+			<b>KeyEventDispatchers</b> must call <b>redispatchEvent(target, e)</b> 
+			instead of <b>target.dispatchEvent(e)</b> to dispatch an event.</p>
+			<p>Parameters: </p>
+			<ul>
+				<li><b>target</b> - the Component to which the event should be 
+				dispatched</li>
+				<li><b>e</b> - the event to dispatch </li>
+			</ul>
+			<p>Figure 2<br/>
+</div>
+</div>
+<p>Given the above discussion, Figure 2 should be relatively self-explanatory.</p>
+<p><font color="#FF0000"><b>The return value</b></font></p>
+<p>Returning now to the code in Listing 8, after re-dispatching the <b>KeyEvent</b> 
+to <i>Field C,</i> the <b>dispatchKeyEvent</b> method returns <b>true</b>. 
+This causes the <b>KeyboardFocusManager</b> to assume that the <b>KeyEvent</b> 
+has been dispatched. It will take no further action with respect to that
+<b>KeyEvent</b>.</p>
+<p>If the source of the <b>KeyEvent</b> in Listing 8 was not <i>Field A,</i> the
+<b>dispatchKeyEvent</b> method returns <b>false</b>. This causes the <b>
+KeyboardFocusManager</b> to pass the <b>KeyEvent</b> to the <b>
+KeyEventDispatcher</b> of type <b>AlternateDispatcherB</b> that was also 
+registered on the <b>KeyboardFocusManager</b>.</p>
+<blockquote>
+	<p><i>(Recall that events are delivered to multiple registered <b>
+	KeyEventDispatcher</b> objects in the order in which they were registered on 
+	the <b>KeyboardFocusManager</b>.)</i> </p>
+</blockquote>
+<p><font color="#FF0000"><b>The AlternateDispatcherB class</b></font></p>
+</p>
+<p>The <b>AlternateDispatcherB</b> class is shown in Listing 9. This class 
+is very similar to the <b>AlternateDispatcherA</b> class shown in Listings 6, 7, 
+and 8.</p>
+<div class="a">                     
+<pre>
+class AlternateDispatcherB
+                   implements KeyEventDispatcher{
+  JTextField fieldB;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+  //Constructor
+  AlternateDispatcherB(
+                   JTextField fieldB,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldB = fieldB;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+  public boolean dispatchKeyEvent(KeyEvent e){
+    if(e.getSource() == fieldB){
+      manager.redispatchEvent(fieldC,e);
+      return true;
+    }else{
+      return false;
+    }//end else
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherB
+
+<b>Listing 9</b>
+</pre>
+</div></p>
+<p>The main difference between the <b>AlternateDispatcherA</b> class and the <b>
+AlternateDispatcherB</b> class is:</p>
+<blockquote>
+	<p>The<b> dispatchKeyEvent</b> method in the<b> AlternateDispatcherB</b> 
+	class re-dispatches the event to <i>Field C</i> if the source of the <b>
+	KeyEvent</b> is <i><b>Field B</b>. </i>In contrast, the<b> 
+	dispatchKeyEvent</b> method in the <b>AlternateDispatcherA</b> class 
+	re-dispatches the event to <i>Field C</i> if the source of the <b>KeyEvent</b> 
+	is <i><b>Field A</b>. </i></p>
+</blockquote>
+<p>This causes characters entered into <i>Field B</i> to appear in <i>Field C</i> 
+instead of appearing in <i>Field B.</i></p>
+<p><font color="#FF0000"><b>The end of the program</b></font></p>
+<p>Listing 9 signals the end of the program.</p>
+<h2 align="center"><a name="Run_the_Programs">Run the Program</a></h2><p>I encourage you to copy, compile, and run the program provided in this chapter. 
+Experiment with it, making changes and observing the results of your changes.</p><h2 align="center"><a name="Summary">Summary</a></h2>
+<p>I showed you how to use <b>KeyEventDispatcher</b> objects to cause a <b>
+KeyEvent</b> fired by one component to be dispatched to a different component 
+for processing. As a result, characters typed into one text field appear 
+in another text field, and do not appear in the text field into which they are 
+typed.</p>
+<h2 align="center"><a name="Whats Next">What's Next?</a></h2>
+<p>Future chapters will discuss other important features of the focus subsystem including the 
+following:</p>
+<ul>
+	<li>The KeyEventPostProcessor interface</li>
+	<li>FocusEvent and WindowEvent</li>
+	<li>Event delivery</li>
+	<li>Temporary focus events</li>
+	<li>Focus and PropertyChangeListener</li>
+	<li>Focus and VetoableChangeListener</li>
+</ul>
+<p>The next chapter in the series will explain the use of the <b>KeyEventPostProcessor</b> interface 
+to cause a final stage of customized event processing to take place after a <b>
+KeyEvent</b> has already been dispatched to a component for default processing.</p>
+<h2 align="center"><a name="Complete_Program_Listings">Complete Program Listing</a></h2><p>
+A complete listing of the program discussed in this chapter is provided below.</p><p>
+<div class="a">                     
+<pre>
+/*File KeyEventDispatch01.java
+Copyright,R.G.Baldwin
+Revised 07/27/04
+
+This program illustrates the use of an
+alternate KeyEventDispatcher.
+
+A JFrame object appears on the screen containing
+three JTextField objects.  The initial text in
+the three JTextField objects is respectively:
+
+Field A
+Field B
+Field C
+
+Two alternative KeyEventDispatcher objects are
+registered on the current KeyboardFocusManager
+in the following order:
+
+AlternateDispatcherA
+AlternateDispatcherB
+
+When a key event occurs, the current
+KeyboardFocusManager delivers that event to
+AlternateDispatcherA for dispatching.  If the
+owner of the focus at that point in time is
+Field A, the AlternateDispatcherA object
+re-dispatches that event to Field C and returns
+true.  That causes keystrokes entered into
+Field A to appear in Field C instead.  Returning
+true prevents any further dispatching of the
+event.
+
+If the owner of the focus at that point in time
+is not Field A, the AlternateDispatcherA object
+returns false.  This causes the current
+KeyboardFocusManager to deliver the event to
+AlternateDispatcherB for dispatching.  If the
+owner of the focus at that point in time is
+Field B, the AlternateDispatcherB object
+re-dispatches that event to Field C and returns
+true.  That causes keystrokes entered into
+Field B to appear in Field C instead.  Returning
+true prevents any further dispatching of the
+event.
+
+If the owner of the focus at that point in time
+is not Field B, the AlternateDispatcherB object
+returns false.  This causes the current
+KeyboardFocusManager to dispatch the event to
+the component that owns the focus.  In this
+simple program, that would have to be Field C
+because it has already been determined that
+neither Field A nor Field B own the focus.
+
+That causes keystrokes entered into Field C to
+appear in Field C as is normally the case.
+
+Thus, all keystrokes entered into any of the
+three fields in the GUI will appear in field C.
+
+Tested using J2SE 1.4.2 under WinXP.
+************************************************/
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class KeyEventDispatch01{
+  public static void main(String[] args){
+    new GUI();
+  }//end main
+}//end class KeyEventDispatch01
+//=============================================//
+
+class GUI extends JFrame{
+  JTextField fieldA =
+                    new JTextField("Field A",12);
+  JTextField fieldB =
+                    new JTextField("Field B",12);
+  JTextField fieldC =
+                    new JTextField("Field C",12);
+
+  KeyboardFocusManager manager;
+
+  GUI(){//constructor
+    getContentPane().setLayout(new FlowLayout());
+    getContentPane().add(fieldA);
+    getContentPane().add(fieldB);
+    getContentPane().add(fieldC);
+
+    setSize(390,100);
+    setTitle("Copyright, R.G. Baldwin");
+    setDefaultCloseOperation(
+                           JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+    manager = KeyboardFocusManager.
+                getCurrentKeyboardFocusManager();
+
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherA(
+                         fieldA,fieldC,manager));
+    manager.addKeyEventDispatcher(
+                        new AlternateDispatcherB(
+                         fieldB,fieldC,manager));
+
+  }//end constructor
+}//end class GUI
+//=============================================//
+
+class AlternateDispatcherA
+                   implements KeyEventDispatcher{
+  JTextField fieldA;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+  //Constructor
+  AlternateDispatcherA(
+                   JTextField fieldA,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldA = fieldA;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+  public boolean dispatchKeyEvent(KeyEvent e){
+    if(e.getSource() == fieldA){
+      manager.redispatchEvent(fieldC,e);
+      return true;
+    }else{
+      return false;
+    }//end else
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherA
+//=============================================//
+
+class AlternateDispatcherB
+                   implements KeyEventDispatcher{
+  JTextField fieldB;
+  JTextField fieldC;
+  KeyboardFocusManager manager;
+
+  //Constructor
+  AlternateDispatcherB(
+                   JTextField fieldB,
+                   JTextField fieldC,
+                   KeyboardFocusManager manager){
+    this.fieldB = fieldB;
+    this.fieldC = fieldC;
+    this.manager = manager;
+  }//end constructor
+
+  public boolean dispatchKeyEvent(KeyEvent e){
+    if(e.getSource() == fieldB){
+      manager.redispatchEvent(fieldC,e);
+      return true;
+    }else{
+      return false;
+    }//end else
+  }//end dispatchKeyEvent
+}//end class AlternateDispatcherB
+
+<b>Listing 10</b>
+</pre></div></p>
+<br/>
+     
+<hr size="3" width="100%" align="center">    
+<p>Copyright, Richard G. Baldwin. Reproduction in whole or in
+part in any form or medium without express written permission from Richard
+Baldwin is prohibited. </p>
+     
+<h4> <a name="About_the_author">About the author</a></h4><b>
+<a href="mailto:baldwin@dickbaldwin.com">Richard Baldwin</a></b><i>
+  is a college professor (at Austin Community College in Austin, TX) and
+private  consultant whose primary focus is a combination of Java, C#, and
+XML. In addition to the many platform and/or language independent benefits
+of Java and C# applications, he believes that a combination of Java, C#,
+and XML will become the primary driving force in the delivery of structured
+information on the Web.</i>    
+<p><i>Richard has participated in numerous consulting projects, and he frequently 
+ provides onsite training at the high-tech companies located in and around 
+ Austin, Texas. He is the author of Baldwin's Programming <a
+ href="http://www.dickbaldwin.com">Tutorials</a>,
+  which has gained a worldwide following among experienced and aspiring programmers.
+  He has also published articles in JavaPro magazine.</i> </p>
+     
+<p><i>In addition to his programming expertise, Richard has many years of 
+ practical experience in Digital Signal Processing (DSP). His first
+ job after he earned his Bachelor's degree was doing DSP in the Seismic Research 
+ Department of Texas Instruments. (TI is still a world leader in DSP.) 
+ In the following years, he applied his programming and DSP expertise to other
+ interesting areas including sonar and underwater acoustics.</i> </p>
+     
+<p><i>Richard holds an MSEE degree from Southern Methodist University and
+  has many years of experience in the application of computer technology
+to  real-world problems.</i> </p>
+     
+<p><i><a href="mailto:baldwin@dickbaldwin.com">Baldwin@DickBaldwin.com</a></i>
+  </p>
+     
+<p>-end- </p>
+   </body>
+</html>

@@ -1,0 +1,86 @@
+﻿
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Compiling and running</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+      body {
+        font-family: Arial;
+        font-size: 16pt;
+      }
+
+.auto-style1 {
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+
+
+
+<h2 class="auto-style1">Compiling and Running Java Programs from the Command Line</h2>
+<p>You don't need an IDE to compile and run Java programs. Once you get things 
+set up, it is very easy to compile and run them from the command line. All you 
+need is the Java Development Kit (jdk) that you can download from Oracle and a 
+text editor. Detailed instructions for Windows are provided below. If you are 
+using a different operating system, you will need to translate the instructions 
+into that operating system.</p>
+<h3>Preparation</h3>
+<ol>
+	<li>Make certain that you can see file extensions such as .java, .bat, .txt, 
+	etc. If not, you may need to adjust your preferences.</li>
+	<li>Download and install the Java SE Development Kit from
+	<a href="https://www.oracle.com/java/technologies/downloads/">Oracle</a>.
+	</li>
+	<li>Create an empty folder somewhere on your disk</li>
+	<li>Create an empty text file named aacmd.bat in that folder. <em>(Note .bat and 
+	not .txt.)</em></li>
+	<li>Use your text editor to put the following line of text in that file and 
+	close the file: <br/>cmd</li>
+	<li>Double click that file. This will cause a command-line window to open 
+	with a command prompt shown by the &gt; character.</li>
+	<li>Type the following at the command prompt and press Enter: <br/>javac -version<br/>
+	This should display text that shows the version of the Java compiler that 
+	you have installed.</li>
+	<li>Type the following at the command prompt and press Enter: <br/>java -version<br/>
+	This should display text that shows the version of the Java Virtual Machine 
+	(JVM) that you have installed </li>
+	<li>If everything has worked to this point, this confirms that you have 
+	Java properly installed and ready for use. If not, you might want to seek 
+	help from the ACC CSIT tutors.</li>
+</ol>
+<h3>Compiling and running programs</h3>
+<ol>
+	<li>Create an empty text file in that same folder named HelloWorld.java. 
+	<em>(Note .java and not .txt.)</em> This is a simple Java source code file.</li>
+	<li>Use your text editor to enter the following Java code in the file:<br/>
+	class HelloWorld {<br/>public static void main(String[] args) {<br/>System.out.println("Hello, World!");<br/>}//end method<br/>}//end class</li>
+	<li>Double click the file named aacmd.bat to open the command-line screen.</li>
+	<li>Enter the following command at the command prompt: <br/>javac&nbsp; -cp 
+	.; HelloWorld.java<br/>
+	If there are no errors, the command prompt will reappear. If you examine the 
+	folder, you will see that it now contains a new file named HelloWorld.class. 
+	This is a compiled Java file ready to run.</li>
+	<li>Enter the following command at the command prompt: <br/>java -cp .; HelloWorld<br/>The following output should appear on the screen:<br/>Hello, World!</li>
+	<li>If 
+	everything has worked to this point, this confirms that you have 
+	successfully created, compiled, and executed a simple Java program. If not, 
+	you might want to seek help from the ACC CSIT tutors.</li>
+	<li>From this point forward, each time you update your source code file or 
+	create a new source code file, you should execute the following commands at 
+	the command prompt:<br/>del *.class<br/>javac -cp .; fileName.java<br/>java -cp 
+	.; fileName</li>
+</ol>
+<hr/>
+<p>File: CompilingAndRunningJava.htm<br/>Revised: 12/06/25</p>
+
+    </body>
+</html>
+
+
+

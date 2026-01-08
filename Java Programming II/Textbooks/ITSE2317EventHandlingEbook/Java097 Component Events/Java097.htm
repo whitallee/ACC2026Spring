@@ -1,0 +1,190 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>... in Java by Richard G Baldwin</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MSOFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff">
+
+<P><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><!--start--></P>
+<I><H3 ALIGN="CENTER">Richard G Baldwin (512) 223-4758, </I><A HREF="mailto:baldwin@austin.cc.tx.us"><I>baldwin@austin.cc.tx.us</I></A><I>, </I><A HREF="http://www2.austin.cc.tx.us/baldwin/"><I>http://www2.austin.cc.tx.us/baldwin/</I></A></H3>
+<H2 ALIGN="CENTER"><!--title-->Event Handling in JDK 1.1, Component Events<!--endTitle--></H2>
+<P>Java Programming, Lecture Notes # 97, Revised 02/24/99. </P>
+
+<UL>
+<LI><A HREF="#Preface">Preface</A> </LI>
+<LI><A HREF="#Introduction">Introduction</A> </LI>
+<LI><A HREF="#Overview">Overview</A> </LI>
+<LI><A HREF="#Sample_Program">Sample Program</A> </LI>
+
+<UL>
+<LI><A HREF="#Interesting_Code_Fragments">Interesting Code Fragments</A> </LI>
+<LI><A HREF="#Program_Listing">Program Listing</A> </LI></UL>
+</UL>
+
+<P><HR></P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Preface"></A>Preface</H2>
+</FONT><P>Students in Prof. Baldwin's <B><U>Intermediate Java Programming</B></U> classes at ACC will be responsible for knowing and understanding all of the material in this chapter beginning with the Spring semester of 1999. </P>
+<P>Sample program was successfully tested using JDK 1.2 under Win95 on 2/24/99.<br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Introduction"></A>Introduction</H2>
+</FONT><P>This chapter was originally written on September 22, 1998, using the JDK 1.1.6 download package. The purpose of this chapter is to illustrate the use of <B>component</B> events. <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Overview"></A>Overview</H2>
+</FONT><P>If you instantiate an object of type <B>ComponentListener</B> and register that object on an object that is a subclass of the <B>Component</B> class, methods of the listener object will be invoked whenever the object is <I>hidden</I>, <I>moved</I>, <I>resized</I>, or <I>shown</I>. </P>
+<P>Hiding and showing are accomplished by invoking the <B>setVisible()</B> method on the object with a parameter of <I>false</I> or <I>true</I>. </P>
+<P>Resizing and moving are accomplished by physically performing these actions on the visual representation of the object on the screen. </P>
+<P>Information regarding the event is passed into the <B>ComponentListener </B>methods in the form of an object of type <B>ComponentEvent</B>. <br/>
+ <br/>
+ </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="Sample_Program"></A>Sample Program</H2>
+</FONT><P>This program illustrates component events, and invokes the <B>componentShown()</B> and <B>componentHidden()</B> methods of the <B>ComponentListener</B> interface under program control. </P>
+<P>The user can invoke the <B>componentMoved()</B> and <B>componentResized()</B> methods by moving and resizing the <B>Frame</B> object on the screen. </P>
+<P>The program also illustrates the use of an anonymous inner class to terminate the program when the user clicks the <I>close</I> button on the <B>Frame</B> object.. </P>
+<P>It also illustrates the use of the controlling class as a listener class. In this situation, the listener methods are defined as methods of the controlling class rather than being defined as methods of separately compiled listener classes. </P>
+<P>Typical output from the program is shown in the program listing that follows later. </P>
+<P>This program was tested using JDK 1.1.6 under Win95. <br/>
+ <br/>
+ </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="Interesting_Code_Fragments"></A>Interesting Code Fragments</H3>
+</FONT><P>We will begin with the first line of the definition of the controlling class. Note that the controlling class implements the <B>ComponentListener</B> interface. Having done this, the listener methods declared in that interface must be defined in the controlling class, and an object of the controlling class (<B>this</B>) is the listener object which gets registered on itself (<B>this</B>). <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>class Event34 <I>extends</I> <B>Frame</B> <I>implements</I> <B>ComponentListener</B>{</PRE></TD>
+</TR>
+</TABLE>
+
+<P>I will skip the <B>main</B> method (that does nothing but instantiate an instance of the controlling class) and move on to the constructor. I will highlight only those statements in the constructor that are interesting with respect to component events or the structure of the program. </P>
+<P>The next fragment shows the code to register the object as a listener on itself. This is a somewhat cryptic programming style that I have not used widely in these tutorial chapters up to this point but you do see it being used by other authors. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> <B>this</B>.addComponentListener(<B>this</B>);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next fragment shows statements that cause the <B>componentShown()</B> and <B>componentHidden()</B> methods of the <B>ComponentListener</B> interface to be invoked several times in succession. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> this.setVisible(true);//invoke shown event
+ this.setVisible(false);//invoke hidden event
+ this.setVisible(true);//invoke shown event</PRE></TD>
+</TR>
+</TABLE>
+
+<P>To invoke the other two methods of the interface, you will need to manually resize and move the <B>Frame</B> object on the screen. </P>
+<P>The last fragment shows the definition of one of the methods of the <B>ComponentListener</B> interface. The definitions of all four methods are essentially the same, so only one of them is shown here. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> public void <B>componentResized</B>(ComponentEvent e){
+ System.out.println("Resized\n" + e.getSource());
+ }//end componentResized()</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The code in the program that was not highlighted in the fragments above can be viewed in the complete listing of the program that follows in the next section. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="Program_Listing"></A>Program Listing</H3></FONT>
+<TABLE BORDER CELLSPACING=1 WIDTH=486>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Event34.java
+Copyright, R.G.Baldwin
+
+This program illustrates component events, and invokes the
+componentShown() and componentHidden() methods of the
+ComponentListener interface under program control.
+
+The user can invoke the componentMoved() and
+componentResized() methods by moving and resizing the
+Frame object.
+
+The program also illustrates the use of an anonymous
+inner class.
+
+It also illustrates the use of the controlling class as a
+listener class. In this situation, the listener methods
+are defined as methods of the controlling class rather than
+being defined as methods of separately compiled listener
+classes.
+
+Typical output from the program with line breaks manually
+inserted is shown below:
+
+Shown
+Event34[frame0,0,0,350x100,layout=java.awt.BorderLayout,
+resizable,title=Copyright R.G.Baldwin]
+Hidden
+Event34[frame0,0,0,350x100,layout=java.awt.BorderLayout,
+resizable,title=Copyright R.G.Baldwin]
+Shown
+Event34[frame0,0,0,350x100,layout=java.awt.BorderLayout,
+resizable,title=Copyright R.G.Baldwin]
+Moved
+Event34[frame0,31,43,350x100,layout=java.awt.BorderLayout,
+resizable,title=Copyright R.G.Baldwin]
+Resized
+Event34[frame0,31,43,282x139,layout=java.awt.BorderLayout,
+resizable,title=Copyright R.G.Baldwin]
+
+
+This program was tested using JDK 1.1.6 under Win95.
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+//Note that the controlling class implements the
+// ComponentListener interface.
+class Event34 extends Frame implements ComponentListener{
+
+ public static void main(String[] args){
+ new Event34();//instantiate this object
+ }//end main
+ //=====================================================//
+
+ public Event34(){//constructor
+ //Add a component listener
+ this.addComponentListener(this);
+ this.setSize(350,100);
+ this.setTitle("Copyright R.G.Baldwin");
+ this.setVisible(true);//invoke shown event
+ this.setVisible(false);//invoke hidden event
+ this.setVisible(true);//invoke shown event
+
+ //Anonymous inner-class listener to terminate program
+ this.addWindowListener(
+ new WindowAdapter(){//anonymous class definition
+ public void windowClosing(WindowEvent e){
+ System.exit(0);//terminate the program
+ }//end windowClosing()
+ }//end WindowAdapter
+ );//end addWindowListener
+ }//end constructor
+ //-----------------------------------------------------//
+
+ //Define the methods of the ComponentListener interface
+ public void componentResized(ComponentEvent e){
+ System.out.println("Resized\n" + e.getSource());
+ }//end componentResized()
+
+ public void componentMoved(ComponentEvent e){
+ System.out.println("Moved\n" + e.getSource());
+ }//end componentMoved()
+
+ public void componentShown(ComponentEvent e){
+ System.out.println("Shown\n" + e.getSource());
+ }//end componentShown()
+
+ public void componentHidden(ComponentEvent e){
+ System.out.println("Hidden\n" + e.getSource());
+ }//end componentHidden()
+
+}//end class Event34
+//=======================================================//</PRE></TD>
+</TR>
+</TABLE>
+
+<P>-end- <!--end--></P></BODY>
+</HTML>

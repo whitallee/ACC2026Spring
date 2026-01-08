@@ -1,0 +1,1802 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java071</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java071 Consolidated Review Event Handling</h1>
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>, 
+		<a href="#question11">11</a>, <a href="#question12">12</a>, 
+		<a href="#question13">13</a>, 
+		<a href="#question14">14</a>, 
+		<a href="#question15">15</a>,
+		<a href="#question16">16</a>,
+		<a href="#question17">17</a>, 
+		<a href="#question18">18</a>,
+		<a href="#question19">19</a>,
+		<a href="#question20">20</a>,
+		<a href="#question21">21</a>,
+		<a href="#question22">22</a>,
+		<a href="#question23">23</a>,
+		<a href="#question24">24</a>,
+		<a href="#question25">25</a>,
+		<a href="#question26">26</a>,
+		<a href="#question27">27</a>,
+		<a href="#question28">28</a>,
+		<a href="#question29">29</a>,
+		<a href="#question30">30</a>,
+		<a href="#question31">31</a>,
+		<a href="#question32">32</a>,
+		<a href="#question33">33</a>,
+		<a href="#question34">34</a>,
+		<a href="#question35">35</a>,
+		<a href="#question36">36</a>,
+		<a href="#question37">37</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter contains a non-exhaustive set of review questions and answers 
+keyed to the material in the Event Handling eBook. </p>
+<p>It may seem strange to see a review chapter at the beginning of the eBook. 
+This chapter was placed at the beginning rather than at the end in the hope that 
+you will refer to it often as you progress through the other chapters in the 
+eBook. This consolidated review chapter contains review questions covering all 
+of the other chapters in the eBook. It also contains a variety of sample 
+programs that are not specifically covered in the chapters of the eBook but may 
+show up on assignments, quizzes, or tests.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False: AWT is the abbreviation for <em>Abstract Windows Toolkit</em>.</p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>True or False: GUI is the abbreviation for the Graphical User Interface.</p>
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False: There are two primary packages that are used for <b>GUI</b> 
+programming in Java 12.</p>
+<ul>
+	<li>java.awt.*</li>
+	<li>com.sun.java.swing.*</li>
+</ul>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>True or False: When it was released, Swing was a replacement for the AWT.</p>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False: A <em>callback</em> mechanism is a mechanism where a method in 
+one object asks a method in another object to <i>"call me back"</i> or <i>
+"notify me"</i> when an interesting event happens. </p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h2><a name="question06">Question 6</a></h2>
+<p>True or False: Many different objects may ask one object to notify them when 
+an interesting event happens. This is sometimes referred to as <em>unicasting</em>.</p>
+<p><a href="#answer06">Answer 6</a> </p>
+
+<h2><a name="question07">Question 7</a></h2>
+<p>True or False: API is an abbreviation for Application Programming Interface.</p>
+<p><a href="#answer07">Answer 7</a></p>
+
+<h2><a name="question08">Question 8</a> </h2>
+<p>Given: The event model that has been in use since Java version 1.1 is 
+sometimes called the Delegation Event Model and is sometimes called the 
+JavaBeans Event Model. <em>(It may be called by other names as well.)</em> 
+Although there was an earlier model, the Delegation Event Model is the event 
+model to which the questions in this review chapter apply.</p>
+<p>True or False: The event model makes use of <b>event sources</b> and <b>event 
+listeners</b>.</p>
+
+
+<p><a href="#answer08">Answer 8</a> </p>
+
+<h2><a name="question09">Question 9</a></h2>
+<p>True or False: An event <strong>listener</strong> is an object that has the 
+ability to determine when an interesting event has occurred, and to notify
+<strong>source</strong> objects of the occurrence of the event.</p>
+<p><a href="#answer09">Answer 9</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>True or False: A <strong>listener</strong> object is an instance of a class 
+(or instance of a subclass of a class) that implements a specific <em>listener 
+interface</em>. </p>
+<p><a href="#answer10">Answer 10</a></p>
+	
+<h2><a name="question11">Question 11</a></h2>
+<p>True or False: A number of listener interfaces are defined where each 
+interface declares the methods appropriate for a specific class of events. Thus, 
+there is natural pairing of classes of events and interface definitions.</p>
+<p><a href="#answer11">Answer 11</a></p>
+	
+<h2><a name="question12">Question 12</a></h2>
+<p>True or False: There is a class of mouse events that includes most of the 
+events normally associated with mouse action and there is a matching source 
+definition that is used to define a listener class for those events.</p>
+<p><a href="#answer12">Answer 12</a></p>
+	
+<h2><a name="question13">Question 13</a></h2>
+<p>True or False: A listener object can be registered on a source object to be 
+notified of the occurrence of all events of the specific class for which the 
+listener object is designed. </p>
+<p><a href="#answer13">Answer 13</a></p>
+	
+<h2><a name="question14">Question 14</a></h2>
+<p>True or False: Once a listener object is registered to be notified of all 
+events of the specific class for which the listener object is designed, the 
+occurrence of such an event will automatically invoke the matching method in the 
+listener object. The code in the body of the method is designed by the 
+programmer to perform the desired action when the event occurs. </p>
+<p><a href="#answer14">Answer 14</a></p>
+	
+<h2><a name="question15">Question 15</a></h2>
+<p>True or False: In many cases, the same goal can be achieved by either 
+implementing a listener interface or extending a corresponding adapter class. </p>
+<p><a href="#answer15">Answer 15</a></p>
+	
+<h2><a name="question16">Question 16</a></h2>
+<p>Given: The program shown below will compile and run successfully. </p>
+<p>True or False: </p>
+<p>When 
+the program starts running, it displays a small window and also displays the following on 
+the command-line screen:</p>
+<p>WProc1 windowActivated test msg<br/>WProc1 windowOpened test msg</p>
+<p>Whenever the small window loses the focus, the following is displayed on the 
+command-line screen:</p>
+<p>WProc1 windowDeactivated test msg</p>
+<p>Whenever the small window gains the focus, the following is displayed on the 
+command-line screen:</p>
+<p>WProc1 windowActivated test msg</p>
+<p>Whenever the user clicks the X-button, the small window disappears and the 
+following is displayed on the command-line screen.</p>
+<p>WProc1 windowClosing test msg<br/>WProc1 windowDeactivated test msg<br/>WProc1 
+windowClosed test msg</p>
+<div class="a">
+<p><strong><a name="Listing_1">Listing 1</a>. Question 
+				16.</strong></p>
+
+<pre>
+/*File Q16.java
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q16 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUInterface object
+  }//end main
+}//end class Q16
+//=======================================================//
+
+class GUI{
+  public GUI(){//constructor
+    //Create a new Frame object
+    Frame displayWindow = new Frame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Q16");
+
+    WProc1 winProcCmd1 = new WProc1(displayWindow);
+    displayWindow.addWindowListener(winProcCmd1);
+    displayWindow.setVisible(true);
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class WProc1 implements WindowListener{
+  Frame displayWindowRef;
+
+  WProc1(Frame windowIn){//constructor
+    this.displayWindowRef = windowIn;
+  }//end constructor
+
+  public void windowClosed(WindowEvent e){
+    System.out.println("WProc1 windowClosed test msg");
+  }//end windowClosed()
+
+  public void windowIconified(WindowEvent e){
+    System.out.println("WProc1 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowOpened(WindowEvent e){
+    System.out.println("WProc1 windowOpened test msg");
+  }//end windowOpened()
+
+  public void windowClosing(WindowEvent e){
+    System.out.println("WProc1 windowClosing test msg");
+    displayWindowRef.dispose();//generate WindowClosed
+  }//end windowClosing()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+                      "WProc1 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+  public void windowActivated(WindowEvent e){
+    System.out.println("WProc1 windowActivated test msg");
+  }//end windowActivated()
+
+  public void windowDeactivated(WindowEvent e){
+    System.out.println(
+                     "WProc1 windowDeactivated test msg");
+  }//end windowDeactivated()
+}//end class WProc1
+//=======================================================//
+</pre>
+</div>
+
+<p><a href="#answer16">Answer 16</a></p>
+
+<h2><a name="question17">Question 17</a></h2>
+<p>Given: The program shown below will compile and run successfully. When 
+it starts running, it displays a small window and doesn't display anything on 
+the command-line screen.</p>
+<p>True or False: </p>
+<p>Whenever the small window is iconified to the system try, the following is 
+displayed on the command-line screen:</p>
+<p>******** WProc2 windowIconified test msg</p>
+<p>Whenever the small window is deiconified from the system try, the following 
+is displayed on the command-line screen:</p>
+<p>******** WProc2 windowDeiconified test msg</p>
+<p>Nothing happens when the user clicks the X-button. The program does not 
+terminate and does not return control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_2">Listing 2</a>. Question 
+				17.</strong></p>
+
+<pre>
+/*File Q17.java Copyright, R.G.Baldwin
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q17 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUInterface object
+  }//end main
+}//end class Q17
+//=======================================================//
+
+class GUI{
+  public GUI(){//constructor
+    //Create a new Frame object
+    Frame displayWindow = new Frame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Q17");
+
+    WProc2 winProcCmd2 = new WProc2();
+    displayWindow.addWindowListener(winProcCmd2);
+    displayWindow.setVisible(true);
+
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class WProc2 extends WindowAdapter{
+
+  public void windowIconified(WindowEvent e){
+    System.out.println(
+              "******** WProc2 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+            "******** WProc2 windowDeiconified test msg");
+  }//end windowDeiconified()
+
+}//end class WProc2
+</pre>
+
+</div>
+
+
+
+<p><a href="#answer17">Answer 17</a></p>
+
+<h2><a name="question18">Question 18</a></h2>
+<p>True or False: The default layout manager for a Frame object is <strong>
+FlowLayout</strong>.</p>
+<p><a href="#answer18">Answer 18</a></p>
+
+<h2><a name="question19">Question 19</a></h2>
+<p>True or False: The program shown below displays a small Frame object on the 
+computer screen. When the user clicks the mouse inside the Frame object, the mouse 
+coordinates are displayed near the mouse pointer. When the user clicks at 
+another location, the old coordinates are erased and the new coordinates are 
+displayed at the new location</p>
+<p>When the user clicks the X-button in the upper right corner of the Frame, the 
+program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_3">Listing 3</a>. Question 19.</strong></p>
+
+<pre>
+/*File Q19.java
+*/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q19 {
+  public static void main(String[] args){
+    GUI gui = new GUI();
+  }//end main
+}//end class Q19
+//---------------------------------------------------------
+
+class MyFrame extends Frame{
+  int clickX;
+  int clickY;
+
+  public void paint(Graphics g){
+    g.drawString(
+              "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint()
+}//end class MyFrame
+//---------------------------------------------------------
+
+class GUI {
+  public GUI(){//constructor
+    MyFrame displayWindow = new MyFrame();
+    displayWindow.setSize(300,300);
+    displayWindow.setTitle("Q19");
+    displayWindow.setVisible(true);
+
+    displayWindow.addWindowListener(new WProc1());
+    displayWindow.addMouseListener(
+                                new MProc1(displayWindow));
+  }//end constructor
+}//end class GUI definition
+//---------------------------------------------------------
+
+class MProc1 extends MouseAdapter{
+  MyFrame refToWin; //save a reference to the window here
+
+  MProc1(MyFrame inWin){//constructor
+    refToWin = inWin;//save ref to window
+  }//end constructor
+
+  public void mousePressed(MouseEvent e){
+    refToWin.clickX = e.getX();
+    refToWin.clickY = e.getY();
+    refToWin.repaint();
+  }//end mousePressed()
+}//end class MProc1
+//---------------------------------------------------------
+class WProc1 extends WindowAdapter{
+  public void windowClosed(WindowEvent e){
+    System.exit(0);
+  }//end windowClosed()
+}//end class Wproc1
+</pre>
+
+</div>
+
+<p><a href="#answer19">Answer 19</a></p>
+
+<h2><a name="question20">Question 20</a></h2>
+<p>Given: The program shown below will compile and run successfully. When 
+it starts running, it displays a small JFrame window and doesn't display anything on 
+the command-line screen.</p>
+<p>True or False: </p>
+<p>Whenever the small window is iconified to the system try, the following is 
+displayed on the command-line screen:</p>
+<p>******** WProc2 windowIconified test msg</p>
+<p>Whenever the small window is deiconified from the system try, the following 
+is displayed on the command-line screen:</p>
+<p>******** WProc2 windowDeiconified test msg</p>
+<p>When the user clicks the X-button, the program terminates and returns control 
+to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_4">Listing 4</a>. Question 20.</strong></p>
+
+<pre>
+/*File Q20.java
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Q20 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUInterface object
+  }//end main
+}//end class Q20
+//=======================================================//
+
+class GUI{
+  public GUI(){//constructor
+    JFrame displayWindow = new JFrame();
+    displayWindow.setSize(300,200);
+    displayWindow.setTitle("Q20");
+    //Following is available in recent Java versions
+    displayWindow.setDefaultCloseOperation(
+                                     JFrame.EXIT_ON_CLOSE);
+    displayWindow.addWindowListener(new WProc2());
+    displayWindow.setVisible(true);
+
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class WProc2 extends WindowAdapter{
+  public void windowIconified(WindowEvent e){
+    System.out.println(
+              "******** WProc2 windowIconified test msg");
+  }//end windowIconified()
+
+  public void windowDeiconified(WindowEvent e){
+    System.out.println(
+            "******** WProc2 windowDeiconified test msg");
+  }//end windowDeiconified()
+}//end class WProc2
+//=======================================================//
+</pre>
+
+</div>
+
+<p><a href="#answer20">Answer 20</a></p>
+
+<h2><a name="question21">Question 21</a></h2>
+<p>True or False: The program shown below displays a small JFrame object on the 
+computer screen. When the user clicks the mouse inside the JFrame object, the mouse 
+coordinates are displayed near the mouse pointer. Old coordinates are erased and 
+new coordinates are displayed with each successive mouse click.</p>
+<p>When the user clicks the X-button in the upper right corner of the Frame, the 
+program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_5">Listing 5</a>. Question 21.</strong></p>
+
+<pre>
+/*File Q21.java
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Q21 {
+  public static void main(String[] args){
+    GUI gui = new GUI();//instantiate a GUI
+  }//end main
+}//end class Q21
+//=======================================================//
+
+class MyFrame extends JFrame{
+  int clickX;
+  int clickY;
+
+  public void paint(Graphics g){
+    g.drawString(
+             "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint()
+}//end class MyFrame
+//=======================================================//
+
+class GUI {
+  public GUI(){//constructor
+    MyFrame displayWindow = new MyFrame();
+    displayWindow.setSize(300,300);
+    displayWindow.setTitle("Q21");
+    displayWindow.setVisible(true);
+    displayWindow.setDefaultCloseOperation(
+                                     JFrame.EXIT_ON_CLOSE);
+    displayWindow.addMouseListener(
+                             new MouseProc(displayWindow));
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class MouseProc extends MouseAdapter{
+  MyFrame refToWin; //save a reference to the source here
+
+  MouseProc(MyFrame inWin){//constructor
+    refToWin = inWin;//save ref to window
+  }//end constructor
+
+  public void mousePressed(MouseEvent e){
+    refToWin.clickX = e.getX();
+
+    refToWin.clickY = e.getY();
+    refToWin.repaint();
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+</pre>
+
+
+</div>
+
+
+<p><a href="#answer21">Answer 21</a></p>
+
+<h2><a name="question22">Question 22</a></h2>
+<p>True or False: There must always be a one-to-one correspondence between 
+source objects and listener objects.</p>
+<p><a href="#answer22">Answer 22</a></p>
+
+<h2><a name="question23">Question 23</a></h2>
+<p>True or False: The program shown below displays two small Frame objects side-by-side on 
+the computer screen. Clicking inside either Frame object causes the mouse coordinates to 
+be displayed in that Frame object relative to the upper-left corner of the Frame 
+object.</p>
+<p>Clicking the X-button on either Frame object causes that Frame object to 
+disappear from the computer screen. Clicking the X-button on both Frame objects causes 
+both Frame objects to disappear and causes the program to terminate returning 
+control to the operating system. </p>
+
+<div class="a">
+
+<p><strong><a name="Listing_6">Listing 6</a>. Question 23.</strong></p>
+
+<pre>
+/*File Q23.java
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q23 {
+  public static void main(String[] args){
+    GUI gui = new GUI();
+  }//end main
+}//end class Q23
+//=======================================================//
+
+class MyFrame extends Frame{
+  int xCoor;
+  int yCoor;
+
+  MyFrame(){//constructor
+    setTitle("Q3");
+    setSize(200,200);
+  }//end constructor
+
+  public void paint(Graphics g){
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyFrame
+//=======================================================//
+
+class GUI {
+  public GUI(){//constructor
+
+    MyFrame myFrame1 = new MyFrame();
+    myFrame1.setVisible(true);
+
+    MyFrame myFrame2 = new MyFrame();
+    myFrame2.setLocation(201,0);
+    myFrame2.setVisible(true);
+
+    WProc1 winProcCmd1 = new WProc1();
+    myFrame1.addWindowListener(winProcCmd1);
+    myFrame2.addWindowListener(winProcCmd1);
+
+    MouseProc mouseProcCmd = new MouseProc();
+    myFrame1.addMouseListener(mouseProcCmd);
+    myFrame2.addMouseListener(mouseProcCmd);
+  }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+class MouseProc extends MouseAdapter{
+  public void mousePressed(MouseEvent e){
+    ((MyFrame)e.getComponent()).xCoor = e.getX();
+    ((MyFrame)e.getSource()).yCoor = e.getY();
+    e.getComponent().repaint();
+  }//end mousePressed()
+}//end class MouseProc
+//=======================================================//
+
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=======================================================//
+</pre>
+
+</div>
+
+<p><a href="#answer23">Answer 23</a></p>
+
+<h2><a name="question24">Question 24</a></h2>
+<p>True or False: The program shown below displays a small JFrame with a red background. 
+Two overlapping buttons appear in front of the red background. One button is 
+green and the other button is yellow. </p>
+<p>At startup, the green button is in front 
+of and partially hides the yellow button. If you click the front most button, the 
+two buttons swap positions front to back. In other words, clicking the green 
+button when it is in front brings the yellow button to the front. Clicking the 
+yellow button when it is in front brings the green button to the front. Clicking 
+the button in the back does not cause the buttons to swap positions.</p>
+<p>Clicking the X-button causes the program to terminate and return control to 
+the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_7">Listing 7</a>. Question 24.</strong></p>
+
+<pre>
+/*File Q24
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+class Q24 extends JFrame{//subclass JFrame
+  JLayeredPane theLayeredPane;
+  JButton greenButton;
+  JButton yellowButton;
+
+  public static void main(String[] args){
+    new Q24();
+  }//end main
+  //-----------------------------------------------------//
+
+  Q24(){//constructor
+    theLayeredPane = this.getLayeredPane();
+    int frameWidth = 300;
+    int frameHeight = 100;
+
+    JTextField redTextField = new JTextField("");
+    redTextField.setBackground(Color.red);
+    this.getContentPane().add(redTextField,"Center");
+
+    greenButton = new JButton(
+                            "greenButton on Layered Pane");
+    greenButton.setBackground(Color.green);
+    greenButton.setBounds(10,10,240,40);
+    greenButton.addActionListener(new MyActionListener());
+    theLayeredPane.add(greenButton,new Integer(1));
+
+    yellowButton = new JButton(
+                           "yellowButton on Layered Pane");
+    yellowButton.setBackground(Color.yellow);
+    yellowButton.setBounds(40,20,240,40);
+    yellowButton.addActionListener(new MyActionListener());
+    theLayeredPane.add(yellowButton,new Integer(-29999));
+
+    //Set title, size, and visibility of JFrame object.
+    this.setTitle("Q24");
+    this.setSize(frameWidth,frameHeight);
+    this.setVisible(true);
+
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }//end constructor
+  //=====================================================//
+
+  class MyActionListener implements ActionListener{
+    public void actionPerformed(ActionEvent e){
+      if(e.getActionCommand().equals(
+                           "greenButton on Layered Pane")){
+        theLayeredPane.setLayer(greenButton,-29999);
+        theLayeredPane.setLayer(yellowButton,1);
+      }else{
+        theLayeredPane.setLayer(greenButton,1);
+        theLayeredPane.setLayer(yellowButton,-29999);
+      }//end else
+    }//end actionPerformed()
+  }//end class MyActionListener
+  //=====================================================//
+}//end class Q24
+//=======================================================//
+</pre>
+
+</div>
+
+
+
+<p><a href="#answer24">Answer 24</a></p>
+
+<h2><a name="question25">Question 25</a></h2>
+<p>True or False: The <strong>MouseMotionListener</strong> interface declares three methods:</p>
+<ul>
+	<li>public abstract void mouseDragged(MouseEvent e)</li>
+	<li>public abstract void mouseMoved(MouseEvent e) </li>
+	<li>public abstract void mousePressed(MouseEvent e) </li>
+</ul>
+<p><a href="#answer25">Answer 25</a></p>
+
+
+
+<h2><a name="question26">Question 26</a></h2>
+<p>True or False: The <strong>mouseDragged</strong> method is invoked when a mouse button is pressed on a component and then dragged. </p>
+<p><a href="#answer26">Answer 26</a></p>
+
+<h2><a name="question27">Question 27</a></h2>
+<p>True or False: The <strong>mouseMoved</strong> method is invoked when the mouse is moved on a component with no buttons down.</p>
+<p><a href="#answer27">Answer 27</a></p>
+
+<h2><a name="question28">Question 28</a></h2>
+<p>True or False: This program displays a small Frame object on the computer screen. When you 
+hold down a mouse button and move your mouse pointer into the client area of
+the Frame, the coordinates of the mouse pointer appear
+directly above the pointer.  As you move the mouse pointer
+around in the client area while holding the button down, the coordinates of the pointer
+continue to be displayed above the pointer.
+
+</p>
+<p>If you release the mouse button while moving the
+mouse in the client area, the coordinates of the point
+where you released the button appear and remain there until
+you press the mouse button, at which time the
+coordinates of the mouse pointer resume being displayed.
+
+</p>
+<p>Clicking the X-button terminates the program and returns
+control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_8">Listing 8</a>. Question 
+				28.</strong></p>
+
+<pre>
+/*File Q28.java  from lesson 92
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q28 {
+  public static void main(String[] args){
+    GUI gui = new GUI();
+  }//end main
+}//end class Q28
+//=========================================================
+
+class MyFrame extends Frame{
+  int xCoor;
+  int yCoor;
+
+  MyFrame(String name){//constructor
+    this.setTitle("Q28");
+    this.setSize(300,200);
+    this.setName(name);
+  }//end constructor
+
+  public void paint(Graphics g){
+    g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+  }//end paint()
+}//end class MyFrame
+//==========================================================
+
+class GUI {
+  public GUI(){//constructor
+    MyFrame myFrame1 = new MyFrame("Frame1");
+    myFrame1.setVisible(true);
+
+    myFrame1.addWindowListener(new WProc1());
+
+    MyMouseMotionProcessor mouseMotionProc =
+                    new MyMouseMotionProcessor(myFrame1);
+    myFrame1.addMouseMotionListener(mouseMotionProc);
+
+  }//end constructor
+}//end class GUI definition
+//=========================================================
+
+class MyMouseMotionProcessor extends MouseMotionAdapter{
+  MyFrame refToFrame1; //save references to the Frame
+
+  MyMouseMotionProcessor(MyFrame inFrame1){
+    refToFrame1 = inFrame1;
+  }// end constructor
+
+  public void mouseMoved(MouseEvent e){
+    refToFrame1.xCoor = e.getX();
+    refToFrame1.yCoor = e.getY();
+    refToFrame1.repaint();
+  }//end mouseMoved()
+
+}//end class MyMouseMotionProcessor
+//=========================================================
+
+class WProc1 extends WindowAdapter{
+  public void windowClosing(WindowEvent e){
+    System.exit(0);
+  }//end windowClosing()
+}//end class WProc1
+//=========================================================
+</pre>
+
+</div>
+
+<p><a href="#answer28">Answer 28</a></p>
+
+<h2><a name="question29">Question 29</a></h2>
+<p>True or False: The program shown below displays a Frame object on the computer screen. The Frame 
+object contains a single large Button object labeled Whistle.</p>
+<p>When the user clicks the Whistle button, the program displays the following 
+text on the command-line screen.</p>
+<p>I am whistling, Tweet Tweet Tweet</p>
+<p>When the user clicks the X-button, the program terminates returning control 
+to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_9">Listing 9</a>. Question 
+				29.</strong></p>
+
+<pre>
+/*File Q29.java Copyright, R.G.Baldwin
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q29 {
+  void whistle() {System.out.println(
+                     "I am whistling, Tweet Tweet Tweet");}
+  //-------------------------------------------------------
+
+  static public void main(String[] args){
+    Q29 app = new Q29();
+    GUI gui = app.new GUI();
+  }//end main()
+  //-------------------------------------------------------
+
+  //The GUI class is defined inside the Q29 class and is
+  // an inner-class of Q29.
+  class GUI extends Frame{
+
+    public GUI(){//constructor for GUI inner-class
+      this.setTitle("Q29");
+      Button whistleButton;
+      this.add(whistleButton =
+                          new Button("Whistle"),"Center");
+      //---------------------------------------------------
+      //Instantiates two anonymous objects of types
+      // ActionListener and WindowAdapter. registers them
+      // for handling
+      // events on the Button object and  the Frame object.
+      //Begin statement -----------------------------------
+      whistleButton.addActionListener(
+          new ActionListener(){//anonymous class definition
+            public void actionPerformed(ActionEvent e){
+              whistle();//call the whistle() method
+            }//end actionPerformed()
+          }//end ActionListener
+        );//end addActionListener()
+      //End statement -------------------------------------
+
+      //Begin statement -----------------------------------
+      this.addWindowListener(
+           new WindowAdapter(){//anonymous class definition
+             public void windowClosing(WindowEvent e){
+               System.exit(0);//terminate the program
+             }//end windowClosing()
+           }//end WindowAdapter
+         );//end addWindowListener
+      //End statement -------------------------------------
+
+      //---------------------------------------------------
+      //Set frame size and make it visible.
+      this.setSize(300,100);
+      this.setVisible(true);
+    }//end GUI constructor
+  }//end class GUI
+}//end class Q29
+//=========================================================
+</pre>
+
+</div>
+
+
+<p><a href="#answer29">Answer 29</a></p>
+
+<h2><a name="question30">Question 30</a></h2>
+<p>True or False: The program shown below displays a small Frame object with a white 
+background. A Button object and a Label object are placed in the Frame. The 
+Label is on the left and the Button is on the right. The two are lined up 
+horizontally and the pair is centered left-to-right in the Frame.</p>
+<p>The Button is labeled "Button" and the Label is labeled "Initial Text".</p>
+<p>When you click the Button, the text in the Label changes to "Ouch".</p>
+<p>When you click the X-button, the program terminates and returns control to 
+the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_10">Listing 10</a>. Question 
+				30.</strong></p>
+
+<pre>
+/*File Q30.java
+**********************************************************/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q30 extends Frame {
+  Label myLabel;
+  //-----------------------------------------------------//
+  static public void main(String[] args){
+    Q30 app = new Q30();
+  }//end main()
+  //-----------------------------------------------------//
+
+  public Q30(){//constructor
+    this.setTitle("Q30");
+    this.setLayout(new FlowLayout());
+    Button myButton;
+    this.add(myButton = new Button("Button"));
+    this.add(myLabel = new Label("Initial Text"));
+    //---------------------------------------------------//
+
+    myButton.addActionListener(
+      new //instantiate anonymous object of the class
+        ActionListener(){//anonymous class definition
+          public void actionPerformed(ActionEvent e){
+            myLabel.setText("Ouch");
+          }//end actionPerformed()
+        }//end ActionListener class definition
+      );//end addActionListener() statement
+
+    this.addWindowListener(
+         new WindowAdapter(){//anonymous class definition
+           public void windowClosing(WindowEvent e){
+             System.exit(0);//terminate the program
+           }//end windowClosing()
+         }//end WindowAdapter
+       );//end addWindowListener
+    //---------------------------------------------------
+
+    this.setSize(300,100);
+    this.setVisible(true);
+  }//end Q30 constructor
+}//end class Q30
+//=========================================================
+</pre>
+
+</div>
+
+<p><a href="#answer30">Answer 30</a></p>
+
+<h2><a name="question31">Question 31</a></h2>
+<p>True or False: The program shown below displays a JSlider centered in a JFrame. The 
+JSlider is calibrated to extend from -100 on the left end to 100 on the right 
+end with 0 at the center. There is a tick mark every 10 units and every other 
+tick mark is labeled, including -100, 0, and 100.</p>
+<p>When you move the thumb on the slider, the value of the current position of 
+the thumb is displayed on the command-line screen. Old values are not erased 
+when a new value is displayed.</p>
+<p>When you click the X-button, the program terminates and returns control to 
+the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_11">Listing 11</a>. Question 
+				31.</strong></p>
+
+<pre>
+/*File Q31
+*********************************************************/
+import javax.swing.JFrame;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.BorderLayout;
+public class Q31{
+
+  public static void main(String[] args){
+    new Q31gui();
+  }//end main method
+}//end class Q31
+//======================================================//
+
+class Q31gui extends JFrame{
+
+  private JSlider slider = new JSlider(-100,100);
+
+  public Q31gui(){//constructor
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    slider.setMajorTickSpacing(20);
+    slider.setMinorTickSpacing(10);
+    slider.setPaintTicks(true);
+    slider.setPaintLabels(true);
+
+    getContentPane().add(slider);
+
+    setSize(300,100);
+    setTitle("Q31");
+    setVisible(true);
+    //--------------------------------------------------//
+
+    slider.addChangeListener(
+      new ChangeListener(){
+        public void stateChanged(ChangeEvent e){
+          System.out.print(" " + slider.getValue());
+        }//end stateChanged
+      }//end new ChangeListener
+    );//end addChangeListener
+    //--------------------------------------------------//
+  }//end constructor
+  //----------------------------------------------------//
+
+}//end class Q31gui
+</pre>
+
+</div>
+
+<p><a href="#answer31">Answer 31</a></p>
+
+<h2><a name="question32">Question 32</a></h2>
+<p>True or False: The program shown below displays a small JFrame object on the 
+computer screen. Each time the user clicks the mouse inside the JFrame object, the mouse 
+coordinates are displayed near the mouse pointer and the old mouse coordinates 
+from the previous click are erased.</p>
+<p>When the user clicks the X-button in the upper right corner of the Frame, the 
+program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_12">Listing 12</a>. Question 
+				32.</strong></p>
+
+<pre>
+/*File Q32.java Copyright R.G.Baldwin
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Q32 {
+  public static void main(String[] args){
+    new Q32gui();
+  }//end main
+}//end class Q32
+//=======================================================//
+
+class Q32gui {
+  public Q32gui(){//constructor
+    JFrame theFrame = new JFrame();
+    theFrame.setSize(200,200);
+    theFrame.setTitle("Q32");
+    DisplaySpace displayWindow = new DisplaySpace();
+
+    theFrame.getContentPane().add(displayWindow,"Center");
+    theFrame.setDefaultCloseOperation(
+                                     JFrame.EXIT_ON_CLOSE);
+    theFrame.setVisible(true);
+
+    displayWindow.addMouseListener(
+                                new MProc1(displayWindow));
+  }//end constructor
+//=======================================================//
+
+class DisplaySpace extends JPanel{
+
+  int clickX;
+  int clickY;
+
+  public void paintComponent(Graphics g){
+    super.paintComponent(g);
+    g.drawString(
+              "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paintComponent
+}//end class DisplaySpace
+//=======================================================//
+
+class MProc1 extends MouseAdapter{
+  DisplaySpace refToWin;
+
+  MProc1(DisplaySpace inWin){//constructor
+    refToWin = inWin;//save ref to window
+  }//end constructor
+
+  public void mousePressed(MouseEvent e){
+    refToWin.clickX = e.getX();
+    refToWin.clickY = e.getY();
+    refToWin.repaint();//display coordinate information
+  }//end mousePressed()
+}//end class MProc1
+}//end GUI class
+//=======================================================//
+</pre>
+
+</div>
+
+
+
+<p><a href="#answer32">Answer 32</a></p>
+
+<h2><a name="question33">Question 33</a></h2>
+<p>True or False: The program shown below displays a small JFrame object on the 
+computer screen. Each time the user clicks the mouse inside the JFrame object, the mouse 
+coordinates are displayed near the mouse pointer and the old mouse coordinates 
+from the previous click are erased.</p>
+<p>When the user clicks the X-button in the upper right corner of the Frame, the 
+program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_13">Listing 13</a>. Question 
+				33.</strong></p>
+
+<pre>
+/*File Q33.java
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Q33 {
+  public static void main(String[] args){
+    new Q33gui();
+  }//end main
+}//end class Q33
+//=======================================================//
+
+class Q33gui extends JFrame{
+  public Q33gui(){//constructor
+    setSize(200,200);
+    setTitle("Q33");
+    getContentPane().add(new DisplaySpace(),"Center");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+  }//end constructor
+}//end Q33gui
+//=======================================================//
+
+class DisplaySpace extends JPanel{
+
+  int clickX;
+  int clickY;
+
+  DisplaySpace(){
+    addMouseListener(
+      new MouseAdapter(){//anonymous class definition
+        public void onMouseEvent(MouseEvent e){
+          clickX = e.getX();
+          clickY = e.getY();
+          repaint();
+        }//end onMouseEvent()
+      }//end MouseAdapter
+    );//end addMouseListener()
+  }//end constructor
+  //-----------------------------------------------------//
+
+  public void paintComponent(Graphics g){
+    super.paintComponent(g);
+    g.drawString(
+              "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paintComponent
+}//end class DisplaySpace
+//=======================================================//
+</pre>
+
+
+</div>
+
+
+<p><a href="#answer33">Answer 33</a></p>
+
+<h2><a name="question34">Question 34</a></h2>
+<p>True or False: The program shown below displays a small Frame object on the 
+computer screen. Each time the user clicks the mouse inside the Frame object, the mouse 
+coordinates are displayed near the mouse pointer and the old mouse coordinates 
+from the previous click are erased.</p>
+<p>When the user clicks the X-button in the upper right corner of the Frame, the 
+program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_14">Listing 14</a>. Question 
+				34.</strong></p>
+
+<pre>
+/*File Q34.java
+*/
+import java.awt.*;
+import java.awt.event.*;
+
+public class Q34 {
+  public static void main(String[] args){
+    GUI gui = new GUI();
+  }//end main
+}//end class Q34
+//-------------------------------------------------------//
+
+class GUI extends Frame{
+  int clickX;
+  int clickY;
+
+  public GUI(){//constructor
+    setSize(150,150);
+    setTitle("Q34");
+    setVisible(true);
+
+    addWindowListener(
+      new WindowAdapter(){//anonymous class definition
+        public void windowClosing(WindowEvent e){
+          System.exit(0);
+        }//end windowClosing
+      }//end WindowAdapter
+    );//end addWindowListener()
+
+    addMouseListener(
+      new MouseAdapter(){//anonymous class definition
+        public void mousePressed(MouseEvent e){
+          clickX = e.getX();
+          clickY = e.getY();
+          repaint();
+        }//end mousePressed()
+      }//end MouseAdapter
+    );//end addMouseListener()
+  }//end constructor
+  //-----------------------------------------------------//
+
+  public void paint(Graphics g){
+    g.drawString(
+              "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paint
+
+}//end class GUI 
+//-------------------------------------------------------//
+</pre>
+
+
+</div>
+
+
+<p><a href="#answer34">Answer 34</a></p>
+
+<h2><a name="question35">Question 35</a></h2>
+<p>True or False: The program shown below displays a small JFrame object on the computer 
+screen.</p>
+<p>When you move your mouse pointer around inside the client area of the frame, 
+without pressing either mouse button, the coordinates of the mouse pointer 
+appear directly above the pointer. In this case, the coordinates are displayed 
+using black characters.</p>
+<p>When you move your mouse pointer around inside the client area of the frame, 
+while pressing either mouse button, the coordinates of the mouse pointer appear 
+directly above the pointer. In this case, the coordinates are displayed using 
+red characters.</p>
+<p>When you click X-button in the upper right corner of the frame, the program 
+terminates and control is returned to the operating system. </p>
+<div class="a">
+<p><strong><a name="Listing_15">Listing 15</a>. Question 
+				35.</strong></p>
+
+<pre>
+/*File Q35.java
+**********************************************************/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Q35 {
+  public static void main(String[] args){
+    new Q35gui();
+  }//end main
+}//end class Q35
+//=======================================================//
+
+class Q35gui extends JFrame{
+  public Q35gui(){//constructor
+    setSize(200,200);
+    setTitle("Q35");
+    getContentPane().add(new DisplaySpace(),"Center");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setVisible(true);
+  }//end constructor
+}//end Q35gui
+//=======================================================//
+
+class DisplaySpace extends JPanel{
+
+  int clickX;
+  int clickY;
+
+  DisplaySpace(){
+    addMouseMotionListener(
+      new MouseMotionAdapter(){//anonymous class definition
+        public void mouseMoved(MouseEvent e){
+          setForeground(Color.RED);
+          clickX = e.getX();
+          clickY = e.getY();
+          repaint();
+        }//end mouseMoved
+        public void mouseDragged(MouseEvent e){
+          setForeground(Color.BLACK);
+          clickX = e.getX();
+          clickY = e.getY();
+          repaint();
+        }//end mouseDragged
+      }//end MouseAdapter
+    );//end addMouseMotionListener()
+  }//end constructor
+  //-----------------------------------------------------//
+
+  public void paintComponent(Graphics g){
+    super.paintComponent(g);
+    g.drawString(
+              "" + clickX + ", " + clickY, clickX, clickY);
+  }//end paintComponent
+}//end class DisplaySpace
+//=======================================================//
+</pre>
+
+</div>
+
+
+
+<p><a href="#answer35">Answer 35</a></p>
+
+<h2><a name="question36">Question 36</a></h2>
+<p>True or False: The program shown below displays a small JFrame object containing two JButton objects and a JLabel object. The JLabel has a 
+green background and blue letters. The captions on the two JButton objects are 
+Top and Bottom.</p>
+<p>The three objects are displayed vertically in the JFrame.
+
+The Top JButton appears at the top of the column of objects. The Bottom JButton appears 
+at the bottom of the column. The JLabel appears between the two JButton objects.</p>
+<p>At startup, the JLabel displays the word Top.
+
+When you click the Bottom button, the word in the JLabel changes to Bottom.
+
+When you click the Top button, the word in the JLabel changes to Top.
+
+When you click X-button on the JFrame, the program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_16">Listing 16</a>. Question 
+				36.</strong></p>
+
+<pre>
+/*File Q36.java
+**********************************************************/
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class Q36{
+  public static void main(String[] args){
+    JFrame aFrame = new Q36gui();
+  }//end main
+}//end class Q36
+//=======================================================//
+
+class Q36gui extends JFrame implements ActionListener{
+  JButton button1 = new JButton("Top");
+  JButton button2 = new JButton("Bottom");
+  JLabel label = new JLabel("Top");
+//-------------------------------------------------------//
+
+  public Q36gui(){//constructor
+    this.setTitle("Q36");
+    this.getContentPane().add(button1,BorderLayout.NORTH);
+    label.setBackground(Color.GREEN);
+    label.setForeground(Color.BLUE);
+    label.setOpaque(true);
+    this.getContentPane().add(label,BorderLayout.CENTER);
+    this.getContentPane().add(button2,BorderLayout.SOUTH);
+    button1.addActionListener(this);
+    button2.addActionListener(this);
+    this.setSize(150,100);
+    this.setVisible(true);
+
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  }//end constructor
+//-------------------------------------------------------//
+
+  public void actionPerformed(ActionEvent e){
+    if(e.getActionCommand().indexOf("Top") != -1)
+      label.setText("Top");
+    else
+      label.setText("Bottom");
+  }//end actionPerformed()
+
+}//end class Q36gui
+//=======================================================//
+</pre>
+
+
+</div>
+
+
+<p><a href="#answer36">Answer 36</a></p>
+
+<h2><a name="question37">Question 37</a></h2>
+<p>True or False: The program shown below displays a small Frame object containing two Button objects and a Label object. The Label has a 
+green background and blue letters. The captions on the two Button objects are 
+Top and Bottom.</p>
+<p>The three objects are displayed vertically in the Frame.
+
+The Top Button appears at the top of the column of objects. The Bottom Button appears 
+at the bottom of the column. The Label appears between the two Button objects.</p>
+<p>At startup, the Label displays the word Top.
+
+When you click the Bottom button, the word in the Label changes to Bottom.
+
+When you click the Top button, the word in the Label changes to Top.
+
+When you click X-button on the Frame, the program terminates and returns control to the operating system.</p>
+<div class="a">
+<p><strong><a name="Listing_17">Listing 17</a>. Question 
+				37.</strong></p>
+
+<pre>
+/*File Q37.java Copyright R.G.Baldwin
+**********************************************************/
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Button;
+import java.awt.Label;
+import java.awt.BorderLayout;
+
+import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+
+public class Q37{
+  public static void main(String[] args){
+    Frame aFrame = new Q37gui();
+  }//end main
+}//end class Q37
+//=======================================================//
+
+class Q37gui extends Frame
+                implements WindowListener, ActionListener{
+  Button button1 = new Button("Top");
+  Button button2 = new Button("Bottom");
+  Label label = new Label("Top");
+//-------------------------------------------------------//
+
+  public Q37gui(){//constructor
+
+    this.setTitle("Q37");
+    add(button1,BorderLayout.NORTH);
+    label.setBackground(Color.GREEN);
+    label.setForeground(Color.BLUE);
+    add(label,BorderLayout.CENTER);
+    add(button2,BorderLayout.SOUTH);
+    button1.addActionListener(this);
+    button2.addActionListener(this);
+    this.setSize(150,100);
+    this.setVisible(true);
+
+    this.addWindowListener(this);
+  }//end constructor
+//-------------------------------------------------------//
+
+  public void windowClosing(WindowEvent e){
+    //terminate the program when the window is closed
+    System.exit(0);
+  }//end windowClosing
+//-------------------------------------------------------//
+
+  public void windowOpened(WindowEvent e){}//dummy
+  public void windowClosed(WindowEvent e){}//dummy
+  public void windowIconified(WindowEvent e){}//dummy
+  public void windowDeiconified(WindowEvent e){}//dummy
+  public void windowActivated(WindowEvent e){}//dummy
+  public void windowDeactivated(WindowEvent e){}//dummy
+//-------------------------------------------------------//
+
+  public void actionPerformed(ActionEvent e){
+    if(e.getActionCommand().indexOf("Top") != -1)
+      label.setText("Top");
+    else
+      label.setText("Bottom");
+  }//end actionPerformed()
+
+}//end class Q37gui
+//=======================================================//
+</pre>
+
+</div>
+
+<p><a href="#answer37">Answer 37</a></p>
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Question 16. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Question 17. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Question 19. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Question 20. </li>
+		<li><a href="#Listing_5">Listing 5</a>. Question 21.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Question 23.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Question 24.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Question 28.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Question 29.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Question 30.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Question 31.</li>
+		<li><a href="#Listing_12">Listing 12</a>. Question 32.</li>
+		<li><a href="#Listing_13">Listing 13</a>. Question 33.</li>
+		<li><a href="#Listing_14">Listing 14</a>. Question 34.</li>
+		<li><a href="#Listing_15">Listing 15</a>. Question 35.</li>
+		<li><a href="#Listing_16">Listing 16</a>. Question 36.</li>
+		<li><a href="#Listing_17">Listing 17</a>. Question 37.</li>
+	</ul>
+
+<hr/>
+
+<hr/>
+<h1><a name="Answers">Answers</a></h1>
+<h2><a name="answer37">Answer 37</a></h2>
+<p>True. Note that the GUI object is both a source of action events and a 
+listener for action events fired by the buttons.</p>
+<p><a href="#question37">Back to Question 37</a> </p>
+
+<h2><a name="answer36">Answer 36</a></h2>
+<p>True. Note that the GUI object is both a source of action events and a 
+listener for action events fired by the buttons.</p>
+<p><a href="#question36">Back to Question 36</a> </p>
+
+<h2><a name="answer35">Answer 35</a></h2>
+<p>False. The red and black colors are reversed. Otherwise, the statement would 
+be true.</p>
+<p><a href="#question35">Back to Question 35</a> </p>
+
+<h2><a name="answer34">Answer 34</a></h2>
+<p>True. This program uses anonymous inner classes to define and instantiate a 
+mouse event handler and a window event handler.</p>
+<p><a href="#question34">Back to Question 34</a> </p>
+
+<h2><a name="answer33">Answer 33</a></h2>
+<p>False. The code in the anonymous mouse event handler class calls a method 
+named <strong>onMouseEvent</strong>. It should call a method named <strong>
+mousePressed</strong> instead, in which case the program would behave as 
+described.</p>
+<p><a href="#question33">Back to Question 33</a> </p>
+
+<h2><a name="answer32">Answer 32</a></h2>
+<p>True.</p>
+<p><a href="#question32">Back to Question 32</a> </p>
+
+<h2><a name="answer31">Answer 31</a></h2>
+<p>True. </p>
+<p><a href="#question31">Back to Question 31</a> </p>
+
+<h2><a name="answer30">Answer 30</a></h2>
+<p>False. The Button and the Label are lined up horizontally with the Button on 
+the Left and the Label on the right. The FlowLayout manager places components 
+from left to right in the order that they are added to the container. The Button 
+was added before the Label. </p>
+<p><a href="#question30">Back to Question 30</a> </p>
+
+<h2><a name="answer29">Answer 29</a></h2>
+<p>True. </p>
+<p><a href="#question29">Back to Question 29</a> </p>
+
+<h2><a name="answer28">Answer 28</a></h2>
+<p>False. The description of the mouse button is reversed. When you move your mouse pointer into the client area of
+the Frame without pressing a mouse button, the coordinates of the mouse pointer appear
+directly above the pointer.  As you move the mouse pointer
+around in the client area, the coordinates of the pointer
+continue to be displayed above the pointer.
+
+</p>
+<p>If you press one of the mouse buttons while moving the
+mouse in the client area, the coordinates of the point
+where you pressed the button appear and remain there until
+you release the mouse button, at which time the
+coordinates of the mouse pointer resume being displayed.
+
+</p>
+<p>Clicking the X-button terminates the program and returns
+control to the operating system.</p>
+<p><a href="#question28">Back to Question 28</a> </p>
+
+<h2><a name="answer27">Answer 27</a></h2>
+<p>True. </p>
+<p><a href="#question27">Back to Question 27</a> </p>
+
+<h2><a name="answer26">Answer 26</a></h2>
+<p>True. </p>
+<p><a href="#question26">Back to Question 26</a> </p>
+
+
+
+
+<h2><a name="answer25">Answer 25</a></h2>
+<p>False. The <strong>MouseMotionListener</strong> interface declares only the following two 
+methods. The <strong>mousePressed</strong> method is declared in the <strong>MouseListener</strong> 
+interface. </p>
+
+<ul>
+	<li>public abstract void mouseDragged(MouseEvent e)</li>
+	<li>public abstract void mouseMoved(MouseEvent e) </li>
+</ul>
+<p><a href="#question25">Back to Question 25</a> </p>
+
+<h2><a name="answer24">Answer 24</a></h2>
+<p>True. See </p>
+<p><a href="#question24">Back to Question 24</a> </p>
+
+<h2><a name="answer23">Answer 23</a></h2>
+<p>False. Clicking the X-button on either Frame object causes both Frame objects 
+to disappear, terminating the program, and returning control to the operating 
+system.</p>
+<p><a href="#question23">Back to Question 23</a> </p>
+
+<h2><a name="answer22">Answer 22</a></h2>
+<p>False. Multiple listener objects can be, and often are registered on a single 
+source object. Similarly, a single listener object can be registered on multiple 
+source objects. In many, but not all such cases of the latter variety, the 
+listener object must be able to identify which source fired the event in order 
+to take the appropriate action. However, in some situations, the appropriate 
+action is independent of the identity of the source. </p>
+<p><a href="#question22">Back to Question 22</a> </p>
+
+<h2><a name="answer21">Answer 21</a></h2>
+<p>False. Although new coordinates are displayed with each mouse click, the old 
+coordinates are not erased. </p>
+<p><a href="#question21">Back to Question 21</a> </p>
+
+<h2><a name="answer20">Answer 20</a></h2>
+<p>True. When used as shown in the code for this question, the <strong>setDefaultCloseOperation</strong>  
+method causes the program to terminate and return control to the operating 
+system when the user clicks the X-button. Four different default actions can be 
+specified for the X-button:</p>
+<ul>
+	<li>DO_NOTHING_ON_CLOSE</li>
+	<li>HIDE_ON_CLOSE</li>
+	<li>DISPOSE_ON_CLOSE</li>
+	<li>EXIT_ON_CLOSE</li>
+</ul>
+<p><a href="#question20">Back to Question 20</a> </p>
+
+<h2><a name="answer19">Answer 19</a></h2>
+<p>False. Nothing happens when the user clicks the X-button. In order for this 
+to be true, it would be necessary to override the WindowClosing method instead 
+of the WindowClosed method. </p>
+<p><a href="#question19">Back to Question 19</a> </p>
+
+<h2><a name="answer18">Answer 18</a></h2>
+<p>False: The default layout manager for a Frame object is <strong>BorderLayout</strong>.</p>
+<p><a href="#question18">Back to Question 18</a> </p>
+
+<h2><a name="answer17">Answer 17</a></h2>
+<p>True. </p>
+<p><a href="#question17">Back to Question 17</a> </p>
+
+<h2><a name="answer16">Answer 16</a></h2>
+<p>True. </p>
+<p><a href="#question16">Back to Question 16</a> </p>
+
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>True. </p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>True. </p>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>True. </p>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>False. There is a class of mouse events that includes most of the events 
+normally associated with mouse action and there is a matching <strong>interface</strong> 
+definition that is used to define a listener class for those events.</p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>True. </p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>True.</p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>False. An event <strong>source</strong> is an object that has the ability to 
+determine when an interesting event has occurred, and to notify <strong>listener</strong> 
+objects of the occurrence of the event. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>True. </p>
+
+
+
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>True.</p>
+<p><a href="#question07">Back to Question 7</a> </p>
+
+<h2><a name="answer06">Answer 6</a></h2>
+<p>False. This is <em>multicasting</em>. The one-to-one case is often referred 
+to as unicasting.</p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>True. </p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>False. It is very important to understand that Swing is an extension of, and 
+not a replacement for the AWT. Therefore, as students, we cannot simply skip 
+over an understanding of the AWT and move on to Swing. The AWT is the foundation 
+for Swing. </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False. com.sun.java.swing.* was the package for Swing in JDK 1.1.6. However, 
+sometime between then and the release of Java 12, the package containing Swing 
+components was changed to javax.swing.*</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>True.</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>True.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+			</p>
+			<ul>
+				<li>Chapter name: Java071 Consolidated Review Event Handling</li>
+				<li>File: Java071.htm </li>
+				<li>Published: 10/30/13</li>
+<li>Revised: 05/08/20</li>
+			</ul>
+</div>
+
+<p>-end- </p>
+
+
+</body>
+</html>

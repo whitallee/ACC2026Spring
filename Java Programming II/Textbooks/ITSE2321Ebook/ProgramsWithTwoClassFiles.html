@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Respondus Monitor trial run</title>
+<style type="text/css">
+.auto-style1 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+
+<body>
+
+		<p class="auto-style1">Update: Java programs with two or more source code files</p>
+		<p class="auto-style1">&nbsp;</p>
+		<p class="auto-style1">Students,</p>
+		<p><span class="auto-style1">Chapter </span> 
+		<span style="color: #000000;" class="auto-style1"><em><strong>Jb0110: Programming 
+		Fundamentals, Getting Started</strong></em></span><span class="auto-style1"> in the course Ebook 
+		explains how to write, compile, and run Java programs consisting of a 
+		single source code file. The purpose of this announcement is to provide 
+		an example showing how to write, compile, and run Java programs 
+		consisting of two or more source code files, which is the case for most 
+		of the assignments in this course.</span></p>
+		<p class="auto-style1">One student reported that the instructions given 
+		in the original version of this announcement would not work on his 
+		computer. As it turned out, that student's computer apparently had an 
+		invalid preset classpath installed which was preventing the sample 
+		program from compiling. Those instructions have been updated in this 
+		version to use the -cp switch to tell the compiler to ignore a preset 
+		classpath, valid or otherwise. If you are having difficulty compiling 
+		and running the sample program on your system, try using the updated 
+		instructions provided below.</p>
+		<p class="auto-style1">Begin by creating a new empty folder named Hello02. Create a Java 
+		source code file in that folder named Hello02.java containing the code 
+		shown below:</p>
+<p><span class="auto-style1">class Hello02{</span><br class="auto-style1" />
+  <span class="auto-style1">public static void main(String[] args){</span><br class="auto-style1" />
+    <span class="auto-style1">new Hello02Runner().run();</span><br class="auto-style1" />
+  <span class="auto-style1">}//end main</span><br class="auto-style1" />
+<span class="auto-style1">}//end class</span></p>
+		<p class="auto-style1">Create another Java source code file in that folder named 
+		Hello02Runner.java containing the code shown below:</p>
+<p><span class="auto-style1">class Hello02Runner{</span><br class="auto-style1" />
+  <span class="auto-style1">void run(){</span><br class="auto-style1" />
+    <span class="auto-style1">System.out.println("Hello World from Hello02");</span><br class="auto-style1" />
+  <span class="auto-style1">}//end main</span><br class="auto-style1" />
+<span class="auto-style1">}//end class</span></p>
+		<p class="auto-style1">Open a command line window in the folder named Hello02 and enter the 
+		following command to compile the program. Note that this command uses 
+		the -cp switch to tell the compiler to ignore a preset classpath and 
+		search only the current folder.</p>
+<p class="auto-style1">javac -cp .; Hello02.java</p>
+		<p class="auto-style1">If there are no errors, the command prompt should reappear and the 
+		following two files should have been created in the folder named 
+		Hello02. (You may need to press the F5 key to make them visible.)</p>
+		<p class="auto-style1">Hello02.class<br/>
+		Hello02Runner.class</p>
+		<p class="auto-style1">Next, enter the following command to run the 
+		program. Note that this command uses the -cp switch to tell the Java 
+		virtual machine to ignore a preset classpath and search only the current 
+		folder.</p>
+<p class="auto-style1">java -cp .; Hello02</p>
+		<p class="auto-style1">The following output should appear on the command-line screen:</p>
+<p class="auto-style1">Hello World from Hello02</p>
+		<p class="auto-style1">Note that these instructions assume that you set the path environment 
+		variable when you installed the Java software. If you didn't, you will 
+		need to deal with the path when entering the commands. In that case, 
+		your commands would be something like the following depending on the 
+		version of the Java software that was installed and where the software 
+		was installed on your hard drive. (Note that the quotation marks are 
+		required in the commands due to the space character in the folder name: 
+		Program Files.)</p>
+		<p><span class="auto-style1">"C:\Program Files\Java\jdk-13\bin"\javac 
+		-cp .; Hello02.java</span><br class="auto-style1" />
+		<span class="auto-style1">"C:\Program Files\Java\jdk-13\bin"\java -cp .; Hello02</span></p>
+
+		<p class="auto-style1">Prof. Baldwin</p>
+
+</body>
+
+</html>

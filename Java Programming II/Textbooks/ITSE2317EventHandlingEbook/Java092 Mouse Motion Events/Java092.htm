@@ -1,0 +1,530 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java092</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java092 Mouse Motion Events</h1>
+
+
+<h1>Table of contents</h1>
+
+<ul>
+<li><a href="#preface">Preface</a> </li>
+<li><a href="#introduction">Introduction</a> </li>
+<li><a href="#overview">Overview</a> </li>
+<li><a href="#the_sample_program">The Sample Program</a> 
+<ul>
+	<li><a href="#discussion">Discussion</a> </li>
+	<li><a href="#program_listing">Program Listing</a></li>
+</ul>
+	</li>
+<li><a href="#Whats_Next" name="Whats_Next0">What's Next?</a></li>
+	<li><a href="#review">Review</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+
+<h1><a name="preface"></a>Preface</h1>
+<p>This chapter is one in a collection of chapters designed for teaching <em>
+ITSE2317 - Java Programming (Intermediate)</em> at Austin Community College in 
+Austin, TX.</p>
+<p><em>(Author's note: As you read this chapter, you will see that it was 
+originally written around 1997. However, despite many improvements in Java since 
+then, most of what was true then is still true in 2020.)</em></p>
+<h1><a name="introduction"></a>Introduction</h1>
+<p>When we discussed mouse events in an earlier chapter, we didn't take into 
+account that there are actually two different mouse interfaces: </p>
+
+<ul>
+<li>MouseListener </li>
+<li>MouseMotionListener</li></ul>
+
+<p>In that chapter, we only discussed the implementation of methods in the <strong>
+MouseListener </strong>interface. </p>
+<p>In this chapter, we will also implement the <strong>mouseDragged()</strong> and the <strong>
+mouseMoved()</strong> methods in the <strong>MouseMotionListener </strong>interface to 
+implement a program that can move a <strong>Label </strong>object on a <strong>Panel </strong>
+object by dragging the <strong>Label </strong>object with the mouse. </p>
+<p>This chapter is not intended to be a polished demonstration of drag-and-drop. 
+Rather, it is intended only to illustrate how to instantiate, register, listen 
+for, and use events declared in the methods of the <strong>MouseMotionListener </strong>
+interface. </p>
+<p>This chapter will also make use of the <strong>mousePressed()</strong> method of the <strong>
+MouseListener </strong>interface. </p>
+<h1><a name="overview"></a>Overview</h1><p>The <strong>MouseMotionListener </strong>interface declares two methods: <br/>
+ </p>
+<div class="a">
+<ul>
+<li>public abstract void mouseDragged(MouseEvent e) </li>
+<li>public abstract void mouseMoved(MouseEvent e)</li></ul>
+</div>
+<p>The <strong>mouseDragged() </strong>method is invoked when a mouse button is pressed 
+on a component and then dragged. </p>
+<p>According to the documentation, mouse drag events will continue to be 
+delivered to the component where they first originated until the mouse 
+button is released (regardless of whether the mouse position is within 
+the bounds of the component). </p>
+<p>However, by disabling the code in the following sample program that moves the 
+Label object, and observing the printed output on the screen, it can be seen 
+that mouse drag events cease to be generated as soon as the mouse leaves 
+the boundaries of the object for which the listener was registered. Furthermore, 
+moving the mouse back inside the boundaries of the object does not cause 
+mouse drag events to resume until the mouse button is released and pressed 
+again. </p>
+<p>It is unclear at this time whether this is a bug, a documentation error, or 
+simply a misinterpretation of the documentation on the part of this author. </p>
+<p>The <strong>mouseMoved() </strong>method is invoked when the mouse is moved on a 
+component (with no buttons down). A <strong>System.out.println()</strong> statement in the <strong>
+mouseMoved()</strong> method in the following program indicates that a stream of 
+events is generated when the mouse is moved inside the label and the events stop 
+being generated when the mouse leaves the label. The stream of events resumes 
+when the mouse re-enters the label. </p>
+<h1><a name="the_sample_program"></a>The 
+Sample Program</h1><p>This section will present a short discussion of the program followed 
+by the program listing. </p>
+<h2><a name="discussion"></a>Discussion</h2><p>The program illustrates the <strong>mouseDragged() </strong>
+event used in conjunction with <strong>mousePressed()</strong>. </p>
+<p>The program uses a combination of <strong>mousePressed() </strong>and <strong>mouseDragged()</strong> 
+events to implement a crude form of <i>Drag-and-Drop</i>. </p>
+<p>A yellow Label is placed on a <strong>Panel, </strong>which is placed in a <strong>Frame</strong>. </p>
+<p>A <strong>MouseListener </strong>object and a <strong>MouseMotionListener </strong>object are 
+instantiated and registered to receive mouse events on the <strong>Label </strong>
+object. </p>
+<p>The user can drag the <strong>Label </strong>object by dragging the mouse internal 
+to the <strong>Label </strong>object. The algorithm that uses the information 
+provided by a <strong>mousePressed()</strong> event and the <strong>mouseDragged() </strong>events 
+to drag the <strong>Label</strong> object on the screen is explained in the comments in 
+the program. </p>
+<p>The purpose of this program is simply to demonstrate the use of the <strong>
+MouseMotionListener </strong>interface as compared to the <strong>MouseListener </strong>
+interface. It is not intended to be a polished <i>Drag-and-Drop</i> 
+program. </p>
+<p>The program also produces screen output showing the stream of events 
+produced by the <strong>mouseDragged()</strong> and <strong>mouseMoved()</strong> methods. By 
+viewing this output while moving or dragging the mouse, you can get an idea of 
+how the event-handling system is behaving. </p>
+<p>Finally, a <strong>WindowListener </strong>object is instantiated and registered to 
+terminate the program when the user closes the Frame object. </p>
+<p>These results were produced using JDK 1.1.3 running under Windows 95. More 
+recently, the program was tested using JDK 12.0.1 running under Windows 7.</p>
+<h2><a name="program_listing"></a>Program 
+Listing</h2><p>A listing of the program with additional comments follows: <br/>
+ </p>
+<div class="a"><pre>/*File Event21A.java Copyright, R.G.Baldwin
+This program is designed to be compiled and run
+under JDK 1.1.3
+
+The program illustrates the mouseDragged event used in
+conjunction with the mousePressed() event to drag a label
+object on a Panel object within a Frame object in a
+crude form of Drag-and-Drop.
+
+The program also illustrates the mouseMoved event by
+displaying the contents of the object passed as a parameter
+to the event when the mouse is moved within the label
+without pressing a mouse button.
+
+A yellow Label is placed on a Panel which is placed in a
+Frame.
+
+A MouseListener object and a MouseMotionListener object are
+instantiated and registered to receive mouse events on the
+Label object.
+
+The user can drag the yellow Label object by dragging the
+mouse internal to the Label object.
+
+Comments within the code explain the algorithm that uses
+the information provided by the mousePressed and mouseDragged
+events to move the label object.
+
+The purpose of this program is simply to demonstrate the
+use of the MouseMotionListener interface as compared to the
+MouseListener interface. It is not intended to be a
+polished Drag-and-Drop program.
+
+Finally, a WindowListener object is instantiated and
+registered to terminate the program when the user closes
+the Frame object.
+
+These results were produced using JDK 1.1.3 running under
+Windows 95.
+*/
+//=========================================================
+
+import java.awt.*;
+import java.awt.event.*;
+
+public class Event21A {
+ public static void main(String[] args){
+ GUI gui = new GUI();
+ }//end main
+}//end class Event21A
+//=========================================================
+
+class GUI {
+ Label myLabel;//reference variables passed as parameters
+ LabelInfo myLabelInfo;
+ int initialX = 50; //initial location of the label object
+ int initialY = 25;
+
+ public GUI(){//constructor
+ //Create visual components
+ myLabel = new Label("LabelObject");//create a label
+ myLabel.setBackground(Color.yellow);//make it yellow
+
+ //create a panel to place the panel on
+ Panel myPanel = new Panel();
+ myPanel.setLayout(null); //no layout manager wanted
+ myPanel.add(myLabel); //place the label on the panel
+ //Adjust x,y,width &amp; height
+ myLabel.setBounds(initialX,initialY,125,100);
+
+ Frame myFrame = new Frame();//frame to contain it all
+ myFrame.setSize(600,600);
+ myFrame.setTitle("Copyright, R.G.Baldwin");
+ myFrame.add("Center",myPanel); //place panel in frame
+ myFrame.setVisible(true);//make it all visible
+
+ //Create object to maintain info about the label
+ // while it is being dragged about.
+ myLabelInfo = new LabelInfo();
+ myLabelInfo.labelX = initialX;
+ myLabelInfo.labelY = initialY;
+
+ //Instantiate and register MouseListener
+ // and MouseMotionListener
+ myLabel.addMouseMotionListener(
+ new MyMouseMotionProcessor(myLabelInfo,myLabel));
+ myLabel.addMouseListener(
+ new MyMouseProcessor(myLabelInfo,myLabel));
+
+ //Instantiate and register a WindowListener object
+ // which will terminate the program when the user
+ // closes the Frame object
+ WProc1 winProcCmd1 = new WProc1();
+ myFrame.addWindowListener(winProcCmd1);
+ }//end constructor
+}//end class GUI definition
+//=========================================================
+
+//This is a simple wrapper class used to maintain info for
+// several position parameters used while dragging the
+// label object.
+
+class LabelInfo{
+ int labelX;
+ int labelY;
+ int mousePressedX;
+ int mousePressedY;
+ int mouseDraggedX;
+ int mouseDraggedY;
+}//end class LabelInfo
+
+//=========================================================
+
+//This class recognizes mousePressed(). This method is
+// used to determine the starting position of the mouse
+// pointer.
+class MyMouseProcessor extends MouseAdapter{
+ LabelInfo theLabelInfo;
+ Label theLabel;
+
+ //Constructor
+ MyMouseProcessor(LabelInfo inLabelInfo, Label inLabel){
+ //save references to the input objects
+ theLabelInfo = inLabelInfo;
+ theLabel = inLabel;
+ }//end constructor
+
+ public void mousePressed(MouseEvent e){
+ //save starting position of mouse pointer
+ theLabelInfo.mousePressedX = e.getX();
+ theLabelInfo.mousePressedY = e.getY();
+ }//end mousePressed()
+
+}//end MyMouseProcessor
+
+//=======================================================
+class MyMouseMotionProcessor extends MouseMotionAdapter{
+ LabelInfo theLabelInfo;
+ Label theLabel;
+
+ //Constructor
+ MyMouseMotionProcessor(
+ LabelInfo inLabelInfo, Label inLabel){
+ //save incoming object reference
+ theLabelInfo = inLabelInfo;
+ theLabel = inLabel;
+ }// end constructor
+
+ public void mouseDragged(MouseEvent e){
+ System.out.println("Drag = " + e);
+ //Save mouse coordinates during the drag operation.
+ theLabelInfo.mouseDraggedX = e.getX();
+ theLabelInfo.mouseDraggedY = e.getY();
+
+
+ /* How does this work?
+ Dragging the mouse on the yellow label produces a
+ stream of events of this type. This method is called
+ once for each event. When an event occurs, if the
+ mouse has been dragged a distance equal to a full
+ pixel (or more), in either or both directions,
+ the X and Y values of the mouseDragged event
+ are used to reposition the label by that distance in
+ one or both of those directions. This causes the
+ label to slide under the mouse pointer so that the
+ X and Y values of the next mouseDragged event revert
+ back to the original Y and Y values of the original
+ mousePressed event. In other words, the motion of the
+ label is such as to cause the coordinates of the
+ mouseDragged event to continue to be equal to the
+ coordinates of the original mousePressed event, or to
+ cause the difference between the two to be zero.
+
+ Think of the following expressions as a feedback system
+ that strives to drive an error signal to zero where
+ the error signal is the difference between the
+ coordinates of the current mouseDragged event and the
+ coordinates of the original mousePressed event.
+
+ Note that when the yellow label is dragged rapidly
+ and randomly for an extended period of time, the system
+ simply quits generating mouseDragged events. This may
+ be a bug in JDK 1.1.3 for Win95.
+ */
+
+ int newX = theLabelInfo.labelX
+ + theLabelInfo.mouseDraggedX
+ - theLabelInfo.mousePressedX;
+ int newY = theLabelInfo.labelY
+ + theLabelInfo.mouseDraggedY
+ - theLabelInfo.mousePressedY;
+
+ //move label to the new location
+ theLabel.setLocation(newX,newY);
+
+ //save the new location information
+ theLabelInfo.labelX = newX;
+ theLabelInfo.labelY = newY;
+
+ }//end mouseDragged()
+
+ public void mouseMoved(MouseEvent e){
+ /*This method is implemented here simply for
+ illustration. It displays the contents of the
+ object passed in for each mouseMoved event.
+
+ It also illustrates a possible bug in JDK 1.1.3
+ for Win 95. In particular, when the mouse is moved
+ rapidly and randomly within the yellow label for
+ an extended period, at some point, mouseMoved
+ events cease to be generated.
+ */
+ System.out.println("Move = " + e);
+ }//
+}//end class MyMouseMotionProcessor
+//======================================================
+
+//The following listener is used to terminate the
+// program when the user closes the Frame object.
+class WProc1 extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ System.exit(0);
+ }//end windowClosing()
+}//end class WProc1
+//======================================================</pre></div>
+<h1><a name="Whats_Next">What's Next?</a></h1>
+<p>This chapter as well as several previous chapters have used the AWT, Swing, 
+the Delegation Event Model, and GUIs to help you learn how to use event handling 
+in Java. However, the purpose of these chapters has been to teach event handling 
+and not to teach GUI design. Therefore, no attempt has been made to teach GUI 
+design.</p>
+<p>The chapter following this one in this eBook begins a series of bonus 
+chapters containing considerably more information on the use of the Swing GUI 
+components. The material in those chapters is not part of this course, but 
+instead is provided for the benefit of those students who have a desire to 
+continue in that direction. </p>
+<h1><a name="review"></a>Review</h1><p>Q - Without viewing the following solution, write a Java application 
+that meets the specifications given in the comments at the beginning of the 
+application. </p>
+<p>A - See specifications and solution below.<br/>
+ </p>
+<div class="a"><pre>/*File SampProg126.java from chapter 92
+Copyright, R. G. Baldwin
+Without viewing the following solution, write a Java
+application that meets the specifications given below.
+
+The solution shown below was successfully tested using
+JDK 1.1.3 under Win95 and JDK 12.0.1 under Win 7.
+
+Write an application that displays a Frame object with
+a width of 300 pixels and a height of 200 pixels. Put
+your name in the banner at the top of the Frame.
+
+When you move your mouse pointer into the client area of
+the Frame, the coordinates of the mouse pointer appear
+directly above the pointer. As you move the mouse pointer
+around in the client area, the coordinates of the pointer
+continue to be displayed above the pointer.
+
+When you move the mouse pointer out of the client area, the
+coordinates of the exit point appear and remain in view
+until you again move the pointer into the client area.
+
+If you press one of the mouse buttons while moving the
+mouse in the client area, the coordinates of the point
+where you pressed the button appear and remain there until
+you release the mouse button, at which time the
+coordinates of the mouse pointer resume being displayed.
+
+Closing the frame terminates the program and returns
+control to the operating system.
+
+End of specifications.
+
+*/
+//=========================================================
+import java.awt.*;
+import java.awt.event.*;
+
+public class SampProg126 {
+ public static void main(String[] args){
+ GUI gui = new GUI();
+ }//end main
+}//end class SampProg126
+//=========================================================
+
+//Subclass Frame in order to override the paint method.
+class MyFrame extends Frame{
+ int xCoor;
+ int yCoor;
+
+ MyFrame(String name){//constructor
+ this.setTitle("Copyright, R.G.Baldwin");
+ this.setSize(300,200);
+ this.setName(name);
+ }//end constructor
+
+ public void paint(Graphics g){
+ //display coordinate information on the Frame
+ g.drawString("" + xCoor + ", " + yCoor, xCoor, yCoor);
+ }//end paint()
+}//end class MyFrame
+//==========================================================
+
+class GUI {
+ public GUI(){//constructor
+ //Create a visual object of type MyFrame named Frame1
+ MyFrame myFrame1 = new MyFrame("Frame1");
+ myFrame1.setVisible(true);
+
+ //Instantiate and register Listener object which will
+ // terminate the program when the user closes
+ // the Frame.
+ WProc1 winProcCmd1 = new WProc1();
+ myFrame1.addWindowListener(winProcCmd1);
+
+ //Instantiate and register Listener object which will
+ // process mouseMoved events to display coordinate
+ // information on the Frame object named myFrame1.
+ MyMouseMotionProcessor mouseMotionProc =
+ new MyMouseMotionProcessor(myFrame1);
+ myFrame1.addMouseMotionListener(mouseMotionProc);
+
+ }//end constructor
+}//end class GUI definition
+//=========================================================
+
+//This listener class monitors for mouseMove events and
+// displays the coordinates of the mouse pointer when the
+// mouse is moved inside the client area of the Frame.
+class MyMouseMotionProcessor extends MouseMotionAdapter{
+ MyFrame refToFrame1; //save references to the Frame
+
+ //Constructor
+ MyMouseMotionProcessor(MyFrame inFrame1){
+ //save incoming object reference
+ refToFrame1 = inFrame1;
+ }// end constructor
+
+ public void mouseMoved(MouseEvent e){
+ //Get X and Y coordinates of mouse pointer and store
+ // in instance variables of the Frame object
+ refToFrame1.xCoor = e.getX();
+ refToFrame1.yCoor = e.getY();
+ //Force a repaint to display the coordinate information
+ refToFrame1.repaint();
+ }//end mouseMoved()
+
+}//end class MyMouseMotionProcessor
+
+//=========================================================
+
+//The following listener is used to terminate the program
+// when the user closes the frame object.
+class WProc1 extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ System.exit(0);
+ }//end windowClosing()
+}//end class WProc1
+//=========================================================</pre></div>
+
+
+<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+<div class="a">
+	<p><strong>Housekeeping material</strong> </p>
+	<ul>
+		<li>Author: Prof. Richard G. Baldwin</li>
+		<li>Chapter name: Java087 Swing, Understanding getContentPane() and 
+		other JFrame Layers</li>
+		<li>File: Java087.htm</li>
+		<li>Originally published: 1997</li>
+		<li>Revised: 05/06/20</li>
+	</ul>
+</div>
+<p>-end- <!--end--></p>
+
+</body>
+</html>

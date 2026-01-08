@@ -1,0 +1,293 @@
+<html><head>
+   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+   <meta name="generator" content="mozilla/4.04 [en] (win95; i) [netscape]">
+   <meta name="author" content="richard g. baldwin">
+   <title>... in Java by Richard G Baldwin</title></head><body><!--start-->
+
+<center><h3><b><i>Richard G Baldwin (512) 223-4758, <a href="mailto:baldwin@austin.cc.tx.us">baldwin@austin.cc.tx.us</a>,
+<a href="http://www2.austin.cc.tx.us/baldwin/">http://www2.austin.cc.tx.us/baldwin/</a></i></b></h3></center>
+
+<center><h2><b><!--title-->The AWT Package, An Overview<!--endtitle--></b></h2></center>
+Java Programming, Lecture Notes # 110, Revised 02/21/98.
+<ul><li><a href="#preface">Preface</a></li>
+
+<li><a href="#introduction">Introduction</a></li>
+
+<li><a href="#package java.awt classes">Package java.awt Classes</a></li>
+
+<li><a href="#arranging components in containers">Arranging Components in Containers</a></li>
+
+<li><a href="#the container classes">The Container Classes</a></li>
+
+<li><a href="#the non-text input components">The Non-Text Input Components</a></li>
+
+<li><a href="#text input and output components">Text Input and Output Components</a></li>
+
+<li><a href="#using a scrollbar component for data input">Using a Scrollbar
+Component for Data Input</a></li>
+
+<li><a href="#dialogs">Dialogs</a></li>
+
+<li><a href="#the canvas component">The Canvas Component</a></li>
+
+<li><a href="#menus">Menus</a></li>
+
+<li><a href="#graphics - working with shapes">Graphics - Working with Shapes</a></li>
+
+<li><a href="#graphics - working with fonts">Graphics - Working With Fonts</a></li>
+
+<li><a href="#graphics - working with images">Graphics - Working With Images</a></li>
+
+<li><a href="#working with the printjob class">Working with the PrintJob Class</a></li>
+
+<li><a href="#working with the toolkit class">Working with the Toolkit Class</a></li>
+
+<li><a href="#review">Review</a></li></ul>
+
+<hr width="100%"><center><h2><a name="preface"></a><b><font color="#ff0000">Preface</font></b></h2></center>
+Students in Prof. Baldwin's <b><u>Intermediate Java Programming</u></b>
+classes at ACC are responsible for knowing and understanding all of the
+material in this lesson.
+
+<p>JDK 1.1 was formally released on February 18, 1997. This lesson was
+originally written on March 5, 1997 using the software and documentation
+in the JDK 1.1 download package. Additional updates have been made since
+then.
+<center><h2><a name="introduction"></a><font color="#ff0000">Introduction</font></h2></center>
+This lesson is primarily a preview of what you can expect to find in several
+lessons immediately following this one. This and the next several lessons
+concentrate on the package <b>java.awt </b>where most of the functionality
+exists for providing the user interface to your application or applet.
+<ul><li><tt>Note that it was the AWT portion of Java that experienced the most
+significant changes in the release of the Java Development Kit, version
+1.1. Much of what you may have learned earlier about version 1.0 was replaced
+using new concepts. These lessons will concentrate on the use of JDK 1.1
+rather than JDK 1.0.</tt></li></ul>
+The user interface of a modern computer program involves techniques to
+activate many of the human senses. We use <i>icons, text boxes, images,
+sound, boardroom graphics, etc.</i>
+
+<p>This and the next several lessons will concentrate on those aspects
+of the interface that we commonly refer to as the <b>Graphical User Interface
+(GUI)</b>. We will leave other aspects of the interface, such as sound,
+to be covered in subsequent lessons.
+
+<p>Many of the sample programs in the earlier lessons on event handling
+made use of simple GUI forms without providing much of an explanation as
+to what was going on. The next few lessons will attempt to rectify that
+situation by explaining many aspects of creating a Graphical User Interface.
+<center><h2><a name="package java.awt classes"></a><font color="#ff0000">Package java.awt
+Classes</font></h2></center>
+As mentioned above, much of the material in this and the next several lessons
+will be based on the classes of the package <b>java.awt</b>.
+
+<p>As of 3/5/97, there were more than fifty classes defined in package
+<b>java.awt</b>. Of that total, we will be mainly concerned with the ones
+discussed in the following sections. The classes are grouped in the general
+order that we will be studying them and each grouping will usually be presented
+as a separate lesson. However, some groups are so large that it may be
+necessary to break the group up into more than one lesson.
+
+<p>We will also be making heavy use of the classes in the <b>java.awt.event</b>
+package, but you are already familiar with most of those classes from your
+study of the previous lessons on event handling in JDK 1.1.
+<center><h2><a name="arranging components in containers"></a><font color="#ff0000">Arranging
+Components in Containers</font></h2></center>
+We can place our components in their containers using <u>absolute position</u>
+coordinates, or we can use any of several different <u>layout managers</u>
+to do the job. Using layout managers is considered by many to be the safer
+approach because this approach tends to automatically compensate for differences
+in screen resolution between platforms.
+
+<p>The different layout managers are defined in classes having the following
+names:
+<ul><li><b>BorderLayout</b></li>
+
+<li><b>CardLayout</b></li>
+
+<li><b>FlowLayout</b></li>
+
+<li><b>GridBagLayout</b></li>
+
+<li><b>GridBagConstraints</b></li>
+
+<li><b>GridLayout</b></li></ul>
+In addition to the layout manager classes, there is a class named <b>GridBagConstraints</b>
+that is used to work with the <b>GridBagLayout</b> class as well as a class
+named <b>Insets</b> that is used to work with other classes.
+<center><h2><a name="the container classes"></a><font color="#ff0000">The Container
+Classes</font></h2></center>
+The following hierarchy diagram shows where the container classes <b>Panel,
+Window, </b>and <b>Frame</b> fit into the overall inheritance hierarchy.
+We will discuss these three classes as a group, and also discuss their
+relationship with their superclasses: <b>Container, Component, </b>and
+<b>Object.</b><br>&nbsp;
+<table border bgcolor="#80ffff" ><tr><td><pre>java.lang.Object<b>&nbsp;
+</b>&nbsp;&nbsp; |&nbsp;
+&nbsp;&nbsp; +----java.awt.Component<b>&nbsp;
+</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.Container
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.Panel<b>&nbsp;
+</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.Window<b>&nbsp;
+</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.Frame</pre></td></tr></table>
+Generally, these classes are used to contain components or instances of
+other classes.
+<center><h2><a name="the non-text input components"></a><font color="#ff0000">The Non-Text
+Input Components</font></h2></center>
+The components in the next group are generally used to allow the user to
+input (non-text) information to the program, although in some circumstances
+they could also be used to output information to the user as well. <b>Non-text</b>
+in this context means that the user can input information <u>without the
+requirement</u> to use the keys on the keyboard.
+
+<p>All of these classes extend the class <b>Component</b>.
+<ul><li><b>Button</b></li>
+
+<li><b>Checkbox</b></li>
+
+<li><b>Choice</b></li>
+
+<li><b>List</b></li></ul>
+The class named <b>CheckboxGroup</b> does not extend <b>Component</b>,
+but extends <b>Object</b> instead. As the name suggests, objects of this
+class can be used to group <b>Checkbox </b>components so that they behave
+in a mutually exclusive fashion.
+
+<p>The lesson on <u>non-text</u> input will discuss the classes listed
+above.
+<center><h2><a name="text input and output components"></a><font color="#ff0000">Text
+Input and Output Components</font></h2></center>
+The lesson on <u>text input and output</u> will deal with the classes <b>TextField
+</b>and <b>TextArea </b>along with the class <b>Label</b>.
+
+<p>The <b>TextField</b> class can be used to produce a component that will
+accept one line of user text as input. It can also be used to display one
+line of text in a "<u>non-editable</u>" fashion..
+
+<p>The <b>TextArea</b> class can be used to produce a component that will
+accept multiple lines of user text as input. It can also be used to display
+multiple lines of text in a "<u>non-editable</u>" fashion.
+
+<p><b>TextField</b> and <b>TextArea</b> extend <b>TextComponent</b> which
+extends <b>Component</b>.
+
+<p>The <b>Label</b> class can be used to display one line of text. This
+component is inherently non-editable and that attribute cannot be modified
+by the program.
+<center><h2><a name="using a scrollbar component for data input"></a><font color="#ff0000">Using
+a Scrollbar Component for Data Input</font></h2></center>
+A previous lesson in the series on event handling discussed the use of
+the <b>Scrollbar </b>component in considerable depth. We will let that
+discussion suffice for out investigation of the <b>Scrollbar </b>component.
+<center><h2><a name="dialogs"></a><font color="#ff0000">Dialogs</font></h2></center>
+In the lesson on Dialogs, we will investigate the use of the <b>Dialog</b>
+class. This is a class that produces a dialog, or a window that takes input
+from the user.
+
+<p>This lesson will also investigate the <b>FileDialog </b>class. This
+class can be used to produce an object that displays a file selection dialog.
+<center><h2><a name="the canvas component"></a><font color="#ff0000">The Canvas Component</font></h2></center>
+A <b>Canvas </b>component is a generic component which needs to be subclassed
+in order to add functionality. We will investigate various uses of this
+class in the lesson on the <b>Canvas </b>component.
+<center><h2><a name="menus"></a><font color="#ff0000">Menus</font></h2></center>
+The inheritance hierarchy for menus is as shown below.
+<br>&nbsp;
+<table border bgcolor="#80ffff" ><tr><td><pre>java.lang.Object
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----MenuShortcut&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.MenuComponent&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.MenuBar
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.MenuItem&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.Menu
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.CheckboxMenuItem
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +----java.awt.PopupMenu</pre></td></tr></table>
+As you might suspect from looking at this diagram, there are a number of
+interesting issues associated with menus, and we will investigate those
+issues in the lesson on menus.
+<center><h2><a name="graphics - working with shapes"></a><font color="#ff0000">Graphics
+- Working with Shapes</font></h2></center>
+The <b>Graphics </b>class, which extends the <b>Object</b> class, is the
+abstract base class for all graphics contexts allowing an application to
+draw onto components or onto off-screen images.
+
+<p>A <b>Graphics </b>object encapsulates the state information needed for
+the various rendering operations that Java supports. This state information
+includes:
+<ul><li>
+The Component to draw on</li>
+
+<li>
+A translation origin for rendering and clipping coordinates</li>
+
+<li>
+The current clip</li>
+
+<li>
+The current color</li>
+
+<li>
+The current font</li>
+
+<li>
+The current logical pixel operation function (XOR or Paint)</li>
+
+<li>
+The current XOR alternation color (see setXORMode)</li></ul><b>Graphics </b>is a large topic which will encompass several different
+lessons.
+
+<p>The first lesson in the <b>Graphics </b>series will investigate the
+use of the following classes for the realization of objects of the type
+indicated by the name of the class.
+<ul><li><b>Rectangle</b></li>
+
+<li><b>Point</b></li>
+
+<li><b>Polygon</b></li>
+
+<li><b>Dimension</b></li></ul>
+
+<center><h2><a name="graphics - working with fonts"></a><font color="#ff0000">Graphics
+- Working With Fonts</font></h2></center>
+The lesson on graphics and fonts will concentrate on the classes <b>Font
+</b>and <b>FontMetrics</b>.<b> </b>As you can probably surmise from the
+names, these classes let you control the font of output text, and also
+let you determine information about the size of text produced with a particular
+font.
+<center><h2><a name="graphics - working with images"></a><font color="#ff0000">Graphics
+- Working With Images</font></h2></center>
+This lesson on images will concentrate on the classes in the following
+list:
+<ul><li><b>Image</b></li>
+
+<li><b>MediaTracker</b></li>
+
+<li><b>Color</b></li>
+
+<li><b>SystemColor</b></li>
+
+<li><b>ScrollPane</b></li></ul>
+
+<center><h2><a name="working with the printjob class"></a><font color="#ff0000">Working
+with the PrintJob Class</font></h2></center>
+As the name implies, this lesson will be concerned with the new printing
+capability of JDK 1.1.
+<center><h2><a name="working with the toolkit class"></a><font color="#ff0000">Working
+with the Toolkit Class</font></h2></center>
+The <b>ToolKit</b> class "is used to bind the abstract AWT classes to a
+particular native toolkit implementation." There are some interesting methods
+in this class and we will take a look at them.
+<center><h2><a name="review"></a><font color="#ff0000">Review</font></h2></center>
+Since this lesson is primarily a preview of subsequent lessons, there is
+no reason to provide review material for this lesson.
+
+<p>-end-<!--end--></body></html>

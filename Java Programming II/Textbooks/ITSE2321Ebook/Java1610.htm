@@ -1,0 +1,548 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1610</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1610: Type Conversion, Casting, etc.</h1>
+ 
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listings</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Definition of the class named A.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Definition of the class named B. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Definition of the class named C. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Beginning of the class named Poly02. </li>
+		<li><a href="#Listing_5">Listing 5</a>. An illegal operation.</li>
+		<li><a href="#Listing_6">Listing 6</a>. An ineffective downcast.</li>
+		<li><a href="#Listing_7">Listing 7</a>. A downcast to type B.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Declare a variable of type B.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Cannot be assigned to type C.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Another failed attempt.</li>
+		<li><a href="#Listing_11">Listing 11</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter discusses type conversion for both <em>primitive</em> and <em>reference</em> types. </p>
+<p>A value of a particular type may be <em>assignment compatible</em> with variables of other types, in which case the value can be assigned directly to the variable.  Otherwise, it may be possible to perform a 
+<em>cast</em> on the value to change its type and assign it to the variable as the new type. </p>
+<p>With regard to reference types, whether or not a cast can be successfully performed depends on the relationships of the classes involved in the class hierarchy.
+	</p>
+<p>A reference to any object can be assigned to a reference variable of the type 
+<strong>Object</strong>, because the <strong>Object</strong> class is a superclass of every other class. </p>
+<p>When we cast a reference along the class hierarchy in a direction from the root class 
+<strong>Object</strong> toward the leaves, we often refer to it as a <em>downcast</em>. </p>
+<p>Whether or not a method can be called on a reference to an object depends on </p>
+<ul>
+	<li>the current type of the reference, and</li>
+	<li>the location in the class hierarchy where the method is defined.</li>
+</ul>
+<p>In order to use a reference of a class type to call a method, the method must be defined at or above that class in the class hierarchy. </p>
+<p>A sample program is provided that illustrates much of the detail involved in type conversion, method 
+calls, and casting with respect to reference types. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><strong>What is polymorphism?</strong> </p>
+<p>As a quick review, the meaning of the word <em>polymorphism</em> is something like 
+<em>one name, many forms</em>. </p>
+<p><strong>How does Java implement polymorphism?</strong> </p>
+<p>Polymorphism manifests itself in Java in the form of multiple methods having the same name.
+
+</p>
+<p>In some cases, multiple methods have the same name, but different formal argument lists 
+<em>(overloaded methods, which were discussed in a previous chapter)</em>. </p>
+<p>In other cases, multiple methods have the same name, same return type, and same formal argument list 
+<em>(overridden methods)</em>. </p>
+<p><strong>Three distinct forms of polymorphism </strong> </p>
+	<p>From a practical programming viewpoint, polymorphism manifests itself in three distinct forms in Java:
+
+    </p>
+<ul>
+	<li>Method overloading
+    </li>
+	<li>Method overriding through inheritance
+    </li>
+	<li>Method overriding through the Java interface </li>
+</ul>
+<p>I covered method overloading as one form of polymorphism in a previous chapter.</p>
+<p><strong>We need to backtrack</strong> </p>
+<p>In this chapter, I will backtrack a bit and discuss the conversion of references from one type to another.
+
+</p>
+<p>I will begin the discussion of polymorphism through method overriding and inheritance in the next chapter
+<em>(following the review chapter)</em>.  I will cover interfaces in a 
+future chapter. </p>
+<p><strong>Assignment compatibility and type conversion</strong> </p>
+<p>As a background for polymorphism, you need to understand something about <em>assignment compatibility</em> and 
+<em>type conversion</em>. </p>
+<p>A value of a given type is assignment compatible with another type if </p>
+<ul>
+	<li>a value of the first type </li>
+	<li>can be successfully assigned to a variable of the second type. </li>
+</ul>
+<p><strong>Type conversion and the cast operator </strong> </p>
+	<p>In some cases, type conversion happens automatically.  In other cases, type conversion must be forced through the use of a 
+	<em>cast operator</em>. </p>
+<p>A cast operator is a <em>unary</em> operator, which has a single right operand.  The physical representation of the cast operator is the name of a type inside a pair of matching parentheses, as in:
+
+</p><div class="a">
+<pre>(int) </pre></div>
+<p><strong>Applying a cast operator </strong></p>
+<p>Applying a cast operator to the name of a variable doesn't actually change the type of the variable.  However, it does cause the contents of the variable to be treated as a different type for the evaluation of the expression in which the cast operator is contained.
+
+Thus, the application of a cast operator is a short-term or temporary operation.</p>
+<p><strong>Primitive values and type conversion</strong> </p>
+	<p>Assignment compatibility issues come into play for both <em>primitive</em> types and 
+	<em>reference</em> types.
+
+</p>
+<p>Values of type <strong>boolean</strong> can only be assigned to variables of type 
+<strong>boolean</strong> 
+<em>(you cannot change the type of a <strong>boolean</strong>)</em>. </p>
+<p>Otherwise, a primitive value can be assigned to any variable of a type </p>
+<ul>
+	<li>whose range is as wide or wider </li>
+	<li>than the range of the type of the value. </li>
+</ul>
+<p>In that case, the type of the value is automatically converted to the type of the variable. </p>
+<p><em>(For example, types </em><strong><em>byte</em></strong><em> and </em>
+<strong><em>short</em></strong><em> can be assigned to a variable of type </em>
+<strong><em>int</em></strong><em> without the requirement for a cast because type 
+</em><strong><em>int</em></strong><em> has a wider range than either type </em>
+<strong><em>byte</em></strong><em> or type </em><strong><em>short</em></strong><em>.)
+</em> </p>
+<p><strong>Conversion to narrower range</strong> </p>
+<p>On the other hand, a primitive value of a given type cannot be assigned to a variable of a type with a narrower range than the type of the value, 
+
+<strong>unless the cast operator is used to force a type conversion.</strong></p>
+
+<p>Oftentimes, such a conversion will result in the loss of data, and that loss is the responsibility of the programmer who performs the cast. </p>
+	<p><strong>Assignment compatibility for references
+
+</strong>
+
+</p>
+<p>Assignment compatibility, with respect to references, doesn't involve range issues, as is the case with primitives.  
+Instead, the reference to an object instantiated from a given class can be assigned to: </p>
+<ul>
+	<li><a name="Any_reference_variable">Any reference variable</a> whose type is the same as the class from which the object was instantiated.
+    </li>
+	<li>Any reference variable whose type is a superclass of the class from which the object was instantiated.
+    </li>
+	<li>Any reference variable whose type is an interface that is implemented by the class from which the object was instantiated.
+    </li>
+	<li>Any reference variable whose type is an interface that is implemented by 
+	a superclass of the class from which the object was instantiated, and</li>
+	<li>A few other cases involving the class and interface hierarchy. </li>
+</ul>
+<p>Such an assignment does not require the use of a cast operator. </p>
+	<p><strong>Type <em>Object</em> is completely generic
+
+</strong> </p>
+<p>A reference to any object can be assigned to a reference variable of the type 
+<strong>Object</strong>, because the <strong>Object</strong> class is a superclass of every other class. </p>
+<p><strong>Converting reference types with a cast</strong> </p>
+<p>Assignments of references, other than those listed 
+<a href="#Any_reference_variable">above</a>, require the use of a cast operator to purposely change the type of the reference. </p>
+<p><strong>Doesn't work in all cases</strong> </p>
+<p>However, it is not possible to perform a successful cast to convert the type of a reference in all cases.</p>
+<p>Generally, a cast can only be performed among reference types that fall on the same ancestral line of the class hierarchy, or on an ancestral line of an interface hierarchy.  For example, a reference cannot be successfully cast to the type of a sibling or a cousin in the class hierarchy. </p>
+<p><strong>Downcasting</strong> </p>
+	<p>When we cast a reference along the class hierarchy in a direction from the root class 
+	<strong>Object</strong> toward the leaves, we often refer to it as a <em>downcast</em>. </p>
+<p>While it is also possible to cast in the direction from the leaves to the root, this happens automatically, and the use of a cast operator is not required.
+
+</p>
+<p><strong>A sample program
+
+</strong> </p>
+<p>The program named <strong>Poly02</strong>, shown in <a href="#Listing_11">Listing 11</a> near the end of the chapter, illustrates the use of the cast operator with references. </p>
+<p>When you examine that program, you will see that two classes named <strong>A</strong> and 
+<strong>C</strong> each extend the class named <strong>Object</strong>.  Hence, we might say that they are siblings in the class hierarchy. </p>
+<blockquote>You might find it helpful to sketch out the class hierarchy (family 
+tree) as I describe it.</blockquote>
+<p>Another class named <strong>B</strong> extends the class named <strong>A</strong>.  Thus, we might say that 
+<strong>A</strong> is a child of <strong>Object</strong>, and <strong>B</strong> is a child of 
+<strong>A</strong>. </p>
+<p><strong>The class named A</strong> </p>
+	<p>The definition of the class named A is shown in <a href="#Listing_1">Listing 1</a>.  This class extends the class named 
+	<strong>Object</strong>.</p>
+<p><em>(Recall that it is not necessary to explicitly state that a class extends the class named 
+<strong>Object</strong>.  Any class that does not explicitly extend some other class will automatically extend 
+<strong>Object</strong> by default.  The class named <strong>A</strong> is shown to extend 
+<strong>Object</strong> here simply for clarity of presentation.) </em> </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Definition of the class 
+				named A.
+
+				<pre>class A extends Object{
+  //this class is empty
+}//end class A</pre>
+</div>
+	<p>The class named <strong>A</strong> is empty.  It was included in this example for the sole purpose of adding a layer of inheritance to the class hierarchy.
+
+</p>
+<p><strong>The class named B
+
+</strong> </p>
+<p><a href="#Listing_2">Listing 2</a> shows the definition of the class named 
+<strong>B</strong>.  This class extends the class named <strong>A</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Definition of the class 
+				named B.
+
+				<pre>class B extends A{
+  public void m(){
+    System.out.println("m in class B");
+  }//end method m()
+}//end class B</pre>
+</div>
+	<p><strong>The method named m()
+
+</strong> </p>
+<p>The class named <strong>B</strong> defines a method named <strong>m()</strong>.  The behavior of the method is simply to display a message each time it is 
+called. </p>
+<p><strong>The class named C</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> contains the definition of the class named 
+<strong>C</strong>, which also extends <strong>Object</strong>. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Definition of the class 
+				named C.
+
+				<pre>class C extends Object{
+  //this class is empty
+}//end class C</pre>
+</div>
+	<p>The class named <strong>C</strong> is also empty.  It was included in this example as a sibling class for the class named 
+	<strong>A</strong>.  Stated differently, it was included as a class that is not in the ancestral line of the class named 
+	<strong>B</strong>. </p>
+	<p><strong>The driver class
+
+</strong> </p>
+<p><a href="#Listing_4">Listing 4</a> shows the beginning of the driver class named 
+<strong>Poly02</strong>. This class extends <strong>Object</strong> by default.</p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Beginning of the class 
+				named Poly02.
+
+				<pre>public class Poly02{
+  public static void main(String[] args){
+    Object var = new B();</pre>
+</div>
+	<p><strong>An object of the class named B</strong> </p>
+<p>The code in <a href="#Listing_4">Listing 4</a> instantiates an object of the class 
+<strong>B</strong> and assigns the object's reference to a reference variable of type 
+<strong>Object</strong>. </p>
+<p><em>(It is important to note that the reference to the object of type </em>
+<strong><em>B</em></strong><em> was not assigned to a reference variable of type 
+</em><strong><em>B</em></strong><em>.  Instead, it was assigned to a reference variable of type 
+</em><strong><em>Object</em></strong><em>.) </em> </p>
+<p>This assignment is allowable because <strong>Object</strong> is a superclass of 
+<strong>B</strong>.  In other words, the reference to the object of the class 
+<strong>B</strong> is assignment compatible with a reference variable of the type 
+<strong>Object</strong>. </p>
+<p><strong>Automatic type conversion</strong> </p>
+<p>In this case, the reference of type <strong>B</strong> is automatically converted to type 
+<strong>Object</strong> and assigned to the reference variable of type <strong>Object</strong>. 
+<em>(Note that the use of a cast operator was not required in this assignment.)
+</em> </p>
+<p><strong>Only part of the story
+
+</strong> </p>
+<p>However, assignment compatibility is only part of the story.  The simple fact that a reference is assignment compatible with a reference variable of a given type says nothing about what can be done with the reference after it is assigned to the reference variable. </p>
+	<p><strong>An illegal operation</strong></p>
+	<p>For example, in this case, the reference variable that was automatically converted to type 
+	<strong>Object</strong> cannot be used directly to call the method named 
+	<strong>m()</strong> on the object of type <strong>B</strong>.  This is indicated in 
+	<a href="#Listing_5">Listing 5</a>. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. An illegal operation.
+				<pre>//var.m();</pre>
+</div>
+	<p>An attempt to call the method named <strong>m()</strong> on the reference variable of type 
+	<strong>Object</strong> in  
+	<a href="#Listing_5">Listing 5</a> resulted in a compiler error.  It was necessary to convert the statement 
+	into a comment in order to get the program to compile successfully. </p>
+<p><strong>An important rule</strong> </p>
+<p>In order to use a reference of a class type to call a method, the method must be defined at or above that class in the class hierarchy.
+
+</p>
+<p><strong>This case violates the rule
+
+</strong> </p>
+<p>In this case, the method named <strong>m()</strong> is defined in the class named 
+<strong>B</strong>, which is two levels down from the class named <strong>Object</strong>. </p>
+<p>When the reference to the object of the class <strong>B</strong> was assigned to the reference variable of type 
+<strong>Object</strong>, the type of the reference was automatically converted to type 
+<strong>Object</strong>. </p>
+<p>Therefore, because the reference is of type <strong>Object</strong>, it cannot be used directly to call the method named 
+<strong>m()</strong>. </p>
+<p><strong>The solution is a downcast
+
+</strong> </p>
+<p>In this case, the solution to the problem is a downcast.
+
+The code in <a href="#Listing_6">Listing 6</a> shows an attempt to solve the problem by casting the reference down the hierarchy to type 
+<strong>A</strong>. </p>
+	
+<div class="a"><a name="Listing_6">Listing 6</a>. An ineffective downcast.
+				<pre>//((A)var).m();</pre>
+</div>
+	<p><strong>Still doesn't solve the problem</strong> </p>
+<p>However, this still doesn't solve the problem, and the result is another compiler error.  Again, it was necessary to convert the statement into a comment in order to get the program to compile.
+
+</p>
+<p><strong>What is the problem here?</strong> </p>
+<p>The problem is that the downcast simply didn't go far enough down the inheritance hierarchy.
+
+</p>
+<p>The class named <strong>A</strong> neither defines nor inherits the method named 
+<strong>m()</strong>.  The method named <strong>m()</strong> is defined in class 
+<strong>B</strong>, which is a subclass of class <strong>A</strong>. </p>
+<p>Therefore, a reference of type <strong>A</strong> is no more useful than a reference of type 
+<strong>Object</strong> insofar as calling the method named <strong>m()</strong> is concerned. </p>
+<p><strong>The real solution
+
+</strong> </p>
+<p>The solution to the problem is shown in <a href="#Listing_7">Listing 7</a>. </p>
+	
+<div class="a"><a name="Listing_7">Listing 7</a>. A downcast to type B.
+				<pre>((B)var).m();</pre>
+</div>
+	<p>The code in <a href="#Listing_7">Listing 7</a> casts <em>(temporarily converts)</em> the reference value contained in the 
+	<strong>Object</strong> variable named <strong>var</strong> down to type 
+	<strong>B</strong>. </p>
+<p>The method named <strong>m()</strong> is defined in the class named <strong>B</strong>.  Therefore, a reference of type 
+<strong>B</strong> can be used to call the method. </p>
+<p>The code in <a href="#Listing_7">Listing 7</a> compiles and executes successfully.  This causes the method named 
+<strong>m()</strong> to execute, producing the following output on the computer screen. </p>
+<div class="a"><pre>m in class B </pre></div>
+<p><strong>A few odds and ends</strong> </p>
+<p>Before leaving this topic, let's look at a couple more issues.
+
+The code in <a href="#Listing_8">Listing 8</a> declares and populates a new variable of type 
+<strong>B</strong>. </p>
+	
+<div class="a"><a name="Listing_8">Listing 8</a>. Declare a variable of 
+				type B.
+				<pre>B v1 = (B)var;</pre>
+</div>
+	<p>The code in Listing 8 also uses a cast to:
+
+    </p>
+<ul>
+	<li>Convert the contents of the <strong>Object</strong> variable to type 
+	<strong>B</strong> </li>
+	<li><strong>Assign the converted reference to the new reference variable of type B.
+	</strong></li>
+</ul>
+<p><strong>A legal operation
+
+</strong> </p>
+<p>This is a legal operation.  In this class hierarchy, the reference to the object of the class 
+<strong>B</strong> can be assigned to a reference variable of the types <strong>B</strong>, 
+<strong>A</strong>, or <strong>Object</strong>. </p>
+<p><strong>Cannot be assigned to type C</strong> </p>
+<p>However, the reference to the object of the class <strong>B</strong> cannot be assigned to a reference variable of any other type, including the type 
+<strong>C</strong>.  An attempt to do so is shown in <a href="#Listing_9">Listing 9</a>. </p>
+	
+<div class="a"><a name="Listing_9">Listing 9</a>. Cannot be assigned to type C.
+				<pre>//C v2 = (C)var;</pre>
+</div>
+	<p>The code in <a href="#Listing_9">Listing 9</a> attempts to cast the reference to type 
+	<strong>C</strong> and assign it to a reference variable of type <strong>C</strong>.
+
+</p>
+<p><strong>A runtime error</strong> </p>
+<p>Although the program will compile, it won't execute.  An attempt to execute the statement in <a href="#Listing_9">Listing 9</a> results in a
+<strong>ClassCastException</strong> at runtime.  As a result, it was necessary to convert the statement into a comment in order to execute the program.
+
+</p>
+<p><strong>Another failed attempt</strong> </p>
+<p>Similarly, an attempt to cast the reference to type B and assign it to a reference variable of type 
+<strong>C</strong>, as shown in 
+<a href="#Listing_10">Listing 10</a>, won't compile. </p>
+	
+<div class="a"><a name="Listing_10">Listing 10</a>. Another failed attempt.
+				<pre>//C v3 = (B)var;</pre>
+</div>
+	<p>The problem here is that the class <strong>C</strong> is not a superclass of the class named 
+	<strong>B</strong>.  Therefore, a reference of type <strong>B</strong> is not assignment compatible with a reference variable of type 
+	<strong>C</strong>. </p>
+<p>Again, it was necessary to convert the statement into a comment in order to compile the program. </p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>This chapter discusses type conversion for both primitive and reference types.
+
+</p>
+<p>A value of a particular type may be assignment compatible with variables of other types.
+
+</p>
+<p>If the type of a value is not assignment compatible with a variable of a given type, it may be possible to perform a cast on the value to change its type and assign it to the variable as the new type.  For primitive types, this will often result in the loss of information.
+
+</p>
+<p>Except for type <strong>boolean</strong>, values of primitive types can be assigned to any variable whose type represents a range that is as wide or wider than the range of the value's type.  
+<em>(Values of type </em><strong><em>boolean</em></strong><em> can only be assigned to variables of type 
+<strong>boolean</strong>.)
+</em> </p>
+<p>With respect to reference types, the reference to an object instantiated from a given class can be assigned to any of the following without the use of a cast:
+
+    </p>
+<ul>
+	<li>Any reference variable whose type is the same as the class from which the object was instantiated.
+    </li>
+	<li>Any reference variable whose type is a superclass of the class from which the object was instantiated.
+    </li>
+	<li>Any reference variable whose type is an interface that is implemented by the class from which the object was instantiated.
+    </li>
+	<li>Any reference variable whose type is an interface that is implemented by a superclass of the class from which the object was instantiated.
+	</li>
+	<li>A few other cases involving the class and interface hierarchy. </li>
+</ul>
+<p>Assignments of references, other than those listed above, require the use of a cast to change the type of the reference.
+
+</p>
+<p>It is not always possible to perform a successful cast to convert the type of a reference.  Whether or not a cast can be successfully performed depends on the relationship of the classes involved in the class hierarchy.
+
+</p>
+<p>A reference to any object can be assigned to a reference variable of the type 
+<strong>Object</strong>, because the <strong>Object</strong> class is a superclass of every other class. </p>
+<p>When we cast a reference along the class hierarchy in a direction from the root class 
+<strong>Object</strong> toward the leaves, we often refer to it as a <em>downcast</em>. </p>
+<p>Whether or not a method can be called on a reference to an object depends on the current type of the reference and the location in the class hierarchy where the method is defined.  In order to use a reference of a class type to call a method, the method must be defined at or above that class in the class hierarchy.
+
+</p>
+<p>A sample program is provided that illustrates much of the detail involved in type conversion, method invocation, and casting with respect to reference types. </p>
+
+	
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>I will begin the discussion of runtime polymorphism through method overriding and inheritance in the next chapter
+<em>(following the review chapter)</em>.
+
+</p>
+<p>I will demonstrate that for runtime polymorphism, the selection of a method for execution is based on the actual type of object whose reference is stored in a reference variable, and not on the type of the reference variable on which the method is called.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1610: Type Conversion, Casting, etc.</li>
+					<li>File: Java1610.htm
+</li>
+					<li>Published: 02/26/02</li>
+					<li>Revised: 03/07/20</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listings</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_11">Listing 11</a> below. </p>
+
+	
+<div class="a"><a name="Listing_11">Listing 11</a>. Complete program 
+				listing.
+				<pre>/*File Poly02.java
+Copyright, R.G.Baldwin
+
+This program illustrates downcasting
+
+Program output is:
+  
+m in class B
+**************************************/
+
+class A extends Object{
+  //this class is empty
+}//end class A
+//===================================//
+
+class B extends A{
+  public void m(){
+    System.out.println("m in class B");
+  }//end method m()
+}//end class B
+//===================================//
+
+class C extends Object{
+  //this class is empty
+}//end class C
+//===================================//
+
+public class Poly02{
+  public static void main(String[] args){
+    Object var = new B();
+    //Following will not compile
+    //var.m();
+    //Following will not compile
+    //((A)var).m();    
+    //Following will compile and run
+    ((B)var).m();
+    
+    //Following will compile and run
+    B v1 = (B)var;
+    //Following will not execute
+    //C v2 = (C)var;
+    //Following will not compile
+    //C v3 = (B)var;
+  }//end main
+}//end class Poly02</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

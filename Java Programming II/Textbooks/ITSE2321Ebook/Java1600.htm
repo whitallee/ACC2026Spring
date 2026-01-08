@@ -1,0 +1,383 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1600</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+<h1 class="auto-style1">Java1600: Objects and Encapsulation</h1>
+
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#The_essence_of_OOP">The essence of OOP</a></li>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a>
+	</li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a></li>
+	<li><a href="#Whats_next">What's next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+<p>The previous chapters in this Ebook attempted to cover the fundamentals of 
+Java programming while minimizing the use of OOP concepts. As you probably 
+noticed, it is not possible to program in Java without using some aspects of 
+OOP.</p>
+<p>This chapter is the first in a series of chapters designed to take a deep 
+dive and teach you the essence of Object-Oriented Programming (OOP) using Java. 
+Before continuing with this chapter, however, I recommend that you study Kjell 
+<a href="http://programmedlessons.org/Java9/chap80/ch80_01.html">CHAPTER 80 — Inheritance</a> through 
+<a href="http://programmedlessons.org/Java9/chap83/ch83_01.html">CHAPTER 83 — Interfaces</a>.</p>
+	<h2><a name="The_essence_of_OOP">The essence of OOP</a></h2>
+	<p>My dictionary provides several definitions for the word essence.  Among those definitions are the following:</p>
+<ul>
+	<li>The property necessary to the nature of a thing</li>
+	<li>The most significant property of a thing</li>
+</ul>
+<p>Thus, the remaining chapters will describe and discuss the necessary and most 
+significant aspects of OOP using Java. In other words, I will discuss the 
+<strong><em>essence</em></strong> of OOP using Java. The OOP paradigm can be 
+difficult to understand. However, assuming that you understand the material in 
+the previous chapters, if you put your mind to it, you should be able to read and understand the 
+remaining chapters in this Ebook.</p>
+	
+<h2> <a name="Viewing_tip">Viewing tip</a></h2>
+<p> I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3> <a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Instantiating a new Radio object.</li>
+	<li><a href="#Listing_2">Listing 2</a>. Calling the playStation method. </li>
+</ul>
+
+	
+	<h1 class="auto-style2"><a name="Preview">Preview</a></h1>
+	<p>In order to understand OOP, you need to understand the following three concepts:</p>
+<ul>
+	<li>Encapsulation
+    </li>
+	<li>Inheritance
+    </li>
+	<li>Polymorphism</li>
+</ul>
+<p>This chapter will concentrate on encapsulation.  Encapsulation will be used as a springboard for a discussion of objects.</p>
+<p>A description of an object-oriented program will be provided, along with a description of an object, and how it relates to encapsulation.</p>
+<p>In order to relate object-oriented programming to the real world, an 
+old-fashioned car radio will be used to illustrate and discuss several aspects of software objects.  For example, you will learn that car radios, as well as software objects have the ability to store data, along with the ability to modify or manipulate that data.</p>
+<p>You will learn that car radios, as well as software objects, have the ability to accept messages and to perform an action, modify their state, return a value, or some combination of the above.</p>
+<p>You will learn some of the jargon used in OOP, including persistence, state, messages, methods, and behaviors.</p>
+<p>You will learn where objects come from, and you will learn that a <em>
+<strong>class</strong></em> is a set of plans that can be used to construct objects.  You will learn that a Java 
+<em><strong>object</strong></em> is an <em>instance</em> of a <em><strong>class</strong></em>.</p>
+<p>You will see a little bit of Java code, used to create an object, and then to send a message to that object (invoke 
+or call a method on the object).</p>
+<p>You will learn about Java references and reference variables.  You will also learn a little about memory allocation for objects and variables in Java.</p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<p>As mentioned earlier, I will describe and discuss the necessary and most significant aspects of OOP using Java.</p>
+<p><strong>The three pillars</strong></p>
+<p>Most books on OOP will tell you that in order to understand OOP, you need to understand the following three concepts:</p>
+<ul>
+	<li>Encapsulation</li>
+	<li>Inheritance</li>
+	<li>Polymorphism</li>
+</ul>
+<p>I agree with that assessment.</p>
+<p><em>(Some books will also add abstraction and/or late binding to the list.  I tend to think of 
+those two topics as being included in one or more of the three concepts listed above.)</em></p>
+<p><strong>Begin with encapsulation</strong></p>
+<p>Generally, speaking, these three concepts increase in difficulty going down the list from top to bottom.  Therefore, I will begin with Encapsulation and work my way down the list in successive 
+chapters.</p>
+<p><strong>What is an Object-Oriented Program? </strong> </p>
+<p>Many authors would answer this question something like the following:</p>
+<p><em>An Object-Oriented Program consists of a group of cooperating objects, exchanging messages, for the purpose of achieving a common objective.</em></p>
+<p><strong>What is an object?</strong></p>
+<p>An object is a software construct that encapsulates data, and the ability to use or modify that data, into a software entity.</p>
+<p><strong>What is encapsulation?</strong></p>
+<p>An interesting description of encapsulation was provided in an article by Rocky Lhotka regarding VB.NET.  That description reads as follows:</p>
+<p><em>"Encapsulation is the concept that an object should totally separate its interface from its implementation. All the data and implementation code for an object should be entirely hidden behind its interface.</em></p>
+<p><em>The idea is that we can create an interface (Public methods in a class) and, as long as that interface remains consistent, the application can interact with our objects. This remains true even if we entirely rewrite the code within a given method thus the interface is independent of the implementation."</em></p>
+<p>I like this description, so I won't try to improve on it.  However, I will try to illustrate it in the paragraphs that follow. </p>
+<p><strong>A real-world analogy</strong></p>
+<p>Abstract concepts, such as the concept of an object or encapsulation, can often be best understood by comparing them to real-world analogies.  One imperfect, but fairly good analogy to a software object is the radio in your car.
+<em>(At least that was true in 2001 when this chapter was originally published.</em>)</p>
+<p><strong>The ability to store data</strong></p>
+<p>Your car radio probably has the ability to store data, and to allow you to use and modify that data at will.  
+<em>(However, you can only use and modify that data through use of the human interface that is provided by the manufacturer of the radio.)</em></p>
+<p>The data that can be stored in your car radio probably includes a list of five or more frequencies that correspond to your favorite radio stations. </p>
+<p><strong>Using the stored data</strong></p>
+<p>The radio provides a mechanism <em>(human interface) </em>that allows you to use the data stored therein.</p>
+<p>When you press one of the frequency-selector buttons on the front of the radio, the radio automatically tunes itself to the frequency corresponding to that button.  
+<em>(In this case, you, the user, are sending a message to the radio object asking it to perform a particular action.)</em></p>
+<p>If you have previously stored a favorite frequency in the storage location corresponding to that button, pressing the button 
+<em>(sending the message)</em> will cause the radio station transmitting at that frequency to be heard through the radio's speakers.</p>
+<p>If you have not previously stored a favorite frequency in the storage location corresponding to that button, you will probably only hear static. 
+<em>(That doesn't mean that the radio object failed to respond correctly to the message.  It simply means that its response was based on bad data.)
+</em> </p>
+<p><strong>Modifying the stored data</strong></p>
+<p>The human interface also makes it possible for you to store or modify those five or more frequency values.  This is done in different ways for different radios.  On my car radio, the procedure is:</p>
+<ul>
+	<li>Manually tune the radio to the desired frequency</li>
+	<li>Press one of the buttons and hold it down for several seconds.</li>
+</ul>
+<p>When the radio beeps, I know that the new frequency value has been stored in a storage location that corresponds to that particular button. </p>
+<p><strong>Please change your state</strong></p>
+<p>What I have done here is to send a message to the radio object asking it to 
+<em>change its state</em>.  The beep that I hear could be interpreted as the radio object returning a value back to me indicating that the mission has been accomplished.  
+<em>(Alternately, we might say that the radio object sent a message back to me.)</em></p>
+<p>We say that an object has changed its state when one or more data values stored in the object have been modified.</p>
+<p>We also say that when an object responds to a message, it will usually perform an action, change its state, return a value, or some combination of the above.</p>
+<p><strong>Please perform an action</strong></p>
+<p>Following this, when I press that button <em>(send a message)</em>, the radio object will be automatically tuned to that frequency.</p>
+
+
+
+<div class="a"><strong>Historical note:</strong>
+
+<p>While the ability to cause your car radio to remember your list of favorite stations may seem like a miracle of modern digital electronics, the truth is that radios had this capability long before they contained digital electronics.  My first car had a radio that accomplished this feat using strings, pulleys, and levers.</p>
+	<p>As I recall, in order to set the frequency for a button, I had to manually tune the radio to a station by turning a knob, pull one of the buttons out about a quarter of an inch, and then push it in again.  From that point until I did the same thing again, whenever I pressed that button, some kind of a mechanical contraption caused a big rotary capacitor to turn just the right amount to tune for a particular radio station.</p>
+	<p>Also, I remember my grandfather having a table-model radio in the early 1940's that had radio buttons.  He used them to select his favorite stations, as he surfed the airwaves.</p>
+	<p><em>(Interestingly, the term radio button has now become a part of programming jargon, signifying certain visual components used in graphical user interfaces.)</em> </p>
+</div>
+
+<p><strong>Enough of that, now back to my car radio</strong></p>
+<p>If I drive to Dallas and press a button that I have associated with a 
+particular radio station in Austin, I will probably hear static. In that case, 
+I may want to change the frequency value associated with that button. I can 
+follow the same procedure described earlier to <em>set</em> the 
+frequency value associated with that button to correspond to one of the radio 
+stations in Dallas. <em>(Again, I would be sending a message to the radio object 
+asking it to change its state.)</em></p>
+<p><strong>Jargon</strong></p>
+<p>As you can see from the above discussion, the world of OOP is awash with jargon, and the ability to translate the jargon is essential to an understanding of the published material on OOP.  Therefore, as we progress through this series of 
+chapters, I will introduce you to some of that jargon and try to help you understand the meaning of the jargon.</p>
+<p><strong>Persistence</strong></p>
+<p>The ability of your car radio to remember your list of favorite stations is often referred to as persistence.  An object that has the ability to store and remember values is often said to have persistence. </p>
+<p><strong>State</strong></p>
+<p>It is often said that the <em>state</em> of an object at a particular point in time is determined by the values stored in the object.  In our analogy, even if we own identical radios, unless the two of us have the same list of favorite radio stations, 
+associated with the same combination of buttons, the state of your radio object at any particular point in time will be different from the state of my radio object.</p>
+
+
+
+<div class="a"><strong>Identical objects with identical states:</strong>
+
+<p>It is perfectly OK for the two of us to own identical radios and to cause the two radio objects to contain the same list of frequencies. Even if two objects have the same state at the same time, they are still separate and distinct objects. While this is obvious in the real world of car radios, it may not be quite as obvious in the virtual world of computer programming.</p>
+</div>
+
+<p><strong>Sending a message</strong></p>
+<p>A person who speaks in OOP-speak might say that pressing one of the frequency-selector buttons on the front of the radio sends a message to the radio object, asking it to perform an action 
+<em>(tune to a particular station)</em>.
+
+That person might also say that storing a new frequency that corresponds to a particular button entails sending a message to the radio object asking it to change its state. </p>
+<p><strong>Invoking or calling a method
+
+</strong></p>
+<p>Java-speak is a little more specific than general OOP-speak.  In Java-speak, we might say that pressing one of the selector buttons on the front of the radio invokes or calls a method on the radio object.  The behavior of the method is to cause the object to perform an action.</p>
+<p>As a practical matter, the physical manifestation of sending a message to an object in Java is to cause that object to execute one of its methods.</p>
+<p>Similarly, we might say that storing a new frequency that corresponds to a particular button invokes a 
+<em>setter</em> method on the radio object.</p>
+<p><em>(In an earlier paragraph, I said that I could follow a specific procedure to 
+<strong>set</strong> the frequency value associated with a button to correspond to one of the radio stations in Dallas.  Note the use of the words set and setter in this jargon.)</em></p>
+<p><strong>Behavior</strong></p>
+<p>In addition to state, objects are often also said to have <em>behavior</em>.  The overall behavior of an object is determined by the combined behaviors of its individual methods.</p>
+<p>For example, one of the behaviors exhibited by our radio object is the ability to play the radio station at a particular frequency.  When a frequency is selected by pressing a selector button, the radio knows how to translate the radio waves at that frequency into audio waves compatible with our range of hearing, and to send those audio waves out through the speakers.</p>
+<p>Thus, the radio object behaves in a specific way in response to a message asking it to tune to a particular frequency.</p>
+<p><strong>Where do objects come from?</strong></p>
+<p>In order to mass-produce car radios, someone must first create a set of 
+manufacturing plans, 
+<em>(drawings, or blueprints) </em>for the radio.  Once the plans are available, the manufacturing people can produce millions of nearly identical radios.</p>
+<p><strong>A class definition is a set of plans</strong></p>
+<p>The same is true for software objects.  In order to create a software object in Java, it is necessary for someone to first create a plan.</p>
+<p>In Java, we refer to that plan as a <em>class</em>.</p>
+<p>The class is defined by a Java programmer. Once the class definition is 
+available, that programmer 
+<em>(or other programmers)</em> can use it to produce millions of nearly identical objects.</p>
+<p><em>(While millions may sound like a lot of objects, I'm confident that since Java was released into the programming world 
+around 1997, Java programmers around the world have created millions of objects using the standard Java class named 
+<strong>Button</strong>.)</em></p>
+<p><strong>An instance of a class</strong></p>
+<p>If we were standing at the output end of the factory that produces car radios, we might pick up a brand new radio and say that it is an 
+<em>instance</em> of the plans used to produce the radio.  
+<em>(Unless they were object-oriented programmers, the people around us might think we were a little odd when they hear us say that.)</em></p>
+<p>However, it is common jargon to refer to a software object as an <em>instance of a class</em>.</p>
+<p><strong>To instantiate an object</strong></p>
+<p>Furthermore, somewhere along the way, someone turned the word instance into a verb, and it is also common jargon to say that when creating a new object, we are 
+<em>instantiating</em> an object.</p>
+<p><strong>A little bit of code</strong></p>
+<p>It is time to view a little bit of Java code.</p>
+<p>Assuming that you have access to a class definition, there are several different ways that you can create an object in Java.  The most common way is using syntax similar to that shown in 
+<a href="#Listing_1">Listing 1</a> below. </p>
+
+<div class="a">
+<a name="Listing_1">Listing 1</a>. Instantiating a new Radio object.
+
+<pre>Radio myObjRef = new Radio();</pre>
+</div>
+
+<p><strong>What does this mean?</strong></p>
+<p>Technically, the expression on the right-hand side of the equal sign in  
+<a href="#Listing_1">Listing 1</a> applies the <strong>new</strong> operator to a 
+<em>constructor</em> for the class named 
+<strong>Radio</strong> in order to cause the new object to come into existence and to occupy memory.</p>
+<p><em>(Suffice it at this point to say that a constructor is code that assists in the creation of an object according to the plans contained in a class definition.  The primary purpose of a constructor is to provide initial values for the new object, but the constructor is not restricted to that behavior alone.)</em></p>
+<p><strong>A reference to the object</strong></p>
+<p>The right-hand expression in  
+<a href="#Listing_1">Listing 1</a> returns a <em>reference</em> to the new object.</p>
+<p><strong>What can you do with a reference?</strong></p>
+<p>The reference can later be used to send messages to the new object <em>(call methods belonging to the new object)</em>. </p>
+<p><strong>Saving the reference</strong></p>
+<p>In order to use the reference later, it is necessary to save it for later use.</p>
+<p>The expression on the left-hand side of the equal sign <em>(assignment 
+operator)</em> in   
+<a href="#Listing_1">Listing 1</a> declares a variable of the type <strong>Radio</strong> named
+<strong>myObjRef</strong>.</p>
+<p><em>(Because this type of variable will ultimately be used to store a reference to an object, we often refer to it by the term
+<strong>reference variable</strong>.)</em></p>
+<p><strong>What does this mean?</strong></p>
+<p>Declaring a variable causes memory to be set aside for use by the variable.  Values can then be stored in that memory space and accessed later by calling up the name given to the variable when it was declared.</p>
+<p><strong>Assignment of values</strong></p>
+<p>The assignment operator in   
+<a href="#Listing_1">Listing 1</a> causes the object's reference returned by the right-hand expression to be assigned to 
+<em>(saved as a value in) </em>the reference variable named
+<strong>myObjRef</strong> <em>(created by the left-hand expression)</em>. </p>
+<p><strong>Memory allocation</strong></p>
+<p>Once the code in    
+<a href="#Listing_1">Listing 1</a> has finished execution, two distinct and different chunks of memory have been allocated and populated.</p>
+<p>One <em>(potentially large)</em> chunk of memory has been allocated <em>(by the right-hand expression)</em> to contain the object itself.  This chunk of memory has been populated according to the plans contained in the definition of the class named
+<strong>Radio</strong>.</p>
+<p>The other chunk of memory is a relatively small chunk allocated <em>(by the left-hand expression)</em> for the reference variable containing the reference to the object.</p>
+<p><strong>Calling a method on the object</strong></p>
+<p>Assume that the definition of the <strong>Radio</strong> class defines a method with the following format 
+<em>(also assume that this method is intended to simulate pressing a frequency-selector button on the front of the radio)</em>:</p>
+<div class="a">
+<pre>public void playStation(int stationNumber)</pre>
+</div>
+<p><strong>What does this mean?</strong></p>
+<p>Generally, in our radio-object context, this format implies that the behavior of the method named
+<strong>playStation</strong> will cause the specific station identified by an integer value passed as 
+<strong>stationNumber</strong> to be selected for play. </p>
+<p><strong>Public and void</strong></p>
+<p>The <em>void</em> return type means that the method doesn't return a value.</p>
+<p>The <em>public</em> modifier means that the button can be pressed by anyone in the car who can reach it.</p>
+<p><em>(Car radios don't have frequency-selector buttons corresponding to the private modifier in Java.)</em></p>
+<p><strong>The method signature</strong></p>
+<p>Continuing with our exposure of jargon, some authors would say that the following constitutes the 
+<em>method signature</em> for the method identified above:</p>
+<div class="a">
+<pre>playStation(int stationNumber) </pre>
+</div>
+<p>A little more Java code</p>
+<p><a href="#Listing_2">Listing 2</a> shows the code from the earlier listing, expanded to cause the method named
+<strong>playStation</strong> to be called. </p>
+
+<div class="a">
+<a name="Listing_2">Listing 2</a>. Calling the playStation method.
+
+<pre>Radio myObjRef = new Radio();
+
+myObjRef.playStation(3);</pre>
+</div>
+
+<p>The first statement in <a href="#Listing_2">Listing 2</a> is a repeat of the statement from the earlier listing.  It is repeated here simply to maintain continuity. </p>
+<p><strong>Method invocation syntax</strong></p>
+<p>The second statement in <a href="#Listing_2">Listing 2</a> is new.
+
+</p>
+<p>This statement shows the syntax used to send a message to a Java object, or to 
+call a method on that object <em>(depending on whether you prefer OOP-speak or Java-speak)</em>.</p>
+<p><strong>Join the method name to the reference</strong></p>
+<p>The syntax required to call a method on a Java object joins the name of the method to the object's reference, using a period as the joining operator.</p>
+<p><em>(In this case, the object's reference is stored in the reference variable named
+<strong>myObjRef</strong>.  However, there are cases where an object's reference may be created and used in the same expression without storing it in a reference variable.  We often refer to such an object as an anonymous object.)</em></p>
+<p><strong>Pressing a radio button</strong></p>
+<p>Given the previous discussion, the numeric value 3, passed to the method when it is 
+called, simulates the pressing of the third button on the front of the radio <em>(or the fourth button if you elect to number your buttons 0, 1, 2, 3, 4)</em>. </p>
+	<h1 class="auto-style2"><a name="Summary">Summary</a></h1>
+<p>This is the first in a series of chapters that describe and discuss the necessary and most significant 
+<em>(essential)</em> aspects of OOP using Java. </p>
+<p>In order to understand OOP, you need to understand the following three concepts:</p>
+<ul>
+	<li>Encapsulation
+    </li>
+	<li>Inheritance
+    </li>
+	<li>Polymorphism</li>
+</ul>
+<p>This chapter has concentrated on encapsulation.  Encapsulation was used as a springboard for a discussion of objects.</p>
+<p>A description of an object-oriented program was provided, along with a description of an object, and how it relates to encapsulation.</p>
+<p>In order to relate object-oriented programming to the real world, a car radio was used to illustrate and discuss several aspects of software objects.</p>
+<p>You learned that car radios, as well as software objects, have the ability to store data, along with the ability to modify or manipulate that data.</p>
+<p>You learned that car radios, as well as software objects, have the ability to accept messages and to perform an action, modify their state, return a value, or some combination of the above.</p>
+<p>You learned some of the jargon used in OOP, including persistence, state, messages, methods, and behaviors.</p>
+<p>You learned where objects come from, and you learned that a class is a set of plans that can be used to construct objects. You learned that a Java object is an 
+<em>instance of a class</em>.</p>
+<p>You saw a little bit of Java code, used to create an object, and then to send a message to that object (invoke a method on the object).</p>
+<p>You learned about Java references and reference variables.  You learned a little about memory allocation for objects and variables in Java. </p>
+	<h1 class="auto-style2"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The next chapter in the series (following the review chapter) will introduce you to the Java class.</p>
+<p>Continuing with the real-world example introduced in this chapter, the next 
+chapter will provide a complete Java program that simulates the manufacture and use of a car radio.</p>
+<p>Along the way, you will see examples of  <em>(or read about) </em>class definitions, constructing objects, saving references to objects, setter methods, sending messages to objects, instance variables and methods, class variables, array objects, persistence, and objects performing actions.</p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1600: Objects and Encapsulation</li>
+					<li>Revised: 08/06/22</li>
+				</ul>
+</div>
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

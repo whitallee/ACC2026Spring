@@ -1,0 +1,397 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4060</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4060: Duplicate Elements, Ordered Collections, Sorted Collections, and Interface Specialization</h1>
+
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Discussion_and_sample_code">Discussion</a><ul>
+		<li><a href="#We_will_start_with_a_quiz">We will start with a quiz</a></li>
+		<li><a href="#The_root_of_the_Collection_hierarchy">The root of the Collection hierarchy</a><ul>
+			<li><a href="#What_does_Oracle_say_about_this">What does Oracle say about this?</a></li>
+		</ul>
+		</li>
+		<li><a href="#What_about_duplicate_elements">What about duplicate elements?</a></li>
+		<li><a href="#What_is_a_set">What is a set?</a></li>
+		<li><a href="#What_is_a_list">What is a list?</a></li>
+		<li><a href="#Ordered_is_not_the_same_as_sorted">Ordered is not the same as sorted</a></li>
+		<li><a href="#Is_ascending_sort_order_always_required">Is ascending sort order always required?</a><ul>
+			<li><a href="#Does_case_matter_in_String_objects">Does case matter in String objects?</a></li>
+		</ul>
+		</li>
+		<li><a href="#Sub_interfaces_have_more_stipulations">Sub-interfaces have more stipulations</a><ul>
+			<li><a href="#Stipulations_on_set">Stipulations on set</a></li>
+			<li>
+			<a name="Stipulations_on_SortedSet0" href="#Stipulations_on_SortedSet">Stipulations on SortedSet</a></li>
+		</ul>
+		</li>
+		<li><a href="#We_will_end_with_a_quiz">We will end with a quiz</a><ul>
+			<li><a href="#Question_1">Question 1</a></li>
+			<li><a href="#Question_2">Question 2</a></li>
+			<li><a href="#Question_3">Question 3</a></li>
+			<li><a href="#Question_4">Question 4</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular. </p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h1><a name="Preview">Preview</a></h1>
+<p>You learned in earlier chapters that the Java Collections Framework defines eight 
+core interfaces, in two distinct trees.
+One of the trees, which consists of six interfaces, is rooted in the interface named
+<strong>Collection</strong>. The other 
+tree, which consists of two interfaces, is 
+rooted in the interface named <strong>Map</strong>.</p>
+<p>You learned the names and the 
+inheritance structure of those interfaces. You also learned about their 
+purpose. You saw how the interfaces declare polymorphic methods that apply to 
+implementations of the interfaces, and you learned about the optional methods of 
+the <strong>Collection</strong> interface and the <strong>Map</strong> 
+interface.</p>
+<p>In this chapter you will learn that all of the implementations of the 
+interfaces on the <strong>Collection</strong> side of the Java Collections Framework
+<em>(the Collection hierarchy)</em> implement one of the sub-interfaces 
+of the <b>Collection</b> interface. <em>(A similar discussion regarding the 
+<strong>Map</strong> 
+side of the Java Collections framework will be deferred until a future chapter.)</em></p>
+<p>You will learn that a <b>Set</b> object cannot contain duplicate elements, 
+but a <b>List</b> object can contain duplicate elements.</p>
+<p>You will learn about the difference between <i>ordered</i> collections and <i>
+sorted</i> collections. You will also learn about <i>ascending order</i> 
+and the <i>natural ordering</i> of objects. </p>
+<p>In addition, you will learn 
+how more specialized stipulations are placed on interfaces as you progress down 
+the interface inheritance hierarchy of the Java Collections Framework.</p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion_and_sample_code">Discussion</a></h1>
+<h2><a name="We_will_start_with_a_quiz">We will start with a quiz</a></h2>
+<p>I am going to begin this chapter with a quiz . Is the following statement True 
+or False?</p>
+<blockquote>
+	The <b>TreeSet</b> class is a direct implementation of the <b>Collection</b> 
+	interface.</blockquote>
+<p>The answer is False. </p>
+<p>The <b>TreeSet</b> class is not a direct implementation of 
+the <b>Collection</b> interface. Rather, the <b>TreeSet</b> class is a direct 
+implementation of the <b>SortedSet</b> interface. The <b>SortedSet</b> 
+interface extends the <b>Set</b> interface, and the <b>Set</b> interface extends 
+the <b>Collection</b> interface.</p>
+<p>The interface hierarchy for the Java Collections Framework is shown below:</p>
+
+<ul>
+	<li>Collection
+	<ul>
+		<li>Set
+		<ul>
+			<li>SortedSet</li>
+		</ul>
+		</li>
+		<li>List</li>
+		<li>Queue</li>
+		<li>Deque</li>
+	</ul>
+	</li>
+	<li>Map
+	<ul>
+		<li>SortedMap</li>
+	</ul>
+	</li>
+</ul>
+<p>As you learned in an earlier chapter, the Java Collections Framework doesn&#39;t 
+have a single root. As shown above, there are two distinct trees in the 
+framework -- The <strong>Collection</strong> hierarchy and the <strong>Map</strong> hierarchy.</p>
+<h2><a name="The_root_of_the_Collection_hierarchy">The root of the Collection hierarchy</a></h2>
+<p>The <b>Collection</b> interface is the root of the collection hierarchy. 
+The Java Collections Framework doesn&#39;t provide any direct implementations of the <b>Collection</b> 
+interface. All of the implementations of the interfaces in the <strong>
+Collection</strong> hierarchy implement one of the sub-interfaces of the <b>Collection</b> 
+interface. </p>
+<h3><a name="What_does_Oracle_say_about_this">What does Oracle say about this?</a></h3>
+<p>Here is what the Oracle documentation has to say on the topic of the <b>
+Collection</b> interface: </p>
+<p><i>&quot;The SDK does not provide any direct implementations of this interface: it 
+provides implementations of more specific sub-interfaces like <strong>Set</strong> and 
+<strong>List</strong>. This 
+interface is typically used to pass collections around and manipulate them where 
+maximum generality is desired.&quot;</i></p>
+<p>The Oracle documentation also states:</p>
+<p><i>&quot;Bags or multisets (unordered collections that may contain duplicate 
+elements) should implement this interface directly.&quot;</i> </p>
+<h2><a name="What_about_duplicate_elements">What about duplicate elements?</a></h2>
+<p>Some implementations of <b>Collection</b> allow duplicate elements, and 
+others do not. Implementations of the <b>List</b> interface <i>(such as 
+<strong>ArrayList</strong>)</i> allow duplicate elements. Implements of <b>Set</b> and <b>
+SortedSet</b> <i>(such as <strong>TreeSet</strong>)</i> do not allow duplicate elements. 
+This was illustrated in an earlier chapter.</p>
+<p>A sample program in that earlier chapter created two collection objects and applied 
+the polymorphic <b>add</b> method to add the same elements to each collection. 
+One of the collection objects was of type <b>ArrayList</b>, and the other 
+collection object was of type <b>TreeSet</b>. The elements added to each 
+collection contained one pair of duplicate elements. The duplicate element 
+was automatically excluded from the <b>TreeSet</b> object, but was retained in 
+the <b>ArrayList</b> object. </p>
+<h2><a name="What_is_a_set">What is a set?</a></h2>
+<p>According to Oracle, a <b>Set</b> is a <i>&quot;collection that contains no duplicate 
+elements ... this interface models the mathematical set abstraction.&quot;</i> </p>
+<p>An 
+object of type <b>Set</b> is typically used to model collections such as Social 
+Security numbers, where duplicates are not allowed. </p>
+<h2><a name="What_is_a_list">What is a list?</a></h2>
+<p>Also according to Oracle, a <b>List</b> is <i>&quot;An ordered collection (also known 
+as a sequence). The user of this interface has precise control over where in the 
+list each element is inserted. The user can access elements by their integer 
+index (position in the list), and search for elements in the list.&quot;</i> </p>
+<h2><a name="Ordered_is_not_the_same_as_sorted">Ordered is not the same as sorted</a></h2>
+<p>Note that an <i>ordered</i> collection is not the same as a <i>sorted</i> 
+collection. </p>
+<p>The fact that the collection is ordered derives from the fact 
+that each element in the collection has a specific position specified by an 
+index. </p>
+<p>In a sorted collection, the position of each element is determined 
+by its value relative to the values of its predecessors and successors.</p>
+<p>Oracle goes on to say, <i>&quot;Unlike sets, lists typically allow duplicate 
+elements. More formally, lists typically allow pairs of elements e1 and e2 such 
+that e1.equals(e2), and they typically allow multiple null elements if they 
+allow null elements at all.&quot;</i></p>
+<h2><a name="Is_ascending_sort_order_always_required">Is ascending sort order always required?</a></h2>
+<p>Not all implementations of the <b>Collection</b> interface maintain the 
+elements in ascending sort order. Some may, and others do not. For 
+example, as discussed above, implementations of the <b>List</b> interface <i>
+(such as <strong>ArrayList</strong>)</i> do not maintain their elements in sorted order at all. 
+In other words, the position of an element in an <b>ArrayList</b> does not 
+depend on the value of the element.</p>
+<p>On the other hand, implementations of the interface named <b>SortedSet </b>
+<i>(such as <strong>TreeSet</strong>) </i>and the interface named <b>SortedMap </b>do maintain their elements in 
+sorted order. However, that order is not necessarily ascending. </p>
+<p>When 
+an object is instantiated from a class that implements the <b>SortedSet</b> 
+interface, the sorting order for that object can be established by providing an 
+object instantiated from a class that implements the 
+<a href="../Java4090-%20The%20Comparator%20Interface,%20Part%201/Java4090.htm">Comparator</a> 
+interface. In that case, the author of the class that implements the <b>Comparator</b> 
+interface determines 
+the order imposed on the elements in the collection. </p>
+<h3><a name="Does_case_matter_in_String_objects">Does case matter in String objects?</a></h3>
+<p>For example, if your <b>SortedSet</b> object contains references to <b>String</b> 
+objects, the natural ascending sort would take the difference between upper case 
+and lower case characters into account. 
+</p>
+<p>However, you might prefer that 
+case be ignored when establishing the sorted order. You can accomplish 
+this by providing an object of a class that implements the <strong>Comparator</strong> 
+interface and which defines the <b>compare method </b>and the <b>equals</b> method in 
+such a way as to eliminate case considerations for comparisons of <b>String</b> 
+objects.</p>
+<h2><a name="Sub_interfaces_have_more_stipulations">Sub-interfaces have more stipulations</a></h2>
+<p>As you progress down the inheritance hierarchy, you find that additional 
+stipulations apply at each level of inheritance. As an example, according 
+to Oracle, <i>&quot;The Set interface places additional stipulations, beyond those 
+inherited from the Collection interface, on the contracts of all constructors 
+and on the contracts of the <b>add</b>, <b>equals</b> and <b>hashCode</b> 
+methods.&quot;</i></p>
+<p>The important point is that specific sub-interfaces of the <b>Collection</b> 
+interface can define requirements that do not apply to all sub-interfaces of the
+<b>Collection</b> interface. </p>
+<h3><a name="Stipulations_on_set">Stipulations on set</a></h3>
+<p>For example, the <b>add</b> method of the
+<b>Set</b> interface stipulates the following:</p>
+<blockquote>
+	<i>&quot;Adds the specified element to this set if it is not already present.&quot;</i></blockquote>
+<p>On the other hand, the <b>add</b> method of the <b>Collection</b> interface 
+simply states:</p>
+<blockquote>
+	<i>&quot;Ensures that this collection contains the specified element.&quot;</i></blockquote>
+<p>Thus, the contract for the <b>add</b> method of an object of a class that 
+implements the <b>Set</b> interface is more specialized than the contract for 
+the <b>add</b> method of an object of a class that implements the <b>Collection</b> 
+interface.</p>
+<p>An additional stipulation on the constructor for a <b>Set</b> object is that 
+all constructors must create a set that contains no duplicate elements. </p>
+<h3><a name="Stipulations_on_SortedSet">Stipulations on SortedSet</a></h3>
+<p>The <b>SortedSet</b> interface extends the <b>Set</b> interface. The <b>
+SortedSet</b> interface contains the following stipulation that makes it more 
+specialized than a <b>Set</b>. </p>
+<p><i>&quot;A set that further guarantees that its iterator will traverse the set in 
+ascending element order, sorted according to the natural ordering of its 
+elements (see 
+<a href="../Java4070-%20The%20Comparable%20Interface,%20Part%201/Java4070.htm">Comparable</a>), or by a <strong>Comparator</strong> provided at sorted set creation 
+time.&quot;</i> </p>
+<h2><a name="We_will_end_with_a_quiz">We will end with a quiz</a></h2>
+<p>I&#39;m going to finish this chapter with several questions in the form of a quiz. 
+To ensure that this is a learning experience, I will provide an explanation in 
+addition to the answer for each question. </p>
+<h3><a name="Question_1">Question 1</a></h3>
+<p>True or False? A collection that implements the <b>List</b> 
+interface maintains its elements in ascending alphanumeric order.</p>
+<p>The answer to question 1 is False. Unlike collections that implement 
+the <b>SortedSet</b> interface, the order of the elements in a collection that 
+implements the <b>List</b> interface is not based on the values of the objects 
+referred to by the elements in the list. </p>
+<h3><a name="Question_2">Question 2</a></h3>
+<p>True or False? A collection that implements the <b>List</b> 
+interface is an unordered collection.</p>
+<p>The answer to question 2 is also False. A collection that implements 
+the <b>List</b> interface is an <strong><em>ordered</em></strong> collection <i>(also known as a sequence)</i>. 
+According to Oracle, <i>&quot;The user of the interface has precise control over where 
+in the list each element is inserted.&quot; </i>Elements can be inserted and 
+retrieved on the basis of their integer index <i>(position in the list)</i> 
+using the following methods: </p>
+<ul>
+	<li><b>add(int index, Object element)</b> </li>
+	<li><b>get(int index)</b></li>
+</ul>
+<p>Valid index values are positive integers that begin with zero. When the
+<b>add</b> method is used to insert an element at a specific position in the 
+sequence, the element currently at that position <i>(if any)</i> and any 
+subsequent elements are shifted toward higher index values to make room for the 
+new element.</p>
+<p>Another version of the <b>add</b> method takes a reference to an object as an 
+incoming parameter and appends the specified element to the end of the 
+collection.</p>
+<p>The <b>get</b> method simply returns the element at the specified position in 
+the collection.</p>
+<p>The <b>List</b> interface also declares various other methods that can be 
+used to manipulate the contents of the collection.</p>
+<h3><a name="Question_3">Question 3</a></h3>
+<p>True or False? A collection that implements the <b>List</b> 
+interface is allowed to contain duplicate values.</p>
+<p>The answer to question 3 is True. Unlike a collection that implements 
+the <b>Set</b> interface, a collection that implements the <b>List</b> interface 
+is typically allowed to contain duplicate values. More formally, according 
+to Oracle, <i>&quot;lists typically allow pairs of elements e1 and e2 such that 
+e1.equals(e2), and they typically allow multiple null elements if they allow 
+null elements at all.&quot;</i> </p>
+<h3><a name="Question_4">Question 4</a></h3>
+<p>True or False? The contracts of the methods in the <b>
+List</b> interface are the same as the contracts of the methods inherited from 
+the <b>Collection</b> interface.</p>
+<p>The answer to question 4 is False. According to Oracle, <i>&quot;The <b>List</b> 
+interface places additional stipulations, beyond those specified in the <b>
+Collection</b> interface, on the contracts of the <b>iterator</b>, <b>add</b>,
+<b>remove</b>, <b>equals</b>, and <b>hashCode</b> methods.&quot;</i></p>
+<p>For example, the <b>iterator</b> method <i>(for both the <b>List</b> and <b>
+Collection</b> interfaces)</i> returns an iterator over the elements in the 
+collection. For the <b>Collection</b> interface, there are no guarantees 
+concerning the order in which the elements are returned by the methods of the <b>
+Iterator</b> object.</p>
+<p>On the other hand, the <b>iterator</b> method for the <b>List</b> interface 
+returns an iterator over the elements in the collection in proper sequence, 
+where the sequence is determined by the numeric index. In other words, 
+when you call the methods of the <b>Iterator</b> object on a <b>List</b>, the 
+elements will be returned in the proper sequence as determined by a numeric 
+index.</p>
+<p>Similarly, according to Oracle, the <b>SortedSet</b> interface <i>&quot;guarantees 
+that its iterator will traverse the set in ascending element order, sorted 
+according to the natural ordering of its elements (see <strong>Comparable</strong>), or by a 
+<strong>Comparator</strong> provided at sorted set creation time.&quot;</i> </p>
+<h1><a name="Summary">Summary</a></h1>
+<p>In this chapter you learned that all of the implementations of the interfaces in 
+the <strong>Collection</strong> hierarchy implement one of the sub-interfaces of the <b>
+Collection</b> interface. You learned that a <b>Set</b> object cannot contain 
+duplicate elements, but a <b>List</b> object can contain duplicate elements.</p>
+<p>You learned about the difference between <i>ordered</i> collections and <i>
+sorted</i> collections. You also learned about <i>ascending order</i> and 
+the <i>natural ordering</i> of objects. In addition, you learned how more 
+specialized stipulations are placed on interfaces as you progress down the 
+interface inheritance hierarchy of the Java Collections Framework. </p>
+<h1><a name="Whats_next">What&#39;s next?</a></h1>
+<p>The <b>SortedSet</b> interface <i>&quot;guarantees that its iterator will traverse 
+the set in ascending element order, sorted according to the natural ordering of 
+its elements (see <strong>Comparable</strong>), or by a <strong>Comparator</strong> provided at sorted set 
+creation time.&quot; </i>In the next chapter, I will show you how to use the <b>
+Comparator</b> interface to control the sorted order of your collections.</p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong></p>
+<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4060: Duplicate Elements, Ordered 
+					Collections, Sorted Collections, and Interface 
+					Specialization</li>
+					<li>File: Java4060.htm
+</li>
+					<li>Published: 04/18/13</li>
+					<li>Revised: 04/15/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>

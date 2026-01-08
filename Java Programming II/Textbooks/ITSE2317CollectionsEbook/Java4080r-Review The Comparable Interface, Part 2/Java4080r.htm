@@ -1,0 +1,357 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4080r</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4080r Review: The Comparable Interface, Part 2</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Answers">Answers</a></li>
+	<li><a href="#Complete_program_listings">Complete program listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+
+<p>This chapter contains review questions and answers keyed to the chapter titled
+<em>Java4080: The Comparable Interface, Part 2</em>.</p>
+<p>Once you study that chapter, you should be able to answer the review 
+questions in this chapter.</p>
+<p>The questions and the answers in this chapter are connected by hyperlinks to 
+make it easy for you to navigate from the question to the answer and back again.</p>
+
+
+<h1><a name="Questions">Questions</a></h1>
+
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>True or False? The elements stored in a <b>TreeSet</b> collection must be 
+references to objects instantiated from a class that implements the <b>
+Comparable</b> interface or makes use of an alternative approach involving the
+<strong>Comparator</strong> interface.</p>
+
+<p><a href="#answer01">Answer 1</a> </p>
+
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 
+1</a>?</p>
+<ul>
+	<li>Compiler Error</li>
+	<li>Runtime Error</li>
+	<li>44321</li>
+	<li>4321</li>
+	<li>1234</li>
+	<li>12344</li>
+	<li>None of the above.</li>
+</ul>
+
+<p><a href="#answer02">Answer 2</a> </p>
+
+<h2><a name="question03">Question 3</a> </h2>
+<p>True or False? The program in <a href="#Listing_1">Listing 
+1</a> throws a runtime error because the class named <strong>MyClass</strong> 
+fails to implement the <strong>CompareTo</strong> interface.</p>
+<p><a href="#answer03">Answer 3</a> </p>
+
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>?</p>
+<ul>
+	<li>Compiler Error</li>
+	<li>Runtime Error</li>
+	<li>44321</li>
+	<li>4321</li>
+	<li>1234</li>
+	<li>12344</li>
+	<li>None of the above.</li>
+</ul>
+<p><a href="#answer04">Answer 4</a> </p>
+
+<h2><a name="question05">Question 5</a></h2>
+<p>True or False? A class that implements the <strong>Comparable</strong> 
+interface must provide a concrete definition of the <strong>compareTo</strong> 
+method.</p>
+<p><a href="#answer05">Answer 5</a></p>
+
+<h1><a name="Listings">Listings</a></h1>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Comparable04.java. </li>
+		<li><a href="#Listing_2">Listing 2</a>. Comparable05.java. </li>
+	</ul>
+
+
+
+
+
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>True.</p>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>1234</p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>False. The program in <a href="#Listing_1">Listing 
+1</a> throws a runtime error because the class named <strong>MyClass</strong> 
+fails to implement the <strong>Comparable</strong> interface.</p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>Runtime Error</p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>True.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+<h1><a name="Complete_program_listings">Complete program listings</a></h1>
+
+
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. Comparable04.java. </p>
+
+<pre>//File Comparable04.java
+
+import java.util.*;
+
+public class Comparable04{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable04
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new TreeSet();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return "" + data;
+  }//end overridden toString()
+
+}//end MyClass
+</pre>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--A table containing text with a footer. -->
+<p>.</p>
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_2">Listing 2</a>. Comparable05.java. </p>
+
+<pre>//File Comparable05.java
+import java.util.*;
+
+public class Comparable05{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Comparable05
+
+class Worker{
+  public void doIt(){
+    Iterator iter;
+    Collection ref;
+
+    ref = new TreeSet();
+    Populator.fillIt(ref);
+    iter = ref.iterator();
+    while(iter.hasNext()){
+      System.out.print(iter.next());
+    }//end while loop
+    System.out.println();
+
+  }//end doIt()
+}// end class Worker
+
+class Populator{
+  public static void fillIt(Collection ref){
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(4));
+    ref.add(new MyClass(3));
+    ref.add(new MyClass(2));
+    ref.add(new MyClass(1));
+  }//end fillIt()
+}//end class Populator
+
+class MyClass implements Comparable{
+  int data;
+
+  MyClass(){
+    data = 0;
+  }//end noarg constructor
+
+  MyClass(int data){
+    this.data = data;
+  }//end parameterized constructor
+
+  public String toString(){
+    return "" + data;
+  }//end overridden toString()
+
+  public int compareTo(Object o){
+    if(!(o instanceof MyClass))
+        throw new ClassCastException();
+    if(((MyClass)o).data &lt; data)
+      return 1;
+    if(((MyClass)o).data &gt; data)
+      return -1;
+    else return 0;
+  }//end compareTo()
+
+  public boolean equals(Object o){
+    if(!(o instanceof MyClass))
+        return false;
+    if(((MyClass)o).data == data)
+      return true;
+    else return false;
+  }//end overridden equals()
+}//end MyClass
+</pre>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+			</p>
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Java4080r Review: The Comparable Interface, Part 2</li>
+				<li>File: Java4080r.htm </li>
+				<li>Published: 12/01/13</li>
+				<li>Revised: 04/15/20</li>
+
+			</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+<p>-end- </p>
+
+
+
+
+</body>
+</html>

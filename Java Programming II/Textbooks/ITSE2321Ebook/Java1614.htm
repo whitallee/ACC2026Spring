@@ -1,0 +1,562 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1614</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1614: Polymorphism and the Object Class</h1>
+
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about the essence of Object-Oriented Programming (OOP) using Java. </p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Definition of the class named A.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Definition of the class named B. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Definition of the class named C. </li>
+		<li><a href="#Listing_4">Listing 4</a>. Beginning of the class named Poly04. </li>
+		<li><a href="#Listing_5">Listing 5</a>. A new object of the class named B.</li>
+		<li><a href="#Listing_6">Listing 6</a>. A new object of the class named C.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p><strong>What is polymorphism?</strong></p>
+	<p>If you have studied the earlier chapters in this Ebook, you should 
+	already know what polymorphism is, how it is implemented in Java, the three 
+	distinct forms of polymorphism in Java, etc.</p>
+	<p>I discussed runtime polymorphism implemented through method overriding and class inheritance in a previous chapter.  
+	Before leaving that topic, I need to discuss an important special case.
+
+</p>
+<p>In this chapter, I will discuss the use of the <strong>Object</strong> class as a completely generic type for storing references to objects of subclass types, and will explain how that results in a very useful form of runtime polymorphism.
+
+</p>
+<p>I will briefly discuss the default versions of eleven methods defined in the 
+<strong>Object</strong> class, and will explain that in many cases, those default versions are meant to be overridden.</p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<p><strong>References of type Object
+
+</strong> </p>
+<p>The <strong>Object</strong> type is a completely generic type, which can be used to store a reference to any object that can be instantiated in Java.
+
+</p>
+<p><strong>Methods defined in the Object class</strong> </p>
+<p>In an earlier chapter, I told you that the class named <strong>Object</strong> defines default versions of the following methods:
+
+    </p>
+<ul>
+	<li>clone()
+    </li>
+	<li>equals(Object obj)
+    </li>
+	<li>finalize()
+    </li>
+	<li>getClass()
+    </li>
+	<li>hashCode()
+    </li>
+	<li>notify()
+    </li>
+	<li>notifyAll()
+    </li>
+	<li>toString()
+    </li>
+	<li>wait()
+    </li>
+	<li>wait(long timeout)
+    </li>
+	<li>wait(long timeout, int nanos)
+
+</li>
+</ul>
+<p><strong>Every class inherits these methods</strong> </p>
+<p>Because every class is either a direct or indirect subclass of <strong>Object</strong>, every class in Java, 
+<em>(including new classes that you define)</em>, inherits these eleven methods.
+
+</p>
+<p><strong>To be overridden ...
+
+</strong> </p>
+<p>Some of these eleven methods are intended to be overridden for various purposes.
+
+</p>
+<p><strong>Calling methods of the Object class</strong> </p>
+<p>You can store a reference to any object in a reference variable of type 
+<strong>Object</strong>. </p>
+<p>If you have studied the previous chapters in this Ebook, you also know how runtime polymorphism based on class inheritance works. </p>
+<p>Given the above, you should know that you can call any of the methods defined in the 
+<strong>Object</strong> class on any reference to any object stored in a reference variable of type 
+<strong>Object</strong>. </p>
+<p><strong>And the behavior will be ...</strong> </p>
+<p>If the class from which that object is instantiated inherits or defines an overridden version of one of the methods in the above list, calling that method on the reference will cause the overridden version to be executed.
+
+</p>
+<p>Otherwise, calling that method on the reference will cause the default version defined in the 
+<strong>Object</strong> class to be executed.
+
+</p>
+<p><strong>A sample program
+
+</strong> </p>
+<p>This is illustrated in the program named <strong>Poly04</strong>, which you can view in its entirety in 
+<a href="#Listing_7">Listing 7</a> near the end of this chapter. </p>
+<p>For purposes of illustration, this program deals specifically with the method named 
+<strong>toString</strong> from the above list, but it could deal just as well with other 
+non-final methods in the list. </p>
+<p><strong>The class named A</strong> </p>
+<p><a href="#Listing_1">Listing 1</a> defines a class named <strong>A</strong>, which extends the class named 
+<strong>Object</strong> <em>(recall that it is not necessary to explicitly show that a class extends 
+</em><strong><em>Object</em></strong>). </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Definition of the class 
+				named A.
+
+				<pre>class A extends Object{
+  //This class is empty
+}//end class A</pre>
+</div>
+	<p><strong>Does not override the toString method
+
+</strong> </p>
+<p>The most important thing to note about the class named <strong>A</strong> is that it does not override any of the methods that it inherits from the class named 
+<strong>Object</strong>.
+
+</p>
+<p>For purposes of this illustration, we will say that it inherits the default version of the method named 
+<strong>toString</strong>, from the class named <strong>Object</strong>. <em>(We will see an example of the behavior of the default version of 
+the </em> 
+<strong><em>toString</em></strong><em> method shortly.) </em> </p>
+<p><strong>The class named B
+
+</strong> </p>
+<p><a href="#Listing_2">Listing 2</a> contains the definition of a class named 
+<strong>B</strong>.  This class extends the class named <strong>A</strong>. </p>
+<div class="a"><a name="Listing_2">Listing 2</a>. Definition of the class 
+				named B.
+
+				<pre>class B extends A{
+  public String toString(){
+    return "toString in class B";
+  }//end overridden toString()
+}//end class B</pre>
+</div>
+	<p><strong>Overrides the toString method
+
+</strong> </p>
+<p>Of particular interest, for purposes of this chapter, is the fact that the class named 
+<strong>B</strong> does override the inherited t<strong>oString</strong> method. </p>
+<p><em>(The class named <strong>B</strong> inherits the default version of the method, because its superclass named
+<strong>A</strong>, which extends <strong>Object</strong>, does not override the 
+<strong>toString</strong> method.) </em> </p>
+<p><strong>Purpose of the toString method
+
+</strong> </p>
+<p>The purpose of the <strong>toString</strong> method is to return a reference to an object of the class 
+<strong>String</strong> that represents an object instantiated from a class that overrides the method. </p>
+<p>Here is part of what Sun has to say about the <strong>toString</strong> method: </p>
+<p><em>"Returns a string representation of the object. In general, the <strong>toString</strong> method returns a string that "textually represents" this object. The result should be a concise but informative representation that is easy for a person to read. It is recommended that all subclasses override this method."
+</em> </p>
+<p><strong>Behavior of the overridden version
+
+</strong> </p>
+<p>As you can see, I didn't follow Sun's advice very closely in this program.  To begin with, I didn't override the 
+<strong>toString</strong> method in the class named <strong>A</strong>. </p>
+<p>Further, the behavior of my overridden version of the <strong>toString</strong> method in the class named 
+<strong>B</strong> doesn't provide much in the way of a textual representation of an object instantiated from class 
+<strong>B</strong>. </p>
+<p>My overridden version simply returns a reference to a <strong>String</strong> object, containing text that indicates that the overridden version of the method 
+defined in the class named 
+<strong>B</strong> has been executed.  <em>(Of course, there wasn't much about an object instantiated from 
+the class named <strong>B</strong> that could be represented in a textual way.)
+</em> </p>
+<p><strong>Will be useful later</strong> </p>
+<p>The reference to the <strong>String</strong> object returned by the overridden version of the 
+<strong>toString</strong> method will prove useful later when we need to determine which version of the method is actually executed. </p>
+<p><strong>The class named C</strong> </p>
+<p><a href="#Listing_3">Listing 3</a> shows the definition of a class named 
+<strong>C</strong>, which extends the class named <strong>B</strong>, and overrides the method named 
+<strong>toString</strong> again.  <em>(A non-final method can be overridden by every class that inherits it, resulting in potentially many different overridden versions of a method in a class hierarchy.)
+</em> </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Definition of the class 
+				named C.
+
+				<pre>class C extends B{
+  public String toString(){
+    return "toString in class C";
+  }//end overridden toString()
+}//end class C</pre>
+</div>
+	<p><strong>Behavior of overridden version</strong> </p>
+<p>The behavior of this overridden version of the method is similar to, but different from the overridden version in the class 
+<strong>B</strong>. </p>
+<p>In this case, the method returns a reference to a <strong>String</strong> object that can be used to confirm that this overridden version of the method has been executed. </p>
+<p><strong>The driver class</strong> </p>
+<p>Finally, <a href="#Listing_4">Listing 4</a> shows the beginning of the driver class named 
+<strong>Poly04</strong>. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. Beginning of the class 
+				named Poly04.
+
+				<pre>public class Poly04{
+  public static void main(String[] args){
+    Object varA = new A();
+    String v1 = varA.toString();
+    System.out.println(v1);</pre>
+</div>
+	<p><strong>A new object of the class A
+
+</strong> </p>
+<p>The <strong>main</strong> method of the driver class begins by instantiating a new object of the class 
+<strong>A</strong>, and saving the object's reference in a reference variable of type 
+<strong>Object</strong>, named <strong>varA</strong>.
+
+</p>
+<p><strong>Call toString method on the reference
+
+</strong> </p>
+<p>Then the code in <a href="#Listing_4">Listing 4</a> calls the <strong>toString</strong> method on the reference variable named
+<strong>varA</strong>, saving the returned reference to the <strong>String</strong> in a reference variable of type 
+<strong>String</strong> named <strong>v1</strong>. </p>
+<p><strong>Display the returned String </strong> </p>
+<p>Finally, that reference is passed to the <strong>println</strong> method, causing the 
+<strong>String</strong> returned by the <strong>toString</strong> method to be displayed on the computer screen.  </p>
+<p><em>(In a future chapter, you will learn that some of the code in </em> <a href="#Listing_4">
+<em>Listing 4</em></a><em> is redundant.)</em></p>
+<p><a name="This_causes_the_following_text">This causes the following text</a> 
+to be displayed on the computer screen:</p>
+<div class="a">
+<pre>A@111f71 </pre>
+</div>
+<p><strong>Pretty ugly, huh?</strong> </p>
+<p>Nowhere does our program explicitly show the creation of any text that looks anything like this.  Where did it come from?
+
+</p>
+<p><strong>Default toString behavior</strong> </p>
+<p>What you are seeing here is the <strong>String</strong> produced by the default version of the 
+<strong>toString</strong> method, as defined by the class named <strong>Object</strong>.</p>
+<p><strong>Class A does not override toString
+
+</strong> </p>
+<p>Recall that our new class named <strong>A</strong> does not override the 
+<strong>toString</strong> method.  Therefore, when the <strong>toString</strong> method is called on a reference to an object of the class 
+<strong>A</strong>, the default version of the method is executed, producing output similar to that shown 
+<a href="#This_causes_the_following_text">above</a>. </p>
+<p><strong>What does Sun have to say?
+
+</strong> </p>
+<p>Here is more of what Sun has to say about the default version of the <strong>toString</strong> method </p>
+<p><em>"The <strong>toString</strong> method for class <strong>Object</strong> returns a string consisting of the name of the class of which the object is an instance, the at-sign character `@', and the unsigned hexadecimal representation of the hash code of the object."</em> </p>
+<p>You should recognize this as a description of the output produced by calling the 
+<strong>toString</strong> method on the reference to the object of the class 
+<strong>A</strong>. That explains the ugliness of the screen output shown
+<a href="#This_causes_the_following_text">above</a> <em>(hexadecimal representations of hashcodes are usually pretty ugly)</em>. </p>
+<p><strong>A new object of the class B</strong> </p>
+<p>Continuing with the driver class, consider the code shown in <a href="#Listing_5">Listing 5</a>, which instantiates a new object of the class named 
+<strong>B</strong>, and stores the object's reference in a reference variable of type 
+<strong>Object</strong>. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. A new object of the class 
+				named B.
+<pre>
+    Object varB = new B();
+    String v2 = varB.toString();
+    System.out.println(v2);</pre>
+</div>
+	<p><strong>Call toString and display the result</strong>
+</p>
+<p>The code in <a href="#Listing_5">Listing 5</a> calls the <strong>toString</strong> method on the reference of type 
+<strong>Object</strong>, saving the returned reference in the reference variable named 
+<strong>v2</strong>.  <em>(Recall that the <strong>toString</strong> method is overridden in the class named B.)
+</em>
+</p>
+<p>As before, the reference is passed to the <strong>println</strong> method, which causes the following text to be displayed on the computer screen.
+
+</p>
+<div class="a">
+<pre>toString in class B </pre>
+</div>
+<p><strong>Do you recognize this?</strong> </p>
+<p>You should recognize this as the text that was encapsulated in the <strong>String</strong> object by the overridden version of the 
+<strong>toString</strong> method defined in the class named <strong>B</strong>.
+</p>
+<p><strong>Overridden version of toString was executed
+
+</strong></p>
+<p>This verifies that even though the reference to the object of the class 
+<strong>B</strong> was stored in a reference variable of type <strong>Object</strong>, the overridden version of the 
+<strong>toString</strong> method defined in the class named <strong>B</strong> was executed 
+<em>(instead of the default version defined in the class named <strong>Object</strong>)</em>.  This is 
+a good example of <em>runtime polymorphic behavior</em>, as described in a previous chapter. </p>
+<p>As you learned in the previous chapter, the selection of a method for execution is based on the 
+<em>actual type of object</em> whose reference is stored in a reference variable, and 
+<strong>not</strong> on the <em>type of the reference variable</em> on which the method is called.
+</p>
+<p><strong>An object of the class C</strong> </p>
+<p>Once again, continuing with the driver class, the code in <a href="#Listing_6">Listing 6</a>
+
+    </p>
+<ul>
+	<li>Instantiates a new object of the class <strong>C</strong>.</li>
+	<li>Stores the object's reference in a reference variable of type <strong>Object</strong>.
+    </li>
+	<li>Calls the <strong>toString</strong> method on the reference.
+    </li>
+	<li>Displays the returned string on the computer screen. </li>
+</ul>
+<div class="a"><a name="Listing_6">Listing 6</a>. A new object of the class 
+				named C.
+				<pre>
+    Object varC = new C();
+    String v3 = varC.toString();
+    System.out.println(v3);</pre>
+</div>
+	<p><strong>What will the output look like?</strong> </p>
+<p>By now, you should know what to expect in the way of text appearing on the computer screen.  The code in <a href="#Listing_6">Listing 6</a>
+
+    causes the following text to be displayed: </p>
+<div class="a">
+<pre>toString in class C </pre>
+
+</div>
+<p><strong>Overridden version of toString was called</strong> </p>
+<p>This confirms what you should already have known by now.  In particular, even though the reference to the object of the class 
+<strong>C</strong> is stored in a reference variable of type <strong>Object</strong>, the overridden version of the 
+<strong>toString</strong> method defined in the class named <strong>C</strong> was executed.  Again, this is 
+<em>runtime polymorphic behavior</em> based on class inheritance and method overriding.
+</p>
+<p><strong>No downcasting was required
+
+</strong></p>
+<p>It is also very important to note that no downcasting was required in order to call the 
+<strong>toString</strong> method in any of the cases shown above.  </p>
+<p>Because a default version of the <strong>toString</strong> method is defined in the 
+<strong>Object</strong> class, the <strong>toString</strong> method can be called without a requirement for downcasting on a reference to any object stored in a variable of type 
+<strong>Object</strong>.  This holds true for any of the eleven methods defined in the class named 
+<strong>Object</strong> <em>(although some of those methods are declared <strong>
+final</strong> and therefore may not be overridden)</em>.</p>
+<div class="a">
+	<p><strong>Update: 07/16/2020</strong> </p>
+	<p>A student has reminded me that this Ebook fails to explain one very 
+	important aspect of OOP with Java. The purpose of this update is to rectify 
+	that discrepancy. In particular, this update explains what happens when the following statement 
+	is executed and the parameter passed to the <strong>println</strong> method 
+	is a reference to an object:</p>
+	<pre>System.out.println(obj);</pre>
+	<p>You learned in the chapter titled <strong>Jb0190: Using the System and PrintStream Classes</strong> that this statement calls the
+	<strong>println</strong> method of an object 
+	instantiated from the <strong>PrintStream</strong> class, which is referred 
+	to <em>(pointed to)</em> by the variable named <strong>out</strong>, which 
+	is a <em>class variable</em> of the <strong>System</strong> class. </p>
+	<p>If you examine the documentation for the <strong>PrintStream</strong> class, you will 
+	find that the class defines many overloaded versions of the method named 
+	<strong>println</strong>, one of which is</p>
+	<pre>println(Object x)</pre>
+	<p>The description for this overloaded method is simply "Prints an Object and then terminate the line."</p>
+	<p>Similarly, the <strong>PrintStream</strong> class defines many overloaded versions of the method named
+	<strong>print</strong>, one of which is</p>
+	<pre>print(Object obj)</pre>
+	<p>In this case, the description reads simply "Prints an object."</p>
+	<p>So the question becomes, "How does the <strong>println</strong> method or 
+	the <strong>print</strong> method actually print an object?"</p>
+	<p>While it's not clear exactly how this is accomplished from a technical 
+	viewpoint, the behavior is clear. The behavior is as if the <strong>println</strong> 
+	method (or the <strong>print</strong> method) calls the <strong>toString</strong> method on the object whose 
+	reference is received as an incoming parameter. This results in a <strong>
+	String</strong> that is displayed on the standard output device. If the
+	<strong>toString</strong> method has been overridden at or above the class 
+	for the object whose reference is received as a parameter, runtime polymorphism applies and 
+	the displayed <strong>String</strong> is produced by the overridden <strong>toString</strong> 
+	method. Otherwise, the displayed <strong>String</strong> is produced by the default
+	<strong>toString</strong> method.</p>
+	<p>This is illustrated by the code that was added to the end of
+	<a href="#Listing_7">Listing 7</a> as shown below.</p>
+<pre>
+    Object varC = new C();//#1
+    String v3 = varC.toString();//#2
+    System.out.println(v3);//#3
+    
+    //The following statements were added in the revision
+    // of 07/16/2020
+    System.out.println("\n07/16/2020 revision");//#4
+    System.out.println(varC);//#5
+</pre>
+	<p>The lines identified as #1, #2, and #3 above are the same as before. The lines 
+	identified as #4 and #5 are new to this update</p>
+	<p>In this example, <strong>varC</strong> contains a reference to an object 
+	of the class named <strong>C</strong>. In the original version, lines #2 and 
+	#3 were used to display the following output:</p>
+	<pre>toString in class C</pre>
+	<p>In the updated version, line #5 displays the same output as lines #2 and 
+	#3 in the original version. The behavior of line #5 is as if the <strong>
+	println</strong> method calls the <strong>toString</strong> method on the 
+	object referred to by the contents of <strong>varC</strong>.</p>
+
+</div>
+
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>Polymorphism manifests itself in Java in the form of multiple methods having the same name.
+
+</p>
+<p>From a practical programming viewpoint, polymorphism manifests itself in three distinct forms in Java:
+
+    </p>
+<ul>
+	<li>Method overloading
+    </li>
+	<li>Method overriding through class inheritance </li>
+	<li>Method overriding through the Java interface </li>
+</ul>
+<p>In this chapter, I have continued my discussion of the implementation of polymorphism using method overriding through 
+class inheritance, and have concentrated on a special case in that category.
+
+</p>
+<p>More specifically, in this chapter, I have discussed the use of the <strong>Object</strong> class as a completely generic type for storing references to objects of subclass types, and have explained how that results in a very useful form of runtime polymorphism. .
+
+</p>
+<p>I briefly mentioned the default version of the eleven methods defined in the 
+<strong>Object</strong> class, and explained that in some cases, those default versions are meant to be overridden.
+
+</p>
+<p>I provided a sample program that illustrates the overriding of the <strong>toString</strong> method, which is one of the eleven methods defined in the 
+<strong>Object</strong> class. </p>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>In the next chapter (following the review chapter) I will embark on an explanation of runtime polymorphic behavior based on the Java interface and method overriding.  </p>
+<p>In my opinion, this is one of the most important concepts in Java OOP, and the one that seems to give students the greatest amount of difficulty. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1614: Polymorphism and the Object Class</li>
+					<li>File: Java1614.htm
+</li>
+					<li>Published: 03/13/02 </li>
+					<li>Revised: 07/16/20</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_7">Listing 7</a> below. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Complete program listing.
+<pre>
+/*File Poly04.java
+Copyright, R.G.Baldwin
+Revised: 07/16/2020
+
+This program illustrates polymorphic 
+behavior
+
+Program output is:
+  
+A@372f7a8d
+toString in class B
+toString in class C
+
+07/16/2020 revision
+toString in class C
+**************************************/
+
+class A extends Object{
+  //This class is empty
+}//end class A
+//===================================//
+
+class B extends A{
+  public String toString(){
+    return "toString in class B";
+  }//end overridden toString()
+}//end class B
+//===================================//
+
+class C extends B{
+  public String toString(){
+    return "toString in class C";
+  }//end overridden toString()
+}//end class B
+//===================================//
+
+public class Poly04{
+  public static void main(String[] args){
+    Object varA = new A();
+    String v1 = varA.toString();
+    System.out.println(v1);
+    
+    Object varB = new B();
+    String v2 = varB.toString();
+    System.out.println(v2);
+    
+    Object varC = new C();
+    String v3 = varC.toString();
+    System.out.println(v3);
+    
+    //The following statements were added in the revision
+    // of 07/16/2020
+    System.out.println("\n07/16/2020 revision");
+    System.out.println(varC);
+
+  }//end main
+}//end class Poly04</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

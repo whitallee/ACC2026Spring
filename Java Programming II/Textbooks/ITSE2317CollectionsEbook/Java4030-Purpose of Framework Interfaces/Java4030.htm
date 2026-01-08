@@ -1,0 +1,319 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4030</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4030: Purpose of Framework Interfaces</h1>
+
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Discussion">Discussion</a><ul>
+		<li><a href="#Purpose_of_framework_interfaces_">Purpose of framework interfaces 
+		</a> </li>
+		<li><a href="#What_is_a_data_type_">What is a data type? </a> </li>
+		<li><a href="#Interface_is_a_type_">Interface is a type </a> </li>
+		<li><a href="#Collection_interface_declares_several_methods_">Collection interface declares several methods 
+		</a> </li>
+		<li><a href="#An_extra_step_">An extra step </a> </li>
+		<li><a href="#The_add_method_in_Collection_">The add method in Collection 
+		</a> </li>
+		<li><a href="#The_add_method_in_Set_">The add method in Set </a> </li>
+		<li><a href="#How_do_the_contracts_differ_">How do the contracts differ? 
+		</a> </li>
+		<li><a href="#What_about_the_List_interface_">What about the List interface?</a> </li>
+		<li><a href="#A_major_difference_">A major difference </a> </li>
+		<li><a href="#Designing_a_framework_">Designing a framework </a> </li>
+		<li class="style1"><a href="#Concrete_implementations">Concrete implementations</a></li>
+	</ul>
+	</li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+framework in particular.</p>
+<p>There are eight core interfaces in the <em>Collections Framework</em>. Each interface 
+declares several methods and provides a contract that applies to each declared 
+method. The method declarations and their associated contracts specify the 
+general behavior of matching methods in the classes that implement the 
+interfaces.</p>
+<p>The purpose of this chapter is to provide a brief explanation of those 
+interfaces.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h1><a name="Preview">Preview</a></h1>
+<p>At least three things are included in a collections framework:</p>
+<ul>
+	<li>interfaces</li>
+	<li>implementations</li>
+	<li>algorithms</li>
+</ul>
+<p>This chapter will discuss the purpose of the interfaces in the Collections 
+Framework. Future chapters will discuss implementations and algorithms. </p>
+<h1>Introduction</h1>
+<p>In an earlier chapter, we learned that the Collections Framework contains 
+eight core interfaces with the parent-child relationships <a name="shown_below">
+shown below</a>: </p>
+<ul>
+	<li><b>Collection</b>
+	<ul>
+		<li>Set
+		<ul>
+			<li>SortedSet</li>
+		</ul>
+		</li>
+		<li>List</li>
+		<li>Queue</li>
+		<li>Deque</li>
+	</ul>
+	</li>
+	<li><b>Map</b>
+	<ul>
+		<li>SortedMap</li>
+	</ul>
+	</li>
+</ul>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Discussion">Discussion</a></h1>
+<h2><a name="Purpose_of_framework_interfaces_">Purpose of framework interfaces </a></h2>
+<p>A <i>collection</i> is an object of some type, and that type is defined in a 
+generic sense by one or more interfaces that make up the Collections Framework.
+</p>
+<h2><a name="What_is_a_data_type_">What is a data type? </a></h2>
+<p>All data types specify the operations that can be performed on an entity of 
+that type. <i>(Data types also specify the kinds of data that can be stored in 
+an entity of that type, but that is not germane to this discussion.)</i> </p>
+<h2><a name="Interface_is_a_type_">Interface is a type </a></h2>
+<p>An object in Java can often be considered to be of several different types. 
+One of those types is determined by any interfaces implemented by the class from 
+which the object was instantiated. Framework collection objects in Java are 
+instantiated from classes that implement the core interfaces of the Collections 
+Framework.
+</p>
+<p>Thus, a Java interface in the Collections Framework specifies the type of 
+such an object, and provides a generic representation of the operations that 
+apply across different implementations of the interface. </p>
+<h2><a name="Collection_interface_declares_several_methods_">Collection 
+interface declares several methods </a></h2>
+<p>The <b>Collection</b> interface declares several methods. This is not 
+unusual. From a technical standpoint, all interfaces declare none, one, or more 
+methods. Most interfaces declare multiple methods. <i>(Interfaces can also 
+declare constants, but that is not germane to this discussion.)</i> </p>
+<p>In general, there is no technical requirement for a specification of the 
+behavior of the interface methods when implemented in a class. In fact, because 
+a method that is declared in an interface is abstract, it specifically refrains 
+from defining the behavior of the method. The interface definition simply 
+declares the interfaces for all the methods that it declares. </p>
+<p>We have now arrived at one of the differences that distinguish the Collections 
+Framework from <em>&quot;just a bunch of interfaces.&quot; </em>That difference 
+is <em>contracts</em>.</p>
+<h2><a name="An_extra_step_">An extra step </a></h2>
+<p>The Oracle documentation for the <b>Collection</b> interface goes a 
+step beyond the minimum technical requirements for an interface. The 
+documentation describes the general behavior that <em>must be exhibited</em> by each of 
+the methods belonging to an object instantiated from a class that implements the
+<b>Collection</b> interface. This is sometimes referred to as a <i>contract</i>.
+</p>
+<p>Therefore, if you define a class that implements the <b>Collection </b>
+interface in a manner consistent with the <em>Collections Framework</em>, it is important 
+that you make certain that each of your methods behaves as described in the 
+Oracle 
+documentation. In other words, you must be careful to comply with the contract 
+defined for those methods. If you don&#39;t do that, a user can&#39;t rely on objects 
+instantiated from your class to exhibit proper behavior. </p>
+<h2><a name="The_add_method_in_Collection_">The add method in Collection </a>
+</h2>
+<p>For example, the <b>Collection</b> interface declares a method named <b>add</b> 
+that receives an incoming reference of a generic type <em>(see <a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>)</em> and returns a <b>
+boolean</b>.. Here is some text from the Oracle documentation 
+describing the required behavior <i>(contract)</i> of the <b>add</b> method 
+for any class that implements the <b>Collection</b>  interface. </p>
+<p><em>&quot;Ensures that this collection contains the specified element (optional operation). Returns true if this collection changed as a result of the call. (Returns false if this collection does not permit duplicates and already contains the specified element.)
+
+</em> </p>
+<p><em>Collections that support this operation may place limitations on what elements may be added to this collection. In particular, some collections will refuse to add null elements, and others will impose restrictions on the type of elements that may be added. 
+</em> </p>
+<p><em>Collection classes should clearly specify in their documentation any restrictions on what elements may be added.
+
+If a collection refuses to add a particular element for any reason other than that it already contains the element, it must throw an exception (rather than returning false). This preserves the invariant that a collection always contains the specified element after this call returns.&quot;
+</em> </p>
+  
+<p>As you can see, the behavior is defined in a very general way. There is no 
+indication as to how that behavior is to be achieved.</p>
+<h2><a name="The_add_method_in_Set_">The add method in Set </a></h2>
+<p>As you can see from the list <a href="#shown_below">above</a>, the <b>Set</b> interface extends the <b>
+Collection</b> interface. In keeping with the general form of object-oriented 
+design, <b>Set</b> is more specialized than <b>Collection</b>. Therefore, <b>Set</b> 
+makes the contract for the <b>add</b> method more specific for objects of type
+<b>Set</b>. Here is some text from the Oracle documentation 
+describing the contract of the <b>add</b> method for any class that implements 
+the <b>Set</b> interface. </p>
+<p><i>&quot;Adds the specified element to this set if it is not already present (optional operation). More formally, adds the specified element e to this set if the set contains no element e2 such that (e==null ? e2==null : e.equals(e2)). </i>  </p>
+<p><i>If this set already contains the element, the call leaves the set unchanged and returns false. In combination with the restriction on constructors, this ensures that sets never contain duplicate elements.
+
+</i>  </p>
+<p><i>The stipulation above does not imply that sets must accept all elements; sets may refuse to add any particular element, including null, and throw an exception, as described in the specification for Collection.add. Individual set implementations should clearly document any restrictions on the elements that they may contain.&quot;</i>  </p>
+<h2><a name="How_do_the_contracts_differ_">How do the contracts differ? </a>
+</h2>
+<p>The contract for the <b>add</b> method, as declared in the <b>Collection</b> 
+interface, does not prohibit duplicate elements, but does make the provision for 
+interfaces that extend <b>Collection</b> to prohibit duplicate elements. </p>
+<p>The contract for the <b>add</b> method in the <b>Set</b>  interface does 
+prohibit duplicate elements. </p>
+<h2><a name="What_about_the_List_interface_">What about the List interface? </a>
+</h2>
+<p>Here is some text from the Oracle documentation describing the contract of 
+the <b>add</b> method for any class that implements 
+the <strong>List</strong> interface.</p>
+<p><em>&quot;Appends the specified element to the end of this list (optional operation).
+
+</em></p>
+<p><em>Lists that support this operation may place limitations on what elements may be added to this list. In particular, some lists will refuse to add null elements, and others will impose restrictions on the type of elements that may be added. List classes should clearly specify in their documentation any restrictions on what elements may be added.&quot;</em></p>
+<p>As you can see, the contract for the <b>add</b> method 
+declared in the <b>List</b> interface, <i>(which extends Collection)</i>, does 
+not prohibit duplicate elements. However, it does have some other requirements 
+that don&#39;t apply to <b>Set</b>  objects. For example, it must add new 
+elements at the end of the list.</p>
+<h2><a name="A_major_difference_">A major difference </a></h2>
+<p>This is one of the major differences between lists and sets in the Java 
+Collection Framework. Both <b>List</b> objects and <b>Set</b> objects are 
+collections, because both of the interfaces extend the <b>Collection</b> 
+interface. However, the <b>Set</b> interface contract prohibits duplicate 
+elements while the <b>List</b>  interface contract does not prohibit duplicate 
+elements. </p>
+<h2><a name="Designing_a_framework_">Designing a framework </a></h2>
+<p>In theory, it should be possible <i>(but perhaps not very practical)</i> to 
+define a framework consisting solely of interface definitions and associated 
+contracts for methods and algorithms. Then each user could implement the 
+interfaces however they see fit, provided that they comply with the contracts.
+<i>(This might not be very practical, however, because every user of the framework would 
+then be required to implement the interfaces, which would entail a lot of work.)</i>
+
+</p>
+<h2><a name="Concrete_implementations">Concrete implementations</a></h2>
+<p>Fortunately, Oracle didn&#39;t stop work after defining the interfaces and contracts 
+for the Java Collections Framework. Rather, they also provided us with several 
+useful classes that implement the interfaces in the framework. Thus, we can 
+instantiate and use objects of those classes immediately without having to 
+define them ourselves. Here is a list of some of the concrete implementation 
+classes in the Java Collections Framework:</p>
+<ul>
+	<li>HashSet</li>
+	<li>TreeSet</li>
+	<li>LinkedList</li>
+	<li>Vector</li>
+	<li>ArrayList</li>
+	<li>HashMap</li>
+	<li>Hashtable</li>
+	<li>WeakHashMap</li>
+	<li>TreeMap</li>
+</ul>
+<p>In addition, Oracle provided us with several partial implementation classes 
+including <strong>AbstractSet</strong>, <strong>AbstractList</strong>, and 
+<strong>AbstractMap</strong>, which are intended to serve a 
+starting point for new implementations that we choose to define. According to 
+Oracle, these classes provide <i>a skeletal implementation of the Set, List, 
+and Map interfaces to minimize the effort required to implement those 
+interfaces.</i> </p>
+<h1><a name="Summary">Summary</a></h1>
+<p>There are eight core interfaces in the Collections Framework. </p>
+<p>As is always the case, each of the core interfaces defines a data type. Each 
+interface declares several methods. In addition, each interface provides a 
+contract that applies to each declared method. The contracts become more 
+specific as we traverse down the interface inheritance hierarchy. </p>
+<p>Objects instantiated from classes that implement the interfaces can be 
+considered to be of the interface type or any ancestor interface in the 
+interface&#39;s hierarchical family tree. </p>
+<p>The method declarations and their associated contracts in the interfaces 
+specify the general behavior of matching methods in the classes that implement 
+the interfaces. </p>
+<p>The framework provides several concrete implementations of the interfaces that 
+we can use to instantiate new objects to use as data structures or data 
+containers. </p>
+<p>The framework also provides several abstract implementations that we can use as 
+a starting point for defining our own implementations. </p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4030: Purpose of Framework Interfaces</li>
+					<li>File: Java4030.htm
+</li>
+					<li>Published: 04/18/13</li>
+					<li>Revised: 04/12/20</li>
+					
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+
+
+<p>-end- </p>
+
+
+</body>
+</html>

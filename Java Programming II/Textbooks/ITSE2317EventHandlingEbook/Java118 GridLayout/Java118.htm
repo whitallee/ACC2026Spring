@@ -1,0 +1,640 @@
+<html><head>
+   <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+   <meta name="generator" content="mozilla/4.04 [en] (win95; i) [netscape]">
+   <meta name="author" content="richard g. baldwin">
+   <title>... in Java by Richard G Baldwin</title></head><body><!--start-->
+
+<center><h3><b><i>Richard G Baldwin (512) 223-4758, <a href="mailto:baldwin@austin.cc.tx.us">baldwin@austin.cc.tx.us</a>,
+<a href="http://www2.austin.cc.tx.us/baldwin/">http://www2.austin.cc.tx.us/baldwin/</a></i></b></h3></center>
+
+<center><h2><b><!--title-->The AWT Package, Placing Components in Containers, GridLayout<!--endtitle--></b></h2></center>
+Java Programming, Lecture Notes # 118, Revised 02/21/98.
+<ul><li><a href="#preface">Preface</a></li>
+
+<li><a href="#introduction">Introduction</a></li>
+
+<li><a href="#gridlayout manager">GridLayout Manager</a></li>
+
+<li><a href="#sample program">Sample Program</a></li>
+
+<ul><li><a href="#discussion">Discussion</a></li>
+
+<li><a href="#interesting code fragments">Interesting Code Fragments</a></li>
+
+<li><a href="#program listing">Program Listing</a></li></ul>
+
+<li><a href="#review">Review</a></li></ul>
+
+<hr width="100%"><center><h2><a name="preface"></a><b><font color="#ff0000">Preface</font></b></h2></center>
+Students in Prof. Baldwin's <b><u>Intermediate Java Programming</u></b>
+classes at ACC are responsible for knowing and understanding all of the
+material in this chapter.
+
+<p>JDK 1.1 was formally released on February 18, 1997. This chapter was
+originally written on March 7, 1997 using the software and documentation
+in the JDK 1.1 download package. It has been updated on various occasions
+since then.
+<center><h2><a name="introduction"></a><font color="#ff0000">Introduction</font></h2></center>
+This is one in a series of chapters that concentrate on the package <b>java.awt
+</b>where most of the functionality exists for providing the user interface
+to your application or applet.
+
+<p>In this chapter, we will learn how to use the <b>GridLayout </b>class
+for creating a layout manager.
+
+<p>Perhaps more important, we will take another important step in learning
+about the User Interface. In particular, we will learn how to create composite
+user-interface objects by building up a combination of smaller objects.
+
+<p>In particular, we will create a top-level user-interface object that
+is a <b>Frame</b> object containing two <b>Panel</b> objects where each
+of the <b>Panel</b> objects contains several <b>Button</b> objects.
+
+<p>This is one of the processes that you can use to create the types of
+complex User Interface objects that you are accustomed to seeing in typical
+Graphical User Interfaces.
+<center><h2><a name="gridlayout manager"></a><font color="#ff0000">GridLayout Manager</font></h2></center>
+In earlier chapters, we have learned about absolute positioning and sizing
+of components in a container, have learned about the <b>BorderLayout</b>
+manager, and have learned about the <b>FlowLayout</b> manager.
+
+<p>The <b>GridLayout </b>manager lays out components in a grid of rows
+and columns.
+
+<p>If the container is resized by the user at runtime, the system attempts
+to maintain the proper row/column layout within overall size constraints.
+Maintaining overall row/column format takes priority over minimum size
+constraints and, for example, the components can shrink to such a small
+size that labels become unreadable.
+
+<p>The <b>GridLayout</b> class has no <i>Fields</i>, has three <i>Constructors</i>,
+and has more than a dozen <i>methods</i>.
+
+<p>In most cases, you will probably only be concerned with the <i>Constructors
+</i>unless you need to dynamically modify the layout at runtime.
+
+<p>The three constructors are:
+<ul><li><b>GridLayout()</b> --Creates a grid layout with a default of one column
+per component, in a single row.</li>
+
+<li><b>GridLayout(int, int)</b> -- Creates a grid layout with the specified
+rows and columns.</li>
+
+<li><b>GridLayout(int, int, int, int)</b> -- Creates a grid layout with the
+specified rows, columns, horizontal gap, and vertical gap.</li></ul>
+By this point, you should have no difficulty with the terminology used
+in the description of these three constructors.
+
+<p>Some previous chapters have contained two sample programs; one very simple
+program, and another program that was not quite so simple.
+
+<p>This chapter contains only one sample program and it is considerably
+more complex than any of the sample programs in previous chapters on layout
+managers. This complexity doesn't derive from layout management as such.
+Rather, the complexity derives from the fact that we are now going to begin
+creating top-level user-interface objects that are composites of two or
+more lower-level objects.
+
+<p>Also, rather than to pass up on the opportunity to improve our event-handling
+skills, this sample program also processes <b>ActionListener </b>events
+on two buttons.
+
+<p>When one of the buttons is clicked, the <b>GridLayout </b>display format
+is set to three rows by two columns. When the other button is clicked,
+the <b>GridLayout </b>display format changes to two rows by three columns.
+Thus, this sample program also illustrates dynamic modification of the
+layout manager at runtime.
+<center><h2><a name="sample program"></a><font color="#ff0000">Sample Program</font></h2></center>
+This program illustrates use of the <b>GridLayout </b>manager. Equally
+important, this program illustrates building a fairly complex user-interface
+object through the composition of other objects. Finally, the program illustrates
+the process of dynamically modifying a layout at runtime.
+<center><h3><a name="discussion"></a><font color="#ff0000">Discussion</font></h3></center>
+This program is designed to be compiled and run under JDK 1.1
+
+<p>The top-level user interface consists of a <b>Frame </b>object. Two
+<b>Panel </b>objects are placed on the <b>Frame </b>object using the default
+<b>BorderLayout </b>manager for the <b>Frame</b> object.
+
+<p>One of the <b>Panel </b>objects contains six <b>Button </b>objects which
+are placed there using a <b>GridLayout </b>manager. These buttons are placed
+on the <b>Panel </b>object for illustration of layout only, and are not
+functional (they have <i>no registered listener</i> objects).
+
+<p>The buttons are initially placed on this panel in a grid pattern consisting
+of <u>two rows</u> and <u>three columns</u>. This is accomplished by passing
+the appropriate parameters to the constructor for the <b>GridLayout </b>object
+used to establish the layout manager for the <b>Panel</b> object.
+
+<p>The other <b>Panel </b>object contains two <b>Button </b>objects labeled
+<b>3x2 </b>and <b>2x3</b>.
+
+<p>These two buttons are placed on the <b>Panel</b> object using the default
+<b>FlowLayout </b>manager. These buttons are functional because they have
+<b>ActionListener </b>objects registered on them.
+
+<p>When the user clicks the button labeled <b>3x2</b>, the buttons on the
+<u>other</u> <b>Panel </b>object are rearranged into <u>three rows and
+two columns</u>.
+
+<p>Similarly, when the user clicks the button labeled <b>2x3</b>, the buttons
+on the <u>other</u> <b>Panel </b>object are rearranged into <u>two rows
+and three columns</u>.
+
+<p>A <b>windowClosing()</b> event listener object is instantiated and registered
+on the <b>Frame</b> object to terminate the program when the frame is closed.
+
+<p>The program was tested using JDK 1.1 running under Win95.
+<center><h3><a name="interesting code fragments"></a><font color="#ff0000">Interesting
+Code Fragments</font></h3></center>
+Because of its complexity, this program contains a number of interesting
+code fragments.
+
+<p>As mentioned earlier, the top-level user-interface object is the composite
+of several lower-level objects. The general arrangement of the code is
+designed to construct the components from the inside out ending with the
+construction through composition of the final top-level interface object.
+
+<p>We begin by instantiating two <b>Button </b>objects which will later
+become functional. These objects cannot be instantiated anonymously because
+we will be registering an <b>ActionListener </b>object on each of them
+and we will need a variable referencing each object in order to accomplish
+the registration.
+<br/>
+<div class="a"><pre> Button button7 = new Button("3x2");
+ Button button8= new Button("2x3");</pre></div>
+Next, we will instantiate a <b>GridLayout</b> object that we will use to
+establish the layout manager for one of the <b>Panel </b>objects. This
+also cannot be an anonymous object because we will later need access to
+it in order to modify the row/column arrangement of components in the <b>Panel</b>
+object.
+<br/>
+<div class="a"><pre>GridLayout myGridLayout = new GridLayout(2,3);//row, col</pre></div>
+Next, we will instantiate the first of two <b>Panel </b>objects that will
+later be combined onto a Frame object. We will use the above instantiated
+<b>GridLayout</b> object to establish the layout manager for the <b>Panel
+</b>object.
+
+<p>Following that, we will use a <b>for</b> loop to place six <u>anonymous</u><b>Button </b>objects on the <b>Panel</b>. In this program, it is OK for
+these buttons to be anonymous because we don't intend to register any type
+of event listeners on the buttons. Normally, however, you would want to
+register one or more event listeners on a <b>Button </b>object, so you
+normally would <b>not</b> make it anonymous.
+
+<p>Note that the caption for each button is being constructed by concatenating
+the value of <b>cnt</b> to the string <b>Button</b>.
+
+<p>Note also that the reference variable <b>panel1</b> is defined earlier
+as an instance variable of the <b>GUI </b>class because it needs to be
+accessed later by the <b>Action</b> listener.
+<br/>
+<div class="a"><pre> panel1 = new Panel();
+ panel1.setLayout(myGridLayout);
+
+ for(int cnt = 0; cnt &lt; 6; cnt++)
+ panel1.add(new Button("Button" + cnt));</pre></div>
+Next, we will instantiate the second <b>Panel </b>object that will later
+be combined onto the <b>Frame </b>object. Once we instantiate it, we will
+place the two <b>Button </b>objects <u>previously instantiated</u> onto
+the <b>Panel </b>object.
+<br/>
+<div class="a"><pre> Panel panel2 = new Panel();
+ panel2.add(button7);
+ panel2.add(button8);</pre></div>
+The next step is to instantiate a <b>Frame </b>object which will serve
+as our top-level user-interface object. Once we instantiate it, we will
+place the two <b>Panel </b>objects on it using the default <b>BorderLayout
+</b>manager.
+<br/>
+<div class="a"><pre> Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ myFrame.add(panel1,"North");
+ myFrame.add(panel2,"South");</pre></div>
+At this point, the physical construction of our top-level user-interface
+object is complete. The next step is to instantiate and register anonymous
+<b>ActionListener </b>objects which will be used to process action events
+on the two <b>Button </b>objects.
+<br/>
+<div class="a"><pre> button7.addActionListener(
+ new A3x2ActionListener(myGridLayout,myFrame,this));
+ button8.addActionListener(
+ new A2x3ActionListener(myGridLayout,myFrame,this));</pre></div>
+The <b>ActionListener </b>objects are not greatly different from those
+that we have seen in previous chapters on layout managers, except this time
+we are not requiring buttons to share a single listener. In this case,
+each of the <b>Button </b>objects has its own registered <b>ActionListener
+</b>object.
+
+<p>As before, the code in the event handler makes use of methods of the
+layout manager class to effect the desired action upon receipt of an event.
+In this case, an event on one <b>Button </b>object causes the components
+to be arranged in a grid with three rows and two columns and an event on
+the other <b>Button </b>object causes the components to be arranged in
+a grid with two rows and three columns. Since the code for the two event
+handlers is so similar, only the code for the body of one of the event
+handlers is shown below.
+
+<p>Note that the reference variables used in this code fragment are passed
+in as parameters when the <b>Action</b> listener object is constructed.
+<br/>
+<div class="a"><pre> public void actionPerformed(ActionEvent e){
+ myGridLayoutObject.setRows(3);
+ myGridLayoutObject.setColumns(2);
+ myGuiObject.panel1.setLayout(myGridLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()</pre></div>
+A complete listing of the program is provided in the next section.
+<center><h3><a name="program listing"></a><font color="#ff0000">Program Listing</font></h3></center>
+This section contains a complete listing of the program with a large number
+of explanatory comments.
+<br/>
+<div class="a"><pre>/*File Layout06.java Copyright, R.G.Baldwin
+Revised 10/29/97 to correct a logic error in the
+earlier version.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+This program illustrates use of the GridLayout manager.
+Equally important, this program illustrates building a
+fairly complex user interface object through the
+composition of subunits. Finally, the program illustrates
+the process of dynamically modifying a layout at runtime.
+
+The top-level user interface consists of a Frame object.
+Two Panel objects are placed on the Frame object using the
+default BorderLayout manager.
+
+One of the Panel objects contains six Button objects which
+are placed there using a GridLayout manager. These buttons
+are placed on the Panel object using a GridLayout manager
+for illustration of layout only, and they are not
+functional (they have no registered listener objects).
+
+The buttons are initially placed on this panel in a grid
+pattern consisting of two rows and three columns. This is
+accomplished by passing the appropriate parameters to the
+constructor for the GridLayout object used to establish the
+layout manager for the panel.
+
+The other Panel object contains two Button objects labeled
+3x2 and 2x3. These buttons are placed on the panel using
+the default FlowLayout manager. These buttons are
+functional. When the user clicks the button labeled 3x2,
+the buttons on the other Panel object are arranged into
+three rows and two columns. Similarly, when the user clicks
+the button labeled 2x3, the buttons on the other Panel
+object are arranged into two rows and three columns.
+
+A windowClosing() event listener object is instantiated and
+registered on the frame to terminate the program when the
+frame is closed.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class Layout06 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout06
+//=======================================================//
+
+class GUI {
+ Panel panel1;
+
+ public GUI(){//constructor
+ //Instantiate two button objects that will later
+ // become functional
+ Button button7 = new Button("3x2");
+ Button button8= new Button("2x3");
+
+ //Instantiate a layout manager object to be used with
+ // a Panel object
+ GridLayout myGridLayout = new GridLayout(2,3);//row,col
+
+ //Instantiate the first of two Panel objects that will
+ // be combined onto a Frame object.
+ panel1 = new Panel();
+ //Specify the GridLayout manager for the Panel object
+ panel1.setLayout(myGridLayout);
+ //Place six Button objects on the Panel with labels
+ // as shown
+ for(int cnt = 0; cnt &lt; 6; cnt++)
+ panel1.add(new Button("Button" + cnt));
+
+ //Instantiate the second Panel object using default
+ // FlowLayout and place two Button objects on it.
+ // These buttons will become functional later when
+ // ActionListener objects are registered on them.
+ Panel panel2 = new Panel();
+ panel2.add(button7);
+ panel2.add(button8);
+
+ //Instantiate a Frame object which will become the
+ // top-level user-interface object.
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+
+ //IMPORTANT Add the two previously prepared Panel
+ // objects to the Frame object to create the composite
+ // user-interface object.
+ myFrame.add(panel1,"North");
+ myFrame.add(panel2,"South");
+
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+
+ //Instantiate action listener objects and register on
+ // button7 &amp; button8
+ button7.addActionListener(
+ new A3x2ActionListener(myGridLayout,myFrame,this));
+ button8.addActionListener(
+ new A2x3ActionListener(myGridLayout,myFrame,this));
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//The next two classes are ActionListener classes. One
+// object of each is instantiated and registered on the two
+// active buttons respectively. The purpose of these event
+// handlers is to modify the GridLayout manager for one of
+// the Panel objects that make up the composite
+// user-interface object. The first of these two classes
+// sets the grid to 3 rows by 2 columns. The other class
+// sets the grid to 2 rows by 3 columns.
+
+//=======================================================//
+class A3x2ActionListener implements ActionListener{
+ GridLayout myGridLayoutObject;
+ Frame myFrameObject;
+ GUI myGuiObject;
+
+ //constructor
+ A3x2ActionListener(GridLayout layoutObject,
+ Frame inFrame,GUI inGuiObject){
+ myGridLayoutObject = layoutObject;
+ myFrameObject = inFrame;
+ myGuiObject = inGuiObject;
+ }//end constructor
+
+ //When an action event occurs, set the rows to 3 and the
+ // columns to 2 in the GridLayout object. Then set the
+ // layout manager for the frame to be the newly-modified
+ // GridLayout object. Then validate the frame to ensure
+ // a valid layout so that the new visual will
+ // take effect.
+ public void actionPerformed(ActionEvent e){
+ myGridLayoutObject.setRows(3);
+ myGridLayoutObject.setColumns(2);
+ myGuiObject.panel1.setLayout(myGridLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class A3x2ActionListener
+//=======================================================//
+
+class A2x3ActionListener implements ActionListener{
+ GridLayout myGridLayoutObject;
+ Frame myFrameObject;
+ GUI myGuiObject;
+
+ //constructor
+ A2x3ActionListener(GridLayout layoutObject,
+ Frame inFrame,GUI inGuiObject){
+ myGridLayoutObject = layoutObject;
+ myFrameObject = inFrame;
+ myGuiObject = inGuiObject;
+ }//end constructor
+
+ //When an action event occurs, set the rows to 2 and the
+ // columns to 3 in the GridLayout object. Then set the
+ // layout manager for the frame to be the newly-modified
+ // GridLayout object. Then validate the frame to ensure
+ // a valid layout so that the new visual will
+ // take effect.
+ public void actionPerformed(ActionEvent e){
+ myGridLayoutObject.setRows(2);
+ myGridLayoutObject.setColumns(3);
+ myGuiObject.panel1.setLayout(myGridLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class A3x2ActionListener
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</pre></div>
+
+<center><h2><a name="review"></a><font color="#ff0000">Review</font></h2></center>
+Q - Without viewing the solution that follows, write a Java application
+that meets the specifications provided in the comments at the beginning
+of the following program.
+
+<p><font color="#0000ff"><font size=-1>A - See the specifications and the
+solution below.</font></font><br/>
+<div class="a"><pre><font color="#0000ff">/*File SampProg137.java Copyright, R.G.Baldwin
+
+Write an application that meets the following
+specifications:
+
+The program begins with a Frame object on the screen.
+
+The top half of the client area of the frame is yellow.
+
+The bottom half of the client area of the frame is green.
+
+The top half contains six buttons. All six buttons are the
+same size,
+
+The six buttons are arranged in two rows of three columns.
+
+The yellow shows through the gap between the buttons.
+
+The bottom half contains two buttons, one labeled "3x2"
+and the other labeled "2x3".
+
+When you click the 3x2 button, the six buttons in the top
+half are rearranged into three rows of two columns.
+
+When you click on the 2x3 button, the six buttons are
+rearranged into two rows of three columns.
+
+Regardless of the arrangement of the buttons in the top
+half, the client area of the frame continues to be divided
+into two equal halves. The bottom half is green, and
+the top half is yellow.
+
+When you close the Frame object, the program terminates and
+returns control to the operating system.
+
+The program was tested using JDK 1.1.3 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+//=======================================================//
+public class SampProg137 {
+ public static void main(String[] args){
+ //instantiate a Graphical User Interface object
+ GUI gui = new GUI();
+ }//end main
+}//end class SampProg137
+//=======================================================//
+
+class GUI {
+ Panel panel1;//The Action listener req a ref to panel1
+
+ public GUI(){//constructor
+ //Instantiate two button objects that will later
+ // become functional
+ Button button7 = new Button("3x2");
+ Button button8= new Button("2x3");
+
+ //Instantiate a layout manager object to be used with
+ // a Panel object. Make the gap 3 pixels.
+ //Args: row,col,Hgap,Vgap
+ GridLayout myGridLayout = new GridLayout(2,3,3,3);
+
+ //Instantiate the first of two Panel objects that will
+ // be combined onto a Frame object and make
+ // it yellow.
+ panel1 = new Panel();
+ panel1.setBackground(Color.yellow);
+
+ //Specify the GridLayout manager for the Panel object
+ panel1.setLayout(myGridLayout);
+
+ //Place six Button objects on the Panel with labels
+ // as shown
+ for(int cnt = 0; cnt &lt; 6; cnt++)
+ panel1.add(new Button("Button" + cnt));
+
+ //Instantiate the second Panel object using default
+ // FlowLayout and place two Button objects on it.
+ // These buttons will become functional later when
+ // ActionListener objects are registered on them.
+ Panel panel2 = new Panel();
+ panel2.setBackground(Color.green);
+ panel2.add(button7);
+ panel2.add(button8);
+
+ //Instantiate a Frame object which will become the
+ // top-level user-interface object.
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+ //Note that the zero in the following argument list
+ // allows for an many rows as are needed to accommodate
+ // the data.
+ myFrame.setLayout(new GridLayout(0,1));
+
+ //Add the two previously prepared Panel objects to the
+ // Frame object based on the GridLayout defined above
+ // to create the composite user-interface object.
+ myFrame.add(panel1);
+ myFrame.add(panel2);
+
+ myFrame.setSize(250,150);
+ myFrame.setVisible(true);
+
+ //Instantiate action listener objects and register on
+ // button7 &amp; button8
+ button7.addActionListener(
+ new A3x2ActionListener(myGridLayout,myFrame,this));
+ button8.addActionListener(
+ new A2x3ActionListener(myGridLayout,myFrame,this));
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//The next two classes are ActionListener classes. One
+// object of each is instantiated and registered on the two
+// active buttons respectively. The purpose of these event
+// handlers is to modify the GridLayout manager for one of
+// the Panel objects that make up the composite
+// user-interface object. The first of these two classes
+// sets the grid to 3 rows by 2 columns. The other class
+// sets the grid to 2 rows by 3 columns.
+
+//=======================================================//
+class A3x2ActionListener implements ActionListener{
+ GridLayout myGridLayoutObject;
+ Frame myFrameObject;
+ GUI myGuiObject;
+
+ //constructor
+ A3x2ActionListener(GridLayout layoutObject,
+ Frame inFrame,GUI inGuiObject){
+ myGridLayoutObject = layoutObject;
+ myFrameObject = inFrame;
+ myGuiObject = inGuiObject;
+ }//end constructor
+
+ //When an action event occurs, set the rows to 3 and the
+ // columns to 2 in the GridLayout object. Then set the
+ // layout manager for the frame to be the newly-modified
+ // GridLayout object. Then validate the frame to ensure
+ // a valid layout so that the new visual will
+ // take effect.
+ public void actionPerformed(ActionEvent e){
+ myGridLayoutObject.setRows(3);
+ myGridLayoutObject.setColumns(2);
+ myGuiObject.panel1.setLayout(myGridLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class A3x2ActionListener
+//=======================================================//
+
+class A2x3ActionListener implements ActionListener{
+ GridLayout myGridLayoutObject;
+ Frame myFrameObject;
+ GUI myGuiObject;
+
+ //constructor
+ A2x3ActionListener(GridLayout layoutObject,
+ Frame inFrame,GUI inGuiObject){
+ myGridLayoutObject = layoutObject;
+ myFrameObject = inFrame;
+ myGuiObject = inGuiObject;
+ }//end constructor
+
+ //When an action event occurs, set the rows to 2 and the
+ // columns to 3 in the GridLayout object. Then set the
+ // layout manager for the frame to be the newly-modified
+ // GridLayout object. Then validate the frame to ensure
+ // a valid layout so that the new visual will
+ // take effect.
+ public void actionPerformed(ActionEvent e){
+ myGridLayoutObject.setRows(2);
+ myGridLayoutObject.setColumns(3);
+ myGuiObject.panel1.setLayout(myGridLayoutObject);
+ myFrameObject.validate();
+ }//end actionPerformed()
+}//end class A3x2ActionListener
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</font></pre></div>
+-end-<!--end--></body></html>

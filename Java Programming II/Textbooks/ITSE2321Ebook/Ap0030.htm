@@ -1,0 +1,1173 @@
+﻿
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0030</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0030: Relational Operators, Increment Operator, and Control Structures</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a>,
+		
+		<a href="#question11">11</a>, <a href="#question12">12</a>,
+		<a href="#question13">13</a>, <a href="#question14">14</a>,
+		<a href="#question15">15</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+<p>Given: The use of <strong>String</strong> concatenation in the argument 
+list of the call to the <strong>println</strong> method in the program shown in
+<a href="#Listing_1">Listing 1</a> will cause seven items to be displayed on the 
+screen, separated by spaces. </p>
+<p>True or False? The program produces the output shown below: </p>
+
+
+
+
+<div class="a">
+				<pre>false true false false true true false</pre>
+</div>
+<p>`</p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap025{
+  public static void main(
+                        String args[]){
+    new Worker().doRelat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doRelat(){
+    int a = 1, b = 2, c = 3, d = 2;
+
+    System.out.println(
+                      (a == b) + &quot; &quot; +
+                      (b == d) + &quot; &quot; +
+                      (b != d) + &quot; &quot; +
+                      (c &lt; a) + &quot; &quot; +
+                      (b &lt;= d) + &quot; &quot; +
+                      (c &gt; d) + &quot; &quot; +
+                      (a &gt;= c));
+  }//end doRelat()
+}//end class definition
+</pre>
+
+</div>
+
+<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. false</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap026{
+  public static void main(
+                        String args[]){
+    new Worker().doRelat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doRelat(){
+    Dummy x = new Dummy();
+    Dummy y = new Dummy();
+    System.out.println(x == y);
+  }//end doRelat()
+}//end class definition
+
+class Dummy{
+  int x = 5;
+  double y = 5.5;
+  String z = &quot;A String Object&quot;;
+}//end class Dummy
+</pre>
+
+</div>
+
+<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. false</li>
+</ul>
+	
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>public class Ap027{
+  public static void main(
+                        String args[]){
+    new Worker().doRelat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doRelat(){
+    Dummy x = new Dummy();
+    Dummy y = new Dummy();
+    System.out.println(x.equals(y));
+  }//end doRelat()
+}//end class definition
+
+class Dummy{
+  int x = 5;
+  double y = 5.5;
+  String z = &quot;A String Object&quot;;
+}//end class Dummy
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true false</li>
+	<li>D. false true</li>
+	<li>E. true true</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>public class Ap028{
+  public static void main(
+                        String args[]){
+    new Worker().doRelat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doRelat(){
+    Dummy x = new Dummy();
+    Dummy y = x;
+    System.out.println(
+         (x == y) + &quot; &quot; + x.equals(y));
+  }//end doRelat()
+}//end class definition
+
+class Dummy{
+  int x = 5;
+  double y = 5.5;
+  String z = &quot;A String Object&quot;;
+}//end class Dummy
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_5">Listing 
+5</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. true</li>
+	<li>D. false</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap029{
+  public static void main(
+                        String args[]){
+    new Worker().doRelat();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doRelat(){
+    Dummy x = new Dummy();
+    Dummy y = new Dummy();
+    System.out.println(x &gt; y);
+  }//end doRelat()
+}//end class definition
+
+class Dummy{
+  int x = 5;
+  double y = 5.5;
+  String z = &quot;A String Object&quot;;
+}//end class Dummy
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_6">Listing 
+6</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5 5 8.3 8.3</li>
+	<li>D. 6 4 9.3 7.300000000000001</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap030{
+  public static void main(
+                        String args[]){
+    new Worker().doIncr();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doIncr(){
+    int w = 5, x = 5;
+    double y = 8.3, z = 8.3;
+
+    w++;
+    x--;
+    y++;
+    z--;
+
+    System.out.println(w + &quot;  &quot; +
+                       x + &quot;  &quot; +
+                       y + &quot;  &quot; +
+                       z);
+  }//end doIncr()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_7">Listing 
+7</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Hello</li>
+	<li>D. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 7.
+<pre>public class Ap031{
+  public static void main(
+                        String args[]){
+    new Worker().doIf();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doIf(){
+    int x = 5, y = 6;
+    if(x - y){
+      System.out.println(&quot;Hello&quot;);
+    }//end if
+  }//end doIf()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_8">Listing 
+8</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. World</li>
+	<li>D. Hello World</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 8.
+<pre>public class Ap032{
+  public static void main(
+                        String args[]){
+    new Worker().doIf();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doIf(){
+    int x = 5, y = 6;
+    if(x &lt; y){
+      System.out.print(&quot;Hello &quot;);
+    }//end if
+    System.out.println(&quot;World&quot;);
+  }//end doIf()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Hello World</li>
+	<li>D. Goodbye World</li>
+	<li>E. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 9.
+<pre>public class Ap033{
+  public static void main(
+                        String args[]){
+    new Worker().doIf();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doIf(){
+    int x = 5, y = 6;
+    if(x == y){
+      System.out.println(
+                        &quot;Hello World&quot;);
+    }else{
+      System.out.println(
+                      &quot;Goodbye World&quot;);
+    }//end else
+  }//end doIf()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. x = 4</li>
+	<li>D. x = 5</li>
+	<li>E. x = 6</li>
+	<li>F. x != 4,5,6</li>
+	<li>G. None of the above</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 
+				10.
+<pre>public class Ap034{
+  public static void main(
+                        String args[]){
+    new Worker().doIf();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doIf(){
+    int x = 2;
+    if(x == 4){
+      System.out.println(&quot;x = 4&quot;);
+    }else if (x == 5){
+      System.out.println(&quot;x = 5&quot;);
+    }else if (x == 6){
+      System.out.println(&quot;x = 6&quot;);
+    }else{
+      System.out.println(&quot;x != 4,5,6&quot;);
+    }//end else
+  }//end doIf()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer10">Answer and Explanation</a></p>
+
+<h2><a name="question11">Question 11</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_11">Listing 
+11</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 1 2 3 4</li>
+	<li>D. 1 2 3 4 5</li>
+	<li>E. None of the above</li>
+</ul>
+
+	
+	
+
+
+<div class="a"><a name="Listing_11">Listing 11</a>. Listing for Question 
+				11.
+<pre>public class Ap035{
+  public static void main(
+                        String args[]){
+    new Worker().doLoop();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLoop(){
+    int cnt = 0;
+    while(cnt&lt;5){
+      cnt++;
+      System.out.print(cnt + &quot; &quot;);
+      cnt++;
+    }//end while loop
+    System.out.println(&quot;&quot;);
+  }//end doLoop()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer11">Answer and Explanation</a></p>
+
+<h2><a name="question12">Question 12</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_12">Listing 
+12</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 1 2 3 4 5</li>
+	<li>D. 1 2 3 4 5 5</li>
+	<li>E. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_12">Listing 12</a>. Listing for Question 
+				12.
+<pre>public class Ap036{
+  public static void main(
+                        String args[]){
+    new Worker().doLoop();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLoop(){
+    int cnt;
+    for(cnt = 0; cnt &lt; 5; cnt++){
+      System.out.print(cnt + &quot; &quot;);
+    }//end for loop
+    System.out.println(cnt + &quot; &quot;);
+  }//end doLoop()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer12">Answer and Explanation</a></p>
+
+<h2><a name="question13">Question 13</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_13">Listing 
+13</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 1 2 3 4 5</li>
+	<li>D. 1 2 3 4 5 5</li>
+	<li>E. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_13">Listing 13</a>. Listing for Question 
+				13.
+<pre>public class Ap037{
+  public static void main(
+                        String args[]){
+    new Worker().doLoop();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLoop(){
+    for(int cnt = 0; cnt &lt; 5; cnt++){
+      System.out.print(cnt + &quot; &quot;);
+    }//end for loop
+    System.out.println(cnt + &quot; &quot;);
+  }//end doLoop()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer13">Answer and Explanation</a></p>
+
+<h2><a name="question14">Question 14</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_14">Listing 
+14</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 1 2 3 3</li>
+	<li>D. 0 1 2 3 4</li>
+	<li>E. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_14">Listing 14</a>. Listing for Question 
+				14.
+<pre>public class Ap037{
+  public static void main(
+                        String args[]){
+    new Worker().doLoop();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public double doLoop(){
+    for(int cnt = 0; cnt &lt; 5; cnt++){
+      System.out.print(cnt + &quot; &quot;);
+      if(cnt == 3){
+        System.out.println(cnt);
+        return cnt;
+      }//end if
+    }//end for loop
+    //return 3.5;
+  }//end doLoop()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer14">Answer and Explanation</a></p>
+
+<h2><a name="question15">Question 15</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_15">Listing 
+15</a>?</p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 0 1 2 3 3</li>
+	<li>D. 0 1 2 3 4</li>
+	<li>E. None of the above</li>
+</ul>
+
+
+<div class="a"><a name="Listing_15">Listing 15</a>. Listing for Question 
+				15.
+<pre>public class Ap038{
+  public static void main(
+                        String args[]){
+    new Worker().doLoop();
+  }//end main()
+}//end class definition
+
+class Worker{
+  public void doLoop(){
+    for(int cnt = 0; cnt &lt; 5; cnt++){
+      System.out.print(cnt + &quot; &quot;);
+      if(cnt == 3){
+        System.out.println(cnt);
+        return;
+      }//end if
+    }//end for loop
+  }//end doLoop()
+}//end class definition
+</pre>
+
+</div>
+
+	<p><a href="#answer15">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them.</p>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1. </li>
+	<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3. </li>
+	<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4. </li>
+	<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5. </li>
+	<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6. </li>
+	<li><a href="#Listing_7">Listing 7</a>. Listing for Question 7. </li>
+	
+	<li><a href="#Listing_8">Listing 8</a>. Listing for Question 8. </li>
+	<li><a href="#Listing_9">Listing 9</a>. Listing for Question 9. </li>
+	<li><a href="#Listing_10">Listing 10</a>. Listing for Question 10. </li>
+	<li><a href="#Listing_11">Listing 11</a>. Listing for Question 11. </li>
+	<li><a href="#Listing_12">Listing 12</a>. Listing for Question 12. </li>
+	<li><a href="#Listing_13">Listing 13</a>. Listing for Question 13. </li>
+	<li><a href="#Listing_14">Listing 14</a>. Listing for Question 14. </li>
+	<li><a href="#Listing_15">Listing 15</a>. Listing for Question 15. </li>
+
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	<p>Housekeeping material</p>
+<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0030: Relational Operators, 
+				Increment Operator, and Control Structures</li>
+				<li>File: Ap0030.htm </li>
+				<li>Originally published: January, 2002</li>
+				<li>Published at cnx.org: 12/02/12</li>
+				<li>Revised: 03/19/20</li>
+
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer15">Answer 15</a></h2>
+<p>C. 0 1 2 3 3 </p>
+<h3><strong>Explanation 15</strong></h3><p>
+<strong>No return statement is required</strong>
+</p>
+<p>A method with a signature that specifies a <strong>void</strong> return type does not require 
+a <strong>return</strong> statement. </p>
+<p>However, such a method may contain a <strong>return</strong> statement, provided that it is 
+terminated immediately with a semicolon <em>(no expression between the word return 
+and the semicolon)</em>. </p>
+<p><em>(Every method whose return type is not void must contain at least one return 
+statement.)</em> </p>
+<p><strong>Multiple return statements are allowed</strong> </p>
+<p>Any method may contain any number of <strong>return</strong> statements provided that they 
+make sense from a syntax viewpoint, and provided the expression <em>(or lack 
+thereof)</em> between the word <strong>return</strong> and the semicolon evaluates to the type 
+specified in the method signature <em>(or a type that will be automatically converted to the type 
+specified in the method signature)</em>. </p>
+<p><strong>A return statement terminates a method immediately </strong> </p>
+<p>Whenever the execution stream encounters any <strong>return</strong> statement, the method is 
+terminated immediately, and control is returned to the method that called that 
+method. </p>
+<p><a href="#question15">Back to Question 15</a> </p>
+
+<h2><a name="answer14">Answer 14</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 14</strong></h3><p>
+<strong>Missing return statement
+</strong>
+</p>
+<p>This program produces the following compiler error under JDK 1.3: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap037.java:11: missing return statement 
+  public int doLoop(){ </pre>
+</div>
+<p>Even though this program contains a <strong>return</strong> statement inside the <strong>for</strong> 
+loop, it is still necessary to place a <strong>return</strong> statement at the end of the method 
+to satisfy the compiler. <em>(The one shown in the code is a comment.) </em> </p>
+<p>The method named <strong>doLoop</strong> must return a value of type <strong>double</strong>. 
+Apparently the compiler assumes that the <strong>return</strong> statement inside the <strong>for</strong> 
+loop may never be executed <em>(although that isn&#39;t true in this case)</em>. </p>
+<p>Both of the <strong>return</strong> statements must return a value that satisfies the <strong>
+double</strong> type requirement given in the method signature. </p>
+<p>Returning a value of type <strong>int</strong> in the <strong>for</strong> loop will satisfy 
+the type requirement because type <strong>int</strong> will be automatically 
+converted to type <strong>double</strong> as it is returned. <em>(Conversion 
+from type <strong>int</strong> to type <strong>double</strong> is a widening 
+conversion.) </em> </p>
+<p><a href="#question14">Back to Question 14</a> </p>
+
+<h2><a name="answer13">Answer 13</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 13</strong></h3><p>
+<strong>The scope of a local variable
+</strong>
+</p>
+<p>In general, the scope of a local variable extends from the point at which it 
+is declared to the curly brace that signals the end of the block in which it is 
+declared. </p>
+<p><strong>This applies to for loop in an interesting way </strong> </p>
+<p>While it is allowable to declare a variable within the first clause of a
+<strong>for</strong> loop, the scope of that variable is limited to the block of 
+code contained in the loop structure. </p>
+<p>The variable cannot be accessed outside the loop. </p>
+<p><strong>Attempts to access variable out of scope </strong> </p>
+<p>This program attempts to access the value of the variable named <strong>cnt</strong> after the 
+loop terminates. </p>
+<p>The program displays the following compiler error under JDK 1.3. This 
+error results from the attempt to display the value of the counter after the 
+loop terminates. </p>
+
+
+
+
+<div class="a">
+				<pre>Ap037.java:15: cannot resolve symbol 
+symbol  : variable cnt 
+location: class Worker 
+    System.out.println(cnt + " ");</pre>
+</div>
+<p><a href="#question13">Back to Question 13</a> </p>
+
+<h2><a name="answer12">Answer 12</a></h2>
+<p>C. 0 1 2 3 4 5 </p>
+<h3><strong>Explanation 12</strong></h3><p>
+<strong>A simple for loop structure
+</strong>
+</p>
+<p>This program illustrates a simple <strong>for</strong> loop that displays the 
+value of its counter using a call to the <strong>print</strong> method inside 
+the loop. </p>
+<p>After the loop terminates, the program displays the value of the counter one 
+last time using a call to <strong>println</strong>. </p>
+<p><strong>Three clauses separated by semicolons </strong> </p>
+<p>The first line of a <strong>for</strong> loop structure always contains three 
+clauses separated by semicolons. </p>
+<p>The first and third clauses may be empty, but the semicolons are required in 
+any case. </p>
+<p><strong>The first clause ... </strong> </p>
+<p>The first clause is executed once and only once at the beginning of the loop.
+</p>
+<p>It can contain just about any valid Java expression. </p>
+<p>It can even contain more than one expression with the individual expression 
+separated by commas. </p>
+<p>When the first clause contains more than one expression separated by commas, 
+the expressions are evaluated in left-to-right order. </p>
+<p><strong>The second clause </strong> </p>
+<p>The second clause is a conditional clause. It must contain an 
+expression that returns a <strong>boolean</strong> value. </p>
+<p><em>(Actually, this clause can also be empty, in which case it is apparently 
+assumed to be true. This leads to an infinite loop unless there is some 
+code inside the loop to terminate it, perhaps by executing a return or a break 
+statement.)</em> </p>
+<p><strong>An entry-condition loop </strong> </p>
+<p>The <strong>for</strong> loop is an entry condition loop, meaning that the 
+conditional expression is evaluated once immediately after the first clause is 
+executed, and once per iteration thereafter. </p>
+<p><strong>Behavior of the for loop </strong> </p>
+<p>If the conditional expression returns true, the block of code following the 
+closing parenthesis is executed. </p>
+<p>If it returns false, the block of code is skipped, and control passes to the 
+first executable statement following the block of code. </p>
+<p><em>(For the case where the block contains only one statement, the matching curly 
+brackets can be omitted.) </em> </p>
+<p><strong>The third clause </strong> </p>
+<p>The third clause can contain none, one, or more valid expressions separated 
+by commas. </p>
+<p>If there are more than one, they are evaluated in left-to-right order. </p>
+<p><strong>When they are evaluated</strong></p>
+<p>The expressions in the third clause are evaluated once during each iteration.
+</p>
+<p>However, it is very important to remember that despite the physical placement 
+of the clause in the first line, the expressions in the third clause are not 
+evaluated until after the code in the block has been evaluated. </p>
+<p><strong>Typically an update clause </strong> </p>
+<p>The third clause is typically used to update a counter, but this is not a 
+technical requirement. </p>
+<p>This clause can be used for just about any purpose. </p>
+<p>However, the counter must be updated somewhere within the block of code or 
+the loop will never terminate.</p>
+<p><em>(Stated differently, something must occur within the block of code to 
+eventually cause the conditional expression to evaluate to false. 
+Otherwise, the loop will never terminate on its own. However, it is 
+possible to execute a <strong>return</strong> or <strong>break</strong> within the block to terminate the loop.)</em>
+</p>
+<p><strong>Note the first output value for this program </strong> </p>
+<p>Because the update in the third clause is not executed until after the code 
+in the block has been executed, the <a href="#answer12">first value displayed</a> by this program is the 
+value zero. </p>
+<p><a href="#question12">Back to Question 12</a> </p>
+
+<h2><a name="answer11">Answer 11</a></h2>
+<p>E. None of the above </p>
+<h3><strong>Explanation 11</strong></h3><p>
+<strong>And the answer is ...</strong>
+</p>
+<p>The output produced by this program is: </p>
+<p><strong>1 3 5</strong></p>
+<p><strong>A simple while loop </strong> </p>
+<p>This program uses a simple <strong>while</strong> loop to display the value of a counter, once 
+during each iteration. </p>
+<p><strong>Behavior of a while loop </strong> </p>
+<p>As long as the relational expression in the conditional clause returns true, 
+the block of code immediately following the conditional clause is executed. </p>
+<p>When the relational expression returns false, the block of code following the 
+conditional clause is skipped and control passes to the next executable 
+statement following that block of code. </p>
+<p><strong>An entry-condition loop </strong> </p>
+<p>The <strong>while</strong> loop is an entry condition loop, meaning that the test is 
+performed once during each iteration before the block of code is executed. </p>
+<p>If the first test returns false, the block of code is skipped entirely. </p>
+<p><strong>An exit-condition loop</strong> </p>
+<p>There is another loop, known as a <strong>do-while</strong> loop, that performs the test 
+after the block of code has been executed once. This guarantees that the 
+block of code will always be executed at least once. </p>
+<p><strong>Just to make things interesting ...</strong> </p>
+<p>Two statements using the increment operator were placed inside the loop in 
+this program. </p>
+<p>Therefore, insofar as the conditional test is concerned, the counter is being 
+incremented by twos. This causes the output to display the sequence 1 3 5.
+</p>
+<p><strong>Nested while loops </strong> </p>
+<p>The <strong>while</strong> loop control structure can contain loops nested inside of loops, 
+which leads to some interesting behavior. </p>
+<p><a href="#question11">Back to Question 11</a> </p>
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>F. x != 4,5,6 </p>
+<h3><strong>Explanation 10</strong></h3><p>
+<strong>A multiple-choice structure
+</strong>
+</p>
+<p>This is a form of control structure that is often used to make logical 
+decisions in a <em>multiple-choice</em> sense. </p>
+<p>This is a completely general control structure. It can be used with 
+just about any type of data. </p>
+<p><strong>A switch structure</strong> </p>
+<p>There is a somewhat more specialized, control structure named <strong>switch</strong> that can 
+also be used to make decisions in a multiple choice sense under certain fairly 
+restrictive conditions. </p>
+<p>However, the structure shown in this program can always be used to replace a 
+switch. Therefore, I find that I rarely use the <strong>switch</strong> 
+structure, opting instead for the more general form of multiple-choice 
+structure.</p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>D. Goodbye World </p>
+<h3><strong>Explanation 9</strong></h3><p>
+<strong>An if-else control structure
+</strong>
+</p>
+<p>This program contains a simple <strong>if-else</strong> control structure. </p>
+<p><strong>Behavior of if-else structure </strong> </p>
+<p>If the expression in the conditional clause returns true, the block of code 
+following the conditional clause is executed, and the block of code following 
+the word <strong>else</strong> is skipped. </p>
+<p>If the expression in the conditional clause returns false, the block of code 
+following the conditional clause is skipped, and the block of code following the 
+word <strong>else</strong> is executed. </p>
+<p><strong>This program executes the else block </strong> </p>
+<p>In this program, the expression in the conditional clause returns false. </p>
+<p>Therefore, the block of code following the word <strong>else</strong> is executed, producing 
+the words <em>Goodbye World</em> on the computer screen. </p>
+<p><strong>Can result in very complex structures </strong> </p>
+<p>While the structure used in this program is relatively simple, it is possible 
+to create very complex control structures by nesting additional <strong>if-else</strong> 
+structures inside the blocks of code. </p>
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>D. Hello World </p>
+<h3><strong>Explanation 8</strong></h3><p>
+<strong>A simple if statement </strong>
+</p>
+<p>This program contains a simple <strong>if</strong> statement that </p>
+<ul>
+	<li>uses a relational expression</li>
+	<li>to return a value of type <strong>boolean</strong> inside its 
+	conditional clause</li>
+</ul><p>
+<strong>Tests for x less than y</strong>
+</p>
+<p>The relational expression tests to determine if the value of the variable 
+named <strong>x</strong> is less than the value of the variable named <strong>y</strong>. </p>
+<p>Since the value of <strong>x</strong> is 5 and the value of <strong>y</strong> is 6, this relational expression 
+returns true. </p>
+<p><strong>Behavior of an if statement</strong> </p>
+<p>If the expression in the conditional clause returns true, the block of code 
+following the conditional clause is executed </p>
+<p><strong>What is a block of code?</strong> </p>
+<p>A block of code is one or more statements surrounded by matching curly 
+brackets. </p>
+<p>For cases like this one where the block includes only one statement, the 
+curly brackets can be omitted. However, I prefer to put them there anyway. They 
+don&#39;t cause any harm and help me avoid programming errors if I come back later 
+and add more statements to the body of the <strong>if</strong> statement.</p>
+<p><strong>Display the word Hello </strong> </p>
+<p>In this program, execution of the code in the block causes the <strong>print</strong> 
+method to be called and the word <em>Hello</em> to be displayed followed by a space, but 
+without a newline following the space. </p>
+<p><strong>What if the conditional clause returns false? </strong> </p>
+<p>If the expression in the conditional clause returns false, the block of code 
+following the conditional clause is bypassed. </p>
+<p><em>(That is not the case in this program.) </em> </p>
+<p><strong>After the if statement ... </strong> </p>
+<p>After the <strong>if</strong> statement is executed in this program, the <strong>println</strong> 
+method is called to cause the word <em>World</em> to be displayed on the same line as the 
+word <em>Hello</em>. </p>
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 7</strong></h3><p>
+<strong>Not the same as C and C++
+</strong>
+</p>
+<p>Unlike C and C++, which can use an integer numeric expression in the 
+conditional clause of an <strong>if</strong> statement, Java requires the conditional clause of 
+an <strong>if</strong> statement to contain an expression that will return a <strong>boolean</strong> 
+result. </p>
+<p><strong>Bad conditional expression </strong> </p>
+<p>That is not the case in this program, and the following compiler error occurs 
+under JDK 1.3: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap031.java:13: incompatible types 
+found   : int 
+required: boolean 
+    if(x - y){ </pre>
+</div>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>D. 6 4 9.3 7.300000000000001 </p>
+<h3><strong>Explanation 6</strong></h3><p>
+<strong>Postfix increment and decrement operators
+</strong>
+</p>
+<p>This program illustrates the use of the increment (++) and decrement (--) 
+operators in their postfix form. </p>
+<p><strong>Behavior of increment operator </strong> </p>
+<p>Given a variable <strong>x</strong>, the following two statements are equivalent: </p>
+
+
+
+
+<div class="a">
+				<pre>x++;
+x = x + 1;</pre>
+</div>
+<p><strong>Behavior of decrement operator </strong> </p>
+<p>Also, the following two statements are equivalent: </p>
+
+
+
+
+<div class="a">
+				<pre>x--;
+x = x - 1;</pre>
+</div>
+<p class="style1">Prefix and postfix forms available </p>
+<p>These operators have both a prefix form and a postfix form. </p>
+<p><strong>Can be fairly complex </strong> </p>
+<p>It is possible to construct some fairly complex scenarios when using these 
+operators and combining them into expressions. </p>
+<p><strong>In these chapters ...</strong> </p>
+<p>In this group of self-assessment chapters, the increment and decrement operators will 
+primarily be used to update control variables in loops. </p>
+<p><strong>Inaccurate results</strong> </p>
+<p>Regarding the program output, you will note that there is a little arithmetic 
+inaccuracy when this program is executed using JDK 1.3. <em>(The same is still 
+true with JDK version 1.7.)</em></p>
+<p>Ideally, the output value 7.300000000000001 should simply be 7.3 without the 
+very small additional fractional part, but that sort of thing often happens when 
+using floating types. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 5</strong></h3><p>
+<strong>Cannot use &gt; with reference variables</strong>
+</p>
+<p>The only relational operator that can be applied to reference variables is 
+the == operator. </p>
+<p>As discussed in the previous questions, even then it can only be used to determine 
+if two reference variables refer to the same object. </p>
+<p>This program produces the following compiler error under JDK 1.3: </p>
+
+
+
+
+<div class="a">
+				<pre>Ap029.java:14: operator &gt; cannot be applied to Dummy,Dummy
+      System.out.println(x &gt; y);</pre>
+</div>
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>E. true true </p>
+<h3><strong>Explanation 4</strong></h3><p>
+<strong>Two references to the same object</strong>
+</p>
+<p>In this case, the reference variables named <strong>x</strong> and <strong>y</strong> both refer to the same 
+object. Therefore, when tested for equality, using either the == 
+operator or the default <strong>equals</strong> method, the result is true. </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>D. false </p>
+<h3><strong>Explanation 3</strong></h3><p>
+<strong>Read question 2</strong>
+</p>
+<p>In case you skipped it, you need to read the explanation for the answer to
+<a href="#question02">Question 2</a> before reading this explanation. </p>
+<p><strong>Objects appear to be equal</strong> </p>
+<p>These two objects are of the same type and contain the same values. Why 
+are they reported as not being equal? </p>
+<p><strong>Did not override the equals method </strong></p>
+<p>When I defined the class named <strong>Dummy</strong> used in the programs 
+for <a href="#question02">Question 2</a> and <a href="#question03">Question 3</a>, I did not override the 
+method named <strong>equals</strong>. </p>
+<p>Therefore, my class named <strong>Dummy</strong> simply inherited the default 
+version of the method named <strong>equals</strong> that is defined in the class 
+named <strong>Object</strong>. </p>
+<p><strong>Default behavior of equals method </strong></p>
+<p>The default version of the <strong>equals</strong> method behaves 
+essentially the same as the == operator. </p>
+<p>That is to say, the inherited default version of the <strong>equals</strong> 
+method will return true if the two objects being compared are actually the same 
+object, and will return false otherwise. </p>
+<p>As a result, this program displays false. </p>
+<p><strong>Overridden equals is required for valid testing</strong> </p>
+<p>If you want to be able to determine if two objects instantiated from a class 
+that you define are &quot;equal&quot;, you must override the inherited <strong>equals</strong> 
+method for your new class. You cannot depend on the inherited version of 
+the <strong>equals</strong> method to do that job for you. </p>
+<p><strong>Overriding may not be easy</strong> </p>
+<p>That is not to say that overriding the <strong>equals</strong> method is 
+easy. In fact, it may be quite difficult in those cases where the class 
+declares instance variables that refer to other objects. In this case, it 
+may be necessary to test an entire tree of objects for equality. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>D. false</p>
+<h3><strong>Explanation 2</strong></h3><p>
+<strong>Use of the == operator with references to objects </strong>
+</p>
+<p>This program illustrates an extremely important point about the use of the == operator with objects and reference variables containing references 
+to objects. </p>
+<p><strong>You cannot determine... </strong> </p>
+<p>You cannot determine if two objects are &quot;equal&quot; by applying the == 
+operator to the reference variables containing references to those objects. </p>
+<p>Rather, that test simply determines if two reference variables refer to the 
+same object. </p>
+<p><strong>Two references to the same object </strong> </p>
+<p>Obviously, if there is only one object, referred to by two different 
+reference variables, then it is &quot;equal&quot; to itself. </p>
+<p><strong>Objects of same type containing same instance values </strong> </p>
+<p>On the other hand, two objects of the same type could contain exactly the 
+same data values, but this test would not indicate that they are &quot;equal.&quot; 
+<em>(In 
+fact, that is the case in this program.) </em> </p>
+<p><strong>So, how do you test two objects for equal? </strong> </p>
+<p>In order to determine if two objects are &quot;equal&quot;, you must devise a way to 
+compare the types of the two objects and actually compare the contents of one 
+object to the contents of the other object. Fortunately, there is a 
+standard framework for doing this. </p>
+<p><strong>The equals method </strong> </p>
+<p>In particular, the class named <strong>Object</strong> defines a default version of a method 
+named <strong>equals</strong> that is inherited by all other classes. </p>
+<p><strong>Class author can override the equals method</strong> </p>
+<p>The intent is that the author of a new class can override the <strong>equals</strong> 
+method so that it can be called to determine if two objects instantiated from 
+that class are &quot;equal.&quot; </p>
+<p><strong>What does &quot;equal&quot; mean for objects?</strong> </p>
+<p>Actually, that is up to the author of the class to decide. </p>
+<p>After having made that decision, the author of the class writes that behavior 
+into her overridden version of the method named <strong>equals</strong>. </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>The answer is True. </p>
+<h3><strong>Explanation 1</strong></h3><p>
+<strong>Not much to explain here
+</strong>
+</p>
+<p>There isn&#39;t much in the way of an explanation to provide for this program.
+</p>
+<p><strong>Evaluate seven relational expressions </strong> </p>
+<p>Each of the seven relational expressions in the argument list for the <strong>
+println</strong> method is evaluated and returns either true or false as a 
+<strong>boolean</strong> value. </p>
+<p><strong>Concatenate the individual results, separated by a space</strong> </p>
+<p>The seven <strong>boolean</strong> results are concatenated, separated by space characters, 
+and displayed on the computer screen. </p>
+<p><strong>Brief description of the relational operators </strong> </p>
+<p>Just in case your aren&#39;t familiar with the relational operators, here is a 
+brief description. </p>
+<p>Each of these operators returns the <strong>boolean</strong> value true if the specified 
+condition is met. Otherwise, it returns false. </p>
+
+
+
+
+<div class="a">
+				<pre>== Left operand equals the right operand</pre>
+				<pre>!= Left operand is not equal to the right operand</pre>
+				<pre>&lt; Left operand is less than the right operand</pre>
+				<pre>&lt;= Left operand is less than or equal to the right operand</pre>
+				<pre>&gt; Left operand is greater than the right operand</pre>
+				<pre>&gt;= Left operand is greater than or equal to the right operand</pre>
+</div>
+<p><a href="#question01">Back to Question 1</a> </p>
+<p>-end- </p>
+
+
+</body>
+</html>

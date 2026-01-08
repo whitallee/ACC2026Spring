@@ -1,0 +1,676 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Java1622</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style2 {
+	text-align: left;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Java1622: Array Objects, Part 1</h1>
+ 
+
+<h1 class="style1">Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Whats_next">What&#39;s next?</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Complete_program_listing">Complete program listing</a></li>
+</ul>
+	<h1 class="auto-style2"><a name="Preface">Preface</a></h1>
+	<p>This chapter is one of a series of chapters designed to teach you about Object-Oriented Programming (OOP) using Java.</p>
+	<h2><a name="Viewing_tip">Viewing tip</a></h2>
+	<p>I recommend that you open another copy of this document in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+	<h3><a name="Listings">Listings</a></h3>
+	<ul>
+		<li><a href="#Listing_1">Listing 1</a>. Sample variable declarations for array objects.</li>
+		<li><a href="#Listing_2">Listing 2</a>. The special case of type Object. </li>
+		<li><a href="#Listing_3">Listing 3</a>. Creating array objects. </li>
+		<li><a href="#Listing_4">Listing 4</a>. The beginning of the class named Array05. </li>
+		<li><a href="#Listing_5">Listing 5</a>. A new ordinary object of class Array05.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Populate the second element.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Print some data.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Produce some more output.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Complete program listing.</li>
+	</ul>
+	<h1 class="style1"><a name="Preview">Preview</a></h1>
+	<p>This chapter explains how array objects fit into the grand scheme of things 
+in Object-Oriented Programming <em>(OOP)</em> using Java. Before continuing with 
+	this chapter, I recommend that you study Kjell 
+	<a href="http://programmedlessons.org/Java9/chap60/ch60_01.html">CHAPTER 60 — Arrays</a> through
+	<a href="http://programmedlessons.org/Java9/chap67/ch67_01.html">CHAPTER 67 — Two-Dimensional Arrays</a>.</p>
+<p>A different syntax is required to create array objects than the syntax 
+normally used to create ordinary objects. </p>
+<p>Array objects are accessed via references. Any of the methods of the <b>
+Object</b> class can be called on a reference to an array object. </p>
+<p>Array objects encapsulate a group of variables. The variables don&#39;t have 
+individual names. They are accessed using positive integer index values. The 
+integer indices of a Java array object always extend from <b>0</b> to <b>(n-1)</b> 
+where <b>n</b> is the <b>length</b> of the array encapsulated in the object. </p>
+<p>All array objects in Java encapsulate one-dimensional arrays. The component 
+type of an array may itself be an array type. This makes it possible to create 
+array objects whose individual components refer to other array objects. This is 
+the mechanism for creating <i>multi-dimensional</i> or <i>ragged</i> arrays in 
+Java. </p>
+	<h1 class="auto-style2"><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+	<p><b>Three kinds of objects</b> </p>
+<p>There are 
+at least three kinds of objects involved in a Java program: </p>
+<ul>
+	<li>Ordinary objects</li>
+	<li>Class objects</li>
+	<li>Array objects</li>
+</ul>
+<p>Most of the discussion up to this point in this Ebook has dealt with what I 
+referred to in the above list as <i>ordinary objects</i>. These are the objects that you instantiate in your code by applying the <b>new</b> 
+operator to a constructor for a class in order to create a new instance <i>
+(object)</i> of that class. </p>
+<p>Class objects will be discussed in a later chapter.</p>
+<p>This chapter and some that follow will discuss array objects.</p>
+<p>The existence of array objects tends to complicate the OOP structure of 
+a Java program. Even if you don&#39;t consider 
+array objects to be a different kind of object, you must at least consider them 
+to be a <i>special</i> kind of object. A completely different syntax is required 
+to create array objects than the syntax normally used to instantiate ordinary 
+objects. </p>
+<p><b>References to array objects</b> </p>
+<p>Arrays are objects in Java <i>(at least, arrays are always encapsulated in 
+objects).</i> Array objects are dynamically created. Like ordinary objects, 
+array objects are accessed via references. The reference to an array object can 
+be assigned to a reference variable whose type is specified as: </p>
+<div class="a">
+<pre>TypeName[] </pre>
+</div>
+<p>For example, <a href="#Listing_1">Listing 1</a> shows some unrelated 
+declarations for variables that are capable of storing references to array 
+objects. </p>
+<div class="a"><a name="Listing_1">Listing 1</a>. Sample variable 
+				declarations for array objects.
+
+				<pre>int[] x1;
+
+Button[] x2;
+
+Object[] x3;</pre>
+</div>
+	<p>Note the empty square brackets that are required in the variable 
+	declarations in <a href="#Listing_1">Listing 1</a>. </p>
+<p><b>The special case of type Object</b> </p>
+<p>In addition, a reference to an array object may be assigned to a reference 
+variable of type <b>Object</b> as shown in <a href="#Listing_2">Listing 2</a>, 
+where <strong>x4</strong> is a reference to an array object.</p>
+<div class="a"><a name="Listing_2">Listing 2</a>. The special case of type Object.
+
+				<pre>Object x4;</pre>
+</div>
+	<p>Note that there are <i>no square brackets</i> in the statement in 
+	Listing 2. </p>
+<p><b>What does this mean?</b> </p>
+<p>This means that like ordinary objects, a reference to an array object <em>can be 
+treated </em>as type <b>Object </b><i>(with no square brackets).</i> </p>
+<p>This further means that any of the methods defined in the <b>Object</b> class
+<i>(such as the <b>toString</b> and <b>getClass</b> methods) </i>can be called 
+on a reference to an array object. </p>
+<p><b>The String representation of an array object&#39;s reference</b> </p>
+<p>For example, when the <b>toString</b> method is called on a reference to an 
+array object containing data of type <b>int</b>, the resulting string will be 
+similar to the following: </p>
+<div class="a">
+<pre>[I@73d6a5 </pre>
+</div>
+<p><b>Pretty ugly, huh?</b> </p>
+<p>You may recognize this as being similar to the default <b>String</b> returned 
+by calling the <b>toString</b> method on an ordinary object with the name of the 
+class for the ordinary object being replaced by <b>[I</b>. </p>
+<p>For example, the <b>String </b>returned by calling the <b>toString</b> method 
+on an object of the class named <b>Array04</b>, <i>(with no overridden toString 
+method), </i>looks something like the following. </p>
+<div class="a">
+<pre>Array04@73d6a5 </pre>
+</div>
+<p><i>(Note that the hexadecimal numeric values following the @ in both of the 
+above examples will change from one case to the next.)</i> </p>
+<p><b>Calling the getClass method</b> </p>
+<p>Similarly, calling the <b>getClass</b> method on references to array objects 
+containing data of the types <b>Array04</b>, <b>Button</b>, and <b>int</b>, 
+respectively, and then calling the <b>toString</b> method on the <b>Class</b> 
+objects returned by the <b>getClass</b> method, produces the following: </p>
+<div class="a">
+<pre>class [LArray04;
+class [Ljava.awt.Button;
+class [I</pre>
+</div>
+<p><em>(The getClass method will be discussed in detail in a future chapter.)</em></p>
+<p><b>Complicating the OOP structure</b> </p>
+<p>I made the following statement in an earlier paragraph:</p>
+<p><i>&quot;The existence of array objects tends to complicate the OOP structure 
+of a Java program."</i></p>
+<p><b>Array object is not a subclass of class Object</b> </p>
+<p>An array object can be treated as type <b>Object</b> for purposes of calling 
+the methods of the <b>Object</b> class on the reference to the array object. 
+However, it would probably be misleading to say that an array object is 
+instantiated from a subclass of the <b>Object</b> class. </p>
+<p><b>The new operator and the constructor name</b> </p>
+<p>Ordinary objects are created by applying the <b>new</b> operator to the 
+constructor for a class, where the name of the constructor is always the same as 
+the name of the class. That is not the case with array objects. Array objects 
+are created by applying the <b>new</b> operator to the name of the type of data 
+to be encapsulated in the array object. </p>
+<p><b>Passing parameters versus square-bracket notation</b> </p>
+<p>In addition, whereas the instantiation of ordinary objects involves 
+parameters passed in parentheses, a square-bracket notation is used instead of 
+parentheses to create an array object. The value in the square brackets 
+specifies the <b>length</b> of the array. <em>(An array object has an accessible 
+property named <strong>length</strong> that specifies the number of elements in the 
+array.)</em></p>
+<p><b>Creating an array object</b> </p>
+<p>Array objects <i>(with <strong>default</strong> initialization values)</i> 
+can be created by 
+applying the <b>new</b> operator to the name of the data type to be stored in 
+the array, using a square-bracket notation. An example is shown by the 
+right-hand portion of the first statement in <a href="#Listing_3">Listing 3</a>. </p>
+<div class="a"><a name="Listing_3">Listing 3</a>. Creating array objects.
+
+				<pre>int[] x1 = new int[5];
+
+int[] x2 = {1,2,3,4,5};</pre>
+</div>
+	<p><b>A five-element array object</b> </p>
+<p>The first statement in <a href="#Listing_3">Listing 3</a> creates an array 
+object capable of storing five values of type <b>int</b>. The statement also assigns the array object&#39;s 
+reference to the newly-declared reference variable named <b>x1</b>. </p>
+<p>Each element in the array is initialized to the default value zero or its 
+equivalent.</p>
+<p><i>(All array elements created in this manner receive a default initial 
+value. Numeric primitive types receive an initial value of zero. Elements of 
+type <b>boolean</b> receive an initial value of <b>false</b>. Elements whose 
+type is the name of a class or the name of an interface receive an initial value 
+of <b>null</b>.)</i></p>
+<p><b>Explicit initialization</b> </p>
+<p>The second statement in <a href="#Listing_3">Listing 3</a> also creates an 
+array object capable of storing five values of type <b>int</b>, but in this case, the values in the 
+elements are explicitly initialized to the values shown.</p>
+<p><i>(Note that the <b>new</b> operator is not used in the second statement in 
+Listing 3. This is also a significant departure from the syntax used to 
+instantiate ordinary objects.)</i></p>
+<p>This array object&#39;s reference is assigned to the reference variable named <b>x2</b>.</p>
+<p><b>Note the empty square brackets in the variable declarations</b> </p>
+<p>The syntax of the type specification for the reference variable in each 
+statement in <a href="#Listing_3">Listing 3</a> 
+is different from the syntax used in the type specification for either a 
+primitive variable or an ordinary class type reference variable <i>(note the 
+square brackets on the left in Listing 3)</i>. In <a href="#Listing_3">Listing 3</a>, 
+the type specifications indicate that each variable is capable of holding a 
+reference to an array object. </p>
+<p><b>The size of the array</b> </p>
+<p>Furthermore, the empty square brackets <i>(in the declaration of the 
+reference variable)</i> indicate that the reference variable doesn&#39;t know <i>
+(and doesn&#39;t care)</i> about the size of the array to which it may refer. Each 
+of the reference variables declared in <a href="#Listing_3">Listing 3</a> can 
+refer to a one-dimensional array object of any size. Also, each of the reference 
+variables can refer to different array objects of different sizes at different points in time 
+during the execution of the program. <em>(Note that size is not a keyword 
+insofar as array objects are concerned. See the discussion of the <strong>length</strong> 
+property later.)</em></p>
+
+
+
+<div class="a"><b>The Array class</b>
+				<p>As an aside, let me mention that there is a class named <b>
+				Array</b>, which provides <strong>static</strong> methods to 
+				dynamically create and access Java arrays. The use of the 
+				methods of this class makes it possible to handle arrays with a 
+				programming style similar to the programming style typically 
+				used with ordinary objects. However, the use of the methods of 
+				the <b>Array</b> class tends to require more programming effort 
+				than the square-bracket notation discussed in this chapter. I 
+				will discuss a sample program that illustrates the methods of 
+				the <b>Array</b> class in a future chapter.</p>
+</div>
+	<p><b>Encapsulating a group of variables</b> </p>
+<p>As is the case with other languages that support arrays, array objects in 
+Java encapsulate a group of variables. </p>
+<p>Zero or more variables may be encapsulated in an array object. If the number 
+is zero, the array object is said to be empty.</p>
+<p><i>(An example of an empty array object is the <strong>String[]</strong> 
+array passed to the <strong>main</strong> method in a Java application when the user doesn&#39;t enter 
+any arguments at the command line.)</i></p>
+<p><b>No individual names</b> </p>
+<p>Also, as with other languages that support arrays, the variables encapsulated 
+in an array object don&#39;t have individual names. Rather, they are referenced 
+using positive integer index values.</p>
+<p><i>(Typically, in Java, the index is placed in square brackets, which are 
+applied to the name of the reference variable holding a reference to the array 
+object. Array indices begin with zero.)</i></p>
+<p><b>Elements or components?</b> </p>
+<p>It is common in the literature to refer to the variables that make up an 
+array as its <i>elements</i>. However, the Java specification refers to them as
+<i>components. </i>The specification ascribes a different meaning to the word 
+element, as shown in the following quotation from the specification:</p>
+<p><i>&quot;The value of an array component of type <strong>float</strong> is always 
+an element of the <strong>float</strong> value set ...; similarly, the value of 
+an array component of type <strong>double</strong> is always an element of the
+<strong>double</strong> value set.&quot;</i></p>
+<p>Another quotation from Sun <i>(shown later in this chapter)</i> provides a somewhat 
+clearer distinction between the words <i>component</i> and <i>element</i>.</p>
+<p><i>(However, from force of habit, I will probability use component and 
+element interchangeably in this chapter.)</i></p>
+<p><b>The length of an array</b></p>
+<p>If an array has <b>n</b> components, the <strong>length</strong> of the array 
+is <b>n</b>. 
+The components of the array are referenced using integer indices from 0 to (n - 
+1), inclusive. </p>
+<p><b>Another quotation from Sun</b> </p>
+<p>Here is another quotation from the Java specification that explains the type 
+specifications for the variable declarations in <a href="#Listing_1">Listing 1</a> 
+and <a href="#Listing_3">Listing 3</a>.</p>
+<p><i>&quot;All the components of an array have the same type, called the component 
+type of the array. If the component type of an array is T, then the type of the 
+array itself is written T[].&quot;</i></p>
+<p><b>Components may be of an array type</b> </p>
+<p>As of this writing (2002), all array objects in 
+Java encapsulate one-dimensional arrays <i>(I have read that this may change in 
+the future).</i>
+</p>
+<p>The component type of an array may itself be an array type. This makes it 
+possible to create array objects whose individual components refer to other 
+array objects. </p>
+<p><b>Multi-dimensional or ragged arrays</b> </p>
+<p>One way to think of this is to think of the second level of array objects as 
+being sub-arrays of the original array object. This construct can be used to 
+create multi-dimensional array structures.</p>
+<p><i>(The geometry of such multi-dimensional array structures is not 
+constrained to be rectangles, cubes, etc., as is the requirement in many other 
+languages. Some authors may refer to this as ragged arrays.)</i></p>
+<p><b>Tree structures</b> </p>
+<p>This process of having the components of an array contain references to 
+sub-arrays can be continued indefinitely <i>(well, maybe not indefinitely, but 
+further than I care to contemplate).</i></p>
+<p><i>(This can be thought of as a tree structure where each array object 
+containing references to other array objects is a node in the tree.)</i></p>
+<p><b>The leaves of the tree</b> </p>
+<p>Eventually, the components <i>(the leaves of the tree structure)</i> must 
+refer to a component type that is not an array type. According to Sun:</p>
+<p><i>&quot;... this is called the element type of the original array, and the <b>
+components</b> at this level of the data structure are called the <b>elements</b> 
+of the original array.&quot;</i></p>
+<p><b>Component versus element</b> </p>
+<p>Hopefully, the above quotation provides a somewhat clearer distinction 
+between the use of the words <i>component</i> and <i>element</i> than was presented earlier 
+but then again, maybe not. </p>
+<p><b>Generic references</b> </p>
+<p>Any array object's reference can also be assigned to reference variables 
+of the types <b>Object</b>, <b>Cloneable</b>, or <b>Serializable</b>.</p>
+<p><i>(<b>Object</b> is the class at the top of the inheritance hierarchy. <b>
+Cloneable</b> and <b>Serializable</b> are interfaces, which are implemented by 
+all array objects. Thus, a reference to an array object can be treated as any of 
+these three types.)</i></p>
+<p><b>Generic array objects</b> </p>
+<p>Therefore, if the element type of an array object is one of these types, the 
+elements in the array can refer to: </p>
+<ul>
+	<li>Other array objects</li>
+	<li>Ordinary objects</li>
+	<li>A mixture of the two</li>
+</ul>
+<p>This is illustrated in the sample program named <b>Array05</b> shown in
+<a href="#Listing_9">Listing 9</a> near the end of the chapter. </p>
+<p><b>Will explain in fragments</b> </p>
+<p>I will explain this program in fragments. <a href="#Listing_4">Listing 4</a> 
+shows the beginning of the controlling class and the beginning of the <b>main</b> method 
+for the program named <strong>Array05</strong>.. </p>
+<div class="a"><a name="Listing_4">Listing 4</a>. The beginning of the 
+				class named Array05.
+
+				<pre>
+public class Array05{
+  public static void main(String[] args){
+    int[] v1 = {1,2,3,4,5};
+    Object[] v2 = new Object[2];</pre>
+</div>
+	<p> <a href="#Listing_4">Listing 4</a> 
+	creates two array objects. </p>
+<p><b>An array of type int</b> </p>
+<p>The first array object is a five-element array of element type <b>int</b>, 
+with the element values initialized as shown by the values within the curly 
+brackets. The reference to this array object is assigned to the reference 
+variable named <b>v1</b>. </p>
+<p><b>An array of element type Object</b> </p>
+<p>The second array object is a two-element array of element type <b>Object</b>, 
+with each of the element values automatically initialized to their default value of <b>null</b>. 
+The reference to the array object is assigned to the reference variable named <b>
+v2</b>.</p>
+<p><i>(Note that unlike the previous discussion of <b>Object</b>, the 
+declaration of the reference variable in this case does include empty square 
+brackets. I will have more to say about this later.)</i></p>
+<p><b>A new object of this class</b> </p>
+<p><a href="#Listing_5">Listing 5</a> creates a new <i>ordinary object</i> of 
+class <b>Array05</b>. The code assigns the object&#39;s reference to the first 
+element in the array object of element type <b>Object</b>, referred to by the 
+reference variable named <b>v2</b>. </p>
+<div class="a"><a name="Listing_5">Listing 5</a>. A new ordinary object of 
+				class Array05.
+				<pre>
+    v2[0] = new Array05();</pre>
+</div>
+	<p>This is allowable because the reference to an object of any class can be 
+	assigned to a reference variable of type <strong>Object</strong>.</p>
+<p><i>(The array object referred to by <b>v2</b> contains two elements, each of 
+which is a reference variable of type <b>Object</b>.)</i></p>
+<p><b>Populate the second element</b> </p>
+<p>The code in <a href="#Listing_6">Listing 6</a> assigns the reference that 
+points to the existing array object of 
+the element type <b>int</b> to the second element in the array object of element 
+type <b>Object</b>. </p>
+<div class="a"><a name="Listing_6">Listing 6</a>. Populate the second element.
+				<pre>
+    v2[1] = v1;</pre>
+</div>
+	<p>This is allowable because a reference to any array object can be assigned 
+	to a reference variable of type <b>Object</b>. </p>
+<p><b>Array contains two references</b> </p>
+<p>At this point, the array object of element type <b>Object</b> contains two 
+references.</p>
+<p><i>(Each of the elements in an array of the declared type <b>Object[]</b> is 
+a reference of type <b>Object</b>.)</i></p>
+<p>The first element refers to an ordinary object of the class <b>Array05</b>.</p>
+<p>The second element refers to an array object of type <b>int</b>, having five 
+elements, populated with the integer values of 1 through 5 inclusive.</p>
+<p><i>(Note that this is not a multi-dimensional array in the traditional sense. 
+I will discuss the Java approach to such multi-dimensional arrays in the next 
+chapter. This is simply a generic array of element type <b>Object</b>, one 
+element of which happens to contain a reference to an array object of type <b>
+int</b>.)</i></p>
+<p><b>Print some data</b> </p>
+<p>The code in<a href="#Listing_7"> Listing 7</a> passes each of the references 
+to the <b>println</b> 
+method of the <b>PrintStream</b> class. </p>
+<div class="a"><a name="Listing_7">Listing 7</a>. Print some data.
+				<pre>
+    System.out.println(v2[0]);
+    System.out.println(v2[1]);</pre>
+</div>
+	<p>The <b>println</b> method causes the <b>toString</b> method to be called 
+	on each reference. The <b>String</b> returned by the <b>toString</b> method 
+	is displayed on the computer screen in each case. </p>
+<p>This is allowable because any method defined in the <b>Object</b> class <i>
+(including the <b>toString</b> method)</i> can be called on any reference stored 
+in a reference variable of type <b>Object</b>. </p>
+<p>This is true regardless of whether that reference is a reference to an 
+ordinary object or a reference to an array object. </p>
+<p><b>The output</b> </p>
+<p><a href="#Listing_7"> Listing 7</a> causes the following two lines of text to 
+be displayed: </p>
+<div class="a">
+<pre>Array05@15db9742
+[I@6d06d69c</pre>
+</div>
+<p><b>Pretty ugly, huh?</b> </p>
+<p>In both cases, this is the value of the <b>String</b> returned by the default 
+version of the <b>toString</b> method defined in the <b>Object</b> class. Here 
+is what Sun has to say about that default behavior:</p>
+<p><i>&quot;Returns a string representation of the object. In general, the <b>
+toString</b> method returns a string that &quot;textually represents&quot; this object. 
+The result should be a concise but informative representation that is easy for a 
+person to read. It is recommended that all subclasses override this method.</i>
+</p>
+<p><i>The <b>toString</b> method for class <b>Object</b> returns a string 
+consisting of the name of the class of which the object is an instance, the 
+at-sign character `@&#39;, and the unsigned hexadecimal representation of the hash 
+code of the object.&quot;</i></p>
+<p><b>Doesn&#39;t address array objects</b> </p>
+<p>Obviously, this description of behavior doesn&#39;t address the case where the 
+object is an array object, unless the characters <b>[I</b> are considered to be 
+the name of a class. <i>(I will have a little more to say about this later.)</i>
+</p>
+<p><b>Produce some more output</b> </p>
+<p>Finally, <a href="#Listing_8">Listing 8</a> shows the last statement in this 
+simple program. </p>
+<div class="a"><a name="Listing_8">Listing 8</a>. Produce some more output.
+				<pre>
+    System.out.println( ( (int[])v2[1] )[4] );
+  }//end main
+}//end class Array05</pre>
+</div>
+	<p><b>What does this mean?</b> </p>
+<p>As you can see, the syntax of this statement is pretty ugly. </p>
+<p>Values are accessed from an array object by following the array&#39;s reference 
+with a pair of square brackets containing an integer index value as follows:</p>
+<div class="a">
+<pre>v2[1]</pre>
+</div>
+<p><b>Get the value at index 1 as type Object</b> </p>
+<p>This code begins by accessing the component at index value 1 of the array 
+object referred to by the reference variable named <b>v2</b><i>.</i> </p>
+<p>The value retrieved is a reference, and is retrieved as type <b>Object</b>,
+<i>(because the variable named <b>v2</b> was declared to be of type <b>Object[]</b>).</i>
+</p>
+<p><b>A cast is required</b> </p>
+<p>A cast is used to convert from type <b>Object[] </b>to type <strong>int[]</strong> using 
+the following code:</p>
+<div class="a">
+<pre>(int[])</pre>
+</div>
+<p>This produces a reference to an 
+array object capable of containing values of type <b>int</b>. </p>
+<p><b>Apply index to the int array</b> </p>
+<p>After the type of the reference has been converted, the accessor <b>[4]</b> 
+is applied to the reference. This causes the <b>int</b> value stored in the 
+array object of type <b>int</b> <i>(at index value 4)</i> to be returned.</p>
+<p><i>(If you refer back to <a href="#Listing_4">Listing 4</a>, you will see that the integer value 5 was 
+stored in the element at index value 4 of this array object.)</i> </p>
+<p>You should try to remember this syntax and compare it with the syntax used in 
+the Java approach to traditional multi-dimensional arrays, which I will discuss 
+in the next chapter.</p>
+<p><b>The output</b> </p>
+<p>Thus, the code in <a href="#Listing_8">Listing 8</a> causes the number 5 to be displayed on the 
+computer screen. The complete output from the program is shown below.</p>
+<div class="a">
+<pre>Array05@15db9742
+[I@6d06d69c
+5</pre>
+</div>
+
+<p><b>Let&#39;s recap</b> </p>
+<p>To recap, the program named <b>Array05</b> creates a two-element array object 
+capable of storing references of type <b>Object</b>. </p>
+<p><b>Object is generic</b> </p>
+<p>Because <b>Object</b> is a completely generic type, each of 
+the elements in the array is capable of storing a reference to any ordinary 
+object, or storing a reference to any array object. </p>
+<p><b>Store reference to ordinary object in generic array</b> </p>
+<p>The first element in the array is populated with a reference to an ordinary 
+object instantiated from the class named <b>Array05</b>.</p>
+<p><i>(Important: The actual object does not occupy the array element. Rather, 
+the actual object exists someplace else in memory, and a reference to the object 
+occupies the array element.)</i></p>
+<p><b>Store a reference to an array object in the generic array</b> </p>
+<p>The second element in the array of element type <b>Object</b> is populated 
+with a reference to another array object capable of containing elements of type
+<b>int</b>. </p>
+<p>As above, the actual array object of type <b>int</b> does not occupy the 
+second element. Rather, that array object exists someplace else in memory, and a 
+reference to the array object occupies the second element in the array of 
+element type <b>Object</b>. </p>
+<p><b>Display some data</b> </p>
+<p>After the array object of element type <b>Object</b> is created and 
+populated, three print statements are executed to display information about the 
+array object and its contents <i>(those print statements are shown in 
+<a href="#Listing_7">Listing 7</a> 
+and </i> <a href="#Listing_8">Listing 8</a><i>).</i> </p>
+<p>The print statements produce the following output on the computer screen: </p>
+<div class="a">
+<pre>Array05@15db9742
+[I@6d06d69c
+5</pre>
+</div>
+<p><b>Default textual representation of ordinary object</b> </p>
+<p>The first line of output is the default textual representation of the 
+ordinary object, achieved by calling the default <b>toString</b> method on the 
+reference to the ordinary object. </p>
+<p><b>Default textual representation of array object</b> </p>
+<p>The second line of output is the textual representation of the array object 
+of type <b>int[]</b>, achieved by calling the default <b>toString</b> method on 
+the reference to the array object. </p>
+<p><b>Primitive value stored in array object</b> </p>
+<p>The third line of text is the value stored in element index 4 of the <b>int[]</b> 
+array object whose reference is stored in element index 1 of the array object of 
+element type <b>Object</b>.</p>
+<p><strong>Primitive versus non-primitive array element contents</strong></p>
+<p>References to objects are stored in the elements of non-primitive array 
+objects. The objects themselves exist somewhere else in memory.</p>
+<p>Actual primitive values are stored in the elements of 
+a primitive array object.</p>
+<p>Thus, the elements of an array object contain actual primitive 
+values, null references, or actual references to ordinary or array objects, 
+depending on the type of the elements of the array object.</p>
+	<h1 class="style1"><a name="Summary">Summary</a></h1>
+<p>This chapter begins an in-depth discussion of array objects in Java.</p>
+<p>The existence of array objects tends to complicate the OOP structure of a 
+Java program otherwise consisting only of ordinary objects. </p>
+<p>A completely different syntax is required to create array objects than the 
+syntax normally used to instantiate ordinary objects. Ordinary objects are 
+normally instantiated by applying the <b>new</b> operator to the constructor for 
+the target class passing parameters between a pair of matching parentheses. </p>
+<p>Array objects <i>(with default initialization)</i> are created using the <b>
+new</b> operator, the type of data to be encapsulated in the array, and a 
+square-bracket notation to specify the <b>length</b> of the array encapsulated 
+in the object. </p>
+<p>Array objects with explicit initialization are created using a 
+comma-separated list of expressions enclosed in curly brackets. </p>
+<p>Arrays in Java are objects, which are dynamically created and allocated to 
+dynamic memory. </p>
+<p>Like ordinary objects, array objects are accessed via references. The type of 
+such a reference is considered to be <b>TypeName[]</b> <i>(note the empty square 
+brackets in the type specification).</i> </p>
+<p>A reference to an array object can also be assigned to a reference variable 
+of type <b>Object</b> <i>(note the absence of square brackets).</i> Thus, any of 
+the methods of the <b>Object</b> class can be called on a reference to an array 
+object. </p>
+<p>As is the case with other languages that support arrays, array objects in 
+Java encapsulate a group of zero or more variables. The variables encapsulated 
+in an array object don&#39;t have individual names. Rather, they are accessed using 
+positive integer index values. </p>
+<p>The integer indices of a Java array object always extend from <b>0</b> to <b>
+(n-1)</b> where <b>n</b> is the <b>length</b> of the array object. </p>
+<p>As of the time of this writing (2002), all array objects in Java encapsulate 
+one-dimensional arrays. However, the component type of an array may itself be an 
+array type. This makes it possible to create array objects whose individual 
+components refer to other array objects. This is the mechanism for creating <i>
+multi-dimensional</i> or <i>ragged</i> arrays in Java. </p>
+<p>The reference to any array object can be assigned to reference variables of 
+the types <b>Object</b>, <b>Cloneable</b>, or <b>Serializable</b>. If the 
+element type of an array object is one of these types, the elements in the array 
+can refer to:</p>
+<ul>
+	<li>Other array objects</li>
+	<li>Ordinary objects</li>
+	<li>A mixture of the two</li>
+</ul>
+<h1 class="style1"><a name="Whats_next">What&#39;s next?</a></h1>
+<p>This chapter has barely scratched the surface in explaining how array objects 
+fit into the grand scheme of things in OOP using Java. In the next chapter, I 
+will continue the discussion, showing you some of the <i>(often complex)</i> 
+aspects of using Java array objects to emulate traditional<i> multi-dimensional</i> 
+arrays. I will also show you how to create <i>ragged</i> arrays in Java. </p>
+	<h1 class="style1"><a name="Miscellaneous">Miscellaneous</a></h1>
+	<p>This section contains a variety of miscellaneous information.</p>
+
+<div class="a"><strong>Housekeeping material</strong>
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java1622: Array Objects, Part 1</li>
+					<li>File: Java1622.htm
+</li>
+					<li>Revised: 08/06/22</li>
+
+				</ul>
+</div>
+
+
+<h1 class="style1"><a name="Complete_program_listing">Complete program listing</a></h1>
+<p>A complete listing of the program is shown in <a href="#Listing_9">Listing 9</a> 
+below.</p>
+<div class="a"><a name="Listing_9">Listing 9</a>. Complete program listing.
+				<pre>
+/*File Array05.java
+Copyright, R.G.Baldwin
+
+This program illustrates storage of
+references to ordinary objects and
+references to array objects in the
+same array object of type Object.
+
+Program output is:
+
+Array05@73d6a5
+[I@111f71
+5
+**************************************/
+
+public class Array05{
+  public static void main(
+                        String[] args){
+
+    int[] v1 = {1,2,3,4,5};
+    Object[] v2 = new Object[2];
+    v2[0] = new Array05();
+    v2[1] = v1;
+
+    System.out.println(v2[0]);
+    System.out.println(v2[1]);
+    System.out.println(
+                    ((int[])v2[1])[4]);
+  }//end main
+}//end class Array05</pre>
+</div>
+	<p>-end- </p>
+
+
+</body>
+</html>

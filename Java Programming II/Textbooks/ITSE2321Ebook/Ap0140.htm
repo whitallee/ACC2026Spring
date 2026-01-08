@@ -1,0 +1,1059 @@
+﻿<!--
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Ap0140</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+<h1 class="auto-style1">Ap0140: Type conversion, casting, common exceptions, public class files, javadoc comments and directives, and null references</h1>
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a></li>
+	<li><a href="#Questions">Questions</a>
+	<ul>
+		<li><a href="#question01">1</a>, <a href="#question02">2</a>,
+		<a href="#question03">3</a>, <a href="#question04">4</a>,
+		<a href="#question05">5</a>, <a href="#question06">6</a>,
+		<a href="#question07">7</a>, <a href="#question08">8</a>,
+		<a href="#question09">9</a>, <a href="#question10">10</a></li>
+	</ul>
+	</li>
+	<li><a href="#Listings">Listings</a></li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+	<li><a href="#Answers">Answers</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is part of a self-assessment test designed to help you determine how much you know about Java programming. </p>
+<p>The test consists of a series of questions with answers and explanations of 
+the answers.</p>
+<p>The questions and the answers are connected by hyperlinks to make it easy for 
+you to navigate from the question to the answer and back.</p>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the links under <a href="#Listings">Listings</a> to easily 
+find and view the listings while you are reading about them. </p>
+<h1><a name="Questions">Questions</a></h1>
+<h2><a name="question01">Question 1</a><b>. </b> </h2>
+
+
+<p>What output is produced by the program shown in <a href="#Listing_1">Listing 1</a>?</p>
+
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK OK</li>
+	<li>D. OK</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_1">Listing 1</a>. Listing for Question 1.
+
+<pre>public class Ap151{
+  public static void main(
+                        String args[]){
+        new Worker().doIt();
+  }//end main()
+}//end class Ap151
+
+class Worker{
+  void doIt(){
+    Object refA = new MyClassA();
+    Object refB = 
+              (Object)(new MyClassB());
+    System.out.print(refA);
+    System.out.print(refB);
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class MyClassA{
+  public String toString(){
+    return &quot;OK &quot;;
+  }//end test()
+}//end class MyClassA
+
+class MyClassB{
+  public String toString(){
+    return &quot;OK &quot;;
+  }//end test()
+}//end class MyClassB
+</pre>
+
+</div>
+
+	<p><a href="#answer01">Answer and Explanation</a> </p>
+<h2><a name="question02">Question 2</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_2">Listing 
+2</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK OK</li>
+	<li>D. OK</li>
+	<li>E. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_2">Listing 2</a>. Listing for Question 2.
+<pre>public class Ap152{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap152
+
+class Worker{
+  void doIt(){
+    Object ref1 = new MyClassA();
+    Object ref2 = new MyClassB();
+    System.out.print(ref1);
+    
+    MyClassB ref3 = (MyClassB)ref1;
+    System.out.print(ref3);
+    System.out.println(&quot;&quot;);
+  }//end doIt()
+}// end class Worker
+
+class MyClassA{
+  public String toString(){
+    return &quot;OK &quot;;
+  }//end test()
+}//end class MyClassA
+
+class MyClassB{
+  public String toString(){
+    return &quot;OK &quot;;
+  }//end test()
+}//end class MyClassB
+</pre>
+
+</div>
+
+	<p><a href="#answer02">Answer and Explanation</a> </p>
+<h2><a name="question03">Question 3</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_3">Listing 
+3</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_3">Listing 3</a>. Listing for Question 3.
+<pre>import java.util.Random;
+import java.util.Date;
+
+public class Ap153{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap153
+
+class Worker{
+  void doIt(){
+    Random ref = new Random(
+                 new Date().getTime());
+    if(ref.nextBoolean()){
+      throw new IllegalStateException();
+    }else{
+      System.out.println(&quot;OK&quot;);
+    }//end else
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer03">Answer and Explanation</a> </p>
+<h2><a name="question04">Question 4</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_4">Listing 
+4</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. 5 10 15</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_4">Listing 4</a>. Listing for Question 4.
+<pre>import java.util.NoSuchElementException;
+public class Ap154{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap154
+
+class Worker{
+  void doIt(){
+    MyContainer ref = 
+                     new MyContainer();
+    ref.put(0,5);
+    ref.put(1,10);
+    ref.put(2,15);
+    
+    System.out.print(ref.get(0)+&quot; &quot;);
+    System.out.print(ref.get(1)+&quot; &quot;);
+    System.out.print(ref.get(2)+&quot; &quot;);
+    System.out.print(ref.get(3)+&quot; &quot;);  
+
+  }//end doIt()
+}// end class Worker
+
+class MyContainer{
+  private int[] array = new int[3];
+  
+  public void put(int idx, int data){
+    if(idx &gt; (array.length-1)){
+      throw new 
+              NoSuchElementException();
+    }else{
+      array[idx] = data;
+    }//end else
+  }//end put()
+    
+  public int get(int idx){
+    if(idx &gt; (array.length-1)){
+      throw new 
+              NoSuchElementException();
+    }else{
+      return array[idx];
+    }//end else
+  }//end put()
+    
+}//end class MyContainer
+</pre>
+
+</div>
+
+	<p><a href="#answer04">Answer and Explanation</a> </p>
+<h2><a name="question05">Question 5</a></h2>
+<p>The source code in <a href="#Listing_5">Listing 5</a> is contained in a 
+single file named Ap155.java </p>
+<p>What output is produced by the program? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_5">Listing 5</a>. Listing for Question 5.
+<pre>public class Ap155{
+  public static void main(
+                        String args[]){
+    new Ap155a().doIt();
+  }//end main()
+}//end class Ap155
+
+public class Ap155a{
+  void doIt(){
+    System.out.println(&quot;OK&quot;);
+  }//end doIt()
+}// end class Ap155a
+</pre>
+
+</div>
+
+	<p><a href="#answer05">Answer and Explanation</a></p>
+<h2><a name="question06">Question 6</a></h2>
+<p>A Java application consists of the two source files shown in
+<a href="#Listing_6">Listing 6</a> and <a href="#Listing_7">Listing 7</a> having names 
+of AP156.java and AP156a.java </p>
+<p>What output is produced by this program? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. OK</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_6">Listing 6</a>. Listing for Question 6.
+<pre>public class Ap156{
+  public static void main(
+                        String args[]){
+    new Ap156a().doIt();
+  }//end main()
+}//end class Ap156
+</pre>
+</div>
+`
+
+<div class="a"><a name="Listing_7">Listing 7</a>. Listing for Question 6.
+<pre>public class Ap156a{
+  void doIt(){
+    System.out.println(&quot;OK&quot;);
+  }//end doIt()
+}// end class Ap156a
+</pre>
+
+</div>
+
+	<p><a href="#answer06">Answer and Explanation</a> </p>
+<h2><a name="question07">Question 7</a></h2>
+<p>Explain the purpose of the terms @param and @return in <a href="#Listing_8">Listing 
+8</a>. Also explain any of the other terms that 
+make sense to you.</p>
+
+<div class="a"><a name="Listing_8">Listing 8</a>. Listing for Question 7.
+<pre>public class Ap157{
+    
+/**
+* Returns the character at the 
+* specified index. An index ranges from
+* &lt;code&gt;0&lt;/code&gt; to 
+* &lt;code&gt;length() - 1&lt;/code&gt;.
+*
+* @param  index  index of desired 
+* character.
+* @return  the desired character.
+*/
+  public char charAt(int index) {
+    //Note, this method is not intended
+    // to be operational.  Rather, it
+    // ...
+    return &apos;a&apos;;//return dummy char
+  }//end charAt method
+}//end class
+</pre>
+
+</div>
+
+	<p><a href="#answer07">Answer and Explanation</a></p>
+<h2><a name="question08">Question 8</a> </h2>
+<p>What output is produced by the program shown in <a href="#Listing_9">Listing 
+9</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Tom</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_9">Listing 9</a>. Listing for Question 8.
+<pre>public class Ap158{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap158
+
+class Worker{
+  void doIt(){
+    char[] ref;
+    System.out.print(ref);
+    System.out.print(&quot; &quot;);
+    ref[0] = &apos;T&apos;;
+    ref[1] = &apos;o&apos;;
+    ref[2] = &apos;m&apos;;
+    System.out.println(ref);
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer08">Answer and Explanation</a> </p>
+<h2><a name="question09">Question 9</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_10">Listing 
+10</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Tom</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_10">Listing 10</a>. Listing for Question 9.
+<pre>public class Ap159{
+  public static void main(
+                        String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class Ap159
+
+class Worker{
+  void doIt(){
+    char[] ref = null;
+    System.out.print(ref);
+    System.out.print(&quot; &quot;);
+    ref[0] = &apos;T&apos;;
+    ref[1] = &apos;o&apos;;
+    ref[2] = &apos;m&apos;;
+    System.out.println(ref);
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<p><a href="#answer09">Answer and Explanation</a> </p>
+
+<h2><a name="question10">Question 10</a></h2>
+<p>What output is produced by the program shown in <a href="#Listing_11">Listing 
+11</a>? </p>
+<ul>
+	<li>A. Compiler Error</li>
+	<li>B. Runtime Error</li>
+	<li>C. Joe Tom</li>
+	<li>D. None of the above.</li>
+</ul>
+
+<div class="a"><a name="Listing_11">Listing 11</a>. Listing for Question 
+				10.
+<pre>public class Ap160{
+  public static void main(
+                        String args[]){
+        new Worker().doIt();
+  }//end main()
+}//end class Ap160
+
+class Worker{
+  void doIt(){
+    char[] ref = {&apos;J&apos;,&apos;o&apos;,&apos;e&apos;};
+    System.out.print(ref);
+    System.out.print(&quot; &quot;);
+    ref[0] = &apos;T&apos;;
+    ref[1] = &apos;o&apos;;
+    ref[2] = &apos;m&apos;;
+    System.out.println(ref); 
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+
+	
+	
+
+<p><a href="#answer10">Answer and Explanation</a></p>
+
+
+
+
+
+
+<h1><a name="Listings">Listings</a></h1>
+<p>I recommend that you open another copy of this document in a separate browser 
+window and use the following links to easily 
+find and view the listings while you are reading about them. </p>
+<ul>
+
+		<li><a href="#Listing_1">Listing 1</a>. Listing for Question 1.</li>
+		<li><a href="#Listing_2">Listing 2</a>. Listing for Question 2.</li>
+		<li><a href="#Listing_3">Listing 3</a>. Listing for Question 3.</li>
+		<li><a href="#Listing_4">Listing 4</a>. Listing for Question 4.</li>
+		<li><a href="#Listing_5">Listing 5</a>. Listing for Question 5.</li>
+		<li><a href="#Listing_6">Listing 6</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_7">Listing 7</a>. Listing for Question 6.</li>
+		<li><a href="#Listing_8">Listing 8</a>. Listing for Question 7.</li>
+		<li><a href="#Listing_9">Listing 9</a>. Listing for Question 8.</li>
+		<li><a href="#Listing_10">Listing 10</a>. Listing for Question 9.</li>
+
+	<li><a href="#Listing_11">Listing 11</a>. Listing for Question 10. </li>
+</ul>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information. </p>
+
+
+<div class="a">
+	Housekeeping material 
+
+			<ul>
+				<li>Author: Prof. Richard G. Baldwin</li>
+				<li>Chapter name: Ap0140: Type conversion, 
+				casting, common exceptions, public class files, javadoc comments 
+				and directives, and null references</li>
+				<li>File: Ap0140.htm </li>
+				<li>Originally published: 2004</li>
+				<li>Published at cnx.org: 12/18/12</li>
+				<li>Revised: 03/19/20</li>
+          
+
+
+
+</ul>
+</div>
+<h1><a name="Answers">Answers</a></h1>
+
+
+<h2><a name="answer10">Answer 10</a></h2>
+<p>C. Joe Tom </p>
+<h3><strong>Explanation 10</strong></h3>
+
+<p>This is an upgrade to the program from <a href="#question09">Question 9</a>.</p>
+<p><strong>Success at last </strong> </p>
+<p>The code in the following fragment resolves the compilation problem from 
+Question 8 and the runtime problem from <a href="#question09">Question 9</a>. </p>
+<div class="a">
+				<pre>  void doIt(){
+    char[] ref = {&apos;J&apos;,&apos;o&apos;,&apos;e&apos;};
+    System.out.print(ref);
+    System.out.print(&quot; &quot;);
+    ref[0] = &apos;T&apos;;
+    ref[1] = &apos;o&apos;;
+    ref[2] = &apos;m&apos;;
+    System.out.println(ref); 
+  }//end doIt()</pre>
+</div>
+<p>Simply initializing the local reference variable named <strong>ref</strong> satisfies the 
+compiler, making it possible to compile the program. </p>
+<p>Initializing the local reference variable named <strong>ref</strong> with a reference to a 
+valid array object eliminates the NullPointerException that was experienced in 
+<a href="#question09">Question 9</a>. </p>
+<p><strong>Printing the contents of the array object</strong> </p>
+<p>The print statement passes the reference variable to the <strong>print</strong> 
+method. The <strong>print</strong> method finds that the reference variable 
+refers to a valid object <em>(instead of containing null as was the case in </em>
+<a href="#question09"><em>Question 9</em></a>) and behaves accordingly. </p>
+<p>The <strong>print</strong> statement causes the initialized contents of the array object to be 
+displayed. Then those contents are replaced with a new set of characters. The
+<strong>println</strong> statement causes the new characters to be displayed. </p>
+<p><a href="#question10">Back to Question 10</a> </p>
+
+
+
+<h2><a name="answer09">Answer 9</a> </h2>
+<p>B. Runtime Error </p>
+<h3><strong>Explanation 9</strong></h3>
+
+<p><strong>Purposely initializing a local variable</strong></p>
+<p>This is an update to the program from <a href="#question08">Question 8</a>. The code in the 
+following fragment solves the compilation problem identified in 
+<a href="#question08">Question 8</a>. </p>
+<div class="a">
+				<pre>  void doIt(){
+    char[] ref = null;</pre>
+</div>
+<p>In particular, initializing the value of the reference variable named <strong>ref</strong> 
+satisfies the compiler and makes it possible to compile the program. </p>
+<p><strong>A <em>NullPointerException</em></strong></p>
+
+
+<p>However, there is still a problem, and that problem causes a runtime error. </p>
+<p>The following statement attempts to use the reference variable named <strong>ref</strong> to 
+print something on the screen. This results, among other things, in an attempt 
+to call the <strong>toString</strong> method on the reference. However, the 
+reference doesn&apos;t refer to an object. Rather, it contains the value <strong>
+<em>null</em></strong>. </p>
+<div class="a">
+				<pre>    System.out.print(ref);</pre>
+</div>
+<p>The result is a runtime error with the following infamous 
+<strong>NullPointerException</strong> message appearing on the screen: </p>
+<div class="a">
+				<pre>java.lang.NullPointerException
+ at java.io.Writer.write(Writer.java:107)
+ at java.io.PrintStream.write(PrintStream.java:245)
+ at java.io.PrintStream.print(PrintStream.java:396)
+ at Worker.doIt(Ap159.java:22)
+ at Ap159.main(Ap159.java:15)
+</pre>
+</div>
+
+<p><a href="#question09">Back to Question 9</a> </p>
+
+<h2><a name="answer08">Answer 8</a> </h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 8</strong></h3>
+
+<p><strong>Garbage in, garbage out</strong></p>
+<p>Earlier programming languages, notably C and C++ allowed you to inadvertently 
+write programs that process the garbage left in memory by previous programs 
+running there. This happens when the C or C++ programmer fails to properly 
+initialize variables, allowing them to contain left-over garbage from memory.
+</p>
+<p><strong>Member variables are automatically initialized to default values 
+</strong> </p>
+<p>That is not possible in Java. All member variables in a Java object are 
+automatically initialized to a default value if you don&apos;t write the code to 
+initialize them to some other value. </p>
+<p><strong>Local variables are not automatically initialized </strong> </p>
+<p>Local variables are not automatically initialized. However, your program will 
+not compile if you write code that attempts to fetch and use a value in a local 
+variable that hasn&apos;t been initialized or had a value assigned to it. </p>
+<p><strong>Print an uninitialized local variable </strong> </p>
+<p>The statement in the following code fragment attempts to fetch and 
+print a value using the uninitialized local variable named <strong>ref</strong>. </p>
+<div class="a">
+				<pre>  void doIt(){
+    char[] ref;
+    System.out.print(ref);</pre>
+</div>
+<p>As a result, the program refuses to compile, displaying the following error 
+message under JDK 1.3.</p>
+<div class="a">
+				<pre>Ap158.java:23: variable ref might not have been initialized
+    System.out.print(ref);
+</pre>
+</div>
+
+<p><a href="#question08">Back to Question 8</a> </p>
+<h2><a name="answer07">Answer 7</a> </h2>
+<p>See explanation below. </p>
+<h3><strong>Explanation 7</strong></h3>
+<p><strong>The javadoc.exe program</strong></p>
+<p>When you download the JDK from Oracle, you receive a program named 
+<strong>javadoc.exe</strong> in addition to several other programs. </p>
+<p>The purpose of the <strong>javadoc</strong> program is to help you document the Java 
+programs that you write. You create the documentation by running the <strong>javadoc</strong> 
+program and specifying your source file or files as a command-line parameter. For 
+example, you can generate documentation for this program by entering the 
+following at the command line.</p>
+<div class="a">
+				<pre>javadoc Ap157.java</pre>
+</div>
+
+<p><strong>Produces HTML files as output </strong> </p>
+<p>This will produce a large number of related HTML files containing 
+documentation for the class named <strong>Ap157</strong>. The primary HTML file is named 
+<strong>Ap157.html</strong>. A file named <strong>index.html</strong> is also 
+created. This file can be opened in a browser to provide a viewer for all of the 
+information contained in the many related HTML files.</p>
+<p>
+	<em>(As a labor saving device, you can also specify a group of input files to 
+	the javadoc program, using wildcard characters as appropriate, to cause the 
+	program to produce documentation files for each of the input files in a 
+	single run.)</em></p>
+<p><strong>Special documentation comments and directives</strong></p>
+<p>If you include comments in your source code that begin with </p>
+<p><strong>/**</strong></p>
+
+<p>and end with</p>
+<p><strong>*/</strong></p>
+
+<p>they will be picked up by the javadoc program and become part of the 
+documentation.
+</p>
+<p>In addition to comments, you can also enter a variety of special 
+directives to the javadoc program as shown in the following program. </p>
+<div class="a">
+				<pre>public class Ap157{
+    
+/**
+* Returns the character at the 
+* specified index. An index ranges from
+* &lt;code&gt;0&lt;/code&gt; to 
+* &lt;code&gt;length() - 1&lt;/code&gt;.
+*
+* @param  index  index of desired 
+* character.
+* @return  the desired character.
+*/
+  public char charAt(int index) {
+    //Note, this method is not intended
+    // to be operational.  Rather, it
+    // is intended solely to illustrate
+    // the generation of javadoc
+    // documentation for the parameter
+    // and the return value.
+    return &apos;a&apos;;//return dummy char
+  }//end charAt method
+}//end class</pre>
+</div>
+<p><strong>The @param and @return directives </strong> </p>
+<p>The <strong>@param</strong> and <strong>@return</strong> directives in the source code shown above are used by 
+the <strong>javadoc</strong> program for documenting information about parameters passed to and 
+information returned from the method named <strong>charAt</strong>. The method 
+definition follows the special javadoc comment. </p>
+<p><a href="#question07">Back to Question 7</a> </p>
+<h2><a name="answer06">Answer 6</a></h2>
+<p>C. OK </p>
+<h3><strong>Explanation 6</strong></h3>
+<p><strong>Public classes in separate files</strong></p>
+<p>This program meets the requirement identified in <a href="#question05">Question 5</a>. In particular, 
+this program defines two public classes. The source code for each public class 
+is stored in a separate file. Thus, the program compiles and executes 
+successfully, producing the text OK on the screen. </p>
+<p><a href="#question06">Back to Question 6</a> </p>
+
+
+<h2><a name="answer05">Answer 5</a></h2>
+<p>A. Compiler Error </p>
+<h3><strong>Explanation 5</strong></h3>
+<p><strong>Public classes in separate files</strong></p>
+<p>Java requires that the source code for every public class be contained in a 
+separate file. In this case, the source code for two public classes was 
+contained in a single file. The following compiler error was produced by JDK 
+1.3: </p>
+<div class="a">
+				<pre>Ap155.java:18: class Ap155a is public, should be declared in a file 
+named Ap155a.java
+public class Ap155a{
+</pre>
+</div>
+
+<p><a href="#question05">Back to Question 5</a> </p>
+<h2><a name="answer04">Answer 4</a> </h2>
+<p>This program produces both of the following:</p>
+<ul>
+	<li>C. 5 10 15</li>
+	<li>B. Runtime Error</li>
+</ul>
+<h3><strong>Explanation 4</strong></h3>
+<p><strong>The NoSuchElementException</strong></p>
+<p>This program defines, creates, and uses a very simple container object for 
+the purpose of illustrating the <strong>NoSuchElementException</strong>. </p>
+<p>The code in the following fragment shows the beginning of a class named 
+<strong>MyContainer</strong> from which the container object is instantiated. </p>
+<div class="a">
+				<pre>class MyContainer{
+  private int[] array = new int[3];
+  
+  public void put(int idx, int data){
+    if(idx &gt; (array.length-1)){
+      throw new 
+              NoSuchElementException();
+    }else{
+      array[idx] = data;
+    }//end else
+  }//end put()</pre>
+</div>
+<p><strong>A wrapper for an array object </strong> </p>
+<p>This class is essentially a wrapper for a simple array object of type <strong>int</strong>. An 
+object of the class provides a method named <strong>put</strong>, which can be 
+used to store an <strong>int</strong> value into the array. The <strong>put</strong> method 
+receives two parameters. The first parameter specifies the index of the element 
+where the value of the second parameter is to be stored. </p>
+<p><strong>Throw NoSuchElementException on index out of bounds </strong> </p>
+<p>The <strong>put</strong> method tests to confirm that the specified index is 
+within the positive bounds of the array. If not, it uses the <strong>throw</strong> keyword to 
+throw an exception of the type <strong>NoSuchElementException</strong>. Otherwise, it stores the 
+incoming data value in the specified index position in the array. </p>
+<p>
+	<em>(Note that a negative index will cause an ArrayIndexOutOfBoundsException 
+	instead of a NoSuchElementException to be thrown.)</em></p>
+<p><strong>The get method</strong></p>
+<p>An object of the <strong>MyContainer</strong> class also provides a <strong>get</strong> 
+method that can be used to retrieve the value stored in a specified index. </p>
+<div class="a">
+				<pre>  public int get(int idx){
+    if(idx &gt; (array.length-1)){
+      throw new 
+              NoSuchElementException();
+    }else{
+      return array[idx];
+    }//end else
+  }//end put()</pre>
+</div>
+<p>The <strong>get</strong> method also tests to confirm that the specified 
+index is within the positive bounds of the array. If not, it throws an exception 
+of the type <strong>NoSuchElementException</strong>. Otherwise, it returns the value stored in 
+the specified index of the array. </p>
+<p>
+	<em>(As noted earlier, a negative index will cause an 
+	ArrayIndexOutOfBoundsException instead of a NoSuchElementException to be 
+	thrown.)</em></p>
+<p><strong>The NoSuchElementException</strong></p>
+<p>Thus, this container class illustrates the general intended purpose of the 
+<strong>NoSuchElementException</strong>. </p>
+<p><strong>Instantiate and populate a container </strong> </p>
+<p>The remainder of the program simply exercises the container. The code in the 
+following fragment instantiates a new container, and uses the <strong>put</strong> 
+method to populate each of its three available elements with the values 5, 10, 
+and 15. </p>
+<div class="a">
+				<pre>  void doIt(){
+    MyContainer ref = 
+                     new MyContainer();
+    ref.put(0,5);
+    ref.put(1,10);
+    ref.put(2,15);</pre>
+</div>
+<p><strong>Get and display the data in the container </strong> </p>
+<p>Then the code in the next fragment uses the <strong>get</strong> method to 
+get and display the values in each of the three elements, causing the following 
+text to appear on the screen: </p>
+<p>5 10 15</p>
+<div class="a">
+				<pre>    System.out.print(ref.get(0)+&quot; &quot;);
+    System.out.print(ref.get(1)+&quot; &quot;);
+    System.out.print(ref.get(2)+&quot; &quot;);</pre>
+</div>
+<p><strong>One step too far </strong> </p>
+<p>Finally, the code in the next fragment goes one step too far and attempts to 
+get a value from index 3, which is outside the bounds of the container. </p>
+<div class="a">
+				<pre>    System.out.print(ref.get(3)+&quot; &quot;);</pre>
+</div>
+<p>This causes the <strong>get</strong> method of the container object to throw 
+a <strong>NoSuchElementException</strong>. The program was not designed to handle this exception, 
+so this causes the program to abort with the following text showing on the 
+screen: </p>
+<div class="a">
+				<pre>5 10 15 java.util.NoSuchElementException
+ at MyContainer.get(Ap154.java:49)
+ at Worker.doIt(Ap154.java:30)
+ at Ap154.main(Ap154.java:15)
+</pre>
+</div>
+
+<p><em>(Note that the values of 5, 10, and 15 were displayed on the screen before 
+the program aborted and displayed the error message.)</em> </p>
+<p><a href="#question04">Back to Question 4</a> </p>
+<h2><a name="answer03">Answer 3</a> </h2>
+<p>This program can produce either of the following depending on the value produced 
+by a random boolean value generator:</p>
+<ul>
+	<li>B. Runtime Error</li>
+	<li>C. OK</li>
+</ul>
+<h3><strong>Explanation 3</strong></h3>
+<p><strong>Throwing an exception</strong></p>
+<p>This program illustrates the use of the <strong>throw</strong> keyword to throw an exception.
+</p>
+<p>
+	<em>(Note that the <strong>throw</strong> keyword is different from the 
+	<strong>throws</strong> keyword.)</em></p>
+<p><strong>Throw an exception if random boolean value is true</strong></p>
+<p>A random <strong>boolean</strong> value is obtained. If the value is true, the program throws 
+an <strong>IllegalStateException</strong> and aborts with the following message on the screen:
+</p>
+<div class="a">
+				<pre>java.lang.IllegalStateException
+ at Worker.doIt(Ap153.java:29)
+ at Ap153.main(Ap153.java:20)
+</pre>
+</div>
+
+<p>If the random <strong>boolean</strong> value is false, the program runs to completion, 
+displaying the text OK on the screen. </p>
+<p><strong>Instantiate a Random object </strong> </p>
+<p>The following code fragment instantiates a new object of the <strong>Random</strong> class and 
+stores the object&apos;s reference in a reference variable named <strong>ref</strong>. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Random ref = new Random(
+                 new Date().getTime());</pre>
+</div>
+<p>I&apos;m not going to go into a lot of detail about the <strong>Random</strong> class. Suffice it 
+to say that an object of this class provides methods that will return a pseudo 
+random sequence of values upon successive calls. You might think of 
+this object as a random value generator. </p>
+<p><strong>Seeding the random generator</strong> </p>
+<p>The constructor for the class accepts a <strong>long</strong> integer as the seed for the 
+sequence. </p>
+<p>
+	<em>(Two <strong>Random</strong> objects instantiated using the same seed will produce the same 
+	sequence of values.)</em></p>
+
+<p>In this case, I obtained the time in milliseconds, relative to January 1, 1970, 
+as a <strong>long</strong> integer, and provided that value as the seed. Thus, if you run the 
+program two times in succession, with a time delay of at least one millisecond 
+in between, the random sequences will be different.
+</p>
+<p><strong>Get a random boolean value</strong> </p>
+<p>The code in the next fragment calls the <strong>nextBoolean</strong> method 
+on the <strong>Random</strong> object to obtain a random boolean value. <em>
+(Think of this as tossing a coin with true on one side and false on the other 
+side.)</em></p>
+<div class="a">
+				<pre>    if(ref.nextBoolean()){
+      throw new IllegalStateException();</pre>
+</div>
+<p><strong>Throw an exception</strong> </p>
+<p>If the <strong>boolean</strong> value obtained in the above fragment is true, the code 
+instantiates a new object of the <strong>IllegalStateException class</strong>, and uses the 
+<strong>throw</strong> 
+keyword to throw an exception of this type. </p>
+<p><strong>Program aborts</strong> </p>
+<p>The program was not designed to gracefully handle such an exception. 
+Therefore the program aborts, displaying the error message shown earlier. </p>
+<p><strong>Don&apos;t throw an exception</strong> </p>
+<p>The code in the next fragment shows that if the <strong>boolean</strong> value tested above is 
+false, the program will display the text OK and run successfully to completion.
+</p>
+<div class="a">
+				<pre>    }else{
+      System.out.println(&quot;OK&quot;);
+    }//end else
+  }//end doIt()</pre>
+</div>
+<p>You may need to run the program several times to see both possibilities. </p>
+<p><a href="#question03">Back to Question 3</a> </p>
+<h2><a name="answer02">Answer 2</a></h2>
+<p>The answer is both of the following:</p>
+<ul>
+	<li>D. OK</li>
+	<li>B. Runtime Error</li>
+</ul>
+<h3><strong>Explanation 2</strong></h3>
+<p><strong>One cast is allowable ...</strong></p>
+<p>It is allowable, but not necessary, to cast the type of an object&apos;s reference 
+toward the root of the inheritance hierarchy. </p>
+<p>It is also allowable to cast the type of an object&apos;s reference along the 
+inheritance hierarchy toward the actual class from which the object was 
+instantiated. </p>
+<p><strong>Another cast is not allowable ... </strong> </p>
+<p>However, <em>(excluding interface type casts)</em>, it is not allowable to cast the 
+type of an object&apos;s reference in ways that are not related in a 
+subclass-superclass inheritance sense. For example, you cannot cast the type of 
+an object&apos;s reference to the type of a sibling of that object. </p>
+<p><strong>Two sibling classes </strong> </p>
+<p>The code in the following fragment defines two simple classes named <strong>MyClassA</strong> 
+and <strong>MyClassB</strong>. By default, each of these classes extends the class named 
+<strong>Object</strong>. 
+Therefore, neither is a superclass of the other. Rather, they are siblings. </p>
+<div class="a">
+				<pre>class MyClassA{
+  public String toString(){
+    return &quot;OK &quot;;
+  }//end test()
+}//end class MyClassA
+
+class MyClassB{
+  public String toString(){
+    return &quot;OK &quot;;
+  }//end test()
+}//end class MyClassB</pre>
+</div>
+<p><strong>Instantiate one object from each sibling class </strong> </p>
+<p>The code in the next fragment instantiates one object from each of the above 
+classes, and stores references to those objects in reference variables of type 
+Object. </p>
+<p>Then the code causes the overridden <strong>toString</strong> method of one of the objects 
+to be called by passing that object&apos;s reference to the <strong>print</strong> method. </p>
+<div class="a">
+				<pre>  void doIt(){
+    Object ref1 = new MyClassA();
+    Object ref2 = new MyClassB();
+    System.out.print(ref1);</pre>
+</div>
+<p>The code in the above fragment causes the text OK to appear on the screen. </p>
+<p><strong>Try to cast to a sibling class type </strong> </p>
+<p>At this point, the reference variable named <strong>ref1</strong> holds a reference to an 
+object of type <strong>MyClassA</strong>. The reference is being held as type 
+<strong>Object</strong>. </p>
+<p>The statement in the next fragment attempts to cast that reference to type 
+<strong>MyClassB</strong>, which is a sibling of the class named <strong>MyClassA</strong>. </p>
+<div class="a">
+				<pre>    MyClassB ref3 = (MyClassB)ref1;</pre>
+</div>
+<p><strong>A ClassCastException </strong> </p>
+<p>The above statement causes a <strong>ClassCastException</strong> to be thrown, which in turn 
+causes the program to abort. The screen output is shown below: </p>
+<div class="a">
+				<pre>OK java.lang.ClassCastException:MyClassA
+ at Worker.doIt(Ap152.java:24)
+ at Ap152.main(Ap152.java:14)
+</pre>
+</div>
+
+<p><em>(Note that the text OK appeared on the screen before the program aborted and 
+displayed diagnostic information on the screen.)</em> </p>
+<p><a href="#question02">Back to Question 2</a> </p>
+
+
+<h2><a name="answer01">Answer 1</a> </h2>
+<p>C. OK OK </p>
+<h3><strong>Explanation 1</strong></h3>
+<p><strong>Type conversion</strong></p>
+<p>This program illustrates type conversion up the inheritance hierarchy, both 
+with and without a cast. </p>
+<p><strong>Store object&apos;s reference as type Object </strong> </p>
+<p>The following fragment instantiates a new object of the class named <strong>MyClassA</strong>, 
+and stores that object&apos;s reference in a reference variable of type <strong>Object</strong>. This 
+demonstrates that you can store an object&apos;s reference in a reference variable 
+whose type is a superclass of the class from which the object was instantiated, 
+with no cast required. </p>
+<div class="a">
+				<pre>class Worker{
+  void doIt(){
+    Object refA = new MyClassA();</pre>
+</div>
+<p><strong>Cast object&apos;s reference to type Object</strong> </p>
+<p>The code in the next fragment instantiates an object of the class named 
+<strong>MyClassB</strong>, and stores the object&apos;s reference in a reference variable of type 
+<strong>Object</strong>, after first casting the reference to type <strong>Object</strong>. This, and the previous 
+fragment demonstrate that while it is allowable to cast a reference to the 
+superclass type before storing it in a superclass reference variable, such a 
+cast is not required. </p>
+<div class="a">
+				<pre>    Object refB = 
+              (Object)(new MyClassB());</pre>
+</div>
+<p><strong>Type conversion and assignment compatibility </strong> </p>
+<p>This is part of a larger overall topic commonly referred to as type 
+conversion. It also touches the fringes of something that is commonly referred 
+to as assignment-compatibility. </p>
+<p><strong>Automatic type conversions </strong> </p>
+<p>Some kinds of type conversions happen automatically. For example, you can 
+assign a value of type <strong>byte</strong> to a variable of type <strong>int</strong> and the type conversion 
+will take place automatically. </p>
+<p><strong>Cast is required for narrowing conversions</strong> </p>
+<p>However, if you attempt to assign a value of type <strong>int</strong> to a variable of type 
+<strong>byte</strong>, the assignment will not take place automatically. Rather, the compiler 
+requires you to provide a cast to confirm that you accept responsibility for the 
+conversion, which in the case of <strong>int</strong> to byte could result in the corruption of 
+data. </p>
+<p><strong>Automatic conversions up the inheritance hierarchy </strong> </p>
+<p>When working with objects, type conversion takes place automatically for 
+conversions toward the root of the inheritance hierarchy. 
+Therefore, conversion from any class type to type <strong>Object</strong> happen automatically. 
+However, conversions in the direction away from the root require a cast. </p>
+<p>
+	<em>(Conversion from any class type to any superclass of that class also happens 
+	automatically.)</em></p>
+<p><strong>Polymorphic behavior</strong></p>
+<p>The code in the next fragment uses polymorphic behavior to display the 
+contents of the two String objects. </p>
+<div class="a">
+				<pre>    System.out.print(refA);
+    System.out.print(refB);</pre>
+</div>
+<p><strong>No cast required </strong> </p>
+<p>This works without the use of a cast because the <strong>print</strong> method calls the 
+<strong>toString</strong> method on any object&apos;s reference that it receives as an incoming 
+parameter. The <strong>toString</strong> method is defined in the <strong>Object</strong> class, and overridden 
+in the <strong>String</strong> class. Polymorphic behavior dictates that in such a situation, the 
+version of the method belonging to the object will be called regardless of the 
+type of the reference variable holding the reference to the object. </p>
+<p><strong>When would a cast be required?</strong> </p>
+<p>Had the program attempted to call a method on the reference that is not 
+defined in the <strong>Object</strong>, class, it would have been necessary to cast the reference 
+down the inheritance hierarchy in order to successfully call the method.</p>
+<p><a href="#question01">Back to Question 1</a> </p>
+
+<p>-end- </p>
+
+
+</body>
+</html>

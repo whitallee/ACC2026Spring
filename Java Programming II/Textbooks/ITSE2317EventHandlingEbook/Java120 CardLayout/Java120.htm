@@ -1,0 +1,880 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>... in Java by Richard G Baldwin</TITLE>
+<META NAME="Template" CONTENT="C:\PROGRAM FILES\MSOFFICE\OFFICE\html.dot">
+</HEAD>
+<BODY LINK="#0000ff" VLINK="#800080">
+
+<P><!--start--></P>
+<I><H3 ALIGN="CENTER">Richard G Baldwin (512) 223-4758, </I><A HREF="mailto:baldwin@austin.cc.tx.us"><I>baldwin@austin.cc.tx.us</I></A><I>, </I><A HREF="http://www2.austin.cc.tx.us/baldwin/"><I>http://www2.austin.cc.tx.us/baldwin/</I></A></H3>
+<H2 ALIGN="CENTER"><!--title-->The AWT Package, Placing Components in Containers, CardLayout<!--endtitle--></H2>
+<P>Java Programming, Lecture Notes # 120, Revised 03/03/99. </P>
+
+<UL>
+<LI><A HREF="#preface">Preface</A> </LI>
+<LI><A HREF="#introduction">Introduction</A> </LI>
+<LI><A HREF="#cardlayout_manager">CardLayout Manager</A> </LI>
+<LI><A HREF="#sample_program">Sample Program</A> </LI>
+
+<UL>
+<LI><A HREF="#discussion">Discussion</A> </LI>
+<LI><A HREF="#interesting_code_fragments">Interesting Code Fragments</A> </LI>
+<LI><A HREF="#program_listing">Program Listing</A></LI></UL>
+
+<LI><A HREF="#review">Review</A></LI></UL>
+
+<P><HR></P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="preface"></A>Preface</H2>
+</FONT><P>Students in Prof. Baldwin's <B><U>Intermediate Java Programming</B></U> classes at ACC are responsible for knowing and understanding all of the material in this chapter. </P>
+<P>JDK 1.1 was formally released on February 18, 1997. This chapter was originally written on March 8, 1997 using the software and documentation in the JDK 1.1 download package, and has been revised several times since then. </P>
+<P>The sample program in this chapter was confirmed to compile and run properly under JDK 1.2 on 2/3/99.</P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="introduction"></A>Introduction</H2>
+</FONT><P>This is one in a series of chapters that concentrate on the package <B>java.awt </B>where most of the functionality exists for providing the user interface to your application or applet. </P>
+<P>In this chapter, we will learn how to use the <B>CardLayout </B>class for creating a layout manager. </P>
+<P>Also, we will continue learning how to create user-interface objects by building up a combination of smaller objects into the final composite object. </P>
+<P>In particular, we will create a top-level user-interface object that is a <B>Frame</B> object containing two <B>Panel</B> objects. One of the <B>Panel </B>objects will serve as a <I>display panel </I>on which we can display any one of several <I>"cards"</I> using a <B>CardLayout </B>manager. </P>
+<P>The other <B>Panel </B>object contains several <B>Button</B> objects, which we can use to flip through the cards being displayed on the other <B>Panel</B> object. </P>
+<P>All but one of the cards in the deck are <U>passive</U> (have no registered event listener objects). </P>
+<P>One of the cards in the deck contains a <B>Button </B>object, which is <U>not passive</U>. In this case, clicking on the button causes the <U>date and time</U> to be displayed on the same card. </P>
+<P>This is one of the processes that you can use to create the types of complex User Interface objects that you are accustomed to seeing in typical Graphical User Interfaces. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="cardlayout_manager"></A>CardLayout Manager</H2>
+</FONT><P>In earlier chapters, we have learned about absolute positioning and sizing of components in a container, and we have learned about the <B>BorderLayout</B> manager, the <B>FlowLayout</B> manager, and the <B>GridLayout </B>manager. </P>
+<P>In this chapter, we will learn about the <B>CardLayout</B> manager. </P>
+<P>The <B>CardLayout </B>manager is a layout manager for a container that contains several<I> "cards"</I>. Only one card is visible at a time, allowing you to flip through the cards using methods of the class. </P>
+<P>The <B>CardLayout</B> class has no <I>Fields</I>, has two <I>Constructors</I>, and has about twenty <I>methods</I>. </P>
+<P>You will usually be concerned with the <I>Constructors </I>and with several of the methods that are used to display the cards. In the sample program in this chapter, we will use five different methods to display the cards in a deck of cards in various ways. </P>
+<P>The constructors are: </P>
+
+<UL>
+<B><LI>CardLayout()</B> -- Creates a new card layout with gaps of size zero. </LI>
+<B><LI>CardLayout(int, int)</B> -- Creates a card layout with the specified gaps.</LI></UL>
+
+<P>The terminology used in the description of these constructors should be familiar to you by now. </P>
+<P>The following list of methods that will be used in the sample program in this chapter: </P>
+
+<UL>
+<B><LI>first(Container)</B> -- Flip to the first card. </LI>
+<B><LI>last(Container)</B> -- Flips to the last card of the specified container. </LI>
+<B><LI>next(Container)</B> -- Flips to the next card of the specified container. </LI>
+<B><LI>previous(Container)</B> -- Flips to the previous card of the specified container. </LI>
+<B><LI>show(Container, String)</B> -- Flips to the specified component name in the specified container.</LI></UL>
+
+<P>This chapter contains one sample program and it is fairly long. However, much of the length derives from code that is generally repetitive. </P>
+<P>This sample program is more complex that previous programs in the chapters on layout managers. The <B>CardLayout </B>manager is slightly more complex than those previously studied, but with that complexity comes considerable power. </P>
+<P>The <B>CardLayout </B>manager makes it possible for you to create a Graphical User Interfaces consisting of multiple pages for communication with the user, with only one page being visible at a time.. </P>
+<P>This program has <B>ActionListener </B>objects working at two levels. At one level, <B>ActionListener </B>objects are used to <U>select a card for viewing</U>. </P>
+<P>At another level, an <B>ActionListener </B>object is registered to service a button on one of the cards to cause the <U>date and time to be displayed</U>, when that card is <U>displayed</U>, and when the button on that card is <U>clicked</U>. </P>
+<P>For <U>clarity</U>, the main sample program in this chapter uses a parameterized constructor for the <B>ActionListener</B> object for this button. Another sample program at the end of this chapter shows how to eliminate the use of such parameterized constructors, which is considered by some to represent a better and more object-oriented approach. However, the second approach is a little more complex from a coding viewpoint. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="sample_program"></A>Sample Program</H2>
+</FONT><P>The following sample program illustrates use of the <B>CardLayout </B>manager. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="discussion"></A>Discussion</H3>
+</FONT><P>This program is designed to be compiled and run under JDK 1.1 </P>
+<P>A top-level <B>Frame </B>object is created which contains two <B>Panel </B>objects. One of the <B>Panel</B> objects is a control panel that will be discussed in more detail later. </P>
+<P>The other <B>Panel</B> object is a display panel that is used to display each of the following <I>"cards."</I>  The cards are added to the panel using a <B>CardLayout </B>manager. </P>
+
+<UL>
+<LI>Button("First card is a Button object") </LI>
+<LI>Label("Second card is a Label object") </LI>
+<LI>Label("Third card is also a Label object") </LI>
+<LI>Label("Fourth card is a label object") </LI>
+<LI>timePanel,"time panel"); (see note below) </LI>
+<LI>TextField("Last card is a TextField Object")</LI></UL>
+
+<P>Except for the card identified as a <I>"timePanel"</I>, each of the cards is an object of the type indicated and is <U>passive</U> (no event listener objects registered). </P>
+<P>The card identified as a <I>"time panel"</I> is a <B>Panel </B>object to which has been added a <B>Button </B>object and a <B>Label </B>object. </P>
+<P>This card is <U>not passive</U>. Rather, an <B>ActionListener </B>object is instantiated and registered on the button such that clicking the button causes the current date and time to be displayed in a <B>Label </B>object on the same card. </P>
+<P>As mentioned earlier, the <B>Frame </B>object contains two panels. The <I>display panel</I> is described above. The other panel is a <I>control panel,</I> which contains five <B>Button</B> objects labeled as shown below: </P>
+
+<UL>
+<LI>"Next" </LI>
+<LI>"Previous" </LI>
+<LI>"First" </LI>
+<LI>"Last" </LI>
+<LI>"Show Time Panel"</LI></UL>
+
+<P>These buttons are all active (have ActionListener objects registered on them). The buttons are used to flip through the deck of cards on the display panel. The action of each button is indicated by its label (for example, the button labeled <I>"Next"</I> causes the <U>next card</U> in the deck to be displayed.) </P>
+<P>A <B>windowClosing()</B> event listener object is instantiated and registered on the frame to terminate the program when the frame is closed. </P>
+<P>The program was tested using JDK 1.1.3 running under Win95. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="interesting_code_fragments"></A>Interesting Code Fragments</H3>
+</FONT><P>Because of its complexity, this program contains a large number of interesting code fragments. This program builds a top-level user-interface object by combining lower-level objects to create the whole. The top-level object is a <B>Frame </B>object onto which two <B>Panel </B>objects are placed. </P>
+<P>One of the <B>Panel </B>objects serves as the <I>display panel</I> for six different <I>"cards"</I> which are placed on the <B>Panel </B>object using the <B>CardLayout </B>manager. </P>
+<P>One of those cards is itself a <B>Panel </B>object.  A <B>Button </B>object and a <B>Label </B>object have been placed on that card. When the user <U>displays</U> this card and <U>clicks</U> the button, the <U>date and time</U> are displayed in the <B>Label </B>object on the same card. </P>
+<P>The other panel that is placed on the top-level Frame object contains five <B>Button </B>objects. These <B>Button </B>objects are visible any time the top-level user-interface object is visible, and are used to flip through the cards on the other <B>Panel </B>object. </P>
+<P>The first interesting code fragment is used to <U>create one of the cards</U> which contains a <B>Button </B>object and a <B>Label </B>object. </P>
+<P>An <B>ActionListener </B>object is instantiated and registered on the <B>Button </B>object. The overridden <B>actionPerformed()</B> method in the <B>ActionListener </B>object causes the date and time to be displayed in the <B>Label </B>object on the card when the button on the card is clicked. That code fragment follows. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=498>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Label timeLabel = new Label(
+ "__________________________________________");
+ Button timeButton = new Button("Display Date and Time");
+ Panel timePanel = new Panel();
+ timePanel.add(timeButton);
+ timePanel.add(timeLabel);
+
+ timeButton.addActionListener(
+ new TimeActionListener(timeLabel));</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The next interesting code fragment is used to <U>build a display panel</U> for the deck of cards. </P>
+<P>First we will instantiate a <B>CardLayout </B>manager object and assign it to a reference variable named <B>myCardLayout</B>. This cannot be an anonymous object because we will need access to it later when processing events. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> CardLayout myCardLayout = new CardLayout();</PRE></TD>
+</TR>
+</TABLE>
+
+<P>Next, we will </P>
+
+<UL>
+<LI>instantiate our display panel object, </LI>
+<LI>specify its layout manager, and </LI>
+<LI>make it yellow so that it can be visually distinguished from the other <B>Panel </B>object on the top-level user-interface object.</LI></UL>
+
+<P>. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Panel displayPanel = new Panel();
+ displayPanel.setLayout(myCardLayout);
+ displayPanel.setBackground(Color.yellow);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>Once the display panel object exists, the next step is to <U>add the cards to the panel</U> using the <B>CardLayout </B>manager. In the following usage of the <B>add()</B> method from the <B>Container</B> class, </P>
+
+<UL>
+<LI>the first parameter is the object to be added and </LI>
+<LI>the second parameter is the <I>name</I> of the object.</LI></UL>
+
+<P>All but one of these objects are added as anonymous objects which is OK because they are passive objects (no event listeners registered on them). </P>
+<P>The non-anonymous object is the <B>timePanel</B> object that was constructed earlier in the program. This cannot be an anonymous object because it is the composite of a <B>Panel </B>object, a <B>Button </B>object, and a <B>Label </B>object. A variable referencing the panel was required in order to construct it. </P>
+<P>The <I>name </I>of the object specified as a string in the second parameter to the <B>add()</B> method will be used in our sample program as a parameter to the <B>show()</B> method, by which a specified card can be made visible (brought to the top of the stack). </P>
+<P>Please note that I determined the syntax used with the <B>add()</B> method in the following code fragment largely by trial and error. </P>
+<P>As of 3/8/97, I have been unable to locate definitive information as to how objects should be added to a JDK 1.1 container under the <B>CardLayout </B>manager without using deprecated methods from JDK 1.0. </P>
+<P>The syntax shown below seems to be the correct syntax (it works), but as near as I can tell, it is not shown in the JDK 1.1 documentation. I have asked for information on one of the Java newsgroups and hopefully I will be able to update this chapter to be more definitive about this syntax later. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>displayPanel.add(new Button(
+ "First card is a Button object"),"first");
+displayPanel.add(new Label(
+ "Second card is a Label object"),"second");
+displayPanel.add(new Label(
+ "Third card is also a Label object"),"third");
+displayPanel.add(new Label(
+ "Fourth card is a label object"),"fourth");
+displayPanel.add(
+timePanel,"time panel");//special panel defined earlier
+displayPanel.add(new TextField(
+ "Last card is a TextField Object"),"sixth");</PRE></TD>
+</TR>
+</TABLE>
+
+<P>That completes the construction of the display panel. The next task is to <U>construct the control panel</U>. </P>
+<P>Construction of the control panel is pretty straightforward using capabilities that we have studied in previous chapters. </P>
+<P>The following two statements are typical of the largely repetitive statements used to instantiate the <B>Button </B>objects for the control panel and register <B>ActionListener </B>objects on those buttons. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Button nextButton = new Button("Next");
+
+ firstButton.addActionListener(
+new FirstListener(myCardLayout,displayPanel));</PRE></TD>
+</TR>
+</TABLE>
+
+<P>The following code fragment is typical of the largely repetitive code used to instantiate the control panel object and place the five buttons on it. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Panel controlPanel = new Panel();
+ controlPanel.add(firstButton);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>We have now reached the point where we can <U>construct the top-level user-interface object</U> by placing the display panel and the control panel objects on the <B>Frame </B>object using the default <B>BorderLayout </B>manager of the <B>Frame </B>object. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> Frame myFrame = new Frame(
+"Copyright, R.G.Baldwin");
+
+ myFrame.add(displayPanel,"North");
+ myFrame.add(controlPanel,"South");</PRE></TD>
+</TR>
+</TABLE>
+
+<P>That completes the interesting code fragments from the user-interface (GUI) class. </P>
+<P>Now we need to <U>define the Listener classes</U> containing overridden <B>actionPerformed()</B> methods to satisfy the Listener object instantiation and registration code shown above. </P>
+<P>The first <B>ActionListener </B>class that we will study is the class used to service the action event on the <B>Button </B>object, which is on one of the cards in the deck of cards. </P>
+<P>That class is named <B>TimeActionListener</B>, It contains </P>
+
+<UL>
+<LI>one instance variable, </LI>
+<LI>one constructor, and </LI>
+<LI>an overridden <B>actionPerformed()</B> method.</LI></UL>
+
+<P>There is nothing particularly interesting about the instance variable or the constructor. As mentioned earlier, another sample program at the end of this chapter shows how to eliminate the use of the instance variable and the parameterized constructor. </P>
+<P>The overridden <B>actionPerformed()</B> method is shown in the following code fragment. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> public void actionPerformed(ActionEvent e){
+ <B>myLabelObject.setText(new Date().toString())</B>;
+ }//end actionPerformed()</PRE></TD>
+</TR>
+</TABLE>
+
+<P>As you can see, this overridden method instantiates a new instance of the <B>Date</B> class. </P>
+<P>Whenever an instance of the <B>Date</B> class is instantiated, it contains information that can be used to determine the date and time at which it was instantiated. </P>
+<P>This information is extracted using the <B>toString()</B> method and used with the <B>setText()</B> method of the <B>Label </B>class to deposit the date and time information in the <B>Label </B>object. </P>
+<P>This class definition is followed by five <U>very similar</U> <B>ActionListener </B>classes, which are used to flip through the deck of cards whenever one of the <B>Button </B>objects on the control panel is clicked. </P>
+<P>These class definitions are <U>almost identical</U>, differing only in terms of the method called inside of the overridden<B> actionPerformed()</B> method. </P>
+<P>None of the rest of the code in the classes is particularly interesting. Therefore, in this case, I am simply going to show the individual statements which make those method calls inside the overridden <B>actionPerformed()</B> methods of the five classes. <B>(Note that these five statements appear inside five different methods.)</B><br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE> myCardLayoutObject.<B>first</B>(myPanelObject);
+ myCardLayoutObject.<B>next</B>(myPanelObject);
+ myCardLayoutObject.<B>previous</B>(myPanelObject);
+ myCardLayoutObject.<B>last</B>(myPanelObject);
+ myCardLayoutObject.<B>show</B>(myPanelObject,<B>"time panel"</B>);</PRE></TD>
+</TR>
+</TABLE>
+
+<P>You can tell from the highlighted method name how the method is used to select another card for viewing. </P>
+<P>Pay particular attention to the <B>show()</B> method which takes an <U>additional parameter</U> relative to the others. This parameter is the <I>name</I> of the component that is established when the component is added to its container under control of the <B>CardLayout </B>manager. This method can be used to display any card in the deck regardless of its position relative to the card currently being displayed. </P>
+<FONT COLOR="#ff0000"><H3 ALIGN="CENTER"><A NAME="program_listing"></A>Program Listing</H3>
+</FONT><P>This section contains a complete listing of the program with a large number of explanatory comments. <br/>
+ </P>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE>/*File Layout07.java Copyright, R.G.Baldwin
+Revised 10/29/97 to make it fit on the printed
+page better.
+
+This program is designed to be compiled and run under
+JDK 1.1
+
+This program illustrates use of the CardLayout manager.
+
+A top-level Frame object is created which contains two
+Panel objects.
+
+One of the panels is a control panel that will be discussed
+in more detail later.
+
+The other panel is a display panel that is used to display
+each of the following "cards" which are added to the panel
+using a CardLayout manager.
+
+Button("First card is a Button object")
+Label("Second card is a Label object")
+Label("Third card is also a Label object")
+Label("Fourth card is a label object")
+timePanel,"time panel"); (see note below)
+TextField("Last card is a TextField Object")
+
+Except for the card identified as a "timePanel", each of
+the cards is an object of the type indicated and is
+passive (no event listener objects registered).
+
+The card identified as a "time panel" is a Panel object to
+which has been added a Button object and a Label object.
+This card is not passive. Rather, an ActionListener
+object is instantiated and registered on the button such
+that clicking the button causes the current date and time
+to be displayed in the Label object.
+
+As mentioned earlier, the Frame object contains two
+panels. The display panel is described above. The other
+panel is a control panel which contains five buttons
+labeled as shown below:
+
+"Next"
+"Previous"
+"First"
+"Last"
+"Show Time Panel"
+
+These buttons are all active (have ActionListener objects
+registered on them). The buttons are used to iterate
+through the deck of cards on the display panel. The
+action of each button is indicated by its label (for
+example, the button labeled "Next" causes the next card
+in the deck to be displayed.)
+
+A windowClosing() event listener object is instantiated
+and registered on the frame to terminate the program when
+the frame is closed.
+
+The program was tested using JDK 1.1 running under Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+//=======================================================//
+public class Layout07 {
+ public static void main(String[] args){
+ GUI gui = new GUI();
+ }//end main
+}//end class Layout07
+//=======================================================//
+
+class GUI {
+ public GUI(){//constructor
+
+ //Build a card with GUI components to be added to a
+ // deck of cards using a CardLayout manager.
+
+ Label timeLabel = new Label(
+ "____________________________");
+
+ Button timeButton = new Button(
+ "Display Date and Time");
+ Panel timePanel = new Panel();
+ timePanel.add(timeButton);
+ timePanel.add(timeLabel);
+
+ //Instantiate ActionListener object and register it on
+ // the button This event handler will display the date
+ // and time.
+ timeButton.addActionListener(
+ new TimeActionListener(timeLabel));
+
+ //===Build a display panel for the deck of cards===
+
+ //Instantiate a layout manager object to be used with
+ // a Panel object
+ CardLayout myCardLayout = new CardLayout();
+
+ //Instantiate a display Panel object that will be
+ // composited onto a Frame object.
+ Panel displayPanel = new Panel();
+
+ //Specify a CardLayout manager for the Panel object
+ displayPanel.setLayout(myCardLayout);
+ //make the display panel visible
+ displayPanel.setBackground(Color.yellow);
+
+ //Add objects to the display panel using the specified
+ // CardLayout manager
+ displayPanel.add(new Button(
+ "First card is a Button object"),"first");
+ displayPanel.add(new Label(
+ "Second card is a Label object"),"second");
+ displayPanel.add(new Label(
+ "Third card is also a Label object"),"third");
+ displayPanel.add(new Label(
+ "Fourth card is a label object"),"fourth");
+ //special panel defined earlier
+ displayPanel.add(timePanel,"time panel");
+ displayPanel.add(new TextField(
+ "Last card is a TextField Object"),"sixth");
+
+
+ //======== Build the control panel ======//
+
+ //Instantiate button objects that will be used to
+ // iterate through the cards in the deck.
+ Button nextButton = new Button("Next");
+ Button prevButton= new Button("Previous");
+ Button firstButton= new Button("First");
+ Button lastButton= new Button("Last");
+ Button showButton= new Button("Show Time Panel");
+
+ //Instantiate action listener objects and register on
+ // the buttons
+ firstButton.addActionListener(
+ new FirstListener(myCardLayout,displayPanel));
+ nextButton.addActionListener(
+ new NextListener(myCardLayout,displayPanel));
+ prevButton.addActionListener(
+ new PrevListener(myCardLayout,displayPanel));
+ lastButton.addActionListener(
+ new LastListener(myCardLayout,displayPanel));
+ showButton.addActionListener(
+ new ShowListener(myCardLayout,displayPanel));
+
+
+ //Instantiate a control Panel object using default
+ // FlowLayout and place the Button objects on it.
+ // These buttons are functional because ActionListener
+ // objects have been registered on them.
+ Panel controlPanel = new Panel();
+ controlPanel.add(firstButton);
+ controlPanel.add(nextButton);
+ controlPanel.add(prevButton);
+ controlPanel.add(lastButton);
+ controlPanel.add(showButton);
+
+
+ //== Build the Top-Level User-Interface Object ==
+
+ //Instantiate a Frame object
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+
+ //Add the display panel and the control panel objects
+ // to the Frame object to create the composite
+ // user-interface object.
+ myFrame.add(displayPanel,"North");
+ myFrame.add(controlPanel,"South");
+
+ myFrame.setSize(500,150);//set the size
+ myFrame.setVisible(true);//make it visible
+
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//An object of this ActionListener class is registered on
+// the Button object on the Time panel which is one of the
+// cards in the deck of cards. When an event occurs, this
+// handler causes the date and time to be displayed on a
+// Label object on the same panel.
+
+ class TimeActionListener implements ActionListener{
+ Label myLabelObject;
+
+ TimeActionListener(Label inLabel){//constructor
+ myLabelObject = inLabel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myLabelObject.setText(new Date().toString());
+ }//end actionPerformed()
+ }//end class TimeActionListener
+
+//=======================================================//
+
+//Objects of the next five ActionListener classes are
+// registered on the Button objects on the control panel.
+// When an event occurs, the event handler causes a card
+// in the deck of cards to be displayed on the display
+// panel. For example, an object of the following class
+// causes the first card in the deck to be displayed. All
+// five of the classes are very similar, differing only by
+// one statement in the overridden ActionPerformed
+// method which specifies the action to be taken.
+
+class FirstListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ FirstListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myCardLayoutObject.first(myPanelObject);
+ }//end actionPerformed()
+}//end class NextListener
+//=======================================================//
+
+//See comments above in class FirstListener
+class NextListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ NextListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myCardLayoutObject.next(myPanelObject);
+ }//end actionPerformed()
+}//end class NextListener
+//=======================================================//
+
+//See comments above in class FirstListener
+class PrevListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ PrevListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myCardLayoutObject.previous(myPanelObject);
+ }//end actionPerformed()
+}//end class NextListener
+//=======================================================//
+
+//See comments above in class FirstListener
+class LastListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ LastListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myCardLayoutObject.last(myPanelObject);
+ }//end actionPerformed()
+}//end class NextListener
+
+//=======================================================//
+
+//See comments above in class FirstListener
+class ShowListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ ShowListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ //The following method invocation will display the
+ // card whose name matches the second parameter.
+ myCardLayoutObject.show(myPanelObject,"time panel");
+ }//end actionPerformed()
+}//end class NextListener
+
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</PRE></TD>
+</TR>
+</TABLE>
+
+<P>. </P>
+<FONT COLOR="#ff0000"><H2 ALIGN="CENTER"><A NAME="review"></A>Review</H2>
+</FONT><P>Q - Without viewing the solution that follows, write a Java application that meets the specifications provided by the opening comments in the following application. Note in particular the specification regarding <B>parameterized constructors and listener objects</B>. </P>
+<FONT SIZE=2 COLOR="#0000ff"><P>A - See solution below.</FONT><br/>
+<FONT FACE="Courier New"> </P></FONT>
+<TABLE BORDER CELLSPACING=1 WIDTH=480>
+<TR><TD VALIGN="MIDDLE" BGCOLOR="#ffff00">
+<PRE><FONT COLOR="#0000ff">/*File SampProg138.java Copyright, R.G.Baldwin
+From chapter 120
+
+Without viewing the solution that follows, write a Java
+application that meets the following specifications.
+
+When you start the program, a Frame object appears on the
+screen with a width of 350 pixels and a height of 200
+pixels.
+
+The bottom portion of the client area of the Frame object
+is yellow. The top portion of the client area of the Frame
+object is red.
+
+At startup, the text string
+
+First Card
+
+appears in the red portion of the Frame object.
+
+At startup, and throughout the running of the program, the
+yellow portion of the Frame object contains two buttons,
+one above the other. These buttons are labeled (from top to
+bottom) as follows:
+
+Show First Card
+Show Next Card
+
+Some yellow background shows through in the space between
+the two buttons.
+
+The yellow portion of the Frame object and the associated
+buttons provide a control panel that is used to display
+information in the red portion of the Frame object.
+
+The red portion of the Frame object is a display area
+that has the ability to display three different cards of
+information.
+
+The First Card of information shows at startup with the
+label
+
+First Card
+
+The Last Card of information can be exposed by clicking the
+button "Show Next Card" several times in succession, and
+that card is labeled
+
+Last Card
+
+Between the first and last cards, there is an additional
+card that can be exposed by clicking on the
+"Show Next Card" button.
+
+The labels on the buttons indicate which card will be
+exposed when you click on a button.
+
+The "Show Next Card" button cycles through all three cards,
+exposing them in order.
+
+When you expose the card between the first and last cards,
+the red portion of the Frame object contains three
+components in a vertical column: two buttons and a green
+rectangle. A small portion of the red background shows
+through between the components.
+
+The top button in the red portion of the Frame object is
+labeled:
+
+Display Output
+
+and the other button is labeled
+
+Clear Output
+
+When you click on the "Display Output" button the word
+"Ouch" is displayed in the green rectangle.
+
+When you click on the "Clear Output" button all text is
+removed from the green rectangle.
+
+<B>Do not use parameterized constructors for the listener
+objects for these two buttons.
+
+</B>When you press the close button on the Frame object, the
+program terminates and returns control to the operating
+system.
+
+Your name should appear in the banner at the top of the
+Frame object.
+
+The program was tested using JDK 1.1.3 running under
+Win95.
+*/
+//=======================================================//
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+//=======================================================//
+public class SampProg138 {
+ public static void main(String[] args){
+ GUI gui = new GUI();
+ }//end main
+}//end class SampProg138
+//=======================================================//
+
+class GUI {
+
+ public GUI(){//constructor
+
+ //Build an active card.
+
+ Label outputLabel = new Label(" ");
+ outputLabel.setBackground(Color.green);
+ Button setOutputButton = new Button("Display Output");
+ Button clearOutputButton = new Button("Clear Output");
+ Panel outputPanel = new Panel();
+ GridLayout outputLayout = new GridLayout(3,1);
+ outputLayout.setVgap(5);
+ outputPanel.setLayout(outputLayout);
+ outputPanel.add(setOutputButton);
+ outputPanel.add(clearOutputButton);
+ outputPanel.add(outputLabel);
+ outputPanel.setName("Output");
+
+ //Instantiate ActionListener objects and register them
+ // on the set and clear buttons. These event handlers
+ // will display the output or clear the display.
+ setOutputButton.addActionListener(
+ new SetOutputActionListener());
+ clearOutputButton.addActionListener(
+ new ClrOutputActionListener());
+ //===================================================//
+
+ //===Build a display panel for the deck of cards===
+
+ //Instantiate a layout manager object to be used with
+ // a Panel object
+ CardLayout myCardLayout = new CardLayout();
+
+ //Instantiate a display Panel object that will be
+ // composited onto a Frame object.
+ Panel displayPanel = new Panel();
+
+ //Specify a CardLayout manager for the Panel object
+ displayPanel.setLayout(myCardLayout);
+ //make the display panel visible
+ displayPanel.setBackground(Color.red);
+
+ //Add objects to the display panel using the specified
+ // CardLayout manager
+ displayPanel.add(new Label("First Card"),"first");
+ displayPanel.add(outputPanel,"output panel");
+ displayPanel.add(new Label("Last Card"),"last");
+
+ //======== Build the control panel ======//
+
+ //Instantiate button objects that will be used to
+ // cycle through the cards in the deck.
+ Button firstButton= new Button("Show First Card");
+ Button nextButton = new Button("Show Next Card");
+
+ //Instantiate action listener objects and register on
+ // the buttons on the control panel
+ firstButton.addActionListener(
+ new FirstListener(myCardLayout,displayPanel));
+ nextButton.addActionListener(
+ new NextListener(myCardLayout,displayPanel));
+
+ //Instantiate a control Panel object and place the
+ // Button objects on it.
+ Panel controlPanel = new Panel();
+ BorderLayout controlLayout = new BorderLayout();
+ controlLayout.setVgap(5);
+ controlPanel.setLayout(controlLayout);
+ controlPanel.add(firstButton,"North");
+ controlPanel.add(nextButton,"South");
+ controlPanel.setBackground(Color.yellow);
+
+ //== Build the Top-Level User-Interface Object ==
+
+ //Instantiate a Frame object
+ Frame myFrame = new Frame(
+ "Copyright, R.G.Baldwin");
+
+ //Add the display panel and the control panel objects
+ // to the Frame object to create the composite
+ // user-interface object.
+ myFrame.add(displayPanel,"North");
+ myFrame.add(controlPanel,"South");
+
+ myFrame.setSize(350,200);//set the size
+ myFrame.setVisible(true);//make it visible
+
+
+ //Instantiate and register a window listener to
+ // terminate the program when the Frame is closed.
+ myFrame.addWindowListener(new Terminate());
+ }//end constructor
+}//end class GUI definition
+//=======================================================//
+
+//An object of this ActionListener class is registered on
+// a Button object on a Panel object. When an event
+// occurs, this handler modifies the text in a Label object
+// on the same panel.
+ class SetOutputActionListener implements ActionListener{
+ public void actionPerformed(ActionEvent e){
+ //Construct an array of the components on the
+ // panel that is the parent object of the source
+ // of the event. Note the requirement for casting.
+ Component[] comps = ((Component)e.getSource()).
+ getParent().getComponents();
+
+ //Identify the Label component in the array and
+ // modify its text.
+ for(int cnt = 0; cnt &lt; comps.length; cnt++){
+ if(comps[cnt].toString().indexOf("Label") != -1)
+ ((Label)comps[cnt]).setText("Ouch");
+ }//end for loop
+ }//end actionPerformed()
+ }//end class SetOutputActionListener
+
+//=======================================================//
+//An object of this ActionListener class is registered on
+// a Button object on a Panel object. When an event
+// occurs, this handler clears the text in a Label object
+// on the same panel. This ActionListener is used to clear
+// the names.
+
+ class ClrOutputActionListener implements ActionListener{
+ public void actionPerformed(ActionEvent e){
+ //Construct an array of the components on the
+ // panel that is the parent object of the source
+ // of the event. Note the requirement for casting.
+ Component[] comps = ((Component)e.getSource()).
+ getParent().getComponents();
+
+ //Identify the Label component in the array and
+ // modify its text.
+ for(int cnt = 0; cnt &lt; comps.length; cnt++){
+ if(comps[cnt].toString().indexOf("Label") != -1)
+ ((Label)comps[cnt]).setText("");
+ }//end for loop
+ }//end actionPerformed()
+ }//end class ClrOutputActionListener
+//=======================================================//
+
+//Objects of the next two ActionListener classes are
+// registered on the Button objects on the control panel.
+// When an event occurs, the event handler causes a card
+// in the deck of cards to be displayed on the display
+// panel. For example, an object of the following class
+// causes the first card in the deck to be displayed. All
+// of the classes are very similar, differing only by
+// one statement in the overridden ActionPerformed
+// method which specifies the action to be taken.
+
+class FirstListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ FirstListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myCardLayoutObject.first(myPanelObject);
+ }//end actionPerformed()
+}//end class NextListener
+//=======================================================//
+
+//See comments above in class FirstListener
+class NextListener implements ActionListener{
+ Panel myPanelObject;
+ CardLayout myCardLayoutObject;
+
+ //constructor
+ NextListener(CardLayout inCardLayout,Panel inPanel){
+ myCardLayoutObject = inCardLayout;
+ myPanelObject = inPanel;
+ }//end constructor
+
+ public void actionPerformed(ActionEvent e){
+ myCardLayoutObject.next(myPanelObject);
+ }//end actionPerformed()
+}//end class NextListener
+//=======================================================//
+
+class Terminate extends WindowAdapter{
+ public void windowClosing(WindowEvent e){
+ //terminate the program when the window is closed
+ System.exit(0);
+ }//end windowClosing
+}//end class Terminate
+//=======================================================//</PRE></FONT></TD>
+</TR>
+</TABLE>
+
+<P>-end-<!--end--></P></BODY>
+</HTML>

@@ -1,0 +1,624 @@
+﻿<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<title>Java4040</title>
+
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.auto-style1 {
+	text-align: center;
+}
+div.a {
+  border: 2px solid black;
+}
+
+</style>
+
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 12pt; background-color: #FEFFF0;"
+>
+
+
+<h1 class="auto-style1">Java4040: Purpose of Framework Implementations and Algorithms</h1>
+
+
+
+
+
+<h1>Table of Contents</h1>
+<ul>
+	<li><a href="#Preface">Preface</a>
+	<ul>
+		<li><a href="#Viewing_tip">Viewing tip</a><ul>
+			<li><a href="#Listings">Listings</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#Preview">Preview</a> </li>
+	<li><a href="#Generics">Generics</a></li>
+	<li><a href="#Introduction">Introduction</a></li>
+	<li><a href="#Discussion_and_sample_code">Discussion and sample code</a><ul>
+		<li><a href="#Purpose_of_implementations_">Purpose of implementations</a><ul>
+			<li><a href="#Available_for_immediate_use_">Available for immediate use</a> </li>
+			<li><a href="#Vector_and_Hashtable_classes_">Vector and Hashtable classes 
+			</a> </li>
+			<li><a href="#Abstract_implementations_">Abstract implementations 
+			</a> </li>
+		</ul>
+		</li>
+		<li><a href="#Purpose_of_algorithms_">Purpose of algorithms</a>
+		<ul>
+			<li><a href="#The_contains_method_">The contains method </a> </li>
+			<li><a href="#Different_classes_different_implementations_">Different classes, different implementations</a> </li>
+		</ul>
+		</li>
+		<li><a href="#A_sample_program">A sample program</a><ul>
+			<li><a href="#Instantiate_and_populate_a_TreeSet_object">Instantiate 
+			and populate a TreeSet object</a></li>
+			<li><a href="#Instantiate_and_populate_an_ArrayList_object">
+			Instantiate and populate an ArrayList object</a></li>
+			<li><a href="#Identify_a_target_element">Identify a target element</a></li>
+			<li><a href="#Search_for_the_test_value_in_each_collection">Search 
+			for the test value in each collection</a></li>
+			<li><a href="#Program_output">Program output</a></li>
+			<li><a href="#Time_required_to_search_ArrayList_">Time required to search 
+			the ArrayList collection </a> </li>
+			<li><a href="#Time_required_to_search_TreeSet_object_">Time required to search 
+			the TreeSet collection </a> </li>
+			<li><a href="#Different_implementations_">Different implementations</a> </li>
+			<li><a href="#Polymorphic_behavior_applies_">Polymorphic behavior applies</a> </li>
+		</ul>
+		</li>
+		<li><a href="#Sorting_algorithms_">Sorting algorithms </a> </li>
+		<li><a href="#Now_for_a_little_quiz_">Now for a little quiz 
+		</a> 
+		<ul>
+			<li><a href="#And_the_answer_is">And the answer is ...</a> </li>
+			<li><a href="#Drive_home_the_point">Drive home the point</a></li>
+		</ul>
+		</li>
+		<li><a href="#Benefits_of_using_the_Collections_Framework_">Benefits of using the Collections Framework</a> </li>
+
+	</ul>
+	</li>
+	<li><a href="#Run_the_program">Run the program</a></li>
+	<li><a href="#Summary">Summary</a> </li>
+	<li><a href="#Miscellaneous">Miscellaneous</a></li>
+</ul>
+<h1><a name="Preface">Preface</a></h1>
+<p>This chapter is one of a series of chapters designed to teach you about 
+Object-Oriented Programming (OOP) in general and the Java Collections 
+Framework in particular.</p>
+<p>This chapter explains how the core collection interfaces in the Java Collections Framework allow collections to be manipulated without regard for how they are implemented. The framework provides nine 
+or more concrete implementations of the interfaces. The framework also provides various algorithms for manipulating the data in the collections.</p>
+<p>In addition to studying these chapters, I strongly recommend that you study 
+the <a href="http://docs.oracle.com/javase/tutorial/collections/index.html">
+Collections Trail</a> in
+<a href="http://docs.oracle.com/javase/tutorial/index.html">Oracle&#39;s Java 
+Tutorials</a>. The chapters in this eBook are intended to supplement and not 
+to replace those tutorials.</p>
+<h2><a name="Viewing_tip">Viewing tip</a></h2>
+<p>I recommend that you open another copy of this chapter in a separate 
+browser window and use the following links to easily find and view the listings while you are reading about them.</p>
+<h3><a name="Listings">Listings</a></h3>
+<ul>
+	<li><a href="#Listing_1">Listing 1</a>. SpeedTest01.</li>
+	<li><a href="#Listing_2">Listing 2</a>. Beginning of the doIt method. </li>
+	<li><a href="#Listing_3">Listing 3</a>. Instantiate and populate an ArrayList object.</li>
+	<li><a href="#Listing_4">Listing 4</a>. Identify a target element.</li>
+	<li><a href="#Listing_5">Listing 5</a>. Search for the test value in each collection.</li>
+</ul>
+<h1><a name="Preview">Preview</a></h1>
+<p>At least three things are included in the Java<em> Collections Framework:</em> </p>
+<ul>
+	<li>interfaces</li>
+	<li>implementations</li>
+	<li>algorithms</li>
+</ul>
+<p>The previous chapter discussed the purpose of the interfaces. This chapter will 
+discuss the purpose of the implementations and the algorithms in the Collections 
+Framework. </p>
+<h1><a name="Generics">Generics</a></h1>
+<p>The code in this series of chapters is written with no thought given to
+<a href="http://docs.oracle.com/javase/tutorial/java/generics/index.html">
+Generics</a>. As a result, if you copy and compile the code, you will probably 
+get warnings about <em>unchecked or unsafe operations</em>.</p>
+<p>While you will ultimately need to understand how to use Generics, that is a 
+very complex topic. An understanding of Generics is beyond the scope of this 
+course. Therefore, for purposes of this course, you can simply ignore those 
+warnings.</p>
+<h1><a name="Introduction">Introduction</a></h1>
+<p>We learned in an earlier chapter that the framework 
+provides at least nine concrete implementations of the interfaces in the framework. These 
+nine implementation classes are available for immediate instantiation to produce 
+objects to satisfy your collection needs. </p>
+<p>We also learned that the framework provides at least three incomplete implementations. 
+These classes are available for you to use as a starting point in defining your 
+own implementations. Default implementations of many of the interface methods 
+are provided in the incomplete implementations. </p>
+<h1><a name="Discussion_and_sample_code">Discussion and sample code</a></h1>
+<h2><a name="Purpose_of_implementations_">Purpose of implementations </a></h2>
+<p>The <i>implementations</i> in the Java Collections Framework are the concrete 
+definitions of the classes that implement the <i>core collection interfaces</i>. 
+For example, concrete implementations in the Java Collections 
+Framework are provided by at least the following nine classes.</p>
+<ul>
+	<li>HashSet</li>
+	<li>TreeSet</li>
+	<li>LinkedList</li>
+	<li>ArrayList</li>
+	<li>Vector</li>
+	<li>HashMap</li>
+	<li>WeakHashMap</li>
+	<li>TreeMap</li>
+	<li>Hashtable</li>
+</ul>
+<h3><a name="Available_for_immediate_use_">Available for immediate use </a></h3>
+<p>These classes are available for immediate use to instantiate collection 
+objects. </p>
+<p>As you can see, there are two classes that obviously fall into the <i>Set</i> 
+category, two that obviously fall into the <i>List</i> category, and three that 
+obviously fall into the <i>Map</i> category. You can learn more about the 
+detailed characteristics of those classes in the standard Java documentation and 
+in
+<a href="http://docs.oracle.com/javase/tutorial/collections/interfaces/index.html">
+The Java Tutorials</a>.</p>
+<p>This leaves two additional classes whose names don&#39;t readily divulge the 
+category to which they belong. </p>
+<h3><a name="Vector_and_Hashtable_classes_">Vector and Hashtable classes </a>
+</h3>
+<p>The classes <b>Vector</b> and <b>Hashtable</b> were part of Java even before 
+the Java Collections Framework became available. The <b>Vector</b> class can be 
+used to instantiate objects that fall in the general <i>List</i> category. </p>
+<p>The <b>Hashtable</b> class can be used to instantiate objects that fall in 
+the <i>Map</i> category. </p>
+<p>These two classes have been upgraded to make them compatible with the 
+Collections Framework. </p>
+<h3><a name="Abstract_implementations_">Abstract implementations </a></h3>
+<p>In addition to the concrete implementations listed above, the following three 
+classes partially implement the interfaces, but are not intended for 
+instantiation. Rather, they are intended to be extended into new concrete 
+classes that you define.</p>
+<ul>
+	<li>AbstractSet</li>
+	<li>AbstractList</li>
+	<li>AbstractMap</li>
+</ul>
+<p>Therefore, by either using one of the three classes listed above as a 
+starting point, or by starting from scratch and fully implementing one or more 
+of the interfaces, you can provide new concrete implementations to augment the 
+framework to include collections that meet your special needs. If you do that, 
+be sure to satisfy the contract requirements of the Collections Framework in 
+addition to the technical requirements imposed by implementing interfaces.</p>
+<h2><a name="Purpose_of_algorithms_">Purpose of algorithms </a></h2>
+<p>Algorithms are methods <i>(not necessarily exposed)</i> that provide useful 
+capabilities, such as searching and sorting. For example, the <b>Collection</b> 
+interface declares an exposed method named <b>contains</b>.</p>
+<h3><a name="The_contains_method">The contains method</a> </h3>
+<p>The contract for the <strong>contains</strong> method requires that the 
+method:</p>
+<ul>
+	<li>receives an incoming reference of type <b>Object</b> as a parameter</li>
+	<li>searches the collection looking for an element that matches the incoming 
+	reference</li>
+	<li>returns true if the collection on which the method is called contains 
+	the specified element and returns false otherwise.</li>
+</ul>
+<h3><a name="Different_classes_different_implementations_">Different classes, 
+different implementations </a></h3>
+<p>You can safely call the <b>contains</b> method on any object instantiated from 
+a class that properly implements the <b>Collection</b> interface, even if you 
+don&#39;t know the actual type of the collection object. </p>
+<p>The manner in which the search will be performed will probably differ from 
+one concrete implementation of the interface to the next. For example, a <b>
+TreeSet</b> object will perform the search very rapidly with a time cost of only 
+log(n) where n is the number of elements. On the other hand, for the same number 
+of elements, because of a different underlying data structure, a search on an <b>
+ArrayList</b> object will probably require more time than a search on a <b>
+TreeSet</b> object. As the number of elements increases, the difference in time 
+cost between the two will also increase. </p>
+<h2><a name="A_sample_program">A sample program</a></h2>
+<p>Consider the sample program shown in <a href="#Listing_1">Listing 1</a>. This program compares the 
+search speed of the <b>ArrayList</b> class and the <b>TreeSet</b> class. A 
+detailed discussion of the program follows <a href="#Listing_1">Listing 1</a>. </p>
+
+
+
+<!--A table containing text with a footer. -->
+<div class="a">
+
+
+	<p>
+
+
+<a name="Listing_1">Listing 1</a>. SpeedTest01.</p>
+<pre>/*File SpeedTest01
+Copyright R.G.Baldwin
+**************************************/
+
+import java.util.*;
+
+public class SpeedTest01{
+  public static void main(String args[]){
+    new Worker().doIt();
+  }//end main()
+}//end class SpeedTest01
+
+class Worker{
+  public void doIt(){
+    int size = 2000000;
+    //Create a TreeSet object
+    Collection aTree = new TreeSet();
+
+    //Populate the TreeSet object with
+    // random values.  The add() method
+    // for a set rejects duplicates.
+    Random rnGen = new Random();
+    for(int ct = 0; ct &lt; size; ct++){
+      aTree.add(new Double(rnGen.nextDouble()));
+    }//end for loop
+
+    //Create and populate an ArrayList
+    // object with the same random
+    // values
+    Collection aList = new ArrayList(aTree);
+
+    //Extract a value near the center
+    // of the ArrayList object to use
+    // as a test case.
+    Object testVal = ((List)aList).get(size/2);
+
+    //Search for the test value in each
+    // of the collection objects.
+    // Measure and display the time
+    // required to perform the search
+    // in each case.
+    long start = new Date().getTime();
+    boolean found = aList.contains(testVal);
+    long stop = new Date().getTime();
+    System.out.println(found + &quot; &quot; + (stop - start));
+
+    start = new Date().getTime();
+    for(int x = 0; x &lt; 100000; x++){
+      found = aTree.contains(testVal);
+    }//end for loop
+    stop = new Date().getTime();
+    System.out.println(found + &quot; &quot; + (stop - start)/100000.0);
+
+  }//end doIt()
+}// end class Worker
+</pre>
+
+</div>
+
+	<h3><a name="Instantiate_and_populate_a_TreeSet_object">Instantiate and 
+	populate a TreeSet object</a></h3>
+
+<p>The program begins by instantiating a <b>TreeSet</b> object and populating it 
+with approximately 2,000,000 elements as shown in <a href="#Listing_2">Listing 2</a>. The values 
+encapsulated in the objects referred to by the elements in the collection are 
+produced by a random number generator. </p>
+<p>Recall that the <b>add</b> method of a <b>Set</b> object rejects duplicate 
+elements, so there may be fewer than 2,000,000 elements in the object after it is 
+populated, depending on how many of the random values are duplicates. </p>
+
+<!--``1List02-->
+	<div class="a">
+		<p>
+<a name="Listing_2">Listing 2</a>. Beginning of 
+				the doIt method.</p>
+<pre>  public void doIt(){
+    int size = 2000000;
+
+    Collection aTree = new TreeSet();
+
+    Random rnGen = new Random();
+    for(int ct = 0; ct &lt; size; ct++){
+      aTree.add(new Double(rnGen.nextDouble()));
+    }//end for loop
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Instantiate_and_populate_an_ArrayList_object">Instantiate and 
+populate an ArrayList object</a></h3>
+<p>One of the capabilities of the Collection Framework is to create a new <b>
+Collection</b> object and populate it with the contents of an existing <b>
+Collection</b> object of a different <i>(or the same)</i> actual type. </p>
+<p>The code in <a href="#Listing_3">Listing 3</a> instantiates an <b>ArrayList</b> object and populates 
+it with the contents of the existing <b>TreeSet</b> object. As a result, we then 
+have two different <b>Collection</b> objects of different actual types 
+containing the same elements. </p>
+
+<!--``1List03-->
+	<div class="a">
+		<p>
+<a name="Listing_3">Listing 3</a>. Instantiate and populate an ArrayList object.
+				</p>
+				<pre>
+    Collection aList = new ArrayList(aTree);
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Identify_a_target_element">Identify a target element</a></h3>
+<p>The objective of this program is to compare the times required to search for 
+and to find an element in each of the collections. Thus, we need a target element 
+to search for. </p>
+<p>The code in <a href="#Listing_4">Listing 4</a> extracts a value near the center of the <b>
+ArrayList</b> object using an index to find and extract the value. This is a 
+very fast operation on a <b>List</b> object. This value is saved in <b>testVal</b> 
+to be used later for test purposes. </p>
+<p>Note that the reference to the <b>ArrayList</b> object was saved as type <b>
+Collection</b> <em>(and not as type <strong>ArrayList</strong>)</em> in <a href="#Listing_3">Listing 3</a> above. </p>
+<p>Note also that it was necessary to cast that reference to type <b>List</b> in 
+<a href="#Listing_4">Listing 4</a> in order to call the <b>get</b> method on the reference. This is 
+because the <b>Collection</b> interface does not declare a method named <b>get</b>. 
+Rather, the <b>get</b> method is added to the <b>List</b> interface to define a 
+more specialized form of collection. </p>
+<blockquote><em>(Author&#39;s note: This program was originally written before the 
+introduction of Generics. The above requirement may not be true if the program 
+were to be rewritten making proper use of Generics.)</em></blockquote>
+
+<!--``1List04-->
+	<div class="a">
+		<p>
+<a name="Listing_4">Listing 4</a>. Identify a target element.</p>
+<pre>
+    Object testVal = ((List)aList).get(size/2);
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Search_for_the_test_value_in_each_collection">Search for the test 
+value in each collection</a></h3>
+<p>The code in <a href="#Listing_5">Listing 5</a> calls the <b>contains</b> method to search for 
+the test value in each of the collections. It uses the system clock to measure 
+the time required to find the element in each case. <em>(I will assume that you 
+understand how to use the </em> <b><em>Date</em></b><em> class for this purpose, and won&#39;t provide 
+a detailed explanation.)</em></p>
+
+
+<!--``1List05-->
+	<div class="a">
+		<p>
+<a name="Listing_5">Listing 5</a>. Search for the test value in each collection.</p>
+<pre>    long start = new Date().getTime();
+    boolean found = aList.contains(testVal);
+    long stop = new Date().getTime();
+    System.out.println(found + &quot; &quot; + (stop - start));
+
+    start = new Date().getTime();
+    for(int x = 0; x &lt; 100000; x++){
+      found = aTree.contains(testVal);
+    }//end for loop
+    stop = new Date().getTime();
+    System.out.println(found + &quot; &quot; + (stop - start)/100000.0);
+
+  }//end doIt()
+</pre>
+</div>
+<!--``2-->
+<h3><a name="Program_output">Program output</a></h3>
+<p>Running the program several times produced the following range of output 
+values:</p>
+<ul>
+	<li>First output value ranged from &quot;true 93&quot; to &quot;true 109&quot;</li>
+	<li>Second output value ranged from &quot;true 0.00031&quot; to &quot;true 0.00046&quot; </li>
+</ul>
+<p>The first output value applies to the <b>ArrayList</b> object, and the 
+second output value applies to the <b>TreeSet</b> object. </p>
+<p>As we would expect, the test value was successfully found in both cases; 
+hence the display of true in both cases. </p>
+<h3><a name="Time_required_to_search_ArrayList_">Time required to search the 
+ArrayList collection </a></h3>
+<p>The output indicates that approximately 100 milliseconds were required to 
+find the test value in the <b>ArrayList</b> object. </p>
+<h3><a name="Time_required_to_search_TreeSet_object_">Time required to search 
+the 
+TreeSet collection </a></h3>
+<p>The time required to find the test value in the <b>TreeSet</b> 
+object was so small that it wasn&#39;t even measurable within the granularity of the 
+system clock <i>(other experiments have caused me to believe that the 
+granularity of the system clock on this machine is at least sixteen milliseconds)</i>. 
+Hence, the original reported time required to find the test value in the <b>
+TreeSet</b> object was zero. </p>
+<p>In order to get a measurable time value to search the <b>TreeSet</b> object, 
+I had to wrap the invocation of the <b>contains</b> method in a for-loop and 
+search for the same value 100,000 times in succession. Thus, the time required to 
+find the test value in the <b>TreeSet</b> object was approximately 0.00030 
+milliseconds as compared to 100 milliseconds for the <b>ArrayList</b> object.
+</p>
+<blockquote><i>(I&#39;ll let you do the arithmetic to see if this makes sense in terms of the 
+expected time cost to search the two different types of collections. Don&#39;t forget 
+the extra overhead of the for-loop.)</i> </blockquote>
+<h3><a name="Different_implementations_">Different implementations </a></h3>
+<p>This is a graphic demonstration that even though both objects can be treated 
+as type <b>Collection</b>, and the <b>contains</b> method can be called on 
+either object in a polymorphic manner, the actual implementations of the two 
+objects and the implementations of the <b>contains</b> methods in those two 
+objects are different. </p>
+<p>Each type of collection has advantages and disadvantages, depending on your 
+needs. </p>
+<h3><a name="Polymorphic_behavior_applies_">Polymorphic behavior applies </a>
+</h3>
+<p>The important point is that if you receive a reference to the collection 
+object as type <b>Collection</b>, you can call the <b>contains</b> method on that 
+reference without regard to the underlying structure of the collection object. 
+This is because <i>polymorphic</i> behavior applies. </p>
+<p>Very briefly, polymorphic behavior means that the actual method that is 
+executed is the appropriate method for that type of object regardless of the 
+actual type <em>(class)</em> of the reference to the object. This is one of the great advantages of 
+using the Java Collections Framework and passing collection objects among 
+methods as interface types. </p>
+<h2><a name="Sorting_algorithms_">Sorting algorithms </a></h2>
+<p>Some of the implementations of the Java Collection Framework maintain their 
+elements in a random order, and other implementations maintain their elements in 
+a sorted order. Thus, the framework also provides sorting algorithms. However, 
+the sorting algorithms used to maintain the order of the collections are not 
+exposed in the way that the search algorithm is exposed <i>(via the <strong>contains</strong> method). </i>Rather, the sorting algorithms are implicit in those 
+implementations that need them, and are absent from those implementations that 
+don&#39;t need them. </p>
+<h2><a name="Now_for_a_little_quiz_">Now for a little quiz </a></h2>
+<p>Select the words in one pair of parentheses 
+in the following statement that causes the statement to be true. </p>
+<blockquote><em>The interfaces in the Collections Framework make it possible to manipulate 
+the contents of collections in a manner that is (dependent on)
+(independent of) the underlying implementation of each collection.</em> 
+</blockquote>
+<h3><a name="And_the_answer_is">And the answer is ... </a></h3>
+<p>The interfaces in the Collections Framework make it possible to manipulate 
+the contents of collections in a manner that is <em><strong>independent of</strong></em> the underlying 
+implementation of each collection. That is the beauty of basing the framework on 
+interfaces that declare polymorphic methods. </p>
+<h3><a name="Drive_home_the_point">Drive home the point</a></h3>
+<p>I placed this question here to drive home the point that the methods declared 
+in the <b>Collection</b> interface can be called on collection objects in a <i>
+polymorphic</i> manner. </p>
+<p>That is to say, as a user of an object instantiated from a class that 
+properly implements the <b>Collection</b> interface <em>(according to the 
+contracts of the Collections Framework)</em>, you can call the methods 
+declared in that interface on a reference to the object and be confident that 
+the actual method that is called will be the version that is appropriate for 
+the class from which the object was instantiated. This is polymorphic behavior.
+</p>
+<p>In the event that you need to call a method that is not declared in the <b>
+Collection</b> interface <i>(such as the get() method in <a href="#Listing_4">Listing 4</a> above),</i> 
+you can pass the reference as one of the more specialized sub-interfaces of <b>
+Collection</b>, such as <b>Set</b>. </p>
+<blockquote><em>(Author&#39;s note: Once again, this document was originally 
+written before the release of Generics. The use of the more specialized 
+sub-interfaces described above may not be required if the program is re-written making proper use of Generics.)</em></blockquote>
+<h2><a name="Benefits_of_using_the_Collections_Framework_">Benefits of using the 
+Collections Framework </a></h2>
+<p>
+<a href="http://docs.oracle.com/javase/tutorial/collections/interfaces/index.html">The Java 
+Tutorial</a> from Oracle lists and explains the benefits of using the 
+Java Collections Framework, including the following. </p>
+<ul>
+	<li>It reduces programming effort</li>
+	<li>It increases program speed and quality</li>
+	<li>It allows interoperability among unrelated APIs</li>
+	<li>It reduces the effort to learn and use new APIs</li>
+	<li>It reduces effort to design new APIs</li>
+	<li>It fosters software reuse</li>
+</ul>
+<p>For a detailed explanation of these benefits, I am simply going to refer you 
+directly to
+<a href="http://docs.oracle.com/javase/tutorial/collections/interfaces/index.html">The Java 
+Tutorial</a>.</p>
+<h1><a name="Run_the_program">Run the program</a></h1>
+<p>I encourage you to copy the code from <a href="#Listing_1">Listing 1</a> and paste it into 
+a Java source code file. Then 
+compile and execute it.</p>
+<p>Run the program 
+and observe the results. Experiment with the code. Make changes, run the program again, and observe the results of your changes. Make certain that you 
+can explain why your changes behave as they do.</p>
+<h1><a name="Summary">Summary</a></h1>
+<p>Let&#39;s recap some of what we have learned in this and the previous 
+chapters. </p>
+<p>The core collection interfaces in the Collections Framework are shown below. </p>
+		<ul>
+			<li>Collection<ul>
+				<li>Set<ul>
+					<li>SortedSet</li>
+				</ul>
+				</li>
+				<li>List</li>
+				<li>Queue</li>
+				<li>Deque</li>
+			</ul>
+			</li>
+			<li>Map<ul>
+				<li>SortedMap</li>
+			</ul>
+			</li>
+		</ul>
+<p>The basic purpose of the core collection interfaces in the Java Collections 
+Framework is to allow collections to be manipulated without regard for how the 
+collections are implemented, provided of course that the implementations comply 
+with the contracts. </p>
+<p>The framework provides at least the following nine concrete implementations <i>
+(classes)</i>  of the interfaces shown above:</p>
+<ul>
+	<li>HashSet</li>
+	<li>TreeSet</li>
+	<li>LinkedList</li>
+	<li>ArrayList</li>
+	<li>Vector</li>
+	<li>HashMap</li>
+	<li>WeakHashMap</li>
+	<li>TreeMap</li>
+	<li>Hashtable</li>
+</ul>
+<p>For example, the classes <b>TreeSet</b> and <b>ArrayList</b> are concrete 
+implementations of the <b>Collection</b> interface as shown in the above list.
+</p>
+<blockquote><i>(Actually, they are concrete implementations of sub-interfaces of Collection. 
+The Collections Framework doesn&#39;t provide any direct implementations of the Collection 
+interface.)</i></blockquote>
+<p>A collection object instantiated from the class <b>TreeSet</b> and a 
+collection object instantiated from the class <b>ArrayList</b> can each be 
+viewed as being of the interface type <b>Collection</b>. </p>
+<p>Methods having the same signatures can be used to manipulate either 
+collection with confidence that the behavior of the method will be appropriate 
+for the actual type of collection involved. </p>
+<p>The framework also provides the following incomplete implementations of the 
+core interfaces: </p>
+<ul>
+	<li>AbstractSet</li>
+	<li>AbstractList</li>
+	<li>AbstractMap</li>
+</ul>
+<p>The purpose of these implementations is to provide you with a starting point 
+for defining your own concrete implementations for more specialized collections.</p>
+<h1><a name="Miscellaneous">Miscellaneous</a></h1>
+<p>This section contains a variety of miscellaneous information.</p>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+<div class="a">
+	<p><strong>Housekeeping material</strong>
+
+				</p>
+
+				<ul>
+					<li>Author: Prof. Richard G. Baldwin</li>
+					<li>Chapter name: Java4040: Purpose of Framework 
+					Implementations and Algorithms</li>
+					<li>File: Java0440.htm
+</li>
+					<li>Published: 04/18/13</li>
+					<li>Revised: 04/12/20</li>
+
+				</ul>
+</div>
+
+<!--Set border to 15 to create a note. Paragraph elements inside the note are allowed but not required.-->
+
+<p>-end- </p>
+
+
+</body>
+</html>
