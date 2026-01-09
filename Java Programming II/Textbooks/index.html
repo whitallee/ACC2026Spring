@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Programming II - Textbooks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .textbooks {
+            display: grid;
+            gap: 16px;
+        }
+
+        .textbook-link {
+            display: block;
+            padding: 20px 24px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+
+        .textbook-link:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .textbook-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .textbook-code {
+            font-size: 0.9em;
+            opacity: 0.8;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Java Programming II</h1>
+        <p class="subtitle">Course Textbooks - ACC Spring 2026</p>
+
+        <div class="textbooks">
+            <a href="Functional Programming Ebook/index.htm" class="textbook-link">
+                <div class="textbook-title">Functional Programming</div>
+                <div class="textbook-code">Lambda expressions, functional interfaces, and functional programming concepts</div>
+            </a>
+
+            <a href="ITSE2317CollectionsEbook/index.htm" class="textbook-link">
+                <div class="textbook-title">Java Collections</div>
+                <div class="textbook-code">ITSE2317 - Getting started with Java Collections framework</div>
+            </a>
+
+            <a href="ITSE2317EventHandlingEbook/index.htm" class="textbook-link">
+                <div class="textbook-title">Event Handling</div>
+                <div class="textbook-code">ITSE2317 - Java OOP event handling and callbacks</div>
+            </a>
+
+            <a href="ITSE2321Ebook/index.htm" class="textbook-link">
+                <div class="textbook-title">Advanced Java Programming</div>
+                <div class="textbook-code">ITSE2321 - Core Java programming concepts</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
