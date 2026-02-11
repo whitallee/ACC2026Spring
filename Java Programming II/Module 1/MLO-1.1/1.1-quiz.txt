@@ -1,0 +1,158 @@
+Question 1
+1
+True/False
+Listing 1 causes the following text to appear on the screen:
+44321
+
+  True
+X False
+
+
+
+Question 2
+2
+True/False
+In Listing 1, the fillIt method can call the add method on the incoming object with confidence that the behavior of the add method will be appropriate for the specific type of object involved.
+
+X True
+  False
+
+Feedback
+For example, the behavior of the add method for an object of the TreeSet class will probably be different from the behavior of the add method for an object of some other class that implements the Collection interface.
+
+
+
+Question 3
+3
+True/False
+In Listing 1, when the fillIt method returns, the TreeSet object contains five elements.
+
+  True
+X False
+
+
+
+Question 4
+4
+True/False
+The program shown in Listing 2 instantiates a TreeSet object and populates it with approximately 10,000,000 elements.
+
+  True
+X False
+
+
+
+Question 5
+5
+True/False
+Listing 1 instantiates an object of the TreeSet class and stores the object's reference in a reference variable of type Object named ref.
+
+  True
+X False
+
+
+
+Question 6
+6
+True/False
+The Iterator interface declares three methods:
+hasNext()
+next()
+remove()
+
+X True
+  False
+
+
+
+Question 7
+7
+True/False
+In general, the time required for the contains method to find a value in a TreeSet object is more than the time required for the contains method to find a value in an ArrayList object.
+
+  True
+X False
+
+
+
+Question 8
+8
+True/False
+Given: in Listing 1, when the fillIt method returns, the TreeSet object contains four (not five) elements with no duplicates. Each element is a reference to an object of type Integer. Those references are maintained in such a way as to make them accessible in descending order, based on the int values encapsulated in each of the Integer objects.
+
+  True
+X False
+
+
+
+Question 9
+9
+True/False
+The program shown in Listing 2 compares the search speed of the ArrayList class and the TreeSet class.
+
+X True
+  False
+
+
+
+Question 10
+10
+True/False
+There will always be exactly 2,000,000 elements in the TreeSet object in Listing 2 after it is populated.
+
+  True
+X False
+
+
+
+Question 11
+11
+True/False
+Listing 2 calls the get method on the ArrayList object. The ArrayList class implements the List interface. The get method of the List interface is inherited from the  Collection interface.
+
+  True
+X False
+
+
+
+Question 12
+12
+True/False
+The ArrayList object in Listing 2 may contain duplicate values.
+
+  True
+X False
+
+
+
+Question 13
+13
+True/False
+The while loop in the Worker class in Listing 1 traverses the collection
+Accessing each of the object's elements in succession, and
+Displaying the value encapsulated in the object referred to by each element.
+
+X True
+  False
+
+
+
+Question 14
+14
+True/False
+An Iterator object can be used to traverse a  Collection object, gaining access to each element in order.
+
+  True
+X False
+
+
+
+Question 15
+15
+True/False
+The code in Listing 2 instantiates an ArrayList object and populates it with exactly 2,000,000 random values that are different from the random values contained in the TreeSet object.
+
+  True
+X False
+
+Score 93.3/100 (1 incorrect)

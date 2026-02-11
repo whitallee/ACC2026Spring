@@ -1,0 +1,271 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Proj01</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+.auto-style2 {
+	color: #FF0000;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 16pt; background-color: #FEFFF0;"
+>
+
+<center>
+<h1>ITSE2317 Java Programming (Intermediate)</h1>
+
+</center>
+
+<center>
+<h2 style="text-align: center;">Project 01</h2>
+</center>
+File Proj01.htm<p>Revised 12/07/24</p>
+<p>R. G. Baldwin instructor<br/>
+ </p>
+
+<center>
+<h2>Read The Instructions Carefully</h2>
+</center>
+
+<p>A detailed set of instructions is provided in a separate document titled <strong>Instructions for Downloading and Submitting Assignments </strong> that you can
+view at the Orientation link in your Blackboard course.</p>
+<p>I recommend that you study those instructions <strong>very carefully</strong> 
+and&nbsp;make yourself a checklist to ensure that you meet all of the 
+requirements before submitting your assignment.</p>
+<p>Failure to follow the instructions to the letter usually results in a
+failing grade, normally zero. The general instructions in that document apply
+to this assignment. In addition, this document provides specific
+instructions for the assignment. </p>
+
+<p>If you have any questions regarding instructions, please ask them at least
+one week prior to the assignment deadline. Don't end up with a bad grade due to the
+fact that you didn't understand the instructions. </p>
+
+<center>
+<h2>Typographical Errors</h2>
+</center>
+If you discover any typographical errors in this document, please let me know
+so that I can correct the error and notify all of the students.<h2 class="auto-style1">Source Code and Class Files</h2>
+
+<p>You will find a source code file for the driver class (named <strong>Proj01.java</strong>) for the program 
+in the same zip file from which you extracted this project specification.</p>
+
+
+<center>
+<h2>Java Version Requirement</h2>
+</center>
+
+<p>Software version requirements are specified in the syllabus for this course.</p>
+<hr/>
+<p><strong>Hint for Asg01</strong>
+</p>
+<p>After an extended discussion regarding Asg01, one student asked<em> "So should I be creating the 
+<strong>runA</strong> method? B/c i do not see it in your code"
+</em>
+</p>
+<p>My response to that question follows:
+
+</p>
+<p>You don't see it in my code because you don't have a copy of my source code for the file named <strong>Proj01Runner.java</strong>. However, you do have my source code for the file named 
+<strong>Proj01.java</strong>.
+</p>
+
+<p>Here is how I would approach this problem.
+</p>
+<p>The first thing that you need to do is to analyze the given code in the file named <strong>Proj01.java</strong>. You need to make sure that you can explain the behavior of each and every line of code in that file.
+</p>
+<p>For example, the code down through line 29 creates an array object of type 
+<strong>int</strong> and populates it with six random values. The array object's reference is stored in a variable named 
+<strong>vals</strong>.
+</p>
+<p>Line 30 simply prints a blank line.
+</p>
+<p>Line 34 instantiates an object of your class named <strong>Proj01Runner</strong>. It passes a copy of a reference to the array object that is stored is the variable named 
+<strong>vals</strong> to the constructor for the object.
+</p>
+<p>You might surmise that the constructor needs to save that reference to the array object for later use.
+</p>
+<p>You might also surmise that the constructor needs to create and print your certification statement since it needs to be printed early and must be printed by your code.
+</p>
+<p>Lines 37, 38, and 39 print the contents of the array referred to by the reference in 
+<strong>vals</strong>. This produces the first row of numbers in the required output,
+</p>
+<p>1 4 3 3 3 1 for example.
+</p>
+<p>Now here is the answer to your question. Line 45 calls a method named <strong>runA</strong> on an object of the class that you designed. That means that your class named <strong>Proj01Runner</strong> must define a method named <strong>runA</strong>.
+</p>
+<p>What isn't obvious is, what must be the behavior of the <strong>runA</strong> method?
+</p>
+<p>Here is what we know, or can discern about that behavior. First, it must return a reference to an object that can be stored in a reference variable of type 
+<strong>Collection</strong> named <strong>ref</strong>. That means it is assignment compatible with type <strong>Collection</strong>.
+</p>
+<p>Second, by examining the code in lines 48 through 52 and examining the required second line of output text, we can determine that the object whose reference is returned by the method named <strong>runA</strong> must contain the same data values that were contained in the array that was passed to and saved by your constructor.
+</p>
+<p>You may have a couple of options as to the type of object whose reference is returned by the method named <strong>runA</strong>. First, it must be an object that is assignment compatible with type <strong>Collection</strong>. Second, it must be iterable by the code in lines 48 through 52. Third it must contain the values from the array object in the same order as the array object.
+</p>
+<p>Lines 48 through 52 print the content of that object producing the second row of numbers in the output.
+</p>
+<p>Line 57 calls a method named <strong>runB</strong> on the object that was instantiated in line 34. That means that you must also define a method named <strong>runB</strong> in your class named <strong>Proj01Runner</strong>. That method must 
+also return a reference to an object that is assignment compatible with type <strong>Collection</strong> and is iterable. Also, given the required output, that object must contain the values shown in the third row of numbers.
+</p>
+<p>Here is the part that requires some serious study to determine the behavior of the method named <strong>runB</strong>.
+</p>
+<p>What is the relationship between the required values in the third row of output and the values in the second row of output? What do you know about the behavior of the different data structures in the 
+<strong>Collections Framework</strong> that would result in such a relationship?
+</p>
+
+<p>The remaining code simply prints the third line of output. It also computes 
+and prints the sum of those values.</p>
+<hr/>
+
+<div class="a">
+<p>Proj01 Copyright 2020 R.G.Baldwin</p>
+<p>Among other things, the purpose of this assignment is to assess your 
+ability to write a program dealing with basic <strong>Collection Framework</strong> concepts and 
+methods.</p>
+	<p><strong><a name="THE_DELIVERABLES">THE DELIVERABLES</a></strong></p>
+	<p>This assignment requires that you submit a zip file named <strong>
+	YourNameProj01.zip</strong> containing the following files where <strong>
+	YourName</strong> means to insert your last name:</p>
+	<ul>
+		<li>A Java source code file named <strong>Proj01Runner.java</strong></li>
+		<li>A screenshot file named <strong>Compare01.png</strong> or <strong>
+		Compare01.jpg</strong> (your choice)</li>
+	</ul>
+	  <p><strong>PROGRAM SPECIFICATIONS</strong></p>
+		<p>Beginning with the file that you downloaded named <strong>Proj01.java</strong>, 
+		create a new file named <strong>Proj01Runner.java</strong> to meet the specifications 
+		given below.</p>
+	  <p>Note that you must not modify code in the file named <strong>Proj01.java</strong>.</p>
+	  <p>Be sure to display your name in the output as indicated.</p>
+	<p>When you place both files in the same folder, compile them both, and run the file 
+	named <strong>Proj01.java</strong> <strong class="auto-style2"><em>with a command-line 
+	argument 
+	of 5</em></strong>, the program must display the text shown in
+	<a href="#Figure_1">Figure 1</a> on the 
+	command line screen. Your requirement is not simply to reproduce the output 
+	shown in <a href="#Figure_1">Figure 1</a>. Your requirement is to process 
+	the incoming data in such a way as to reproduce the output shown in
+	<a href="#Figure_1">Figure 1</a>.</p>
+	<p><a name="Figure_1"><strong>Figure 1</strong></a><strong>. 
+	RequiredOutput01.png</strong></p>
+	<p>
+	<img alt="RequiredOutput01.png" height="218" src="RequiredOutput01.png" width="769"/></p>
+
+
+
+
+
+	<p>Your output text must match my output text for a command-line argument of 
+	any numeric value that I choose. For example, <a href="#Figure_2">Figure 2</a> 
+	shows the output text created by running my program six times in succession 
+	for command-line argument values of 1 through 6 respectively. (Note that I 
+	deleted the certification text from each output to conserve space.) You 
+	should make certain that you can reproduce all of these results before 
+	submitting your assignment.</p>
+	<p><a name="Figure_2"><strong>Figure 2</strong></a><strong>. 
+	RequiredOutput02.png</strong></p>
+	<p>
+	<img alt="RequiredOutput02.png" height="610" src="RequiredOutput02.png" width="770"/></p>
+	<p>When you place both files in the same folder, compile them both, and run the file 
+	named <strong>Proj01.java</strong> <strong class="auto-style2"><em>without a 
+	command-line argument</em></strong>, the program must display text similar to, 
+	but not necessarily the same as the text shown in <a href="#Figure_1">Figure 
+	1</a> on the 
+	command line screen. In this case, the numeric values are based on a random 
+	number generator that will change from one run to the next. In all cases, 
+	the values in the first two lines of numbers must match. The values in the 
+	third line of numbers must be the unique values from the first line and must 
+	be in ascending numeric order. The value of the last line must be the sum of 
+	the numbers in the third line.</p>
+	<p class="auto-style2"><strong>SUBMITTING YOUR ASSIGNMENT</strong></p>
+	<p>Encapsulate the required files in a zip file named <strong>
+	YourNameProj01.zip</strong> and submit the zip file as a Blackboard 
+	assignment. </p>
+	<p>Your zip file must contain the screenshot file listed above under 
+	<a href="#THE_DELIVERABLES">THE 
+	DELIVERABLES</a> in addition to any other files that may be listed there.</p>
+	<p>The zip file from which you extracted this document contains a file named
+	<strong>RequiredOutput01.png</strong>.</p>
+	<p>The screenshot file that you submit must be a screenshot showing a 
+	side-by-side comparison of the output from your program and the given file 
+	named <strong>RequiredOutput01.png</strong>. Place the given file on the 
+	left, place your output on the right, and take the screenshot. </p>
+	<p>The purpose of the screenshot is to confirm that your output matches the 
+	required output. If it doesn't match, don't bother submitting it because you 
+	won't get credit for the assignment if it doesn't match. Just keep working 
+	on it until you get a match. Consult your instructor if you have any 
+	questions regarding what does and what does not constitute a match.</p>
+	<p><strong>A SAMPLE SCREENSHOT</strong></p>
+	<p><a href="#Figure_3">Figure 3</a> shows the expected format of a side-by-side comparison 
+	screenshot. The two original images were overlapped to make it easier to 
+	compare them on a line-by-line basis. The right end was cropped to make the 
+	final image fit this publication format. You should format your screenshot 
+	in a similar manner.</p>
+	<p><a name="Figure_3"><strong>Figure 3</strong></a><strong>. Screenshot01.png</strong></p>
+	<p>
+	<img alt="Screenshot01.png" height="334" src="Screenshot01.png" width="814"/></p>
+	<p><strong>RECOMMENDED SCREENSHOT PROCEDURE</strong></p>
+	<p>The zip file from which you extracted this document contains a Java 
+	image-viewer program named <strong>ImageViewer.java</strong>. That program 
+	can be used to display a png file or a jpg file in its natural size.</p>
+	<p>Copy <strong>ImageViewer.java</strong> into the folder containing the 
+	given file named <strong>RequiredOutput01.png</strong>. Compile and execute 
+	the Java file. Select the png file in the GUI that appears. That will cause 
+	the png file to be displayed as a movable, resizable image on the screen.
+	</p>
+	<p>Arrange that image and your program output in a side-by-side layout, 
+	similar to that shown in <a href="#Figure_3">Figure 3</a>, with the image of the given file on the left 
+	and your program output on the right. Insofar as possible, arrange them so 
+	that the text on the left aligns with the text on the right. Then take the 
+	screenshot to produce the required screenshot file.</p>
+	<p>If you are running Windows, you can use the Windows <strong>Snip &amp; Sketch</strong> 
+	application to neatly crop the desired portion of the screen and cause it to 
+	be written into an output png file. Rename the png file as indicated under 
+	<a href="#THE_DELIVERABLES">THE DELIVERABLES</a> and add it to the zip file that you will submit as a 
+	Blackboard assignment. </p>
+	<p>If you are using a different operating system, you will need to use the 
+	screenshot capture facility provided by that operating system. I'm told that 
+	macOS has a built-in tool that is quite similar to Windows <strong>Snip &amp; 
+	Sketch.</strong> It's called the <strong>Screenshot</strong> app, and it 
+	offers a variety of features for capturing screenshots. I'm also told that 
+	Linux systems have several screenshot tools that offer similar 
+	functionalities to the Windows <strong>Snip &amp; Sketch</strong> application.</p>
+
+
+</div>
+<p>-end- </p>
+
+</body>
+</html>
