@@ -6,8 +6,9 @@ Professor Baldwin
 ***********************************************************/
 
 import java.util.Comparator;
+import java.io.Serializable;
 
-public class Proj03Runner implements Comparator {
+public class Proj03Runner implements Comparator, Serializable {
     
     private String name;
 
