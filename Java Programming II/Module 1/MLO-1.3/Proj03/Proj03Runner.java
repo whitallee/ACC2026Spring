@@ -26,6 +26,10 @@ public class Proj03Runner implements Comparator {
     }//end overloaded constructor
     
     public int compare(Object o1, Object o2) { // case insensitive comparison in descending order
+        if(!(o1 instanceof String))
+            throw new ClassCastException();
+        if(!(o2 instanceof String))
+            throw new ClassCastException();
         return (((String) o1).compareToIgnoreCase((String) o2)) * -1;
     }//end compare
 
