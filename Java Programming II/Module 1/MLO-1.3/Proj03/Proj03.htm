@@ -1,0 +1,172 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Proj03</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+.auto-style2 {
+	color: #FF0000;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 16pt; background-color: #FEFFF0;"
+>
+
+
+<center>
+<h1>ITSE2317 Java Programming (Intermediate)</h1>
+
+</center>
+
+<center>
+<h2 style="text-align: center;">Project 03</h2>
+</center>
+File Proj03.htm<p>Revised 12/07/24</p>
+<p>R. G. Baldwin instructor<br/>
+ </p>
+
+<center>
+<h2>Read The Instructions Carefully</h2>
+</center>
+
+<p>A detailed set of instructions is provided in a separate document titled <strong>Instructions for Downloading and Submitting Assignments </strong> that you can
+view at the Orientation link in your Blackboard course.</p>
+<p>I recommend that you study those instructions <strong>very carefully</strong> 
+and&nbsp;make yourself a checklist to ensure that you meet all of the 
+requirements before submitting your assignment.</p>
+<p>Failure to follow the instructions to the letter usually results in a
+failing grade, normally zero. The general instructions in that document apply
+to this assignment. In addition, this document provides specific
+instructions for the assignment. </p>
+
+<p>If you have any questions regarding instructions, please ask them at least
+one week prior to the assignment deadline. Don't end up with a bad grade due to the
+fact that you didn't understand the instructions. </p>
+
+<center>
+<h2>Typographical Errors</h2>
+</center>
+If you discover any typographical errors in this document, please let me know
+so that I can correct the error and notify all of the students.<h2 class="auto-style1">Source Code and Class Files</h2>
+
+<p>You will find a source code file for the driver class (named Proj03.java) for the program 
+in the same zip file from which you extracted this project specification.</p>
+
+
+<center>
+<h2>Java Version Requirement</h2>
+</center>
+
+<p>Software version requirements are specified in the syllabus for this course.</p>
+
+<div class="a">
+<p>Proj03 Copyright 2020 R.G.Baldwin</p>
+<p>Among other things, the purpose of this assignment is to assess your 
+ability to write a program dealing with runtime polymorphism and the <strong>Comparator</strong> 
+interface.</p>
+	<p><strong><a name="THE_DELIVERABLES">THE DELIVERABLES</a></strong></p>
+	<p>This assignment requires that you submit a zip file named <strong>
+	YourNameProj03.zip</strong> containing the following files where <strong>
+	YourName</strong> means to insert your last name:</p>
+	<ul>
+		<li>A Java source code file named <strong>Proj03Runner.java.</strong></li>
+		<li>A screenshot file named <strong>Compare01.png</strong> or <strong>
+		Compare01.jpg</strong> (your choice)</li>
+	</ul>
+	  <p><strong>PROGRAM SPECIFICATIONS</strong></p>
+		<p>Beginning with the file that you downloaded named <strong>Proj03.java</strong>, create a new file named <strong>Proj03Runner.java</strong> to meet the specifications 
+		given below.</p>
+	  <p>Note that you must not modify code in the file named <strong>Proj03.java</strong>.</p>
+	  <p>Be sure to display your name in the output as indicated.</p>
+	<p>When you place both files in the same folder, compile them both, and run the file 
+	named <strong>Proj03.java</strong> <strong class="auto-style2"><em>with a command-line 
+	argument 
+	of 5</em></strong>, the program must display the text shown in
+	<a href="#Figure_1">Figure 1</a> on the 
+	command line screen. Your requirement is not simply to reproduce the output 
+	shown in <a href="#Figure_1">Figure 1</a>. Your requirement is to process the incoming data in such 
+	a way as to reproduce the output shown in <a href="#Figure_1">Figure 1</a>.</p>
+	<p><a name="Figure_1"><strong>Figure 1</strong></a><strong>. 
+	RequiredOutput01.png</strong></p>
+	<p>
+	<img alt="RequiredOutput01.png" height="201" src="RequiredOutput01.png" width="767"/></p>
+
+
+
+
+
+	<p>Your output text must match my output text for a command-line argument of 
+	any numeric value that I choose. For example, <a href="#Figure_2">Figure 2</a> 
+	shows the output text created by running my program six times in succession 
+	for command-line argument values of 1 through 6 respectively. (Note that I 
+	deleted the certification text from each output to conserve space.) You 
+	should make certain that you can reproduce all of these results before 
+	submiting your assignment.</p>
+	<p><a name="Figure_2"><strong>Figure 2</strong></a><strong>. 
+	RequiredOutput02.png</strong></p>
+	<p>
+	<img alt="RequiredOutput02.png" height="443" src="RequiredOutput02.png" width="774"/></p>
+	<p>When you place both files in the same folder, compile them both, and run the file 
+	named <strong>Proj03.java</strong> <strong class="auto-style2"><em>without a 
+	command-line argument</em></strong>, the program must display text that is 
+	similar to, but not necessarily the same as the text shown in
+	<a href="#Figure_1">Figure 1</a> on the 
+	command line screen. In this case, the input names are based on a random 
+	number generator that will change from one run to the next. In all cases, 
+	the names in the <strong>ArrayList</strong> contents must match the <strong>Input</strong> names. The names in the 
+	<strong>TreeSet </strong>contents must be the unique names from the input and must 
+	be in descending alphabetical order (ignoring case) with no duplicates. </p>
+	<p class="auto-style2"><strong>SUBMITTING YOUR ASSIGNMENT</strong></p>
+	<p>Encapsulate the required files in a zip file named <strong>
+	YourNameProj03.zip</strong> and submit the zip file as a Blackboard 
+	assignment. </p>
+	<p>Your zip file must contain the screenshot file listed above under
+	<a href="#THE_DELIVERABLES">THE DELIVERABLES</a> in addition to any other 
+	files that may be listed there.</p>
+	<p>The zip file from which you extracted this document contains a file named 	<strong>RequiredOutput01.png</strong>.</p>
+	<p>The screenshot file that you submit must be a screenshot showing a 
+	side-by-side comparison of the output from your program and the given file 
+	named <strong>RequiredOutput01.png</strong>. Place the given file on the 
+	left, place your output on the right, and take the screenshot. </p>
+	<p>The purpose of the screenshot is to confirm that your output matches the 
+	required output. If it doesn't match, don't bother submitting it because you 
+	won't get credit for the assignment if it doesn't match. Just keep working 
+	on it until you get a match. Consult your instructor if you have any 
+	questions regarding what does and what does not constitute a match.</p>
+
+
+</div>
+<p>-end- </p>
+
+</body>
+</html>
