@@ -1,0 +1,238 @@
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+<meta content="en-us" http-equiv="Content-Language" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>Proj08</title>
+<style type="text/css">
+a:link {color:#0000ff;}
+a:visited {color:#cc00cc;}
+a:active {color:#ff0000;}
+p{color:black;}
+h1{color:green}
+h2{color: purple}
+h3{color: gray}
+b{color: #000000}
+strong{color: #000000}
+blockquote{color: purple}
+ul{color: maroon}
+ol{color: maroon}
+table{border: 1px solid black}
+th{border: 1px solid black}
+a:hover {
+	color: #cc0000;
+	font-weight: bold;
+	text-decoration: none;
+}
+div.a {
+  border: 2px solid black;
+}
+.auto-style1 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body style="font-family: Arial,Helvetica,sans-serif;font-size: 16pt; background-color: #FEFFF0;"
+>
+
+<center>
+<h1>ITSE2317 Java Programming (Intermediate)</h1>
+
+</center>
+
+<center>
+<h2 style="text-align: center;">Project 08</h2>
+</center>
+File Proj08.htm<p>Revised 02/16/26</p>
+<p>R. G. Baldwin instructor <br/>
+ </p>
+
+<center>
+<h2>Read The Instructions Carefully</h2>
+</center>
+
+<p>A detailed set of instructions is provided in a separate document titled <strong>Instructions for Downloading and Submitting Assignments </strong> that you can
+view at the Orientation link in your Blackboard course.</p>
+<p>I recommend that you study those instructions <strong>very carefully</strong> 
+and make yourself a checklist to ensure that you meet all of the 
+requirements before submitting your assignment.</p>
+<p>Failure to follow the instructions to the letter usually results in a
+failing grade, normally zero. The general instructions in that document apply
+to this assignment. In addition, this document provides specific
+instructions for the assignment. </p>
+
+<p>If you have any questions regarding instructions, please ask them at least
+one week prior to the assignment deadline. Don't end up with a bad grade due to the
+fact that you didn't understand the instructions. </p>
+
+<center>
+<h2>Typographical Errors</h2>
+</center>
+If you discover any typographical errors in this document, please let me know
+so that I can correct the error and notify all of the students.<h2 class="auto-style1">Source Code and Class Files</h2>
+
+<p>You will find a source code file for the driver class (named Proj08.java) for the program 
+in the same zip file from which you extracted this project specification.</p>
+
+
+<center>
+<h2>Java Version Requirement</h2>
+</center>
+
+<p>Software version requirements are specified in the syllabus for this course.</p>
+
+<div class="a">
+<p>Proj08 Copyright 2020 R.G.Baldwin</p>
+<p>Among other things, the purpose of this assignment is to assess your 
+ability to write a program dealing with <strong>Frame</strong> objects, <strong>MouseMoved</strong> events, 
+<strong>MouseDragged</strong> events, and the <strong>Delegation Event Model</strong>.</p>
+	  <p><strong><a name="THE_DELIVERABLES">THE DELIVERABLES</a></strong></p>
+	<p>This assignment requires that you submit a zip file named <strong>
+	YourNameProj08.zip</strong> containing the following files where <strong>
+	YourName</strong> means to insert your last name:</p>
+	<ul>
+		<li>A Java source code file named <strong>Proj08Runner.java.</strong></li>
+		<li>A screenshot file named <strong>Compare01.png</strong> or <strong>
+		Compare01.jpg</strong> (your choice)</li>
+		<li>A screenshot file named <strong>Compare02.png</strong> or <strong>
+		Compare02.jpg</strong> (your choice)</li>
+	</ul>
+	<p><strong>PROGRAM SPECIFICATIONS</strong></p>
+		<p>Beginning with the file that you downloaded named <strong>Proj08.java</strong>, create a new file named <strong>
+		Proj08Runner.java</strong> to meet the specifications 
+		given below.</p>
+	  <p>Note that you must not modify the code in the file named <strong>Proj08.java</strong>.</p>
+	  <p>Be sure to display your name in both locations in the output as indicated.</p>
+	<p>When you place both files in the same folder, compile them both, and run the file 
+	named <strong>Proj08.java</strong>, the program must display the text shown 
+	in <a href="#Figure_1">Figure 1</a> on the 
+	command line screen. </p>
+	<p><a name="Figure_1"><strong>Figure 1</strong></a><strong>. 
+	RequiredOutput01.png</strong></p>
+	<p>
+	<img alt="RequiredOutput01.png" height="118" src="RequiredOutput01.png" width="769"/></p>
+	
+<p>The image in Figure 1 displays the following text.</p>
+<pre>
+I certify that this program is my own work
+and is not the work of others. I agree not
+to share my solution with others.
+Print your name here.
+</pre>	
+	
+
+
+
+
+
+	<p>In addition, your program must display a single 300-pixel by 100-pixel 
+	<strong>Frame</strong> object <a name="simlar_">similar</a> to
+	<a href="#Figure_2">Figure 2</a>.</p>
+	<p><a name="Figure_2"><strong>Figure 2</strong></a><strong>. 
+	RequiredOutput02.png</strong></p>
+	<p>
+	<img alt="RequiredOutput02.png" height="99" src="RequiredOutput02.png" width="293"/></p>
+	
+	<p>The image in Figure 2 displays a 300x100 <strong>Frame</strong> with the 
+	student's name in the banner at the top and one line of black text at the 
+	bottom of the client area. That line of black text reads "79, 91".</p>
+	<p>When I move or drag the mouse in the working area of the <strong>Frame</strong>, 
+	the coordinates of the mouse pointer must be shown in black or red. (More on 
+	this <a href="#When_I_move_the_mouse">later</a>.)</p>
+	<p>The coordinate value must be displayed immediately above and to the right 
+	of the mouse pointer. The tip of the mouse pointer must be at the 
+	bottom-left corner of the first text character as shown in 	
+	<a href="#Figure_3">Figure 3</a>.
+	</p>
+	<p><a name="Figure_3"><strong>Figure 3</strong></a><strong>. Relationship 
+	between mouse pointer and position of coordinates.</strong></p>
+	<p>
+	<img alt="RequiredPlacement01.png" height="187" src="RequiredPlacement01.png" width="606"/></p>
+	
+<p>The image in Figure 3 displays a portion of an enlarged version of a Frame or JFrame with the student's name in the banner at the top. The coordinate value "154, 29" appears in black near the center of the client area. An image of the mouse pointer appears with the tip of the pointer slightly below and slightly to the left of the numeral "1". The purpose of the image is to illustrate the required relationship between the mouse pointer and the position of the coordinates when they are displayed. You are not required to submit a screenshot of the image in Figure 3 (see 
+<a href="#THE_DELIVERABLES">THE DELIVERABLES</a>).</p>	
+	
+	<p>I used the word
+	<a href="#simlar_">similar</a> 
+	above for the following reason. Depending on your operating system, the
+	<strong>Frame</strong> object that is displayed on your system may have a 
+	different appearance than on my system. </p>
+	<p>When I grade your assignment, I will be looking for the following 
+	characteristics of the <strong>Frame</strong> object that is displayed.</p>
+	<ol>
+		<li>The object that is displayed must be of type <strong>Frame</strong> 
+		and not of type <strong>JFrame</strong>.</li>
+		<li>Your name must appear in the banner at the top.</li>
+		<li>The coordinate values must be displayed in black or red, as 
+		explained <a href="#When_I_move_the_mouse">below</a>.</li>
+		<li>The relationship between the tip of the mouse pointer and the 
+		lower-left corner of the first text character must be as shown in
+		<a href="#Figure_3">Figure 3</a>. 
+		There must be very little space between the tip of the mouse pointer and 
+		the bottom-left corner of the first text character.</li>
+		<li><a name="When_I_move_the_mouse">When I move the mouse</a> pointer around inside the client area of your
+		<strong>Frame</strong>, without pressing either mouse button, the 
+		coordinates of the mouse pointer must appear directly above and to the 
+		right of the tip of the pointer. In this case, the coordinates are 
+		displayed using black characters.</li>
+		<li>When I drag the mouse pointer around inside the client area of the 
+		frame, while pressing either mouse button, the coordinates of the mouse 
+		pointer are displayed in the same manner using red characters.</li>
+		<li>If I slowly move the mouse pointer off the bottom of the <strong>
+		Frame</strong> without pressing either mouse button, the coordinate values should freeze 
+		at the bottom of the <strong>Frame</strong> with the 
+		y-coordinate value being approximately equal to 100 minus the thickness of 
+		the bottom border of the <strong>Frame</strong> as shown in 
+		<a href="#Figure_2">Figure 2</a>. </li>
+		<li>If I slowly move the mouse pointer off any edge of the <strong>
+		Frame</strong> while pressing either mouse button, the coordinate values 
+		should follow the mouse pointer such that they move outside the <strong>
+		Frame</strong> and become no longer visible.</li>
+		<li>Whenever I move or drag the mouse in the working area of the <strong>Frame</strong>, 
+		the old coordinates must be erased before new ones are displayed.</li>
+		<li>When I click the X-button in the upper-right corner of the <strong>
+		Frame</strong> object, the program must terminate and MUST RETURN 
+		CONTROL TO THE OPERATING SYSTEM.</li>
+	</ol>
+	<p>You may find it necessary to consult the Java documentation and take 
+	class inheritance into account to meet these specifications</p>
+	<p>The zip file from which you extracted this document contains all of the 
+	class files for my version of the program. Before you submit your 
+	assignment, you should run your code side-by-side with my code and confirm 
+	that the behavior of your version matches the behavior of my version. By 
+	match I mean they show the same coordinate values, approximately the same 
+	text size, etc. for the same types of events. </p>
+	<p>If you have issues running my code, please let me know. That would 
+	probably be the result of a Java version issue and I will help you work 
+	through it.</p>
+	<p><strong>SUBMITTING YOUR ASSIGNMENT</strong></p>
+	<p>Encapsulate the required files in a zip file named <strong>
+	YourNameProj08.zip</strong> and submit the zip file as a Blackboard 
+	assignment. </p>
+	<p>Your zip file must contain the screenshot files listed above under 
+	<a href="#THE_DELIVERABLES">THE 
+	DELIVERABLES</a> in addition to any other files that may be listed there.</p>
+	<p>The zip file from which you extracted this document contains a file named
+	<strong>RequiredOutput01.png</strong> and a file named <strong>
+	RequiredOutput02.png</strong>.</p>
+	<p>The screenshot files that you submit must be a screenshots showing a 
+	side-by-side comparison of the output from your program and the given files 
+	named <strong>RequiredOutput01.png</strong> and <strong>RequiredOutput02.png</strong>. 
+	Place the given file on the left, place your output on the right, and take 
+	the screenshot. </p>
+	<p>The purpose of the screenshots is to confirm that your output matches the 
+	required output. If it doesn't match, don't bother submitting it because you 
+	won't get credit for the assignment if it doesn't match. Just keep working 
+	on it until you get a match. Consult your instructor if you have any 
+	questions regarding what does and what does not constitute a match.</p>
+
+
+</div>
+<p>-end- </p>
+
+</body>
+</html>

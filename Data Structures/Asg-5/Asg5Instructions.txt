@@ -1,0 +1,22 @@
+Complete the attached assignment. You will need the following:
+
+
+
+Notes
+
+Structs Review presentation
+Passing by Reference and By Value presentation
+A demonstration of pointers, dynamic memory allocation, and passing by reference
+Solution to Assignment 4 (given 2 days after the due date)
+
+
+Lectures (Panopto Folder)
+
+Structs Review
+Pass by Reference, Pass by Value
+Dynamic Memory Allocation
+
+
+Use the code checklist before submitting
+
+Follow submission guidelines.
